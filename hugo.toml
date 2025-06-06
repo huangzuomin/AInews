@@ -1,0 +1,79 @@
+baseURL = 'http://example.org/'
+languageCode = 'zh-cn'
+title = 'AI内参'
+theme = 'mainroad'
+disqusShortname = ""
+googleAnalytics = ""
+
+# 修复：使用新的分页配置
+[pagination]
+  pagerSize = 10
+
+# 修复：将 Author 移动到 Params 下
+[Params]
+  description = "AI领域的深度分析和最新资讯，专注人工智能技术发展和行业动态"
+  opengraph = true
+  twitter_cards = true
+  customCSS = ["css/custom.css"]
+  readmore = true
+  summaryLength = 150
+  authorbox = true
+  pager = true
+  post_meta = ["date", "categories", "author"]
+  mainSections = ["articles"]
+
+[Params.Author]
+  name = "AI内参团队"
+  bio = "专注于人工智能领域的深度分析和最新资讯，致力于为读者提供最前沿的AI技术发展和行业动态。"
+  avatar = "img/avatar.png"
+
+[Params.logo]
+  subtitle = "人工智能深度资讯"
+
+[Params.sidebar]
+  home = "right"
+  list = "right"
+  single = "right"
+  widgets = ["search", "recent", "categories", "taglist"]
+
+[Params.widgets]
+  recent_num = 5
+  tags_counter = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  author = "authors"
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[[menus.main]]
+name = "首页"
+url = "/"
+weight = 10
+
+[[menus.main]]
+name = "文章"
+url = "/articles/"
+weight = 20
+
+[[menus.main]]
+name = "分类"
+url = "/categories/"
+weight = 30
+
+[[menus.main]]
+name = "标签"
+url = "/tags/"
+weight = 40
+
+[[menus.main]]
+name = "作者"
+url = "/authors/"
+weight = 50
+
+[[menus.main]]
+name = "关于"
+url = "/about/"
+weight = 60
