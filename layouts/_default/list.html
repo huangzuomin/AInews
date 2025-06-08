@@ -1,0 +1,10 @@
+{{ define "main" }}
+<main class="main list" role="main">
+	{{ with .Title }}<h1 class="list__title">{{ . }}</h1>{{ end }}
+	{{ with .Content }}<div class="list__lead lead">{{ . }}</div>{{ end }}
+	{{ range .Paginator.Pages }}
+		{{ .Render "summary" }}
+	{{ end }}
+	{{ template "_internal/pagination.html" . }}
+</main>
+{{ end }}

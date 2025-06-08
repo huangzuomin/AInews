@@ -1,0 +1,17 @@
+{{ define "main" }}
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">{{ .Title }}</h1>
+			{{ with .Params.lead }}<p class="post__lead">{{ . }}</p>{{ end }}
+			<div class="post__meta meta">
+				{{ with .Date }}<div class="meta__item datetime">{{ .Format "2006-01-02" }}</div>{{ end }}
+				{{ with .Params.categories }}<div class="meta__item categories">{{ delimit . ", " }}</div>{{ end }}
+			</div>
+		</header>
+		<div class="post__content clearfix">
+			{{ .Content }}
+		</div>
+	</article>
+</main>
+{{ end }}
