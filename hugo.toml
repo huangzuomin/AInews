@@ -1,53 +1,84 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://192.168.50.247:1313'
 languageCode = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
 title = 'AI内参'
-theme = 'mainroad'
+theme = 'ananke'
 disqusShortname = ""
 googleAnalytics = ""
 
-# 修复：使用新的分页配置
+# 语言配置
+[languages]
+  [languages.zh-cn]
+    languageCode = 'zh-cn'
+    languageName = '中文'
+    title = 'AI内参'
+    weight = 1
+
+# 忽略 Synology NAS 系统文件
+ignoreFiles = [
+  "@eaDir",
+  "@SynoEAStream", 
+  "@SynoResource",
+  "@tmp",
+  "\\.DS_Store$",
+  "Thumbs\\.db$"
+]
+
+# 忽略原始 HTML 警告
+ignoreLogs = ['warning-goldmark-raw-html']
+
+
+# 允许原始 HTML
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Ananke 主题配置
+[params]
+  description = "AI领域的深度分析和最新资讯，专注人工智能技术发展和行业动态"
+  author = "AI内参团队"
+  twitter = ""
+  facebook = ""
+  youtube = ""
+  instagram = ""
+  github = "huangzuomin"
+  gitlab = ""
+  linkedin = ""
+  # 启用搜索功能
+  ananke_search_index = true
+  # 显示阅读时间
+  show_reading_time = true
+  # 启用评论
+  commentoEnable = false
+  # 自定义 CSS
+  custom_css = ["css/custom.css"]
+  # 首页显示的文章数量
+  recent_posts_number = 6
+  # 启用社交分享
+  socialShare = true
+  # 背景颜色（可选）
+  background_color_class = "bg-black"
+  # 文本颜色（可选）
+  text_color_class = "white"
+  # 特色图片
+  featured_image = "/img/featured-bg.jpg"
+
+# 分页配置
 [pagination]
   pagerSize = 10
 
-# 修复：将 Author 移动到 Params 下
-[Params]
-  description = "AI领域的深度分析和最新资讯，专注人工智能技术发展和行业动态"
-  opengraph = true
-  twitter_cards = true
-  customCSS = ["css/custom.css"]
-  readmore = true
-  summaryLength = 150
-  authorbox = true
-  pager = true
-  post_meta = ["date", "categories", "author"]
-  mainSections = ["articles"]
-
-[Params.Author]
-  name = "AI内参团队"
-  bio = "专注于人工智能领域的深度分析和最新资讯，致力于为读者提供最前沿的AI技术发展和行业动态。"
-  avatar = "img/avatar.png"
-
-[Params.logo]
-  subtitle = "人工智能深度资讯"
-
-[Params.sidebar]
-  home = "right"
-  list = "right"
-  single = "right"
-  widgets = ["search", "recent", "categories", "taglist"]
-
-[Params.widgets]
-  recent_num = 5
-  tags_counter = true
-
+# 分类法配置
 [taxonomies]
   category = "categories"
   tag = "tags"
   author = "authors"
 
+# 输出格式
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
 
+# 菜单配置
 [[menus.main]]
 name = "首页"
 url = "/"
