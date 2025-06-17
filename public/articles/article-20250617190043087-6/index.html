@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="苹果公司此前发表论文质疑大模型推理能力，认为其在复杂问题上表现崩溃。最新研究由Open Philanthropy和Anthropic合作，并由AI模型Claude Opus共同署名，反驳了苹果的观点。新论文指出，苹果的实验设计存在缺陷，如模型输出令牌限制、误差累积和包含无解问题，这些因素导致模型被误判为缺乏推理能力。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="AI内参团队">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/articles/article-20250617190043087-6/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/articles/article-20250617190043087-6/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论">
+  <meta property="og:description" content="苹果公司此前发表论文质疑大模型推理能力，认为其在复杂问题上表现崩溃。最新研究由Open Philanthropy和Anthropic合作，并由AI模型Claude Opus共同署名，反驳了苹果的观点。新论文指出，苹果的实验设计存在缺陷，如模型输出令牌限制、误差累积和包含无解问题，这些因素导致模型被误判为缺乏推理能力。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2025-06-17T19:00:43+08:00">
+    <meta property="article:modified_time" content="2025-06-17T19:00:43+08:00">
+    <meta property="article:tag" content="AI推理">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="苹果公司">
+    <meta property="article:tag" content="Claude Opus">
+    <meta property="article:tag" content="AI评估">
+    <meta property="article:tag" content="汉诺塔">
+
+  <meta itemprop="name" content="超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论">
+  <meta itemprop="description" content="苹果公司此前发表论文质疑大模型推理能力，认为其在复杂问题上表现崩溃。最新研究由Open Philanthropy和Anthropic合作，并由AI模型Claude Opus共同署名，反驳了苹果的观点。新论文指出，苹果的实验设计存在缺陷，如模型输出令牌限制、误差累积和包含无解问题，这些因素导致模型被误判为缺乏推理能力。">
+  <meta itemprop="datePublished" content="2025-06-17T19:00:43+08:00">
+  <meta itemprop="dateModified" content="2025-06-17T19:00:43+08:00">
+  <meta itemprop="wordCount" content="70">
+  <meta itemprop="keywords" content="AI推理,大语言模型,苹果公司,Claude Opus,AI评估,汉诺塔,伦理影响,技术范式">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论">
+  <meta name="twitter:description" content="苹果公司此前发表论文质疑大模型推理能力，认为其在复杂问题上表现崩溃。最新研究由Open Philanthropy和Anthropic合作，并由AI模型Claude Opus共同署名，反驳了苹果的观点。新论文指出，苹果的实验设计存在缺陷，如模型输出令牌限制、误差累积和包含无解问题，这些因素导致模型被误判为缺乏推理能力。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        AI内参
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/articles/" title="">
+              文章
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/categories/" title="">
+              分类
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/tags/" title="">
+              标签
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/authors/" title="">
+              作者
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Articles
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论</h1>
+      
+      <p class="tracked"><strong>AI内参团队</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-06-17T19:00:43+08:00">June 17, 2025</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>一场由苹果公司论文引发的关于大模型推理能力的辩论，正深刻挑战着AI评估的既有范式。最新研究指出，许多所谓的“推理失败”实则源于不当的测试设计，而非模型本身的局限性，这促使业界重新审视如何公正、有效地衡量AI的真实能力，并对未来AI应用的构建与信任产生深远影响。</p></blockquote>
+<p>近日，一篇由Open Philanthropy研究人员与Anthropic公司合作、并由其旗舰AI模型Claude Opus共同署名的论文——《思考的幻觉的幻觉》（<em>The Illusion of the Illusion of Thinking</em>）<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，将矛头直指苹果公司此前发表的《思考的幻觉》（<em>The Illusion of Thinking</em>）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>一文。苹果的研究曾断言，当前最先进的大型语言模型（LLMs）在处理复杂逻辑推理问题时，其表现会随着问题规模的扩大而迅速崩溃，暗示它们本质上仅是模式匹配器，而非真正的推理者。然而，这篇最新的反驳论文以简洁而有力的笔触，揭示了苹果研究中存在的关键实验设计漏洞，不仅为大模型的“推理能力”正名，更引发了对AI评估方法论本身的深层反思。</p>
+<h3 id="重新审视推理缺陷的暴露">重新审视推理：缺陷的暴露</h3>
+<p>苹果的“思考的幻觉”论文主要通过汉诺塔（Tower of Hanoi）和过河问题（River Crossing）等经典逻辑难题，来测试大模型（如o3-mini、DeepSeek-R1、Claude-3.7-Sonnet等）的推理能力。其核心论点是，当这些问题的复杂度增加时，模型的准确率会急剧下降，进而得出大模型缺乏通用推理能力的结论。然而，《思考的幻觉的幻觉》论文的作者Lawsen和Claude Opus指出，苹果的测试未能充分考虑大模型固有的技术限制和评估标准的不合理性。</p>
+<p>首先是<strong>输出令牌（Token）上限</strong>的问题。在汉诺塔这类问题中，即使是一个相对较小的盘子数量（例如15个盘子），也需要指数级的移动步骤（超过32,000次移动）。大模型的输出通常受到严格的令牌上限限制（例如Sonnet 3.7为128k，DeepSeek R1为64K，o3-mini为100k）。这意味着，无论模型是否能“理解”并“推理”出完整的解决方案，它们在达到输出上限时都无法完整列出所有步骤，从而被错误地判定为“推理失败”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。论文指出，在不考虑任何推理令牌的情况下，大多数模型在处理超过13个盘子的汉诺塔问题时，准确率就会降至零，这并非推理能力的缺失，而是<strong>输出带宽的限制</strong>。当模型面对过大的问题时，它们甚至会选择解释解决方案的方法，而非逐一列出步骤，这恰恰是其在容量限制下的一种“智能”规避。</p>
+<p>其次是<strong>误差累积效应</strong>。即使模型在每一步推理中选择正确盘子的概率高达99.99%，随着推理步骤的呈指数级增长，最终答案的准确性也会急剧衰减<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。苹果的评估标准往往要求大模型给出的回答必须<strong>完全没有错误</strong>。这种“零容忍”的评估方式，对于涉及多步骤、长序列输出的任务而言，显得过于严苛。模型可能在某一微小环节的记忆或表示上出现偏差，导致后续指令无法执行，但其核心的推理逻辑可能依然存在。</p>
+<p>再者，苹果的研究还被指出存在<strong>测试用例的缺陷</strong>。例如，其在过河问题中引入了在数学上无解的n=6的情况。将模型在这些_不可解问题_上的失败视为缺乏推理能力的证据，显然有失公允<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h3 id="评估的艺术与科学超越表象">评估的艺术与科学：超越表象</h3>
+<p>这场争论不仅揭示了单个研究的局限性，更凸显了当前大模型评估领域所面临的深层挑战：<em>我们究竟应该如何有效地衡量和理解这些复杂系统的能力？</em></p>
+<p>《思考的幻觉的幻觉》论文提出了一种更具洞察力的评估方法：不再要求大模型直接逐行输出所有推理步骤，而是要求它们<strong>生成一个能够解决问题的程序（例如Lua程序）</strong>。随后，通过运行这个程序并判断其输出是否正确来评估模型的推理能力。结果令人瞩目：Claude-3.7-Sonnet、Claude Opus 4、OpenAIo3和Google Gemini 2.5等模型在5000个令牌的限制下，都能够输出高准确率的正确程序<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这有力地表明，模型并非未能进行推理，而是未能遵循一个_人为设定、过于严格_的、且可能不符合其_运行机制_的评分标准。这完全消除了所谓的“推理能力崩溃”现象。</p>
+<p>这一发现对于大模型评估领域而言意义重大。它提醒我们，当前许多基准测试可能存在“盲点”：它们可能更侧重于测试模型的_输出能力或记忆精确度_，而非其_深层规划或逻辑构建能力_。例如，要求模型生成冗长、无差错的步骤列表，可能更多地是在考验其上下文窗口大小、输出预算或记忆精度，而不是它能否理解问题并找到解决方案的核心逻辑。</p>
+<h3 id="超越技术行业与伦理的考量">超越技术：行业与伦理的考量</h3>
+<p>这场关于LLM推理能力的辩论，早已超越了纯粹的学术范畴，触及了更广泛的行业与社会影响。苹果论文的发布时间恰逢其全球开发者大会（WWDC）之前，这使得其影响力进一步扩大，也引发了关于其动机的猜测：一些批评者暗示，苹果在大模型领域相对于OpenAI和谷歌等竞争对手可能有所滞后，因此试图通过质疑大模型的推理能力来降低公众预期，或是挽救其在Siri等AI产品上表现不佳的声誉<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>更深层次的讨论则关注到人类与AI能力边界的模糊。有评论指出，即使是人类，也大多无法在不借助外部工具或记忆辅助的情况下，精确无误地写出13个盘子汉诺塔问题的一步步解法。如果缺乏与人类在相同任务和约束下的比较，我们又如何能断言AI的“失败”是其独有的缺陷？<sup id="fnref3:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 此外，关于模型是否仅仅是“模式匹配”的争论也再次浮出水面。法国高效能AI初创公司Pleias的工程师Alexander Doria认为，模型可能正在学习部分_启发式方法_，而非简单的模式匹配，这暗示了比纯粹复制更复杂的认知过程<sup id="fnref4:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。宾夕法尼亚大学沃顿商学院专注于AI的教授Ethan Mollick则认为，当前就断言大语言模型“遇到瓶颈”为时尚早，并将其比作那些未能应验的关于“模型崩溃”的类似论断<sup id="fnref5:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>这场辩论凸显了一个日益增长的共识：<strong>设计合理的大模型评估方案，如今与模型设计本身同等重要</strong>。对于在企业中构建基于推理大模型应用的决策者而言，这并非仅仅是学术争论。它提出了关于在生产工作流程中何时、何地以及如何信任这些模型的关键问题——尤其是在任务涉及长规划链或需要精确的逐步输出时<sup id="fnref6:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>理解上下文窗口、令牌预算以及评估中使用的评分标准，对于可靠的系统设计至关重要。开发者可能需要考虑外部化内存、分块推理步骤或使用函数或代码等更紧凑的输出形式，而不是依赖完整的语言解释。如果一个模型在处理复杂提示时看似“失败”，问题可能不在于其核心推理能力，而在于任务如何被构建、需要多少输出，或模型能访问多少内存。这对于构建如协作者、自主代理或决策支持系统等工具的行业尤其相关，在这些应用中，可解释性和任务复杂性都可能很高<sup id="fnref7:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>更重要的是，这篇论文的争议提醒我们，<strong>基准测试与现实应用并不相同</strong>。企业团队应谨慎避免过度依赖那些不能反映实际应用场景的合成基准测试——或者那些无意中限制模型展示其能力的基准测试。对机器学习研究人员来说，一个重要的启示是：在宣称一个人工智能里程碑或“讣告”之前，务必确保测试本身没有将系统置于一个_太小而无法思考的框框之中_。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Lawsen, L., &amp; Opus, C. (2025/6/17). <a href="https://arxiv.org/pdf/2506.09250">The Illusion of the Illusion of Thinking</a>. ArXiv.org. Retrieved 2025/6/17.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>不可考作者. (2025/6/17). <a href="https://zhuanlan.zhihu.com/p/19151336627">苹果最新论文打脸推理模型：思维链集体「翻车」，复杂难题面前秒变「人工智障」？</a>. 知乎. Retrieved 2025/6/17.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>不可考作者. (2025/6/17). <a href="https://www.163.com/dy/article/K273DSPR0519U3I5.html">Claude团队反驳苹果&quot;大模型推理能力崩溃论&quot;|算法|实验|复杂性|苹果公司|知名企业|claude_网易订阅</a>. 网易订阅. Retrieved 2025/6/17.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8B%B9%E6%9E%9C%E5%85%AC%E5%8F%B8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">苹果公司</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-opus/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Opus</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%AF%84%E4%BC%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI评估</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">汉诺塔</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%A6%E7%90%86%E5%BD%B1%E5%93%8D/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">伦理影响</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术范式</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3"></p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/articles/article-20250617190043122-10/">AI转绘动漫：效率革命下的内容产业新纪元与深层挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/groqhugging-faceai-20250617083004617-2/">Groq携手Hugging Face：一场重塑AI推理格局的速度革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250617025225342-2/">昆仑万维的AI豪赌：在“烧钱”中追逐巨头梦的代价与前路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/airichard-sutton-20250617003004877-3/">AI的未来之路：Richard Sutton预言“经验时代”的到来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/transformereso-lm65-20250616123004/">超越Transformer：混合扩散模型Eso-LM以65倍速重塑语言生成范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250616123004/">超越表象：大语言模型“遗忘”的深层结构与可逆边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/agi-20250616083004/">超越参数堆叠：复旦邱锡鹏教授力推“情境智能”，探索通往AGI的下一幕</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/aidia-20250616003004/">AI原生浏览器Dia：是浏览器革新，还是通往“系统”的起点？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/sam-altmanai/">揭秘“一茶匙水”的真相：Sam Altman的AI用水量宣言背后</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/aisiriwwdc-2025/">苹果在AI竞赛中艰难前行：Siri为何在WWDC 2025上“被缺席”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/2025-06-11-article-497/">十亿美元AI折戟儿童谜题：苹果研究揭示大型模型“思考幻象”背后的深层警示</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/2025-06-10-article-495/">AI“思考的幻觉”：当十亿美元模型被孩童谜题击败，我们该如何重新审视AI的承诺？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
