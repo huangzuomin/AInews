@@ -1,0 +1,103 @@
+/* 卡片式布局样式 */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card__content {
+    padding: 1.5rem;
+}
+
+.card__header {
+    margin-bottom: 1rem;
+}
+
+.card__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    line-height: 1.3;
+}
+
+.card__title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.card__title a:hover {
+    color: #e22d30;
+}
+
+.card__lead {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.card__meta {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.card__excerpt {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.card__footer {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.card__readmore {
+    background: #e22d30;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: background 0.2s ease;
+}
+
+.card__readmore:hover {
+    background: #c41e22;
+    color: #fff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card__content {
+        padding: 1rem;
+    }
+    
+    .card__title {
+        font-size: 1.1rem;
+    }
+}
+
+/* 缩略图样式优化 */
+.card .post__thumbnail {
+    margin: 0;
+    border-radius: 0;
+}
+
+.card .post__thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
