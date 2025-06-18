@@ -1,0 +1,268 @@
+/* 文章详情页UI优化样式 */
+
+/* 1. 特色图片区域优化 */
+.article-header {
+  position: relative;
+}
+
+/* 2. 引用部分样式 - 低调浅灰色风格 */
+/* References 标题样式 */
+#references h2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 脚注容器 */
+.footnotes {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.footnotes hr {
+  display: none;
+}
+
+/* 脚注列表 */
+.footnotes ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style: decimal;
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: #9ca3af;
+}
+
+.footnotes li:last-child {
+  margin-bottom: 0;
+}
+
+/* 脚注内容 */
+.footnotes p {
+  margin: 0;
+  color: #9ca3af;
+}
+
+/* 脚注中的链接 */
+.footnotes a {
+  color: #9ca3af;
+  text-decoration: underline;
+  text-decoration-color: rgba(156, 163, 175, 0.5);
+}
+
+.footnotes a:hover {
+  color: #6b7280;
+  text-decoration-color: #6b7280;
+}
+
+/* 返回链接 */
+.footnote-backref {
+  color: #9ca3af;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.footnote-backref:hover {
+  color: #6b7280;
+}
+
+.footnote-backref:hover {
+  background: #d1d5db;
+  color: #374151;
+  transform: translateY(-1px);
+}
+
+/* 3. 正文中的链接 - 与正文同色系 */
+.article-content a {
+  color: #374151;
+  text-decoration: underline;
+  text-decoration-color: rgba(55, 65, 81, 0.4);
+  transition: all 0.2s ease;
+}
+
+.article-content a:hover {
+  color: #1f2937;
+  text-decoration-color: #1f2937;
+}
+
+.article-content a:active {
+  transform: translateY(1px);
+}
+
+/* 4. 脚注引用链接 - 低调样式 */
+.footnote-ref {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  text-decoration: none;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.footnote-ref:hover {
+  color: #6b7280;
+}
+
+/* 5. 响应式优化 */
+@media (max-width: 768px) {
+  #references {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+  
+  .footnotes {
+    padding: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+  }
+  
+  .footnotes li {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footnotes li::before {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.625rem;
+  }
+}
+
+/* 6. 打印样式优化 */
+@media print {
+  .footnotes {
+    color: black;
+  }
+  
+  .footnotes li {
+    color: black;
+  }
+  
+  .footnotes p {
+    color: black;
+  }
+  
+  .footnotes a {
+    color: black;
+  }
+  
+  .footnote-ref {
+    color: black;
+  }
+  
+  .article-content a:after,
+  .footnotes a:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* 侧边栏相关新闻链接颜色 */
+aside .nested-links a {
+  color: inherit !important;
+  text-decoration: none;
+}
+
+aside .nested-links a:hover {
+  text-decoration: underline;
+}
+
+aside .nested-links a:visited {
+  color: inherit !important;
+}
+
+/* 增加正文行距，提升页面呼吸感 */
+.article-content {
+  line-height: 1.8 !important;
+}
+
+.article-content p {
+  margin-bottom: 1.5em;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.article-content h1:first-child,
+.article-content h2:first-child,
+.article-content h3:first-child {
+  margin-top: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .article-content blockquote {
+    margin: 0.5em 0;
+    padding: 0.3em 0.8em;
+  }
+}
+
+/* 7. 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  #references h2 {
+    color: #6b7280;
+  }
+  
+  .footnotes {
+    color: #6b7280;
+  }
+  
+  .footnotes li {
+    color: #6b7280;
+  }
+  
+  .footnotes p {
+    color: #6b7280;
+  }
+  
+  .footnotes a {
+    color: #6b7280;
+    text-decoration-color: rgba(107, 114, 128, 0.5);
+  }
+  
+  .footnotes a:hover {
+    color: #9ca3af;
+    text-decoration-color: #9ca3af;
+  }
+  
+  .footnote-backref {
+    color: #6b7280;
+  }
+  
+  .footnote-backref:hover {
+    color: #9ca3af;
+  }
+  
+  .article-content a {
+    color: #d1d5db;
+    text-decoration-color: rgba(209, 213, 219, 0.4);
+  }
+  
+  .article-content a:hover {
+    color: #f3f4f6;
+    text-decoration-color: #f3f4f6;
+  }
+  
+  .footnote-ref {
+    color: #6b7280;
+  }
+  
+  .footnote-ref:hover {
+    color: #9ca3af;
+  }
+}
