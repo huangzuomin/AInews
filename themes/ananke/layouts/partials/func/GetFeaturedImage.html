@@ -27,6 +27,9 @@
   {{ with $.Resources.GetMatch . }}
     {{ $linkToCover = .RelPermalink }}
   {{ end }}
+{{/* If no page-level featured_image, check site-level configuration for home page */}}
+{{ else if and (.IsHome) (.Site.Params.featured_image) }}
+  {{ $linkToCover = strings.Trim .Site.Params.featured_image "/" | urls.AbsURL }}
 {{/* Find the first image with 'cover' in the name in this page bundle. */}}
 {{ else }}
   {{ with .Resources.ByType "image" }}
