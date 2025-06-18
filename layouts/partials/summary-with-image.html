@@ -19,14 +19,9 @@
         {{ $minutes := $duration.Minutes }}
         {{ $hours := $duration.Hours }}
         
-        <div class="f7 gray mb2">
-          {{ if lt $minutes 60 }}
-            {{ printf "%.0f分钟前" $minutes }}
-          {{ else if lt $hours 24 }}
-            {{ printf "%.0f小时前" $hours }}
-          {{ else }}
-            {{ .Date.Format "2006-01-02" }}
-          {{ end }}
+        {{/* 动态时间显示 */}}
+        <div class="f7 gray mb2 relative-time" data-publish-time="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+          {{ .Date.Format "2006-01-02" }}
         </div>
         
         <h1 class="f3 fw1 athelas mt0 lh-title">
