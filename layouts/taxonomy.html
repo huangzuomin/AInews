@@ -1,0 +1,28 @@
+{{ define "main" }}
+    {{ $data := .Data }}
+  <article class="cf pa3 pa4-m pa4-l">
+    <div class="measure-wide-l center f4 lh-copy nested-copy-line-height nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }}">
+      <h1 class="f1 athelas mt0 mb3">{{ .Title }}</h1>
+      {{ .Content }}
+    </div>
+  </article>
+  <div class="mw8 center">
+    <section class="ph4">
+      {{ range $term := .Data.Pages }}
+        <h2 class="f2 athelas mt4 mb3">
+          <a href="{{ $term.RelPermalink }}" class="link blue hover-black">
+            {{ $.Data.Singular | inflect.Humanize }}: {{ $term.LinkTitle }}
+          </a>
+          <span class="f6 gray">({{ $term.Pages.Len }})</span>
+        </h2>
+        <div class="flex-ns flex-wrap">
+          {{ range $term.Pages }}
+            <div class="w-100 w-50-ns mb3 pr3-ns">
+              {{ .Render "summary" }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </section>
+  </div>
+{{ end }}

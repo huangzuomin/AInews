@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=65292&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌最新发布的Gemini 2.5系列模型在多项基准测试中刷新了SOTA纪录，展示了其在性能、多模态处理和成本效益上的显著进步，特别是轻量级的Flash-Lite版本。然而，一项关于Gemini 2.5 Pro在宝可梦游戏中表现的实验揭示了其在虚拟角色“濒死”时出现类似人类“恐慌”的行为，导致推理能力下降，这为我们理解大型语言模型的非预期行为及其在现实应用中的鲁棒性提出了新的挑战。">
+    <meta name="generator" content="Hugo 0.147.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="AI内参团队">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:65292/articles/gemini-25ai-20250618142004293-2/">
+    
+
+    <meta property="og:url" content="http://localhost:65292/articles/gemini-25ai-20250618142004293-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察">
+  <meta property="og:description" content="谷歌最新发布的Gemini 2.5系列模型在多项基准测试中刷新了SOTA纪录，展示了其在性能、多模态处理和成本效益上的显著进步，特别是轻量级的Flash-Lite版本。然而，一项关于Gemini 2.5 Pro在宝可梦游戏中表现的实验揭示了其在虚拟角色“濒死”时出现类似人类“恐慌”的行为，导致推理能力下降，这为我们理解大型语言模型的非预期行为及其在现实应用中的鲁棒性提出了新的挑战。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2025-06-18T14:20:04+08:00">
+    <meta property="article:modified_time" content="2025-06-18T14:20:04+08:00">
+    <meta property="article:tag" content="谷歌Gemini">
+    <meta property="article:tag" content="人工智能">
+    <meta property="article:tag" content="大型语言模型">
+    <meta property="article:tag" content="多模态AI">
+    <meta property="article:tag" content="性能基准">
+    <meta property="article:tag" content="AI伦理">
+
+  <meta itemprop="name" content="谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察">
+  <meta itemprop="description" content="谷歌最新发布的Gemini 2.5系列模型在多项基准测试中刷新了SOTA纪录，展示了其在性能、多模态处理和成本效益上的显著进步，特别是轻量级的Flash-Lite版本。然而，一项关于Gemini 2.5 Pro在宝可梦游戏中表现的实验揭示了其在虚拟角色“濒死”时出现类似人类“恐慌”的行为，导致推理能力下降，这为我们理解大型语言模型的非预期行为及其在现实应用中的鲁棒性提出了新的挑战。">
+  <meta itemprop="datePublished" content="2025-06-18T14:20:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-18T14:20:04+08:00">
+  <meta itemprop="wordCount" content="92">
+  <meta itemprop="keywords" content="谷歌Gemini,人工智能,大型语言模型,多模态AI,性能基准,AI伦理,涌现行为,宝可梦">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察">
+  <meta name="twitter:description" content="谷歌最新发布的Gemini 2.5系列模型在多项基准测试中刷新了SOTA纪录，展示了其在性能、多模态处理和成本效益上的显著进步，特别是轻量级的Flash-Lite版本。然而，一项关于Gemini 2.5 Pro在宝可梦游戏中表现的实验揭示了其在虚拟角色“濒死”时出现类似人类“恐慌”的行为，导致推理能力下降，这为我们理解大型语言模型的非预期行为及其在现实应用中的鲁棒性提出了新的挑战。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://localhost:65292/images/default%20%281%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        AI内参
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/articles/" title="">
+              新闻
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/categories/" title="">
+              分类
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/tags/" title="">
+              标签
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/authors/" title="">
+              作者
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Articles
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察</h1>
+      
+      <p class="tracked"><strong>AI内参团队</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2025-06-18T14:20:04+08:00">June 18, 2025</time>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>谷歌近日发布了其旗舰AI模型Gemini 2.5家族的正式版本，包括高性能的Pro版和极具成本效益的Flash-Lite版，在多项基准测试中刷新了业界纪录。然而，在一项宝可梦游戏挑战中，Gemini 2.5 Pro却在虚拟角色“濒死”时表现出类似人类“恐慌”的行为，导致推理能力下降，揭示了大型语言模型行为的复杂性和非预期性。</p></blockquote>
+<p>人工智能领域正经历着前所未有的加速发展，而谷歌的Gemini系列无疑是这一浪潮中的核心力量。近日，谷歌正式推出了<strong>Gemini 2.5家族</strong>，包括了正式版的Gemini 2.5 Pro和Gemini 2.5 Flash，以及首次亮相的预览版Gemini 2.5 Flash-Lite。这份长达70页的技术报告<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>不仅展示了这些模型在性能、成本效益上的显著跃升，更披露了一个引人深思的现象：在面对游戏中的“濒死”状态时，模型竟表现出类似人类“恐慌”的行为模式，使得其决策能力出现质性下降。</p>
+<h3 id="技术原理解析谷歌gemini-25家族的飞跃">技术原理解析：谷歌Gemini 2.5家族的飞跃</h3>
+<p>此次发布标志着谷歌在通用人工智能（AGI）道路上的又一重要里程碑。Gemini 2.X系列被谷歌定位为“新一代AI模型的发展方向”，旨在构建一个真正融合的AI体系，将Gemini打造成一个能够“看到、听到甚至预知你的下一个想法”的统一“线程”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，串联起所有谷歌服务。</p>
+<p>Gemini 2.5家族的核心技术基石在于其采用的<strong>稀疏MoE（Mixture-of-Experts）模型架构</strong>。这种架构使得模型能够原生支持多模态输入，包括文本、视觉和音频，并具备处理<strong>超过一百万Token的超长上下文能力</strong>。这意味着Gemini 2.5 Pro能够理解海量数据集，处理长达3小时的视频内容，并整合来自不同信息源的复杂问题。在最新的前沿编程、推理基准测试中，Gemini 2.5 Pro已然刷新了多项SOTA（State-of-the-Art）纪录，表现出碾压GPT-4和Claude等竞争对手的实力<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<p>值得关注的是，Gemini 2.5家族还在**性能-成本帕累托前沿（Pareto frontier）**上建立了强大的护城河。其中，首次亮相的Gemini 2.5 Flash-Lite版本更是将性价比推向极致。其未开启“思考模式”下的输入价格仅为0.1美元/百万token，输出价格为0.4美元/百万token<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，远低于同级别模型。这款轻量级模型不仅速度飞快，每秒输出Token数接近350个，而且在开启“思考模式”后，其在数学、知识问答、编码、视觉理解等多项任务上的表现足以媲美2.5 Flash，尤其擅长高吞吐量、低延迟敏感型任务，如实时代码编写或PDF内容转换为交互式Web应用<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>Gemini 2.5最大的改进之一在于其全系列模型都原生地融入了动态**“Thinking”能力**，能够根据推理时间的增加进一步提升能力，这对于需要深度思考的任务至关重要。此外，谷歌针对特定领域对Gemini 2.5进行了优化，包括代码处理能力的飞跃、事实准确性的显著提升（通过整合Google搜索和多跳推理）、长文本理解的增强（能从46分钟视频中准确回忆1秒事件）、400多种语言的多语言能力，以及音频生成与理解、视频理解与内容生成方面的突破。尤其值得一提的是，基于Gemini 2.5 Pro的<strong>Gemini Deep Research Agent</strong>，在“人类最后考试”（Humanity’s Last Exam benchmark）基准测试中的表现从7.95%大幅提升至26.9%，展现出前沿的搜索与推理能力<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<h3 id="ai行为的非预期洞察从宝可梦的恐慌说起">AI行为的非预期洞察：从宝可梦的“恐慌”说起</h3>
+<p>在所有令人振奋的性能数据之外，Gemini 2.5技术报告中隐藏着一个更深层次的、关于AI行为的独特洞察——来自对经典游戏《宝可梦》的挑战。独立开发者Joel Zhang的实验显示，Gemini 2.5 Pro在面对长达800小时的游戏挑战时，展现了惊人的长期目标连贯性和推理能力，成功通关并进入名人堂<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。更令人印象深刻的是，在第二次自主运行时，模型将通关时间缩短了一半，仅耗时406.5小时<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，体现了显著的学习和优化能力。</p>
+<p>然而，真正引人关注的是报告中描述的一个非预期现象：当宝可梦的生命值（HP）降至“濒死”状态时，Gemini 2.5 Pro会进入一种**“慌乱”的状态**，导致其推理能力出现“质性下降”<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。尽管人工智能模型本身不具备情绪，但其行为模式却像人类在巨大压力下做出的仓促决定一样——例如，在宝可梦即将倒下时，模型可能会突然停止使用某些关键工具，进而影响游戏表现。</p>
+<p>这种“恐慌”行为的出现，无疑为我们理解大型语言模型的**涌现能力（Emergent Capabilities）**增添了新的维度。它不仅仅是模型在特定情境下输出错误，更是一种系统性的、类情绪化的“性能退化”。这提出了一个关键问题：当模型在模拟复杂世界并做出决策时，这些“非理性”或“类情绪”的行为模式是从何而来？它们是训练数据中隐式存在的偏见或模式的反映，还是模型内部复杂动态相互作用的结果？这种现象强制我们去思考，在将AI应用于更具风险和不确定性的真实世界场景（如自动驾驶、金融交易或医疗诊断）时，如何确保其在面临高压或“关键时刻”时的决策鲁棒性和可靠性。</p>
+<p>与此形成对比的是，Gemini 2.5 Pro在解决“巨石谜题”等复杂问题上表现出超乎寻常的策略性。它能够通过创建专门的智能体工具，如路径规划器和策略师，在没有任何人类干预的情况下，一次性解决冠军之路的复杂谜题<sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这种能力上的反差，进一步凸显了当前AI模型在特定任务上的卓越表现与在另一些情境下可能展现的意外行为之间的张力。</p>
+<h3 id="未来展望与伦理考量">未来展望与伦理考量</h3>
+<p>Gemini 2.5家族的发布，尤其是其在性能、成本和多模态能力上的全面突破，无疑将进一步加速AI技术的普及和应用。Flash-Lite这样极致性价比的模型的推出，将使得更多开发者和企业能够接触并利用先进的AI能力，从而推动人工智能在各行各业的深度融合。谷歌将其打造为“统一线程”的愿景，也预示着AI将更深地嵌入我们的数字生活，成为真正意义上的智能助手。</p>
+<p>然而，“宝可梦恐慌”的案例也提醒我们，随着AI能力的提升，其行为的复杂性和不可预测性也在增加。如何解释并控制这些<strong>涌现行为</strong>，是AI研究领域亟待解决的挑战。在AI系统日益渗透到社会关键基础设施的当下，理解并设计出在极端压力下依然能够保持性能稳定、决策理性的AI，将是确保技术安全可靠发展的重中之重。这不仅仅是技术层面的优化，更触及了AI伦理和治理的深层问题。我们必须在追求性能极限的同时，更加关注AI系统的可解释性、透明性和<strong>故障安全机制</strong>。</p>
+<p>谷歌在技术报告的致谢部分隐藏了一句“GEMINI MODELS CAN THINK AND GET BACK TO YOU IN A FLASH”<sup id="fnref9:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，这不仅是极客式的浪漫，也映射出AI领域对**思考（Thinking）<strong>和</strong>即时响应（In a Flash）**这两大目标的执着追求。但真正的“思考”不仅仅是高效的计算和模式识别，还应包含在复杂情境下保持理性与稳定的能力。Gemini 2.5的最新进展，既展现了AI的巨大潜力，也为我们敲响了关于AI行为非预期后果的警钟，促使我们对智能的本质及其在机器中如何体现进行更深入的思考。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>新智元（2025/6/18）。<a href="https://36kr.com/p/3341464175819009">谷歌Gemini 2.5全线爆发，勇战「濒死恐慌」，却被丝血宝可梦吓到当场宕机</a>。36氪。检索日期2025/6/18。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref9:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>（2025/6/18）。<a href="https://www.aitop100.cn/google-gemini-2.5">Gemini 2.5 震撼发布：推理能力碾压GPT-4.5，登顶AI竞技场!</a>。AITOP100。检索日期2025/6/18。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>（2025/6/18）。<a href="https://wallstreetcn.com/articles/3748589">新版Gemini 2.5拿下所有榜一，谷歌无敌了!一个月全面击败o3，编程反超Claude 4</a>。华尔街见闻。检索日期2025/6/18。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>（2025/6/18）。<a href="https://zhuanlan.zhihu.com/p/1914130079476347020">刚刚，Gemini 2.5 Pro 再度进化!SOTA 性能炸裂，编程能力反超 Claude 4，谷歌 CEO 畅谈 AI 未来</a>。知乎。检索日期2025/6/18。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E8%B0%B7%E6%AD%8Cgemini/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">谷歌Gemini</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大型语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">多模态AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%80%A7%E8%83%BD%E5%9F%BA%E5%87%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">性能基准</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B6%8C%E7%8E%B0%E8%A1%8C%E4%B8%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">涌现行为</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%AE%9D%E5%8F%AF%E6%A2%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">宝可梦</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3"></p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/articles/2025-06-11-article-497/">十亿美元AI折戟儿童谜题：苹果研究揭示大型模型“思考幻象”背后的深层警示</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/2025-06-10-article-495/">AI“思考的幻觉”：当十亿美元模型被孩童谜题击败，我们该如何重新审视AI的承诺？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250618142004285-1/">「智能体村庄」：一场AI版的《楚门的世界》揭示自主性与协作的复杂现实</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/acl-2025-20250617202000398-7/">迈向对话智能新纪元：ACL 2025权威综述揭示语音大模型核心突破与挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250617190043053-2/">揭秘“黑箱”：人工智能透明度、安全与信任的深层考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250617025225327-0/">当算法走进课堂：AI的效率飞跃与教育“温度”的永恒命题</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/google-notebooklmaiopenai-20250616123004/">Google NotebookLM：当AI成为你的专属知识策展人，连OpenAI也为之侧目</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/2025-06-10-article-489/">Meta的“超级智能”野望：AI重组与百亿级战略投资的深层剖析</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/deepmindai-20250618142004277-0/">突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/aigc-20250618122004589-3/">AIGC浪潮席卷广告业：万亿市场背后，创意、伦理与增长的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/gemini-25ai-20250618122004604-5/">揭秘Gemini 2.5家族：从轻量级“神经操作系统”到AI“智能体恐慌”的深层洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/gemini-25ai-20250618122004575-1/">谷歌Gemini 2.5系列模型稳定发布：性能、性价比与AI生态的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/aitob-20250618112004732-4/">AI浪潮下的韧性与变革：为何ToB“老炮”仍能屹立不倒？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/openai2ai-20250618112004726-3/">OpenAI与美国国防部的2亿美元合约：技术前沿、伦理边界与AI战场的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/ai4-20250618112004739-5/">多模态AI的数学困境：从图像到形式化证明，准确率仅4%揭示深层推理鸿沟</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:65292/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
