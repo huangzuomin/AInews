@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>软件范式的重塑：Andrej Karpathy解读AI时代的新代码与新操作系统 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="知名AI研究员Andrej Karpathy在近期演讲中提出“软件3.0”时代，将自然语言提示词视作新代码，大语言模型（LLM）比作新操作系统。他强调LLM作为计算平台的潜力，呼吁软件界面适应AI的“感知与行动”，并对AI代理的未来发展保持谨慎，主张通过人类监督和结构化协作来弥合AI的局限性。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/articles/andrej-karpathyai-20250620211005691-3/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/articles/andrej-karpathyai-20250620211005691-3/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="软件范式的重塑：Andrej Karpathy解读AI时代的新代码与新操作系统">
+  <meta property="og:description" content="知名AI研究员Andrej Karpathy在近期演讲中提出“软件3.0”时代，将自然语言提示词视作新代码，大语言模型（LLM）比作新操作系统。他强调LLM作为计算平台的潜力，呼吁软件界面适应AI的“感知与行动”，并对AI代理的未来发展保持谨慎，主张通过人类监督和结构化协作来弥合AI的局限性。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2025-06-20T21:10:05+08:00">
+    <meta property="article:modified_time" content="2025-06-20T21:10:05+08:00">
+    <meta property="article:tag" content="Andrej Karpathy">
+    <meta property="article:tag" content="软件3.0">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="LLM">
+    <meta property="article:tag" content="提示词工程">
+    <meta property="article:tag" content="AI Agent">
+
+  <meta itemprop="name" content="软件范式的重塑：Andrej Karpathy解读AI时代的新代码与新操作系统">
+  <meta itemprop="description" content="知名AI研究员Andrej Karpathy在近期演讲中提出“软件3.0”时代，将自然语言提示词视作新代码，大语言模型（LLM）比作新操作系统。他强调LLM作为计算平台的潜力，呼吁软件界面适应AI的“感知与行动”，并对AI代理的未来发展保持谨慎，主张通过人类监督和结构化协作来弥合AI的局限性。">
+  <meta itemprop="datePublished" content="2025-06-20T21:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-06-20T21:10:05+08:00">
+  <meta itemprop="wordCount" content="37">
+  <meta itemprop="keywords" content="Andrej Karpathy,软件3.0,大语言模型,LLM,提示词工程,AI Agent,人机协作,AI与软件工程,AI伦理">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="软件范式的重塑：Andrej Karpathy解读AI时代的新代码与新操作系统">
+  <meta name="twitter:description" content="知名AI研究员Andrej Karpathy在近期演讲中提出“软件3.0”时代，将自然语言提示词视作新代码，大语言模型（LLM）比作新操作系统。他强调LLM作为计算平台的潜力，呼吁软件界面适应AI的“感知与行动”，并对AI代理的未来发展保持谨慎，主张通过人类监督和结构化协作来弥合AI的局限性。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('https://img.36krcdn.com/hsossms/20250620/v2_dbd8fcbbf6c74a39bfac30357f0db021@46958_oswg497415oswg1080oswg554_img_000?x-oss-process=image/format,jpg/interlace,1');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        AI内参
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/articles/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/summary/" title="">
+              综述
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100"><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">软件范式的重塑：Andrej Karpathy解读AI时代的新代码与新操作系统</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-20 21:10</span>
+      </aside>
+
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>Andrej Karpathy的最新演讲深刻阐释了“软件3.0”时代，其中自然语言提示词正取代传统代码成为核心编程范式，大语言模型（LLM）则被视为新一代操作系统。他强调了人机协作的重要性，呼吁软件界面适应AI的“感知”与“行动”，并对AI代理的成熟路径持谨慎乐观态度。</p></blockquote>
+<p>作为前特斯拉AI总监、OpenAI的明星研究员，Andrej Karpathy总是能以其独到的视角和深邃的思考，在人工智能领域投下掷地有声的涟漪。近日，Karpathy在YC AI创业学校的演讲引发了业界广泛关注，他不仅重申了“软件3.0”的愿景，更将大语言模型（LLM）提升至“新操作系统”的地位，揭示了AI时代编程范式、计算平台乃至人机交互的深刻变革。</p>
+<h3 id="软件范式的演进从代码到咒语">软件范式的演进：从代码到“咒语”</h3>
+<p>Karpathy的论述始于对软件发展史的宏大叙事：从依赖人类手动编写指令的<strong>软件1.0</strong>时代，到以数据投喂为核心、机器从中学习模式的<strong>软件2.0</strong>时代，我们正迈入一个全新的纪元——<strong>软件3.0</strong>。在这个新范式中，自然语言提示词（prompts）不再仅仅是与模型交流的工具，它们被赋予了“新代码”的地位。这标志着编程方式的根本性转变：过去需要人类工程师一行行敲打的复杂逻辑，如今可以由AI通过“对模型说咒语”的方式自动生成和执行<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>这种转变的力量不容小觑。正如Karpathy本人所示范的，他可以在没有任何Swift编程经验的情况下，仅凭与ChatGPT的多轮对话，在一个小时内开发并部署一个完整的卡路里追踪iOS应用<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这不仅仅是效率的提升，更是编程门槛的颠覆性降低，预示着未来“氛围编程师”的崛起——那些能够巧妙构建和引导AI、而非亲自动手编写底层代码的开发者。这意味着，过去由人工编写的复杂逻辑正逐渐被大模型所承载和自动化，将人类的创造力从繁琐的语法细节中解放出来，专注于更高层次的抽象和问题定义。</p>
+<h3 id="llm作为新操作系统重塑计算平台">LLM作为新操作系统：重塑计算平台</h3>
+<p>在Karpathy看来，将LLM比作“操作系统”（Operating Systems）远比将其视为“电网”或“芯片工厂”更为贴切。LLM并非电力或自来水那样标准化、无差异的“商品”，它们是日益复杂的软件生态系统，具备独特的复杂性、能力边界和生态系统特征。他精妙地将<strong>闭源的LLM提供商</strong>类比为Windows和macOS，而将<strong>开源的Llama生态</strong>视为Linux。更进一步地，他提出将<strong>LLM本身</strong>视为计算机体系结构中的“CPU”，负责执行计算和推理的核心任务；而**上下文窗口（Context Windows）**则如同“内存（RAM）”，临时存储当前工作所需的信息<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。在这种类比下，LLM的工作流就是调度这些“硬件”资源以解决用户提出的复杂任务，从而构成一个全新的计算平台。</p>
+<p>然而，Karpathy也明确指出，当前主流的纯文本聊天框式交互方式并非长久之计。他以代码编辑器Cursor为例，指出通过图形用户界面（GUI）直观地展示代码增删、并通过快捷键快速接受或拒绝，远比用自然语言描述修改要高效得多。这突显了<strong>GUI在“验证”和“审计”AI工作成果中的关键作用</strong>，它利用了人类强大的视觉处理能力，使得人机协作的“生成-验证”循环能够飞速运转。尽管LLM的核心是语言模型，但要构建出真正实用的、能部分自主的应用，决不能忽视GUI的力量，它是连接人类用户和AI“操作系统”之间最高效的桥梁。</p>
+<h3 id="从愿景到现实ai代理的挑战与人机协作的未来">从愿景到现实：AI代理的挑战与人机协作的未来</h3>
+<p>Karpathy对AI代理（agents）的看法，既充满远见又秉持着谨慎的现实主义。他认为，当前普遍高呼的“agent元年”是过于乐观的，这更应该被视为“<strong>代理人的十年（decade of agents）</strong>”<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。从一个令人惊艳的演示（99%的成功率）到真正可靠、能处理所有极端情况的成熟产品（99.999%的成功率），其间横亘着一道漫长而艰难的鸿沟。</p>
+<p>为了实现软件向“AI可驱动的、部分自主的应用”的改造，Karpathy提出了三个前提条件：</p>
+<ul>
+<li><strong>感知（Perception）</strong>：AI代理必须能够“看到”所有人类用户能看到的信息。</li>
+<li><strong>行动（Action）</strong>：AI代理必须能够执行所有人类用户能执行的操作。</li>
+<li><strong>监督（Supervision）</strong>：必须有一个机制，允许人类监督AI的工作并随时介入，因为AI系统目前远非完美可靠<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+</ul>
+<p>一个至关重要的结论是，当前绝大多数软件的用户界面（如各种开关和设置）都是纯粹为人类设计的，这恰恰是实现AI自动化的主要障碍。因此，他呼吁：“所有这一切都必须改变，变得对大语言模型可访问”<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着未来的软件设计不仅要考虑人机交互，更要考虑如何让AI能有效“理解”和“操作”界面。</p>
+<p>Karpathy还深入探讨了LLM所展现出的“心理特征”。他指出，AI通过学习和拟合互联网上几乎所有人类编写的文本数据进行训练，因此不可避免地涌现出类似人类的心理特质，无论好与坏。LLM拥有百科全书般的知识储备，犹如电影《雨人》中的主角，但也伴随着幻觉、智能水平参差不齐以及类似“顺行性遗忘症”般的有限记忆能力等认知缺陷<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>他以教育为例强调了人类监督和结构化的重要性。一个完全开放、无结构的指令会让AI“失控”或“迷失方向”，无法提供连贯的教学大纲。因此，他提倡让教师与AI协作，共同创建结构化的“课程”，这个可被审核和验证的中间产物，能确保教学质量，避免“过度反应的代理”产生无用结果。</p>
+<p>有趣的是，Karpathy也观察到LLM颠覆了传统的技术扩散方向。以往，颠覆性技术往往先由政府和企业采用，再逐步普及到消费者。但LLM却恰恰相反，它首先通过ChatGPT等消费级应用触达大众，而政府和企业在采用上反而显得滞后<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这独特的扩散模式，无疑为行业带来了前所未有的机遇和挑战。</p>
+<p>Andrej Karpathy的演讲不仅是一次技术分析，更是一场关于AI时代人类与机器如何协同进化的深刻思考。他没有描绘不切实际的“大饼”，而是提供了多维度的新视角和一种不断自我迭代的思维方式。在每个人都在努力穿上“AI战甲”的当下，他为我们指明了未来软件开发、人机交互以及AI部署的可能路径，强调了在追求自动化的同时，人类的监督、协作与对AI局限性的深刻理解将是成功的关键。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://mp.weixin.qq.com/s/lqoNPROwfNw2whPSSwH5uA">AI大神Karpathy演讲刷屏：软件3.0时代已来，提示词就是新代码</a>·APPSO·发现明日产品的（2025/6/20）·检索日期2025/6/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://news.qq.com/rain/a/20250620A08IFL00">AI 大神 Karpathy 演讲刷屏：软件 3.0 时代已来，提示词就是新代码 | 附完整PPT_腾讯新闻</a>·腾讯新闻·（2025/6/20）·检索日期2025/6/20&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/andrej-karpathy/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Andrej Karpathy</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B63.0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件3.0</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/llm/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LLM</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">提示词工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人机协作</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI与软件工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/articles/30andrej-karpathyai-20250619200339603-1/">软件3.0时代：Andrej Karpathy揭示AI如何重塑编程与人机协作的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/ai-agent-20250620141004447-1/">从工具到伙伴：AI Agent发展中的技术、商业与伦理深思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/minimaxai53-20250620092004466-0/">MiniMax的AI成本革命：53万美元如何塑造下一代智能体未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250619132004432-1/">揭秘AI的数字偏执：大模型不约而同的“心头好”背后</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250619042004381-0/">AI编排层：驾驭提示词之乱，构建智能企业新秩序</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250618202004734-2/">超越“工作末日论”：AI时代人类角色的重塑与新职业图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/llmmit50-20250618172004590-1/">信息洪流中的LLM深度航标：MIT揭示掌握大模型精髓的50个关键洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/gemini-25ai-20250618122004604-5/">揭秘Gemini 2.5家族：从轻量级“神经操作系统”到AI“智能体恐慌”的深层洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/anthropicaiai-20250618072004246-0/">Anthropic的可解释AI：解构大模型“黑箱”，重塑企业级AI策略的信任基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/chatgpt-20250617202000390-6/">大语言模型如何被一场古老棋局“考倒”：ChatGPT与“理解”的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250617083004593-0/">中国AI赛道新动向：基础模型之“炼”与智能代理之“用”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250617003004891-5/">当人机共生走向极端：一位资深程序员的AI痴迷与职业终结</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250616123004/">超越表象：大语言模型“遗忘”的深层结构与可逆边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/aimitchatgpt-20250620201004425-1/">当AI成为“外部大脑”：MIT研究揭示ChatGPT对人类认知的深层影响与“认知惯性”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/articles/article-20250620181004362-0/">人形机器人的“玩具”困境：从聚光灯到真实应用的漫漫长路</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
