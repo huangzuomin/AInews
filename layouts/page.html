@@ -8,21 +8,7 @@
   {{ $section := .Site.GetPage "section" .Section }}
   <article class="flex-l mw8 center ph3 flex-wrap justify-between">
     <header class="mt4 w-100">
-      <aside class="instapaper_ignoref helvetica tracked">
-        {{/* 动态时间显示 */}}
-        {{ $now := now }}
-        {{ $publishTime := .Date }}
-        {{ $duration := $now.Sub $publishTime }}
-        {{ $minutes := $duration.Minutes }}
-        {{ $hours := $duration.Hours }}
-        {{ if lt $minutes 60 }}
-          {{ printf "%.0f分钟前" $minutes }}
-        {{ else if lt $hours 24 }}
-          {{ printf "%.0f小时前" $hours }}
-        {{ else }}
-          {{ .Date | time.Format "2006年1月2日" }}
-        {{ end }}
-      </aside>
+
       {{- partials.IncludeCached "social/share.html" . . -}}
       <h1 class="f1 athelas mt3 mb1">
         {{- .Title -}}
@@ -40,6 +26,10 @@
         </strong>
       </p>
       {{ end }}
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">{{ .Date.Format "2006-01-02 15:04" }}</span>
+      </aside>
+
       {{/* 移除作者下方的发布时间显示 */}}
     </header>
     <div class="article-content nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
