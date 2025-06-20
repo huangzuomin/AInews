@@ -88,6 +88,26 @@
   color: #95a5a6;
 }
 
+.more-categories {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+}
+
+.more-categories:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.more-categories .category-name {
+  color: white;
+}
+
+.more-categories .category-count {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* 标签云模块样式 */
 .tags-section {
   margin-bottom: 3rem;
@@ -185,10 +205,21 @@
     <div class="categories-grid">
       {{ $categories := .Site.Taxonomies.main_topics }}
       {{ if $categories }}
+        {{ $sortedCategories := slice }}
         {{ range $name, $taxonomy := $categories }}
-          <a href="{{ "/main_topics/" | relLangURL }}{{ $name | urlize }}/" class="category-card">
-            <div class="category-name">{{ $name | humanize }}</div>
-            <div class="category-count">({{ len $taxonomy }} 篇)</div>
+          {{ $sortedCategories = $sortedCategories | append (dict "name" $name "taxonomy" $taxonomy "count" (len $taxonomy)) }}
+        {{ end }}
+        {{ $sortedCategories = sort $sortedCategories "count" "desc" }}
+        {{ range first 11 $sortedCategories }}
+          <a href="{{ "/main_topics/" | relLangURL }}{{ .name | urlize }}/" class="category-card">
+            <div class="category-name">{{ .name | humanize }}</div>
+            <div class="category-count">({{ .count }} 篇)</div>
+          </a>
+        {{ end }}
+        {{ if gt (len $sortedCategories) 11 }}
+          <a href="{{ "/all-categories/" | relLangURL }}" class="category-card more-categories">
+            <div class="category-name">更多分类</div>
+            <div class="category-count">({{ sub (len $sortedCategories) 11 }} 个)</div>
           </a>
         {{ end }}
       {{ else }}

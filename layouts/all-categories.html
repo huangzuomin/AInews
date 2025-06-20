@@ -1,0 +1,154 @@
+{{ define "main" }}
+<style>
+/* 全部分类页面样式 */
+.all-categories-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.all-categories-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.all-categories-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.all-categories-subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+/* 分类网格样式 */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.category-card {
+  background: #fff;
+  border: 1px solid #e8ecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: #3498db;
+}
+
+.category-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.category-count {
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+/* 返回按钮样式 */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.back-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.back-button::before {
+  content: '←';
+  font-size: 1.2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .all-categories-container {
+    padding: 1rem;
+  }
+  
+  .all-categories-title {
+    font-size: 2rem;
+  }
+  
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+</style>
+
+<div class="all-categories-container">
+  <!-- 页面头部 -->
+  <div class="all-categories-header">
+    <a href="{{ "/explore/" | relLangURL }}" class="back-button">返回主题探索</a>
+    <h1 class="all-categories-title">全部分类</h1>
+    <p class="all-categories-subtitle">浏览所有主题分类，发现更多精彩内容</p>
+  </div>
+
+  <!-- 所有分类展示 -->
+  <div class="categories-grid">
+    {{ $categories := .Site.Taxonomies.main_topics }}
+    {{ if $categories }}
+      {{ $sortedCategories := slice }}
+      {{ range $name, $taxonomy := $categories }}
+        {{ $sortedCategories = $sortedCategories | append (dict "name" $name "taxonomy" $taxonomy "count" (len $taxonomy)) }}
+      {{ end }}
+      {{ $sortedCategories = sort $sortedCategories "count" "desc" }}
+      {{ range $sortedCategories }}
+        <a href="{{ "/main_topics/" | relLangURL }}{{ .name | urlize }}/" class="category-card">
+          <div class="category-name">{{ .name | humanize }}</div>
+          <div class="category-count">({{ .count }} 篇)</div>
+        </a>
+      {{ end }}
+    {{ else }}
+      <div class="no-content">暂无分类内容</div>
+    {{ end }}
+  </div>
+</div>
+
+<script>
+// 添加交互效果
+document.addEventListener('DOMContentLoaded', function() {
+  // 为分类卡片添加点击效果
+  const categoryCards = document.querySelectorAll('.category-card');
+  categoryCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // 添加点击动画
+      this.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+    });
+  });
+});
+</script>
+{{ end }}
