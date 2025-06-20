@@ -1,0 +1,280 @@
+{{ define "main" }}
+<style>
+/* 主题探索页面样式 */
+.explore-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.explore-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.explore-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.explore-subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+/* 分类模块样式 */
+.categories-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #34495e;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.category-card {
+  background: #fff;
+  border: 1px solid #e8ecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: #3498db;
+}
+
+.category-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.category-count {
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+/* 标签云模块样式 */
+.tags-section {
+  margin-bottom: 3rem;
+}
+
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+}
+
+.tag-item {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #495057;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tag-item:hover {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+  transform: scale(1.05);
+}
+
+/* 标签大小变化 - 增强视觉差异 */
+.tag-size-1 { 
+  font-size: 0.75rem; 
+  font-weight: 400;
+  opacity: 0.8;
+}
+.tag-size-2 { 
+  font-size: 0.85rem; 
+  font-weight: 500;
+  opacity: 0.9;
+}
+.tag-size-3 { 
+  font-size: 1rem; 
+  font-weight: 600;
+}
+.tag-size-4 { 
+  font-size: 1.15rem; 
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+}
+.tag-size-5 { 
+  font-size: 1.3rem; 
+  font-weight: 800;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .explore-container {
+    padding: 1rem;
+  }
+  
+  .explore-title {
+    font-size: 2rem;
+  }
+  
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .tags-cloud {
+    gap: 0.5rem;
+  }
+}
+</style>
+
+<div class="explore-container">
+  <!-- 页面头部 -->
+  <div class="explore-header">
+    <h1 class="explore-title">{{ .Title }}</h1>
+    <p class="explore-subtitle">{{ .Content }}</p>
+  </div>
+
+  <!-- 分类浏览模块 -->
+  <section class="categories-section">
+    <h2 class="section-title">按分类浏览</h2>
+    <div class="categories-grid">
+      {{ $categories := .Site.Taxonomies.main_topics }}
+      {{ if $categories }}
+        {{ range $name, $taxonomy := $categories }}
+          <a href="{{ "/main_topics/" | relLangURL }}{{ $name | urlize }}/" class="category-card">
+            <div class="category-name">{{ $name | humanize }}</div>
+            <div class="category-count">({{ len $taxonomy }} 篇)</div>
+          </a>
+        {{ end }}
+      {{ else }}
+        <div class="no-content">暂无分类内容</div>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- 热门标签探索模块 -->
+  <section class="tags-section">
+    <h2 class="section-title">按热门标签探索</h2>
+    <div class="tags-cloud">
+      {{ $tags := .Site.Taxonomies.tags }}
+      {{ $maxCount := 0 }}
+      {{ $minCount := 999999 }}
+      {{ range $tags }}
+        {{ $count := len . }}
+        {{ if gt $count $maxCount }}
+          {{ $maxCount = $count }}
+        {{ end }}
+        {{ if lt $count $minCount }}
+          {{ $minCount = $count }}
+        {{ end }}
+      {{ end }}
+      
+      {{ range $name, $taxonomy := $tags }}
+        {{ $count := len $taxonomy }}
+        {{ $size := 1 }}
+        {{ if and (gt $maxCount $minCount) (gt $maxCount 0) }}
+          {{ $range := sub $maxCount $minCount }}
+          {{ if gt $range 0 }}
+            {{ $normalized := div (sub $count $minCount) $range }}
+            {{ $size = int (add (mul $normalized 4) 1) }}
+          {{ end }}
+        {{ else if gt $count 10 }}
+          {{ $size = 5 }}
+        {{ else if gt $count 5 }}
+          {{ $size = 4 }}
+        {{ else if gt $count 2 }}
+          {{ $size = 3 }}
+        {{ else if gt $count 1 }}
+          {{ $size = 2 }}
+        {{ end }}
+        {{ if lt $size 1 }}{{ $size = 1 }}{{ end }}
+        {{ if gt $size 5 }}{{ $size = 5 }}{{ end }}
+        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}/" 
+           class="tag-item tag-size-{{ $size }}" 
+           title="{{ $name | humanize }} ({{ $count }} 篇)">
+          {{ $name | humanize }}
+        </a>
+      {{ end }}
+    </div>
+  </section>
+</div>
+
+<script>
+// 添加交互效果
+document.addEventListener('DOMContentLoaded', function() {
+  // 为分类卡片添加点击效果
+  const categoryCards = document.querySelectorAll('.category-card');
+  categoryCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // 添加点击动画
+      this.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+    });
+  });
+  
+  // 为标签添加随机颜色（可选）
+  const tagItems = document.querySelectorAll('.tag-item');
+  const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#34495e'];
+  
+  tagItems.forEach((tag, index) => {
+    tag.addEventListener('mouseenter', function() {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      this.style.backgroundColor = randomColor;
+      this.style.borderColor = randomColor;
+    });
+    
+    tag.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = '';
+      this.style.borderColor = '';
+    });
+  });
+});
+</script>
+{{ end }}
