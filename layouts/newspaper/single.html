@@ -8,9 +8,7 @@
   {{ $section := .Site.GetPage "section" .Section }}
   <article class="flex-l mw8 center ph3 flex-wrap justify-between">
     <header class="mt4 w-100">
-      <aside class="instapaper_ignoref helvetica tracked">
-        <span style="color: #999;">{{ .Date.Format "2006-01-02 15:04" }}</span>
-      </aside>
+
       {{- partials.IncludeCached "social/share.html" . . -}}
       <h1 class="f1 athelas mt3 mb1">
         {{- .Title -}}
@@ -28,22 +26,15 @@
         </strong>
       </p>
       {{ end }}
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">{{ .Date.Format "2006-01-02 15:04" }}</span>
+      </aside>
       {{/* 移除作者下方的发布时间显示 */}}
     </header>
     <div class="article-content nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
       {{/* 处理newspaper特殊格式 */}}
       {{ $content := .Content }}
-      {{/* 为【深度解读与关联】等段落添加样式 */}}
-      {{ $content = $content | replaceRE "【深度解读与关联】" "<div class='analysis-section mt4 mb3'><h4 class='f5 b mb3' style='color: #2c3e50; border-left: 4px solid #3498db; padding-left: 12px;'>【深度解读与关联】</h4>" }}
-      {{ $content = $content | replaceRE "【原文信息】" "</div><div class='source-info mt4 mb3 pa3' style='background-color: #f8f9fa; border-radius: 6px; border-left: 4px solid #6c757d;'><h4 class='f6 b mb2' style='color: #495057;'>【原文信息】</h4>" }}
-      {{ $content = $content | replaceRE "【事实速览】" "<div class='fact-overview mt3 mb3'><h4 class='f5 b mb3' style='color: #2c3e50; border-left: 4px solid #e74c3c; padding-left: 12px;'>【事实速览】</h4>" }}
-      {{ $content = $content | replaceRE "【一句话点评】" "<div class='comment-section mt3 mb3'><h4 class='f5 b mb3' style='color: #2c3e50; border-left: 4px solid #f39c12; padding-left: 12px;'>【一句话点评】</h4>" }}
       
-      {{/* 为**标题**添加样式 */}}
-      {{ $content = $content | replaceRE "\\*\\*([^*]+)\\*\\*" "<strong class='db mb2 mt3' style='color: #2c3e50;'>$1</strong>" }}
-      
-      {{/* 确保段落正确闭合 */}}
-      {{ $content = $content | replaceRE "(标题: [^\\n]+\\n链接: [^\\n]+)" "$1</div>" }}
       
       {{ $content | safeHTML }}
       
