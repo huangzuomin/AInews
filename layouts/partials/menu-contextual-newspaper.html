@@ -1,0 +1,117 @@
+{{/*
+  Use Hugo's native Table of contents feature. You must set `toc: true` in your parameters for this to show.
+  https://gohugo.io/content-management/toc/
+*/}}
+
+{{- if .Params.toc -}}
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">{{ lang.Translate "whatsInThis" . }}</p>
+      {{ .TableOfContents }}
+  </div>
+{{- end -}}
+
+{{/*
+  针对newspaper的相关阅读：显示相关主题的articles和其他newspaper文章
+*/}}
+
+{{/* 获取当前文章的标签和主题 */}}
+{{ $currentTags := .Params.tags }}
+{{ $currentTopics := .Params.main_topics }}
+
+{{/* 获取相关的articles文章 */}}
+{{ $relatedArticles := slice }}
+{{ $articlePages := where .Site.RegularPages "Section" "articles" }}
+{{ range $articlePages }}
+  {{ $hasCommonTag := false }}
+  {{ range .Params.tags }}
+    {{ if in $currentTags . }}
+      {{ $hasCommonTag = true }}
+    {{ end }}
+  {{ end }}
+  {{ range .Params.main_topics }}
+    {{ if in $currentTopics . }}
+      {{ $hasCommonTag = true }}
+    {{ end }}
+  {{ end }}
+  {{ if $hasCommonTag }}
+    {{ $relatedArticles = $relatedArticles | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* 获取相关的newspaper文章（排除当前文章） */}}
+{{ $relatedNewspaper := slice }}
+{{ $newspaperPages := where .Site.RegularPages "Section" "newspaper" }}
+{{ range $newspaperPages }}
+  {{ if ne .RelPermalink $.RelPermalink }}
+    {{ $hasCommonTag := false }}
+    {{ range .Params.tags }}
+      {{ if in $currentTags . }}
+        {{ $hasCommonTag = true }}
+      {{ end }}
+    {{ end }}
+    {{ range .Params.main_topics }}
+      {{ if in $currentTopics . }}
+        {{ $hasCommonTag = true }}
+      {{ end }}
+    {{ end }}
+    {{ if $hasCommonTag }}
+      {{ $relatedNewspaper = $relatedNewspaper | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* 如果没有相关文章，则显示最新的articles和newspaper */}}
+{{ if eq (len $relatedArticles) 0 }}
+  {{ $relatedArticles = first 3 (where .Site.RegularPages "Section" "articles") }}
+{{ end }}
+{{ if eq (len $relatedNewspaper) 0 }}
+  {{ $relatedNewspaper = first 3 (where .Site.RegularPages "Section" "newspaper") }}
+{{ end }}
+
+{{/* 限制显示数量 */}}
+{{ $relatedArticles = first 3 $relatedArticles }}
+{{ $relatedNewspaper = first 3 $relatedNewspaper }}
+
+{{ if or $relatedArticles $relatedNewspaper }}
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    
+    {{ if $relatedArticles }}
+      <div class="mb3">
+        <p class="f6 b mb2" style="color: #888;">深度洞察</p>
+        <ul class="pa0 list">
+          {{ range $relatedArticles }}
+            <li class="mb2">
+              <a href="{{ .RelPermalink }}" class="link dim">
+                <span class="f6" style="color: #3498db;">[洞察]</span> {{ .Title }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+    
+    {{ if $relatedNewspaper }}
+      <div class="mb3">
+        <p class="f6 b mb2" style="color: #888;">往期日报</p>
+        <ul class="pa0 list">
+          {{ range $relatedNewspaper }}
+            <li class="mb2">
+              <a href="{{ .RelPermalink }}" class="link dim">
+                <span class="f6" style="color: #e74c3c;">[日报]</span> {{ .Date.Format "01-02" }} {{ .Title | truncate 30 }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}
+
+{{/* AI写作声明 */}}
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div>
