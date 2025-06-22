@@ -101,3 +101,30 @@
     object-fit: cover;
     display: block;
 }
+
+/* 默认样式：针对所有屏幕（主要是移动端） */
+/* 由于 img 标签有 w100，这里可以直接设置最大宽度和高度来约束它 */
+img[src*="/logo/logo.png"] {
+    /* 设置 Logo 在移动设备上的最大宽度 */
+    max-width: 140px; /* 例如，手机上最大宽度150px */
+    height: auto;     /* 保持图片比例 */
+}
+/* PC 端样式：使用媒体查询 for 较大的屏幕 */
+/* Tachyons 的 `ns` (not-small) 通常对应 min-width: 30em (480px) 或 min-width: 48em (768px) */
+/* 假设你希望在宽度大于 768px 的屏幕上应用这些样式 */
+@media screen and (min-width: 48em) { /* 48em 约等于 768px，这是 Ananke 常用的PC端断点 */
+    img[src*="/logo/logo.png"] {
+        /* 覆盖 w100 和 mw5-ns 的效果，设置 PC 端的固定宽度 */
+        width: 150px; /* 例如，PC 上固定宽度200px */
+        height: auto; /* 保持图片比例 */
+        /* 可以移除 mw5-ns，或者直接覆盖它 */
+        max-width: 150px; /* 确保不会超过这个宽度 */
+    }
+}
+/* 如果你需要针对更宽的屏幕（如大型桌面显示器）进一步调整 */
+@media screen and (min-width: 60em) { /* 60em 约等于 960px */
+    img[src*="/logo/logo.png"] {
+        width: 200px; /* 例如，更宽屏幕上250px */
+        max-width: 200px;
+    }
+}
