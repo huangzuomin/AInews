@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="MiniMax开源了其首个大规模混合架构推理模型M1，以4560亿参数、MoE架构和独特的“闪电注意力”机制，在长上下文处理和Agent工具使用方面展现出卓越性能，并大幅降低了训练成本。M1的开放标志着中国AI公司在高效、超长上下文推理技术上的重要突破，预示着未来AI在复杂任务协作中的广阔应用前景。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/minimax-m1ai-20250617202000424-10/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/minimax-m1ai-20250617202000424-10/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界">
+  <meta property="og:description" content="MiniMax开源了其首个大规模混合架构推理模型M1，以4560亿参数、MoE架构和独特的“闪电注意力”机制，在长上下文处理和Agent工具使用方面展现出卓越性能，并大幅降低了训练成本。M1的开放标志着中国AI公司在高效、超长上下文推理技术上的重要突破，预示着未来AI在复杂任务协作中的广阔应用前景。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-17T20:20:00+08:00">
+    <meta property="article:modified_time" content="2025-06-17T20:20:00+08:00">
+    <meta property="article:tag" content="MiniMax">
+    <meta property="article:tag" content="开源模型">
+    <meta property="article:tag" content="混合专家架构">
+    <meta property="article:tag" content="闪电注意力">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="AI推理">
+
+  <meta itemprop="name" content="MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界">
+  <meta itemprop="description" content="MiniMax开源了其首个大规模混合架构推理模型M1，以4560亿参数、MoE架构和独特的“闪电注意力”机制，在长上下文处理和Agent工具使用方面展现出卓越性能，并大幅降低了训练成本。M1的开放标志着中国AI公司在高效、超长上下文推理技术上的重要突破，预示着未来AI在复杂任务协作中的广阔应用前景。">
+  <meta itemprop="datePublished" content="2025-06-17T20:20:00+08:00">
+  <meta itemprop="dateModified" content="2025-06-17T20:20:00+08:00">
+  <meta itemprop="wordCount" content="35">
+  <meta itemprop="keywords" content="MiniMax,开源模型,混合专家架构,闪电注意力,大模型,AI推理,长上下文,强化学习">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界">
+  <meta name="twitter:description" content="MiniMax开源了其首个大规模混合架构推理模型M1，以4560亿参数、MoE架构和独特的“闪电注意力”机制，在长上下文处理和Agent工具使用方面展现出卓越性能，并大幅降低了训练成本。M1的开放标志着中国AI公司在高效、超长上下文推理技术上的重要突破，预示着未来AI在复杂任务协作中的广阔应用前景。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2820%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-17 20:20</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>MiniMax近日开源了其首个大规模混合架构推理模型MiniMax-M1，以其4560亿参数规模、高效的“闪电注意力”机制和创新的强化学习算法CISPO，在软件工程、工具使用及百万级上下文处理能力上超越DeepSeek-R1等竞品，标志着中国大模型公司在开放生态和长上下文推理领域迈出了关键一步，预示着复杂多Agent协作场景的未来。</p></blockquote>
+<p>AI领域的技术迭代速度令人目不暇接，而中国市场作为这一全球竞赛的核心战场，其动态尤为引人注目。近日，被称为“大模型六小虎”之一的MiniMax正式开源了其首个大规模混合架构推理模型MiniMax-M1，并公布了详尽的技术报告<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。此举不仅是MiniMax自身发展的一个里程碑，更深刻反映了当前大模型技术演进的关键趋势：对极致效率、超长上下文处理能力以及复杂任务执行的追求。</p>
+<p>MiniMax-M1以其<strong>4560亿参数规模</strong>亮相，更值得关注的是其每次推理仅激活<strong>459亿参数</strong>的稀疏性，这得益于其混合专家（MoE）架构。这一设计理念与DeepMind的GLaM模型、Google的Switch Transformer以及Meta的LLaMA系列后续版本中采用的MoE不谋而合，旨在通过激活更少参数来降低推理成本，同时保持甚至提升模型性能。M1原生支持<strong>100万上下文输入</strong>和<strong>8万token推理输出</strong>，与谷歌Gemini 2.5 Pro等闭源模型在输入长度上达到相同水平，并远超DeepSeek-R1的8倍。</p>
+<h3 id="技术突破与架构革新">技术突破与架构革新</h3>
+<p>MiniMax-M1的核心技术创新在于其对混合专家（MoE）架构的深度应用与“闪电注意力机制”（Lightning Attention）的融合。传统的Transformer模型在处理长序列时，注意力机制的计算成本呈平方增长，这成为上下文窗口扩展的瓶颈。而M1采用的<strong>闪电注意力机制</strong>，被MiniMax描述为能够高效扩展测试时计算资源，显著降低了长上下文推理的FLOPs消耗。例如，在10万token的生成长度下，M1仅需消耗DeepSeek-R1约25%的FLOPs<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这种效率上的巨大提升，对于需要处理海量信息、进行复杂思考的任务至关重要。</p>
+<p>除了架构上的优化，MiniMax在模型训练阶段也实现了突破。M1的开发大量采用了<strong>大规模强化学习（RL）</strong>，并引入了一种名为<strong>CISPO</strong>的全新算法。这项算法通过裁剪重要性采样权重而非token更新来提升性能，在AIME 2024任务上的实验表明，CISPO的收敛速度比字节跳动近期提出的DAPO快一倍，并显著优于DeepSeek早期使用的GRPO<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这种在强化学习算法上的创新，使得模型在从传统数学推理到基于沙盒的真实软件工程环境等复杂应用场景中，能够更高效地学习和适应。值得注意的是，MiniMax在仅仅三周内使用512块H800 GPU完成了M1的强化学习阶段训练，成本仅为53.74万美元，远低于其最初的成本预期，这无疑证明了其技术栈在效率上的卓越表现。</p>
+<h3 id="市场定位与竞争格局">市场定位与竞争格局</h3>
+<p>MiniMax-M1的发布，无疑对当前的开源大模型市场带来了新的冲击。在标准基准测试中，M1在<strong>复杂的软件工程、工具使用和长上下文任务</strong>方面的表现，超越了DeepSeek-R1和Qwen3-235B等主流开源模型。特别是在OpenAI的MRCR测试集中，M1的表现仅略逊于闭源的Gemini 2.5 Pro，但在长文本中区分复杂信息的能力上表现出色。其在航空业测试集TAU-bench（airline）中的Agent工具使用能力更是“一骑绝尘”，优于所有其他开源及闭源模型。然而，M1在数学和编程能力方面仍有提升空间，其得分低于Qwen3-235B-A22B、DeepSeek-R1和Claude 4 Opus<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>在商业策略上，MiniMax选择将M1开放免费使用，并提供了阶梯式的API定价。尽管在0-32k和32k-128k的输入长度区间，M1的价格优势并不总是明显，甚至在某些情况下高于DeepSeek-R1的优惠时段价格，但在其<strong>独有的128k-1M输入长度档位</strong>，M1展现了绝对的竞争力，因为DeepSeek-R1目前并不支持如此长的上下文输入<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这表明MiniMax旨在通过其在超长上下文处理上的技术领先性，抢占对高强度信息处理能力有需求的市场。</p>
+<p>值得注意的是，几乎与MiniMax同时，另一家“大模型六小虎”月之暗面也开源了其编程模型Kimi-Dev，其编程能力被宣称强于DeepSeek-R1。这凸显了中国AI公司在开源生态建设上的积极姿态和日益激烈的竞争，它们正试图通过开放核心技术来扩大开发者社区，加速应用创新，并最终争夺更大的市场份额。</p>
+<h3 id="大模型演进的未来图景">大模型演进的未来图景</h3>
+<p>MiniMax在技术报告中指出，为了支持日益复杂的应用场景，未来的大模型尤其需要充当“Language-Rich Mediator”（富语言中介），与环境、工具、计算机或其他Agent进行交互。这要求模型能够进行<strong>数十到数百轮的推理</strong>，并同时集成来自不同来源的<strong>长上下文信息</strong><sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。MiniMax-M1的发布，正是MiniMax应对这一行业发展趋势在算法创新上的探索。</p>
+<p>从更广阔的视角来看，M1所展现的超长上下文处理能力和强大的Agent工具使用潜力，预示着AI将能够承担更复杂、更需要连续推理和多模态协作的任务。这可能包括：</p>
+<ul>
+<li><strong>智能软件开发助手：</strong> 能够理解整个代码库，进行跨文件、跨模块的复杂调试和重构。</li>
+<li><strong>企业知识管理：</strong> 处理海量的文档、报告和内部数据，为决策者提供深度洞察和建议。</li>
+<li><strong>人机交互新范式：</strong> 实现更自然、更连贯的多轮对话，甚至参与到复杂的多Agent协作任务中。</li>
+</ul>
+<p>然而，伴随这些进步而来的是新的挑战。超长上下文的处理能力虽然强大，但也可能带来新的伦理和社会问题，例如：如何确保模型在处理海量敏感信息时的隐私保护和数据安全？当AI能够进行数百轮推理并影响真实世界时，如何对其行为进行有效监管和责任界定？这些问题需要技术、政策和社会各界的共同思考和协作。</p>
+<p>MiniMax-M1的开源，不仅是一次技术实力的展示，更是对大模型未来发展方向的一次深刻押注。它不仅降低了高性能大模型的应用门槛，也为开发者提供了构建更强大、更智能AI应用的基石，推动着人工智能从“语言理解”向“复杂推理与协作”的新范式迈进。这场竞赛才刚刚开始，我们期待看到这些技术创新如何真正改变我们的世界。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>智东西（2025/6/17）。<a href="https://www.36kr.com/p/3340045493319686">MiniMax开源首个推理模型，456B参数，性能超DeepSeek-R1，技术报告公开</a>。36氪。检索日期2025/6/17。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>fromgeek（2025/06/17）。<a href="https://www.fromgeek.com/ai/690736.html">MiniMax开源M1模型：打破性能界限，456B参数引领混合架构推理新时代</a>。fromgeek。检索日期2025/6/17。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/minimax/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MiniMax</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">混合专家架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%97%AA%E7%94%B5%E6%B3%A8%E6%84%8F%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">闪电注意力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">长上下文</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">强化学习</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250617202000381-5/">AI眼镜：从“百镜大战”到下一代计算平台的漫漫长路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617202000340-1/">揭开黑箱：大模型可解释性竞赛，一场关乎AI未来的智力马拉松</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/graai-20250617202000362-3/">集体智能的崛起：GRA框架如何赋能小模型“逆袭”大模型，重塑AI开发图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250617193006124-2/">字节跳动的AI Agent豪赌：重塑数字未来的关键战役</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006131-3/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006116-1/">游戏之智：小模型如何通过像素世界解锁通用推理能力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043078-5/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043087-6/">超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/groqhugging-faceai-20250617083004617-2/">Groq携手Hugging Face：一场重塑AI推理格局的速度革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617083004593-0/">中国AI赛道新动向：基础模型之“炼”与智能代理之“用”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617083004626-3/">中国大模型“六小虎”高管震荡：从“狂飙突进”到“断臂求生”的行业转折</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aio3-pro-20250617025225363-5/">当“推箱子”邂逅AI：o3-pro在经典游戏基准测试中突破上限</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/airichard-sutton-20250617003004877-3/">AI的未来之路：Richard Sutton预言“经验时代”的到来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metascale-ai-20250617003004885-4/">Meta斥巨资收购Scale AI股权：一场押注人才与数据基础设施的豪赌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai/">字节跳动豆包模型升级：AI竞赛从性能巅峰转向普惠实用</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

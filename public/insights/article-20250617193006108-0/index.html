@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="苹果公司发布论文《思考的幻象》，质疑大语言模型（LLM）的推理能力，认为其在复杂逻辑任务中性能崩盘。然而，一篇由独立研究员Alex Lawsen和Claude Opus 4共同撰写的反驳论文《思考的幻象的幻象》指出，苹果的评估存在严重缺陷，包括对Token输出限制的忽视、测试题目不严谨以及评估方式的片面性。这场辩论不仅揭示了当前AI评估方法的局限性，也引发了对AI智能本质和未来发展路径的深层思考。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250617193006108-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250617193006108-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思">
+  <meta property="og:description" content="苹果公司发布论文《思考的幻象》，质疑大语言模型（LLM）的推理能力，认为其在复杂逻辑任务中性能崩盘。然而，一篇由独立研究员Alex Lawsen和Claude Opus 4共同撰写的反驳论文《思考的幻象的幻象》指出，苹果的评估存在严重缺陷，包括对Token输出限制的忽视、测试题目不严谨以及评估方式的片面性。这场辩论不仅揭示了当前AI评估方法的局限性，也引发了对AI智能本质和未来发展路径的深层思考。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-17T19:30:06+08:00">
+    <meta property="article:modified_time" content="2025-06-17T19:30:06+08:00">
+    <meta property="article:tag" content="人工智能">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="推理能力">
+    <meta property="article:tag" content="评估方法">
+    <meta property="article:tag" content="伦理影响">
+    <meta property="article:tag" content="Claude">
+
+  <meta itemprop="name" content="“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思">
+  <meta itemprop="description" content="苹果公司发布论文《思考的幻象》，质疑大语言模型（LLM）的推理能力，认为其在复杂逻辑任务中性能崩盘。然而，一篇由独立研究员Alex Lawsen和Claude Opus 4共同撰写的反驳论文《思考的幻象的幻象》指出，苹果的评估存在严重缺陷，包括对Token输出限制的忽视、测试题目不严谨以及评估方式的片面性。这场辩论不仅揭示了当前AI评估方法的局限性，也引发了对AI智能本质和未来发展路径的深层思考。">
+  <meta itemprop="datePublished" content="2025-06-17T19:30:06+08:00">
+  <meta itemprop="dateModified" content="2025-06-17T19:30:06+08:00">
+  <meta itemprop="wordCount" content="79">
+  <meta itemprop="keywords" content="人工智能,大语言模型,推理能力,评估方法,伦理影响,Claude,Apple,AI哲学,技术争议">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思">
+  <meta name="twitter:description" content="苹果公司发布论文《思考的幻象》，质疑大语言模型（LLM）的推理能力，认为其在复杂逻辑任务中性能崩盘。然而，一篇由独立研究员Alex Lawsen和Claude Opus 4共同撰写的反驳论文《思考的幻象的幻象》指出，苹果的评估存在严重缺陷，包括对Token输出限制的忽视、测试题目不严谨以及评估方式的片面性。这场辩论不仅揭示了当前AI评估方法的局限性，也引发了对AI智能本质和未来发展路径的深层思考。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-17 19:30</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>苹果公司的一篇论文质疑大语言模型（LLM）的推理能力，称其“思考是幻象”。然而，一篇由Claude Opus 4共同撰写的反驳论文指出，苹果的实验设计存在严重缺陷，实际问题并非模型缺乏推理能力，而是受限于输出长度、测试题目失当以及评估方式的片面性，引发了对AI能力边界和测试方法论的深刻辩论。</p></blockquote>
+<p>近期，人工智能领域再次被一场激烈的学术争论搅动，核心焦点直指大语言模型（LLM）最引以为傲的能力之一：推理。这场风波的起点是科技巨头苹果公司机器学习研究团队发布的一篇名为《思考的幻觉（The Illusion of Thinking）》的论文<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这份长达53页的技术报告，以一系列经典逻辑谜题——<strong>汉诺塔（Tower of Hanoi）、积木世界（Blocks World）、过河问题（River Crossing）和跳棋（Checkers Jumping）</strong>——对当前主流LLM的推理能力提出了尖锐质疑。</p>
+<p>苹果的研究团队通过这些随着步骤和限制条件增加而难度指数级飙升的任务，发现包括OpenAI的“o”系列、Google的Gemini 2.5以及DeepSeek-R等“推理型大模型”，在面对复杂任务时，其准确率会直线下滑，最终在最复杂场景下甚至<strong>性能崩盘，准确率归零</strong>。更引人注意的是，模型用于“思考”的篇幅（即输出的token数量）也随之缩水，这被苹果研究者解读为模型主动减少推理尝试的迹象，从而得出结论：大型语言模型的推理能力，可能只是一种“幻象”，并未真正学习到可泛化的第一性原理，而更像是记忆模式的复读机。</p>
+<h3 id="推理的幻象苹果的质疑与评估陷阱">推理的幻象：苹果的质疑与评估陷阱</h3>
+<p>苹果的论文一经发布，便在学术界和社交媒体上掀起轩然大波，许多人据此宣称，主流AI的“推理能力”已被证伪。然而，争议的火苗很快被一篇名为《思考的幻象的幻象（The Illusion of The Illusion of Thinking）》的反驳论文点燃<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。令人瞩目的是，这篇论文的作者是独立研究员Alex Lawsen，以及他的“合作伙伴”——大语言模型<strong>Claude Opus 4</strong>。这本身就构成了一个强烈的声明：一个被质疑推理能力的AI，亲自参与撰写了一篇反驳其缺乏推理能力的论文。</p>
+<p>反驳论文的核心论点是：苹果所谓的“推理崩溃”，并非AI能力的上限，而是其<strong>实验设计本身存在致命缺陷</strong>。</p>
+<p>首先，也是最核心的反驳点，在于<strong>混淆了“推理失败”和“作文本不够长”</strong>。像汉诺塔这类问题，解决步骤是随着盘子数量指数级增长的。例如，一个15个盘子的汉诺塔问题，理论上需要输出超过32,000个步骤。然而，现有大模型的上下文窗口和单次输出Token都有明确的上限。批评者指出，模型很可能在内部已经推导出了正确的算法和策略，但因为输出篇幅的限制，导致答案被截断，从而被苹果的评估脚本直接判了零分。这并非是逻辑能力的极限，而是_Token输出能力的极限_。正如反驳方所言：“这不是逻辑的极限，这是Token的极限。”<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>其次，反驳论文进一步指出，苹果用来测试的**“考卷”本身就存在设计缺陷**。在苹果使用的某些“过河问题”的基准测试中，根据其给出的限制条件，一些题目在数学上是<strong>根本无解的</strong>。AI自然无法给出“正确答案”。但更令人费解的是，苹果的评估系统却依然对模型在这些无解题上的输出进行了评分，并以此作为模型“失败”的证据。这种对测试题目的严谨性审查不足，无疑削弱了其结论的说服力。</p>
+<h3 id="从token到算法重新审视ai的思考方式">从Token到算法：重新审视AI的“思考”方式</h3>
+<p>最有力且最具说服力的反驳实验，是“换个‘考法’，AI原地复活”。Alex Lawsen和Claude Opus 4做了一个简单的实验：他们不再要求模型一步一步地写出汉诺塔的完整解法（这种“默写全文”式的要求），而是让模型<strong>直接输出一个能解决这个问题的“程序代码”（例如一个Lua函数）</strong>。</p>
+<p>结果令人惊讶：模型在之前被判定为“彻底失败”的、更复杂的任务上，轻松给出了正确的程序。这个实验有力地证明了，AI并非“不懂”解题的逻辑，它只是无法遵循那种极其冗长且低效的“口述”式输出要求。AI的“大脑”里可能已经形成了算法，但我们却强求它将每一步计算都以人类习惯的方式“口述”出来。这引发了一个深刻的思考：我们对AI“思考”方式的理解，是否过于人类中心化？</p>
+<p>此外，有其他研究者在社交媒体X（原Twitter）上指出了苹果实验的第四个槽点：<strong>缺乏人类基准的“单方面宣布”</strong>。苹果在整个实验中，从未将模型的表现与人类在相同任务下的表现进行对比。一个正常人在没有任何纸笔辅助的情况下，去心算一个需要几百步规划的逻辑谜题，其大脑也同样会“宕机”。没有这个最基本的参照系，我们又怎能断言AI的“性能衰减”是一种根本性的“思考缺陷”，而非所有智能体（包括人类）在面对超限复杂任务时的正常表现呢？</p>
+<h3 id="智能边界的辩论技术与伦理的交织">智能边界的辩论：技术与伦理的交织</h3>
+<p>这场关于“思考的幻象”的辩论，远超出了单纯的技术细节讨论，它触及了我们对AI智能本质的理解，以及如何公正、有效地评估这些日益复杂系统的核心问题。它揭示了当前AI评估体系可能存在的盲点和局限性。</p>
+<p>首先，它迫使我们重新思考<strong>何谓“推理”</strong>。如果AI能够生成解决问题的代码，这是否足以证明其理解了底层逻辑？人类的推理往往伴随着语言和思维链条的表达，但AI的“思维”可能以更隐蔽、更高效的非语言形式存在。将人类的认知模式强加于AI，可能限制了我们对其真实能力的认知。</p>
+<p>其次，这场辩论凸显了<strong>评估方法论的关键性</strong>。一个不严谨、不全面的测试，可能得出误导性的结论，从而影响公众对AI的认知，甚至左右未来的研发方向和投资。我们需要设计出更具鲁棒性、能适应AI独特处理方式的基准测试，而不是简单地将人类的评估标准“硬套”在AI身上。这不仅关乎技术进步，更关乎科学严谨性与伦理责任。</p>
+<p>最后，Claude Opus 4作为合著者参与反驳论文，本身就是一件具有里程碑意义的事件，预示着AI在未来的学术和技术讨论中，将扮演更加积极、甚至“独立”的角色。这不仅挑战了传统的科学研究范式，也引发了关于<strong>AI主体性、责任归属以及知识产权</strong>等一系列深层伦理问题。</p>
+<p>“思考的幻象”与“幻象的幻象”之间的较量，并非简单的技术分歧，而是对AI未来发展路径的一次深刻反思。它提醒我们，在惊叹于AI进步的同时，更要审慎地理解其能力边界，不断完善评估工具，并以开放的心态探索智能的多样形态。只有这样，我们才能真正走向人机协作的智能未来。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Apple Machine Learning Research (2025/6/17). <a href="https://www.apple.com/research/docs/The_Illusion_of_Thinking.pdf">The Illusion of Thinking</a>. Apple. Retrieved 2025/6/17.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Lawsen, Alex &amp; Claude Opus 4 (2025/6/17). <a href="https://mp.weixin.qq.com/s/hlg87MrNa0mLnCCoY5oChQ">The Illusion of The Illusion of Thinking</a>. 大数据文摘. Retrieved 2025/6/17.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>大数据文摘 (2025/6/17). <a href="https://news.qq.com/rain/a/20250617A05MCC00">反转，AI推理能力遭苹果质疑后，Claude合著论文反击：不是不会推理，是输给Token</a>. 腾讯新闻. Retrieved 2025/6/17.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理能力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">评估方法</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%A6%E7%90%86%E5%BD%B1%E5%93%8D/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">伦理影响</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/apple/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Apple</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%93%B2%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI哲学</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E4%BA%89%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术争议</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043087-6/">超越“思考的幻觉”：一场关乎大模型推理本质与评估范式的深度辩论</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617025225342-2/">昆仑万维的AI豪赌：在“烧钱”中追逐巨头梦的代价与前路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/airichard-sutton-20250617003004877-3/">AI的未来之路：Richard Sutton预言“经验时代”的到来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aidia-20250616003004/">AI原生浏览器Dia：是浏览器革新，还是通往“系统”的起点？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006138-4/">AI浪潮深处：从高考志愿到浏览器核心，一场流量与认知的高维之战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006131-3/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006116-1/">游戏之智：小模型如何通过像素世界解锁通用推理能力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043069-4/">AI“数据饥渴症”引爆学术危机：知识库濒临瘫痪，人类知识的未来何去何从？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043145-13/">AI浪潮深处：从高考志愿到浏览器核心，一场流量与认知的高维之战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043122-10/">AI转绘动漫：效率革命下的内容产业新纪元与深层挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043078-5/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043053-2/">揭秘“黑箱”：人工智能透明度、安全与信任的深层考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617083004626-3/">中国大模型“六小虎”高管震荡：从“狂飙突进”到“断臂求生”的行业转折</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/llm-20250617083004605-1/">深度透视：领英如何通过LLM蒸馏重塑职业搜索的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-20250617043005411-0/">意大利监管机构重拳出击：DeepSeek事件揭示AI“幻觉”与信任危机</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

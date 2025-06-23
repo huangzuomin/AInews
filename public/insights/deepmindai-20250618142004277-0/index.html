@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌DeepMind团队，包括传奇工程师杰夫·迪恩，发布了DataRater框架，利用元学习实现了训练数据的全自动质量筛选，最高可剔除75%的低质量数据。这项技术显著提升了模型训练效率，降低了计算成本，并提高了最终模型性能，标志着AI训练正从追求数据规模转向关注数据质量的新阶段，但同时也引发了对数据“价值”定义和潜在偏见传播的深层思考。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/deepmindai-20250618142004277-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/deepmindai-20250618142004277-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选">
+  <meta property="og:description" content="谷歌DeepMind团队，包括传奇工程师杰夫·迪恩，发布了DataRater框架，利用元学习实现了训练数据的全自动质量筛选，最高可剔除75%的低质量数据。这项技术显著提升了模型训练效率，降低了计算成本，并提高了最终模型性能，标志着AI训练正从追求数据规模转向关注数据质量的新阶段，但同时也引发了对数据“价值”定义和潜在偏见传播的深层思考。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-18T14:20:04+08:00">
+    <meta property="article:modified_time" content="2025-06-18T14:20:04+08:00">
+    <meta property="article:tag" content="人工智能">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="数据质量">
+    <meta property="article:tag" content="元学习">
+    <meta property="article:tag" content="Jeff Dean">
+    <meta property="article:tag" content="Google DeepMind">
+
+  <meta itemprop="name" content="突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选">
+  <meta itemprop="description" content="谷歌DeepMind团队，包括传奇工程师杰夫·迪恩，发布了DataRater框架，利用元学习实现了训练数据的全自动质量筛选，最高可剔除75%的低质量数据。这项技术显著提升了模型训练效率，降低了计算成本，并提高了最终模型性能，标志着AI训练正从追求数据规模转向关注数据质量的新阶段，但同时也引发了对数据“价值”定义和潜在偏见传播的深层思考。">
+  <meta itemprop="datePublished" content="2025-06-18T14:20:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-18T14:20:04+08:00">
+  <meta itemprop="wordCount" content="38">
+  <meta itemprop="keywords" content="人工智能,大模型,数据质量,元学习,Jeff Dean,Google DeepMind,AI训练效率,伦理影响">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选">
+  <meta name="twitter:description" content="谷歌DeepMind团队，包括传奇工程师杰夫·迪恩，发布了DataRater框架，利用元学习实现了训练数据的全自动质量筛选，最高可剔除75%的低质量数据。这项技术显著提升了模型训练效率，降低了计算成本，并提高了最终模型性能，标志着AI训练正从追求数据规模转向关注数据质量的新阶段，但同时也引发了对数据“价值”定义和潜在偏见传播的深层思考。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%284%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-18 14:20</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">突破“垃圾进，垃圾出”魔咒：谷歌DeepMind如何用元学习重塑AI数据筛选</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>谷歌DeepMind推出的DataRater框架，利用元学习实现了训练数据的全自动质量评估与筛选，可显著削减高达75%的低质量数据，大幅提升AI模型的训练效率并优化性能。这一创新不仅挑战了AI领域长期存在的“垃圾进，垃圾出”定律，更预示着模型训练将从追求“大数据”转向聚焦“高质量数据”的新范式，对计算资源消耗和AI的可持续发展产生深远影响。</p></blockquote>
+<p>在人工智能的宏伟叙事中，一个反复被提及的基石是“垃圾进，垃圾出”（Garbage In, Garbage Out, GIGO）。这一箴言深刻揭示了AI模型的性能与训练数据质量之间的内在联系。随着大型语言模型（LLMs）的崛起，其对海量数据的饥渴达到了前所未有的程度，这些数据往往来源于网络，质量参差不齐，从结构化的文本到混乱的网页抓取，无所不包。识别并剔除其中低价值乃至有害的数据，一直是预训练阶段效率与效果提升的关键挑战。传统的解决方案，无论是耗时耗力的人工筛选，还是依赖启发式规则的手动调整，都显得捉襟见肘，尤其面对合成数据日益盛行带来的偏差和重复问题，更显乏力。</p>
+<h3 id="datarater元学习的数据炼金术">DataRater：元学习的数据炼金术</h3>
+<p>最近，由谷歌DeepMind团队，其中包括AI领域的传奇人物杰夫·迪恩（Jeff Dean）在内的研究人员，提出了一项突破性的数据质量评估框架——DataRater。这项技术的核心在于其革命性的**元学习（meta-learning）**方法，能够自动学习数据筛选或混合的标准，从而以数据驱动的方式量化并提升训练数据的固有价值。DataRater的独特之处在于，它不仅仅是识别“垃圾”数据，而是通过“元梯度优化”机制，深入理解每个数据点对最终模型训练效果的贡献。</p>
+<p>DataRater的工作原理可以分解为三个关键步骤<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>：首先，它在梯度计算的每一步决定哪些数据点应该被纳入，这类似于为每个数据点分配一个“重要性”权重。其次，这些“重要性”权重从简单的二元选择（选或不选）转变为0到1之间的连续值，使得梯度加权成为可能，并且确保每批次总权重恒定，以维持梯度规模。最后，一个评分函数被引入，根据每个数据点的价值给出分数，再通过softmax函数转化为归一化权重。</p>
+<p>重要的是，DataRater不是为某个特定下游任务而优化，而是旨在最大化给定数据集的训练效率。它通过一个_非因果Transformer_实现，并基于元梯度下降法优化其参数。这意味着，DataRater模型能够从经验中学习如何更好地评估数据，以达到更快的学习效率和更优的模型性能。</p>
+<p>实验结果令人瞩目。在像Pile和C4/noclean这类公认质量较差的数据集上，DataRater能够识别并有效降低那些符合人类直觉的低质量数据权重，例如错误的文本编码、光学字符识别（OCR）错误、大量的空白符、非打印字符、高熵文本，甚至是私人SSH密钥和非英文内容<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。通过DataRater筛选后的数据集，大型语言模型的训练所需的浮点运算次数（FLOPS）大幅减少，最高可达<strong>46.6%的净计算收益</strong><sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，同时显著提高了跨多种预训练语料库（如Pile、C4/noclean）语言模型的最终性能。</p>
+<p>更令人振奋的是，DataRater展现出强大的泛化能力。一个使用固定规模内部模型（4亿参数）进行元训练的DataRater模型，能够将其学到的数据估值策略有效地推广到更大规模的模型（从5000万到10亿参数）的训练中，并且最佳的数据丢弃比例在不同模型大小之间保持一致。例如，对于Pile数据集，最佳丢弃比例高达<strong>75%</strong>；对于C4/noclean，为50%；而对于高质量的C4数据集，仅需丢弃10%的数据便能取得最佳效果<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着，通过一次性的元训练投入，可以为未来大规模模型的训练带来持续且可观的效率提升。尽管元训练DataRater模型本身需要相当于训练一个10亿参数LLM约58.4%的FLOPS，但由于其筛选能力可复用于更大规模模型的训练，这份前期投入的成本效益极高。</p>
+<h3 id="超越效率对ai发展和社会影响的深层思考">超越效率：对AI发展和社会影响的深层思考</h3>
+<p>DataRater的诞生，不仅仅是技术栈上的一个优化，它代表着AI训练范式从“量”到“质”转变的重要里程碑。这并非孤立的现象，而是与杰夫·迪恩等领军人物对AI未来发展的宏观判断不谋而合。迪恩曾预测，在一年内，具备“初级工程师”能力的AI系统将实现24/7全天候运行<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。而这种高级AI能力的实现，无疑需要更高效、更可持续的训练基础设施。DataRater正是这样一种基石性的进步。</p>
+<p>首先，它对<strong>AI的经济性</strong>具有革命性意义。削减不必要的训练数据意味着直接减少了庞大的计算资源消耗，从而降低了AI模型的开发和部署成本。这不仅能让大型科技公司更高效地迭代模型，也可能为中小型企业和学术机构提供更低的AI研发门槛，在一定程度上促进AI领域的民主化。</p>
+<p>其次，其对<strong>环境影响</strong>的积极作用不容小觑。大型AI模型的训练是出了名的“能耗大户”，减少计算量直接 translates 到更低的能源消耗和碳排放。在一个日益关注可持续发展的时代，DataRater提供了一条通向“绿色AI”的务实路径。</p>
+<p>然而，更深层次的思考在于，DataRater对“数据质量”的定义和筛选标准。该框架的核心是根据数据对“提高训练效率和模型性能”的价值进行评估。这引发了几个关键问题：</p>
+<ul>
+<li><strong>数据“价值”的定义：</strong> DataRater根据验证损失和下游任务性能来衡量数据价值。但“价值”是否应该包含更广泛的社会和伦理维度？例如，某些看似“低质量”或“异常”的数据点，可能代表着边缘群体、罕见现象或特定文化背景，它们对于模型的鲁棒性和公平性可能至关重要。仅仅追求效率和性能最大化，是否会不经意间过滤掉这些多样性，从而加剧模型的潜在偏差？</li>
+<li><strong>偏见的传播与放大：</strong> 尽管DataRater能识别文本编码错误等显性垃圾，但如果训练DataRater本身的“保留数据”或“测试集”存在隐性偏差，元学习过程是否会内化并放大这种偏差？它会倾向于保留那些与现有高质量数据分布相似的数据，从而巩固主流叙事，而忽略了需要更广泛视角的数据？</li>
+<li><strong>黑盒机制的挑战：</strong> DataRater的元学习过程在一定程度上是一个“黑盒”，我们知道它在识别低质量数据方面表现出色，但其评分函数内部如何权衡不同特征，其决策过程的透明度仍是一个值得探讨的问题。</li>
+</ul>
+<p>DataRater的出现，无疑是AI研究领域向前迈出的重要一步，它通过智能化的数据筛选，将AI训练从粗放的“数据堆叠”推向了精准的“数据炼金”。它不仅有望显著加速下一代AI模型的研发，降低其运行成本，更可能为AI的可持续发展贡献一份力量。但与此同时，我们也必须警惕，在追求效率和性能的道路上，如何确保“质量”的定义足够全面，包含对社会公平、多样性和伦理的深思熟虑。毕竟，我们希望训练出的AI，不仅是高效的，更是负责任的。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>新智元 (2025/6/18)。<a href="https://36kr.com/p/3341468436461831">75%预训练数据都能删，Jeff Dean新作：全自动筛除低质量数据</a>。36氪。检索日期2025/6/18。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>InfoQ (2025/6/18)。<a href="https://www.infoq.cn/article/R41mYyV1F7RS3dC1yIKM">Jeff Dean：一年内 AI 将取代初级工程师，网友：&ldquo;Altman 只会画饼，Jeff 说的话才致命&rdquo;</a>。检索日期2025/6/18。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">数据质量</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%83%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">元学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/jeff-dean/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Jeff Dean</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/google-deepmind/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Google DeepMind</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%AE%AD%E7%BB%83%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI训练效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%A6%E7%90%86%E5%BD%B1%E5%93%8D/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">伦理影响</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/aigc-20250618122004589-3/">AIGC浪潮席卷广告业：万亿市场背后，创意、伦理与增长的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-25ai-20250618122004575-1/">谷歌Gemini 2.5系列模型稳定发布：性能、性价比与AI生态的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-25aiopenai-20250618062004410-0/">谷歌Gemini 2.5：以“思考”模型重塑企业AI赛道，剑指OpenAI主导地位</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250618012004426-1/">Meta巨资押注AI：一场豪赌，还是市场重塑的序曲？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617202000381-5/">AI眼镜：从“百镜大战”到下一代计算平台的漫漫长路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/graai-20250617202000362-3/">集体智能的崛起：GRA框架如何赋能小模型“逆袭”大模型，重塑AI开发图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006108-0/">“思考的幻象”还是评估的盲点？AI推理能力辩论的深层反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006131-3/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043078-5/">巨头AI的“开源”之梦：广告驱动下的商业化新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617083004626-3/">中国大模型“六小虎”高管震荡：从“狂飙突进”到“断臂求生”的行业转折</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aio3-pro-20250617025225363-5/">当“推箱子”邂逅AI：o3-pro在经典游戏基准测试中突破上限</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250618142004285-1/">「智能体村庄」：一场AI版的《楚门的世界》揭示自主性与协作的复杂现实</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-25ai-20250618142004293-2/">谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitob-20250618112004732-4/">AI浪潮下的韧性与变革：为何ToB“老炮”仍能屹立不倒？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai2ai-20250618112004726-3/">OpenAI与美国国防部的2亿美元合约：技术前沿、伦理边界与AI战场的未来</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

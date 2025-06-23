@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越顶会：一篇博客文章如何颠覆AI研究的价值衡量 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="一篇未经同行评审的博客文章，介绍了一款名为Muon的神经网络优化器，因其卓越的实测效果，助作者凯勒·乔丹获得OpenAI的Offer，并引发了AI研究领域对传统学术发表模式的深刻反思。文章深入分析了Muon的技术原理、其在效率上超越AdamW的表现，以及由月之暗面团队对Muon的进一步验证和开源，指出AI研究正从“论文至上”转向“实效为先”的范式转变。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250617003004870-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250617003004870-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越顶会：一篇博客文章如何颠覆AI研究的价值衡量">
+  <meta property="og:description" content="一篇未经同行评审的博客文章，介绍了一款名为Muon的神经网络优化器，因其卓越的实测效果，助作者凯勒·乔丹获得OpenAI的Offer，并引发了AI研究领域对传统学术发表模式的深刻反思。文章深入分析了Muon的技术原理、其在效率上超越AdamW的表现，以及由月之暗面团队对Muon的进一步验证和开源，指出AI研究正从“论文至上”转向“实效为先”的范式转变。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-17T00:30:04+08:00">
+    <meta property="article:modified_time" content="2025-06-17T00:30:04+08:00">
+    <meta property="article:tag" content="AI研究">
+    <meta property="article:tag" content="Muon优化器">
+    <meta property="article:tag" content="深度学习">
+    <meta property="article:tag" content="学术范式">
+    <meta property="article:tag" content="OpenAI">
+    <meta property="article:tag" content="月之暗面">
+
+  <meta itemprop="name" content="超越顶会：一篇博客文章如何颠覆AI研究的价值衡量">
+  <meta itemprop="description" content="一篇未经同行评审的博客文章，介绍了一款名为Muon的神经网络优化器，因其卓越的实测效果，助作者凯勒·乔丹获得OpenAI的Offer，并引发了AI研究领域对传统学术发表模式的深刻反思。文章深入分析了Muon的技术原理、其在效率上超越AdamW的表现，以及由月之暗面团队对Muon的进一步验证和开源，指出AI研究正从“论文至上”转向“实效为先”的范式转变。">
+  <meta itemprop="datePublished" content="2025-06-17T00:30:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-17T00:30:04+08:00">
+  <meta itemprop="wordCount" content="91">
+  <meta itemprop="keywords" content="AI研究,Muon优化器,深度学习,学术范式,OpenAI,月之暗面,论文发表,实际影响力,人工智能伦理,技术突破">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越顶会：一篇博客文章如何颠覆AI研究的价值衡量">
+  <meta name="twitter:description" content="一篇未经同行评审的博客文章，介绍了一款名为Muon的神经网络优化器，因其卓越的实测效果，助作者凯勒·乔丹获得OpenAI的Offer，并引发了AI研究领域对传统学术发表模式的深刻反思。文章深入分析了Muon的技术原理、其在效率上超越AdamW的表现，以及由月之暗面团队对Muon的进一步验证和开源，指出AI研究正从“论文至上”转向“实效为先”的范式转变。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-17 00:30</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">超越顶会：一篇博客文章如何颠覆AI研究的价值衡量</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>一篇未经同行评审的博客文章，因其在深度学习优化器上的卓越实测效果，不仅为作者赢得了OpenAI的青睐，更引发了AI学术界对研究影响力衡量标准及其与传统论文发表模式之间张力的深刻反思。这起事件以及后续的行业验证，揭示了在AI飞速发展的时代，实用价值和工程落地正日益成为衡量技术突破的关键。</p></blockquote>
+<p>在人工智能领域，顶会论文向来是衡量研究水平和职业发展的“硬通货”。然而，近期一则消息却打破了这一常规：一名名叫凯勒·乔丹（Keller Jordan）的研究员，仅凭一篇名为《Muon: An optimizer for hidden layers in neural networks》的个人博客文章<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，而非正式的同行评审论文，便成功获得了OpenAI的Offer，甚至有传闻称，这项技术已应用于GPT-5的训练工作。这一看似“非主流”的成功案例，不仅让Muon优化器迅速走红，更引发了一场关于AI研究范式、学术诚信与实际影响力之间关系的激烈辩论。</p>
+<h3 id="技术原理解析与实效验证">技术原理解析与实效验证</h3>
+<p>Muon优化器之所以能够获得OpenAI的青睐，其根本在于它在实际训练中展现出的惊人效率。Muon专门为神经网络的隐藏层设计，并在多个热门任务上刷新了训练速度记录。</p>
+<p>从实际表现来看，Muon的成绩斐然：</p>
+<ul>
+<li>在CIFAR-10数据集上，达到94%准确率的训练时间从3.3 A100秒缩短到2.6 A100秒，显著提升了约21%。</li>
+<li>在NanoGPT的“精炼网页（FineWeb）”任务中，达到验证损失3.28的速度提升了1.35倍。</li>
+<li>在模型参数规模扩展至7.74亿和15亿时，Muon的训练速度优势依然显著。</li>
+<li>使用Muon训练一个15亿参数的Transformer模型，在HellaSwag任务中仅用10小时（8张H100组成的GPU集群）便达到了GPT-2 XL的性能水平，而使用AdamW则需要13.3小时才能达到相同效果，这相当于<strong>Muon将训练时间缩短了约25%</strong>。</li>
+</ul>
+<p>图1和图2清晰地展示了Muon在样本效率和实际训练时间上超越AdamW等主流优化器的表现，尤其在更大规模模型上，其时间效率优势更为突出。</p>
+<p class="img-desc">图 1 按样本效率比较优化器</p>
+<p class="img-desc">图 2 按挂钟时间比较优化器</p>
+<p class="img-desc">图 3 Muon 与 AdamW 在 15 亿参数短时间训练中的对比</p>
+<p>从设计原理上讲，Muon的核心机制在于其对神经网络权重更新的独特处理方式。它首先通过_带动量的随机梯度下降（SGD-momentum）<em>生成初步的更新矩阵，然后对每个更新矩阵执行一次_牛顿-舒尔茨（Newton-Schulz，NS）迭代处理</em>，最终再将其应用于模型参数。</p>
+<p>具体来说，NS迭代的作用是对更新矩阵进行近似正交化。其公式表示为：
+<em>X = X(3I - X^2)/2</em></p>
+<p>这意味着，Muon将SGD-momentum得出的更新矩阵，替换为与之最接近的“半正交矩阵”。这种近似正交化操作有助于稳定训练过程，避免梯度爆炸或消失，并可能促进模型更好地收敛，尤其是在深度网络中。</p>
+<h3 id="学术范式之辩影响力与论文的权衡">学术范式之辩：影响力与论文的权衡</h3>
+<p>凯勒·乔丹的成功并非偶然，其背后是对现有AI学术发表机制的深刻批判。他早在今年2月就公开表示，之所以没有为Muon撰写正式的arXiv论文，是因为他根本不相信“写出一篇数据漂亮、图表华丽的优化器论文”与“这个优化器实际有没有用”之间有什么必然联系。对他而言，<em>“我只相信实测跑分。”</em></p>
+<p>这种观点在AI界并非孤例。Hyperbolic Labs联合创始人、同时也是Muon合作者的金雨辰（Yuchen Jin）在X平台上分享了凯勒的经历，并感慨道：</p>
+<blockquote>
+<p>“很多博士（包括曾经的我）常常陷入一个误区：认为在顶级会议上发表论文就是最终目标。但‘发表’并不等于‘影响力’。Muon只是篇博客文章，却帮Keller拿到了OpenAI的offer——现在他可能正在用它训练GPT-5。”<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p></blockquote>
+<p>前谷歌研究员Hieu Pham也对此事评论称，ResNet、Seq2Seq、Adam、Attention、Transformers、MoE等经典成果固然以论文形式出现，但“曾几何时，‘发表论文’就等于‘产生影响’……真正的问题，是我们没有意识到这个时代已经过去了。”他进一步指出，就优化器而言，“行业已经有成千上万篇关于优化器的论文发表了，但真正推动SOTA（最优性能）前进的，也就只有一次——从Adam到AdamW。其他所谓的进步，基本都是这两个的改进实现，比如FSDP。因此，我们真的应该停止再写这类论文了。”<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>凯勒的犀利言辞——“几乎所有优化器的论文都是‘假的’……如果你也打算再写一篇这样的‘假优化器’论文，拜托别引用Muon。我不需要你的引用。”<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>——虽然引人注目，却也反映出一种日渐增长的共识：在AI技术以指数级速度迭代的当下，传统学术评审和发表周期冗长，可能导致研究成果在面世时便已“过时”，或被淹没在海量的投稿中，难以被真正关注和应用。这种对“实际效果大于学术装饰”的坚持，正挑战着“论文至上”的学术生态。</p>
+<h3 id="行业验证与未来路径的重塑">行业验证与未来路径的重塑</h3>
+<p>Muon的影响力并未止步于凯勒的个人成功。更进一步的验证来自中国领先的大模型公司月之暗面（Moonshot AI）。该团队对Muon进行了深入研究，并开源了改进版Muon优化器，发现并证明了Muon方法的_“缩放法则（Scaling Law）”_，这意味着其性能优势可以扩展到更大规模的模型训练中。通过改进，月之暗面团队实现了<strong>比AdamW锐减48%的算力需求</strong>，从而大幅降低了大型模型训练的成本和时间<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。这一进展无疑为Muon的实用价值提供了强有力的行业背书，并暗示了头部机构正加速布局新型优化器研发。</p>
+<p>凯勒·乔丹的案例与月之暗面对Muon的进一步验证，共同勾勒出AI研究领域正在发生的深刻变革。它并非全盘否定学术研究的价值，而是提醒研究者和机构，在AI高速发展的今天，影响力的来源正在多元化。一篇能够解决实际问题、加速模型训练、降低算力消耗的博客文章或开源实现，其价值可能远超一篇仅仅在理论上漂亮的顶会论文。</p>
+<p>这与另一家大模型公司DeepSeek的崛起路径不谋而合。DeepSeek同样走出了一条“技术效果优先”的成名之路：没有高调预热，没有复杂包装，仅仅凭借实打实的性能和稳定表现，便在激烈的大模型竞赛中杀出重围，迅速赢得社区认可。</p>
+<p>这些案例表明，AI研究的未来可能不再仅仅依赖于传统的学术发表，而是更加强调以下几个方面：</p>
+<ul>
+<li><strong>实际性能与工程落地能力</strong>：优化器、算法等底层技术，其真正价值体现在能否显著提升模型性能或降低训练成本。</li>
+<li><strong>快速迭代与开源共享</strong>：通过博客、GitHub等平台，研究者可以更快地分享成果，接受社区的即时反馈和验证。</li>
+<li><strong>跨界协作与产业应用</strong>：学术界与工业界的界限日益模糊，技术成果的价值在很大程度上取决于其在真实世界中的应用潜力。</li>
+</ul>
+<p>凯勒·乔丹的故事，以及Muon在产业界的验证和发展，或许只是这一转变的开始。它迫使我们重新思考：在人工智能这个以效率和规模为核心的领域，什么才是真正值得投入时间的研究？是一篇“看起来很强”的论文，还是一个“跑得足够快”的模型？答案可能不再是单一的。追求影响力，而非仅仅光鲜的头衔，正成为新一代AI研究者的核心驱动力。</p>
+<h2 id="references">References</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Keller Jordan (2025/6/17)。<a href="https://kellerjordan.github.io/posts/muon/">Muon: An optimizer for hidden layers in neural networks</a>。个人博客。检索日期2025/6/17。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Yuchen Jin (2025/6/17)。<a href="https://x.com/Yuchenj_UW/status/1934291648542126580">X帖子</a>。X。检索日期2025/6/17。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Hieu Pham (2025/6/17)。<a href="https://x.com/hyhieu226/status/1934290217516793947">X帖子</a>。X。检索日期2025/6/17。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Keller Jordan (2025/6/17)。<a href="https://x.com/kellerjordan0/status/1934138033240146313">X帖子</a>。X。检索日期2025/6/17。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>月之暗面改进并开源了 Muon 优化算法，对行业有哪些影响？(2025/2/24)。<a href="https://www.zhihu.com/question/13184527018">知乎</a>。检索日期2025/6/17。&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>开源赛道太挤了!月之暗面开源新版Muon优化器 ｜ 机器之心(2025/2/24)。<a href="https://www.jiqizhixin.com/articles/2025-02-24-6">机器之心</a>。检索日期2025/6/17。&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%A0%94%E7%A9%B6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI研究</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/muon%E4%BC%98%E5%8C%96%E5%99%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Muon优化器</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">深度学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%AD%A6%E6%9C%AF%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">学术范式</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/openai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">OpenAI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">月之暗面</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%BA%E6%96%87%E5%8F%91%E8%A1%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">论文发表</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%AE%9E%E9%99%85%E5%BD%B1%E5%93%8D%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">实际影响力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术突破</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/openaimuonai-20250616163004/">一篇博客直通OpenAI：深度学习优化器Muon如何重塑AI研究范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metascale-ai-20250617003004885-4/">Meta斥巨资收购Scale AI股权：一场押注人才与数据基础设施的豪赌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/google-notebooklmaiopenai-20250616123004/">Google NotebookLM：当AI成为你的专属知识策展人，连OpenAI也为之侧目</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiai-20250616123004/">超越兄弟情谊：OpenAI与谷歌联手，重塑AI算力版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250616083004/">超越上下文窗口：记忆与人格如何重塑通用人工智能的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agi-20250616083004/">超越参数堆叠：复旦邱锡鹏教授力推“情境智能”，探索通往AGI的下一幕</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/copilot-visionai/">微软Copilot Vision：AI“视觉”开启屏幕协作新范式，亦或隐私边界新挑战？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
