@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越模仿：智象未来如何通过多模态模型“触达物理世界” | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="智象未来算法科学家潘滢炜深度解析了公司多模态大模型从UNet到DiT再到DiT&#43;AR的架构演进，以及从内容生成到“触达物理世界构建”的宏大技术愿景。文章探讨了智象未来如何通过技术创新、人才策略和商业化布局，在AI激烈竞争中保持领先，并展望了AI模型从“模拟”走向“构建”所带来的深远影响和潜在挑战。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250624161004438-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250624161004438-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越模仿：智象未来如何通过多模态模型“触达物理世界”">
+  <meta property="og:description" content="智象未来算法科学家潘滢炜深度解析了公司多模态大模型从UNet到DiT再到DiT&#43;AR的架构演进，以及从内容生成到“触达物理世界构建”的宏大技术愿景。文章探讨了智象未来如何通过技术创新、人才策略和商业化布局，在AI激烈竞争中保持领先，并展望了AI模型从“模拟”走向“构建”所带来的深远影响和潜在挑战。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-24T16:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-24T16:10:04+08:00">
+    <meta property="article:tag" content="多模态AI">
+    <meta property="article:tag" content="生成式AI">
+    <meta property="article:tag" content="UNet">
+    <meta property="article:tag" content="Diffusion Transformer">
+    <meta property="article:tag" content="DiT&#43;AR">
+    <meta property="article:tag" content="智象未来">
+
+  <meta itemprop="name" content="超越模仿：智象未来如何通过多模态模型“触达物理世界”">
+  <meta itemprop="description" content="智象未来算法科学家潘滢炜深度解析了公司多模态大模型从UNet到DiT再到DiT&#43;AR的架构演进，以及从内容生成到“触达物理世界构建”的宏大技术愿景。文章探讨了智象未来如何通过技术创新、人才策略和商业化布局，在AI激烈竞争中保持领先，并展望了AI模型从“模拟”走向“构建”所带来的深远影响和潜在挑战。">
+  <meta itemprop="datePublished" content="2025-06-24T16:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-24T16:10:04+08:00">
+  <meta itemprop="wordCount" content="43">
+  <meta itemprop="keywords" content="多模态AI,生成式AI,UNet,Diffusion Transformer,DiT&#43;AR,智象未来,潘滢炜,物理世界构建,架构演进,AI竞争">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越模仿：智象未来如何通过多模态模型“触达物理世界”">
+  <meta name="twitter:description" content="智象未来算法科学家潘滢炜深度解析了公司多模态大模型从UNet到DiT再到DiT&#43;AR的架构演进，以及从内容生成到“触达物理世界构建”的宏大技术愿景。文章探讨了智象未来如何通过技术创新、人才策略和商业化布局，在AI激烈竞争中保持领先，并展望了AI模型从“模拟”走向“构建”所带来的深远影响和潜在挑战。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2816%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-24 16:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">超越模仿：智象未来如何通过多模态模型“触达物理世界”</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>多模态人工智能正从理解并生成数字内容，迈向更深层次的突破：构建物理世界。智象未来通过其从UNet到DiT再到DiT+AR的架构演进，不仅提升了内容生成的质量与效率，更提出了“三维重建与视频生成统一”的宏伟愿景，旨在超越单纯的模拟，实现对现实世界的精准建模与创造。</p></blockquote>
+<p>在人工智能飞速迭代的时代，多模态大模型无疑是前沿焦点，它赋予机器同时理解并生成文本、图像、音频、视频等多种信息的能力，使AI更接近人类的感知与推理。在这个高强度竞争的赛道中，智象未来（Smart Future），一家由加拿大工程院外籍院士梅涛博士于2023年创立的初创企业，正凭借其不断演进的多模态大模型架构，以及“触达物理世界的构建”的宏大目标，力图在激烈的市场竞争中“留在牌桌上”。其算法科学家潘滢炜在近期采访中，深入阐释了智象未来的技术路线、人才策略及对行业未来的思考<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h3 id="多模态生成模型的技术演进从像素到物理世界">多模态生成模型的技术演进：从像素到物理世界</h3>
+<p>多模态生成模型的发展，核心在于其底层架构的不断演进。智象未来多模态大模型3.0的迭代路径，清晰地描绘了这条从最初像素级生成到追求物理世界建模的轨迹。</p>
+<p>潘滢炜介绍，智象未来早期发布的1.0版本，主要基于<strong>UNet架构的扩散模型</strong>。这一阶段的技术考量是如何在像素空间提升生成质量，同时在语义隐式空间保证语义一致性。彼时，行业普遍聚焦于追赶国际前沿技术，智象未来也不例外，致力于快速跟进。</p>
+<p>进入2024年，智象未来迅速推出了2.0版本，采用了与OpenAI Sora同源的<strong>Diffusion Transformer (DiT) 架构</strong>。这一转变的核心考量在于实现生成效率和生成质量的极致“性价比”，即在达到国际领先水平的同时，大幅降低训练成本。其开源模型HiDream-I1便是在此架构下的杰作，不仅在国际权威榜单Artificial Analysis中登顶，成为首个跻身全球第一梯队的中国自研生成式AI模型，也在图像质量、语义理解和艺术表现上刷新了行业记录<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。DiT通过将Transformer的强大建模能力引入扩散过程，使得模型能够更高效、更准确地处理长距离依赖关系，从而生成更高质量、更具语义一致性的内容。</p>
+<p>当前，智象未来已迈入3.0版本，采用<strong>扩散自回归架构（DiT + Autoregressive model）</strong>。潘滢炜指出，这一阶段的技术选型旨在进一步平衡“成本-效率”，并从用户视角关注基础模型在应用层的表现。DiT+AR架构的引入，不仅强化了生成画面的质量，更显著降低了推理耗时。同时，它通过全局镜头运动与局部画面运动的联合学习，实现了影视级的运镜和更为生动的画面运动。此外，融合**Mixture-of-Expert (MoE)**技术，放大多模态生成大模型在不同特色场景下的产品能力，从而更好地解决用户“最后一公里”的痛点。</p>
+<p>然而，潘滢炜强调，当前的扩散自回归模型本质上仍是对物理世界的“复刻”，而非真正的建模。他指出，这套架构仍无法真正掌握精准的物理规律。因此，智象未来在技术上的下一步将是突破这一局限，探索如何实现真正意义上的<strong>物理世界构建</strong>。</p>
+<blockquote>
+<p>潘滢炜表示：“今年，在技术上我们会更多地去思考如何实现真正物理世界构建，我们称之为‘三维重建和视频生成的统一’，这套架构会跳出物理世界模拟的套路（一味的模拟永远无法实现世界的生成），在视频生成的过程中用三维重建去构建真实物理世界，在构建物理世界的同时又去渲染视频生成，真正去触达物理世界的构建。”</p></blockquote>
+<p>这意味着未来的模型将不再仅仅是根据输入生成类似真实世界的图像或视频，而是通过三维重建技术，先在虚拟空间中构建一个具备物理属性的世界模型，再在此基础上进行视频渲染，从而实现对物理规律更深层次的理解和应用。这种从“模拟”到“构建”的转变，预示着AI在创造真实感内容方面将迈出颠覆性的一步。</p>
+<p>在基础设施层面，多模态大模型的训练需求远超单一模态模型。除了强大的GPU算力，还需要充足且灵活分配的CPU、高性能硬件解码器、大容量高吞吐低延迟的存储解决方案以及高速数据网络，以支持海量多模态数据的实时传输和处理。同时，智象未来也在积极适配国产算力，通过评估性能、实现计算模块、校正精度和性能调优等步骤，以确保模型能在不同硬件环境下高效运行。</p>
+<h3 id="智象未来的竞争策略与人才哲学">智象未来的竞争策略与人才哲学</h3>
+<p>在激烈的AI竞争中，“留在牌桌上”是所有参与者的共同目标。对于智象未来而言，其竞争力的核心在于其独特的人才策略、研发文化以及对用户需求的深刻理解。</p>
+<p>智象未来拥有典型的高级人才聚集优势，博士及硕士技术骨干占比超过90%。潘滢炜将其归因于创始人团队深厚的工业界经验和学术底蕴。公司内部实行<strong>扁平化的组织架构</strong>，鼓励员工以“技术改变世界”的使命感为驱动，以产品和商业化目标牵引技术创新，专注于做“难而正确的事”。</p>
+<p>与一些以论文发表为导向的研究机构不同，智象未来坚持**“产品驱动，而非论文驱动”**的研发模式。潘滢炜强调，团队并非为了发论文而做研发，而是当在研发真实场景下的模型能力遇到技术痛点时，才会围绕痛点提升模型能力，并最终判断其在工业界和学术界的技术影响力，进而产出相应论文。这种用户驱动、问题导向的研发文化，使得智象未来能够保持极快的模型迭代节奏，始终聚焦于用户在产品上获得的反馈，并根据这些反馈持续迭代模型。</p>
+<h3 id="留在牌桌上ai产业的生存法则与未来愿景">“留在牌桌上”：AI产业的生存法则与未来愿景</h3>
+<p>2024年初Sora的惊艳亮相，将文生视频技术推向了AI竞争的新高地，也让“留在牌桌上”成为当下AI初创企业面临的严峻考验。智象未来创始人梅涛曾指出，2024年对公司而言至关重要。潘滢炜认为，这是多方面因素叠加的结果：</p>
+<ul>
+<li><strong>技术发展角度</strong>：AI技术迭代速度惊人，需要持续投入研发以保持技术的先进性和领先地位。</li>
+<li><strong>市场竞争层面</strong>：越来越多的企业和资本涌入AI赛道，竞争愈发激烈，市场份额争夺处于动态变化中。</li>
+<li><strong>商业化角度</strong>：创业公司需要实现可持续盈利，探索合适的商业模式、提高收入和实现盈利平衡至关重要。</li>
+</ul>
+<p>在这样的竞争格局下，智象未来的竞争力在于其<strong>领先的技术实力</strong>、<strong>快速的技术响应能力</strong>、<strong>完善的应用平台</strong>以及<strong>广泛的商业合作</strong>。其自主研发的“智象视觉大模型”是国内首批通过模型和算法双备案的多模态生成式大模型，也是全球支持图像和视频生成的最大模型之一。在Sora发布后仅2个月内，智象未来便迅速推出了全球首个上线开放使用的DiT架构模型，展现出其对行业变化的敏锐洞察和快速执行力。同时，智象AI应用平台（如智小象AI）以及与彩讯股份、慈文传媒等上市公司的深度合作，为其技术落地和商业化拓展了广阔空间。</p>
+<p>潘滢炜总结道，能“留在牌桌上”的公司通常具备：<strong>强大的技术研发能力</strong>、<strong>充足的资金支持</strong>、<strong>优秀的人才团队</strong>、<strong>清晰的商业模式</strong>和<strong>良好的市场拓展能力</strong>。这些要素共同构成了AI时代企业生存与发展的基石。</p>
+<p>从智象未来的技术路线图可以看出，AI模型正在从对现实世界的“映射”走向“塑造”。这种能力飞跃不仅意味着生成内容的真实感和可控性将大幅提升，更隐含着对我们认知和创作方式的深刻影响。当AI能够“构建物理世界”时，它将不再仅仅是工具，而可能成为新现实的共同创造者。然而，伴随这种能力而来的，将是对AI安全、可控性以及其生成内容与真实世界边界的伦理考量。如同任何具有颠覆性的技术一样，通往“物理世界构建”的道路，既充满无限可能，也伴随着需要全社会共同深思的挑战。</p>
+<h2 id="引文">引文</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://m.163.com/news/sub/T1486530093955.html">多模态模型如何架构选型？从 UNet 到 DiT+AR，智象未来潘滢炜：今年要触达物理世界的构建</a>·InfoQ·（2025/06/21）·检索日期2025/06/24&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://news.qq.com/rain/a/20250621A03ACI00">多模态模型如何架构选型？从UNet 到DiT+AR，智象未来潘滢炜</a>·腾讯新闻·（2025/06/21）·检索日期2025/06/24&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://news.sohu.com/a/906458474_121924584">多模态大模型架构演进：从UNet到DiT+AR的技术突破与应用前景 - 新闻</a>·搜狐新闻·（2025/06/21）·检索日期2025/06/24&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">多模态AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E6%88%90%E5%BC%8Fai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生成式AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/unet/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">UNet</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/diffusion-transformer/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Diffusion Transformer</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/dit&#43;ar/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DiT&#43;AR</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%B1%A1%E6%9C%AA%E6%9D%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智象未来</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%BD%98%E6%BB%A2%E7%82%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">潘滢炜</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E6%9E%84%E5%BB%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">物理世界构建</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">架构演进</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%AB%9E%E4%BA%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI竞争</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/midjourneyai-20250624101004341-2/">好莱坞巨头吹响号角：迪士尼与环球影业起诉Midjourney，重塑AI版权格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624101004353-4/">苹果AI困局：在“自研优先”与时代洪流间的艰难抉择</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624091004643-0/">商汤重塑：徐冰离职与AI芯片的战略剥离背后</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiperplexity-ai-20250623201004095-0/">苹果的AI突围：传闻收购Perplexity AI背后的战略博弈与未来重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/20ai-20250623121004680-4/">万兴科技音视频大模型2.0：AI内容创作步入“视听纪元”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaisam-altmangpt-5-20250623113259005-16/">OpenAI新篇章：Sam Altman预告开源模型、GPT-5多模态跃进与智能体时代的来临</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113258970-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258940-5/">当AI检测遭遇人类创作：教育信任危机下的学术诚信重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaisam-altmangpt-5-20250623113044290-16/">OpenAI新篇章：Sam Altman预告开源模型、GPT-5多模态跃进与智能体时代的来临</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113044256-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044227-5/">当AI检测遭遇人类创作：教育信任危机下的学术诚信重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiperplexitymeta-20250622171004277-0/">巨头竞逐AI搜索：Perplexity缘何成为苹果、Meta的“香饽饽”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai12ai-20250621111004418-0/">AI应用商业化驶入快车道：12亿美元营收背后，谁在为AI“氪金”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gptagentai-20250621001005217-0/">从GPT到Agent：重塑AI时代的技术、商业与人才版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiai-20250619200339613-2/">OpenAI与微软：AI巨头复杂共生关系的裂变与前瞻</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
