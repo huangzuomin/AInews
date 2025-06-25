@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌将其Agent2Agent (A2A) 协议捐赠给Linux基金会，旨在推动AI智能体间的开放通信与协作，打破当前“孤岛化”困境，但其仅捐赠标准和SDK的模式对开发者提出了实现挑战。文章深入分析了A2A与Anthropic的MCP、IBM的ACP在技术定位与市场策略上的竞合关系，并探讨了智能体协议在实际应用中面临的价值衡量、可靠性保障及安全等深层挑战，展望了其在构建复杂AI生态中的关键作用。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aia2a-20250625141004431-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aia2a-20250625141004431-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？">
+  <meta property="og:description" content="谷歌将其Agent2Agent (A2A) 协议捐赠给Linux基金会，旨在推动AI智能体间的开放通信与协作，打破当前“孤岛化”困境，但其仅捐赠标准和SDK的模式对开发者提出了实现挑战。文章深入分析了A2A与Anthropic的MCP、IBM的ACP在技术定位与市场策略上的竞合关系，并探讨了智能体协议在实际应用中面临的价值衡量、可靠性保障及安全等深层挑战，展望了其在构建复杂AI生态中的关键作用。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-25T14:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-25T14:10:04+08:00">
+    <meta property="article:tag" content="AI智能体">
+    <meta property="article:tag" content="A2A协议">
+    <meta property="article:tag" content="MCP协议">
+    <meta property="article:tag" content="ACP协议">
+    <meta property="article:tag" content="互操作性">
+    <meta property="article:tag" content="开源生态">
+
+  <meta itemprop="name" content="AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？">
+  <meta itemprop="description" content="谷歌将其Agent2Agent (A2A) 协议捐赠给Linux基金会，旨在推动AI智能体间的开放通信与协作，打破当前“孤岛化”困境，但其仅捐赠标准和SDK的模式对开发者提出了实现挑战。文章深入分析了A2A与Anthropic的MCP、IBM的ACP在技术定位与市场策略上的竞合关系，并探讨了智能体协议在实际应用中面临的价值衡量、可靠性保障及安全等深层挑战，展望了其在构建复杂AI生态中的关键作用。">
+  <meta itemprop="datePublished" content="2025-06-25T14:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-25T14:10:04+08:00">
+  <meta itemprop="wordCount" content="51">
+  <meta itemprop="keywords" content="AI智能体,A2A协议,MCP协议,ACP协议,互操作性,开源生态,人工智能伦理,企业级AI,市场竞争,Linux基金会">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？">
+  <meta name="twitter:description" content="谷歌将其Agent2Agent (A2A) 协议捐赠给Linux基金会，旨在推动AI智能体间的开放通信与协作，打破当前“孤岛化”困境，但其仅捐赠标准和SDK的模式对开发者提出了实现挑战。文章深入分析了A2A与Anthropic的MCP、IBM的ACP在技术定位与市场策略上的竞合关系，并探讨了智能体协议在实际应用中面临的价值衡量、可靠性保障及安全等深层挑战，展望了其在构建复杂AI生态中的关键作用。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('https://static001.geekbang.org/infoq/4f/4f8db65047d5a9f0d979c4a6874bdb34.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-25 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>谷歌将Agent2Agent (A2A) 协议捐赠给Linux基金会，旨在建立开放、厂商中立的AI智能体通信标准，以解决当前智能体间的“孤岛化”问题。此举标志着AI互操作性进入新阶段，但与Anthropic的MCP和IBM的ACP等现有协议的竞合关系，以及企业在实际应用中的ROI衡量挑战，共同构成了智能体生态发展的复杂图景。</p></blockquote>
+<p>在人工智能领域，互操作性长期以来都是一个难以逾越的障碍。随着智能体（AI Agents）技术的迅速崛起，不同厂商、不同框架下的智能体之间如何有效沟通与协作，成为决定其潜能释放的关键。正是在这一背景下，科技巨头谷歌采取了一项引人注目的举措：将其开发的Agent2Agent (A2A) 协议规范、相关SDK及开发工具捐赠给中立的Linux基金会<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。此举旨在推动A2A成为一个开放、社区驱动的互操作标准，从而打破智能体之间的“信息孤岛”。</p>
+<h3 id="智能体互操作性的基石a2a协议的深度解析">智能体互操作性的基石：A2A协议的深度解析</h3>
+<p>谷歌于今年4月首次推出A2A协议，其核心目标是为多样化的AI智能体提供一个统一的通信与协作框架。与以往的集成模式不同，A2A着眼于实现多个智能体之间的顺畅交互，确保通信的安全性、上下文管理，并协助智能体之间协商任务与相互发现。本质上，A2A旨在协调多个专业智能体，使它们能够高效协作，共同完成复杂的任务<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>从技术层面看，A2A定义了一种<strong>基于HTTP的通信模型</strong>，将每个代理视为可互操作的服务。每个代理通过公开一个名为“代理卡”（Agent Cards）的机器可读JSON描述符，详细说明自身的身份、功能、端点和身份验证要求。这种设计使得智能体能够清晰地了解彼此的能力和通信方式，为构建复杂智能体系统奠定了基础。</p>
+<p>谷歌选择将A2A捐赠给Linux基金会，这并非其首次在开源领域的“基本操作”。2015年，谷歌将Kubernetes捐赠给由Linux基金会托管的CNCF，此后Kubernetes在社区的运营下蓬勃发展，成为容器编排领域的事实标准。通过Linux基金会的中立治理模式，谷歌希望确保A2A协议能够保持厂商中立和社区驱动，加速其开发与普及。然而，与Kubernetes这种可以直接“开箱即用”的项目不同，谷歌此次捐赠的仅是协议标准和SDK，这意味着<strong>开发者需要自行完成具体的逻辑实现</strong>，这无疑为协议的采纳和产品落地带来了额外的开发负担和不确定性。</p>
+<h3 id="协议战场a2amcp与acp的竞合态势">协议战场：A2A、MCP与ACP的竞合态势</h3>
+<p>在AI智能体协议的早期阶段，市场并非只有A2A一枝独秀。当前，Anthropic的**模型上下文协议（MCP）**以惊人的速度被业界采纳，包括谷歌和OpenAI在内的主要参与者都已采用，其服务器数量从2月份的500台迅速增长至超过4000台<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。MCP的核心作用是标准化大型语言模型（LLM）与外部工具、数据库和API的通信方式，解决了将“M个不同的大模型与N个不同的工具集成在一起”的组合爆炸问题。它为大模型提供了关于外部服务能力和所需数据的清晰上下文，并提出了一个标准的客户端-服务器架构。</p>
+<p>谷歌官方将A2A定义为MCP的“补充”，指出MCP旨在将AI连接到工具，而A2A则专注于将AI连接到其他AI。它们共同构成了构建智能体系统的模块化基础。然而，业界对此的解读并非完全一致。有开发者指出，从架构角度看，A2A的运作层面高于MCP，并且可能<strong>通过“代理索引”的机制，最终将代理本身解构为可直接调用的标准化工具</strong>。这种索引机制，在某种程度上，可能引入类似谷歌广告的竞价模式，这引发了关于其“开放性”的质疑——如果核心索引和排名机制由特定算法或协调器控制，其开放性便值得商榷。</p>
+<p>尽管谷歌强调两者互补，但不少开发者仍对A2A和MCP将如何共存感到困惑，甚至认为A2A有能力完成MCP所能做的一切。在这种竞争态势下，A2A需要展示出MCP无法企及的独特优势才能脱颖而出。一个潜在的优势在于A2A基于HTTP协议，可能在客户端集成方面更具优势，其集成难度相对较低。相比之下，MCP的集成复杂性似乎更高，即便同出自Anthropic的Claude桌面端，在MCP发布数月后也未能完全支持其全部功能，这或许侧面印证了A2A作为更易集成方案的可能性。</p>
+<p>此外，由IBM提出的**代理通信协议（ACP）**则采用了完全不同的策略<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。ACP基于本地优先的代理协调，无需云端，不依赖HTTP和Web发现机制，而是允许智能体在共享运行时内直接查找并相互通信。这种设计使其非常适合带宽有限、需要低延迟（如机器人或边缘设备）、注重隐私或部署在隔离环境（如工厂车间）的场景。ACP并非与A2A直接竞争，而是填补了不同的市场空白，在特定严格控制的环境中，甚至可能因其跳过Web原生协议开销的特性而完全取代A2A。</p>
+<h3 id="落地挑战与价值衡量智能体协议的未来之路">落地挑战与价值衡量：智能体协议的未来之路</h3>
+<p>围绕这些智能体协议的讨论，一个更深层次的问题浮现出来：我们真的需要这些协议吗？Y Combinator的普通合伙人Pete Koomen观察到，尽管他们构建了许多AI智能体来帮助公司运营，但这些智能体并未依赖MCP或A2A<sup id="fnref3:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这表明，对于简单的智能体工作流而言，这些复杂的协议可能并非必需。</p>
+<p>然而，Andreessen Horowitz的合伙人Yoko Li则持不同观点。她认为，AI模型目前仍未完全成熟，存在遗忘信息、对工具使用感到困惑等问题。因此，像MCP和A2A这样的协议，扮演着“程序层”或“手把手指导”的关键角色，协助智能体及其背后的大模型完成它们各自无法独立完成的复杂任务。谷歌云的应用总监兼A2A共同创造者Miku Jha强调，企业只有在智能体技术像现有企业工具一样可靠时，才会大规模采用。尽管生成式AI令人印象深刻，但其可靠性并非强项，而A2A的初衷正是为了提升这种可靠性<sup id="fnref4:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>然而，智能体应用的投资回报率（ROI）衡量目前面临显著挑战。企业通常通过两种方式利用代理：现代化现有工作流，或启用新的用户交互方式。但如何评估智能体生成内容的质量、是否能转化为切实的成本节约或收入增长，仍然是一个难题。Jha警告说，企业在探索代理技术时，常犯的错误是先选择工具而非清晰定义用例和成功标准。她建议反其道而行之：<strong>在对智能体技术进行大量投资之前，应首先明确用例和业务价值意义上的成功标准</strong>。</p>
+<p>更具挑战性的是，针对智能体驱动系统的监控和衡量机制尚不完善。衡量AI系统提供的“正常运行时间达到几个九”或定义服务级别协议（SLAs）等基本可靠性概念仍处于早期阶段，而评估生成式AI的输出则更为棘手。微软使用NPS（净推荐值）来衡量AI模型的性能，这一点在行业会议上曾引起震惊<sup id="fnref5:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>此外，MCP和A2A等协议在安全性和复杂性方面也带来了新的担忧。MCP的开放工具调用必须经过仔细的沙盒处理，而A2A在智能体之间开放了许多端点，因此<strong>身份验证（OAuth、API密钥等）和授权（RBAC、令牌）变得至关重要</strong>。</p>
+<p>对于开发者而言，真正的问题是，如何在自身的系统中结合这些框架？未来的智能体是否会使用MCP链接工具，再利用A2A跨服务进行协作？以及，他们的大模型是否已为这个新的、更加开放的智能体生态系统做好了准备？Yoko Li也提及，在某些场景中（如AI伴侣），传统的ROI衡量可能失效或根本不适用，因为消费者可能处于一种“以前不知道需要，但现在离不开”的境地。</p>
+<p>尽管前路漫漫，目前只有约5%的生成式AI项目转化为盈利产品，但这些智能体协议的出现，无疑将有助于提升智能体的可靠性，从而为企业带来有价值的变革。它们是构建一个真正互联、高效、智能的AI生态系统的关键拼图。</p>
+<h2 id="引文">引文</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>谷歌将A2A 捐赠给Linux 基金会，但代码实现还得靠开发者自己？！·雪球·(2023/6/23)·检索日期2024/7/12 <a href="https://xueqiu.com/9217191040/339900278">https://xueqiu.com/9217191040/339900278</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>What Every AI Engineer Should Know About A2A, MCP, ACP · Elisowski · (2024/7/1)·检索日期2024/7/12 <a href="https://medium.com/@elisowski/what-every-ai-engineer-should-know-about-a2a-mcp-acp-8335a210a742">https://medium.com/@elisowski/what-every-ai-engineer-should-know-about-a2a-mcp-acp-8335a210a742</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI智能体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/a2a%E5%8D%8F%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">A2A协议</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mcp%E5%8D%8F%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MCP协议</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/acp%E5%8D%8F%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">ACP协议</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">互操作性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源生态</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%81%E4%B8%9A%E7%BA%A7ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">企业级AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%B8%82%E5%9C%BA%E7%AB%9E%E4%BA%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">市场竞争</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/linux%E5%9F%BA%E9%87%91%E4%BC%9A/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linux基金会</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/openaiofficeworkspace-20250625131005041-0/">OpenAI挥师办公：重塑企业协作，挑战Office与Workspace帝国</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiperplexitymeta-20250622171004277-0/">巨头竞逐AI搜索：Perplexity缘何成为苹果、Meta的“香饽饽”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiai-20250619072004332-0/">OpenAI的代理框架：将AI智能体从实验室推向企业前沿的战略举措</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250618202004760-5/">高考志愿争夺战：AI大模型与“名师”话语权的深度交锋</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625121004307-0/">高盛AI助理全面部署：华尔街效率革命与工作未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624201004200-0/">AI浪潮下的结构性重塑：昆仑万维方汉论“中间层”消亡与中国企业的未来航向</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/harmonyos-6ai-20250624171004263-0/">华为HarmonyOS 6：AI智能体如何重塑移动操作系统的未来战场？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624101004335-1/">AI自动化浪潮：量化范式下的颠覆与人类的未知边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiperplexity-ai-20250623201004095-0/">苹果的AI突围：传闻收购Perplexity AI背后的战略博弈与未来重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaisam-altmangpt-5-20250623113259005-16/">OpenAI新篇章：Sam Altman预告开源模型、GPT-5多模态跃进与智能体时代的来临</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaisam-altmangpt-5-20250623113044290-16/">OpenAI新篇章：Sam Altman预告开源模型、GPT-5多模态跃进与智能体时代的来临</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentic-ai-20250621001005238-2/">Agentic AI：从概念炒作到企业生产力核心的“临门一脚”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/awssmithy-apiai-20250620171004559-1/">AWS开源Smithy API模型：重塑云服务互操作性与AI代理未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-20250619202505898-0/">揭秘AI的“潜意识”：OpenAI新研究如何破解大模型的“双重人格”危机</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/midjourney-v1ai-20250619122004768-2/">Midjourney V1：从AI生图到“开放世界”视频模拟的跃迁与挑战</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
