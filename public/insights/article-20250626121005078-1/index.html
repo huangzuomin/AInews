@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>大模型基础设施的“暗涌”：工程师如何穿越复杂性与成本的迷雾 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="大模型基础设施工程师正面临严峻挑战，包括大规模集群的稳定性问题、性能瓶颈和高昂的运营成本。他们通过模型与部署联合设计、精细化KV缓存管理、以及利用新型硬件架构如华为Cloud Matrix提升算力利用率，来优化成本和性能。同时，开源社区的协作和异构硬件的智能调度，正成为未来AI基础设施发展的关键趋势。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250626121005078-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250626121005078-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="大模型基础设施的“暗涌”：工程师如何穿越复杂性与成本的迷雾">
+  <meta property="og:description" content="大模型基础设施工程师正面临严峻挑战，包括大规模集群的稳定性问题、性能瓶颈和高昂的运营成本。他们通过模型与部署联合设计、精细化KV缓存管理、以及利用新型硬件架构如华为Cloud Matrix提升算力利用率，来优化成本和性能。同时，开源社区的协作和异构硬件的智能调度，正成为未来AI基础设施发展的关键趋势。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-26T12:10:05+08:00">
+    <meta property="article:modified_time" content="2025-06-26T12:10:05+08:00">
+    <meta property="article:tag" content="AI基础设施">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="性能优化">
+    <meta property="article:tag" content="算力管理">
+    <meta property="article:tag" content="开源生态">
+    <meta property="article:tag" content="GPU虚拟化">
+
+  <meta itemprop="name" content="大模型基础设施的“暗涌”：工程师如何穿越复杂性与成本的迷雾">
+  <meta itemprop="description" content="大模型基础设施工程师正面临严峻挑战，包括大规模集群的稳定性问题、性能瓶颈和高昂的运营成本。他们通过模型与部署联合设计、精细化KV缓存管理、以及利用新型硬件架构如华为Cloud Matrix提升算力利用率，来优化成本和性能。同时，开源社区的协作和异构硬件的智能调度，正成为未来AI基础设施发展的关键趋势。">
+  <meta itemprop="datePublished" content="2025-06-26T12:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-06-26T12:10:05+08:00">
+  <meta itemprop="wordCount" content="49">
+  <meta itemprop="keywords" content="AI基础设施,大模型,性能优化,算力管理,开源生态,GPU虚拟化,工程化实践,成本效益">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="大模型基础设施的“暗涌”：工程师如何穿越复杂性与成本的迷雾">
+  <meta name="twitter:description" content="大模型基础设施工程师正面临严峻挑战，包括大规模集群的稳定性问题、性能瓶颈和高昂的运营成本。他们通过模型与部署联合设计、精细化KV缓存管理、以及利用新型硬件架构如华为Cloud Matrix提升算力利用率，来优化成本和性能。同时，开源社区的协作和异构硬件的智能调度，正成为未来AI基础设施发展的关键趋势。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('https://static001.geekbang.org/wechat/images/1a/1a4973e167c75f4ba2d63d57c158f621.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-26 12:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">大模型基础设施的“暗涌”：工程师如何穿越复杂性与成本的迷雾</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>大模型基础设施工程师正面临训练中断、性能瓶颈和部署成本高昂等“暗涌”挑战。他们通过精细的并行策略优化、异构硬件智能调度、以及提升GPU利用率来应对，同时通过开源协作和持续工程化实践，致力于构建更稳定、高效且低成本的AI计算底座。</p></blockquote>
+<p>大型语言模型（LLMs）以其惊人的能力席卷全球，预示着人工智能的新纪元。然而，在这些智能的表象之下，支撑其庞大计算需求的AI基础设施却是一个充满挑战的“底座”。对于那些肩负着构建和维护这一看不见的基石的工程师们而言，前路并非坦途，而是充斥着意想不到的故障、难以捉摸的性能瓶颈，以及在史无前例的规模下持续优化成本的巨大压力。近期，在AICon全球人工智能开发与应用大会2025北京站即将召开之际，一场汇聚了华为昇腾技术专家ZOMI酱、蚂蚁集团高级专家马介悦和SGLang核心开发者尹良升的《极客有约》直播，深入揭示了这些深层挑战及其前沿解决方案，为我们剖析了大模型工程中的“暗涌”。</p>
+<h3 id="基础设施的暗涌挑战与痛点">基础设施的“暗涌”：挑战与痛点</h3>
+<p>大模型训练和推理的本质是对海量计算资源的极限压榨，这也意味着故障的概率被指数级放大。蚂蚁集团的马介悦指出，线上训练过程中最常见的问题之一就是<strong>稳定性</strong>，特别是对于千卡乃至万卡级别的大规模集群，训练任务中断（“跑挂”）几乎是常态。他坦言：“GPU本身存在一定的错误率，对于一个万卡集群来说，每天出现不同的GPU故障几乎是必然的。” <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这些故障可能源自底层网络系统、交换机、光模块、计算节点本身，甚至GPU的ECC错误。由于训练是一个同步过程，任何单卡故障都可能导致整个任务停滞或失败。早期，工程师们只能依赖人工响应和重启，但问题往往反复出现，暴露出缺乏自动化运维系统的窘境。</p>
+<p>除了硬件层面的不确定性，“跑飞”——即模型损失函数（loss）异常飙升——则更为复杂，它可能源于<strong>算法本身的缺陷、并行框架的问题或数据错误</strong>。这类问题需要基础设施工程师与业务算法工程师紧密协作，排查难度极大。尹良升则从开源推理引擎的角度，指出了<strong>运行时错误</strong>（Runtime Error）和<strong>性能问题</strong>是用户反馈的焦点。其中，诸如显存分配溢出（OOM）等运行时错误，往往因用户不当配置或代码bug所致；而性能无法达到预期，则可能涉及配置差异、软件版本不一致乃至测试数据集迁移的偏差。这些都指向了<strong>软硬件协同的复杂性</strong>，以及在庞大系统中精确诊断问题的挑战。</p>
+<p>如果将大模型的工程流程比作一条流水线，那么其脆弱点无处不在。并行策略的兼容性是一个核心症结。尹良升以SGLang复现DeepSeek Blog的实践为例，解释了_Multi Token Prediction_ (MTP) 等新策略与 <em>Data-Parallel Attention</em> 等现有功能间的冲突。这种不兼容并非设计理念的根本矛盾，而是<strong>代码实现中兼容性与解耦不足</strong>的体现，反映出快速迭代与系统健壮性之间的固有张力。马介悦进一步补充，尽管研发流程中依赖严格的代码审查、门禁（gatekeeping）和自动化测试，但核心挑战在于<strong>性能“门禁”常常受限于资源</strong>。线上万卡规模才能复现的问题，往往无法在仅8卡规模的CI流水线中暴露，导致许多深层问题直到线上大规模复现后才被发现。这使得对机器浮点运算利用率（MFU）下降的排查异常复杂，往往需要依赖耗时的人工二分法回溯测试，凸显了<strong>强大的性能剖析和监控系统</strong>对高效工程化实践的重要性。</p>
+<h3 id="成本效益的压榨软硬协同的优化之道">成本效益的“压榨”：软硬协同的优化之道</h3>
+<p>在“大模型低成本”成为行业共识的今天，如何从系统层面“压榨每一分显存”和提升算力利用率，成为AI基础设施工程师的核心使命。尹良升从推理部署的角度提出了三个关键优化方向：</p>
+<ol>
+<li>
+<p><strong>模型架构设计与最终上线部署的联合设计</strong>：他指出，DeepSeek通过大规模卡群部署和PD分离节点策略，将API价格压至前所未有的低点。以稀疏MoE架构为例，每次推理仅激活少量参数，若利用大量专家并行，则等效于单卡承载的模型权重显著减少，从而释放出更多显存用于更大的KV缓存。这表明，在模型设计或训练阶段就需考虑未来的推理性能，实现前期与后期的深度协同。</p>
+</li>
+<li>
+<p><strong>高效的KV缓存管理策略</strong>：将每轮对话后的KV缓存转储至CPU内存或文件系统，因其相对廉价，成为普遍做法。但如何在多轮对话或Agent工作流等特定场景下，设计智能的KV缓存驱逐与重加载策略，以适应不同的复用间隔，仍有巨大的优化空间。</p>
+</li>
+<li>
+<p><strong>提升GPU的极限利用率，消除CPU阻塞带来的空闲</strong>：传统流程中，调度批次和启动内核等CPU密集型任务容易阻塞GPU。SGLang的_Overlap Scheduling_重新设计了工作流，允许GPU在执行当前批次时，CPU并行准备下一批次，从而“完全隐藏了CPU开销”，极大提升了GPU利用效率 <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这些优化调度开销的创新点，是压榨GPU推理性能的关键。</p>
+</li>
+</ol>
+<p>蚂蚁集团的马介悦则从更宏观的硬件架构层面，揭示了提升性价比的关键。他指出，英伟达GPU的领先很大程度上得益于其NVLink/NVSwitch实现了高效的单机节点内通信。然而，<strong>跨节点通信</strong>的性能瓶颈（与NVLink存在一个数量级的差距）是传统架构的痛点。他强调，通过将大量节点整合到大型机柜内，利用<strong>NVLink的“拉远”互联技术</strong>，能够将跨节点带宽提升至接近节点内水平。马介悦的实践证实，仅更换为类似<strong>华为Cloud Matrix</strong>的硬件架构，实测性能提升便“非常可观”，甚至能让国产芯片在跑_DeepSeek_的效率上超越英伟达 <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这种“成本优化不仅关乎价格，更需关注性价比，即同等模型MFU下的单位成本”的理念，正推动AI算力基础设施向更高集成度、更低延迟的方向演进。</p>
+<h3 id="开源与异构的未来共建生态的机遇">开源与异构的未来：共建生态的机遇</h3>
+<p>构建一个健壮、高效的AI基础设施，远不止于编写优质代码。马介悦提到，DLRover开源项目自2023年开源以来，目标是发展为更庞大的社区，吸引更多伙伴参与。这需要平衡公司繁重工作与社区投入，并<strong>有效运营技术监督委员会，提升国内外影响力</strong>。尹良升将开源的本质定义为“众人拾柴火焰高”，强调<strong>在项目维护者与社区用户之间构建良性循环</strong>的重要性——“用户信任社区并提供反馈，社区则吸纳更多构建者，驱动版本迭代与项目进化。” <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这种超越纯粹工程能力的<strong>社区建设和信任机制</strong>，是开源项目得以持续发展和保持活力的核心。华为昇腾的ZOMI酱也深有体会，Mind系列开源项目初期面临的挑战，是如何打破“仅支持昇腾硬件且易用性不足”的普遍认知，真正打造一个能够吸引全球开发者的生态。</p>
+<p>展望未来，GPU共享和虚拟化技术正在成为提升资源利用率的新趋势。马介悦解释了英伟达MIG（Multi-Instance GPU）如何通过SR-IOV技术将物理GPU划分为多个虚拟实例，实现了<strong>设备级的虚拟化，带来了性能、隔离性和安全性上的优势</strong>。ZOMI酱进一步指出，在早期难以实现的<strong>异构融合</strong>，特别是推理环节预填充（prefill）与解码（decode）分离架构的成熟，正使其可行性显著提升。预填充阶段依赖高算力芯片，而解码阶段更看重显存容量与高效的KV缓存管理能力，这使得为不同阶段匹配最优硬件成为可能。这种<strong>充分利用异构硬件特性、实现跨类型资源的智能调度与混部</strong>，已成为AI基础设施演进的重要方向。</p>
+<p>SGLang与vLLM等开源推理引擎之间的良性竞争，也揭示了开源生态的活力。尹良升强调，SGLang通过独特的“GPU显存前缀共享”和“零开销调度器”等设计，致力于提供更低的部署成本或更友好的上手体验。这种<strong>差异化竞争和以用户痛点为核心的迭代</strong>，共同推动着整个推理引擎领域的技术进步。</p>
+<p>最终，AI基础设施的未来将是一个高度集成、智能调度、且深度协作的生态系统。工程师们正不断在硬件故障的“暗涌”中寻求稳定性，在成本飙升的压力下“压榨”极致效率，并在开源协作的浪潮中构建共赢的未来。这不仅是一场技术革新，更是一场关于如何高效、普惠地驾驭AI力量的社会实验，其进展将直接决定大模型技术的最终边界和普惠程度。</p>
+<h2 id="引文">引文</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.infoq.cn/video/kx2h235pHrE7fENMaxlH">AI Infra 工程师们如何应对大模型流水线里的“暗涌”？</a> · InfoQ · AICon全球人工智能开发与应用大会策划·罗燕珊（2025/6/25）·检索日期2025/6/26&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://m.163.com/news/sub/T1486530093955.html">InfoQ</a> · InfoQ (2025/6/25) · 检索日期2025/6/26&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">性能优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E7%AE%A1%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力管理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源生态</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/gpu%E8%99%9A%E6%8B%9F%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GPU虚拟化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%AE%9E%E8%B7%B5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">工程化实践</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">成本效益</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250617193006124-2/">字节跳动的AI Agent豪赌：重塑数字未来的关键战役</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagi-20250625181004400-0/">全球AI人才的“权力游戏”：中美巨头在AGI竞赛中的战略分化与深层动因</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimiai-20250625171004517-3/">Kimi能否穿越“月之暗面”：AI创业浪潮中的战略迷思与重塑之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aia2a-20250625141004431-2/">AI智能体协议战：谷歌A2A能否打破“孤岛”并重塑互操作性？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624201004200-0/">AI浪潮下的结构性重塑：昆仑万维方汉论“中间层”消亡与中国企业的未来航向</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-o3-pro-20250624131004401-0/">OpenAI o3-pro：可靠性之诺与用户体验的现实鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623181004317-3/">更深层次的变革：AI如何重塑软件开发的起点、过程与目的</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3ai-20250623181004301-0/">有道“子曰3”：低成本AI大模型如何重塑数学教育的公平版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004664-1/">中国大模型“六小虎”的现实困境：从群雄逐鹿到洗牌整合</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004658-0/">智能体的崛起：AI新纪元的品味与人机共舞</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gmi-cloud-waic-2025ai-20250623113258957-8/">GMI Cloud 亮相 WAIC 2025：AI算力基础设施的全球化进击与深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-20250623113258945-6/">当智能体寻求“自保”：Anthropic研究揭示大模型“错位”行为的深层隐忧</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258980-12/">智能体的崛起：张亚勤解码AI时代的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gmi-cloud-waic-2025ai-20250623113044244-8/">GMI Cloud 亮相 WAIC 2025：AI算力基础设施的全球化进击与深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-20250623113044233-6/">当智能体寻求“自保”：Anthropic研究揭示大模型“错位”行为的深层隐忧</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
