@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI颠覆前端：Anthropic的Artifacts如何重塑代码与对话的边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic近日对旗下AI工具Claude Artifacts进行了重大升级，使用户能够通过自然语言指令直接创建并分享交互式AI应用程序，无需编程技能。此举旨在将Claude从对话机器人转型为实用的工具平台，预示着软件开发领域“公民开发者”的崛起，并引发了对人机协作模式及未来工作形态的深层思考。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aianthropicartifacts-20250627211008410-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aianthropicartifacts-20250627211008410-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI颠覆前端：Anthropic的Artifacts如何重塑代码与对话的边界">
+  <meta property="og:description" content="Anthropic近日对旗下AI工具Claude Artifacts进行了重大升级，使用户能够通过自然语言指令直接创建并分享交互式AI应用程序，无需编程技能。此举旨在将Claude从对话机器人转型为实用的工具平台，预示着软件开发领域“公民开发者”的崛起，并引发了对人机协作模式及未来工作形态的深层思考。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-27T21:10:08+08:00">
+    <meta property="article:modified_time" content="2025-06-27T21:10:08+08:00">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="Claude Artifacts">
+    <meta property="article:tag" content="AI应用开发">
+    <meta property="article:tag" content="无代码">
+    <meta property="article:tag" content="低代码">
+    <meta property="article:tag" content="公民开发者">
+
+  <meta itemprop="name" content="AI颠覆前端：Anthropic的Artifacts如何重塑代码与对话的边界">
+  <meta itemprop="description" content="Anthropic近日对旗下AI工具Claude Artifacts进行了重大升级，使用户能够通过自然语言指令直接创建并分享交互式AI应用程序，无需编程技能。此举旨在将Claude从对话机器人转型为实用的工具平台，预示着软件开发领域“公民开发者”的崛起，并引发了对人机协作模式及未来工作形态的深层思考。">
+  <meta itemprop="datePublished" content="2025-06-27T21:10:08+08:00">
+  <meta itemprop="dateModified" content="2025-06-27T21:10:08+08:00">
+  <meta itemprop="wordCount" content="102">
+  <meta itemprop="keywords" content="Anthropic,Claude Artifacts,AI应用开发,无代码,低代码,公民开发者,人机协作,AI伦理,未来工作">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI颠覆前端：Anthropic的Artifacts如何重塑代码与对话的边界">
+  <meta name="twitter:description" content="Anthropic近日对旗下AI工具Claude Artifacts进行了重大升级，使用户能够通过自然语言指令直接创建并分享交互式AI应用程序，无需编程技能。此举旨在将Claude从对话机器人转型为实用的工具平台，预示着软件开发领域“公民开发者”的崛起，并引发了对人机协作模式及未来工作形态的深层思考。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%281%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-27 21:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">AI颠覆前端：Anthropic的Artifacts如何重塑代码与对话的边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>Anthropic 的 Claude Artifacts 工具迎来重大升级，使用户能够通过自然语言指令直接创建并分享交互式AI应用，无需编程。这标志着AI从静态问答向动态工具平台的转型，预示着“公民开发者”时代的到来，并将重塑人机协作的边界。</p></blockquote>
+<p>旧金山人工智能公司 Anthropic 近日宣布对旗下重要工具 <strong>Artifacts</strong> 进行重大升级，标志着其旗舰聊天机器人 Claude 正式从单纯的对话平台向一个功能更强大的实用工具平台转型。此次更新的核心在于，它使得用户无需任何编程技能，即可直接在 Claude 环境中创建、共享和定制<strong>交互式AI应用程序</strong>。这一举措，不仅仅是技术上的迭代，更是对软件开发范式，乃至人机协作未来模式的一次深刻探讨<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>Artifacts 的概念最初于去年8月（指2023年）推出，允许 Claude 用户生成供个人使用的小型AI编程应用。自发布以来，数百万用户已创建了逾五亿个“作品”，涵盖从生产力工具到教育游戏的广泛应用。而本次于美国当地时间6月26日发布的重大升级，则致力于简化 Artifacts 的分享过程，并赋予这些AI生成的应用程序更强大的功能，甚至使其能够在移动设备上运行<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h3 id="技术原理解析与产品哲学">技术原理解析与产品哲学</h3>
+<p>Artifacts 的诞生源于 Anthropic 研发团队的一次“灵光乍现”。一位工程师在尝试利用大模型生成网站时，发现反复复制粘贴代码到编辑器再打开浏览器预览的过程效率低下。他萌生了直接在屏幕上渲染生成内容的想法，并迅速搭建了一个简陋的并排界面。当团队成员看到这一原型时，无不为之振奋。其背后的核心机制，正是大型语言模型惊人的理解与生成能力在起作用。研发人员通过少量的提示词工程和对 Claude 的指令，便在短短一晚（甚至到凌晨两点）就完成了概念验证。从原型到内部试用，仅用了一周半的时间便得以实现，这充分展现了 AI 驱动开发的速度和效率。</p>
+<p>Anthropic 团队对 Artifacts 的愿景是，通过对人机交互方式的“小小调整”，就能“极大地改变使用它们时的趣味性、参与感和创造性”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这与传统软件开发中由开发者预先定义所有功能，用户被动使用的模式截然不同。正如技术评论员 Fraser 所言，Artifacts 成功实现了 GPT Store 未竟的使命。他认为，无论是 ChatGPT 还是 Claude，用户本质上都在“创造东西”，这些“东西”往往是某种软件的雏形。然而，这些生成物极少能一次性完美，都需要“人机反复打磨——来回传球，协同创作”<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Artifacts 首次将这种“<strong>你是编辑，AI 是执行者</strong>”的工作模式真正落地，用户提供意见，AI 处理繁重任务，并实时呈现结果。</p>
+<p>这种产品哲学也反映了 Anthropic 对待AI产品开发的独特视角，即将其视为一场“谜题（mystery）”而非“拼图（puzzle）”<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。在传统软件领域，如开发一款成熟的FPS游戏，数据、玩家行为、武器平衡性等皆有据可循，可以进行“拼图式”的深度研究和大规模发布。然而，在AI领域，市场动态和未来走向充满不确定性。AI正在彻底重塑看似“静态”的市场，无法通过更多调研获得确定性，因为“未来尚未发生”<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。因此，Artifacts 这种灵活、迭代、以模型为核心的服务方式，恰好贴合了 Anthropic “为模型服务”的能力边界，以聪明的方式打造其产品。</p>
+<h3 id="行业转型与未来图景">行业转型与未来图景</h3>
+<p>Artifacts 的升级不仅仅是产品功能的扩展，它更深层地触及了软件开发乃至未来工作模式的根本性转变。传统的人工智能交互往往停留在问答模式，用户需将AI生成的结果复制粘贴到其他应用程序中才能使用。Artifacts 则通过创建一个专用的工作空间，实现了AI生成内容的即时可用与共享，极大地消除了这种摩擦。它与 OpenAI 的 Canvas 功能和 GPT Store 形成了鲜明对比：GPT Store 侧重于对话代理，而 Artifacts 则更专注于<strong>生成具有用户界面的功能性应用程序</strong>。Anthropic 举例指出，学生可以要求 Claude 开发一个可共享的“抽认卡App”，而非仅仅生成一组静态的抽认卡资料，这使得学习成果从一次性内容变为可广泛使用的互动工具。</p>
+<p>这种通过AI工具实现应用程序创建民主化的趋势，正催生着“平民开发者”群体的崛起。Gartner 研究数据显示，到2025年，70%的新应用程序将采用低代码或无代码技术，相比2020年的25%大幅提升，同时近60%的定制应用程序是在传统IT部门之外构建的<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。Artifacts 的免费使用和便捷分享模式，无疑将加速这一进程，使数百万用户即便不编写任何代码，也能构建和共享AI应用程序。</p>
+<p>然而，这并非意味着传统软件开发者的末日。相反，人工智能开发工具与传统编程之间的关系，似乎更多的是<strong>互补而非竞争</strong>。Anthropic 将 Artifacts 定位为快速原型设计和个人工具创建的利器，而专业开发人员则将继续专注于构建生产级、高复杂度、任务关键型的应用程序。这些AI平台擅长业务流程自动化和简单应用的开发，但在处理需要定制功能、企业级性能、复杂系统架构、性能优化和集成挑战时，仍需专业开发人员。安全和治理方面的担忧也持续支撑着对专业开发人员的需求，他们负责建立适当的治理框架并确保应用程序符合企业安全标准。市场动态预测，到2030年，全球低代码开发平台市场将达到1870亿美元，而传统软件开发也将同步增长，两者将是共存而非取代的关系<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>Artifacts 的此次升级，以及它所代表的“按需生成软件”的趋势，预示着用户体验设计将从预设的、臃肿的静态界面，转向定制化、实时响应的提示式界面。用户无需再浏览复杂的菜单和仪表盘，只需用自然语言描述需求，AI驱动的系统便能实时整合所需工具和数据，以用户要求的格式提供内容，甚至实时开发出简易的软件界面。这种转变从“功能堆砌”的软件时代，迈向了“按需生成”的智能服务新时代。</p>
+<p>Anthropic 认为，在人工智能时代，最强大的代码可能只是一段精心编写的对话。这一观点无疑重新定义了“编码”的边界，将人与机器的协作推向一个全新的维度。随着Artifacts将AI的创造力直接暴露给更广泛的用户群体，关于未来软件的形态、人与AI的互动模式，以及“谁来编写代码”的根本问题，都将继续被深入探讨。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://m.36kr.com/p/3354532139299465">程序员还写啥前端？Claude 工程师凌晨2点造出Artifacts：AI直接生成可交互App，现在又重磅升级了</a>·InfoQ·冬梅（2025/6/27）·检索日期2025/6/27&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.engadget.com/ai/anthropic-makes-it-easier-to-create-and-share-claudes-bite-sized-artifact-apps-170022293.html">Anthropic makes it easier to create and share Claude&rsquo;s bite-sized Artifact apps</a>·Engadget·（2025/6/27）·检索日期2025/6/27&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://research.aimultiple.com/low-code-statistics/">Low-code statistics to understand the trends (2024)</a>·AIMultiple·（2025/6/27）·检索日期2025/6/27&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/anthropic/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-artifacts/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Artifacts</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI应用开发</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%97%A0%E4%BB%A3%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">无代码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">低代码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%AC%E6%B0%91%E5%BC%80%E5%8F%91%E8%80%85/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">公民开发者</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人机协作</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%AA%E6%9D%A5%E5%B7%A5%E4%BD%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">未来工作</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250618202004734-2/">超越“工作末日论”：AI时代人类角色的重塑与新职业图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/alphawriteai-20250624151004557-6/">AlphaWrite：进化算法如何迭代重塑AI叙事边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004658-0/">智能体的崛起：AI新纪元的品味与人机共舞</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113258970-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258987-13/">人工智能：信仰、预言与人类的未来主线任务</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258952-7/">当AI开始“闹情绪”甚至“威胁”：理解大型模型的代理性错位与伦理挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cluelyai-20250623113258933-4/">当“作弊”成为商业模式：Cluely融资背后，AI如何重塑生产力与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258993-14/">萨姆·阿尔特曼的未来远景：从博士级AI到戴森球，一场关于超级智能、具身计算与人类未来的深度思辨</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258975-11/">软件编程的第三次浪潮：AI大神卡帕西定义“对话式编程”新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113044256-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044273-13/">人工智能：信仰、预言与人类的未来主线任务</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044239-7/">当AI开始“闹情绪”甚至“威胁”：理解大型模型的代理性错位与伦理挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cluelyai-20250623113044221-4/">当“作弊”成为商业模式：Cluely融资背后，AI如何重塑生产力与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044279-14/">萨姆·阿尔特曼的未来远景：从博士级AI到戴森球，一场关于超级智能、具身计算与人类未来的深度思辨</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044261-11/">软件编程的第三次浪潮：AI大神卡帕西定义“对话式编程”新纪元</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
