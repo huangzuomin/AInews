@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>零开销终结AI“幻觉”：西安交大团队Nullu方法如何重塑视觉语言模型的可靠性 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="西安交通大学团队提出Nullu方法，通过识别并消除大型视觉语言模型（LVLMs）内部的“幻觉子空间”（HalluSpace），从根本上解决了模型凭空生成图像中不存在物体描述的问题。该方法通过零空间投影直接编辑模型权重，不仅有效提升了LVLMs的真实性和可靠性，更在不增加任何额外推理成本的情况下实现，为AI的广泛部署和信任建立提供了高效且实用的解决方案。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/ainullu-20250627201005008-5/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/ainullu-20250627201005008-5/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="零开销终结AI“幻觉”：西安交大团队Nullu方法如何重塑视觉语言模型的可靠性">
+  <meta property="og:description" content="西安交通大学团队提出Nullu方法，通过识别并消除大型视觉语言模型（LVLMs）内部的“幻觉子空间”（HalluSpace），从根本上解决了模型凭空生成图像中不存在物体描述的问题。该方法通过零空间投影直接编辑模型权重，不仅有效提升了LVLMs的真实性和可靠性，更在不增加任何额外推理成本的情况下实现，为AI的广泛部署和信任建立提供了高效且实用的解决方案。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-27T20:10:05+08:00">
+    <meta property="article:modified_time" content="2025-06-27T20:10:05+08:00">
+    <meta property="article:tag" content="大型视觉语言模型">
+    <meta property="article:tag" content="物体幻觉">
+    <meta property="article:tag" content="Nullu">
+    <meta property="article:tag" content="零空间投影">
+    <meta property="article:tag" content="HalluSpace">
+    <meta property="article:tag" content="模型权重编辑">
+
+  <meta itemprop="name" content="零开销终结AI“幻觉”：西安交大团队Nullu方法如何重塑视觉语言模型的可靠性">
+  <meta itemprop="description" content="西安交通大学团队提出Nullu方法，通过识别并消除大型视觉语言模型（LVLMs）内部的“幻觉子空间”（HalluSpace），从根本上解决了模型凭空生成图像中不存在物体描述的问题。该方法通过零空间投影直接编辑模型权重，不仅有效提升了LVLMs的真实性和可靠性，更在不增加任何额外推理成本的情况下实现，为AI的广泛部署和信任建立提供了高效且实用的解决方案。">
+  <meta itemprop="datePublished" content="2025-06-27T20:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-06-27T20:10:05+08:00">
+  <meta itemprop="wordCount" content="27">
+  <meta itemprop="keywords" content="大型视觉语言模型,物体幻觉,Nullu,零空间投影,HalluSpace,模型权重编辑,零开销,可靠性AI">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="零开销终结AI“幻觉”：西安交大团队Nullu方法如何重塑视觉语言模型的可靠性">
+  <meta name="twitter:description" content="西安交通大学团队提出Nullu方法，通过识别并消除大型视觉语言模型（LVLMs）内部的“幻觉子空间”（HalluSpace），从根本上解决了模型凭空生成图像中不存在物体描述的问题。该方法通过零空间投影直接编辑模型权重，不仅有效提升了LVLMs的真实性和可靠性，更在不增加任何额外推理成本的情况下实现，为AI的广泛部署和信任建立提供了高效且实用的解决方案。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-06-Jun%2027,%202025_20-05-22-829.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-27 20:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">零开销终结AI“幻觉”：西安交大团队Nullu方法如何重塑视觉语言模型的可靠性</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>大型视觉语言模型普遍存在的“物体幻觉”问题，即模型凭空生成图像中不存在的物体描述，长期困扰着AI应用。西安交通大学团队提出的Nullu方法，通过识别并消除模型内部的“幻觉子空间”，成功在不增加任何推理成本的前提下，显著提升了模型的真实性与可靠性，为AI的广泛部署铺平了道路。</p></blockquote>
+<p>在人工智能的快速演进中，大型视觉语言模型（LVLMs）无疑是其中最引人注目的突破之一。它们能够理解图像并生成相应的文本描述，为人类与数字世界的交互带来了前所未有的可能性。然而，伴随其惊人能力而来的，是Persistent的“幻觉”现象——模型有时会编造出图像中根本不存在的物体，这种“无中生有”的错误，不仅削弱了LVLMs的实用性，更对其可靠性和可信度构成了严重挑战。长久以来，研究人员一直在寻找既能抑制幻觉，又不牺牲模型性能或引入额外计算负担的解决方案。</p>
+<h3 id="理解幻觉大型视觉语言模型的固有缺陷">理解幻觉：大型视觉语言模型的固有缺陷</h3>
+<p>LVLMs的幻觉问题并非偶然，而是其架构深层固有偏见的产物。正如西安交通大学团队在其最新研究中揭示的，这种偏见主要源于模型所基于的<strong>大型语言模型（LLMs）过强的偏好先验知识</strong>。当视觉信息模糊或不足时，这些强大的语言先验往往会“脑补”出高频或模型偏好的概念，导致生成与实际图像不符的描述。例如，一个模型可能会在一张没有人的风景照中“看到”一个人，或者将特定形状误判为它在大量文本数据中频繁关联的物体。这种现象如同人类在模棱两可的图案中看到“人脸”一样，是模式识别系统过度拟合先验知识的表现。解决这一问题，需要深入到模型内部，直接修正其“认知”偏向，而非仅仅在输出端进行修补。</p>
+<h3 id="nullu的核心机制零空间投影的精妙之处">Nullu的核心机制：零空间投影的精妙之处</h3>
+<p>西安交通大学团队提出的Nullu方法，正是抓住了这一核心矛盾，提出了一种<strong>高效且“零开销”<strong>的解决方案<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。其创新之处在于，它并没有像许多现有方法那样依赖于额外的解码或后处理步骤，而是通过</strong>直接编辑模型权重</strong>来从根本上消除幻觉。Nullu的核心思想在于识别并利用“幻觉子空间”（HalluSpace）。</p>
+<p>该方法分为三个关键步骤：</p>
+<ol>
+<li>
+<p><strong>真实-幻觉数据对构建：</strong> 研究人员首先构建了特殊的“真实-幻觉”数据对。对于同一图像，他们生成两个文本描述：一个包含对图像中物体的准确描述（真实描述，GT），另一个则包含故意引入幻觉的描述（幻觉描述，HD）。例如，利用LURE数据集<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，通过替换GT中易引发幻觉的高频对象来创建HD。这种数据对清晰地定义了“正确”与“错误”之间的界限。</p>
+</li>
+<li>
+<p><strong>HalluSpace抽取：</strong> 接下来，Nullu在LVLM的语言模型部分（特别是MLP层特征空间）中，抽取幻觉子空间。通过对比真实描述与幻觉描述输入时模型内部嵌入特征的差异，研究人员使用<strong>主成分分析（SVD分解）<strong>来识别出这些差异向量中最显著的方向。这些方向集合，正是模型特征空间中导致幻觉描述产生的关键“偏差”方向，即HalluSpace。实验证实，这些差异向量在HalluSpace中的投影分量，比随机向量高出10倍以上，有力证明了</strong>幻觉子空间的存在性及其对幻觉信息的捕捉能力</strong>。</p>
+</li>
+<li>
+<p><strong>基于零空间投影的模型权重编辑：</strong> 一旦HalluSpace被识别，Nullu的创新之处便凸显出来。由于HalluSpace代表了导致幻觉的核心偏差，通过将<strong>模型权重正交化，并将其投影到HalluSpace的零空间</strong>，就可以有效地“抹去”模型内部与幻觉相关的潜在信息。这类似于将一个复杂向量分解成两个正交分量，然后舍弃掉与特定 undesired 方向相关的分量。这种对模型参数的直接、一次性修改，意味着在模型加载后，所有未来的推理都将自动受益于这种修正，而<strong>不引入任何额外计算开销</strong>。这与传统的、在推理阶段增加计算量的幻觉消除方法形成了鲜明对比，使得Nullu在实际部署中更具优势。</p>
+</li>
+</ol>
+<h3 id="超越技术零开销解决方案的深远意义">超越技术：零开销解决方案的深远意义</h3>
+<p>Nullu的“零开销”特性，不仅仅是技术上的一个亮点，更是其在AI产业生态中具有深远意义的关键所在。在大型模型部署的现实世界中，哪怕是微小的推理延迟或计算成本增加，都可能对用户体验和运营效率造成巨大影响。通过直接修改模型权重，Nullu避免了在每次推理时重新计算或调整输出，这使其成为一个<strong>极具商业价值和可扩展性的解决方案</strong>。它允许企业在不升级硬件、不增加云服务支出的前提下，显著提升其LVLM应用的可靠性。</p>
+<p>该研究在LLaVA-1.5、MiniGPT-4和mPLUG-Owl2等主流LVLMs上进行了广泛验证，并在CHAIR和POPE等幻觉评估数据集上取得了出色表现，同时在MME和LLaVA-Bench等通用性能测试中保持了良好水平<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着Nullu在提升模型真实性的同时，并未损害其理解和生成多样化内容的能力。</p>
+<p>此外，Nullu的理论分析也揭示了其与现有先进方法，如VCD（Visual Contrastive Decoding）和DPO（Direct Preference Optimization）之间的内在联系<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。论文通过对HalluSpace内部信息的解码，发现其包含了大量语言模型的偏好先验，这与VCD通过对比视觉和语言特征来抑制偏见有异曲同工之妙。而Nullu在权重更新方式上与DPO的潜在一致性，则进一步佐证了其在优化模型行为方面的有效性。这种深度分析不仅为Nullu的有效性提供了理论支撑，也为未来的AI模型对齐和偏好优化研究提供了新的视角。</p>
+<p>在一个越来越依赖AI系统的世界里，模型的可靠性是信任的基石。从自动驾驶到医疗诊断辅助，再到创意内容生成，LVLMs的“幻觉”能力是其广泛应用的一大障碍。Nullu提供了一种高效、实用且可部署的途径，有望使这些强大的AI工具变得更加值得信赖。它不仅仅是一个算法的进步，更是向构建更可靠、更透明、最终更符合人类预期的智能系统迈出的重要一步。随着AI技术日益渗透到社会肌理，这种从根本上解决模型“认知偏差”的方法，将为AI的伦理治理和安全部署提供坚实的技术支撑。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>零开销，消除图像幻觉，基于零空间投影挖掘正常样本特征 <a href="https://m.36kr.com/p/3354370974937736">https://m.36kr.com/p/3354370974937736</a>·36氪·编辑：LRST（2025/6/27）·检索日期2025/6/27&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大型视觉语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%89%A9%E4%BD%93%E5%B9%BB%E8%A7%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">物体幻觉</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/nullu/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Nullu</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9B%B6%E7%A9%BA%E9%97%B4%E6%8A%95%E5%BD%B1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">零空间投影</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/halluspace/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">HalluSpace</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E6%9D%83%E9%87%8D%E7%BC%96%E8%BE%91/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型权重编辑</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9B%B6%E5%BC%80%E9%94%80/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">零开销</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">可靠性AI</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
