@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="一项最新研究揭示了多模态推理模型在追求深度推理时，反而更容易产生“幻觉”的悖论。该研究指出，随着推理链条的加长，模型对视觉输入的关注度下降，转而过度依赖语言先验知识，导致生成内容与图像脱节。为解决此问题，研究团队提出了RH-AUC评估指标和RH-Bench数据集，以衡量模型在推理与感知间的平衡，并为未来模型的稳健性训练提供了宝贵启示。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250626081004120-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250626081004120-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力">
+  <meta property="og:description" content="一项最新研究揭示了多模态推理模型在追求深度推理时，反而更容易产生“幻觉”的悖论。该研究指出，随着推理链条的加长，模型对视觉输入的关注度下降，转而过度依赖语言先验知识，导致生成内容与图像脱节。为解决此问题，研究团队提出了RH-AUC评估指标和RH-Bench数据集，以衡量模型在推理与感知间的平衡，并为未来模型的稳健性训练提供了宝贵启示。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-26T08:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-26T08:10:04+08:00">
+    <meta property="article:tag" content="多模态AI">
+    <meta property="article:tag" content="人工智能幻觉">
+    <meta property="article:tag" content="推理能力">
+    <meta property="article:tag" content="视觉感知">
+    <meta property="article:tag" content="RH-AUC">
+    <meta property="article:tag" content="模型评估">
+
+  <meta itemprop="name" content="超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力">
+  <meta itemprop="description" content="一项最新研究揭示了多模态推理模型在追求深度推理时，反而更容易产生“幻觉”的悖论。该研究指出，随着推理链条的加长，模型对视觉输入的关注度下降，转而过度依赖语言先验知识，导致生成内容与图像脱节。为解决此问题，研究团队提出了RH-AUC评估指标和RH-Bench数据集，以衡量模型在推理与感知间的平衡，并为未来模型的稳健性训练提供了宝贵启示。">
+  <meta itemprop="datePublished" content="2025-06-26T08:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-26T08:10:04+08:00">
+  <meta itemprop="wordCount" content="33">
+  <meta itemprop="keywords" content="多模态AI,人工智能幻觉,推理能力,视觉感知,RH-AUC,模型评估,AI伦理,大模型训练">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力">
+  <meta name="twitter:description" content="一项最新研究揭示了多模态推理模型在追求深度推理时，反而更容易产生“幻觉”的悖论。该研究指出，随着推理链条的加长，模型对视觉输入的关注度下降，转而过度依赖语言先验知识，导致生成内容与图像脱节。为解决此问题，研究团队提出了RH-AUC评估指标和RH-Bench数据集，以衡量模型在推理与感知间的平衡，并为未来模型的稳健性训练提供了宝贵启示。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-06-Jun%2026,%202025_08-01-16-980.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-26 08:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>随着多模态大模型推理能力的增强，一个令人不安的“幻觉悖论”浮现：模型在“思考”得越深时，其对视觉现实的感知锚点反而越弱，导致内容偏离图像、凭空捏造。一项最新研究系统揭示了这一现象的内在机制，并提出了新的评估指标RH-AUC，旨在引导AI发展走向更平衡的“看清”与“想通”并存的智能范式。</p></blockquote>
+<p>在人工智能领域，多模态大模型的崛起正在重塑我们与数字世界的交互方式，它们不仅能理解语言，还能处理图像、声音等多种信息，并进行复杂的跨模态推理。特别是一类被称为R1系列的多模态推理模型，通过引入显式的长链推理机制，在解决复杂问题方面展现出前所未有的能力，突破了传统“快思考”范式的性能瓶颈。然而，近期由加州大学圣克鲁兹分校、圣塔芭芭拉分校和斯坦福大学研究团队发布的一项系统性分析，揭示了一个令人警醒的“幻觉悖论”：这类模型在推理链条加长的过程中，其视觉感知能力却呈现出下降趋势，生成内容有时会偏离图像本身，甚至出现“看见”不存在事物的幻觉现象。换言之，模型可能正在面临一个根本性的权衡取舍：<em>越“聪明”，越容易“看错”</em>。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="智能的代价推理与感知的两难">&ldquo;智能&quot;的代价：推理与感知的两难</h3>
+<p>这项研究的核心发现，直指当前多模态大模型发展中的一个深层矛盾：<strong>推理能力的提升，在一定程度上伴随着视觉对齐的弱化，呈现出“越推理越幻觉”的倾向。</strong> 这种“推理增强—感知削弱”的悖论，挑战了我们对AI能力提升的直观认知。我们通常认为，一个更强大的模型理应在各个维度都表现得更出色，但事实证明，至少在当前的架构下，情况并非如此。</p>
+<p>研究人员通过对比多个7B规模的多模态模型在推理与感知两类任务中的表现，清晰地观察到了这一趋势。例如，尽管R1-OneVision-7B等模型在推理准确率上具备一定优势，但其在感知任务中的准确率却降至最低，显著低于同规模的非推理模型（如Qwen2.5-VL-7B）。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 这表明，长链推理并非“无代价”的性能飞跃，而是以牺牲图像感知能力为代价，放大了模型生成幻觉的风险。在需要细致图像对齐能力的感知评测基准（如MMVP、MMHAL）中，R1类模型普遍低于同规模的Base模型，进一步印证了“推理链的增强不仅没有提升感知质量，反而加剧了模型‘脱图而答’的幻觉倾向”。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这种现象尤其体现在视觉问答任务中。当模型被要求对图像内容进行冗长而复杂的推理时，其生成的答案往往并未真正参考图像本身，而是转而依赖语言常识或先验知识进行“脑补”，从而捏造出听上去合理但图像中并不存在的信息。这种“过度依赖语言先验”的模式，使得模型即便面对明确依赖视觉证据的问题，也往往“凭语言猜”，最终生成与图像严重脱节的幻觉答案。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="剖析过度思考的机制">剖析“过度思考”的机制</h3>
+<p>为了深入理解多模态推理模型为何更容易产生幻觉，研究团队对模型内部的注意力分布进行了系统分析，揭示出一种结构性机制：<strong>推理增强并非免费午餐，它以牺牲视觉关注为代价换取语言推理能力的提升。</strong> 具体来说，相较于非推理模型，R1类推理模型在生成过程中显著减少了对<strong>视觉token</strong>的关注，取而代之的是将大量注意力分配给<strong>指令token</strong>与语言上下文。</p>
+<p>更为关键的是，这种“注意力迁移”并非固定偏差，而是随着推理链条的延展而逐层加剧。模型越往后层，越倾向于忽略图像输入，而完全依赖语言信号进行推理。在视觉聚焦任务中，非推理模型在多层均展现出对图中关键区域的稳定关注，而R1模型在同样问题下，其注意力热图呈现出明显的视觉退化，深层几乎完全失焦。这种结构性偏移使得模型即使面对明确依赖图像的问题，也往往“凭语言猜”，最终生成与图像严重脱节的幻觉答案。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>研究还发现，这一现象在模型进入“过度思考”（Overthinking）阶段时表现得尤为明显。随着推理链的延长，模型对视觉token的关注持续减弱，而对指令等语言token的注意力则显著增强，导致生成过程越来越依赖语言线索而非图像内容。这一发现令人深思：在人类认知中，深度思考通常意味着更全面、更细致的分析；而在AI模型中，过度的语言推理似乎反而可能导致对现实输入（视觉）的“视而不见”。</p>
+<h3 id="重塑评估范式rh-auc的启示">重塑评估范式：RH-AUC的启示</h3>
+<p>面对多模态模型中推理增强与幻觉放大的两难局面，研究团队提出了一项全新评估指标：<strong>RH-AUC（Reasoning-Hallucination Area Under Curve）</strong>。不同于传统指标只在单一推理长度上评估准确率或幻觉率，RH-AUC从整体视角出发，衡量模型在不同推理深度下“思考力”与“看清力”的动态平衡水平。简而言之，它旨在评估模型在提升推理能力的同时，能否保持对视觉现实的稳定感知。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>为了支持RH-AUC的评估，研究人员还构建了配套的诊断性基准集<strong>RH-Bench</strong>，其中包含1000个跨感知与推理的样本。通过在新基准上计算模型在不同推理长度下的reasoning accuracy与hallucination risk，然后计算两者构成曲线下的面积，RH-AUC能够提供一个更全面的指标：RH-AUC越高，说明模型在推理增强的同时，视觉对齐能力保持得越好——既能“想得深”，也能“看得清”。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>实验结果揭示出几个关键趋势，为未来的多模态模型训练提供了重要启示：</p>
+<ul>
+<li><strong>更大规模模型更具稳健性：</strong> 7B模型在不同思考深度下展现出更平滑的RH-AUC曲线和更高的峰值分数，这表明它们具备更强的推理–感知整合能力，能够更好地平衡两者。</li>
+<li><strong>RL-only 训练范式优于SFT+RL：</strong> 纯强化学习（RL-only）训练的模型平均RH-AUC均高于混合范式（SFT+RL），尤其在长推理链条件下差距显著。这暗示纯RL训练可能更倾向于自适应地生成高质量的推理路径，而SFT+RL则更容易陷入冗余模仿，从而干扰感知判断。</li>
+<li><strong>数据“类型”比规模更重要：</strong> 实验发现，与其盲目扩展训练集规模，不如引入少量具备<strong>领域感知特征</strong>的样本（如数学推理或图像感知任务），更有助于引导模型在“看图”与“思考”之间实现平衡。这强调了高质量、有针对性的数据在模型稳健性训练中的核心作用。<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p>这项研究无疑为多模态AI的未来发展敲响了警钟，也指明了方向。它强调，推理能力的提升并非越多越好，盲目追求推理深度可能会带来意想不到的“副作用”。真正的智能，或许在于如何在复杂的推理过程中，始终保持对真实世界视觉锚点的坚守。RH-AUC及其背后的理念，将促使研究人员重新思考多模态模型的训练目标：如何设计出既能“想得深”，又能“看得清”的AI系统，从而在追求更高层次智能的同时，确保其输出的真实性和可靠性，这不仅是一个技术挑战，更关乎AI的信任和可信度，是其走向更广泛社会应用的关键。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://mp.weixin.qq.com/s/QTW8gr1qPNqQzFlFjVi_FQ">推理越多，幻觉越重？多模态推理模型的“幻觉悖论”</a>·新智元·LRST（2025/06/25）·检索日期2025/06/26&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://news.qq.com/rain/a/20250625A076I400">推理越多，幻觉越重？多模态推理模型的“幻觉悖论”</a>·腾讯新闻·（2025/06/25）·检索日期2025/06/26&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">多模态AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B9%BB%E8%A7%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能幻觉</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理能力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">视觉感知</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/rh-auc/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">RH-AUC</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型评估</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型训练</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/gemini-25ai-20250618142004293-2/">谷歌Gemini 2.5：一场技术爆发，以及“濒死恐慌”背后的AI行为洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250626001004562-0/">AI智能体时代：重塑企业身份与访问管理，安全边界何在？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625211007550-2/">当数字人不再是“牌友”：百度AI电商野心与行业信任的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ucleverb-20250625171004494-0/">弥合“想”与“做”的鸿沟：UC伯克利LeVERB框架赋能人形机器人自主决策</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepmindgemini-20250625121004313-1/">谷歌DeepMind推出具身Gemini本地版：机器人自主时代的里程碑？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-robotics-on-device-20250625121004319-2/">谷歌的具身智能新策略：Gemini Robotics On-Device与“机器人安卓”生态的黎明</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatehr-20250625101004434-0/">对话病历：斯坦福ChatEHR如何重塑医疗数据交互与挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004518-2/">AI商业化：一场创新投入的持久战与伦理重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/harvey-ai50ai-20250624181004234-1/">Harvey AI估值飙升至50亿美元：法务AI如何重塑专业服务未来？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/comate-ai-ideai-20250624161004432-0/">百度Comate AI IDE：重塑软件工程工作流的“AI原生”范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624161004438-1/">超越模仿：智象未来如何通过多模态模型“触达物理世界”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/alphawriteai-20250624151004557-6/">AlphaWrite：进化算法如何迭代重塑AI叙事边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-o3-pro-20250624131004401-0/">OpenAI o3-pro：可靠性之诺与用户体验的现实鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/midjourneyai-20250624101004341-2/">好莱坞巨头吹响号角：迪士尼与环球影业起诉Midjourney，重塑AI版权格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/sealai-20250624061004196-0/">超越静态模型：麻省理工学院SEAL框架赋能AI自主学习新范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

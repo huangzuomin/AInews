@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic的Claude Code现已支持远程模型上下文协议（MCP）服务器，显著简化了AI与外部开发工具和资源的集成过程，无需本地服务器设置。这项更新通过流式HTTP和OAuth 2.0确保了连接的便捷与安全，被业界专家视为改变AI工具集成经济的关键进步，有望推动AI在复杂软件工程场景中实现更深层次的应用和协作。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/claude-codemcpai-20250625141004425-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/claude-codemcpai-20250625141004425-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流">
+  <meta property="og:description" content="Anthropic的Claude Code现已支持远程模型上下文协议（MCP）服务器，显著简化了AI与外部开发工具和资源的集成过程，无需本地服务器设置。这项更新通过流式HTTP和OAuth 2.0确保了连接的便捷与安全，被业界专家视为改变AI工具集成经济的关键进步，有望推动AI在复杂软件工程场景中实现更深层次的应用和协作。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-25T14:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-25T14:10:04+08:00">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="模型上下文协议">
+    <meta property="article:tag" content="MCP">
+    <meta property="article:tag" content="AI集成">
+    <meta property="article:tag" content="软件开发">
+
+  <meta itemprop="name" content="Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流">
+  <meta itemprop="description" content="Anthropic的Claude Code现已支持远程模型上下文协议（MCP）服务器，显著简化了AI与外部开发工具和资源的集成过程，无需本地服务器设置。这项更新通过流式HTTP和OAuth 2.0确保了连接的便捷与安全，被业界专家视为改变AI工具集成经济的关键进步，有望推动AI在复杂软件工程场景中实现更深层次的应用和协作。">
+  <meta itemprop="datePublished" content="2025-06-25T14:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-25T14:10:04+08:00">
+  <meta itemprop="wordCount" content="117">
+  <meta itemprop="keywords" content="Anthropic,Claude Code,模型上下文协议,MCP,AI集成,软件开发,AI Agents,大语言模型,OAuth 2.0,流式HTTP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流">
+  <meta name="twitter:description" content="Anthropic的Claude Code现已支持远程模型上下文协议（MCP）服务器，显著简化了AI与外部开发工具和资源的集成过程，无需本地服务器设置。这项更新通过流式HTTP和OAuth 2.0确保了连接的便捷与安全，被业界专家视为改变AI工具集成经济的关键进步，有望推动AI在复杂软件工程场景中实现更深层次的应用和协作。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%287%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-25 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>Anthropic通过为Claude Code引入远程模型上下文协议（MCP）服务器支持，显著简化了AI与现有开发工具的集成，使开发者无需本地配置即可安全地访问外部资源。这一升级不仅提升了便利性，更被业界视为可能改变AI工具集成经济、推动AI在复杂软件工程场景中更深层应用的关键一步。</p></blockquote>
+<p>近期，人工智能公司Anthropic为旗下代码生成和理解工具Claude Code带来了一项重要更新：对远程模型上下文协议（MCP）服务器的支持。这项功能允许开发人员在不进行传统本地服务器设置的情况下，直接将Claude Code与现有的外部工具和资源无缝集成，例如安全服务、项目管理系统和知识库等。此举旨在降低集成门槛，使AI模型能更轻松地从多样化的开发环境中获取上下文信息，进而提升其在实际工程场景中的实用性与效率。</p>
+<h3 id="技术原理解析与集成范式变革">技术原理解析与集成范式变革</h3>
+<p>长期以来，将大型语言模型（LLM）与复杂的外部系统连接一直是一项技术挑战。为了让AI模型能够访问实时数据或执行特定操作，通常需要开发者自行配置本地服务器作为模型与外部工具之间的“翻译层”。Anthropic此次推出的远程MCP服务器支持，正是为了解决这一痛点。它提供了一种_低维护成本_的替代方案，开发者只需将供应商提供的URL添加到Claude Code中，无需再手动管理服务器基础设施，如配置、更新和扩展等繁琐任务。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这项新功能的核心在于其对<strong>流式HTTP（streaming HTTP）<strong>和</strong>OAuth 2.0</strong>的内置支持。通过流式HTTP，Claude Code可以替代传统的stdio（标准输入/输出）方式，实现更高效、更灵活的数据传输，从而更好地与远程MCP服务器进行通信。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 同时，对OAuth 2.0的原生支持意味着开发者可以直接通过终端进行身份验证，例如将Claude Code连接到GitHub MCP服务器时，只需执行简单的命令：</p>
+<p><code>$ claude mcp add --transport sse github-server https://api.github.com/mcp</code></p>
+<p>该命令会触发一个交互式菜单，引导开发者通过浏览器完成OAuth认证，之后Claude Code会自动在本地存储访问令牌，确保连接的<strong>安全性</strong>和<strong>便捷性</strong>。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 这一改进，将开发者从底层服务器管理的负担中解放出来，使其能够更专注于利用AI解决实际的工程问题，无疑改变了AI工具与传统软件栈的集成范式。</p>
+<h3 id="成本效益与应用边界的再审视">成本效益与应用边界的再审视</h3>
+<p>尽管Reddit上一些开发者对这项更新的重要性持保守态度，认为其“远不能改变游戏规则”<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，但前Tripadvisor产品工程负责人、现任Fractional首席技术官的Robert Matsukoa却提供了更深远的洞察。他指出，这_“不仅仅是一个方便的升级”<em>，而是一个将</em>“改变AI工具集成经济”_的关键一步。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>Matsukoa认为，远程服务器显著消除了本地MCP部署所需的基础设施成本，团队不再需要为配置服务器、管理更新或处理MCP服务的扩展而投入资源。然而，他也审慎地指出，使用MCP服务器通常会因从外部资源中提取更大规模的上下文而增加约25-30%的运营成本。远程MCP的便捷性，反而可能因为更容易进行大规模上下文提取而放大这些成本。因此，关键在于_明智地选择何时使用_。<sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>Matsukoa强调，MCP的真正优势体现在那些需要_深度上下文集成_的场景：例如多存储库调试会话、需要历史上下文的遗留系统分析，或同时结合多个数据源的复杂工作流程。当Claude需要在工具交互之间维护状态或关联来自不同系统的信息时，该协议能发挥出卓越的性能。相反，对于基于CLI（命令行界面）和标准API的简单工作流程，他认为没有必要绕道MCP。<sup id="fnref2:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> 这一观点为开发者提供了重要的指导，帮助他们权衡便利性与实际需求，避免不必要的成本开销。</p>
+<h3 id="推动ai与传统软件的深度融合">推动AI与传统软件的深度融合</h3>
+<p>Anthropic此举的深远影响，在于它进一步<strong>模糊了AI与传统软件工程之间的界限</strong>。通过提供更流畅、更安全的远程集成方式，Claude Code能够更紧密地融入到现有的开发工具链和企业级系统中，使AI不仅是独立的工具，更是开发者日常工作流中不可或缺的智能协作伙伴。</p>
+<p>这为构建更<strong>自主化、上下文感知</strong>的AI Agent奠定了基础。随着AI模型能够轻松访问项目管理系统中的任务状态、安全服务中的漏洞信息或代码仓库中的历史变更记录，它们将能够执行更复杂、更智能的决策和操作，从而提高软件开发的效率和质量。Anthropic已经发布了一份与合作伙伴共同开发的官方MCP服务器列表<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>，而GitHub社区也维护着一个更广泛的集合<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>，预示着一个更加开放和互联的AI工具生态系统正在形成。</p>
+<p>在AI技术加速与各行各业深度融合的当下，Anthropic的远程MCP服务器支持，代表着大模型在企业级应用落地上迈出的关键一步。它不仅是技术上的精进，更是对未来软件开发模式的一次深刻思考：如何让AI以最自然、最高效的方式，成为人类工程师的延伸，共同应对日益复杂的数字挑战。</p>
+<h2 id="引文">引文</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.anthropic.com/news/claude-code-remote-mcp">Remote MCP support in Claude Code - Anthropic</a> · Anthropic （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.infoq.com/news/2025/06/anthropic-claude-remote-mcp/">Claude Code通过流式HTTP获得对远程MCP服务器的支持</a> · InfoQ · (无作者) （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.reddit.com/r/ClaudeAI/comments/1lecqrt/comment/myj0002/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">Reddit 讨论：comment/myj0002</a> · Reddit （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.reddit.com/r/ClaudeAI/comments/1lemtxx/claude_code_now_supports_remote_mcp_servers_no/">Reddit 讨论：Claude Code now supports remote MCP servers, no local server setup required</a> · Reddit （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://hyperdev.matsuoka.com/p/claude-code-remote-mcp">Claude Code Remote MCP - Hyperdev by Robert Matsukoa</a> · Hyperdev by Robert Matsukoa · Robert Matsukoa （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="http://anthropic.com/partners/mcp">MCP Server Partnerships - Anthropic</a> · Anthropic （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p><a href="https://github.com/jaw9c/awesome-remote-mcp-servers">GitHub: jaw9c/awesome-remote-mcp-servers</a> · GitHub （2025/6/25）· 检索日期2025/6/25&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/anthropic/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型上下文协议</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mcp/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MCP</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E9%9B%86%E6%88%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI集成</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件开发</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agents/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agents</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/oauth-2.0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">OAuth 2.0</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B5%81%E5%BC%8Fhttp/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">流式HTTP</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/anthropic-vscode-ai--20250623121004675-3/">代码协作者的范式重塑：Anthropic 如何通过 VSCode 深度集成重塑 AI 编程版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudiaai-20250624181004227-0/">Claudia：将AI编程从命令行带入直观桌面时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258952-7/">当AI开始“闹情绪”甚至“威胁”：理解大型模型的代理性错位与伦理挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044239-7/">当AI开始“闹情绪”甚至“威胁”：理解大型模型的代理性错位与伦理挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicaiai-20250618072004246-0/">Anthropic的可解释AI：解构大模型“黑箱”，重塑企业级AI策略的信任基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004532-4/">大模型“拖拽时代”开启：即时定制突破算力藩篱，AI民主化加速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004505-0/">摆脱“花瓶”困境：银河通用如何在具身智能的“无人区”中深耕实用价值</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004572-10/">智能顾问崛起：AI如何重塑高考志愿填报市场，挑战传统专家？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/comate-ai-ideai-20250624161004432-0/">百度Comate AI IDE：重塑软件工程工作流的“AI原生”范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004670-2/">AI情感迷思：当模型“躺平”与“求生”并存，我们该如何审视智能体的边界？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004658-0/">智能体的崛起：AI新纪元的品味与人机共舞</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258999-15/">构建数字社会：揭秘AI世界模型中的选举与共存实验</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258975-11/">软件编程的第三次浪潮：AI大神卡帕西定义“对话式编程”新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044285-15/">构建数字社会：揭秘AI世界模型中的选举与共存实验</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044261-11/">软件编程的第三次浪潮：AI大神卡帕西定义“对话式编程”新纪元</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
