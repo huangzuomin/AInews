@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越符号：新型大模型如何通过代码图谱重塑软件工程的未来 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="蚂蚁团队开源的Code Graph Model（CGM）首次使大模型能够直接理解代码图谱，无需复杂的Agent即可实现自动bug修复。该模型在SWE-Bench Lite上实现了44%的修复率，超越所有开源方案并媲美闭源模型，并通过其开源特性为软件工程自动化提供了更高效、可控和透明的路径。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250627171004412-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250627171004412-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越符号：新型大模型如何通过代码图谱重塑软件工程的未来">
+  <meta property="og:description" content="蚂蚁团队开源的Code Graph Model（CGM）首次使大模型能够直接理解代码图谱，无需复杂的Agent即可实现自动bug修复。该模型在SWE-Bench Lite上实现了44%的修复率，超越所有开源方案并媲美闭源模型，并通过其开源特性为软件工程自动化提供了更高效、可控和透明的路径。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-27T17:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-27T17:10:04+08:00">
+    <meta property="article:tag" content="Code Graph Model">
+    <meta property="article:tag" content="CGM">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="代码图谱">
+    <meta property="article:tag" content="自动修bug">
+    <meta property="article:tag" content="SWE-Bench">
+
+  <meta itemprop="name" content="超越符号：新型大模型如何通过代码图谱重塑软件工程的未来">
+  <meta itemprop="description" content="蚂蚁团队开源的Code Graph Model（CGM）首次使大模型能够直接理解代码图谱，无需复杂的Agent即可实现自动bug修复。该模型在SWE-Bench Lite上实现了44%的修复率，超越所有开源方案并媲美闭源模型，并通过其开源特性为软件工程自动化提供了更高效、可控和透明的路径。">
+  <meta itemprop="datePublished" content="2025-06-27T17:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-27T17:10:04+08:00">
+  <meta itemprop="wordCount" content="56">
+  <meta itemprop="keywords" content="Code Graph Model,CGM,大模型,代码图谱,自动修bug,SWE-Bench,开源模型,AI Agent,软件工程自动化,代码补全">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越符号：新型大模型如何通过代码图谱重塑软件工程的未来">
+  <meta name="twitter:description" content="蚂蚁团队开源的Code Graph Model（CGM）首次使大模型能够直接理解代码图谱，无需复杂的Agent即可实现自动bug修复。该模型在SWE-Bench Lite上实现了44%的修复率，超越所有开源方案并媲美闭源模型，并通过其开源特性为软件工程自动化提供了更高效、可控和透明的路径。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-06-Jun%2027,%202025_17-00-25-867.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-27 17:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">超越符号：新型大模型如何通过代码图谱重塑软件工程的未来</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>一项来自蚂蚁的突破性开源模型，Code Graph Model (CGM)，首次实现了大模型对代码图谱的直接理解，无需复杂的Agent协调，便能在SWE-Bench Lite上达到惊人的44%错误修复率，超越所有现有开源方案，并媲美顶尖闭源模型。这一创新范式不仅提升了AI在复杂软件工程任务中的表现，更通过其开源性质，为行业提供了可控、透明且高效的自动化新路径。</p></blockquote>
+<p>在人工智能浪潮席卷全球的当下，大型语言模型（LLMs）在代码生成领域的表现令人瞩目，尤其是在“写函数”这类结构化、小规模任务上，其准确率已能轻松突破90%。然而，真正的软件工程远非孤立的函数编写所能概括。修复复杂的bug、实现跨模块的功能增强，这些任务往往需要模型深入理解整个代码仓库的结构、依赖关系以及类继承体系，这正是当前AI编程面临的**“理解鸿沟”**。</p>
+<p>传统上，为了弥合这一鸿沟，行业主流方案多依赖于<strong>基于闭源模型的Agent</strong>。这些智能体通过模拟人类程序员的行为模式，如观察、调用工具、多轮交互等，尝试完成复杂的仓库级任务。它们固然能取得一定效果，但其固有的“黑盒”特性、不可控的行为路径、推理误差累积问题，以及对GPT-4、Claude等闭源API的强依赖，不仅阻碍了私有化部署和定制化开发，也带来了高昂的工程成本与效率瓶颈。与此同时，纯粹基于开源模型的解决方案，在此类复杂任务上往往难以企及顶尖水平，形成了一种性能与开放性之间的两难困境。</p>
+<h3 id="技术范式革新从文本到图谱的理解跃迁">技术范式革新：从文本到图谱的理解跃迁</h3>
+<p>正是在这一背景下，由蚂蚁团队提出并开源的<strong>Code Graph Model (CGM)</strong> 应运而生，它旨在彻底改变这一现状，首次在大模型中实现了对_代码图模态_的直接理解，且完全基于开源模型构建。CGM的核心创新在于其独特的**“图-语言”多模态建模方式**，它突破了传统LLM仅限于文本理解的局限，让AI像人类开发者一样，能够直观地“看到”并理解代码仓库中错综复杂的结构与依赖。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>CGM的设计灵感来源于视觉-语言模型（VLM），其架构深度融合了两种关键模态：</p>
+<ul>
+<li><strong>图模态（Graph Modality）</strong>：将整个代码仓库抽象为一张结构化图。图中的节点不再仅仅是简单的代码文本片段，而是包含函数、类、文件、包等7种不同类型的逻辑单元。节点之间的边则精妙地表示了调用、包含、继承等复杂的程序依赖关系。这种图结构为模型提供了对代码库宏观架构和微观关联的<strong>全局视角</strong>。</li>
+<li><strong>语言模态（Language Modality）</strong>：用户通过自然语言描述或代码提示，驱动模型执行任务，例如指明需要修复的bug描述或期望完成的功能增强。</li>
+</ul>
+<p>在模型内部，CGM巧妙地将这两种模态进行深度对齐。它并非简单地将图信息作为额外的上下文输入，而是通过一系列创新的结构融合方法，让LLM能够**“原生”地感知和利用代码的结构依赖关系**：</p>
+<p>首先，CGM使用小型编码器（如CodeT5+）对每个代码节点进行编码，将其压缩为单个**“节点token”<strong>，每个节点可包含至多512个token的文本块。随后，通过一个两层MLP适配器，将这些编码后的节点表征映射到LLM的输入嵌入空间中，这相当于将LLM的上下文窗口在原有基础上</strong>扩展了数百倍**，极大地增强了模型处理海量代码仓库上下文的能力。</p>
+<p>更具突破性的是，CGM引入了<strong>图感知注意力掩码（Graph-aware Attention Mask）</strong>。这项技术替代了LLM中传统的因果注意力机制，使得模型的注意力仅作用于图结构中相邻的节点之间。这与图神经网络（GNN）中的消息传递机制异曲同工，让LLM不再是盲目地处理平面文本，而是能直接感知和利用代码的拓扑结构信息，从而实现对项目逻辑和依赖的_深层理解_。</p>
+<p>为了训练模型有效捕捉代码图的语义和结构信息，团队采用了<strong>两阶段训练策略</strong>：</p>
+<ol>
+<li><strong>子图重构预训练（Subgraph Reconstruction Pre-training）</strong>：此阶段设计了“图生代码（Graph-to-Code）”任务。模型根据随机采样的子图（仅包含节点类型和连接关系，不含完整代码）来重建原始代码片段，以此学习图结构与代码语义的对应关系。</li>
+<li><strong>噪声增强微调（Noise-augmented Fine-tuning）</strong>：在第二阶段，CGM使用真实的GitHub问题-修复补丁数据进行微调。为增强模型鲁棒性，研究团队特意在提示中引入了10%的噪声输入，例如包含不相关文件或遗漏关键文件，使得模型即使在面对不完整或有干扰的实际输入时也能更好地泛化。</li>
+</ol>
+<h3 id="开源生态的曙光与工程效率的未来">开源生态的曙光与工程效率的未来</h3>
+<p>CGM的出现不仅是技术上的突破，更是对AI软件工程领域的一次<strong>生态重塑</strong>。与此前几乎所有SOTA级方案依赖闭源模型不同，CGM完全基于开源模型（如Qwen模型）构建，却能达到甚至超越闭源模型的性能水平。这意味着，企业和开发者将拥有一个<strong>灵活、透明、可控且安全</strong>的自动化方案，能够根据自身需求进行私有部署和深度定制，摆脱对外部黑盒API的依赖，极大地降低了安全和合规风险。</p>
+<p>在实际应用中，CGM构建了一个轻量级的<strong>无Agent Graph-RAG框架</strong>，显著提升了工作效率。它将人类程序员修复bug的工作流进行了精炼，从Agent方案中复杂的编排过程简化为仅需4个核心模块：</p>
+<ul>
+<li><strong>改写器（Rewriter）</strong>：解析问题描述，提取关键信息和相关文件。</li>
+<li><strong>检索器（Retriever）</strong>：通过语义和结构检索，从代码图中抽取最相关的连通子图。</li>
+<li><strong>重排器（Reranker）</strong>：对检索结果进行排序，选出最关键的文件用于后续生成。</li>
+<li><strong>生成器（Reader）</strong>：结合选定的子图和文本提示，最终生成修复代码补丁。</li>
+</ul>
+<p>这种简洁高效的流程，避免了Agent方案中行为路径不可控、推理误差累积等问题，实现了<strong>效率的直线提升</strong>。</p>
+<p>实验结果进一步验证了CGM的强大能力。在当前最具挑战性的<strong>SWE-bench Lite Leaderboard</strong>上，CGM以<strong>44.00%<strong>的解决率登顶开源权重榜单第一，显著优于此前最佳开源模型KGCompass 7.33% <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。在更严格的SWE-bench Verified数据集上，CGM的解决率提升至</strong>50.40%</strong>，相较于最佳开源基线提高了10.20% <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。其跨语言、跨项目处理大规模仓库级Bug修复任务的能力，以及在ComplexCodeEval和CrossCodeEval等代码补全任务上的卓越表现，都彰显了其强大的结构理解与泛化能力。更值得一提的是，CGM具备良好的通用性，可适配CodeLlama-7B和DeepSeek-Coder-7B等多种基座模型，并超越了传统的RAG方法 <sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<h3 id="ai驱动软件工程的深远影响与挑战">AI驱动软件工程的深远影响与挑战</h3>
+<p>CGM的发布，标志着AI辅助软件工程迈出了坚实的一步，从“辅助写代码”向“<strong>理解并修复整个项目</strong>”的更高层次迈进。其对代码图谱的直接理解能力，可能彻底改变软件开发的未来：</p>
+<p>首先，这将<strong>极大地提升软件开发效率和质量</strong>。想象一下，未来程序员不再需要花费大量时间去调试和修复那些散布在复杂代码库中的bug，而是可以专注于更高层次的系统设计、架构优化和创新功能开发。这将加速产品迭代周期，降低维护成本，并从根本上提升软件的可靠性。</p>
+<p>其次，CGM的开源特性，为整个<strong>AI软件工程生态的繁荣</strong>注入了新的活力。它为研究人员和开发者提供了一个强大的基础工具，促进了模型透明度，使得更深层次的研究、定制和审计成为可能。这将加速社区对AI在软件开发中伦理与安全问题的探索，例如如何确保自动生成的代码不会引入新的安全漏洞，以及如何对模型行为进行可解释性分析。</p>
+<p>然而，我们也要清醒地认识到，尽管CGM取得了显著进展，但44%或50%的bug修复率，距离完全自主的软件开发仍有距离。复杂的软件缺陷往往涉及深层次的业务逻辑、系统交互和人类意图，这仍是当前AI模型难以完全掌握的领域。此外，随着AI在软件开发中的作用日益增强，关于<strong>开发者角色演变、技能重塑</strong>的讨论也将愈发重要。未来的程序员可能更多地扮演“AI合作者”和“系统监督者”的角色，其核心竞争力将从编码能力转向问题定义、架构设计、AI协作与结果验证。</p>
+<p>总而言之，Code Graph Model不仅在技术上实现了AI对代码仓库“真正理解”的突破，更以其开源的姿态，为AI驱动的软件工程描绘了一幅更具效率、更可控、也更具想象力的未来图景。它提醒我们，AI并非简单地替代人类，而是在不断拓宽人类智能的边界，并与我们共同构建一个更智能、更高效的数字世界。</p>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>大模型首次直接理解代码图:不用Agent修bug,登顶SWE-Bench开源榜·量子位·明敏（2025/6/27）·检索日期2025/6/27&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/code-graph-model/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Code Graph Model</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/cgm/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">CGM</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BB%A3%E7%A0%81%E5%9B%BE%E8%B0%B1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">代码图谱</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%87%AA%E5%8A%A8%E4%BF%AEbug/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">自动修bug</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/swe-bench/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">SWE-Bench</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%87%AA%E5%8A%A8%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程自动化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">代码补全</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/kimiai-20250625171004517-3/">Kimi能否穿越“月之暗面”：AI创业浪潮中的战略迷思与重塑之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3ai-20250623181004301-0/">有道“子曰3”：低成本AI大模型如何重塑数学教育的公平版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258980-12/">智能体的崛起：张亚勤解码AI时代的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044268-12/">智能体的崛起：张亚勤解码AI时代的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250621001005227-1/">AI浪潮下的软件工程范式重塑：一场关乎效率、角色与未来的深刻变革</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimaxagent-20250620191004664-2/">百万上下文与超低成本：MiniMax如何重塑大模型训练的经济学与Agent应用图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250620141004447-1/">从工具到伙伴：AI Agent发展中的技术、商业与伦理深思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimaxai53-20250620092004466-0/">MiniMax的AI成本革命：53万美元如何塑造下一代智能体未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250619192004511-1/">押注AI智能体：中国科技巨头如何重塑互联网的“中场战事”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-agent-20250619122004776-3/">“AI张雪峰”上岗：高考志愿，一场AI Agent的深度实战演练</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250619122004759-1/">腾讯全面押注AI Agent：从对话到执行，微信与游戏构建深度生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax-m1ai-20250617202000424-10/">MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250617193006124-2/">字节跳动的AI Agent豪赌：重塑数字未来的关键战役</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617083004593-0/">中国AI赛道新动向：基础模型之“炼”与智能代理之“用”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai/">字节跳动豆包模型升级：AI竞赛从性能巅峰转向普惠实用</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
