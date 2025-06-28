@@ -67,9 +67,44 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # 阅读更多按钮文字
   read_more_copy = "阅读全文"
 
-# 关闭 Ananke 主题社交分享配置
+# Ananke 主题社交分享配置
 [params.ananke.social.share]
-  disable_share = true
+  disable_share = false
+  networks = ["twitter", "weibo", "weixin"]
+
+[params.ananke.social.networks]
+  [params.ananke.social.networks.twitter]
+    slug = "x-twitter"
+    icon = "x-twitter"
+    label = "X"
+    share = true
+    link = "https://twitter.com/intent/tweet/?text={text} - {summary}&url={url}"
+    [params.ananke.social.networks.twitter.particles]
+      text = "{title}"
+      summary = "{summary}"
+      url = "{url}"
+  
+  [params.ananke.social.networks.weibo]
+    slug = "weibo"
+    icon = "weibo"
+    label = "Weibo"
+    share = true
+    link = "http://service.weibo.com/share/share.php?title={title} - {summary}&url={url}"
+    [params.ananke.social.networks.weibo.particles]
+      title = "{title}"
+      summary = "{summary}"
+      url = "{url}"
+  
+  [params.ananke.social.networks.weixin]
+    slug = "weixin"
+    icon = "weixin"
+    label = "Weixin"
+    share = true
+    link = "javascript:void(0)"
+    onclick = "showWeixinQR"
+    [params.ananke.social.networks.weixin.particles]
+      title = "{title}"
+      url = "{url}"
 
 # 分页配置
 [pagination]

@@ -1,0 +1,63 @@
+{{/*
+ * 生成社交分享链接的函数
+ * 参数: context (页面上下文), setup (社交网络配置)
+ */}}
+{{- $context := .context -}}
+{{- $setup := .setup -}}
+{{- $title := $context.Title | string -}}
+{{- $url := $context.Permalink | urls.AbsLangURL | string -}}
+{{- $summary := $context.Summary | string -}}
+{{- $truncatedSummary := $summary -}}
+{{- if gt (len $summary) 100 -}}
+  {{- $truncatedSummary = substr $summary 0 100 | printf "%s..." -}}
+{{- end -}}
+
+{{- $shareUrl := "" -}}
+
+{{- if $setup.link -}}
+  {{/* 使用配置中的链接模板 */}}
+  {{- $shareUrl = $setup.link -}}
+  
+  {{/* 替换参数 */}}
+  {{- range $key, $value := $setup.particles -}}
+    {{- if eq $value "{url}" -}}
+      {{- $urlStr := printf "%s" $url -}}
+      {{- $escapedUrl := $urlStr | urlquery -}}
+      {{- $shareUrl = strings.Replace $shareUrl (fmt.Printf "{%s}" $key) $escapedUrl -1 -}}
+    {{- else if eq $value "{title}" -}}
+      {{- $titleStr := printf "%s" $title -}}
+      {{- $escapedTitle := $titleStr | urlquery -}}
+      {{- $shareUrl = strings.Replace $shareUrl (fmt.Printf "{%s}" $key) $escapedTitle -1 -}}
+    {{- else if eq $value "{summary}" -}}
+      {{- $summaryToUse := $summary -}}
+      {{- if eq $setup.slug "twitter" -}}
+        {{- $summaryToUse = $truncatedSummary -}}
+      {{- end -}}
+      {{- $summaryStr := printf "%s" $summaryToUse -}}
+      {{- $escapedSummary := $summaryStr | urlquery -}}
+      {{- $shareUrl = strings.Replace $shareUrl (fmt.Printf "{%s}" $key) $escapedSummary -1 -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{/* 直接替换模板中的占位符 */}}
+  {{- $urlStr := printf "%s" $url -}}
+  {{- $escapedUrl := $urlStr | urlquery -}}
+  {{- $shareUrl = strings.Replace $shareUrl "{url}" $escapedUrl -1 -}}
+  
+  {{- $titleStr := printf "%s" $title -}}
+  {{- $escapedTitle := $titleStr | urlquery -}}
+  {{- $shareUrl = strings.Replace $shareUrl "{title}" $escapedTitle -1 -}}
+  
+  {{- $summaryToUse := $summary -}}
+  {{- if eq $setup.slug "twitter" -}}
+    {{- $summaryToUse = $truncatedSummary -}}
+  {{- end -}}
+  {{- $summaryStr := printf "%s" $summaryToUse -}}
+  {{- $escapedSummary := $summaryStr | urlquery -}}
+  {{- $shareUrl = strings.Replace $shareUrl "{summary}" $escapedSummary -1 -}}
+{{- else -}}
+  {{/* 默认分享链接 */}}
+  {{- $shareUrl = $url -}}
+{{- end -}}
+
+{{- $shareUrl -}}

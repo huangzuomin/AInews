@@ -1,0 +1,15 @@
+{{/* 自定义样式文件 */}}
+{{/* 首先加载Ananke主题的核心样式 */}}
+{{ with partials.IncludeCached "func/style/GetMainCSS.html" . }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" >
+{{ end }}
+
+{{/* 加载独立的自定义CSS文件（不在custom_css参数中的） */}}
+<link rel="stylesheet" href="{{ "/css/social-share.css" | relURL }}">
+
+{{/* 支持用户自定义CSS（从hugo.toml的custom_css参数加载） */}}
+{{ range site.Params.custom_css }}
+  {{ with partials.IncludeCached "func/style/GetResource.html" . . }}{{ else }}
+    <link rel="stylesheet" href="{{ urls.RelURL (.) }}">
+  {{ end }}
+{{ end }}

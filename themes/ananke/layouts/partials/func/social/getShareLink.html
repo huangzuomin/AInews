@@ -1,9 +1,9 @@
 {{- $context := .context -}}
 {{- $setup := .setup -}}
 {{- $separator := "&" -}}
-{{- $title := $context.Title | transform.HTMLEscape -}}
-{{- $description := $context.Summary | transform.Plainify | transform.HTMLEscape -}}
-{{- $permalink := $context.Permalink | transform.HTMLEscape -}}
+{{- $title := ($context.Title | default "" | transform.HTMLEscape) -}}
+{{- $description := ($context.Summary | default "" | transform.Plainify | transform.HTMLEscape) -}}
+{{- $permalink := ($context.Permalink | default "" | transform.HTMLEscape) -}}
 {{- with $setup.separator -}}
   {{- $separator = . -}}
 {{- end -}}

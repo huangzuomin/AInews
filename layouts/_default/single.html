@@ -52,7 +52,7 @@
     <div class="nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
       {{- .Content -}}
       
-      {{- partial "social-share.html" . -}}
+      {{- partials.IncludeCached "social/share.html" . . -}}
 
       {{- partials.Include "tags.html" . -}}
       <div class="mt6 instapaper_ignoref">
