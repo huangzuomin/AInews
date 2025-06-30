@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>打破参数桎梏：一种仿生学模型如何重塑AI推理的未来 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Sapient Intelligence研发的HRM模型，通过模仿人脑的分层与多时间尺度处理机制，仅用2700万参数和1000个训练样本，便在复杂推理任务上显著超越了DeepSeek和Claude等大型语言模型。这项突破性研究不仅挑战了AI领域对模型规模的依赖，还通过近似梯度、深度监督和自适应计算时间等创新，为构建更高效、可解释且具图灵完备性的AI推理系统开辟了新路径。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250630201004540-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250630201004540-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="打破参数桎梏：一种仿生学模型如何重塑AI推理的未来">
+  <meta property="og:description" content="Sapient Intelligence研发的HRM模型，通过模仿人脑的分层与多时间尺度处理机制，仅用2700万参数和1000个训练样本，便在复杂推理任务上显著超越了DeepSeek和Claude等大型语言模型。这项突破性研究不仅挑战了AI领域对模型规模的依赖，还通过近似梯度、深度监督和自适应计算时间等创新，为构建更高效、可解释且具图灵完备性的AI推理系统开辟了新路径。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-30T20:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-30T20:10:04+08:00">
+    <meta property="article:tag" content="Hierarchical Reasoning Model">
+    <meta property="article:tag" content="HRM">
+    <meta property="article:tag" content="AI推理">
+    <meta property="article:tag" content="深度学习">
+    <meta property="article:tag" content="参数效率">
+    <meta property="article:tag" content="脑启发AI">
+
+  <meta itemprop="name" content="打破参数桎梏：一种仿生学模型如何重塑AI推理的未来">
+  <meta itemprop="description" content="Sapient Intelligence研发的HRM模型，通过模仿人脑的分层与多时间尺度处理机制，仅用2700万参数和1000个训练样本，便在复杂推理任务上显著超越了DeepSeek和Claude等大型语言模型。这项突破性研究不仅挑战了AI领域对模型规模的依赖，还通过近似梯度、深度监督和自适应计算时间等创新，为构建更高效、可解释且具图灵完备性的AI推理系统开辟了新路径。">
+  <meta itemprop="datePublished" content="2025-06-30T20:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-30T20:10:04+08:00">
+  <meta itemprop="wordCount" content="30">
+  <meta itemprop="keywords" content="Hierarchical Reasoning Model,HRM,AI推理,深度学习,参数效率,脑启发AI,AGI,循环神经网络,计算深度">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="打破参数桎梏：一种仿生学模型如何重塑AI推理的未来">
+  <meta name="twitter:description" content="Sapient Intelligence研发的HRM模型，通过模仿人脑的分层与多时间尺度处理机制，仅用2700万参数和1000个训练样本，便在复杂推理任务上显著超越了DeepSeek和Claude等大型语言模型。这项突破性研究不仅挑战了AI领域对模型规模的依赖，还通过近似梯度、深度监督和自适应计算时间等创新，为构建更高效、可解释且具图灵完备性的AI推理系统开辟了新路径。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%281%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-30 20:10</span>
+      </aside><style>
+   
+  .ananke-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+  }
+  .ananke-social-link {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+  }
+  .ananke-social-link .icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .ananke-social-link svg {
+    width: 100%;
+    height: 100%;
+  }
+
+   
+  .wechat-qr-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+  }
+  .wechat-qr-modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      position: relative;
+      max-width: 300px;
+      width: 90%;
+      color: #333;
+  }
+  .wechat-qr-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+  }
+  .wechat-qr-modal-close:hover {
+      color: #333;
+  }
+  #wechat-qr-code {
+      max-width: 200px;
+      height: auto;
+      margin-top: 10px;
+  }
+  </style>
+
+  <div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%89%93%E7%A0%B4%E5%8F%82%E6%95%B0%E6%A1%8E%E6%A2%8F%EF%BC%9A%E4%B8%80%E7%A7%8D%E4%BB%BF%E7%94%9F%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E6%8E%A8%E7%90%86%E7%9A%84%E6%9C%AA%E6%9D%A5%20-%20Sapient&amp;#43;Intelligence%E7%A0%94%E5%8F%91%E7%9A%84HRM%E6%A8%A1%E5%9E%8B%EF%BC%8C%E9%80%9A%E8%BF%87%E6%A8%A1%E4%BB%BF%E4%BA%BA%E8%84%91%E7%9A%84%E5%88%86%E5%B1%82%E4%B8%8E%E5%A4%9A%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%8C%E4%BB%85%E7%94%A82700%E4%B8%87%E5%8F%82%E6%95%B0%E5%92%8C1000%E4%B8%AA%E8%AE%AD%E7%BB%83%E6%A0%B7%E6%9C%AC%EF%BC%8C%E4%BE%BF%E5%9C%A8%E5%A4%8D%E6%9D%82%E6%8E%A8%E7%90%86%E4%BB%BB%E5%8A%A1%E4%B8%8A%E6%98%BE%E8%91%97%E8%B6%85%E8%B6%8A%E4%BA%86DeepSeek%E5%92%8CClaude%E7%AD%89%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E3%80%82%E8%BF%99%E9%A1%B9%E7%AA%81%E7%A0%B4%E6%80%A7%E7%A0%94%E7%A9%B6%E4%B8%8D%E4%BB%85%E6%8C%91%E6%88%98%E4%BA%86AI%E9%A2%86%E5%9F%9F%E5%AF%B9%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BE%9D%E8%B5%96%EF%BC%8C%E8%BF%98%E9%80%9A%E8%BF%87%E8%BF%91%E4%BC%BC%E6%A2%AF%E5%BA%A6%E3%80%81%E6%B7%B1%E5%BA%A6%E7%9B%91%E7%9D%A3%E5%92%8C%E8%87%AA%E9%80%82%E5%BA%94%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E7%AD%89%E5%88%9B%E6%96%B0%EF%BC%8C%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E9%AB%98%E6%95%88%E3%80%81%E5%8F%AF%E8%A7%A3%E9%87%8A%E4%B8%94%E5%85%B7%E5%9B%BE%E7%81%B5%E5%AE%8C%E5%A4%87%E6%80%A7%E7%9A%84AI%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E8%BE%9F%E4%BA%86%E6%96%B0%E8%B7%AF%E5%BE%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630201004540-0%2F"
+        class="ananke-social-link x-twitter no-underline"
+        title="Share on X" aria-label="Share on X"
+        target="_blank" rel="nofollow noopener noreferrer">
+        <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%89%93%E7%A0%B4%E5%8F%82%E6%95%B0%E6%A1%8E%E6%A2%8F%EF%BC%9A%E4%B8%80%E7%A7%8D%E4%BB%BF%E7%94%9F%E5%AD%A6%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E6%8E%A8%E7%90%86%E7%9A%84%E6%9C%AA%E6%9D%A5%20-%20Sapient&amp;#43;Intelligence%E7%A0%94%E5%8F%91%E7%9A%84HRM%E6%A8%A1%E5%9E%8B%EF%BC%8C%E9%80%9A%E8%BF%87%E6%A8%A1%E4%BB%BF%E4%BA%BA%E8%84%91%E7%9A%84%E5%88%86%E5%B1%82%E4%B8%8E%E5%A4%9A%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%8C%E4%BB%85%E7%94%A82700%E4%B8%87%E5%8F%82%E6%95%B0%E5%92%8C1000%E4%B8%AA%E8%AE%AD%E7%BB%83%E6%A0%B7%E6%9C%AC%EF%BC%8C%E4%BE%BF%E5%9C%A8%E5%A4%8D%E6%9D%82%E6%8E%A8%E7%90%86%E4%BB%BB%E5%8A%A1%E4%B8%8A%E6%98%BE%E8%91%97%E8%B6%85%E8%B6%8A%E4%BA%86DeepSeek%E5%92%8CClaude%E7%AD%89%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E3%80%82%E8%BF%99%E9%A1%B9%E7%AA%81%E7%A0%B4%E6%80%A7%E7%A0%94%E7%A9%B6%E4%B8%8D%E4%BB%85%E6%8C%91%E6%88%98%E4%BA%86AI%E9%A2%86%E5%9F%9F%E5%AF%B9%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BE%9D%E8%B5%96%EF%BC%8C%E8%BF%98%E9%80%9A%E8%BF%87%E8%BF%91%E4%BC%BC%E6%A2%AF%E5%BA%A6%E3%80%81%E6%B7%B1%E5%BA%A6%E7%9B%91%E7%9D%A3%E5%92%8C%E8%87%AA%E9%80%82%E5%BA%94%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E7%AD%89%E5%88%9B%E6%96%B0%EF%BC%8C%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E9%AB%98%E6%95%88%E3%80%81%E5%8F%AF%E8%A7%A3%E9%87%8A%E4%B8%94%E5%85%B7%E5%9B%BE%E7%81%B5%E5%AE%8C%E5%A4%87%E6%80%A7%E7%9A%84AI%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E8%BE%9F%E4%BA%86%E6%96%B0%E8%B7%AF%E5%BE%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630201004540-0%2F"
+        class="ananke-social-link weibo no-underline"
+        title="Share on Weibo" aria-label="Share on Weibo"
+        target="_blank" rel="nofollow noopener noreferrer">
+        <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+              </span></a><a href="#ZgotmplZ"
+        class="ananke-social-link weixin no-underline"
+        title="Share on Weixin" aria-label="Share on Weixin"
+        target="_blank" rel="nofollow noopener noreferrer">
+        <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+              </span></a>
+    <a href="javascript:void(0);" id="wechat-share-btn" class="ananke-social-link wechat no-underline" title="分享到微信" aria-label="分享到微信">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 14.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h1c.28 0 .5.22.5.5s-.22.5-.5.5zm-3 0c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h1c.28 0 .5.22.5.5s-.22.5-.5.5zm-9-4c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h1c.28 0 .5.22.5.5s-.22.5-.5.5zm3 0c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h1c.28 0 .5.22.5.5s-.22.5-.5.5zm-6.5 8.5c-2.53 0-4.61-1.92-4.94-4.36c-.04-.3.18-.57.48-.57c.25 0 .46.18.5.42c.28 1.88 1.85 3.31 3.82 3.31c.45 0 .88-.07 1.29-.2c.22-.07.46.02.58.22l.62.9c.15.22.1.5-.1.65c-.5.38-1.07.66-1.68.81c-.04.01-.07.02-.11.02m13.5-9.5c-3.63 0-6.68 2.56-7.33 5.89c-.06.28.15.54.43.54c.23 0 .43-.16.48-.39c.5-2.72 2.98-4.84 5.8-4.84c1.45 0 2.78.48 3.82 1.28c.18.14.45.1.57-.1l.73-.93c.16-.2.14-.5-.05-.66c-1.23-.98-2.8-1.59-4.55-1.59M6.11 20.11c.18.16.45.15.61-.02l.73-.8c.16-.17.14-.45-.04-.6c-.93-.8-1.5-1.9-1.5-3.09c0-2.48 2.02-4.5 4.5-4.5s4.5 2.02 4.5 4.5c0 .3-.02.6-.07.88c-.06.28.15.54.43.54c.24 0 .45-.17.5-.4c.06-.3.1-.6.1-.92c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 1.48.58 2.82 1.54 3.82z"/></svg>
+      </span>
+    </a>
+  </div>
+
+  
+  <div id="wechat-qr-modal" class="wechat-qr-modal">
+      <div class="wechat-qr-modal-content">
+          <span class="wechat-qr-modal-close" id="wechat-qr-modal-close">&times;</span>
+          <p>请使用微信“扫一扫”分享</p>
+          <p>在手机微信浏览器中，请点击右上角“...”菜单，选择“分享到朋友圈”或“发送给朋友”</p>
+          <img id="wechat-qr-code" src="" alt="WeChat QR Code" />
+      </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var wechatBtn = document.getElementById('wechat-share-btn');
+      var modal = document.getElementById('wechat-qr-modal');
+      var closeBtn = document.getElementById('wechat-qr-modal-close');
+      var qrCodeImg = document.getElementById('wechat-qr-code');
+
+      if (wechatBtn && modal && closeBtn && qrCodeImg) {
+          wechatBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              var pageUrl = "http:\/\/192.168.50.247:1313\/insights\/article-20250630201004540-0\/";
+              qrCodeImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(pageUrl);
+              modal.style.display = 'flex';
+          });
+
+          closeBtn.addEventListener('click', function() {
+              modal.style.display = 'none';
+          });
+
+          window.addEventListener('click', function(event) {
+              if (event.target == modal) {
+                  modal.style.display = 'none';
+              }
+          });
+      }
+  });
+  </script><h1 class="f1 athelas mt3 mb1">打破参数桎梏：一种仿生学模型如何重塑AI推理的未来</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>一项基于人脑分层处理机制的新型循环神经网络——分层推理模型（HRM），以其惊人的参数效率（仅2700万参数）和极低的训练数据需求，在复杂推理任务上超越了DeepSeek和Claude等大型语言模型。这不仅挑战了当前AI领域对模型规模的迷信，更指向了一条通往通用人工智能（AGI）的，可能更为高效且可解释的路径。</p></blockquote>
+<p>长期以来，人工智能领域的主流叙事被“更大即更好”的理念所主导。大型语言模型（LLM）的参数量已突破万亿级别，它们在处理复杂任务时，往往依赖于思维链（CoT）等技术来模拟人类的逐步推理。然而，这种策略面临着固有挑战：任务分解的复杂性、对海量高质量数据的需求，以及伴随而来的高延迟和巨大的计算成本。这些问题不仅限制了LLM的部署和可及性，也使得我们不得不反思：AI推理的未来，是否真的只能是一场无休止的“军备竞赛”？</p>
+<p>近日，由Sapient Intelligence的研究人员提出的一种名为**分层推理模型（Hierarchical Reasoning Model, HRM）**的全新架构，正试图提供一个截然不同的答案。该模型以其惊人的参数效率和卓越的推理能力，在多个基准测试中超越了DeepSeek和Claude等行业领先的模型，这无疑为我们理解和构建智能提供了一个全新的视角。</p>
+<h3 id="技术原理解析">技术原理解析</h3>
+<p>HRM的核心创新，源于对人脑结构和运作机制的深刻洞察。它借鉴了大脑分层处理和多时间尺度协同工作的原理，构建了一个独特的循环架构。具体而言，HRM通过两个相互依赖的循环模块在单次前向传递中执行顺序推理任务，而无需对中间过程进行明确的监督。其中，一个<strong>高级模块</strong>负责缓慢、抽象的规划，而另一个<strong>低级模块</strong>则专注于处理快速、细致的计算。这种设计使得HRM能够高效地实现极高的计算深度，有效克服了传统Transformer模型在深度扩展时面临的饱和和性能瓶颈。研究人员通过实验证明，在需要大量树搜索和回溯的复杂数独任务上，增加Transformer的宽度并不能带来性能提升，而增加深度则至关重要，HRM恰好解决了这一根本限制。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>HRM的模型结构由四个可学习组件构成：输入网络、低级循环模块、高级循环模块和输出网络。这种模块化的设计，结合了大脑皮层区域多级层次结构以及神经活动具有不同内在时间节律的特性。高级脑区（如前额叶）在更长的时间尺度上整合信息并形成抽象表示，指导低级脑区（如感觉皮层）的快速计算过程，这与HRM中高级模块指导低级模块的协作模式如出一辙。此外，大脑中普遍存在的密集循环神经网络连接也为HRM的设计提供了灵感，这种反馈回路通过迭代优化提升了表示精确度和上下文适应性，并且能够有效规避传统反向传播时间算法（BPTT）中存在的深层信用分配难题。</p>
+<p>为了进一步优化，HRM引入了多项关键技术。首先是<strong>近似梯度</strong>计算，它通过使用每个模块最后状态的梯度，并将其他状态视为常数，实现了 <code>O(1)</code> 的内存消耗，避免了BPTT随时间步长线性增长的内存问题。其次，<strong>深度监督</strong>机制被融入HRM，允许模型在训练过程中从多次前向传递的中间段落中获取反馈。最引人注目的是**自适应计算时间（Adaptive Computation Time, ACT）**策略，它受大脑在自动化思维（System 1）与审慎推理（System 2）之间动态切换的启发，使HRM能够根据任务复杂性自适应地调整计算资源，从而显著节省计算成本，同时最大程度地降低对性能的影响。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="性能突破与潜在影响">性能突破与潜在影响</h3>
+<p>HRM的实验结果令人瞩目。该模型仅包含<strong>2700万个参数</strong>，并且<strong>仅使用1000个训练样本</strong>，便在复杂的推理任务上取得了卓越的性能。在抽象与推理语料库（ARC-AGI）、复杂数独谜题（Sudoku-Extreme）和大型迷宫最优路径查找（Maze-Hard）等挑战性任务上，HRM取得了近乎完美的性能，而无需预训练或思维链（CoT）数据。这与那些拥有数百亿甚至万亿参数，并严重依赖CoT技术的现有大语言模型形成了鲜明对比。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 在ARC基准测试中，HRM的表现甚至超越了上下文窗口明显更长的大型模型，而ARC是衡量通用人工智能能力的关键基准。</p>
+<p>这项突破的意义远不止于账面上的数字。它引出了一个耐人寻味的问题：HRM神经网络究竟实现了哪些底层推理算法？研究人员通过可视化其推理过程，揭示了模型惊人的灵活性。在迷宫任务中，HRM似乎能同时探索多条潜在路径，随后排除阻塞或低效路径，并进行多次优化迭代。在数独任务中，其策略类似于深度优先搜索方法，模型会探索潜在解决方案，并在遇到死胡同时回溯。而对于ARC任务，HRM则采用了渐进式调整和迭代改进的方法，更类似于爬山优化。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这种对不同任务自适应选择推理策略的能力，显示出其强大的通用性和可解释性潜力，远超当前LLM黑箱式的CoT推理。</p>
+<p>从更宏观的视角来看，HRM展现出<strong>图灵完备性</strong>，这意味着在给定足够的内存和时间约束下，它具有计算通用性，能够模拟任何图灵机。结合其自适应计算能力，HRM可以在长推理过程中进行训练，解决需要密集深度优先搜索和回溯的复杂难题，从而更接近实用的图灵完备性。这一点对于未来AI Agents和自主系统的发展至关重要，因为它意味着更强的泛化能力和问题解决能力。</p>
+<p>此外，HRM的训练范式也与当前主流方法形成对比。它从基于梯度的密集监督中获取反馈，而不是依赖于稀疏的强化学习奖励信号。近年来，强化学习在解锁CoT能力方面发挥了作用，但其不稳定性、数据效率低下以及对精心奖励设计的依赖一直是其痛点。HRM在连续空间中自然运行，避免了为每个token分配相同计算资源所导致的低效，这在生物学上也更为合理。</p>
+<p>HRM的出现，无疑是对当前AI发展路径的一次有力挑战。它不仅证明了在推理能力上，模型规模并非唯一的决定因素，更重要的是，它指明了一条通往更高效、更节能、更可解释且更接近生物智能的AI发展道路。虽然仍需进一步研究以更全面地了解其解题策略和更广泛的适用性，但HRM已然预示着通用计算变革性进步的潜力，可能重塑我们对未来AI的预期和构建方式。它让我们看到，模仿自然智能的优雅与效率，或许才是通往真正通用人工智能的关键。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>只用2700万参数，这个推理模型超越了DeepSeek和Claude·36氪·编辑：泽南、陈陈（2025/6/30）·检索日期2025/6/30&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>只用2700万参数，这个推理模型超越了DeepSeek和Claude·新浪财经·（2025/6/30）·检索日期2025/6/30&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/hierarchical-reasoning-model/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Hierarchical Reasoning Model</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/hrm/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">HRM</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">深度学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8F%82%E6%95%B0%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">参数效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%84%91%E5%90%AF%E5%8F%91ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">脑启发AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/agi/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AGI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">循环神经网络</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A1%E7%AE%97%E6%B7%B1%E5%BA%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">计算深度</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/aiopenaiagi-20250630171004471-1/">硅谷AI人才战升级：OpenAI的紧急反击与AGI愿景的再聚焦</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630161004940-3/">自主编程的里程碑：谷歌AI如何重新定义软件优化与人类智能的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiagi130-20250630131004263-0/">OpenAI“幽灵手稿”引爆AGI定义之战：微软130亿投资的“达摩克利斯之剑”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen-vlo-20250628181008678-0/">Qwen VLo：阿里如何重塑图像生成与编辑的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5agi-20250627181004749-1/">GPT-5浮现：多模态前沿与AGI安全监管的竞速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaaiopenai-20250627151004879-4/">Meta掀起AI人才争夺战：天价挖角OpenAI，豪掷千亿押注“超级智能”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ctaigrape-20250626091004634-3/">平扫CT开启胃癌早筛新纪元：达摩院AI模型GRAPE如何重塑公共卫生格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagi-20250625181004400-0/">全球AI人才的“权力游戏”：中美巨头在AGI竞赛中的战略分化与深层动因</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agi-20250624101004347-3/">预警：AGI浪潮将至，全球经济体系何去何从？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258987-13/">人工智能：信仰、预言与人类的未来主线任务</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044273-13/">人工智能：信仰、预言与人类的未来主线任务</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250621181004290-0/">大型语言模型的幻象：苹果争议揭示通用智能之路的挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ring-liteai-20250621171702985-0/">稀疏激活的力量：蚂蚁Ring-lite如何重塑轻量级AI推理的格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250620211005673-1/">巨头竞逐超智能：Meta的“买投挖”战略与AI人才战的白热化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250620141004447-1/">从工具到伙伴：AI Agent发展中的技术、商业与伦理深思</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
