@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="阿里巴巴正从提供代码补全的AI辅助工具（Copilot）向具备自主规划和执行复杂软件开发任务的通用AI智能体（Agent）转型。这一转变有望将研发效率提升十倍，通过Aone Agent实现从需求分析到代码生成、调试和测试的全生命周期自动化。然而，这项技术飞跃面临着严峻的挑战，包括模型可靠性、记忆管理、工具集成、评估难题，以及更为关键的伦理困境，如安全、隐私和责任归属问题，这些都亟待行业和社会共同应对。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250630171004503-6/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250630171004503-6/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战">
+  <meta property="og:description" content="阿里巴巴正从提供代码补全的AI辅助工具（Copilot）向具备自主规划和执行复杂软件开发任务的通用AI智能体（Agent）转型。这一转变有望将研发效率提升十倍，通过Aone Agent实现从需求分析到代码生成、调试和测试的全生命周期自动化。然而，这项技术飞跃面临着严峻的挑战，包括模型可靠性、记忆管理、工具集成、评估难题，以及更为关键的伦理困境，如安全、隐私和责任归属问题，这些都亟待行业和社会共同应对。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-06-30T17:10:04+08:00">
+    <meta property="article:modified_time" content="2025-06-30T17:10:04+08:00">
+    <meta property="article:tag" content="AI编码">
+    <meta property="article:tag" content="智能体">
+    <meta property="article:tag" content="软件工程">
+    <meta property="article:tag" content="阿里巴巴">
+    <meta property="article:tag" content="代码生成">
+    <meta property="article:tag" content="AI伦理">
+
+  <meta itemprop="name" content="从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战">
+  <meta itemprop="description" content="阿里巴巴正从提供代码补全的AI辅助工具（Copilot）向具备自主规划和执行复杂软件开发任务的通用AI智能体（Agent）转型。这一转变有望将研发效率提升十倍，通过Aone Agent实现从需求分析到代码生成、调试和测试的全生命周期自动化。然而，这项技术飞跃面临着严峻的挑战，包括模型可靠性、记忆管理、工具集成、评估难题，以及更为关键的伦理困境，如安全、隐私和责任归属问题，这些都亟待行业和社会共同应对。">
+  <meta itemprop="datePublished" content="2025-06-30T17:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-06-30T17:10:04+08:00">
+  <meta itemprop="wordCount" content="74">
+  <meta itemprop="keywords" content="AI编码,智能体,软件工程,阿里巴巴,代码生成,AI伦理,技术挑战,研发效率">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战">
+  <meta name="twitter:description" content="阿里巴巴正从提供代码补全的AI辅助工具（Copilot）向具备自主规划和执行复杂软件开发任务的通用AI智能体（Agent）转型。这一转变有望将研发效率提升十倍，通过Aone Agent实现从需求分析到代码生成、调试和测试的全生命周期自动化。然而，这项技术飞跃面临着严峻的挑战，包括模型可靠性、记忆管理、工具集成、评估难题，以及更为关键的伦理困境，如安全、隐私和责任归属问题，这些都亟待行业和社会共同应对。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('https://static001.geekbang.org/wechat/images/e3/e33fde0e7a8c733f155651de3eeafa35.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-06-30 17:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A0%81%E5%88%B0%E8%87%AA%E4%B8%BB%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%9A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9C%A8AI%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%9E%8B%E4%B8%AD%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%8C%91%E6%88%98%20-%20%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%AD%A3%E4%BB%8E%E6%8F%90%E4%BE%9B%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%E7%9A%84AI%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%EF%BC%88Copilot%EF%BC%89%E5%90%91%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E8%A7%84%E5%88%92%E5%92%8C%E6%89%A7%E8%A1%8C%E5%A4%8D%E6%9D%82%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%80%9A%E7%94%A8AI%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%88Agent%EF%BC%89%E8%BD%AC%E5%9E%8B%E3%80%82%E8%BF%99%E4%B8%80%E8%BD%AC%E5%8F%98%E6%9C%89%E6%9C%9B%E5%B0%86%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E5%8D%81%E5%80%8D%EF%BC%8C%E9%80%9A%E8%BF%87Aone&amp;#43;Agent%E5%AE%9E%E7%8E%B0%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E3%80%81%E8%B0%83%E8%AF%95%E5%92%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%85%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%87%AA%E5%8A%A8%E5%8C%96%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E8%BF%99%E9%A1%B9%E6%8A%80%E6%9C%AF%E9%A3%9E%E8%B7%83%E9%9D%A2%E4%B8%B4%E7%9D%80%E4%B8%A5%E5%B3%BB%E7%9A%84%E6%8C%91%E6%88%98%EF%BC%8C%E5%8C%85%E6%8B%AC%E6%A8%A1%E5%9E%8B%E5%8F%AF%E9%9D%A0%E6%80%A7%E3%80%81%E8%AE%B0%E5%BF%86%E7%AE%A1%E7%90%86%E3%80%81%E5%B7%A5%E5%85%B7%E9%9B%86%E6%88%90%E3%80%81%E8%AF%84%E4%BC%B0%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%9B%B4%E4%B8%BA%E5%85%B3%E9%94%AE%E7%9A%84%E4%BC%A6%E7%90%86%E5%9B%B0%E5%A2%83%EF%BC%8C%E5%A6%82%E5%AE%89%E5%85%A8%E3%80%81%E9%9A%90%E7%A7%81%E5%92%8C%E8%B4%A3%E4%BB%BB%E5%BD%92%E5%B1%9E%E9%97%AE%E9%A2%98%EF%BC%8C%E8%BF%99%E4%BA%9B%E9%83%BD%E4%BA%9F%E5%BE%85%E8%A1%8C%E4%B8%9A%E5%92%8C%E7%A4%BE%E4%BC%9A%E5%85%B1%E5%90%8C%E5%BA%94%E5%AF%B9%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630171004503-6%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A0%81%E5%88%B0%E8%87%AA%E4%B8%BB%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%9A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9C%A8AI%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%9E%8B%E4%B8%AD%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%8C%91%E6%88%98%20-%20%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%AD%A3%E4%BB%8E%E6%8F%90%E4%BE%9B%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%E7%9A%84AI%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%EF%BC%88Copilot%EF%BC%89%E5%90%91%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E8%A7%84%E5%88%92%E5%92%8C%E6%89%A7%E8%A1%8C%E5%A4%8D%E6%9D%82%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%80%9A%E7%94%A8AI%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%88Agent%EF%BC%89%E8%BD%AC%E5%9E%8B%E3%80%82%E8%BF%99%E4%B8%80%E8%BD%AC%E5%8F%98%E6%9C%89%E6%9C%9B%E5%B0%86%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E5%8D%81%E5%80%8D%EF%BC%8C%E9%80%9A%E8%BF%87Aone&amp;#43;Agent%E5%AE%9E%E7%8E%B0%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E3%80%81%E8%B0%83%E8%AF%95%E5%92%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%85%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%87%AA%E5%8A%A8%E5%8C%96%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E8%BF%99%E9%A1%B9%E6%8A%80%E6%9C%AF%E9%A3%9E%E8%B7%83%E9%9D%A2%E4%B8%B4%E7%9D%80%E4%B8%A5%E5%B3%BB%E7%9A%84%E6%8C%91%E6%88%98%EF%BC%8C%E5%8C%85%E6%8B%AC%E6%A8%A1%E5%9E%8B%E5%8F%AF%E9%9D%A0%E6%80%A7%E3%80%81%E8%AE%B0%E5%BF%86%E7%AE%A1%E7%90%86%E3%80%81%E5%B7%A5%E5%85%B7%E9%9B%86%E6%88%90%E3%80%81%E8%AF%84%E4%BC%B0%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%9B%B4%E4%B8%BA%E5%85%B3%E9%94%AE%E7%9A%84%E4%BC%A6%E7%90%86%E5%9B%B0%E5%A2%83%EF%BC%8C%E5%A6%82%E5%AE%89%E5%85%A8%E3%80%81%E9%9A%90%E7%A7%81%E5%92%8C%E8%B4%A3%E4%BB%BB%E5%BD%92%E5%B1%9E%E9%97%AE%E9%A2%98%EF%BC%8C%E8%BF%99%E4%BA%9B%E9%83%BD%E4%BA%9F%E5%BE%85%E8%A1%8C%E4%B8%9A%E5%92%8C%E7%A4%BE%E4%BC%9A%E5%85%B1%E5%90%8C%E5%BA%94%E5%AF%B9%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630171004503-6%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>阿里巴巴从基于Copilot的代码辅助工具转向更通用的AI智能体，旨在通过自主化能力实现研发效率的指数级提升。这一范式转变虽前景广阔，但面临着复杂的模型可靠性、工程集成、伦理安全及责任归属等深层技术与社会挑战，其成功将重塑软件开发的未来。</p></blockquote>
+<p>在数字化的浪潮中，人工智能正以前所未有的速度渗透到传统行业的核心流程，而软件开发领域，作为数字世界的基石，尤受AI影响。从最初的代码补全工具，到如今能够自主规划、执行复杂任务的“智能体”（Agents），AI正在重塑我们对软件工程的认知。阿里巴巴，作为全球领先的科技巨头，其在AI编码（AI Coding）领域的探索，无疑是这一宏大变革的缩影，不仅揭示了技术演进的潜力，也暴露了其所面临的深层挑战。</p>
+<h3 id="从代码补全到智能体阿里巴巴的探索之路">从代码补全到智能体：阿里巴巴的探索之路</h3>
+<p>阿里巴巴在智能研发工具领域的探索起步较早，自2023年3月起便开始布局，至今已逾两年。最初的重心主要落在<strong>编程场景</strong>的优化，例如提供类似Copilot的<strong>代码补全</strong>功能（包括传统补全和多行补全），以及<strong>代码会话</strong>能力。此外，他们还率先在<strong>代码审查（Code Review）<strong>方面投入，利用大模型对代码进行总结，并能精确指出问题代码行，甚至提供</strong>一键修改建议</strong>，极大简化了开发者的工作流程。这些工具与阿里巴巴内部的IDE和业务系统深度整合，形成了独特的_Prompt市场_和_Extension功能_，以支持垂直业务场景的自动化。</p>
+<p>据阿里巴巴内部数据显示，其AI Coding产品目前日活用户约12,000人，集团内部渗透率高达65%。在核心的代码补全功能上，整体采纳率达到28%，其中在Java广泛使用的IntelliJ IDEA上，采纳率更高达33%。在代码审查方面，约有20%的问题建议由AI生成<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这些数字无疑证明了AI在局部效率提升上的显著价值。</p>
+<p>然而，尽管取得了初步成功，阿里巴巴也逐渐发现，仅凭“Copilot”式的辅助并不能满足所有期望。一线研发人员感受到了效率提升，但对非一线人员而言，他们希望更激进的变革——例如，从需求提出直接生成可上线代码，实现端到端的自动化。现有的工具在解决复杂问题时显得力不从心，主要症结在于：</p>
+<ul>
+<li><strong>工具理解能力有限</strong>：AI难以完全捕捉用户真实、细致的需求，尤其是在处理边界条件和约束条件时。</li>
+<li><strong>用户需求描述模糊</strong>：用户往往不擅长清晰地表达复杂需求，导致AI生成结果与预期存在偏差。</li>
+<li><strong>领域知识整合困难</strong>：企业内部存在大量隐性知识和不一致的命名规范，这使得模型难以有效学习和应用。</li>
+<li><strong>用户使用成本仍高</strong>：AI生成的代码通常只能达到85%-90%的完成度，用户仍需耗费精力进行本地修改和测试，影响了留存率。</li>
+<li><strong>大模型自身局限</strong>：模型在可靠性、上下文窗口处理复杂性、关键信息抓取以及逐步解决问题的能力上仍有不足。</li>
+<li><strong>内部数据和平台集成障碍</strong>：DevOps平台间的信息孤岛，以及文档质量参差不齐、图片信息解析不足等问题，使得研发信息的串联和知识的有效利用面临巨大挑战。</li>
+</ul>
+<h3 id="智能体范式的崛起与挑战">智能体范式的崛起与挑战</h3>
+<p>在过去半年中，外部产品（如_Cursor_<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>、<em>Windsurf</em>）、多模态模型（理解架构图、截图）以及端到端代码生成能力的飞速进步，特别是大模型在“思考”和理解自身能力边界方面的提升，为阿里巴巴带来了新的机遇。这些进步促使阿里巴巴将战略重心从“Copilot”全面转向“Agent”模式。</p>
+<p>阿里巴巴认为，传统的“人与模型共同驱动”的规则编排模式，虽然短期有效，但存在<strong>泛化能力不足</strong>、<strong>构建成本高昂</strong>以及<strong>难以应对复杂任务</strong>等问题。受到_Devin_等能够从零开始生成代码、并在容器环境中进行调试的_模型驱动_型Agent的启发<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，阿里巴巴决定摈弃规则编排，全面拥抱模型驱动的Agent范式。</p>
+<p>目前，阿里巴巴已开发了两类Agent产品：</p>
+<ol>
+<li><strong>基于IDE的Agent</strong>：这款Agent在集成开发环境中运行，通过模型驱动调用Shell能力、代码库搜索能力以及文件读写等功能，帮助用户快速实现小型需求、理解代码仓库，并将许多研发任务“左移”到开发早期阶段，例如在IDE中自动进行更深层次的代码审查。它采用逐步反馈、迭代推进的任务执行方式。</li>
+<li><strong>Aone Agent（通用Agent）</strong>：这是一款类似_Devin_的通用Agent产品，其核心目标是通过模型驱动来解决复杂的长链路任务。它具备<strong>自主思考、自主规划、使用工具、反思和自我学习</strong>的能力。用户只需提出一个高层需求（如“生成一个五子棋游戏”），Aone Agent就能在后台容器中自动完成代码生成、调试、测试和预览的全过程。其定位是<strong>全研发全生命周期提效</strong>，旨在实现“一个人成为一个团队”的愿景，从而将研发效率提升十倍<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。它不仅能完成代码编写，还能进行业务调研、技术调研报告生成，甚至行程规划等<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+</ol>
+<p>然而，构建和部署通用Agent面临着一系列严峻的挑战：</p>
+<ul>
+<li><strong>记忆管理</strong>：Agent需要高效管理短期记忆（防止上下文膨胀）和长期记忆（存储成功经验并按需召回）。</li>
+<li><strong>任务执行与评估</strong>：多步骤、长链路任务的异步执行需要复杂的Multi-Agent架构和高效的任务调度。更棘手的是，如何评估Agent的能力和效率？传统的代码评测集无法评估整个过程，需要结合结果和过程进行多维度评估。</li>
+<li><strong>工具使用能力</strong>：Agent在使用浏览器控制台、Shell等工具时仍显笨拙，工具间的通信也存在问题（如子Agent无法自动获取主Agent已知的凭据）。</li>
+<li><strong>大模型自身缺陷</strong>：指令遵循能力不足（例如，反复使用转义符或不按规则测试），上下文长度问题（长文本中易忽略细节），以及推理和反思能力欠缺（容易误入歧途或陷入死循环，缺乏从错误中学习并纠正路径的能力）。</li>
+<li><strong>算法团队的认知偏差</strong>：当前的大模型训练往往聚焦于局部最优解，而Agent模式追求的是长链路任务的全局最优解，这要求算法团队在模型训练目标上做出根本性转变。</li>
+<li><strong>对外部模型的依赖</strong>：通用Agent的运行高度依赖强大的基础大模型，而目前具备Agent能力的国产模型相对较少。这带来了<strong>高昂的成本</strong>（单个复杂任务可能高达50-80元人民币）<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>、<strong>数据隐私风险</strong>、<strong>服务限流风险</strong>，甚至是被模型提供商“降智”的潜在风险<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+</ul>
+<h3 id="展望未来ai-agents-的潜能与深层考量">展望未来：AI Agents 的潜能与深层考量</h3>
+<p>阿里巴巴的探索反映了一个更广泛的行业趋势：AI Agent正被视为软件开发领域继图形用户界面和移动互联网之后的又一“GUI时刻”<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。它有望使更多非专业人士（<em>citizen developers</em>）实现长尾需求，生成“随用随抛”的_disposable apps_，为不同用户提供个性化体验<sup id="fnref3:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。最终目标是打造一个“任务引擎”（<em>task engine</em>）<sup id="fnref4:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，彻底颠覆软件生产方式。</p>
+<p>然而，AI Agents的崛起也带来了一系列深层次的伦理和社会考量，这些问题远超技术范畴，关乎我们如何定义人机关系和责任边界：</p>
+<ul>
+<li><strong>安全风险</strong>：Agent的异步执行和不可预测性可能导致无法预料的后果，尤其是在关键业务场景中。</li>
+<li><strong>隐私侵犯</strong>：具备自主权限的Agent可能过度收集和处理敏感数据，引发隐私泄露风险。</li>
+<li><strong>授权边界</strong>：用户如何信任Agent，并清晰地界定其权限范围，避免无意中的越权操作（例如，Agent在未经明确指示的情况下删除重要数据仓库）。</li>
+<li><strong>责任归属</strong>：当Agent在自主执行任务过程中造成损失时，其责任应归属于人类操作者、模型开发者，还是Agent本身？这是一个尚无定论的法律和伦理难题，是业界和社会必须共同面对和探讨的核心问题。</li>
+</ul>
+<p>阿里巴巴从Copilot到通用Agent的转型，是AI在软件工程领域从辅助工具到自主系统的关键跃迁。这不仅是技术能力的飞跃，更是对现有研发范式、企业组织形态乃至社会伦理的深刻重塑。未来的软件开发，将不再仅仅是人类工程师与工具的协同，而是人类与高度自主智能体共同创作、调试、优化的复杂生态。能否妥善应对其技术挑战，并负责任地解决其伴随而来的伦理困境，将决定AI Agents能否真正释放其改变世界的巨大潜能。</p>
+<h2 id="引文">引文</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://wallstreetcn.com/articles/3736622">AI Coding 最全图谱：Agent 将如何颠覆软件</a> · 华尔街见闻 · (2024/05/20) · 检索日期2024/05/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://lingma.aliyun.com/">通义灵码_你的智能编码助手-阿里云</a> · 阿里云 · (2024/05/20) · 检索日期2024/05/20&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.infoq.cn/article/d6oe4ghorgrfotcuxxhf">从“人驱动”到“模型驱动”：聊聊Agent 在2025 年的爆发与挑战</a> · InfoQ · (2024/05/20) · 检索日期2024/05/20&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">阿里巴巴</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">代码生成</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E6%8C%91%E6%88%98/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术挑战</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">研发效率</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250623181004317-3/">更深层次的变革：AI如何重塑软件开发的起点、过程与目的</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004670-2/">AI情感迷思：当模型“躺平”与“求生”并存，我们该如何审视智能体的边界？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-vscode-ai--20250623121004675-3/">代码协作者的范式重塑：Anthropic 如何通过 VSCode 深度集成重塑 AI 编程版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aibase44-20250623113258915-1/">AI时代的新型增长飞轮：从Base44的爆发看代码平权与生产力重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113258970-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258980-12/">智能体的崛起：张亚勤解码AI时代的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aibase44-20250623113044204-1/">AI时代的新型增长飞轮：从Base44的爆发看代码平权与生产力重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibeai-20250623113044256-10/">“Vibe”狂潮：AI时代语境重塑的深刻反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044268-12/">智能体的崛起：张亚勤解码AI时代的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006138-4/">AI浪潮深处：从高考志愿到浏览器核心，一场流量与认知的高维之战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617190043145-13/">AI浪潮深处：从高考志愿到浏览器核心，一场流量与认知的高维之战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004497-5/">当大模型学会吉卜力美学：AI能否终结动漫产能困境？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630161004940-3/">自主编程的里程碑：谷歌AI如何重新定义软件优化与人类智能的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-20250630151004520-1/">AI推理能力之辩：是瓶颈还是幻象？苹果与OpenAI前高管的交锋透视通用智能边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20250630151004527-2/">当AI店长赔光家底，还以为自己是个人：Anthropic迷你商店实验的深层启示</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+{{ define "header" }}
+  {{/* We can override any block in the baseof file be defining it in the template */}}
+  {{ partials.Include "page-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $page := .}}
+  {{ $section := .Site.GetPage "section" .Section }}
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+
+      {{- partials.IncludeCached "social/share.html" . . -}}
+      <h1 class="f1 athelas mt3 mb1">
+        {{- .Title -}}
+      </h1>
+      {{ with .Params.author | compare.Default .Site.Params.author }}
+      <p class="tracked">
+        {{- if compare.Eq $page.Language "de" "en" "es" "fr" "it" "no" "pt" -}}
+          {{- lang.Translate "by" -}}
+        {{ end -}} <strong>
+        {{- if reflect.IsSlice . -}}
+            {{ collections.Delimit . ", " | transform.Markdownify }}
+        {{- else -}}
+            {{ . | transform.Markdownify }}
+        {{- end -}}
+        </strong>
+      </p>
+      {{ end }}
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">{{ .Date.Format "2006-01-02 15:04" }}</span>
+      </aside>
+      {{/* 移除作者下方的发布时间显示 */}}
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
+      {{/* 处理newspaper特殊格式 */}}
+      {{ $content := .Content }}
+      
+      
+      {{ $content | safeHTML }}
+      
+      {{- partials.Include "tags.html" . -}}
+      <div class="mt6 instapaper_ignoref">
+      {{ if .Site.Config.Services.Disqus.Shortname }}
+        {{ template "_internal/disqus.html" . }}
+      {{ end }}
+      {{ if .Site.Params.commentoEnable }}
+        {{- partials.Include "commento.html" . -}}
+      {{ end }}
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+      {{- partials.Include "menu-contextual-morningnews.html" . -}}
+    </aside>
+
+  </article>
+{{ end }}
