@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>DeepSeek的效率之谜：批处理如何塑造前沿AI的经济版图 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="DeepSeek模型在大规模部署时表现出色的成本效益，得益于对GPU批处理技术的高效利用，这使得其在处理大量并发请求时能实现极高的吞吐量。然而，在单用户本地部署场景下，缺乏批处理的机会导致GPU利用率低下，使得DeepSeek模型运行缓慢且成本高昂，揭示了前沿AI模型在规模化与本地化之间存在的效率鸿沟。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/deepseekai-20250702161004411-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/deepseekai-20250702161004411-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="DeepSeek的效率之谜：批处理如何塑造前沿AI的经济版图">
+  <meta property="og:description" content="DeepSeek模型在大规模部署时表现出色的成本效益，得益于对GPU批处理技术的高效利用，这使得其在处理大量并发请求时能实现极高的吞吐量。然而，在单用户本地部署场景下，缺乏批处理的机会导致GPU利用率低下，使得DeepSeek模型运行缓慢且成本高昂，揭示了前沿AI模型在规模化与本地化之间存在的效率鸿沟。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-07-02T16:10:04+08:00">
+    <meta property="article:modified_time" content="2025-07-02T16:10:04+08:00">
+    <meta property="article:tag" content="DeepSeek">
+    <meta property="article:tag" content="AI推理">
+    <meta property="article:tag" content="批处理">
+    <meta property="article:tag" content="专家混合模型">
+    <meta property="article:tag" content="MoE">
+    <meta property="article:tag" content="GPU效率">
+
+  <meta itemprop="name" content="DeepSeek的效率之谜：批处理如何塑造前沿AI的经济版图">
+  <meta itemprop="description" content="DeepSeek模型在大规模部署时表现出色的成本效益，得益于对GPU批处理技术的高效利用，这使得其在处理大量并发请求时能实现极高的吞吐量。然而，在单用户本地部署场景下，缺乏批处理的机会导致GPU利用率低下，使得DeepSeek模型运行缓慢且成本高昂，揭示了前沿AI模型在规模化与本地化之间存在的效率鸿沟。">
+  <meta itemprop="datePublished" content="2025-07-02T16:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-07-02T16:10:04+08:00">
+  <meta itemprop="wordCount" content="56">
+  <meta itemprop="keywords" content="DeepSeek,AI推理,批处理,专家混合模型,MoE,GPU效率,模型部署,算力成本,AI经济">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DeepSeek的效率之谜：批处理如何塑造前沿AI的经济版图">
+  <meta name="twitter:description" content="DeepSeek模型在大规模部署时表现出色的成本效益，得益于对GPU批处理技术的高效利用，这使得其在处理大量并发请求时能实现极高的吞吐量。然而，在单用户本地部署场景下，缺乏批处理的机会导致GPU利用率低下，使得DeepSeek模型运行缓慢且成本高昂，揭示了前沿AI模型在规模化与本地化之间存在的效率鸿沟。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-07-Jul%202,%202025_16-01-14-174.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-07-02 16:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=DeepSeek%E7%9A%84%E6%95%88%E7%8E%87%E4%B9%8B%E8%B0%9C%EF%BC%9A%E6%89%B9%E5%A4%84%E7%90%86%E5%A6%82%E4%BD%95%E5%A1%91%E9%80%A0%E5%89%8D%E6%B2%BFAI%E7%9A%84%E7%BB%8F%E6%B5%8E%E7%89%88%E5%9B%BE%20-%20DeepSeek%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2%E6%97%B6%E8%A1%A8%E7%8E%B0%E5%87%BA%E8%89%B2%E7%9A%84%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%EF%BC%8C%E5%BE%97%E7%9B%8A%E4%BA%8E%E5%AF%B9GPU%E6%89%B9%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%E7%9A%84%E9%AB%98%E6%95%88%E5%88%A9%E7%94%A8%EF%BC%8C%E8%BF%99%E4%BD%BF%E5%BE%97%E5%85%B6%E5%9C%A8%E5%A4%84%E7%90%86%E5%A4%A7%E9%87%8F%E5%B9%B6%E5%8F%91%E8%AF%B7%E6%B1%82%E6%97%B6%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%9E%81%E9%AB%98%E7%9A%84%E5%90%9E%E5%90%90%E9%87%8F%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%9C%BA%E6%99%AF%E4%B8%8B%EF%BC%8C%E7%BC%BA%E4%B9%8F%E6%89%B9%E5%A4%84%E7%90%86%E7%9A%84%E6%9C%BA%E4%BC%9A%E5%AF%BC%E8%87%B4GPU%E5%88%A9%E7%94%A8%E7%8E%87%E4%BD%8E%E4%B8%8B%EF%BC%8C%E4%BD%BF%E5%BE%97DeepSeek%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E7%BC%93%E6%85%A2%E4%B8%94%E6%88%90%E6%9C%AC%E9%AB%98%E6%98%82%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E5%89%8D%E6%B2%BFAI%E6%A8%A1%E5%9E%8B%E5%9C%A8%E8%A7%84%E6%A8%A1%E5%8C%96%E4%B8%8E%E6%9C%AC%E5%9C%B0%E5%8C%96%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E7%9A%84%E6%95%88%E7%8E%87%E9%B8%BF%E6%B2%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseekai-20250702161004411-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=DeepSeek%E7%9A%84%E6%95%88%E7%8E%87%E4%B9%8B%E8%B0%9C%EF%BC%9A%E6%89%B9%E5%A4%84%E7%90%86%E5%A6%82%E4%BD%95%E5%A1%91%E9%80%A0%E5%89%8D%E6%B2%BFAI%E7%9A%84%E7%BB%8F%E6%B5%8E%E7%89%88%E5%9B%BE%20-%20DeepSeek%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2%E6%97%B6%E8%A1%A8%E7%8E%B0%E5%87%BA%E8%89%B2%E7%9A%84%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%EF%BC%8C%E5%BE%97%E7%9B%8A%E4%BA%8E%E5%AF%B9GPU%E6%89%B9%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%E7%9A%84%E9%AB%98%E6%95%88%E5%88%A9%E7%94%A8%EF%BC%8C%E8%BF%99%E4%BD%BF%E5%BE%97%E5%85%B6%E5%9C%A8%E5%A4%84%E7%90%86%E5%A4%A7%E9%87%8F%E5%B9%B6%E5%8F%91%E8%AF%B7%E6%B1%82%E6%97%B6%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%9E%81%E9%AB%98%E7%9A%84%E5%90%9E%E5%90%90%E9%87%8F%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%9C%BA%E6%99%AF%E4%B8%8B%EF%BC%8C%E7%BC%BA%E4%B9%8F%E6%89%B9%E5%A4%84%E7%90%86%E7%9A%84%E6%9C%BA%E4%BC%9A%E5%AF%BC%E8%87%B4GPU%E5%88%A9%E7%94%A8%E7%8E%87%E4%BD%8E%E4%B8%8B%EF%BC%8C%E4%BD%BF%E5%BE%97DeepSeek%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E7%BC%93%E6%85%A2%E4%B8%94%E6%88%90%E6%9C%AC%E9%AB%98%E6%98%82%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E5%89%8D%E6%B2%BFAI%E6%A8%A1%E5%9E%8B%E5%9C%A8%E8%A7%84%E6%A8%A1%E5%8C%96%E4%B8%8E%E6%9C%AC%E5%9C%B0%E5%8C%96%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E7%9A%84%E6%95%88%E7%8E%87%E9%B8%BF%E6%B2%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseekai-20250702161004411-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">DeepSeek的效率之谜：批处理如何塑造前沿AI的经济版图</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>DeepSeek-V3等大型AI模型在大规模部署时成本低廉且响应迅速，其核心在于一种名为“批处理”的关键技术，它能显著提升GPU效率。然而，这种优化在单用户本地运行时却难以实现，导致高昂的成本和缓慢的性能。这种效率的二元性不仅揭示了模型架构与推理优化的深层原理，更重塑了前沿AI的经济格局。</p></blockquote>
+<p>大型语言模型（LLMs）的部署成本与效率，一直是决定其普及度和商业模式的关键因素。近期，关于DeepSeek-V3模型在云端API服务与本地部署之间存在巨大性能及成本差异的讨论，引发了业界的广泛关注。据称，DeepSeek的API价格低廉，在大规模服务时表现出色，但在个人设备上运行时却显得过于缓慢和昂贵<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这种看似矛盾的现象并非偶然，它深刻揭示了大型AI模型，尤其是如DeepSeek-V3这类采用<strong>专家混合（Mixture-of-Experts, MoE）架构</strong>的模型，在推理优化上所面临的独特挑战与机遇。</p>
+<h3 id="批处理效率与延迟的平衡艺术">批处理：效率与延迟的平衡艺术</h3>
+<p>要理解DeepSeek的效率之谜，我们必须首先深入探讨AI推理服务中的一项核心技术：<strong>批处理（Batching）</strong>。GPU在执行**通用矩阵乘法（GEMMs）**时表现出卓越的效率，而大型语言模型的推理过程，本质上就是一系列大规模的矩阵乘法。</p>
+<p>设想一下：当你向模型输入一个token，它被表示为一个与模型维度相符的向量，然后与模型的权重矩阵相乘。这是一个GEMM。但如果同时有十个用户请求，每个请求都生成一个token，你可以将这十个token的向量堆叠成一个10x模型维度的矩阵，然后一次性完成乘法运算。这比执行十次独立的、稍小的GEMM要快得多。其原因在于，向GPU发出每个命令都涉及固定开销，并且每次新的GPU命令都需要从内存中获取权重，这对于大型权重来说成本高昂。通过批处理，可以将多个小操作合并为一个大操作，从而<strong>显著减少了开销和内存墙瓶颈</strong>，使得GPU得以更高效率地运行。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>然而，批处理并非没有代价。推理服务提供商在**吞吐量（throughput）<strong>和</strong>延迟（latency）**之间面临着一个基本权衡：</p>
+<ul>
+<li><strong>高吞吐量、高延迟：</strong> 如果批处理大小设置得很大，用户请求需要等待队列填满才能一起处理。这会增加每个请求的响应时间（延迟），但由于GPU得到了更充分的利用，每秒能够处理的token数量（吞吐量）会大幅提高。</li>
+<li><strong>低吞吐量、低延迟：</strong> 如果不进行批处理，或批处理大小很小，用户请求几乎可以立即处理，延迟很低。但GPU的利用率会很低，导致整体吞吐量下降。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<p>在实践中，推理服务器通常会设置一个“收集窗口”（collection window）。新进来的用户请求会在此窗口内排队，当窗口关闭或达到预设的批次大小时，所有排队的请求被一起批处理并发送给GPU。这种周期性的批处理操作有时被称为一个“tick”。</p>
+<h3 id="专家混合与管道优化deepseek的规模化密码">专家混合与管道优化：DeepSeek的规模化密码</h3>
+<p>DeepSeek-V3之所以在大规模部署时显得如此高效，而在本地运行时效率低下，与其采用的特定模型架构及其对批处理的依赖性息息相关。</p>
+<p><strong>1. 专家混合（MoE）机制对大批次的渴求：</strong>
+DeepSeek-V3被认为是采用了MoE架构，类似于传说中的GPT-4。MoE模型拥有数百个独立的“专家”网络，每个专家都是一个前馈权重块。路由层会为每个token选择一个或多个专家进行计算。这种设计使得模型可以在参数量巨大的同时保持计算量相对可控。然而，MoE模型的GPU效率天生较低。原因在于，如果批处理大小过小，每个专家可能只接收到很少的token，导致GPU被迫执行大量小型矩阵乘法，而这与GPU擅长执行少量大型矩阵乘法的特性相悖。只有当全局批次足够大时，才能确保每个专家都有足够的token来处理，从而<strong>充分利用每个专家的计算能力，避免资源浪费</strong>。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><strong>2. 大型管道对大批次的需求：</strong>
+对于拥有数百个Transformer层的大型模型，通常需要将模型进行**管道化（pipelining）**部署，即将不同层的权重分布到多个GPU上，形成一个处理流水线。一个GPU处理前十层，另一个处理接下来的十层，依此类推。这样做是为了克服单个GPU内存限制，并提高整体吞吐量。然而，管道化会引入“管道气泡”问题：在每个“tick”开始时，下游GPU会空闲等待上游GPU的输出（“预热”），而在“tick”结束时，上游GPU会空闲等待下游GPU处理完剩余数据（“排水”）。如果收集窗口太短，批次太小，这些空闲期在总计算时间中所占的比例就会过高，形成“管道气泡”，导致GPU利用率低下。为了消除这些气泡并保持GPU持续忙碌，<strong>模型需要更大的批次大小和更长的收集窗口</strong>。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>DeepSeek-V3同时具备MoE架构和大型管道化部署的特性，这使得它对大批次的需求尤为迫切。在大规模云服务环境中，DeepSeek可以汇聚来自成千上万用户的请求，轻松形成数百甚至数千的巨大批次，从而将上述挑战转化为其成本优势。</p>
+<h3 id="从数据中心到个人设备效率鸿沟的深层影响">从数据中心到个人设备：效率鸿沟的深层影响</h3>
+<p>DeepSeek模型在大规模部署和本地运行之间的效率差异，反映了AI推理范式的一个核心矛盾：<strong>前沿模型的最高效率，往往只能在高度集中的、拥有海量并发流量的专用数据中心中实现</strong>。</p>
+<ul>
+<li><strong>大规模部署的成本优势：</strong> DeepSeek能够提供极具竞争力的API价格，正是因为它能够充分利用批处理的优势。通过聚合大量的并发用户请求，DeepSeek能够实现<strong>极高的GPU利用率和每token吞吐量</strong>。这意味着在特定时间内，每块GPU可以处理更多的计算任务，从而分摊了高昂的硬件成本和运营成本，使得服务定价得以大幅降低。Reddit上有人讨论DeepSeek API成本降低了95-97%<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+<li><strong>本地运行的效率困境：</strong> 当DeepSeek模型在本地个人设备上运行时，通常只有一个用户进行推理。这意味着批处理大小默认为1，MoE架构和大型管道的效率优势无从发挥。GPU大部分时间处于空闲或低效状态，导致计算速度极慢（例如，据报告，使用8张H100或A800 GPU的本地部署速度仅为10-20 tokens/秒，这对于如此昂贵的硬件而言，效率极低<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>），能源消耗却相对较高，从而使得本地部署在成本和性能上都显得不划算。</li>
+</ul>
+<p>这种效率鸿沟带来了多层面的深远影响：</p>
+<p><strong>首先，它强化了AI算力的集中化趋势。</strong> 只有像DeepSeek、OpenAI、Anthropic这样的巨头，拥有足够的财力购买大量GPU，并设计精妙的推理服务架构（如连续批处理，尽管注意力批处理仍是挑战<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>），才能将这些顶级模型转化为高效、低成本的服务。这使得小型企业和个人开发者更倾向于依赖API而非本地部署，从而将核心AI能力进一步集中于少数大型提供商手中。</p>
+<p><strong>其次，它塑造了AI创新的边界。</strong> 尽管API提供了便捷的访问，但对于需要极低延迟、高度隐私或离线运行的特定应用场景，本地部署仍是必需。然而，当前前沿MoE模型的架构特性，使得这些场景在成本效益上难以实现。这可能会<strong>限制某些特定类型AI应用的探索和落地</strong>，除非出现新的模型架构或推理优化技术，能够更好地平衡批处理效率与单用户性能。</p>
+<p><strong>最后，它对市场竞争和未来发展方向提出了挑战。</strong> OpenAI和Anthropic的模型响应迅速，可能意味着他们采用了不同于MoE的更高效架构，或者拥有更巧妙的推理服务技巧，亦或是投入了远超DeepSeek的GPU资源。这预示着未来AI领域的竞争不仅是模型规模和能力的竞争，更是<strong>推理效率和成本控制的极致竞争</strong>。对更高效的GPU利用、更智能的调度算法以及可能针对MoE模型优化的新型硬件的需求，将成为AI产业持续创新的核心驱动力。</p>
+<p>DeepSeek的案例清晰地表明，前沿AI模型的真正价值和经济可行性，与<strong>其在规模化推理环境中的效率</strong>密不可分。随着AI技术日益深入社会和经济的肌理，理解这些深层的技术权衡和其所带来的效率鸿沟，对于我们把握AI的未来走向至关重要。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.seangoedecke.com/inference-batching-and-deepseek/">为什么DeepSeek大规模部署很便宜，本地很贵</a>·Sean Goedecke·2024/7/24·检索日期2024/7/24&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.csdn.net/2401_86652632/article/details/148407353">为什么DeepSeek 大规模部署便宜但本地运行昂贵？ 原创</a>·CSDN博客·2024/7/24·检索日期2024/7/24&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ib4ksj/how_exactly_is_deepseek_so_cheap/?tl=zh-hans">How exactly is Deepseek so cheap? : r/LocalLLaMA</a>·Reddit·2024/7/24·检索日期2024/7/24&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.zhihu.com/question/11772522238/answer/98240252309">DeepSeek-R1 API定价为什么这么便宜，在目前全量模型部署非常 &hellip;</a>·知乎·2024/7/24·检索日期2024/7/24&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/deepseek/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DeepSeek</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">批处理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%B8%93%E5%AE%B6%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">专家混合模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/moe/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MoE</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/gpu%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GPU效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型部署</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E6%88%90%E6%9C%AC/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力成本</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BB%8F%E6%B5%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI经济</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250630151004543-4/">华为盘古大模型开源：揭示其在昇腾生态下的技术野心与开放策略</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cloudmatrix384ai-20250702133403536-2/">打破英伟达独霸：华为CloudMatrix384超节点如何重塑AI算力版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630201004540-0/">打破参数桎梏：一种仿生学模型如何重塑AI推理的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-20250630151004520-1/">AI推理能力之辩：是瓶颈还是幻象？苹果与OpenAI前高管的交锋透视通用智能边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/llamamistraldeepseekai-20250630141004628-1/">开源大型语言模型的崛起：Llama、Mistral与DeepSeek如何重塑AI应用格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630111004423-1/">百度文心4.5系列模型全面开源：大模型竞赛的下一战场</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aideepseek-20250630091004269-1/">AI全球化遇阻：DeepSeek下架事件揭示数据主权与规则博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpuipoai-20250625181004413-2/">国产GPU巨头沐曦冲刺IPO：一场关乎AI未来的技术与资本竞速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004512-1/">开源浪潮席卷AI：基础模型“护城河”消弭，价值转向应用深水区</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250621181004290-0/">大型语言模型的幻象：苹果争议揭示通用智能之路的挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ring-liteai-20250621171702985-0/">稀疏激活的力量：蚂蚁Ring-lite如何重塑轻量级AI推理的格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai12ai-20250621111004418-0/">AI应用商业化驶入快车道：12亿美元营收背后，谁在为AI“氪金”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimaxagent-20250620191004664-2/">百万上下文与超低成本：MiniMax如何重塑大模型训练的经济学与Agent应用图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax-20250620131004465-0/">MiniMax的夏季攻势：技术竞速、商业化突围与资本化迷途</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250619162004488-0/">潮汐转向：字节跳动人才回流与中国AI大模型创业的深层变局</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
