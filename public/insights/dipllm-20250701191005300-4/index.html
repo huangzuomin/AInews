@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="中国科学院自动化研究所最新发布的DipLLM框架，凭借其创新的自回归分解与均衡策略微调方法，在复杂七人博弈游戏《外交》中，仅用Meta Cicero 1.5%的训练数据就实现了性能超越。这项成果不仅展现了大语言模型在多智能体博弈中的巨大潜力与样本效率，也为构建更通用、更高效且更可迁移的AI策略体提供了全新的范式，预示着AI在复杂决策场景中的更广阔应用前景。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/dipllm-20250701191005300-4/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/dipllm-20250701191005300-4/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得">
+  <meta property="og:description" content="中国科学院自动化研究所最新发布的DipLLM框架，凭借其创新的自回归分解与均衡策略微调方法，在复杂七人博弈游戏《外交》中，仅用Meta Cicero 1.5%的训练数据就实现了性能超越。这项成果不仅展现了大语言模型在多智能体博弈中的巨大潜力与样本效率，也为构建更通用、更高效且更可迁移的AI策略体提供了全新的范式，预示着AI在复杂决策场景中的更广阔应用前景。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-07-01T19:10:05+08:00">
+    <meta property="article:modified_time" content="2025-07-01T19:10:05+08:00">
+    <meta property="article:tag" content="AI智能体">
+    <meta property="article:tag" content="博弈论AI">
+    <meta property="article:tag" content="大语言模型微调">
+    <meta property="article:tag" content="Diplomacy">
+    <meta property="article:tag" content="纳什均衡">
+    <meta property="article:tag" content="策略游戏">
+
+  <meta itemprop="name" content="中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得">
+  <meta itemprop="description" content="中国科学院自动化研究所最新发布的DipLLM框架，凭借其创新的自回归分解与均衡策略微调方法，在复杂七人博弈游戏《外交》中，仅用Meta Cicero 1.5%的训练数据就实现了性能超越。这项成果不仅展现了大语言模型在多智能体博弈中的巨大潜力与样本效率，也为构建更通用、更高效且更可迁移的AI策略体提供了全新的范式，预示着AI在复杂决策场景中的更广阔应用前景。">
+  <meta itemprop="datePublished" content="2025-07-01T19:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-07-01T19:10:05+08:00">
+  <meta itemprop="wordCount" content="30">
+  <meta itemprop="keywords" content="AI智能体,博弈论AI,大语言模型微调,Diplomacy,纳什均衡,策略游戏,样本效率,人工智能,中国科学院自动化研究所">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得">
+  <meta name="twitter:description" content="中国科学院自动化研究所最新发布的DipLLM框架，凭借其创新的自回归分解与均衡策略微调方法，在复杂七人博弈游戏《外交》中，仅用Meta Cicero 1.5%的训练数据就实现了性能超越。这项成果不仅展现了大语言模型在多智能体博弈中的巨大潜力与样本效率，也为构建更通用、更高效且更可迁移的AI策略体提供了全新的范式，预示着AI在复杂决策场景中的更广阔应用前景。">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-07-Jul%201,%202025_16-02-06-492.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-07-01 19:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%B8%AD%E7%A7%91%E9%99%A2DipLLM%EF%BC%9A%E4%BB%A5%E5%BE%AE%E6%9C%AB%E4%B9%8B%E8%B5%84%E9%87%8D%E5%A1%91%E5%8D%9A%E5%BC%88%E6%99%BA%E8%83%BD%EF%BC%8C%E7%AD%96%E7%95%A5%E6%BC%94%E7%AE%97%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%95%88%E7%8E%87%E5%85%BC%E5%BE%97%20-%20%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E8%87%AA%E5%8A%A8%E5%8C%96%E7%A0%94%E7%A9%B6%E6%89%80%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DipLLM%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%87%AD%E5%80%9F%E5%85%B6%E5%88%9B%E6%96%B0%E7%9A%84%E8%87%AA%E5%9B%9E%E5%BD%92%E5%88%86%E8%A7%A3%E4%B8%8E%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9C%A8%E5%A4%8D%E6%9D%82%E4%B8%83%E4%BA%BA%E5%8D%9A%E5%BC%88%E6%B8%B8%E6%88%8F%E3%80%8A%E5%A4%96%E4%BA%A4%E3%80%8B%E4%B8%AD%EF%BC%8C%E4%BB%85%E7%94%A8Meta&amp;#43;Cicero&amp;#43;1.5%25%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%B0%B1%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%80%A7%E8%83%BD%E8%B6%85%E8%B6%8A%E3%80%82%E8%BF%99%E9%A1%B9%E6%88%90%E6%9E%9C%E4%B8%8D%E4%BB%85%E5%B1%95%E7%8E%B0%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%E4%B8%8E%E6%A0%B7%E6%9C%AC%E6%95%88%E7%8E%87%EF%BC%8C%E4%B9%9F%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E9%80%9A%E7%94%A8%E3%80%81%E6%9B%B4%E9%AB%98%E6%95%88%E4%B8%94%E6%9B%B4%E5%8F%AF%E8%BF%81%E7%A7%BB%E7%9A%84AI%E7%AD%96%E7%95%A5%E4%BD%93%E6%8F%90%E4%BE%9B%E4%BA%86%E5%85%A8%E6%96%B0%E7%9A%84%E8%8C%83%E5%BC%8F%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80AI%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%86%B3%E7%AD%96%E5%9C%BA%E6%99%AF%E4%B8%AD%E7%9A%84%E6%9B%B4%E5%B9%BF%E9%98%94%E5%BA%94%E7%94%A8%E5%89%8D%E6%99%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdipllm-20250701191005300-4%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%B8%AD%E7%A7%91%E9%99%A2DipLLM%EF%BC%9A%E4%BB%A5%E5%BE%AE%E6%9C%AB%E4%B9%8B%E8%B5%84%E9%87%8D%E5%A1%91%E5%8D%9A%E5%BC%88%E6%99%BA%E8%83%BD%EF%BC%8C%E7%AD%96%E7%95%A5%E6%BC%94%E7%AE%97%E6%B7%B1%E5%BA%A6%E4%B8%8E%E6%95%88%E7%8E%87%E5%85%BC%E5%BE%97%20-%20%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E8%87%AA%E5%8A%A8%E5%8C%96%E7%A0%94%E7%A9%B6%E6%89%80%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DipLLM%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%87%AD%E5%80%9F%E5%85%B6%E5%88%9B%E6%96%B0%E7%9A%84%E8%87%AA%E5%9B%9E%E5%BD%92%E5%88%86%E8%A7%A3%E4%B8%8E%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9C%A8%E5%A4%8D%E6%9D%82%E4%B8%83%E4%BA%BA%E5%8D%9A%E5%BC%88%E6%B8%B8%E6%88%8F%E3%80%8A%E5%A4%96%E4%BA%A4%E3%80%8B%E4%B8%AD%EF%BC%8C%E4%BB%85%E7%94%A8Meta&amp;#43;Cicero&amp;#43;1.5%25%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%B0%B1%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%80%A7%E8%83%BD%E8%B6%85%E8%B6%8A%E3%80%82%E8%BF%99%E9%A1%B9%E6%88%90%E6%9E%9C%E4%B8%8D%E4%BB%85%E5%B1%95%E7%8E%B0%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%E4%B8%8E%E6%A0%B7%E6%9C%AC%E6%95%88%E7%8E%87%EF%BC%8C%E4%B9%9F%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E9%80%9A%E7%94%A8%E3%80%81%E6%9B%B4%E9%AB%98%E6%95%88%E4%B8%94%E6%9B%B4%E5%8F%AF%E8%BF%81%E7%A7%BB%E7%9A%84AI%E7%AD%96%E7%95%A5%E4%BD%93%E6%8F%90%E4%BE%9B%E4%BA%86%E5%85%A8%E6%96%B0%E7%9A%84%E8%8C%83%E5%BC%8F%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80AI%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%86%B3%E7%AD%96%E5%9C%BA%E6%99%AF%E4%B8%AD%E7%9A%84%E6%9B%B4%E5%B9%BF%E9%98%94%E5%BA%94%E7%94%A8%E5%89%8D%E6%99%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdipllm-20250701191005300-4%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><blockquote>
+<p>中科院自动化所提出的DipLLM框架，以其前所未有的样本效率和策略深度，在复杂七人博弈游戏《外交》（Diplomacy）中超越了Meta的Cicero。通过将复杂决策任务自回归分解并结合理论支持的均衡策略目标，DipLLM为构建更通用、更经济高效的AI博弈智能体开辟了新路径。</p></blockquote>
+<p>从围棋的精妙计算到德州扑克的心理博弈，人工智能在策略游戏领域屡创奇迹。然而，有一个被称为“策略游戏终极试炼场”的领域，因其融合了竞争、协作和欺骗，且拥有高达10的64次方单轮动作空间，长期以来被认为是AI难以逾越的障碍——那就是《外交》（Diplomacy）<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。如今，中国科学院自动化研究所的研究团队正凭借一项创新成果——<strong>DipLLM</strong>，改写这一局面，预示着AI在复杂决策场景中向更高维度的跃迁。</p>
+<h3 id="突破博弈智能的边界dipllm的核心创新">突破博弈智能的边界：DipLLM的核心创新</h3>
+<p>《外交》游戏之所以极具挑战，不仅在于其庞大的动作空间，更在于它是一个七人参与的多智能体博弈，玩家之间既可能合作，也可能背叛，决策需要考量错综复杂的人际关系和地缘政治。此前，Meta在2022年推出的<strong>Cicero</strong>智能体，通过结合人类数据与大规模均衡搜索，在该领域实现了突破。然而，Cicero的方法高度依赖于超大规模的计算资源和数据生成，其训练阶段需要动用448块GPU并行作业，成本高昂且难以扩展<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>中科院自动化所提出的DipLLM，则从根本上颠覆了这一范式。其核心在于将大语言模型（LLM）的强大泛化能力与一种全新的策略学习框架相结合。研究人员构建了一个<strong>基于大语言模型的自回归分解框架</strong>，巧妙地将《外交》游戏中高维的联合动作建模任务，分解为一系列有序的单位动作选择子任务<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着，AI不再试图一次性预测所有单位的庞大联合动作，而是像人类思考一样，逐步、序列化地决定每个单位的行动。这种分解机制与LLM擅长的“下一个token预测”机制天然契合，使得模型能够以更高效的方式逐步输出决策。</p>
+<p>在此基础上，DipLLM进一步定义了_理论支持的均衡策略目标_，并以此对LLM进行高效微调。传统方法在学习纳什均衡策略时，常面临超大规模动作空间和多智能体复杂性带来的挑战。DipLLM则将联合动作价值分解为一系列单位级的子动作价值，并提出了<strong>单位级策略学习目标</strong>，以此引导模型策略逼近近似纳什均衡。论文中提出的“策略等价性”和“近似纳什均衡收敛”等定理，为这一创新提供了坚实的理论保障，确保了在分解建模的同时，不损失策略表达能力，且能够有效收敛到理想的博弈策略<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<h3 id="资源效率与战略深度的平衡">资源效率与战略深度的平衡</h3>
+<p>DipLLM最令人瞩目的成就，莫过于其在资源效率上的巨大飞跃。实验结果显示，<strong>在仅使用了Cicero训练数据1.5%的情况下</strong>，DipLLM不仅在SoS得分、胜率、生存率等关键指标上全面超越了Meta的Cicero及其他现有最先进方法（SOTA），还展现出惊人的样本效率和策略优化潜力<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这种资源效率的提升，对于AI研究和部署具有深远意义。它意味着构建高性能的博弈智能体不再是少数资源巨头的专属，更广泛的研究机构和个人开发者也能参与其中，从而加速AI领域的整体进步。</p>
+<p>DipLLM的战略深度也在与Cicero的对战实例中得到了充分体现。例如，在执掌英国时，面对西线僵持和德俄双线压力，DipLLM展现出_“暗度陈仓”<em>的谋略，通过佯攻牵制法军主力，同时突袭并夺取西班牙，成功绕后包抄法国，最终取得了决定性胜利。而在执掌德国时，面对俄罗斯的强势进攻，DipLLM则展现了</em>“合纵连横”<em>的智慧，与英国（由Cicero控制）协同防守，成功遏制俄军，并在时机成熟时果断反击，最终全面压制了俄罗斯<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这些案例生动地诠释了DipLLM不仅能处理复杂计算，更能理解并执行高级战略，甚至在特定场景下表现出超越传统AI的</em>“人类智慧”_。</p>
+<h3 id="超越游戏ai策略体的更广阔影响">超越游戏：AI策略体的更广阔影响</h3>
+<p>DipLLM的成功不仅仅是《外交》游戏领域的一个里程碑。它更广泛地预示着<strong>基于大语言模型的策略学习</strong>将在更多复杂决策环境中释放巨大潜力。像《外交》这样融合了多智能体交互、混合动机（竞争与合作）以及不完美信息（虽然原文未直接提及，但此类游戏常有）的博弈，是通往通用人工智能（AGI）道路上的关键障碍。DipLLM通过其创新的自回归分解和均衡策略微调，提供了一个构建更通用、更高效、更可迁移的博弈智能体的新范式。</p>
+<p>这种能够以极高效率掌握复杂策略的AI，其影响将远超游戏本身。未来，它们可能在以下几个方面发挥关键作用：</p>
+<ul>
+<li><strong>复杂系统模拟与优化：</strong> 在军事战略、供应链管理、城市规划，甚至全球气候变化应对等领域，构建高保真、多主体互动的模拟器，并利用AI进行策略推演和优化。</li>
+<li><strong>辅助决策与自动化：</strong> 为人类决策者提供更深入的战略洞察和建议，尤其是在那些涉及多方利益、高度不确定性的高风险决策场景。例如，可以想象AI在国际谈判或商业并购中的辅助角色。</li>
+<li><strong>AI Agent的发展：</strong> DipLLM代表了AI Agent在自主规划和复杂交互方面的重要进步。随着这类Agent能力的提升，它们将能更好地在开放世界中执行复杂任务，并与人类及其他AI进行更自然的协作或竞争。</li>
+<li><strong>伦理与治理的挑战：</strong> 随着AI在策略博弈中能力日增，如何确保这些AI的决策符合人类价值观、避免意外后果或被滥用，将成为愈发紧迫的伦理和治理问题。当AI能够“改写历史”的战略走向时，我们必须深思其在现实世界中潜在的影响边界。</li>
+</ul>
+<p>中科院自动化所的这项研究，无疑为AI在复杂多智能体博弈领域的探索描绘了一幅激动人心的蓝图。它不仅推动了博弈论与深度学习的交叉融合，更在全球AI竞赛中展示了中国科研力量在前沿模型和算法领域的创新能力。随着DipLLM开源代码的发布，我们期待这一新范式能激发更多研究，共同推动AI走向更智能、更高效、也更负责任的未来。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>策略改写「一战历史」，中科院开源全新博弈智能体框架DipLLM · 新智元 · LRST（2025/7/1）· 检索日期2025/7/1&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI智能体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BAai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">博弈论AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型微调</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/diplomacy/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Diplomacy</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">纳什均衡</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AD%96%E7%95%A5%E6%B8%B8%E6%88%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">策略游戏</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A0%B7%E6%9C%AC%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">样本效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E8%87%AA%E5%8A%A8%E5%8C%96%E7%A0%94%E7%A9%B6%E6%89%80/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">中国科学院自动化研究所</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/dipllm-20250701181004744-4/">中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dipllm-20250701171005130-4/">中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dipllm-20250701161004621-3/">中科院DipLLM：以微末之资重塑博弈智能，策略演算深度与效率兼得</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250701191005305-5/">Meta“超级智能实验室”：一场押注人类未来的AI军备竞赛</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250701181004750-5/">Meta“超级智能实验室”：一场押注人类未来的AI军备竞赛</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250701171005136-5/">Meta“超级智能实验室”：一场押注人类未来的AI军备竞赛</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250701161004628-4/">Meta“超级智能实验室”：一场押注人类未来的AI军备竞赛</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiai-20250701151004415-0/">OpenAI人才流失风波：一场不只是薪酬的AI高地争夺战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250701131004461-4/">谷歌构建AI帝国：垂直整合、边缘智能与未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250701121004631-0/">谷歌：垂直整合的AI帝国野心，从芯片到具身智能的深度布局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250701001006062-0/">微软AI诊断系统突破：迈向医疗“超智能”抑或引发伦理涟漪？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630201004564-3/">智能眼镜：从“AI噱头”到“第一视角相机”的实用主义转向</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004516-8/">中国AI开源生态的里程碑：魔搭社区如何通过“模型即服务”驱动创新</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004485-3/">游戏产业的生存之道：电竞与AI驱动的变革浪潮</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630161004947-4/">AI浪潮如何赋能家电巨头，突破“内卷”困局并重塑未来生活？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
