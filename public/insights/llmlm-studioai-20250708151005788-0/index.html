@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>本地LLM也能「上网」了？LM Studio这波操作，直接给AI插上了翅膀！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="LM Studio 0.3.17版本引入了模型上下文协议（MCP），让你的本地大模型也能连接外部工具和数据源，告别“哑巴AI”时代。这不仅大大扩展了本地LLM的能力边界，还通过隔离进程和用户确认机制保障了安全，虽然初期有些小bug，但社区反馈积极，预示着本地AI的春天即将到来！">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/llmlm-studioai-20250708151005788-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/llmlm-studioai-20250708151005788-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="本地LLM也能「上网」了？LM Studio这波操作，直接给AI插上了翅膀！">
+  <meta property="og:description" content="LM Studio 0.3.17版本引入了模型上下文协议（MCP），让你的本地大模型也能连接外部工具和数据源，告别“哑巴AI”时代。这不仅大大扩展了本地LLM的能力边界，还通过隔离进程和用户确认机制保障了安全，虽然初期有些小bug，但社区反馈积极，预示着本地AI的春天即将到来！">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-07-08T15:10:05+08:00">
+    <meta property="article:modified_time" content="2025-07-08T15:10:05+08:00">
+    <meta property="article:tag" content="LM Studio">
+    <meta property="article:tag" content="本地大模型">
+    <meta property="article:tag" content="MCP">
+    <meta property="article:tag" content="AI Agents">
+    <meta property="article:tag" content="工具调用">
+
+  <meta itemprop="name" content="本地LLM也能「上网」了？LM Studio这波操作，直接给AI插上了翅膀！">
+  <meta itemprop="description" content="LM Studio 0.3.17版本引入了模型上下文协议（MCP），让你的本地大模型也能连接外部工具和数据源，告别“哑巴AI”时代。这不仅大大扩展了本地LLM的能力边界，还通过隔离进程和用户确认机制保障了安全，虽然初期有些小bug，但社区反馈积极，预示着本地AI的春天即将到来！">
+  <meta itemprop="datePublished" content="2025-07-08T15:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-07-08T15:10:05+08:00">
+  <meta itemprop="wordCount" content="75">
+  <meta itemprop="keywords" content="LM Studio,本地大模型,MCP,AI Agents,工具调用">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="本地LLM也能「上网」了？LM Studio这波操作，直接给AI插上了翅膀！">
+  <meta name="twitter:description" content="LM Studio 0.3.17版本引入了模型上下文协议（MCP），让你的本地大模型也能连接外部工具和数据源，告别“哑巴AI”时代。这不仅大大扩展了本地LLM的能力边界，还通过隔离进程和用户确认机制保障了安全，虽然初期有些小bug，但社区反馈积极，预示着本地AI的春天即将到来！">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-07-Jul%208,%202025_15-02-05-007.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-07-08 15:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%9C%AC%E5%9C%B0LLM%E4%B9%9F%E8%83%BD%E3%80%8C%E4%B8%8A%E7%BD%91%E3%80%8D%E4%BA%86%EF%BC%9FLM&amp;#43;Studio%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%BB%99AI%E6%8F%92%E4%B8%8A%E4%BA%86%E7%BF%85%E8%86%80%EF%BC%81%20-%20LM&amp;#43;Studio&amp;#43;0.3.17%E7%89%88%E6%9C%AC%E5%BC%95%E5%85%A5%E4%BA%86%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE%EF%BC%88MCP%EF%BC%89%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B9%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8%E5%B7%A5%E5%85%B7%E5%92%8C%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E5%91%8A%E5%88%AB%E2%80%9C%E5%93%91%E5%B7%B4AI%E2%80%9D%E6%97%B6%E4%BB%A3%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%A4%A7%E6%89%A9%E5%B1%95%E4%BA%86%E6%9C%AC%E5%9C%B0LLM%E7%9A%84%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%BF%98%E9%80%9A%E8%BF%87%E9%9A%94%E7%A6%BB%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%94%A8%E6%88%B7%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E4%BF%9D%E9%9A%9C%E4%BA%86%E5%AE%89%E5%85%A8%EF%BC%8C%E8%99%BD%E7%84%B6%E5%88%9D%E6%9C%9F%E6%9C%89%E4%BA%9B%E5%B0%8Fbug%EF%BC%8C%E4%BD%86%E7%A4%BE%E5%8C%BA%E5%8F%8D%E9%A6%88%E7%A7%AF%E6%9E%81%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AC%E5%9C%B0AI%E7%9A%84%E6%98%A5%E5%A4%A9%E5%8D%B3%E5%B0%86%E5%88%B0%E6%9D%A5%EF%BC%81&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllmlm-studioai-20250708151005788-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%9C%AC%E5%9C%B0LLM%E4%B9%9F%E8%83%BD%E3%80%8C%E4%B8%8A%E7%BD%91%E3%80%8D%E4%BA%86%EF%BC%9FLM&amp;#43;Studio%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%BB%99AI%E6%8F%92%E4%B8%8A%E4%BA%86%E7%BF%85%E8%86%80%EF%BC%81%20-%20LM&amp;#43;Studio&amp;#43;0.3.17%E7%89%88%E6%9C%AC%E5%BC%95%E5%85%A5%E4%BA%86%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE%EF%BC%88MCP%EF%BC%89%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B9%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8%E5%B7%A5%E5%85%B7%E5%92%8C%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E5%91%8A%E5%88%AB%E2%80%9C%E5%93%91%E5%B7%B4AI%E2%80%9D%E6%97%B6%E4%BB%A3%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%A4%A7%E6%89%A9%E5%B1%95%E4%BA%86%E6%9C%AC%E5%9C%B0LLM%E7%9A%84%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%BF%98%E9%80%9A%E8%BF%87%E9%9A%94%E7%A6%BB%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%94%A8%E6%88%B7%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E4%BF%9D%E9%9A%9C%E4%BA%86%E5%AE%89%E5%85%A8%EF%BC%8C%E8%99%BD%E7%84%B6%E5%88%9D%E6%9C%9F%E6%9C%89%E4%BA%9B%E5%B0%8Fbug%EF%BC%8C%E4%BD%86%E7%A4%BE%E5%8C%BA%E5%8F%8D%E9%A6%88%E7%A7%AF%E6%9E%81%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AC%E5%9C%B0AI%E7%9A%84%E6%98%A5%E5%A4%A9%E5%8D%B3%E5%B0%86%E5%88%B0%E6%9D%A5%EF%BC%81&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllmlm-studioai-20250708151005788-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">本地LLM也能「上网」了？LM Studio这波操作，直接给AI插上了翅膀！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>本地大模型过去只能「宅」在电脑里自言自语，现在LM Studio 0.3.17版本「逆天改命」，引入了Anthropic开发的模型上下文协议（MCP），让你的AI也能「上网冲浪」、调用各种外部工具，真正实现了「能说会道」又能「动手干活」！AI打工人，这下真要“卷”起来了！</p></blockquote>
+<p>还记得那些年，我们辛辛苦苦在本地部署的大模型吗？它们虽然能文能武，诗词歌赋信手拈来，但总感觉少了点什么。就像一位博览群书的学霸，却偏偏是个“社恐”，无法与真实世界互动，更别提“上网冲浪”了。别急，LM Studio的“王炸”来了！0.3.17版本一出，直接给这些“宅”在本地的AI插上了翅膀，让它们也能连接外部世界，甚至还能“使唤”各种工具！<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="本地llm的十八般武艺mcp是啥黑科技">本地LLM的「十八般武艺」：MCP是啥黑科技？</h3>
+<p>话说这回LM Studio祭出的「杀手锏」，名叫“模型上下文协议”（Model Context Protocol，简称MCP）。听起来很高大上，但你把它理解成一个“AI世界的万能插头”就对了。想当年，Anthropic大佬们为了让自家的Claude能跟各种服务“无缝对接”，比如GitHub、Notion、Stripe这些，就捣鼓出了这么个协议。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这波操作，LM Studio直接把自己升级成了一个“MCP主机”。啥意思？就是说，它现在成了个“路由器”，可以连接到本地或远程的各种MCP服务器。这些服务器就像一个个“工具箱”，每个工具箱里都装着不同的技能，比如访问某个API、查询某个数据库等等。只要你的本地LLM连上这个“路由器”，它就能通过“工具箱”去“干活”了！比如，过去你的本地大模型可能只会写代码，现在它可以直接调用GitHub的API去查代码库了；过去它可能只会分析文本，现在它能直接从Notion里读取文档了！<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>想知道怎么把这些“工具箱”接入LM Studio？简单得很！你可以手动修改一下应用里的<code>mcp.json</code>配置文件，或者，如果提供方够贴心，直接点那个“添加到LM Studio”的一键集成按钮，瞬间搞定！<strong>懒人福音，有木有？</strong><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="不止能说会道还要安全靠谱lm-studio怎么玩转mcp">不止「能说会道」，还要「安全靠谱」：LM Studio怎么玩转MCP？</h3>
+<p>你可能会问，让AI随便“上网”使用工具，那不是跟“放羊娃”一样，万一它乱来怎么办？LM Studio早就想到了这一点，简直是**“安全感”拉满**！</p>
+<p>首先，每个MCP服务器都是在<strong>独立的、隔离的进程</strong>中运行的。这就像给每个“工具箱”都套了个“防护罩”，它们之间互不干扰，就算一个“工具箱”出了问题，也不会影响到整个LM Studio的运行。模块化和稳定性，这波操作直接给足了！<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>其次，也是最关键的，<strong>你的AI调用工具，你说了算！<strong>当模型尝试通过MCP服务器调用某个工具时，LM Studio会弹出一个“工具调用确认对话框”。你可以在这里仔细审查、批准、修改甚至直接拒绝这个操作。这就像你给AI安了个“安全卫士”，所有“越界”行为都得经过你的同意。而且，对于你信任的工具，还可以直接加入“白名单”，以后就免去了反复确认的麻烦，简直是</strong>又安全又省心！</strong><sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>举个“栗子”？Hugging Face MCP服务器就是一个典型的应用场景。只要你在配置里输入你的API令牌，你的本地模型就能通过这个服务器访问Hugging Face的API，去搜索模型或数据集。对于那些想让本地模型“开眼看世界”，用外部实时数据来“武装”自己的大模型开发者来说，这简直就是**“YYDS”的福音！**<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="社区真香预警但也有小插曲">社区「真香」预警，但也有小插曲？</h3>
+<p>新功能上线，社区大佬们自然是“闻风而动”，各种“真香”预警纷至沓来。Xholding Group的项目经理Daniele Lucca就在LinkedIn上激动地表示：</p>
+<blockquote>
+<p>“太棒了！这就是我正在进行的激情项目。我正在使用外部数据源来‘教’一个AI，这些数据涉及我所在行业20年来的问题、解决方案、手册……”<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>看看，大佬们都已经开始用MCP来“喂养”自己的AI，让它们变得更专业、更懂行了！这不就是AI的“私人定制”之路吗？</p>
+<p>不过，新事物嘛，总归会有点“小脾气”。也有Reddit上的网友吐槽，说在尝试搜索模型时遇到了错误，模型列表加载不出来。有热心网友回复说，这问题是“间歇性抽风”，过两天就好了。<strong>看来，就算是再“黑科技”的东西，也免不了有点“初期BUG”的小插曲嘛！</strong><sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup><sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>好在LM Studio官方也表示，MCP支持还在不断发展中，他们鼓励社区通过GitHub问题追踪器提交缺陷报告。这说明什么？说明他们是认真的，要和社区一起把这个功能打磨到极致！<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="未来已来本地ai的春天真的要来了吗">未来已来：本地AI的春天真的要来了吗？</h3>
+<p>LM Studio 0.3.17版本携手MCP，不仅仅是一个简单的功能更新，它更像是一个信号，预示着本地大模型将迎来一个全新的时代。过去，高性能大模型往往受限于云端算力，本地部署的模型则像“没有WiFi的手机”，能做的事情有限。但现在，随着LM Studio这样的“神助攻”出现，本地大模型也能拥有“联网”的能力，接入海量的外部工具和实时数据。</p>
+<p>想象一下，你的私人AI助手不再需要联网就能运行，同时又能帮你查询航班、预订餐馆、甚至管理你的智能家居，**这不就是我们憧憬的“赛博朋克”世界吗？**这无疑为个人开发者和小型企业带来了无限可能，让大模型的应用不再是巨头的专属。本地AI的春天，真的要来了！</p>
+<p>LM Studio 0.3.17版本现在已经可以通过应用内更新或直接在lmstudio.ai下载获取了。<strong>还在等什么？赶紧去体验一下，让你的本地大模型也“冲”起来吧！</strong><sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.infoq.com/news/2025/07/lm-studio-mcp/">LM Studio 0.3.17 Adds Model Context Protocol (MCP) Support for Tool-Integrated LLMs</a>·InfoQ·(2025/07/25)·检索日期2024/07/26&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://support.anthropic.com/zh-CN/articles/10949351-%E5%9C%A8%E6%A1%8C%E9%9D%A2%E7%89%88-claude-%E4%B8%8A%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE-mcp">在桌面版Claude 上开始使用模型上下文协议(MCP) - Anthropic Support</a>·Anthropic Support·(未知)·检索日期2024/07/26&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://lmstudio.ai/blog/lmstudio-v0.3.17">MCP in LM Studio</a>·LM Studio Blog·(未知)·检索日期2024/07/26&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.reddit.com/r/LocalLLaMA/comments/1lkc5mr/comment/mzqjs6u/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">Reddit评论 1</a>·Reddit·(未知)·检索日期2024/07/26&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://www.reddit.com/r/LocalLLaMA/comments/1lkc5mr/comment/mzqkqt4/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">Reddit评论 2</a>·Reddit·(未知)·检索日期2024/07/26&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/lm-studio/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LM Studio</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">本地大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mcp/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MCP</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agents/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agents</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">工具调用</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/claude-codemcpai-20250625141004425-1/">Claude Code的集成进化：远程MCP服务器如何重塑AI工具链与开发者工作流</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250704111004452-2/">超越炒作：AI产品交付的工程范式革命与未来智能体的构建之道</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630161004940-3/">自主编程的里程碑：谷歌AI如何重新定义软件优化与人类智能的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aicreatiocrm-20250626031004528-0/">内嵌式AI重塑企业软件版图：Creatio如何挑战CRM巨头，引领智能未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250625091004505-0/">摆脱“花瓶”困境：银河通用如何在具身智能的“无人区”中深耕实用价值</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623121004658-0/">智能体的崛起：AI新纪元的品味与人机共舞</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113258999-15/">构建数字社会：揭秘AI世界模型中的选举与共存实验</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250623113044285-15/">构建数字社会：揭秘AI世界模型中的选举与共存实验</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
