@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1315&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>百度文心4.5系列模型全面开源：大模型竞赛的下一战场 | AI内参</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="百度于6月30日全面开源其文心大模型4.5系列，涵盖了从大型MoE模型到轻量级稠密模型等10款不同参数规模的模型，并开放了预训练权重和推理代码。此举不仅展示了百度在多模态异构MoE预训练、高效基础设施及模态特定后训练方面的技术突破，更在全球AI大模型开源竞争中迈出重要一步，旨在通过技术普惠加速AI生态发展，同时也面临着社区维护和平衡商业化等挑战。">
-    <meta name="generator" content="Hugo 0.147.8">
+    <meta name="generator" content="Hugo 0.147.0">
     
     
     
@@ -49,10 +49,10 @@
     
 
     
-      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250630111004423-1/">
+      <link rel="canonical" href="http://localhost:1315/insights/article-20250630111004423-1/">
     
 
-    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250630111004423-1/">
+    <meta property="og:url" content="http://localhost:1315/insights/article-20250630111004423-1/">
   <meta property="og:site_name" content="AI内参">
   <meta property="og:title" content="百度文心4.5系列模型全面开源：大模型竞赛的下一战场">
   <meta property="og:description" content="百度于6月30日全面开源其文心大模型4.5系列，涵盖了从大型MoE模型到轻量级稠密模型等10款不同参数规模的模型，并开放了预训练权重和推理代码。此举不仅展示了百度在多模态异构MoE预训练、高效基础设施及模态特定后训练方面的技术突破，更在全球AI大模型开源竞争中迈出重要一步，旨在通过技术普惠加速AI生态发展，同时也面临着社区维护和平衡商业化等挑战。">
@@ -165,13 +165,13 @@
     <header class="mt4 w-100">
       <aside class="instapaper_ignoref helvetica tracked">
         <span style="color: #999;">2025-06-30 11:10</span>
-      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%99%BE%E5%BA%A6%E6%96%87%E5%BF%834.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E7%9A%84%E4%B8%8B%E4%B8%80%E6%88%98%E5%9C%BA%20-%20%E7%99%BE%E5%BA%A6%E4%BA%8E6%E6%9C%8830%E6%97%A5%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%E5%85%B6%E6%96%87%E5%BF%83%E5%A4%A7%E6%A8%A1%E5%9E%8B4.5%E7%B3%BB%E5%88%97%EF%BC%8C%E6%B6%B5%E7%9B%96%E4%BA%86%E4%BB%8E%E5%A4%A7%E5%9E%8BMoE%E6%A8%A1%E5%9E%8B%E5%88%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%A8%A0%E5%AF%86%E6%A8%A1%E5%9E%8B%E7%AD%8910%E6%AC%BE%E4%B8%8D%E5%90%8C%E5%8F%82%E6%95%B0%E8%A7%84%E6%A8%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%B9%B6%E5%BC%80%E6%94%BE%E4%BA%86%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D%E5%92%8C%E6%8E%A8%E7%90%86%E4%BB%A3%E7%A0%81%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E7%99%BE%E5%BA%A6%E5%9C%A8%E5%A4%9A%E6%A8%A1%E6%80%81%E5%BC%82%E6%9E%84MoE%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E9%AB%98%E6%95%88%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8F%8A%E6%A8%A1%E6%80%81%E7%89%B9%E5%AE%9A%E5%90%8E%E8%AE%AD%E7%BB%83%E6%96%B9%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%9B%B4%E5%9C%A8%E5%85%A8%E7%90%83AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E6%BA%90%E7%AB%9E%E4%BA%89%E4%B8%AD%E8%BF%88%E5%87%BA%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E6%99%AE%E6%83%A0%E5%8A%A0%E9%80%9FAI%E7%94%9F%E6%80%81%E5%8F%91%E5%B1%95%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E9%9D%A2%E4%B8%B4%E7%9D%80%E7%A4%BE%E5%8C%BA%E7%BB%B4%E6%8A%A4%E5%92%8C%E5%B9%B3%E8%A1%A1%E5%95%86%E4%B8%9A%E5%8C%96%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630111004423-1%2F"
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%99%BE%E5%BA%A6%E6%96%87%E5%BF%834.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E7%9A%84%E4%B8%8B%E4%B8%80%E6%88%98%E5%9C%BA%20-%20%E7%99%BE%E5%BA%A6%E4%BA%8E6%E6%9C%8830%E6%97%A5%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%E5%85%B6%E6%96%87%E5%BF%83%E5%A4%A7%E6%A8%A1%E5%9E%8B4.5%E7%B3%BB%E5%88%97%EF%BC%8C%E6%B6%B5%E7%9B%96%E4%BA%86%E4%BB%8E%E5%A4%A7%E5%9E%8BMoE%E6%A8%A1%E5%9E%8B%E5%88%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%A8%A0%E5%AF%86%E6%A8%A1%E5%9E%8B%E7%AD%8910%E6%AC%BE%E4%B8%8D%E5%90%8C%E5%8F%82%E6%95%B0%E8%A7%84%E6%A8%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%B9%B6%E5%BC%80%E6%94%BE%E4%BA%86%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D%E5%92%8C%E6%8E%A8%E7%90%86%E4%BB%A3%E7%A0%81%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E7%99%BE%E5%BA%A6%E5%9C%A8%E5%A4%9A%E6%A8%A1%E6%80%81%E5%BC%82%E6%9E%84MoE%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E9%AB%98%E6%95%88%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8F%8A%E6%A8%A1%E6%80%81%E7%89%B9%E5%AE%9A%E5%90%8E%E8%AE%AD%E7%BB%83%E6%96%B9%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%9B%B4%E5%9C%A8%E5%85%A8%E7%90%83AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E6%BA%90%E7%AB%9E%E4%BA%89%E4%B8%AD%E8%BF%88%E5%87%BA%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E6%99%AE%E6%83%A0%E5%8A%A0%E9%80%9FAI%E7%94%9F%E6%80%81%E5%8F%91%E5%B1%95%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E9%9D%A2%E4%B8%B4%E7%9D%80%E7%A4%BE%E5%8C%BA%E7%BB%B4%E6%8A%A4%E5%92%8C%E5%B9%B3%E8%A1%A1%E5%95%86%E4%B8%9A%E5%8C%96%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82&amp;amp;url=http%3A%2F%2Flocalhost%3A1315%2Finsights%2Farticle-20250630111004423-1%2F"
           class="ananke-social-link x-twitter no-underline"
           title="Share on X" aria-label="Share on X"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
                 
-              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%99%BE%E5%BA%A6%E6%96%87%E5%BF%834.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E7%9A%84%E4%B8%8B%E4%B8%80%E6%88%98%E5%9C%BA%20-%20%E7%99%BE%E5%BA%A6%E4%BA%8E6%E6%9C%8830%E6%97%A5%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%E5%85%B6%E6%96%87%E5%BF%83%E5%A4%A7%E6%A8%A1%E5%9E%8B4.5%E7%B3%BB%E5%88%97%EF%BC%8C%E6%B6%B5%E7%9B%96%E4%BA%86%E4%BB%8E%E5%A4%A7%E5%9E%8BMoE%E6%A8%A1%E5%9E%8B%E5%88%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%A8%A0%E5%AF%86%E6%A8%A1%E5%9E%8B%E7%AD%8910%E6%AC%BE%E4%B8%8D%E5%90%8C%E5%8F%82%E6%95%B0%E8%A7%84%E6%A8%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%B9%B6%E5%BC%80%E6%94%BE%E4%BA%86%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D%E5%92%8C%E6%8E%A8%E7%90%86%E4%BB%A3%E7%A0%81%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E7%99%BE%E5%BA%A6%E5%9C%A8%E5%A4%9A%E6%A8%A1%E6%80%81%E5%BC%82%E6%9E%84MoE%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E9%AB%98%E6%95%88%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8F%8A%E6%A8%A1%E6%80%81%E7%89%B9%E5%AE%9A%E5%90%8E%E8%AE%AD%E7%BB%83%E6%96%B9%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%9B%B4%E5%9C%A8%E5%85%A8%E7%90%83AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E6%BA%90%E7%AB%9E%E4%BA%89%E4%B8%AD%E8%BF%88%E5%87%BA%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E6%99%AE%E6%83%A0%E5%8A%A0%E9%80%9FAI%E7%94%9F%E6%80%81%E5%8F%91%E5%B1%95%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E9%9D%A2%E4%B8%B4%E7%9D%80%E7%A4%BE%E5%8C%BA%E7%BB%B4%E6%8A%A4%E5%92%8C%E5%B9%B3%E8%A1%A1%E5%95%86%E4%B8%9A%E5%8C%96%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250630111004423-1%2F"
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%99%BE%E5%BA%A6%E6%96%87%E5%BF%834.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E7%9A%84%E4%B8%8B%E4%B8%80%E6%88%98%E5%9C%BA%20-%20%E7%99%BE%E5%BA%A6%E4%BA%8E6%E6%9C%8830%E6%97%A5%E5%85%A8%E9%9D%A2%E5%BC%80%E6%BA%90%E5%85%B6%E6%96%87%E5%BF%83%E5%A4%A7%E6%A8%A1%E5%9E%8B4.5%E7%B3%BB%E5%88%97%EF%BC%8C%E6%B6%B5%E7%9B%96%E4%BA%86%E4%BB%8E%E5%A4%A7%E5%9E%8BMoE%E6%A8%A1%E5%9E%8B%E5%88%B0%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%A8%A0%E5%AF%86%E6%A8%A1%E5%9E%8B%E7%AD%8910%E6%AC%BE%E4%B8%8D%E5%90%8C%E5%8F%82%E6%95%B0%E8%A7%84%E6%A8%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%B9%B6%E5%BC%80%E6%94%BE%E4%BA%86%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D%E5%92%8C%E6%8E%A8%E7%90%86%E4%BB%A3%E7%A0%81%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E7%99%BE%E5%BA%A6%E5%9C%A8%E5%A4%9A%E6%A8%A1%E6%80%81%E5%BC%82%E6%9E%84MoE%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E9%AB%98%E6%95%88%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8F%8A%E6%A8%A1%E6%80%81%E7%89%B9%E5%AE%9A%E5%90%8E%E8%AE%AD%E7%BB%83%E6%96%B9%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%9B%B4%E5%9C%A8%E5%85%A8%E7%90%83AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E6%BA%90%E7%AB%9E%E4%BA%89%E4%B8%AD%E8%BF%88%E5%87%BA%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E6%99%AE%E6%83%A0%E5%8A%A0%E9%80%9FAI%E7%94%9F%E6%80%81%E5%8F%91%E5%B1%95%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E9%9D%A2%E4%B8%B4%E7%9D%80%E7%A4%BE%E5%8C%BA%E7%BB%B4%E6%8A%A4%E5%92%8C%E5%B9%B3%E8%A1%A1%E5%95%86%E4%B8%9A%E5%8C%96%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82&amp;amp;url=http%3A%2F%2Flocalhost%3A1315%2Finsights%2Farticle-20250630111004423-1%2F"
           class="ananke-social-link weibo no-underline"
           title="Share on Weibo" aria-label="Share on Weibo"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
@@ -356,7 +356,7 @@
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1315/" >
     &copy;  AI内参 2025 
   </a>
     <div><div class="ananke-socials"></div>

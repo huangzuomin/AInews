@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1315&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>英伟达DLSS 4显存优化：Transformer模型效率飞跃的深层解读 | AI内参</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="英伟达最新发布的DLSS 4 SDK对核心的Transformer模型进行了显著的显存优化，成功将显存占用降低了20%，有效缓解了高分辨率游戏下的显存压力。这一技术进步不仅为玩家带来了更流畅、更沉浸式的游戏体验，也展示了在AI模型效率提升方面的巨大潜力，预示着未来AI技术在资源受限环境下的更广泛应用。">
-    <meta name="generator" content="Hugo 0.147.8">
+    <meta name="generator" content="Hugo 0.147.0">
     
     
     
@@ -49,10 +49,10 @@
     
 
     
-      <link rel="canonical" href="http://192.168.50.247:1313/insights/dlss-4transformer-20250630111004415-0/">
+      <link rel="canonical" href="http://localhost:1315/insights/dlss-4transformer-20250630111004415-0/">
     
 
-    <meta property="og:url" content="http://192.168.50.247:1313/insights/dlss-4transformer-20250630111004415-0/">
+    <meta property="og:url" content="http://localhost:1315/insights/dlss-4transformer-20250630111004415-0/">
   <meta property="og:site_name" content="AI内参">
   <meta property="og:title" content="英伟达DLSS 4显存优化：Transformer模型效率飞跃的深层解读">
   <meta property="og:description" content="英伟达最新发布的DLSS 4 SDK对核心的Transformer模型进行了显著的显存优化，成功将显存占用降低了20%，有效缓解了高分辨率游戏下的显存压力。这一技术进步不仅为玩家带来了更流畅、更沉浸式的游戏体验，也展示了在AI模型效率提升方面的巨大潜力，预示着未来AI技术在资源受限环境下的更广泛应用。">
@@ -88,7 +88,7 @@
   
   
   
-  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-06-Jun%2030,%202025_11-00-17-685.jpg');">
+  <header class="cover bg-center" style="background-image: url('http://localhost:1315/newsimages/selected_image_YYYY-06-Jun%2030,%202025_11-00-17-685.jpg');">
     <div class="bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l center items-center justify-between">
@@ -165,13 +165,13 @@
     <header class="mt4 w-100">
       <aside class="instapaper_ignoref helvetica tracked">
         <span style="color: #999;">2025-06-30 11:10</span>
-      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%8B%B1%E4%BC%9F%E8%BE%BEDLSS&amp;#43;4%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9ATransformer%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E9%A3%9E%E8%B7%83%E7%9A%84%E6%B7%B1%E5%B1%82%E8%A7%A3%E8%AF%BB%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DLSS&amp;#43;4&amp;#43;SDK%E5%AF%B9%E6%A0%B8%E5%BF%83%E7%9A%84Transformer%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E4%BA%86%E6%98%BE%E8%91%97%E7%9A%84%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E6%98%BE%E5%AD%98%E5%8D%A0%E7%94%A8%E9%99%8D%E4%BD%8E%E4%BA%8620%25%EF%BC%8C%E6%9C%89%E6%95%88%E7%BC%93%E8%A7%A3%E4%BA%86%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B8%B8%E6%88%8F%E4%B8%8B%E7%9A%84%E6%98%BE%E5%AD%98%E5%8E%8B%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E8%BF%9B%E6%AD%A5%E4%B8%8D%E4%BB%85%E4%B8%BA%E7%8E%A9%E5%AE%B6%E5%B8%A6%E6%9D%A5%E4%BA%86%E6%9B%B4%E6%B5%81%E7%95%85%E3%80%81%E6%9B%B4%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%9A%84%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C%EF%BC%8C%E4%B9%9F%E5%B1%95%E7%A4%BA%E4%BA%86%E5%9C%A8AI%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%96%B9%E9%9D%A2%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E6%8A%80%E6%9C%AF%E5%9C%A8%E8%B5%84%E6%BA%90%E5%8F%97%E9%99%90%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%9B%B4%E5%B9%BF%E6%B3%9B%E5%BA%94%E7%94%A8%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdlss-4transformer-20250630111004415-0%2F"
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%8B%B1%E4%BC%9F%E8%BE%BEDLSS&amp;#43;4%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9ATransformer%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E9%A3%9E%E8%B7%83%E7%9A%84%E6%B7%B1%E5%B1%82%E8%A7%A3%E8%AF%BB%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DLSS&amp;#43;4&amp;#43;SDK%E5%AF%B9%E6%A0%B8%E5%BF%83%E7%9A%84Transformer%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E4%BA%86%E6%98%BE%E8%91%97%E7%9A%84%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E6%98%BE%E5%AD%98%E5%8D%A0%E7%94%A8%E9%99%8D%E4%BD%8E%E4%BA%8620%25%EF%BC%8C%E6%9C%89%E6%95%88%E7%BC%93%E8%A7%A3%E4%BA%86%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B8%B8%E6%88%8F%E4%B8%8B%E7%9A%84%E6%98%BE%E5%AD%98%E5%8E%8B%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E8%BF%9B%E6%AD%A5%E4%B8%8D%E4%BB%85%E4%B8%BA%E7%8E%A9%E5%AE%B6%E5%B8%A6%E6%9D%A5%E4%BA%86%E6%9B%B4%E6%B5%81%E7%95%85%E3%80%81%E6%9B%B4%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%9A%84%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C%EF%BC%8C%E4%B9%9F%E5%B1%95%E7%A4%BA%E4%BA%86%E5%9C%A8AI%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%96%B9%E9%9D%A2%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E6%8A%80%E6%9C%AF%E5%9C%A8%E8%B5%84%E6%BA%90%E5%8F%97%E9%99%90%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%9B%B4%E5%B9%BF%E6%B3%9B%E5%BA%94%E7%94%A8%E3%80%82&amp;amp;url=http%3A%2F%2Flocalhost%3A1315%2Finsights%2Fdlss-4transformer-20250630111004415-0%2F"
           class="ananke-social-link x-twitter no-underline"
           title="Share on X" aria-label="Share on X"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
                 
-              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%8B%B1%E4%BC%9F%E8%BE%BEDLSS&amp;#43;4%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9ATransformer%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E9%A3%9E%E8%B7%83%E7%9A%84%E6%B7%B1%E5%B1%82%E8%A7%A3%E8%AF%BB%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DLSS&amp;#43;4&amp;#43;SDK%E5%AF%B9%E6%A0%B8%E5%BF%83%E7%9A%84Transformer%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E4%BA%86%E6%98%BE%E8%91%97%E7%9A%84%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E6%98%BE%E5%AD%98%E5%8D%A0%E7%94%A8%E9%99%8D%E4%BD%8E%E4%BA%8620%25%EF%BC%8C%E6%9C%89%E6%95%88%E7%BC%93%E8%A7%A3%E4%BA%86%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B8%B8%E6%88%8F%E4%B8%8B%E7%9A%84%E6%98%BE%E5%AD%98%E5%8E%8B%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E8%BF%9B%E6%AD%A5%E4%B8%8D%E4%BB%85%E4%B8%BA%E7%8E%A9%E5%AE%B6%E5%B8%A6%E6%9D%A5%E4%BA%86%E6%9B%B4%E6%B5%81%E7%95%85%E3%80%81%E6%9B%B4%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%9A%84%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C%EF%BC%8C%E4%B9%9F%E5%B1%95%E7%A4%BA%E4%BA%86%E5%9C%A8AI%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%96%B9%E9%9D%A2%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E6%8A%80%E6%9C%AF%E5%9C%A8%E8%B5%84%E6%BA%90%E5%8F%97%E9%99%90%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%9B%B4%E5%B9%BF%E6%B3%9B%E5%BA%94%E7%94%A8%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdlss-4transformer-20250630111004415-0%2F"
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%8B%B1%E4%BC%9F%E8%BE%BEDLSS&amp;#43;4%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9ATransformer%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E9%A3%9E%E8%B7%83%E7%9A%84%E6%B7%B1%E5%B1%82%E8%A7%A3%E8%AF%BB%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84DLSS&amp;#43;4&amp;#43;SDK%E5%AF%B9%E6%A0%B8%E5%BF%83%E7%9A%84Transformer%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E4%BA%86%E6%98%BE%E8%91%97%E7%9A%84%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E6%98%BE%E5%AD%98%E5%8D%A0%E7%94%A8%E9%99%8D%E4%BD%8E%E4%BA%8620%25%EF%BC%8C%E6%9C%89%E6%95%88%E7%BC%93%E8%A7%A3%E4%BA%86%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B8%B8%E6%88%8F%E4%B8%8B%E7%9A%84%E6%98%BE%E5%AD%98%E5%8E%8B%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E8%BF%9B%E6%AD%A5%E4%B8%8D%E4%BB%85%E4%B8%BA%E7%8E%A9%E5%AE%B6%E5%B8%A6%E6%9D%A5%E4%BA%86%E6%9B%B4%E6%B5%81%E7%95%85%E3%80%81%E6%9B%B4%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%9A%84%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C%EF%BC%8C%E4%B9%9F%E5%B1%95%E7%A4%BA%E4%BA%86%E5%9C%A8AI%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%96%B9%E9%9D%A2%E7%9A%84%E5%B7%A8%E5%A4%A7%E6%BD%9C%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E6%8A%80%E6%9C%AF%E5%9C%A8%E8%B5%84%E6%BA%90%E5%8F%97%E9%99%90%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%9B%B4%E5%B9%BF%E6%B3%9B%E5%BA%94%E7%94%A8%E3%80%82&amp;amp;url=http%3A%2F%2Flocalhost%3A1315%2Finsights%2Fdlss-4transformer-20250630111004415-0%2F"
           class="ananke-social-link weibo no-underline"
           title="Share on Weibo" aria-label="Share on Weibo"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
@@ -363,7 +363,7 @@
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1315/" >
     &copy;  AI内参 2025 
   </a>
     <div><div class="ananke-socials"></div>
