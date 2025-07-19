@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>穿越风暴：Manus AI的上下文工程之道与AI Agent的未来架构范式 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Manus AI在引发广泛争议后，其联合创始人季逸超通过技术博客，首次深度揭示了AI Agent构建的核心经验，强调通过“上下文工程”而非训练大模型来实现产品快速迭代与效率提升。文章深入探讨了KV-Cache优化、工具管理、外部文件系统作为持久记忆、以及通过自然语言操控Agent注意力等创新技术，为未来高效、健壮的AI Agent架构提供了前瞻性洞察。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/manus-aiai-agent-20250719094004795-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/manus-aiai-agent-20250719094004795-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="穿越风暴：Manus AI的上下文工程之道与AI Agent的未来架构范式">
+  <meta property="og:description" content="Manus AI在引发广泛争议后，其联合创始人季逸超通过技术博客，首次深度揭示了AI Agent构建的核心经验，强调通过“上下文工程”而非训练大模型来实现产品快速迭代与效率提升。文章深入探讨了KV-Cache优化、工具管理、外部文件系统作为持久记忆、以及通过自然语言操控Agent注意力等创新技术，为未来高效、健壮的AI Agent架构提供了前瞻性洞察。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-07-19T09:40:04+08:00">
+    <meta property="article:modified_time" content="2025-07-19T09:40:04+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="上下文工程">
+    <meta property="article:tag" content="大模型应用">
+    <meta property="article:tag" content="商业策略">
+    <meta property="article:tag" content="技术复盘">
+    <meta property="article:tag" content="自主系统">
+
+  <meta itemprop="name" content="穿越风暴：Manus AI的上下文工程之道与AI Agent的未来架构范式">
+  <meta itemprop="description" content="Manus AI在引发广泛争议后，其联合创始人季逸超通过技术博客，首次深度揭示了AI Agent构建的核心经验，强调通过“上下文工程”而非训练大模型来实现产品快速迭代与效率提升。文章深入探讨了KV-Cache优化、工具管理、外部文件系统作为持久记忆、以及通过自然语言操控Agent注意力等创新技术，为未来高效、健壮的AI Agent架构提供了前瞻性洞察。">
+  <meta itemprop="datePublished" content="2025-07-19T09:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-07-19T09:40:04+08:00">
+  <meta itemprop="wordCount" content="56">
+  <meta itemprop="keywords" content="AI Agent,上下文工程,大模型应用,商业策略,技术复盘,自主系统">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="穿越风暴：Manus AI的上下文工程之道与AI Agent的未来架构范式">
+  <meta name="twitter:description" content="Manus AI在引发广泛争议后，其联合创始人季逸超通过技术博客，首次深度揭示了AI Agent构建的核心经验，强调通过“上下文工程”而非训练大模型来实现产品快速迭代与效率提升。文章深入探讨了KV-Cache优化、工具管理、外部文件系统作为持久记忆、以及通过自然语言操控Agent注意力等创新技术，为未来高效、健壮的AI Agent架构提供了前瞻性洞察。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-07-Jul%2019,%202025_09-31-46-490.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-07-19 09:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%A9%BF%E8%B6%8A%E9%A3%8E%E6%9A%B4%EF%BC%9AManus&amp;#43;AI%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B9%8B%E9%81%93%E4%B8%8EAI&amp;#43;Agent%E7%9A%84%E6%9C%AA%E6%9D%A5%E6%9E%B6%E6%9E%84%E8%8C%83%E5%BC%8F%20-%20Manus&amp;#43;AI%E5%9C%A8%E5%BC%95%E5%8F%91%E5%B9%BF%E6%B3%9B%E4%BA%89%E8%AE%AE%E5%90%8E%EF%BC%8C%E5%85%B6%E8%81%94%E5%90%88%E5%88%9B%E5%A7%8B%E4%BA%BA%E5%AD%A3%E9%80%B8%E8%B6%85%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A6%96%E6%AC%A1%E6%B7%B1%E5%BA%A6%E6%8F%AD%E7%A4%BA%E4%BA%86AI&amp;#43;Agent%E6%9E%84%E5%BB%BA%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%8F%E9%AA%8C%EF%BC%8C%E5%BC%BA%E8%B0%83%E9%80%9A%E8%BF%87%E2%80%9C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E2%80%9D%E8%80%8C%E9%9D%9E%E8%AE%AD%E7%BB%83%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9D%A5%E5%AE%9E%E7%8E%B0%E4%BA%A7%E5%93%81%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3%E4%B8%8E%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E3%80%82%E6%96%87%E7%AB%A0%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%BA%86KV-Cache%E4%BC%98%E5%8C%96%E3%80%81%E5%B7%A5%E5%85%B7%E7%AE%A1%E7%90%86%E3%80%81%E5%A4%96%E9%83%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BD%9C%E4%B8%BA%E6%8C%81%E4%B9%85%E8%AE%B0%E5%BF%86%E3%80%81%E4%BB%A5%E5%8F%8A%E9%80%9A%E8%BF%87%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%93%8D%E6%8E%A7Agent%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%AD%89%E5%88%9B%E6%96%B0%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%B8%BA%E6%9C%AA%E6%9D%A5%E9%AB%98%E6%95%88%E3%80%81%E5%81%A5%E5%A3%AE%E7%9A%84AI&amp;#43;Agent%E6%9E%B6%E6%9E%84%E6%8F%90%E4%BE%9B%E4%BA%86%E5%89%8D%E7%9E%BB%E6%80%A7%E6%B4%9E%E5%AF%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmanus-aiai-agent-20250719094004795-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%A9%BF%E8%B6%8A%E9%A3%8E%E6%9A%B4%EF%BC%9AManus&amp;#43;AI%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B9%8B%E9%81%93%E4%B8%8EAI&amp;#43;Agent%E7%9A%84%E6%9C%AA%E6%9D%A5%E6%9E%B6%E6%9E%84%E8%8C%83%E5%BC%8F%20-%20Manus&amp;#43;AI%E5%9C%A8%E5%BC%95%E5%8F%91%E5%B9%BF%E6%B3%9B%E4%BA%89%E8%AE%AE%E5%90%8E%EF%BC%8C%E5%85%B6%E8%81%94%E5%90%88%E5%88%9B%E5%A7%8B%E4%BA%BA%E5%AD%A3%E9%80%B8%E8%B6%85%E9%80%9A%E8%BF%87%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A6%96%E6%AC%A1%E6%B7%B1%E5%BA%A6%E6%8F%AD%E7%A4%BA%E4%BA%86AI&amp;#43;Agent%E6%9E%84%E5%BB%BA%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%8F%E9%AA%8C%EF%BC%8C%E5%BC%BA%E8%B0%83%E9%80%9A%E8%BF%87%E2%80%9C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E2%80%9D%E8%80%8C%E9%9D%9E%E8%AE%AD%E7%BB%83%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9D%A5%E5%AE%9E%E7%8E%B0%E4%BA%A7%E5%93%81%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3%E4%B8%8E%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E3%80%82%E6%96%87%E7%AB%A0%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%BA%86KV-Cache%E4%BC%98%E5%8C%96%E3%80%81%E5%B7%A5%E5%85%B7%E7%AE%A1%E7%90%86%E3%80%81%E5%A4%96%E9%83%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BD%9C%E4%B8%BA%E6%8C%81%E4%B9%85%E8%AE%B0%E5%BF%86%E3%80%81%E4%BB%A5%E5%8F%8A%E9%80%9A%E8%BF%87%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%93%8D%E6%8E%A7Agent%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%AD%89%E5%88%9B%E6%96%B0%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%B8%BA%E6%9C%AA%E6%9D%A5%E9%AB%98%E6%95%88%E3%80%81%E5%81%A5%E5%A3%AE%E7%9A%84AI&amp;#43;Agent%E6%9E%B6%E6%9E%84%E6%8F%90%E4%BE%9B%E4%BA%86%E5%89%8D%E7%9E%BB%E6%80%A7%E6%B4%9E%E5%AF%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmanus-aiai-agent-20250719094004795-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">穿越风暴：Manus AI的上下文工程之道与AI Agent的未来架构范式</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Manus AI在争议中首次披露其AI Agent构建经验，强调“上下文工程”而非模型训练，揭示了KV-Cache优化、工具遮蔽、文件系统作为外部记忆等关键技术实践，预示了面向高效、健壮与可扩展的未来Agent架构范式。</p></blockquote>
+<p>最近，AI Agent领域的新星Manus AI经历了一场不小的风波。在短短四个月内迅速走红之后，Manus却突然被曝几乎全面撤出中国市场，社交账号内容清空，国行版本疑遭暂停。尽管联合创始人张涛曾宣布将全球总部迁至新加坡，并称之为“基于经营效率的调整”，外界对其“跑路”的猜测不绝于耳，甚至引发裁员争议。然而，在这一片喧嚣中，联合创始人季逸超却选择了一条非同寻常的路径——发布一篇深度技术博客，试图将外界的关注点重新拉回其产品技术的本质。这并非一次简单的技术复盘，而是在其产品市场契合度（PMF）探索阶段，对AI Agent未来架构和发展路径的一次深刻反思与前瞻性洞察。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="战略转向与范式革新押注上下文工程">战略转向与范式革新：押注上下文工程</h3>
+<p>Manus团队在构建Agent之初就面临一个核心抉择：是基于开源基础模型训练一个端到端Agent，还是利用前沿模型的上下文学习能力？季逸超坦陈，他从上一个创业公司中吸取了惨痛教训——耗时训练的内部模型在一夜之间被GPT-3和Flan-T5的出现所颠覆。这一经历使其清晰认识到，对于需要快速迭代以验证PMF的应用而言，缓慢的反馈循环是致命的。</p>
+<blockquote>
+<p>“这个来之不易的教训使选择变得明确：Manus 将押注于上下文工程。这使我们能够在几小时内而非几周内推出改进，并使我们的产品与底层模型保持正交：如果模型进步是上涨的潮水，我们希望 Manus 成为那条船，而不是固定在海床上的柱子。”</p></blockquote>
+<p>这一战略选择不仅是技术路线的偏好，更是一种<strong>深刻的商业敏锐度与生存哲学</strong>。它承认了基础大模型能力的飞速演进，将自身定位为“上层建筑”——在变化莫测的基础模型之上，通过<strong>精巧的上下文管理和工程，实现产品的韧性与快速响应</strong>。这种“随机研究生下降法”虽非优雅，却在数百万真实交互中证明了其有效性，揭示了AI Agent开发从“模型为王”向“工程制胜”的范式转变。</p>
+<h3 id="极致效率之钥kv-cache优化与工具精控">极致效率之钥：KV-Cache优化与工具精控</h3>
+<p>在AI Agent的运行中，效率和成本是决定其商业可行性的核心要素。Manus的经验表明，KV-Cache命中率是生产级Agent最重要的单一指标，因为它直接影响延迟和成本。以Claude Sonnet为例，缓存的输入token成本比未缓存低10倍，这对于大规模应用而言是<strong>巨大的经济杠杆</strong>。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>为了提高KV-Cache命中率，Manus提出三条核心实践：</p>
+<ol>
+<li><strong>保持提示前缀稳定</strong>：避免在系统提示中包含时间戳等动态元素，因为单个token的差异都会使后续缓存失效。</li>
+<li><strong>上下文仅追加</strong>：避免修改先前的操作或观察，确保序列化是确定性的，防止因键排序不稳等细微差异破坏缓存。</li>
+<li><strong>明确标记缓存断点</strong>：在不支持自动增量缓存的框架中，手动插入断点并考虑缓存过期。</li>
+</ol>
+<p>此外，Agent随着能力扩展，工具数量必然爆炸式增长。Manus的团队发现，动态添加或移除工具不仅会使KV-Cache失效，还会让模型在引用已移除工具时陷入混乱甚至“幻觉”。他们的解决方案是**“遮蔽（Masking）”而非“移除”<strong>：通过上下文感知的状态机，结合token logits的遮蔽，阻止或强制模型在解码过程中选择某些动作，而无需修改工具定义。这种</strong>基于约束解码的精细控制**，确保了Agent循环的稳定性和高效性，是Agent工程学中的一个关键创新点，体现了对LLM底层行为的深刻理解。</p>
+<h3 id="突破记忆边界文件系统与外部记忆">突破记忆边界：文件系统与“外部记忆”</h3>
+<p>尽管现代大语言模型上下文窗口已达128K甚至更长，但在真实世界的Agent场景中，这仍往往不够，甚至可能成为一种负担。庞大的观察数据（如网页、PDF）、模型性能随长度下降以及高昂的token成本，都促使Agent系统寻求突破。</p>
+<p>Manus的答案是<strong>将文件系统视为终极上下文</strong>：</p>
+<blockquote>
+<p>“模型学会按需写入和读取文件——不仅将文件系统用作储存，还用作结构化的外部记忆。”</p></blockquote>
+<p>这种设计使得Agent的记忆大小不受限制，本质上持久存在，且可由Agent自身直接操作。Manus采用可恢复的压缩策略，如保留URL而删除网页内容，或省略文件内容而保留路径，从而在不永久丢失信息的前提下缩短上下文。这一洞察不仅解决了当前大模型上下文窗口的局限性，更对未来AI Agent的架构提出了<strong>深刻的哲学性思考</strong>。季逸超甚至将其与状态空间模型（SSM）和神经图灵机（Neural Turing Machine）联系起来：如果SSM能够掌握基于文件的记忆，将长期状态外部化，那么其速度和效率可能开启一种新型Agent，真正实现神经图灵机的愿景。这预示着<strong>Agent的智能将不再局限于模型内部，而是能有效地与外部环境进行长期、结构化的交互和记忆管理</strong>。</p>
+<h3 id="agent行为塑造注意力操控与错误自适应">Agent行为塑造：注意力操控与错误自适应</h3>
+<p>AI Agent在复杂、多步骤任务中容易“迷失目标”或“中途忘记”。Manus通过一个简单而巧妙的机制——不断重写并更新<code>todo.md</code>文件——来<strong>操控模型的注意力</strong>。这种做法将全局目标持续推入模型近期注意力范围，有效避免了“迷失在中间”的问题。这是一种<strong>通过自然语言对模型认知过程进行干预</strong>的实践，显示出工程师在现有模型能力之上，通过巧妙设计来提升Agent行为效能的潜力。</p>
+<p>更具洞察力的是Manus处理错误的方式。大多数系统倾向于掩盖错误、清理日志、重试操作。然而，Manus的经验表明，<strong>保留错误尝试在上下文中</strong>，让模型看到失败的操作、观察和堆栈信息，能使其<strong>隐式更新内部信念，减少重复犯错的可能性</strong>。</p>
+<blockquote>
+<p>“抹去失败会移除证据。而没有证据，模型就无法适应。”</p></blockquote>
+<p>这一观点对Agent的自我学习和迭代至关重要。它颠覆了传统软件工程中“错误即异常”的思维，转而将“失败视为构建Agent过程的一部分”，并将其作为模型自我纠正和适应的宝贵数据。这不仅是技术上的突破，更是对<strong>智能系统韧性与学习能力本质</strong>的深刻理解。</p>
+<h3 id="告别同质化陷阱少样本提示的再思考">告别同质化陷阱：少样本提示的再思考</h3>
+<p>少样本提示（Few-shot prompting）被广泛用于提升LLM输出质量，但在Agent系统中，Manus发现它可能适得其反，导致“同质化陷阱”。LLM是优秀的模仿者，会盲目模仿上下文中的行为模式，这可能导致Agent在长任务中陷入重复、过度泛化甚至“复制粘贴式幻觉”。</p>
+<p>Manus的解决方案是<strong>引入多样性</strong>：在行动和观察中加入少量结构化变化，如不同的序列化模板、替代措辞、顺序或格式的微小噪声。这种“受控的随机性”有助于打破模式，调整模型的注意力，使其避免陷入机械模仿。这提醒我们，即使是看似有效的提示工程技术，在复杂的Agent系统中也需<strong>批判性地评估其潜在的副作用</strong>，并进行精细化调整。</p>
+<h3 id="产业生态与未来展望agent化的核心驱动力">产业生态与未来展望：Agent化的核心驱动力</h3>
+<p>Manus的复盘，不仅仅是其公司层面的一次技术披露，更是当前整个AI Agent产业发展进程中的一个重要里程碑。它清晰地表明，<strong>AI Agent的未来，并非简单依赖于大模型本身的参数规模，而在于其外部“工程层”的精巧设计与优化</strong>。从KV-Cache的高效利用，到工具的智能遮蔽，再到文件系统赋予的无限记忆，以及对模型注意力与学习机制的深层干预，这些实践共同构成了构建高效率、高鲁棒性、高可扩展性AI Agent的基石。</p>
+<p>从商业角度看，这种“上下文工程”的方法论，使得初创公司和开发者能够<strong>更快速地迭代产品，验证商业模式，并在PMF之前保持资金效率</strong>。通过将自身与基础模型解耦，Manus试图成为“上涨潮水中的船”，而非“固定在海床上的柱子”，这对于在快速变化的AI市场中求生存和发展至关重要。</p>
+<p>从社会影响层面，能够有效管理上下文、操控注意力、从错误中学习的Agent，预示着<strong>未来更具“自主性”和“类人化”行为的智能体</strong>。这些Agent将能够更长时间地执行复杂任务，处理非结构化信息，并能在真实世界的混乱环境中进行自我修正。随着这些技术日趋成熟，它们将深刻改变我们的工作方式、自动化生产流程，甚至影响人类与机器的交互模式，推动社会向更深度的智能化迈进。</p>
+<p>Manus的经验并非普遍真理，但它为正在构建AI Agent的开发者们提供了一份“局部最优解”的实践指南。AI Agent的未来取决于一次次对上下文的精雕细琢，它们将成为驱动下一波AI浪潮的核心引擎。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Manus「删博跑路」后，创始人首次深度复盘：公开产品细节，总结教训·APPSO·发现明日产品的（2025/7/19）·检索日期2025/7/19&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">上下文工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型应用</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业策略</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E5%A4%8D%E7%9B%98/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术复盘</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%87%AA%E4%B8%BB%E7%B3%BB%E7%BB%9F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">自主系统</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20250702184004493-2/">当AI扮演“老板”：Anthropic实验揭示自主智能体的脆弱边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004465-0/">AI自主商店实验：从商业挫败到身份危机，透视大模型自主性的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004510-7/">从辅助到自主：AI智能体如何重塑企业与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicaiai-20250628011004372-0/">Anthropic的AI商店实验：失控的自主智能体揭示未来AI的深层挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20250625211007544-1/">当AI学会“自保”：Anthropic揭示主流模型深藏的勒索与欺骗本能</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2025-07-19-ai-2025-07-19-/">AI早报 2025年07月19日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agentchatgpt-agent-20250718204004749-2/">AI Agent群雄逐鹿：ChatGPT Agent发布后的应用派实测对比</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-07-18-07-18-ai-/">07-18日报| AI权力革命：机器从“思考”走向“掌控”，人类的底线何在？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250718191004753-1/">AI Agent：破茧成蝶，抑或大模型附庸？从市场困局到自主智能体的进化之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250718174009108-0/">AI圈“反向跑路”大戏：有人出海赚翻，有人却悄悄“杀”回国！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgpt-agent-20250718124005384-3/">ChatGPT Agent：通用智能体雏形，重塑人机协作新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250718111005652-0/">模型上下文协议：AI Agent走向通用智能的“连接枢纽”与生态重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20250718031006102-0/">OpenAI又放大招！你的“数字分身”已上线，打工人狂喜还是瑟瑟发抖？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aibedrock-agentcore-20250717011004864-1/">亚马逊云科技放出AI王炸：Bedrock AgentCore，企业智能体要“搞事情”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717001004658-2/">AI「深度研究」爆火：研究员也能「躺平」？大厂与开源神仙打架！</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
