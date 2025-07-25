@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌最新发布的MoR（Mixture-of-Recursions）架构，以统一参数共享、自适应递归深度和高效KV缓存为核心，实现了大语言模型推理速度翻倍、KV内存减半的突破。这不仅大幅提升了模型效率，降低了部署成本，更是谷歌在底层AI计算范式上的一项战略性创新，有望加速AI技术的普及和商业化进程，并引领未来AI模型的发展方向。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/mortransformer-20250718114005752-4/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/mortransformer-20250718114005752-4/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学">
+  <meta property="og:description" content="谷歌最新发布的MoR（Mixture-of-Recursions）架构，以统一参数共享、自适应递归深度和高效KV缓存为核心，实现了大语言模型推理速度翻倍、KV内存减半的突破。这不仅大幅提升了模型效率，降低了部署成本，更是谷歌在底层AI计算范式上的一项战略性创新，有望加速AI技术的普及和商业化进程，并引领未来AI模型的发展方向。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-07-18T11:40:05+08:00">
+    <meta property="article:modified_time" content="2025-07-18T11:40:05+08:00">
+    <meta property="article:tag" content="MoR架构">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="谷歌AI">
+    <meta property="article:tag" content="算力优化">
+    <meta property="article:tag" content="AI商业化">
+    <meta property="article:tag" content="算法创新">
+
+  <meta itemprop="name" content="谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学">
+  <meta itemprop="description" content="谷歌最新发布的MoR（Mixture-of-Recursions）架构，以统一参数共享、自适应递归深度和高效KV缓存为核心，实现了大语言模型推理速度翻倍、KV内存减半的突破。这不仅大幅提升了模型效率，降低了部署成本，更是谷歌在底层AI计算范式上的一项战略性创新，有望加速AI技术的普及和商业化进程，并引领未来AI模型的发展方向。">
+  <meta itemprop="datePublished" content="2025-07-18T11:40:05+08:00">
+  <meta itemprop="dateModified" content="2025-07-18T11:40:05+08:00">
+  <meta itemprop="wordCount" content="66">
+  <meta itemprop="keywords" content="MoR架构,大语言模型,谷歌AI,算力优化,AI商业化,算法创新">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学">
+  <meta name="twitter:description" content="谷歌最新发布的MoR（Mixture-of-Recursions）架构，以统一参数共享、自适应递归深度和高效KV缓存为核心，实现了大语言模型推理速度翻倍、KV内存减半的突破。这不仅大幅提升了模型效率，降低了部署成本，更是谷歌在底层AI计算范式上的一项战略性创新，有望加速AI技术的普及和商业化进程，并引领未来AI模型的发展方向。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-07-Jul%2018,%202025_11-32-56-596.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-07-18 11:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B0%B7%E6%AD%8CMoR%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%A1%E7%AE%97%E8%8C%83%E5%BC%8F%E7%9A%84%E6%96%B0%E7%AF%87%E7%AB%A0%EF%BC%8C%E8%B6%85%E8%B6%8ATransformer%E7%9A%84%E6%95%88%E7%8E%87%E5%93%B2%E5%AD%A6%20-%20%E8%B0%B7%E6%AD%8C%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84MoR%EF%BC%88Mixture-of-Recursions%EF%BC%89%E6%9E%B6%E6%9E%84%EF%BC%8C%E4%BB%A5%E7%BB%9F%E4%B8%80%E5%8F%82%E6%95%B0%E5%85%B1%E4%BA%AB%E3%80%81%E8%87%AA%E9%80%82%E5%BA%94%E9%80%92%E5%BD%92%E6%B7%B1%E5%BA%A6%E5%92%8C%E9%AB%98%E6%95%88KV%E7%BC%93%E5%AD%98%E4%B8%BA%E6%A0%B8%E5%BF%83%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E7%BF%BB%E5%80%8D%E3%80%81KV%E5%86%85%E5%AD%98%E5%87%8F%E5%8D%8A%E7%9A%84%E7%AA%81%E7%A0%B4%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%86%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%EF%BC%8C%E9%99%8D%E4%BD%8E%E4%BA%86%E9%83%A8%E7%BD%B2%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E6%98%AF%E8%B0%B7%E6%AD%8C%E5%9C%A8%E5%BA%95%E5%B1%82AI%E8%AE%A1%E7%AE%97%E8%8C%83%E5%BC%8F%E4%B8%8A%E7%9A%84%E4%B8%80%E9%A1%B9%E6%88%98%E7%95%A5%E6%80%A7%E5%88%9B%E6%96%B0%EF%BC%8C%E6%9C%89%E6%9C%9B%E5%8A%A0%E9%80%9FAI%E6%8A%80%E6%9C%AF%E7%9A%84%E6%99%AE%E5%8F%8A%E5%92%8C%E5%95%86%E4%B8%9A%E5%8C%96%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%B9%B6%E5%BC%95%E9%A2%86%E6%9C%AA%E6%9D%A5AI%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmortransformer-20250718114005752-4%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B0%B7%E6%AD%8CMoR%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%A1%E7%AE%97%E8%8C%83%E5%BC%8F%E7%9A%84%E6%96%B0%E7%AF%87%E7%AB%A0%EF%BC%8C%E8%B6%85%E8%B6%8ATransformer%E7%9A%84%E6%95%88%E7%8E%87%E5%93%B2%E5%AD%A6%20-%20%E8%B0%B7%E6%AD%8C%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E7%9A%84MoR%EF%BC%88Mixture-of-Recursions%EF%BC%89%E6%9E%B6%E6%9E%84%EF%BC%8C%E4%BB%A5%E7%BB%9F%E4%B8%80%E5%8F%82%E6%95%B0%E5%85%B1%E4%BA%AB%E3%80%81%E8%87%AA%E9%80%82%E5%BA%94%E9%80%92%E5%BD%92%E6%B7%B1%E5%BA%A6%E5%92%8C%E9%AB%98%E6%95%88KV%E7%BC%93%E5%AD%98%E4%B8%BA%E6%A0%B8%E5%BF%83%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E7%BF%BB%E5%80%8D%E3%80%81KV%E5%86%85%E5%AD%98%E5%87%8F%E5%8D%8A%E7%9A%84%E7%AA%81%E7%A0%B4%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%86%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87%EF%BC%8C%E9%99%8D%E4%BD%8E%E4%BA%86%E9%83%A8%E7%BD%B2%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E6%98%AF%E8%B0%B7%E6%AD%8C%E5%9C%A8%E5%BA%95%E5%B1%82AI%E8%AE%A1%E7%AE%97%E8%8C%83%E5%BC%8F%E4%B8%8A%E7%9A%84%E4%B8%80%E9%A1%B9%E6%88%98%E7%95%A5%E6%80%A7%E5%88%9B%E6%96%B0%EF%BC%8C%E6%9C%89%E6%9C%9B%E5%8A%A0%E9%80%9FAI%E6%8A%80%E6%9C%AF%E7%9A%84%E6%99%AE%E5%8F%8A%E5%92%8C%E5%95%86%E4%B8%9A%E5%8C%96%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%B9%B6%E5%BC%95%E9%A2%86%E6%9C%AA%E6%9D%A5AI%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmortransformer-20250718114005752-4%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌最新发布的MoR（Mixture-of-Recursions）架构，以统一参数共享和自适应递归深度为核心，在实现推理速度翻倍、KV内存减半的同时，大幅提升大语言模型效率。这不仅是Transformer架构的重大演进，更是谷歌重塑AI计算范式，推动LLM普及与商业化的战略性一步，预示着未来AI算力瓶颈的突破与应用边界的拓展。</p></blockquote>
+<p>在人工智能领域，每一次底层架构的革新都如同地壳运动，悄无声息却力量磅礴，重塑着整个技术与商业版图。曾被誉为“AI基石”的Transformer架构，在推动大语言模型（LLM）实现前所未有突破的同时，也暴露出其在计算和内存效率上的瓶大模型在推理过程中对KV缓存（键值对缓存）的巨大需求，是导致高内存消耗和推理延迟的关键因素。</p>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>谷歌DeepMind联合KAIST AI、Mila人团队最新提出的Mixture-of-Recursions（MoR）架构，并非简单的优化，而是一种对LLM底层计算范式的<strong>结构性重塑</strong>。与Attention机制主导的Transformer或稀疏激活的Mixture-of-Experts（MoE）不同，MoR通过<strong>统一参数共享</strong>、<strong>自适应递归深度</strong>和<strong>高效KV缓存</strong>三大核心创新，在单一框架内实现了性能与效率的协同跃升。</p>
+<p>首先，MoR引入了<strong>递归Transformer</strong>的概念，通过将模型划分为可复用的递归块，大幅减少了模型所需的独特参数数量。传统的Transformer模型每一层都拥有独立的参数，导致模型规模与计算量呈线性甚至更高阶增长。而MoR的<strong>参数共享策略</strong>（如Cycle、Sequence、Middle变体）允许模型在不同处理阶段复用同一组参数，这不仅能显著提升分布式训练效率，还能通过连续深度批处理（continuous deep batching）消除计算“气泡”，从而提升推理吞吐量。</p>
+<p>其次，MoR的核心突破在于其<strong>自适应递归深度</strong>机制，即动态路由。传统的LLM模型通常采用固定层数，无论任务复杂与否，每个token都需经过所有层。MoR则通过轻量级路由器为每个token动态分配所需的递归深度，将计算资源集中于处理更复杂的token。无论是基于隐藏状态评分的“Expert-choice路由”，还是预设递归深度并逐步执行的“Token-choice路由”，都赋予了模型<strong>按需思考</strong>的能力，避免了不必要的计算浪费。这种动态性突破了先前固定思考深度的限制，使得模型能根据输入内容的复杂性进行<strong>自适应推理</strong>。</p>
+<p>最后，MoR在<strong>KV缓存管理</strong>方面进行了革命性优化。大模型在推理过程中对KV缓存（键值对缓存）的巨大需求，是导致高内存消耗和推理延迟的关键因素。MoR采用“Recursion-wise缓存”仅存储当前递归步骤中活跃token的KV对，将注意力计算限制在本地，显著降低了内存和I/O需求。同时，“Recursive KV共享”允许后续递归步骤复用首次递归的KV对，确保了对历史上下文的访问，进一步减少了预填充操作，从而在保持性能的同时<strong>直接将KV内存减半</strong>。这三者共同作用，使得MoR能够在解码每个token时进行“潜在思考”，从而实现参数效率与自适应计算的统一，达到新的效率最优解。</p>
+<h3 id="性能跃升与数据驱动的效率革命">性能跃升与数据驱动的效率革命</h3>
+<p>MoR的创新性并非纸上谈兵，其在实际实验中展现出的性能指标令人瞩目。研究人员在135M至1.7B不同参数规模的模型上，对MoR、原始Transformer和递归基线模型进行了对比。在相同的16.5e18 FLOPs训练预算下，MoR仅用<strong>50%的参数量</strong>，就实现了更低的验证损失和更高的平均少样本准确率（43.1%），而同等FLOPs下原始Transformer的准确率为42.3% <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这有力证明了MoR的<strong>计算效率远超传统模型</strong>，能在相同的计算预算下处理更多的训练token，从而达到更好的性能。</p>
+<p>进一步的数据分析显示，在固定训练20B token的场景下，MoR的训练FLOPs减少了<strong>25%</strong>，训练时间缩短了19%，峰值内存降低了25% <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着在模型训练阶段，MoR就能为开发者和企业<strong>节约可观的算力与时间成本</strong>。在推理吞吐量评估中，360M规模的MoR模型无论在固定批大小还是最大批大小设置下，均优于vanilla Transformer <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。递归深度的增加使得更多token能够提前退出计算，KV缓存占用减少，推理吞吐量显著提升，这对于实际部署和大规模应用具有<strong>颠覆性意义</strong>。</p>
+<p>MoR的可扩展性也得到了IsoFLOP分析的验证。尽管在135M的小模型规模下受递归容量瓶颈影响略逊于Vanilla模型，但在360M及更大规模的模型中，MoR的性能表现<strong>接近甚至超越Vanilla模型</strong>，而其参数量仅为后者的三分之一 <sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这表明，随着模型规模的进一步扩大，MoR的效率优势将愈发显著，有望成为未来构建千亿乃至万亿参数级别LLM的<strong>更优选择</strong>。</p>
+<h3 id="谷歌的宏大叙事从moe到mor的架构演进哲学">谷歌的宏大叙事：从MoE到MoR的架构演进哲学</h3>
+<p>MoR的发布并非孤立事件，它延续了谷歌在AI底层架构创新上的<strong>深层战略意图</strong>。从2017年首次将MoE（混合专家模型）引入LSTM层，到后来的GShard、Switch Transformer，直至如今Gemini 1.5 Pro采用的分层MoE架构，谷歌始终致力于通过架构创新来<strong>重构计算范式</strong>，以解决超大规模模型所面临的算力瓶颈。</p>
+<p>MoE的核心逻辑在于其<strong>稀疏激活</strong>机制，即在拥有海量参数的同时，仅激活其中一小部分“专家网络”进行计算 <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这使得模型能在参数量极大的情况下保持高效训练和推理，为超大规模模型提供了新的范式。MoR则更进一步，将“效率”的思考从“专家选择”延伸到**“递归深度选择”<strong>，并与参数共享和KV缓存策略结合，实现了“All in One”的统一优化。这体现了谷歌对于AI模型</strong>“效率至上”<strong>的深刻理解，以及其对AI未来发展路径的</strong>前瞻性布局**。它预示着未来AI模型的迭代，将不仅仅是参数规模的堆砌，更是对底层计算逻辑和资源分配机制的精细化探索。</p>
+<h3 id="产业生态重塑与商业化潜能">产业生态重塑与商业化潜能</h3>
+<p>MoR架构的出现，无疑为当前炙手可热的LLM产业带来了<strong>颠覆性的商业机遇</strong>。其“推理速度提高2倍，KV内存减半”的特性，直接击中了LLM部署成本高昂这一核心痛点。</p>
+<p>首先，<strong>降低了LLM的部署门槛</strong>。更低的内存需求意味着LLM可以部署在更少的GPU设备上，甚至未来有望在边缘设备上运行更大规模的模型。这对于中小型企业、初创公司以及个人开发者而言，是<strong>巨大的福音</strong>，将加速LLM在垂直行业和长尾应用中的普及，推动AI技术的“普惠化”。</p>
+<p>其次，<strong>提升了AI服务的盈利能力</strong>。对于提供LLM API服务或私有化部署解决方案的云厂商和AI公司而言，MoR能显著降低运营成本，从而提升利润空间，或以更具竞争力的价格吸引客户。这将进一步<strong>激发市场需求</strong>，加速AI商业化进程。</p>
+<p>再者，MoR的<strong>高参数效率和可扩展性</strong>为未来更强大的LLM奠定了基础。在现有算力约束下，MoR能在更小的参数规模下实现与Vanilla Transformer相当甚至更优的性能，这意味着企业可以更快、更经济地迭代和部署新一代模型。这种效率优势将成为<strong>新的竞争壁垒</strong>，促使更多玩家加入底层架构创新的赛道，加速AI领域的“摩尔定律”效应。</p>
+<p>从投资角度看，MoR的成功验证将引导资本流向更注重**“算力经济学”<strong>和</strong>“架构效率”**的AI基础设施和模型开发公司。那些能有效利用MoR或类似高效架构，提供高性价比AI服务的企业，将更受市场青睐。同时，MoR的全能特性（All in One，统一参数处理多任务）也预示着LLM模型开发将趋向更通用、更精简的方向，可能减少碎片化的模型维护成本。</p>
+<h3 id="超越效率ai思维模式与社会影响的深层洞察">超越效率：AI思维模式与社会影响的深层洞察</h3>
+<p>MoR不仅仅是效率的胜利，它更引发了对AI**“思维模式”<strong>以及</strong>“潜在空间推理”<strong>的深刻哲学思辨。有观点认为，MoR的出现或许代表着“潜在空间推理”（latent space reasoning）将成为LLM的下一个突破口 <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。传统LLM更多地依赖于显式表示和层层堆叠的转换，而“递归”与“动态路由”的结合，或许意味着模型正在学习在更抽象、更深层的潜在空间中进行</strong>“自适应思考”<strong>和</strong>“信息处理”**。这种内在的“思考”机制，使得模型不再简单地被动处理信息，而是能根据任务复杂性主动调整计算资源和深度，这无疑是迈向更类人智能的关键一步。</p>
+<p>如果MoR能够证明其在通用性和可扩展性上的强大潜力，它将不仅仅是“Transformer Killer”，而可能成为<strong>下一代AI基础设施的核心组件</strong>。这意味着未来的AI系统将能够以更高的效率处理更复杂的、跨模态的任务，进一步模糊人类与机器智能的界限。</p>
+<p>然而，随之而来的社会影响也需被正视。当AI的训练和部署成本大幅降低，其普及速度将进一步加快。这将深刻影响<strong>就业市场</strong>，加速自动化进程，要求劳动力市场进行适应性调整。同时，更强大的AI系统也带来了<strong>新的伦理和治理挑战</strong>，如信息茧房的加剧、虚假信息生成效率的提升等。如何在享受技术红利的同时，确保AI的负责任发展，将是全社会共同面临的严峻课题。</p>
+<p>总而言之，谷歌MoR架构的发布，是AI领域继Transformer和MoE之后，又一次对<strong>计算范式的深度探索</strong>。它不仅在技术层面解决了大模型的核心痛点，更在商业层面为AI的普及与应用打开了新的局面，甚至在哲学层面引发了我们对机器智能本质的再思考。尽管“Transformer Killer”的论断尚需时间验证 <sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，但MoR无疑为未来LLM的发展提供了一条极具潜力的道路，它将推动AI从“大而全”向“巧而精”演进，最终加速智能社会的全面到来。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Transformer危，谷歌MoR架构发布：内存减半推理速度还翻倍·量子位·鹭羽（2025/7/18）·检索日期2025/7/18&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://arxiv.org/abs/1701.06538">https://arxiv.org/abs/1701.06538</a>·Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer·Google Brain Team（2017/1/24）·检索日期2025/7/18&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://x.com/reza_byt/status/1945498424536862841">https://x.com/reza_byt/status/1945498424536862841</a>·@reza_byt（2025/7/18）·检索日期2025/7/18&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/mor%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MoR架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%B0%B7%E6%AD%8Cai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">谷歌AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%95%86%E4%B8%9A%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI商业化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%9B%E6%96%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算法创新</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/openaigpt-45-apiai-20250618202004742-3/">OpenAI策略调整：GPT-4.5 API退役背后的成本、稳定与AI生态两难</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiios-26android-16-20250717174005383-2/">超越界面：AI如何重塑iOS 26与Android 16的移动哲学与商业版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ineqmathai-20250717171005381-2/">大语言模型“证明力”跃迁：IneqMath如何重塑AI数学推理的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ineqmath-20250717164005353-2/">从“蒙对”到“理解”：IneqMath如何重塑大模型数学推理的范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717161005359-1/">炸裂！谷歌搜索AI学会“打电话”：不只帮你约服务，还能替你“砍价”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717114005032-5/">大模型架构演进：从参数竞赛到稀疏赋能，重塑AI产业格局与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250716204004705-0/">AI“思维链”的脆弱安全窗：巨头合流预示自主智能体治理新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250716094004552-0/">大模型重塑导航：从丛林救援到个性化管家，AI定义未来出行新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250716091005121-4/">大模型重塑导航：从丛林救援到个性化管家，AI定义未来出行新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250716084004743-0/">大语言模型“信心悖论”：重塑多轮AI系统的可信基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250715181004681-2/">智械守卫者崛起：AI如何重塑网络安全攻防前沿</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250715164004583-0/">梁文锋的“及时雨”：中国大模型竞赛的算力罗生门与性价比战役</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250715114005393-0/">戳破强化学习神话：AI“复盘式进化”开启通用智能新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k2aiai-20250714191005208-1/">Kimi K2：中国AI在成本效益与智能体领域的深层破局，重塑AI算力与应用格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250714121004908-4/">大模型心理咨询的致命盲区：斯坦福研究敲响警钟，重塑人机共愈新范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
