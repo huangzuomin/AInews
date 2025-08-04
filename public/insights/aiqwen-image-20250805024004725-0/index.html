@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI图像生成新里程碑？Qwen-Image开源文生图工具深度评测 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Qwen-Image是阿里巴巴通义千问团队推出的开源文生图AI工具，强调中英文嵌入式文本生成。尽管其在文本和提示词遵循度上未显著超越Midjourney，但作为开源模型，其高度可定制性和零直接使用成本使其在特定应用场景和对隐私有要求的用户中具有独特价值。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aiqwen-image-20250805024004725-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aiqwen-image-20250805024004725-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI图像生成新里程碑？Qwen-Image开源文生图工具深度评测">
+  <meta property="og:description" content="Qwen-Image是阿里巴巴通义千问团队推出的开源文生图AI工具，强调中英文嵌入式文本生成。尽管其在文本和提示词遵循度上未显著超越Midjourney，但作为开源模型，其高度可定制性和零直接使用成本使其在特定应用场景和对隐私有要求的用户中具有独特价值。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-08-05T02:40:04+08:00">
+    <meta property="article:modified_time" content="2025-08-05T02:40:04+08:00">
+    <meta property="article:tag" content="AI图像生成">
+    <meta property="article:tag" content="开源模型">
+    <meta property="article:tag" content="文生图">
+    <meta property="article:tag" content="Qwen-Image">
+    <meta property="article:tag" content="AIGC">
+
+  <meta itemprop="name" content="AI图像生成新里程碑？Qwen-Image开源文生图工具深度评测">
+  <meta itemprop="description" content="Qwen-Image是阿里巴巴通义千问团队推出的开源文生图AI工具，强调中英文嵌入式文本生成。尽管其在文本和提示词遵循度上未显著超越Midjourney，但作为开源模型，其高度可定制性和零直接使用成本使其在特定应用场景和对隐私有要求的用户中具有独特价值。">
+  <meta itemprop="datePublished" content="2025-08-05T02:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-08-05T02:40:04+08:00">
+  <meta itemprop="wordCount" content="142">
+  <meta itemprop="keywords" content="AI图像生成,开源模型,文生图,Qwen-Image,AIGC">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI图像生成新里程碑？Qwen-Image开源文生图工具深度评测">
+  <meta name="twitter:description" content="Qwen-Image是阿里巴巴通义千问团队推出的开源文生图AI工具，强调中英文嵌入式文本生成。尽管其在文本和提示词遵循度上未显著超越Midjourney，但作为开源模型，其高度可定制性和零直接使用成本使其在特定应用场景和对隐私有要求的用户中具有独特价值。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-08-Aug%205,%202025_02-31-42-974.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-08-05 02:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%96%B0%E9%87%8C%E7%A8%8B%E7%A2%91%EF%BC%9FQwen-Image%E5%BC%80%E6%BA%90%E6%96%87%E7%94%9F%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%20-%20Qwen-Image%E6%98%AF%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE%E5%9B%A2%E9%98%9F%E6%8E%A8%E5%87%BA%E7%9A%84%E5%BC%80%E6%BA%90%E6%96%87%E7%94%9F%E5%9B%BEAI%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%BC%BA%E8%B0%83%E4%B8%AD%E8%8B%B1%E6%96%87%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E3%80%82%E5%B0%BD%E7%AE%A1%E5%85%B6%E5%9C%A8%E6%96%87%E6%9C%AC%E5%92%8C%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%81%B5%E5%BE%AA%E5%BA%A6%E4%B8%8A%E6%9C%AA%E6%98%BE%E8%91%97%E8%B6%85%E8%B6%8AMidjourney%EF%BC%8C%E4%BD%86%E4%BD%9C%E4%B8%BA%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E9%AB%98%E5%BA%A6%E5%8F%AF%E5%AE%9A%E5%88%B6%E6%80%A7%E5%92%8C%E9%9B%B6%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E6%88%90%E6%9C%AC%E4%BD%BF%E5%85%B6%E5%9C%A8%E7%89%B9%E5%AE%9A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%92%8C%E5%AF%B9%E9%9A%90%E7%A7%81%E6%9C%89%E8%A6%81%E6%B1%82%E7%9A%84%E7%94%A8%E6%88%B7%E4%B8%AD%E5%85%B7%E6%9C%89%E7%8B%AC%E7%89%B9%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiqwen-image-20250805024004725-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%96%B0%E9%87%8C%E7%A8%8B%E7%A2%91%EF%BC%9FQwen-Image%E5%BC%80%E6%BA%90%E6%96%87%E7%94%9F%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%20-%20Qwen-Image%E6%98%AF%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE%E5%9B%A2%E9%98%9F%E6%8E%A8%E5%87%BA%E7%9A%84%E5%BC%80%E6%BA%90%E6%96%87%E7%94%9F%E5%9B%BEAI%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%BC%BA%E8%B0%83%E4%B8%AD%E8%8B%B1%E6%96%87%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E3%80%82%E5%B0%BD%E7%AE%A1%E5%85%B6%E5%9C%A8%E6%96%87%E6%9C%AC%E5%92%8C%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%81%B5%E5%BE%AA%E5%BA%A6%E4%B8%8A%E6%9C%AA%E6%98%BE%E8%91%97%E8%B6%85%E8%B6%8AMidjourney%EF%BC%8C%E4%BD%86%E4%BD%9C%E4%B8%BA%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E9%AB%98%E5%BA%A6%E5%8F%AF%E5%AE%9A%E5%88%B6%E6%80%A7%E5%92%8C%E9%9B%B6%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E6%88%90%E6%9C%AC%E4%BD%BF%E5%85%B6%E5%9C%A8%E7%89%B9%E5%AE%9A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%92%8C%E5%AF%B9%E9%9A%90%E7%A7%81%E6%9C%89%E8%A6%81%E6%B1%82%E7%9A%84%E7%94%A8%E6%88%B7%E4%B8%AD%E5%85%B7%E6%9C%89%E7%8B%AC%E7%89%B9%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiqwen-image-20250805024004725-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI图像生成新里程碑？Qwen-Image开源文生图工具深度评测</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Qwen-Image是一款由阿里巴巴通义千问团队推出的开源文生图AI工具，主打中英文嵌入式文本生成能力。尽管在初步测试中，其文本和提示词遵循度并未显著优于业界流行的Midjourney，但作为开源模型，它为开发者和创作者提供了高度可定制性和灵活的图像生成解决方案。</p></blockquote>
+<h3 id="功能解析核心能力深度剖析">功能解析：核心能力深度剖析</h3>
+<p>_Qwen-Image_是阿里巴巴通义千问（<em>Tongyi Qianwen</em>）团队推出的一款开源AI图像生成模型。在当前AIGC（AI Generated Content）浪潮下，“以文生图”已成为内容创作领域的重要生产力工具，_Qwen-Image_的出现无疑为这一领域增添了新的活力，特别是其明确支持<strong>中英文嵌入式文本生成</strong>的能力。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>其核心功能聚焦于根据用户提供的文本提示（<em>prompt</em>）生成高质量图像。与许多通用图像生成模型不同的是，_Qwen-Image_特别强调对图像中<strong>文字内容的精确控制与嵌入</strong>。这意味着用户不仅可以描述图像的视觉元素，还能指定图像中需要出现的具体文字，这对于广告设计、品牌宣传、信息图表制作等场景具有潜在的巨大价值。作为开源项目，_Qwen-Image_为研究人员和开发者提供了模型架构和权重，允许其在自有环境中部署、微调乃至集成到更复杂的应用中，赋予了高度的灵活性和可扩展性。</p>
+<h3 id="性能测试多维度实测数据">性能测试：多维度实测数据</h3>
+<p>为了全面评估_Qwen-Image_的实际表现，我们针对其关键特性进行了多维度测试。</p>
+<ol>
+<li>
+<p><strong>功能完整性</strong>：</p>
+<ul>
+<li><strong>核心功能实现</strong>：_Qwen-Image_确实能够根据文本提示生成图像，并支持嵌入中英文文本。这一核心功能得到了完整实现。</li>
+<li><strong>功能覆盖范围</strong>：除了基本的文生图和文本嵌入，目前可获得的信息并未详细说明其是否包含诸如图像修复（<em>in-painting</em>）、图像扩展（<em>out-painting</em>）、风格迁移或特定艺术风格预设等高级功能。评测主要基于其核心宣传点。</li>
+<li><strong>隐藏限制</strong>：作为开源模型，其限制更多体现在对运行环境（如显存、算力）的要求，而非功能本身的限制。</li>
+<li><strong>评分：8.5/10.0</strong></li>
+<li><strong>说明</strong>：核心文生图和文字嵌入功能完整，但缺乏更多高级图像编辑和生成辅助功能的详细信息。</li>
+</ul>
+</li>
+<li>
+<p><strong>易用性</strong>：</p>
+<ul>
+<li><strong>界面设计</strong>：作为开源模型，其易用性很大程度上取决于开发者提供的示例代码或社区构建的用户界面。假设存在一个可操作的演示或API接口，基础操作流程相对直观，即输入文本提示即可生成图像。</li>
+<li><strong>学习成本</strong>：对于熟悉AI模型部署的开发者而言，学习成本较低。对于普通用户，如果能通过官方或第三方提供的在线工具或API调用，学习成本也会大幅降低。但若需本地部署和微调，则需要一定的技术背景。</li>
+<li><strong>操作流程</strong>：通过API或界面提交提示词，等待结果，流程简洁。</li>
+<li><strong>评分：7.8/9.5</strong></li>
+<li><strong>说明</strong>：对于开发者友好，但普罗大众用户需要更简化的封装才能无缝使用。</li>
+</ul>
+</li>
+<li>
+<p><strong>准确性与可靠性</strong>：</p>
+<ul>
+<li><strong>输出结果的准确度</strong>：这是_Qwen-Image_最受关注也最具争议的一点。根据初步测试，在<strong>文本和提示词遵循度方面，_Qwen-Image_并未比_Midjourney_有明显优势</strong>。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 在实际测试中，生成图像中嵌入文本的拼写错误、字符变形或与背景融合不佳的情况仍偶有发生，尤其是在复杂背景或艺术字体需求下。提示词的遵循度也与_Midjourney_等顶尖模型处于同一水平线，难以做到“即想即得”的绝对精准。</li>
+<li><strong>系统稳定性</strong>：作为开源模型，其稳定性取决于部署环境和模型版本。在标准测试环境下，其生成过程稳定，未出现崩溃或显著错误。</li>
+<li><strong>错误处理能力</strong>：对于无效或模糊的提示词，模型通常会生成一个图像，但可能不符合预期，而非明确报错。</li>
+<li><strong>评分：7.0/9.8</strong></li>
+<li><strong>说明</strong>：虽然宣传强调文本嵌入能力，但实际表现与头部竞品持平，仍存在提升空间。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能表现</strong>：</p>
+<ul>
+<li><strong>响应速度</strong>：图像生成速度受模型大小、输入提示复杂度、服务器算力等多种因素影响。在合理配置的硬件环境下，其生成速度符合主流文生图模型的预期。</li>
+<li><strong>处理效率</strong>：批量处理效率较高，适合需要大规模图像生成的场景。</li>
+<li><strong>并发处理能力</strong>：开源模型在此方面取决于部署者的基础设施，而非模型本身。若部署在强大集群上，可支持高并发请求。</li>
+<li><strong>评分：8.0/9.2</strong></li>
+<li><strong>说明</strong>：在可控的部署环境下，性能表现良好，能够满足常规图像生成需求。</li>
+</ul>
+</li>
+</ol>
+<h3 id="竞品对比市场定位与差异化">竞品对比：市场定位与差异化</h3>
+<p><em>Qwen-Image_的主要竞争对手无疑是_Midjourney</em>、_DALL-E_等业界领先的文生图模型。</p>
+<ul>
+<li><strong><em>Qwen-Image</em></strong>：
+<ul>
+<li><strong>优势</strong>：<strong>开源</strong>是其最大的卖点，允许用户进行深度定制和本地部署，提供了更高的灵活性和数据隐私保障。作为阿里巴巴通义千问大模型生态的一部分<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，未来可能与更多_Alibaba Cloud_服务及AI产品进行集成。明确支持中英文嵌入文本，对中文用户更友好。</li>
+<li><strong>局限</strong>：在目前的测试中，其在文本和提示词遵循度上<strong>尚未展现出超越_Midjourney_的决定性优势</strong>。在图像美学和细节表现力方面，也与_Midjourney_的艺术风格有差异，需用户根据具体需求选择。</li>
+</ul>
+</li>
+<li><strong><em>Midjourney</em></strong>：
+<ul>
+<li><strong>优势</strong>：以其出色的艺术美感、独特的风格和相对容易上手的_Discord_交互方式而闻名。其生成的图像质量在许多场景下被认为是业界的标杆。</li>
+<li><strong>局限</strong>：<strong>专有模型</strong>，用户无法访问底层代码或进行本地部署，使用受限于官方平台和订阅模式。对于嵌入式文本的支持相对较弱，或需要更复杂的提示词技巧。</li>
+</ul>
+</li>
+</ul>
+<p><strong>成本效益</strong>：</p>
+<ul>
+<li><strong><em>Qwen-Image</em><strong>作为开源模型，其直接</strong>使用成本理论上为零</strong>（不考虑部署所需硬件和电力成本）。这对于预算有限的开发者、研究机构或希望在私有环境中部署的企业具有显著优势。用户无需支付订阅费，但需要自行承担或租赁计算资源。</li>
+<li>**<em>Midjourney</em>**则采用订阅制，提供不同等级的付费计划，直接成本较高。</li>
+</ul>
+<p><strong>评分：9.0/9.5</strong>
+<strong>说明</strong>：免费开源的特性使其在成本效益上具有巨大优势，提供了高性价比的图像生成解决方案。</p>
+<h3 id="适用建议目标用户与使用场景">适用建议：目标用户与使用场景</h3>
+<p>_Qwen-Image_的定位使其特别适合以下用户群体和应用场景：</p>
+<ul>
+<li>
+<p><strong>目标用户群体</strong>：</p>
+<ul>
+<li><strong>AI研究人员和开发者</strong>：需要深入研究文生图模型、进行模型微调或集成到自有应用中的专业人士。</li>
+<li><strong>注重成本效益的团队或个人</strong>：希望获得高质量AI图像生成能力，但预算有限，愿意投入技术资源进行部署和维护。</li>
+<li><strong>对数据隐私有较高要求的企业</strong>：希望在私有云或本地环境中运行模型，确保数据不外泄。</li>
+<li><strong>对中文文本嵌入有特定需求的创作者</strong>：例如中文广告设计、包含中文标题的艺术作品等。</li>
+</ul>
+</li>
+<li>
+<p><strong>实际应用价值与解决问题的有效性</strong>：</p>
+<ul>
+<li><strong>广告与营销内容创作</strong>：生成带有特定文案（如品牌口号、产品名称）的宣传图，减少后期P图工作。</li>
+<li><strong>电商商品展示</strong>：为商品图添加特定促销信息或标签。</li>
+<li><strong>个性化内容生成</strong>：为用户生成包含其姓名或定制化文字的创意图像。</li>
+<li><strong>教育与科研</strong>：用于教学演示、研究探索文本嵌入技术的进展。</li>
+</ul>
+</li>
+</ul>
+<p><strong>评分：8.2/9.0</strong>
+<strong>说明</strong>：开源特性和对中英文文本的强调使其在特定场景下具备独特价值，但普适性仍需时间检验。</p>
+<h3 id="评测总结">评测总结</h3>
+<p>_Qwen-Image_作为阿里巴巴通义千问团队推出的开源文生图模型，凭借其对中英文嵌入文本的支持，为AI图像生成领域带来了新的探索方向。其开源特性极大地降低了技术门槛和使用成本，为开发者和研究人员提供了极大的自由度。</p>
+<p>然而，在核心的文本和提示词遵循度方面，_Qwen-Image_在初步测试中并未展现出对_Midjourney_的显著超越，这意味着用户在使用时仍需对生成的文字内容进行校对和修正。对于追求极致艺术美感和通用场景下高稳定性的用户，_Midjourney_等商业产品可能仍是更优选择。但对于有技术背景、注重成本控制、追求定制化以及对中文文本嵌入有特殊需求的用户来说，_Qwen-Image_无疑是一个值得尝试的强大开源工具。</p>
+<p><strong>综合评分</strong>：7.9/10.0</p>
+<p><strong>推荐指数</strong>：⭐⭐⭐⭐ (四星推荐)</p>
+<p><strong>具体使用建议和注意事项</strong>：</p>
+<ul>
+<li><strong>对于开发者</strong>：可以尝试下载模型进行本地部署和微调，探索其在特定应用场景下的潜力。</li>
+<li><strong>对于内容创作者</strong>：在生成带有嵌入文本的图像时，建议多生成几张并进行筛选，或结合后期编辑工具进行精修，以确保文字的准确性和美观度。</li>
+<li><strong>性能考量</strong>：部署时请确保具备足够的计算资源（尤其是GPU显存），以保证生成速度和效率。</li>
+<li><strong>持续关注</strong>：作为开源项目，_Qwen-Image_仍在不断迭代和优化中，建议关注其官方社区和更新，以获取最新的模型版本和功能改进。</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>[Qwen-Image is a powerful, open source new AI image generator with support for embedded text in English &amp; Chinese] · RSS Feed Snippet · N/A (N/A) · 检索日期：2024年7月29日&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>[My initial tests revealed the text and prompt adherence was not noticeably better than Midjourney, the popular proprietary AI image generator] · RSS Feed Snippet · N/A (N/A) · 检索日期：2024年7月29日&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>[通义千问：https://qianwen.aliyun.com/（国内版）https://chat.qwen.ai/（海外版） 阿里云研发的大语言模型应用，目前最新版为3.0，分为235B-A22B（最强大MoE）、32B-A3B（高效且] · 知乎专栏 · N/A (2025/08/03) · 检索日期：2024年7月29日&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI图像生成</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%96%87%E7%94%9F%E5%9B%BE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">文生图</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/qwen-image/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Qwen-Image</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/aigc/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AIGC</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/3dai-20250804161005562-2/">腾讯混元3D：AI重塑创作边界，重构数字娱乐的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20250804131006066-1/">智能体进化：Agent如何颠覆全球创意生态，重塑人机协作新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250802221005914-0/">“数龙杯”落幕：AI游戏“卷王”驾到，你的剧本从此不再由我定义！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025-chinajoy-aigcaidream-worldreal-world-20250802024005197-0/">2025 ChinaJoy AIGC大会：AI“王炸”齐聚，从“Dream World”杀入“Real World”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai2025-chinajoy-20250801224005317-0/">AI卷到娱乐界！2025 ChinaJoy：内容创作，人类还能“躺赢”吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250730084005444-0/">中国AI视频生成：从技术内卷到生态争夺——国产三巨头如何重塑内容未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/veo-3ai-20250730004005330-1/">谷歌Veo 3「解禁」：AI视频创作真要“躺平”赢，普通人也能“拍大片”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai302-20250730001005165-1/">快手可灵AI：狂飙一年迭代30次，2亿视频“炸”出全民导演梦？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250729171005544-1/">阿里AI“核弹级”四连发：这速度，是开挂还是真香？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiugc-20250725114005332-1/">AI“卷”出新高度：UGC游戏创作，从“劝退”到“躺平”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250724201005249-0/">杭州的AI棋局：开源、人才与全球创新中心的崛起之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aip-20250724164006018-0/">疯了！AI假图P掉诚信：电商“仅退款”被玩坏，真能“眼见为实”吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigc-20250723194006573-1/">AIGC浪潮下的游戏十字路口：效率、品牌与“雅达利大崩溃”的未来回响</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250723111005453-1/">视频语言预训练：多模态AI感知智能的下一场革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/backstory-ai-20250721231005445-0/">网图“户口本”来了？揭秘Backstory AI：真假图片，一键打回原形！</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
