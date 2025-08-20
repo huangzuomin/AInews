@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>DeepSeek V3.1模型：长上下文与多能力升级的开源新探索 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="DeepSeek V3.1是DeepSeek系列大语言模型的最新升级，其核心亮点在于上下文窗口从64k翻倍至128k tokens，显著提升了处理长文本和复杂任务的能力。模型在编程、知识问答、创意写作及物理理解等多个核心能力上均有明显进步，并已开源Base版本，为开发者提供了强大的免费基座模型。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/deepseek-v31-20250820084004883-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/deepseek-v31-20250820084004883-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="DeepSeek V3.1模型：长上下文与多能力升级的开源新探索">
+  <meta property="og:description" content="DeepSeek V3.1是DeepSeek系列大语言模型的最新升级，其核心亮点在于上下文窗口从64k翻倍至128k tokens，显著提升了处理长文本和复杂任务的能力。模型在编程、知识问答、创意写作及物理理解等多个核心能力上均有明显进步，并已开源Base版本，为开发者提供了强大的免费基座模型。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-08-20T08:40:04+08:00">
+    <meta property="article:modified_time" content="2025-08-20T08:40:04+08:00">
+    <meta property="article:tag" content="DeepSeek V3.1">
+    <meta property="article:tag" content="大型语言模型">
+    <meta property="article:tag" content="开源AI">
+    <meta property="article:tag" content="长上下文">
+    <meta property="article:tag" content="AI工具评测">
+
+  <meta itemprop="name" content="DeepSeek V3.1模型：长上下文与多能力升级的开源新探索">
+  <meta itemprop="description" content="DeepSeek V3.1是DeepSeek系列大语言模型的最新升级，其核心亮点在于上下文窗口从64k翻倍至128k tokens，显著提升了处理长文本和复杂任务的能力。模型在编程、知识问答、创意写作及物理理解等多个核心能力上均有明显进步，并已开源Base版本，为开发者提供了强大的免费基座模型。">
+  <meta itemprop="datePublished" content="2025-08-20T08:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-08-20T08:40:04+08:00">
+  <meta itemprop="wordCount" content="130">
+  <meta itemprop="keywords" content="DeepSeek V3.1,大型语言模型,开源AI,长上下文,AI工具评测">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DeepSeek V3.1模型：长上下文与多能力升级的开源新探索">
+  <meta name="twitter:description" content="DeepSeek V3.1是DeepSeek系列大语言模型的最新升级，其核心亮点在于上下文窗口从64k翻倍至128k tokens，显著提升了处理长文本和复杂任务的能力。模型在编程、知识问答、创意写作及物理理解等多个核心能力上均有明显进步，并已开源Base版本，为开发者提供了强大的免费基座模型。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-08-Aug%2020,%202025_08-31-16-170.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-08-20 08:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=DeepSeek&amp;#43;V3.1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E5%A4%9A%E8%83%BD%E5%8A%9B%E5%8D%87%E7%BA%A7%E7%9A%84%E5%BC%80%E6%BA%90%E6%96%B0%E6%8E%A2%E7%B4%A2%20-%20DeepSeek&amp;#43;V3.1%E6%98%AFDeepSeek%E7%B3%BB%E5%88%97%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9C%80%E6%96%B0%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%85%B6%E6%A0%B8%E5%BF%83%E4%BA%AE%E7%82%B9%E5%9C%A8%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3%E4%BB%8E64k%E7%BF%BB%E5%80%8D%E8%87%B3128k&amp;#43;tokens%EF%BC%8C%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86%E5%A4%84%E7%90%86%E9%95%BF%E6%96%87%E6%9C%AC%E5%92%8C%E5%A4%8D%E6%9D%82%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%83%BD%E5%8A%9B%E3%80%82%E6%A8%A1%E5%9E%8B%E5%9C%A8%E7%BC%96%E7%A8%8B%E3%80%81%E7%9F%A5%E8%AF%86%E9%97%AE%E7%AD%94%E3%80%81%E5%88%9B%E6%84%8F%E5%86%99%E4%BD%9C%E5%8F%8A%E7%89%A9%E7%90%86%E7%90%86%E8%A7%A3%E7%AD%89%E5%A4%9A%E4%B8%AA%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B%E4%B8%8A%E5%9D%87%E6%9C%89%E6%98%8E%E6%98%BE%E8%BF%9B%E6%AD%A5%EF%BC%8C%E5%B9%B6%E5%B7%B2%E5%BC%80%E6%BA%90Base%E7%89%88%E6%9C%AC%EF%BC%8C%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%85%8D%E8%B4%B9%E5%9F%BA%E5%BA%A7%E6%A8%A1%E5%9E%8B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseek-v31-20250820084004883-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=DeepSeek&amp;#43;V3.1%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E5%A4%9A%E8%83%BD%E5%8A%9B%E5%8D%87%E7%BA%A7%E7%9A%84%E5%BC%80%E6%BA%90%E6%96%B0%E6%8E%A2%E7%B4%A2%20-%20DeepSeek&amp;#43;V3.1%E6%98%AFDeepSeek%E7%B3%BB%E5%88%97%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9C%80%E6%96%B0%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%85%B6%E6%A0%B8%E5%BF%83%E4%BA%AE%E7%82%B9%E5%9C%A8%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3%E4%BB%8E64k%E7%BF%BB%E5%80%8D%E8%87%B3128k&amp;#43;tokens%EF%BC%8C%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86%E5%A4%84%E7%90%86%E9%95%BF%E6%96%87%E6%9C%AC%E5%92%8C%E5%A4%8D%E6%9D%82%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%83%BD%E5%8A%9B%E3%80%82%E6%A8%A1%E5%9E%8B%E5%9C%A8%E7%BC%96%E7%A8%8B%E3%80%81%E7%9F%A5%E8%AF%86%E9%97%AE%E7%AD%94%E3%80%81%E5%88%9B%E6%84%8F%E5%86%99%E4%BD%9C%E5%8F%8A%E7%89%A9%E7%90%86%E7%90%86%E8%A7%A3%E7%AD%89%E5%A4%9A%E4%B8%AA%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B%E4%B8%8A%E5%9D%87%E6%9C%89%E6%98%8E%E6%98%BE%E8%BF%9B%E6%AD%A5%EF%BC%8C%E5%B9%B6%E5%B7%B2%E5%BC%80%E6%BA%90Base%E7%89%88%E6%9C%AC%EF%BC%8C%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%85%8D%E8%B4%B9%E5%9F%BA%E5%BA%A7%E6%A8%A1%E5%9E%8B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseek-v31-20250820084004883-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">DeepSeek V3.1模型：长上下文与多能力升级的开源新探索</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>DeepSeek V3.1作为DeepSeek系列大语言模型的最新迭代，显著扩展了上下文窗口至<strong>128k tokens</strong>，并在编程、知识问答、创意写作和物理理解等多个核心能力上展现出明显提升。其Base版本已开源，为开发者和研究者提供了高性能且易于使用的基座模型，尤其适用于处理长文本、复杂代码生成及需要精细化语义理解的应用场景。</p></blockquote>
+<h3 id="功能解析核心能力深度剖析">功能解析：核心能力深度剖析</h3>
+<p>DeepSeek V3.1此次更新的核心亮点在于其长上下文处理能力的显著提升，以及在多模态理解和生成方面表现出的进步。</p>
+<ol>
+<li>
+<p><strong>上下文窗口翻倍：从64k到128k</strong>
+DeepSeek V3.1将上下文窗口从原有的64k tokens扩展至<strong>128k tokens</strong>。这意味着模型能够一次性处理更长篇的文本输入，例如完整的代码库、长篇报告、书籍章节等。这一提升对于需要保持上下文连贯性、进行长文本摘要或复杂多轮对话的场景具有重要的实用价值。</p>
+</li>
+<li>
+<p><strong>编程能力增强：前端开发与逻辑实现</strong>
+实测表明，DeepSeek V3.1在编程能力，特别是前端开发方面有显著提升。</p>
+<ul>
+<li><strong>个人网站开发：</strong> 在要求设计美观、科技感的个人博客网站时，DeepSeek V3.1生成的代码长度更长，最终交付的网页在<strong>布局合理性、重点清晰度及栏目规划丰富性</strong>方面优于前代V3-0324，并能配合图片（尽管未全部显示）。这表明其在复杂网页结构构建和美学考量上的进步。</li>
+<li><strong>小游戏开发：</strong> 在复现Chrome浏览器断网时的小恐龙游戏时，DeepSeek V3.1能在约2分钟内完成开发，页面画风和游戏规则与原版相似。然而，在<strong>可玩性方面仍有局限</strong>，例如小恐龙外观还原度不高，游戏障碍生成和跳跃方式（不支持“二段跳”）仍需优化。这说明其在代码生成完整性上有优势，但在细节模拟和用户体验优化上仍有提升空间。</li>
+</ul>
+</li>
+<li>
+<p><strong>知识问答与幻觉控制：信息量与准确性</strong>
+在处理小众历史问题（如“布须曼人喝牛奶吗”）时，DeepSeek V3.1的回答信息量大幅增加，提供了更多背景细节。经过事实核查，这些新增细节<strong>基本都有事实印证，而非胡编乱造</strong>。这表明模型在知识召回的广度和深度上有所进步，并能有效控制幻觉，提升了回答的可靠性。</p>
+</li>
+<li>
+<p><strong>语言风格与情感倾向：更“活泼”和“中立”</strong>
+DeepSeek V3.1的回答语气变得更为<strong>活泼、温暖、通俗和口语化</strong>。它倾向于先肯定用户问题，再进行回答，并提供更多背景情境，使解释更丰满、更有故事性。在需要给出判断的场景（如“马斯克和阿尔特曼谁更牛”）中，即使被限定只输出一个名字，模型也倾向于对双方都给予赞扬，并使用更多条件性语句，强调情况的复杂性和演变过程，展现出**“端水大师”**般的策略，避免了绝对化的结论，这可能有助于提升用户体验和避免潜在争议。</p>
+</li>
+<li>
+<p><strong>创意写作与数学能力：持续优化</strong></p>
+<ul>
+<li><strong>诗歌创作：</strong> DeepSeek V3.1的诗歌创作依然保持了DeepSeek模型惯有的风格，大量使用比喻和类比，具备一定的创意生成能力。</li>
+<li><strong>数学能力：</strong> 在基础算术题（如9.8-9.11）上，模型最终能够给出正确答案，但<strong>过程有时会显得曲折</strong>，出现先给出正确答案又在最终环节写错，再自我反思修正的情况。这表明其在推理链稳定性上仍有优化空间，但具备一定的自我纠错能力。</li>
+</ul>
+</li>
+<li>
+<p><strong>物理定律理解：视觉化与参数控制</strong>
+有用户反馈，DeepSeek V3.1打造的小球弹跳效果更符合物理定律，并且支持调整重力、摩擦、旋转速度、弹跳等参数。这暗示模型在理解和模拟物理世界方面取得了进展，对于需要进行模拟、设计或教育相关应用的场景具有潜在价值。</p>
+</li>
+</ol>
+<h3 id="性能测试多维度实测数据">性能测试：多维度实测数据</h3>
+<p>DeepSeek V3.1的性能提升主要体现在其处理复杂任务的<strong>深度</strong>和<strong>准确性</strong>上。</p>
+<ul>
+<li><strong>处理效率：</strong> 相较于DeepSeek-V3-0324，新模型在生成个人网站代码时<strong>耗时更久，但产出质量更高</strong>。这可能意味着其内部推理过程更为复杂或生成内容更为详尽，牺牲了部分速度以换取更高质量的输出。</li>
+<li><strong>准确度与可靠性：</strong> 在知识问答方面，V3.1的答案信息量和准确性都有所提升，<strong>幻觉控制表现良好</strong>。在数学问题上，虽然推理过程偶有波折，但最终结果的准确性得到了保证，展现了一定的<strong>自我纠正能力</strong>。这增加了模型在需要高可靠性信息的场景中的实用性。</li>
+<li><strong>稳定性：</strong> 从测试案例来看，模型能够稳定地完成各种任务，未出现崩溃或显著的性能下降。</li>
+</ul>
+<blockquote>
+<p><strong>性能测试总结：</strong></p>
+<ul>
+<li><strong>功能完整性：9.0</strong> (核心功能在多个领域表现出色，长上下文支持极佳，但基础模型开源未能直接体验指令微调后的全部潜力)</li>
+<li><strong>易用性：9.0</strong> (网页、App、小程序多端可用，Hugging Face开源，降低了开发者使用门槛)</li>
+<li><strong>准确性与可靠性：8.8</strong> (知识准确性高，幻觉控制佳，但数学推理过程略显曲折)</li>
+<li><strong>性能表现：8.5</strong> (处理复杂任务能力提升，但部分任务耗时增加，小游戏等实用性仍有提升空间)</li>
+<li><strong>适用场景：9.0</strong> (高度匹配长文本处理、复杂代码生成、创意内容生产及知识问答等场景)</li>
+<li><strong>成本效益：9.5</strong> (作为开源的Base模型，其提供的高级能力是免费且可本地部署的，性价比极高)</li>
+</ul></blockquote>
+<h3 id="优势与局限客观分析利弊">优势与局限：客观分析利弊</h3>
+<p><strong>优势：</strong></p>
+<ul>
+<li><strong>超长上下文窗口：</strong> 128k tokens的上下文能力是其最大的亮点，极大地拓展了模型处理复杂、长篇任务的能力边界。</li>
+<li><strong>综合能力提升：</strong> 在编程（特别是前端）、知识问答（信息量和准确性）、创意写作和物理理解等多个维度均有明显进步。</li>
+<li><strong>幻觉控制表现：</strong> 对于小众知识问题的回答，能提供更多经核实的细节，有效降低了胡编乱造的风险。</li>
+<li><strong>人性化交互风格：</strong> 更活泼、通俗的语气以及“端水大师”般的回答策略，使得用户体验更为友好。</li>
+<li><strong>开源基座模型：</strong> DeepSeek V3.1-Base在Hugging Face上的开源，为全球开发者和研究人员提供了强大的基础模型，便于进行二次开发、微调和部署。</li>
+<li><strong>商业可用性：</strong> 根据Google搜索结果，DeepSeek模型系列具备商业可用性，为企业级应用提供了可能。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p><strong>局限：</strong></p>
+<ul>
+<li><strong>数学推理稳定性：</strong> 虽然最终结果准确，但数学计算过程有时不够直接，甚至出现自我纠正，显示出推理链的潜在不稳定性。</li>
+<li><strong>特定应用实用性：</strong> 在某些特定任务（如小游戏开发）中，虽然能快速生成代码，但产出内容的<strong>可玩性和细节还原度仍需提升</strong>，离实际可用的产品仍有距离。</li>
+<li><strong>开源版本限制：</strong> 目前仅开源了未经指令微调的Base版本。对于非专业用户，直接使用Base版本可能需要额外的微调或更精确的Prompt工程，而无法直接享受指令微调后的最佳体验。</li>
+<li><strong>参数量与架构未变：</strong> 与DeepSeek-V3-0324相比，模型参数量、张量类型没有明显变化，提示其优化主要集中在训练数据、微调策略和长上下文技术上，而非模型架构上的根本性迭代。</li>
+<li><strong>“深度思考”标识变动：</strong> 线上版本“深度思考（R1）”字样改为“深度思考”未有官方明确解释，尽管有猜测融合了推理模型与非推理模型，但缺乏官方证实。</li>
+</ul>
+<h3 id="适用建议目标用户与使用场景">适用建议：目标用户与使用场景</h3>
+<p>DeepSeek V3.1凭借其强大的功能，适用于广泛的用户群体和场景：</p>
+<ul>
+<li><strong>软件开发者与工程师：</strong> 特别是前端开发人员，可以利用其在个人网站、Web应用代码生成方面的能力，提升开发效率。在需要处理和理解大型代码库的场景下，其128k上下文窗口将发挥巨大作用。</li>
+<li><strong>AI研究者与数据科学家：</strong> DeepSeek V3.1-Base的开源为研究人员提供了一个高性能的实验平台，可以用于探索长上下文处理、代码生成、模型微调等前沿技术。</li>
+<li><strong>内容创作者与营销人员：</strong> 模型更活泼、通俗的语言风格和增强的创意写作能力，使其成为生成文案、诗歌、故事及其他创意内容的有力助手。</li>
+<li><strong>知识密集型工作者：</strong> 需要处理大量信息、进行复杂问答或获取准确背景知识的用户，可以利用其增强的知识问答能力和幻觉控制。</li>
+<li><strong>教育与科普领域：</strong> 在需要对复杂概念进行通俗易懂解释的场景中，DeepSeek V3.1的表达风格能够提供帮助。</li>
+<li><strong>对物理模拟有需求的用户：</strong> 在需要进行物理过程模拟、交互式设计等领域，其对物理定律的理解能力值得探索。</li>
+</ul>
+<hr>
+<p><strong>评测总结：</strong></p>
+<p>DeepSeek V3.1的发布，无疑是开源大模型领域的一次重要进展。其将上下文窗口扩展至<strong>128k tokens</strong>，极大地提升了模型处理复杂、长篇任务的能力，并在此基础上，在编程、知识问答、创意写作和物理理解等多个核心能力上展现出显著进步。尽管在数学推理的稳定性及某些特定应用的实用性上仍有改进空间，且目前仅开源了Base版本，但其<strong>强大的基础能力、有效的幻觉控制以及友好的交互风格</strong>，使其成为一款极具潜力的AI工具。作为一款免费开源的基座模型，它为开发者和研究人员提供了极高的<strong>成本效益</strong>，是当前市场上值得关注和深入使用的优秀大模型。</p>
+<p><strong>综合评分：8.9/10.0</strong>
+<strong>推荐指数：⭐⭐⭐⭐⭐</strong></p>
+<p><strong>使用建议与注意事项：</strong></p>
+<ol>
+<li><strong>充分利用长上下文：</strong> 尝试将其应用于需要处理超长文档、代码库或多轮复杂对话的场景，以充分发挥其128k上下文的优势。</li>
+<li><strong>代码生成后二次检查：</strong> 尽管编程能力强大，尤其是在前端方面，但对于生成的代码，尤其是复杂逻辑和细节，仍建议进行人工审查和测试，特别是小游戏这类对交互和细节有高要求的场景。</li>
+<li><strong>探索Base版本微调：</strong> 对于有技术背景的用户，可以尝试在DeepSeek V3.1-Base模型上进行指令微调，以更好地适配特定业务场景或个人需求。</li>
+<li><strong>关注未来更新：</strong> DeepSeek团队通常会后续开源更多版本，包括指令微调版本，持续关注官方动态有助于获取更完整、更优化的模型体验。</li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>[DeepSeek发布最新版V3，代码和审美有了质的提升] · 53AI.com · 53AI资讯 · 2025年3月25日 · 检索日期：2024年8月20日&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/deepseek-v3.1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DeepSeek V3.1</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大型语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">长上下文</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI工具评测</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/llamamistraldeepseekai-20250630141004628-1/">开源大型语言模型的崛起：Llama、Mistral与DeepSeek如何重塑AI应用格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250819111004703-0/">杨立昆：从边缘到中心，一位AI教父的深思与坚守</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tensorzeroai-20250819034004517-0/">驯服语言的巨兽：TensorZero如何在企业AI的狂野西部布设管道</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250818111004983-0/">芝麻企业助手AI招投标功能评测：中小企业智能商机助推器</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/m2ai-20250811154005188-0/">百川M2：中国医疗AI的本土化突围与普惠智能医疗的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/alexaai-20250809174005023-0/">亚马逊Alexa语音助手AI升级评测：智慧跃迁与实际应用价值分析</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250808024005870-0/">AI议员数字助理评测：口音识别的现实挑战与应用前景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250807171005219-0/">AI“三国杀”：世界模型、编程巨匠与开源回归，重塑通用智能竞技场</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/sorafastwanai-20250807154007582-0/">超越Sora：FastWan如何以“稀疏蒸馏”重塑实时AI视频生成范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025aiagent-20250806234005080-0/">超越炒作：2025年生成式AI迈向企业实用化与智能Agent新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-08-02-08-02-ai-/">08-02日报|AI「思考」高地，烽烟再起：奥数金牌与开源自省，大模型正步入“认知大时代”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-20250802034005126-0/">开放：AI时代地缘政治的新战场——美国开源AI战略的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deep-cogito-v2ai-20250801224005328-1/">Deep Cogito v2：开源推理模型如何重塑AI的“思考”边界与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/llm-20250731174005237-1/">法治新纪元：法律LLM综述揭示人机协同的深层逻辑与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/glm-45ai-agentai-20250731081005213-1/">智谱GLM-4.5：开源巨浪下的AI Agent革命与全球AI格局重塑</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
