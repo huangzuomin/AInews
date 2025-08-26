@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="大模型微调曾是令无数开发者头疼的“玄学”，但旧金山初创Unsloth最近发布了一系列“保姆级”教程，旨在简化LLM的对比、运行和微调过程。这些教程不仅详细介绍了Qwen、Llama等主流开放模型的特性和用例，还贴心提供了解决微调中常见问题的“踩坑”指南，甚至通过量化技术让模型推理更省钱，让大模型开发变得前所未有的简单和“亲民”。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/unsloth-20250826141004621-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/unsloth-20250826141004621-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！">
+  <meta property="og:description" content="大模型微调曾是令无数开发者头疼的“玄学”，但旧金山初创Unsloth最近发布了一系列“保姆级”教程，旨在简化LLM的对比、运行和微调过程。这些教程不仅详细介绍了Qwen、Llama等主流开放模型的特性和用例，还贴心提供了解决微调中常见问题的“踩坑”指南，甚至通过量化技术让模型推理更省钱，让大模型开发变得前所未有的简单和“亲民”。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-08-26T14:10:04+08:00">
+    <meta property="article:modified_time" content="2025-08-26T14:10:04+08:00">
+    <meta property="article:tag" content="Unsloth">
+    <meta property="article:tag" content="大模型微调">
+    <meta property="article:tag" content="开源生态">
+    <meta property="article:tag" content="LLM">
+    <meta property="article:tag" content="量化">
+
+  <meta itemprop="name" content="大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！">
+  <meta itemprop="description" content="大模型微调曾是令无数开发者头疼的“玄学”，但旧金山初创Unsloth最近发布了一系列“保姆级”教程，旨在简化LLM的对比、运行和微调过程。这些教程不仅详细介绍了Qwen、Llama等主流开放模型的特性和用例，还贴心提供了解决微调中常见问题的“踩坑”指南，甚至通过量化技术让模型推理更省钱，让大模型开发变得前所未有的简单和“亲民”。">
+  <meta itemprop="datePublished" content="2025-08-26T14:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-08-26T14:10:04+08:00">
+  <meta itemprop="wordCount" content="69">
+  <meta itemprop="keywords" content="Unsloth,大模型微调,开源生态,LLM,量化">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！">
+  <meta name="twitter:description" content="大模型微调曾是令无数开发者头疼的“玄学”，但旧金山初创Unsloth最近发布了一系列“保姆级”教程，旨在简化LLM的对比、运行和微调过程。这些教程不仅详细介绍了Qwen、Llama等主流开放模型的特性和用例，还贴心提供了解决微调中常见问题的“踩坑”指南，甚至通过量化技术让模型推理更省钱，让大模型开发变得前所未有的简单和“亲民”。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-08-Aug%2026,%202025_14-01-20-952.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-08-26 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E5%A4%AA%E5%A4%B4%E7%96%BC%EF%BC%9FUnsloth%EF%BC%9A%E8%BF%99%E4%BB%BD%E2%80%9C%E8%BA%BA%E5%B9%B3%E2%80%9D%E5%BC%8F%E6%95%99%E7%A8%8B%EF%BC%8C%E7%9B%B4%E6%8E%A5%E5%B8%AE%E4%BD%A0%E6%89%93%E9%80%9A%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89%EF%BC%81%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E6%9B%BE%E6%98%AF%E4%BB%A4%E6%97%A0%E6%95%B0%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%B4%E7%96%BC%E7%9A%84%E2%80%9C%E7%8E%84%E5%AD%A6%E2%80%9D%EF%BC%8C%E4%BD%86%E6%97%A7%E9%87%91%E5%B1%B1%E5%88%9D%E5%88%9BUnsloth%E6%9C%80%E8%BF%91%E5%8F%91%E5%B8%83%E4%BA%86%E4%B8%80%E7%B3%BB%E5%88%97%E2%80%9C%E4%BF%9D%E5%A7%86%E7%BA%A7%E2%80%9D%E6%95%99%E7%A8%8B%EF%BC%8C%E6%97%A8%E5%9C%A8%E7%AE%80%E5%8C%96LLM%E7%9A%84%E5%AF%B9%E6%AF%94%E3%80%81%E8%BF%90%E8%A1%8C%E5%92%8C%E5%BE%AE%E8%B0%83%E8%BF%87%E7%A8%8B%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%99%E7%A8%8B%E4%B8%8D%E4%BB%85%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%BA%86Qwen%E3%80%81Llama%E7%AD%89%E4%B8%BB%E6%B5%81%E5%BC%80%E6%94%BE%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E7%94%A8%E4%BE%8B%EF%BC%8C%E8%BF%98%E8%B4%B4%E5%BF%83%E6%8F%90%E4%BE%9B%E4%BA%86%E8%A7%A3%E5%86%B3%E5%BE%AE%E8%B0%83%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%9A%84%E2%80%9C%E8%B8%A9%E5%9D%91%E2%80%9D%E6%8C%87%E5%8D%97%EF%BC%8C%E7%94%9A%E8%87%B3%E9%80%9A%E8%BF%87%E9%87%8F%E5%8C%96%E6%8A%80%E6%9C%AF%E8%AE%A9%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E6%9B%B4%E7%9C%81%E9%92%B1%EF%BC%8C%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E5%8F%91%E5%8F%98%E5%BE%97%E5%89%8D%E6%89%80%E6%9C%AA%E6%9C%89%E7%9A%84%E7%AE%80%E5%8D%95%E5%92%8C%E2%80%9C%E4%BA%B2%E6%B0%91%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Funsloth-20250826141004621-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E5%A4%AA%E5%A4%B4%E7%96%BC%EF%BC%9FUnsloth%EF%BC%9A%E8%BF%99%E4%BB%BD%E2%80%9C%E8%BA%BA%E5%B9%B3%E2%80%9D%E5%BC%8F%E6%95%99%E7%A8%8B%EF%BC%8C%E7%9B%B4%E6%8E%A5%E5%B8%AE%E4%BD%A0%E6%89%93%E9%80%9A%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89%EF%BC%81%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E6%9B%BE%E6%98%AF%E4%BB%A4%E6%97%A0%E6%95%B0%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%B4%E7%96%BC%E7%9A%84%E2%80%9C%E7%8E%84%E5%AD%A6%E2%80%9D%EF%BC%8C%E4%BD%86%E6%97%A7%E9%87%91%E5%B1%B1%E5%88%9D%E5%88%9BUnsloth%E6%9C%80%E8%BF%91%E5%8F%91%E5%B8%83%E4%BA%86%E4%B8%80%E7%B3%BB%E5%88%97%E2%80%9C%E4%BF%9D%E5%A7%86%E7%BA%A7%E2%80%9D%E6%95%99%E7%A8%8B%EF%BC%8C%E6%97%A8%E5%9C%A8%E7%AE%80%E5%8C%96LLM%E7%9A%84%E5%AF%B9%E6%AF%94%E3%80%81%E8%BF%90%E8%A1%8C%E5%92%8C%E5%BE%AE%E8%B0%83%E8%BF%87%E7%A8%8B%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%99%E7%A8%8B%E4%B8%8D%E4%BB%85%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%BA%86Qwen%E3%80%81Llama%E7%AD%89%E4%B8%BB%E6%B5%81%E5%BC%80%E6%94%BE%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E7%94%A8%E4%BE%8B%EF%BC%8C%E8%BF%98%E8%B4%B4%E5%BF%83%E6%8F%90%E4%BE%9B%E4%BA%86%E8%A7%A3%E5%86%B3%E5%BE%AE%E8%B0%83%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%9A%84%E2%80%9C%E8%B8%A9%E5%9D%91%E2%80%9D%E6%8C%87%E5%8D%97%EF%BC%8C%E7%94%9A%E8%87%B3%E9%80%9A%E8%BF%87%E9%87%8F%E5%8C%96%E6%8A%80%E6%9C%AF%E8%AE%A9%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E6%9B%B4%E7%9C%81%E9%92%B1%EF%BC%8C%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BC%80%E5%8F%91%E5%8F%98%E5%BE%97%E5%89%8D%E6%89%80%E6%9C%AA%E6%9C%89%E7%9A%84%E7%AE%80%E5%8D%95%E5%92%8C%E2%80%9C%E4%BA%B2%E6%B0%91%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Funsloth-20250826141004621-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>大模型微调曾是“劝退”无数人的玄学现场？最近Unsloth大手一挥，直接甩出了一堆**“保姆级”教程**，不仅教你选模型、跑模型，连微调踩坑都给你预警了，简直是炼丹师们的**“福音”<strong>，让大模型小白也能轻松</strong>“撸”代码**！</p></blockquote>
+<p>还记得那些年，我们为了微调一个大模型，在配置环境、查阅文档、反复试错的**“秃头”<strong>边缘徘徊吗？代码一跑，报错信息像</strong>“天书”<strong>一样蹦出来，恨不得原地</strong>“爆炸”<strong>。正当你对着屏幕欲哭无泪时，一个名叫Unsloth的</strong>“扫地僧”<strong>突然出现了，还慷慨地放出了全套</strong>“武功秘籍”<strong>，号称能让你</strong>“躺平”<strong>微调大模型，这波操作，直接把难度从</strong>“地狱级”<strong>拉到了</strong>“幼儿园级”**！</p>
+<h3 id="微调不再是玄学unsloth的保姆级操作指南">微调，不再是玄学：Unsloth的“保姆级”操作指南</h3>
+<p>最近，Unsloth在Reddit上**“官宣”<strong>了一波</strong>“大动作”<strong>——他们为所有支持的开放模型发布了</strong>一套“豪华版”教程**<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这可不是随便写写的**“应付差事”<strong>，而是一份真正能帮助你</strong>“少走弯路”<strong>的宝典。教程里不仅有各种开放模型的</strong>“档案卡”<strong>，详细描述了它们的</strong>“身世背景”<strong>和</strong>“拿手好戏”<strong>，还贴心地附上了性能</strong>“体检报告”<strong>（基准测试），让你在模型选择上不再</strong>“抓瞎”**。</p>
+<p>想知道Qwen、Kimi、DeepSeek、Mistral、Phi、Gemma还是Llama，谁才是你心中的**“白月光”<strong>？这份教程都能给你答案。比如，他们就点名夸赞了Qwen3-Coder-480B-A35B，说它在代理编码和代码任务方面简直是</strong>“SOTA之王”<strong>（State of the Art，业内顶尖），能与Claude Sonnet-4和GPT-4.1</strong>“掰手腕”<strong>，甚至超越Kimi K2。它的代码能力有多强？在Aider Polygot上直接飙到了61.8%！更逆天的是，它支持256K的上下文，</strong>“火力全开”<strong>时还能扩展到百万个token，这</strong>“脑容量”<strong>，简直是</strong>“学霸中的学霸”**！</p>
+<h3 id="炼丹师的痛点unsloth如何对症下药">炼丹师的“痛点”：Unsloth如何“对症下药”？</h3>
+<p>对于架构师、机器学习科学家和开发者们来说，选择模型就像是挑对象，得看准了才能**“奔现”<strong>。Unsloth的教程不仅解决了“选哪个”的问题，更深入到了“怎么用好”的层面。它详细指导你如何在llama.cpp、Ollama和OpenWebUI等平台上运行这些模型，甚至连推荐的参数和系统提示都</strong>“手把手”**教给你。</p>
+<p>更**“良心”<strong>的是，Unsloth直面了微调过程中那些</strong>“让人想砸电脑”<strong>的坑。比如，他们就爆料了Gemma 3n和Gemma 3在Colab的Flotat16 GPU（像Tesla T4）上运行的</strong>“小脾气”<strong>。如果你不</strong>“驯服”<strong>它们，分分钟就能给你整出NaN（非数字）和无穷大的</strong>“幺蛾子”<strong>，让你</strong>“怀疑人生”**。</p>
+<blockquote>
+<p>Gemma 3n和Gemma 3一样，在Colab中的Flotat16 GPU（如Tesla T4）上运行时遇到了问题。如果你不为推理或微调修复Gemma 3n，你会遇到NaN和无穷大的问题。</p>
+<p>— Unsloth教程中的“苦口婆心”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+<em>（看来AI也爱“闹小情绪”，得有人给它“顺毛”。）</em></p></blockquote>
+<p>不仅如此，Gemma 3n这种**“特立独行”<strong>的架构，由于在视觉编码器中重用了隐藏状态，还会给梯度检查点（Gradient Checkpointing）带来</strong>“意外之喜”<strong>。Unsloth直接把这些</strong>“坑”<strong>都给你明明白白地</strong>“摆”<strong>出来，并提供了解决方案，这简直是</strong>“送温暖”**啊！</p>
+<h3 id="不止微调从跑模型到省钱推理一站式搞定">不止微调：从跑模型到“省钱”推理，一站式搞定！</h3>
+<p>Unsloth这家成立于2023年的旧金山初创公司，可不仅仅是**“微调专家”<strong>。他们在Hugging Face Hub上提供了一系列</strong>“定制款”<strong>的微调和量化模型，专为代码生成或代理工具支持等特定目的</strong>“量身打造”<strong>。什么是</strong>“量化”<strong>？简单说，就是让你的大模型在推理的时候</strong>“更省钱”<strong>，降低运行成本，这对于</strong>“预算有限”<strong>的团队来说，简直是</strong>“雪中送炭”**。</p>
+<p>Unsloth的文档就**“霸气侧漏”<strong>地宣称，他们的系统旨在简化</strong>“模型训练的所有环节”<strong>——从模型加载、量化，到训练、评估、保存、导出，再到与推理引擎的集成，通通</strong>“打包服务”<strong>。这意味着，你不再需要</strong>“东奔西跑”<strong>找各种工具，Unsloth承诺给你一个</strong>“丝滑”**的工作流程。</p>
+<p>而Google搜索的结果也证实了Unsloth的**“江湖地位”<strong>：它不仅是微调Llama等大模型的</strong>“利器”<strong>，还能与Ollama</strong>“强强联手”<strong>，让你在自己的电脑上就能</strong>“丝滑”<strong>地跑起大模型。甚至有教程教你如何用Unsloth和Google Colab</strong>“零成本”<strong>微调Llama-3，创建自己的自定义聊天机器人<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。这波操作，简直是把大模型</strong>“平民化”<strong>，让更多人能</strong>“玩转”**AI。</p>
+<p>Unsloth和Axolotl这类开源微调框架的**“横空出世”<strong>，正在悄然改变着大模型开发的</strong>“游戏规则”<strong>。它们的目标很明确：减少团队为特定用例创建模型所需的时间和精力。这不仅仅是技术上的进步，更是对整个开源生态的</strong>“赋能”<strong>。即使是使用其他微调框架或AWS等云生态的用户，Unsloth的教程也能提供有用的模型运行指导和能力总结，成为他们</strong>“知己知彼”<strong>的</strong>“情报站”**。</p>
+<p>所以，还在为大模型微调**“愁白了头”<strong>吗？不妨去Unsloth的官网</strong>“打卡”<strong>一下<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，或许你会发现，炼丹之路，其实也能走得</strong>“轻松加愉快”**！</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.infoq.com/news/2025/08/unsloth-llm-tutorial/">Unsloth Tutorials Aim to Make it Easier to Compare and Fine-tune LLMs</a>·InfoQ·（2025/08/26）·检索日期2025/08/26&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://zhuanlan.zhihu.com/p/844833351">Unsloth 大模型微调利器简明教程</a>·知乎·（未知日期）·检索日期2025/08/26&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://blog.csdn.net/weixin_41194129/article/details/145204907">Unsloth 大模型微调工具与llama.cpp 量化推理库简介及其预 ...</a>·CSDN·（未知日期）·检索日期2025/08/26&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.reddit.com/r/LocalLLaMA/comments/1e416fo/stepbystep_tutorial_how_to_finetune_llama_3_8b/?tl=zh-hans">如何使用Unsloth + Google Colab 微调Llama 3 (8B) 并将其 ...</a>·Reddit·（未知日期）·检索日期2025/08/26&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://docs.unsloth.ai/get-started/beginner-start-here">Unsloth初学者指南</a>·Unsloth官方网站·（未知日期）·检索日期2025/08/26&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/unsloth/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Unsloth</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型微调</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源生态</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/llm/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LLM</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%87%8F%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">量化</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/hugging-faceai-20250819061005260-1/">智算破局：Hugging Face如何重塑企业AI成本效益与未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaiawsai-20250808174005145-2/">OpenAI开源入局，AWS“模型超市”战略如何重塑云计算AI版图？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5ai-20250808124005200-1/">GPT-5：从“智能涌现”到“实用深耕”，AI范式转折点与生态博弈新格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250807184005089-0/">具身智能、多智能体与开源潮涌：中国AI大模型正从屏幕走向实体，重塑产业与未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dotsvlm1ai-20250807154007638-4/">小红书dots.vlm1：重塑视觉认知边界，开放生态驱动AI的“内容智商”飞跃</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-08-06-08-06-ai-/">08-06日报|巨头撕裂：当“开放”成为“毒药”，AI的战场转向何方？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250805144005004-0/">具身智能操作系统之争：智元灵渠OS如何重塑机器人产业版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250805004006995-0/">超越基准：AI智能竞技场如何重塑大模型评估与信任根基</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cozeai-agent-20250804194006163-2/">字节跳动Coze开源：一场高并发时代的AI Agent生态博弈与开发者门槛重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3dai-20250804161005562-2/">腾讯混元3D：AI重塑创作边界，重构数字娱乐的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mooncake-20250801111005253-3/">解耦赋能长上下文：Mooncake如何重塑大模型推理的成本与效率边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aideepseek-20250730114005599-2/">中国AI的‘幻觉’与‘护城河’：DeepSeek流量波动，预示智能生态新篇章？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/databricks-agent-bricksai-20250730114005630-5/">炸裂！Databricks Agent Bricks空降，企业AI开发告别“玄学”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ailangsmithalign-evalsai-20250730044005548-1/">AI“跑偏”？LangSmith放大招：Align Evals让AI秒懂“人类的审美”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen3-coderagentic-20250728171005242-0/">Qwen3-Coder：Agentic编程大模型如何重塑软件开发范式与未来劳动力结构</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
