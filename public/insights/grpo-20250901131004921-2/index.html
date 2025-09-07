@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>后训练算法的涌现：从GRPO到群智涌现，重塑大模型商业与哲学边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="大模型后训练算法正经历从OpenAI的PPO到DeepSeek的GRPO，以及字节跳动DAPO、Qwen GSPO、微软GFPO等一系列关键性迭代。这些创新从降低训练成本、提升稳定性、到实现多属性优化等维度，正深刻重塑AI的商业格局和产品形态，并引发我们对智能体本真、对齐边界以及通用人工智能未来路径的哲学思考。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/grpo-20250901131004921-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/grpo-20250901131004921-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="后训练算法的涌现：从GRPO到群智涌现，重塑大模型商业与哲学边界">
+  <meta property="og:description" content="大模型后训练算法正经历从OpenAI的PPO到DeepSeek的GRPO，以及字节跳动DAPO、Qwen GSPO、微软GFPO等一系列关键性迭代。这些创新从降低训练成本、提升稳定性、到实现多属性优化等维度，正深刻重塑AI的商业格局和产品形态，并引发我们对智能体本真、对齐边界以及通用人工智能未来路径的哲学思考。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-01T13:10:04+08:00">
+    <meta property="article:modified_time" content="2025-09-01T13:10:04+08:00">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="后训练">
+    <meta property="article:tag" content="强化学习">
+    <meta property="article:tag" content="GRPO">
+    <meta property="article:tag" content="GSPO">
+    <meta property="article:tag" content="AI对齐">
+
+  <meta itemprop="name" content="后训练算法的涌现：从GRPO到群智涌现，重塑大模型商业与哲学边界">
+  <meta itemprop="description" content="大模型后训练算法正经历从OpenAI的PPO到DeepSeek的GRPO，以及字节跳动DAPO、Qwen GSPO、微软GFPO等一系列关键性迭代。这些创新从降低训练成本、提升稳定性、到实现多属性优化等维度，正深刻重塑AI的商业格局和产品形态，并引发我们对智能体本真、对齐边界以及通用人工智能未来路径的哲学思考。">
+  <meta itemprop="datePublished" content="2025-09-01T13:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-01T13:10:04+08:00">
+  <meta itemprop="wordCount" content="83">
+  <meta itemprop="keywords" content="大模型,后训练,强化学习,GRPO,GSPO,AI对齐">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="后训练算法的涌现：从GRPO到群智涌现，重塑大模型商业与哲学边界">
+  <meta name="twitter:description" content="大模型后训练算法正经历从OpenAI的PPO到DeepSeek的GRPO，以及字节跳动DAPO、Qwen GSPO、微软GFPO等一系列关键性迭代。这些创新从降低训练成本、提升稳定性、到实现多属性优化等维度，正深刻重塑AI的商业格局和产品形态，并引发我们对智能体本真、对齐边界以及通用人工智能未来路径的哲学思考。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%201,%202025_13-04-15-696.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-01 13:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%90%8E%E8%AE%AD%E7%BB%83%E7%AE%97%E6%B3%95%E7%9A%84%E6%B6%8C%E7%8E%B0%EF%BC%9A%E4%BB%8EGRPO%E5%88%B0%E7%BE%A4%E6%99%BA%E6%B6%8C%E7%8E%B0%EF%BC%8C%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%95%86%E4%B8%9A%E4%B8%8E%E5%93%B2%E5%AD%A6%E8%BE%B9%E7%95%8C%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%90%8E%E8%AE%AD%E7%BB%83%E7%AE%97%E6%B3%95%E6%AD%A3%E7%BB%8F%E5%8E%86%E4%BB%8EOpenAI%E7%9A%84PPO%E5%88%B0DeepSeek%E7%9A%84GRPO%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8DAPO%E3%80%81Qwen&amp;#43;GSPO%E3%80%81%E5%BE%AE%E8%BD%AFGFPO%E7%AD%89%E4%B8%80%E7%B3%BB%E5%88%97%E5%85%B3%E9%94%AE%E6%80%A7%E8%BF%AD%E4%BB%A3%E3%80%82%E8%BF%99%E4%BA%9B%E5%88%9B%E6%96%B0%E4%BB%8E%E9%99%8D%E4%BD%8E%E8%AE%AD%E7%BB%83%E6%88%90%E6%9C%AC%E3%80%81%E6%8F%90%E5%8D%87%E7%A8%B3%E5%AE%9A%E6%80%A7%E3%80%81%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%B1%9E%E6%80%A7%E4%BC%98%E5%8C%96%E7%AD%89%E7%BB%B4%E5%BA%A6%EF%BC%8C%E6%AD%A3%E6%B7%B1%E5%88%BB%E9%87%8D%E5%A1%91AI%E7%9A%84%E5%95%86%E4%B8%9A%E6%A0%BC%E5%B1%80%E5%92%8C%E4%BA%A7%E5%93%81%E5%BD%A2%E6%80%81%EF%BC%8C%E5%B9%B6%E5%BC%95%E5%8F%91%E6%88%91%E4%BB%AC%E5%AF%B9%E6%99%BA%E8%83%BD%E4%BD%93%E6%9C%AC%E7%9C%9F%E3%80%81%E5%AF%B9%E9%BD%90%E8%BE%B9%E7%95%8C%E4%BB%A5%E5%8F%8A%E9%80%9A%E7%94%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%9C%AA%E6%9D%A5%E8%B7%AF%E5%BE%84%E7%9A%84%E5%93%B2%E5%AD%A6%E6%80%9D%E8%80%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgrpo-20250901131004921-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%90%8E%E8%AE%AD%E7%BB%83%E7%AE%97%E6%B3%95%E7%9A%84%E6%B6%8C%E7%8E%B0%EF%BC%9A%E4%BB%8EGRPO%E5%88%B0%E7%BE%A4%E6%99%BA%E6%B6%8C%E7%8E%B0%EF%BC%8C%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%95%86%E4%B8%9A%E4%B8%8E%E5%93%B2%E5%AD%A6%E8%BE%B9%E7%95%8C%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%90%8E%E8%AE%AD%E7%BB%83%E7%AE%97%E6%B3%95%E6%AD%A3%E7%BB%8F%E5%8E%86%E4%BB%8EOpenAI%E7%9A%84PPO%E5%88%B0DeepSeek%E7%9A%84GRPO%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8DAPO%E3%80%81Qwen&amp;#43;GSPO%E3%80%81%E5%BE%AE%E8%BD%AFGFPO%E7%AD%89%E4%B8%80%E7%B3%BB%E5%88%97%E5%85%B3%E9%94%AE%E6%80%A7%E8%BF%AD%E4%BB%A3%E3%80%82%E8%BF%99%E4%BA%9B%E5%88%9B%E6%96%B0%E4%BB%8E%E9%99%8D%E4%BD%8E%E8%AE%AD%E7%BB%83%E6%88%90%E6%9C%AC%E3%80%81%E6%8F%90%E5%8D%87%E7%A8%B3%E5%AE%9A%E6%80%A7%E3%80%81%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%B1%9E%E6%80%A7%E4%BC%98%E5%8C%96%E7%AD%89%E7%BB%B4%E5%BA%A6%EF%BC%8C%E6%AD%A3%E6%B7%B1%E5%88%BB%E9%87%8D%E5%A1%91AI%E7%9A%84%E5%95%86%E4%B8%9A%E6%A0%BC%E5%B1%80%E5%92%8C%E4%BA%A7%E5%93%81%E5%BD%A2%E6%80%81%EF%BC%8C%E5%B9%B6%E5%BC%95%E5%8F%91%E6%88%91%E4%BB%AC%E5%AF%B9%E6%99%BA%E8%83%BD%E4%BD%93%E6%9C%AC%E7%9C%9F%E3%80%81%E5%AF%B9%E9%BD%90%E8%BE%B9%E7%95%8C%E4%BB%A5%E5%8F%8A%E9%80%9A%E7%94%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%9C%AA%E6%9D%A5%E8%B7%AF%E5%BE%84%E7%9A%84%E5%93%B2%E5%AD%A6%E6%80%9D%E8%80%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgrpo-20250901131004921-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">后训练算法的涌现：从GRPO到群智涌现，重塑大模型商业与哲学边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>大模型后训练算法正经历从PPO到GRPO及后续DAPO、GSPO、GFPO的深刻演进。这一技术脉络从成本效率、稳定性、多属性优化等维度全面提升了模型与人类偏好的对齐能力，不仅重塑着AI产业的商业格局和产品形态，更引发了对智能体本质、反馈机制与通用人工智能路径的哲学思考。</p></blockquote>
+<p>大语言模型（LLM）的飞速发展，已从最初的“预训练”阶段迈入了对齐人类意图、优化实际应用的关键“后训练”时期。如果说预训练让模型拥有了“会说话”的能力，那么后训练则使其学会了“说对话”——符合特定偏好、任务需求与伦理规范。在这场从“能说”到“会说”的进化中，强化学习（Reinforcement Learning, RL）扮演了不可或缺的核心角色。</p>
+<p>OpenAI的<strong>近端策略优化（Proximal Policy Optimization, PPO）<strong>机制，因其在基于人类反馈的强化学习（RLHF）中的卓越表现而广为人知。PPO通过引入价值函数（Critic）、CLIP操作和Reference Model来稳定训练过程，有效提升了模型性能。然而，PPO需要维护一个与策略模型同样庞大的Critic网络，导致其</strong>计算和内存开销巨大，难以在大规模LLM训练中高效扩展</strong>，成为阻碍其普及的显著瓶颈。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>DeepSeek团队的<strong>组相对策略优化（Group Relative Policy Optimization, GRPO）<strong>正是为了突破这一瓶颈而诞生。GRPO的核心创新在于</strong>巧妙地去除了昂贵的Critic网络</strong>。它通过对同一问题生成多条候选输出，并基于这些输出的平均奖励来计算相对优势（Advantage），从而避免了对单独价值网络的依赖，显著降低了训练成本。GRPO保留了PPO中的策略剪裁（Clip）和KL散度正则化，以保障训练的稳定性。DeepSeek-R1等模型在数学推理、代码生成等复杂任务上的成功，充分证明了GRPO的有效性和成本优势。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>然而，GRPO也非终点，它在实际应用中暴露出<strong>严重的稳定性问题</strong>，尤其在小批量数据训练时极易导致模型崩溃，限制了其在中小规模RL训练中的普适性。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="技术原理与迭代创新从ppo到grpo及群智涌现">技术原理与迭代创新：从PPO到GRPO及群智涌现</h3>
+<p>GRPO的出现，无疑为大模型后训练范式开启了新篇章，并激发了后续一系列旨在克服其局限性的迭代创新：</p>
+<ul>
+<li>
+<p><strong>DAPO（Dynamic Advantage Policy Optimization）</strong>：由字节跳动和清华AIR团队提出，DAPO主要通过<strong>工程实践上的精细优化</strong>，解决了GRPO在训练中遇到的熵崩溃（entropy collapse）、奖励极端化（reward extremization）和长序列梯度分布失衡等问题。例如，DAPO采用_Clip-Higher机制_扩展了低概率Token的探索空间，_动态采样_过滤掉无效梯度样本，以及_Token级策略梯度损失_保证长序列样本的公平贡献，显著提升了训练效率和模型性能，甚至在部分基准上超越了同等规模的GRPO模型。尽管其数学原理仍基于GRPO，但这些工程智慧极大地增强了GRPO范式的实用性。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</li>
+<li>
+<p><strong>GSPO（Group Sequence Policy Optimization）</strong>：Qwen团队在Qwen3中实现的GSPO算法，标志着后训练领域的一次<strong>范式级跃迁</strong>。GSPO的突破在于将<strong>重要性采样（Importance Sampling）的粒度从传统的Token级提升至序列级</strong>。传统的Token级采样在长序列中容易积累高方差，导致训练不稳定，尤其在MoE（专家混合模型）中问题更为严重。GSPO通过计算整个序列的似然度来确定重要性权重，使优化目标与模型输出的奖励信号（通常针对整个回答）保持一致，显著增强了训练的稳定性，并有望成为未来后训练强化学习的新标准。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+</li>
+<li>
+<p><strong>GFPO（Group Filtered Policy Optimization）</strong>：微软研究团队提出的GFPO则聚焦于解决GRPO难以<strong>联合优化多个响应属性</strong>（如同时优化回答的简洁性和准确度）的问题。GFPO通过<strong>显式的“数据过滤”机制</strong>实现多目标优化：它从更大的候选响应组中，根据预设的属性（例如“简洁”）过滤出符合要求的响应，仅将这些响应用于计算策略梯度。这种选择性采样形如“偏好放大器”，无需复杂的奖励工程，即可高效地引导模型学习期望的多重属性，有效避免了模型为追求单一指标而导致的其他属性退化，如响应冗长。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+</li>
+</ul>
+<p>这些算法的演进，从成本削减到工程优化，再到粒度革新和多属性平衡，共同勾勒出后训练技术向着更高效、更稳定、更精细化对齐方向的清晰轨迹。</p>
+<h3 id="产业生态与商业格局的重塑">产业生态与商业格局的重塑</h3>
+<p>后训练算法的每一次突破，都不仅是技术论文上的亮点，更是<strong>AI产业格局和商业化进程的深层驱动力</strong>。</p>
+<p>首先，<strong>计算成本与模型普及度</strong>是商业决策的关键。GRPO通过“去Critic”策略，大幅降低了大模型训练的资源需求，使得DeepSeek等新兴力量能在与巨头抗衡中占据一席之地。这种<strong>成本效率的提升，是推动AI技术民主化和普惠化的重要因素</strong>，让更多企业和研究机构能够负担得起高质量模型的训练和部署。GSPO和DAPO通过提升训练稳定性和效率，进一步缩短了模型迭代周期，降低了因训练失败导致的资源浪费，这对于追求快速市场响应和持续创新的AI企业至关重要。</p>
+<p>其次，<strong>模型对齐能力已成为商业竞争的核心壁垒</strong>。在基础模型能力日益趋同的今天，谁能让模型更好地理解用户意图、生成更符合场景需求、甚至更具“人格化”的输出，谁就能赢得用户和市场。GFPO的多属性优化能力，直接解决了商业场景中“鱼与熊掌兼得”的痛点——例如，客服AI既要准确无误，又要简洁高效。GSPO在长文本生成中的稳定性，则提升了内容创作、文档摘要等应用的用户体验。这些算法使企业能够<strong>根据特定商业目标，打造出更具差异化、更符合垂直市场需求的AI产品</strong>，从而形成独特的竞争优势。</p>
+<p>再者，这场由DeepSeek、Qwen、微软、字节跳动等领衔的<strong>后训练算法创新竞赛，预示着AI技术正从“通用大模型竞赛”转向“应用效果与效率竞赛”</strong>。资本和市场关注的焦点，正从模型的参数规模转向其在实际应用中的表现、成本效益以及与业务场景的契合度。这不仅会加速AI在各行各业的落地速度，也会催生更多围绕“模型对齐”和“用户体验优化”的创业机会和商业模式创新。</p>
+<h3 id="哲学思辨对智能体本真追求的拷问">哲学思辨：对“智能体”本真追求的拷问</h3>
+<p>从技术层面深入，后训练算法的演进也引发了对AI“智能体”本质及其与人类关系更深层次的哲学拷问：我们究竟希望AI成为一个怎样的“智能体”？</p>
+<p>“对齐”作为后训练的核心目标，其本质是对AI<strong>施加人类价值观和意图的塑形</strong>。然而，当GRPO面临“奖励歧义性”——模型难以区分单一标量奖励背后是“答案正确”还是“推理清晰”时<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，我们便需思考：人类能否通过简化为数值的反馈，全面捕捉我们对智能体复杂的行为预期？AI在优化这些数值时，是否可能以一种我们未曾设想的方式“作弊”或偏离真实意图？GFPO通过多属性优化提供了一个更精细的引导方式，但其<strong>底层逻辑仍是人类预设偏好的映射</strong>。这让人不禁追问：我们是在培养AI的“真知灼见”，还是仅仅在训练一个更高级的“模仿者”？</p>
+<p>进一步而言，当前RLHF依赖于人类反馈，这本身便带有<strong>人类固有的主观性、偏差和有限性</strong>。在多轮推理等复杂任务中，模型因反馈机制的脆弱性而产生的“指数级分支”问题<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，不仅是技术难题，更反映出当前人机交互反馈循环的局限。未来的智能体若要实现真正的自主性和通用性，是否需要发展<strong>超越人类反馈的自我评估、自我学习和自我修正机制</strong>？例如，如何让AI能够从其自身与环境的交互中，生成语义丰富的、非标量化的反馈信号？这不仅关乎技术，更触及了关于“学习”、“意识”和“智能”本质的哲学命域。</p>
+<p>这场后训练算法的竞赛，不仅仅是优化参数和提升指标，它更像是一场<strong>人类与AI共同探索智能边界的漫长对话</strong>。每一次算法的迭代，都是我们对AI如何理解世界、如何与世界交互，以及最终如何融入人类文明进程的一次深层思考和实践。它在塑造AI行为的同时，也在无形中定义着我们对未来“智能伙伴”的期待与展望。</p>
+<h3 id="未来发展路径与潜在挑战">未来发展路径与潜在挑战</h3>
+<p>后训练算法的演进趋势预示着AI模型将走向更高效、更稳定、更可控且多功能的方向。展望未来3-5年，其发展将呈现以下几个关键路径：</p>
+<ol>
+<li><strong>多范式融合与超越强化学习</strong>：未来的后训练方法将不再局限于单一范式，而是<strong>融合GSPO的序列级稳定性、GFPO的多属性优化能力以及DAPO的工程实践智慧</strong>。更进一步，研究将探索<strong>超越传统奖励函数的对齐机制</strong>，例如基于对比学习、无监督模仿学习或AI自我评估的弱监督/无监督对齐方法，以降低对昂贵且有偏见的人类反馈的依赖。这将催生出能够自主发现并修正行为的新一代学习范式。</li>
+<li><strong>更深层次的认知对齐与多模态交互</strong>：目前算法仍主要关注文本生成，但未来的重点将是实现<strong>多模态的深度认知对齐</strong>。这意味着算法需要处理和融合来自文本、图像、音频、视频等多种模态的反馈，并能在复杂的多轮对话或具身智能场景中，保持长程连贯性和逻辑推理能力。例如，AI Agent不仅需要理解语言指令，还要根据视觉反馈调整其物理行为，这将对后训练的反馈机制和模型架构提出更高要求。</li>
+<li><strong>伦理治理与可解释性的核心地位</strong>：随着AI对人类社会影响力的加深，<strong>后训练过程中的伦理考量和可解释性将成为重中之重</strong>。如何确保奖励模型不固化或放大偏见？如何量化和审查模型“对齐”的程度？如何让模型在生成决策时提供可解释的推理路径？这将推动研究者开发新的工具和框架，来评估和审计后训练的效果，确保AI的公平性、透明度和安全性。</li>
+<li><strong>算法与硬件的协同优化</strong>：尽管算法不断优化以提高效率，但日益增长的模型规模仍将持续挑战算力极限。未来的发展将更强调<strong>算法设计与底层硬件架构的协同优化</strong>。例如，针对特定AI芯片特性设计的后训练算法、高效的分布式训练框架、以及在后训练阶段应用的更激进的模型压缩（剪枝、量化）技术，都将是突破计算瓶颈的关键。</li>
+<li><strong>AI Agent与具身智能的基石</strong>：能够通过后训练习得更精细、更符合人类意图行为模式的AI模型，将成为构建**具有自主规划和执行能力AI Agent以及具身智能（Embodied AI）**的坚实基石。一个能够精准理解复杂目标、高效与物理世界交互的机器人或智能系统，其核心正是由先进的后训练算法所塑造的行为逻辑。这将推动AI从虚拟世界走向真实世界，在自动驾驶、智能制造、服务机器人等领域引发变革。</li>
+</ol>
+<p>后训练的演进不仅仅是技术层面的精进，更是人类与AI之间不断深化对话、塑造智能体行为边界的过程。它指引着AI从“模仿”走向“理解”，从“预测”走向“决策”，最终成为更值得信赖、更具价值的通用智能伙伴。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://36kr.com/p/3447572249728642">科普向：一文解构大模型后训练，GRPO和它的继任者们的前世今生</a>·36氪·关注大模型的（2025/9/1）·检索日期2025/9/1&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.csdn.net/qq_38961840/article/details/145384900">【DeepSeek】大模型强化学习训练GRPO算法，你学会了吗？ 原创</a>·CSDN·qq_38961840（2025/8/7）·检索日期2025/9/1&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://news.qq.com/rain/a/20250206A07W9A00">强化学习与大模型后训练：DeepSeek R1 如何获得推理能力？</a>·腾讯新闻·未知（2025/2/6）·检索日期2025/9/1&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://zhangxuan.ai/columns/deepseek/deepseek-model-training/1002/">DeepSeek-R1的训练流程强化学习（RL）阶段采用了GRPO算法</a>·MetaX·未知（2025/3/14）·检索日期2025/9/1&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://huggingface.co/papers/2507.18071">Group Sequence Policy Optimization</a>·Hugging Face Papers·Qwen Team（2025/7/18）·检索日期2025/9/1&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://arxiv.org/abs/2508.09726">Sample More to Think Less: Group Filtered Policy Optimization for Concise Reasoning</a>·arXiv·Microsoft Research（2025/8/9）·检索日期2025/9/1&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%90%8E%E8%AE%AD%E7%BB%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">后训练</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">强化学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/grpo/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GRPO</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/gspo/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GSPO</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%AF%B9%E9%BD%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI对齐</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250718191004753-1/">AI Agent：破茧成蝶，抑或大模型附庸？从市场困局到自主智能体的进化之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/grok-4ai-20250710191004644-0/">Grok 4：马斯克吹响AI“加速度”号角，智能奇点临近下的产业与社会嬗变</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/recgpt-20250701202024893-1/">淘宝RecGPT：深度学习如何重塑电商推荐与用户体验的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/recgpt-20250701201004868-1/">淘宝RecGPT：深度学习如何重塑电商推荐与用户体验的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/recgpt-20250701191005282-1/">淘宝RecGPT：深度学习如何重塑电商推荐与用户体验的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/recgpt-20250701181004725-1/">淘宝RecGPT：深度学习如何重塑电商推荐与用户体验的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/recgpt-20250701171005110-1/">淘宝RecGPT：深度学习如何重塑电商推荐与用户体验的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax-m1ai-20250617202000424-10/">MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250901121005041-0/">超越遗忘：AI记忆系统重塑智能体的认知核心与未来生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250829191005909-4/">令牌的算计：中国AI大模型如何告别“免费午餐”的幻影</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20250829191005867-0/">告别“傻白甜”工具人：阿里云这波“Agent觉醒”征集令，要搞大事情！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250827214005209-4/">游戏巨头逐鹿AI：从“人机”到“印钞机”的跨界豪赌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/bge-reasonerragai-agent-20250827211006675-0/">超越信息搬运：BGE-Reasoner如何赋能RAG与AI Agent的“推理之思”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250827161004805-1/">“极”化迷局：大模型数据污染的深层警告与可信AI的重构之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-20250827151004811-1/">小扎，这波是不是有点亏？Meta强化学习大佬离职，还用老板金句“精准背刺”！</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
