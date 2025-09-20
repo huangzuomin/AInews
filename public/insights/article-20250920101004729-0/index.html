@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI的“中枢神经”：可观测性重塑如何定义大模型时代的边界与未来 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="大模型时代的可观测性正经历从“服务业务”到“服务AI”再到“自身智能化”的范式转变。小红书的实践展示了如何通过智能体和AIOps应对AI基础设施的异构挑战与应用复杂性，实现GPU故障诊断和全链路监控，这不仅是保障AI系统稳定性的核心，更是推动AI规模化落地的关键技术支撑，预示着AI系统自我诊断与优化的未来图景。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250920101004729-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250920101004729-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI的“中枢神经”：可观测性重塑如何定义大模型时代的边界与未来">
+  <meta property="og:description" content="大模型时代的可观测性正经历从“服务业务”到“服务AI”再到“自身智能化”的范式转变。小红书的实践展示了如何通过智能体和AIOps应对AI基础设施的异构挑战与应用复杂性，实现GPU故障诊断和全链路监控，这不仅是保障AI系统稳定性的核心，更是推动AI规模化落地的关键技术支撑，预示着AI系统自我诊断与优化的未来图景。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-20T10:10:04+08:00">
+    <meta property="article:modified_time" content="2025-09-20T10:10:04+08:00">
+    <meta property="article:tag" content="大模型可观测性">
+    <meta property="article:tag" content="稳定性工程">
+    <meta property="article:tag" content="AIOps">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="GPU故障诊断">
+    <meta property="article:tag" content="产业生态">
+
+  <meta itemprop="name" content="AI的“中枢神经”：可观测性重塑如何定义大模型时代的边界与未来">
+  <meta itemprop="description" content="大模型时代的可观测性正经历从“服务业务”到“服务AI”再到“自身智能化”的范式转变。小红书的实践展示了如何通过智能体和AIOps应对AI基础设施的异构挑战与应用复杂性，实现GPU故障诊断和全链路监控，这不仅是保障AI系统稳定性的核心，更是推动AI规模化落地的关键技术支撑，预示着AI系统自我诊断与优化的未来图景。">
+  <meta itemprop="datePublished" content="2025-09-20T10:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-20T10:10:04+08:00">
+  <meta itemprop="wordCount" content="92">
+  <meta itemprop="keywords" content="大模型可观测性,稳定性工程,AIOps,AI Agent,GPU故障诊断,产业生态">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI的“中枢神经”：可观测性重塑如何定义大模型时代的边界与未来">
+  <meta name="twitter:description" content="大模型时代的可观测性正经历从“服务业务”到“服务AI”再到“自身智能化”的范式转变。小红书的实践展示了如何通过智能体和AIOps应对AI基础设施的异构挑战与应用复杂性，实现GPU故障诊断和全链路监控，这不仅是保障AI系统稳定性的核心，更是推动AI规模化落地的关键技术支撑，预示着AI系统自我诊断与优化的未来图景。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2020,%202025_10-01-19-764.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-20 10:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E7%9A%84%E2%80%9C%E4%B8%AD%E6%9E%A2%E7%A5%9E%E7%BB%8F%E2%80%9D%EF%BC%9A%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E9%87%8D%E5%A1%91%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E6%AD%A3%E7%BB%8F%E5%8E%86%E4%BB%8E%E2%80%9C%E6%9C%8D%E5%8A%A1%E4%B8%9A%E5%8A%A1%E2%80%9D%E5%88%B0%E2%80%9C%E6%9C%8D%E5%8A%A1AI%E2%80%9D%E5%86%8D%E5%88%B0%E2%80%9C%E8%87%AA%E8%BA%AB%E6%99%BA%E8%83%BD%E5%8C%96%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E3%80%82%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%B1%95%E7%A4%BA%E4%BA%86%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%99%BA%E8%83%BD%E4%BD%93%E5%92%8CAIOps%E5%BA%94%E5%AF%B9AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E5%BC%82%E6%9E%84%E6%8C%91%E6%88%98%E4%B8%8E%E5%BA%94%E7%94%A8%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%8C%E5%AE%9E%E7%8E%B0GPU%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD%E5%92%8C%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%8C%E8%BF%99%E4%B8%8D%E4%BB%85%E6%98%AF%E4%BF%9D%E9%9A%9CAI%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%8C%E6%9B%B4%E6%98%AF%E6%8E%A8%E5%8A%A8AI%E8%A7%84%E6%A8%A1%E5%8C%96%E8%90%BD%E5%9C%B0%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%94%AF%E6%92%91%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80AI%E7%B3%BB%E7%BB%9F%E8%87%AA%E6%88%91%E8%AF%8A%E6%96%AD%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%9C%AA%E6%9D%A5%E5%9B%BE%E6%99%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250920101004729-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E7%9A%84%E2%80%9C%E4%B8%AD%E6%9E%A2%E7%A5%9E%E7%BB%8F%E2%80%9D%EF%BC%9A%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E9%87%8D%E5%A1%91%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5%20-%20%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E6%AD%A3%E7%BB%8F%E5%8E%86%E4%BB%8E%E2%80%9C%E6%9C%8D%E5%8A%A1%E4%B8%9A%E5%8A%A1%E2%80%9D%E5%88%B0%E2%80%9C%E6%9C%8D%E5%8A%A1AI%E2%80%9D%E5%86%8D%E5%88%B0%E2%80%9C%E8%87%AA%E8%BA%AB%E6%99%BA%E8%83%BD%E5%8C%96%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E3%80%82%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%B1%95%E7%A4%BA%E4%BA%86%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%99%BA%E8%83%BD%E4%BD%93%E5%92%8CAIOps%E5%BA%94%E5%AF%B9AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E5%BC%82%E6%9E%84%E6%8C%91%E6%88%98%E4%B8%8E%E5%BA%94%E7%94%A8%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%8C%E5%AE%9E%E7%8E%B0GPU%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD%E5%92%8C%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%8C%E8%BF%99%E4%B8%8D%E4%BB%85%E6%98%AF%E4%BF%9D%E9%9A%9CAI%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%8C%E6%9B%B4%E6%98%AF%E6%8E%A8%E5%8A%A8AI%E8%A7%84%E6%A8%A1%E5%8C%96%E8%90%BD%E5%9C%B0%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%94%AF%E6%92%91%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80AI%E7%B3%BB%E7%BB%9F%E8%87%AA%E6%88%91%E8%AF%8A%E6%96%AD%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%9C%AA%E6%9D%A5%E5%9B%BE%E6%99%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250920101004729-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI的“中枢神经”：可观测性重塑如何定义大模型时代的边界与未来</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>大模型技术的爆发式增长正将可观测性从传统IT运维推向全新的战略高度，成为保障AI基础设施和应用稳定性的核心。小红书在QCon上海分享的实践不仅揭示了AI如何重塑可观测平台自身，通过智能体和AIOps实现GPU故障诊断和全链路监控，更是勾勒出AI规模化落地的核心技术支撑与未来走向。</p></blockquote>
+<p>大模型技术浪潮席卷全球，其带来的颠覆性变革不仅仅局限于算法和应用层面，更深层次的挑战正浮现于其赖以运行的基础设施与稳定性保障之上。如同生物体拥有神经系统感知并响应内部变化，复杂且动态的AI系统也急需一套进化的“中枢神经”——<strong>智能化、前瞻性的可观测性平台</strong>。小红书在QCon上海大会上关于“重塑可观测边界：大模型时代的稳定性工程实践”的分享，为我们提供了一个具象化的案例，深刻揭示了这一演进趋势的底层逻辑与深远影响。</p>
+<h3 id="大模型时代的黑箱挑战与可观测性重构">大模型时代的“黑箱”挑战与可观测性重构</h3>
+<p>传统的可观测性（Observability）主要关注业务系统服务的可用性、性能与可靠性，其核心在于通过日志、指标、追踪等数据，帮助工程师理解系统行为、快速定位问题。然而，大模型时代的技术栈带来了前所未有的复杂性，使得传统方法力不从心。</p>
+<p>首先，<strong>算力基础设施的异构性与规模化</strong>是显著挑战。大模型训练动辄需要千卡甚至万卡规模的GPU集群，不同品牌、型号的GPU参数差异，以及多变的内部训练框架，使得统一的监控和故障诊断变得异常困难。例如，在一个万卡集群中，训练任务“Hang住”后，所有Pod都可能表现为卡死，故障种类繁多，定位难度呈指数级增长。这要求可观测系统不仅要理解GPU的底层运行机制，更要能从海量、异构的数据中快速识别出异常模式，打破AI基础设施的“黑箱”<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>其次，<strong>AI应用自身的高度动态性与不确定性</strong>，对全链路监控提出了新的要求。AI应用的快速迭代、多模态融合、Agentic AI的复杂决策流，使得故障不再是简单的服务宕机，可能表现为推理性能下降、生成内容质量波动甚至行为逻辑异常。如何构建一套能够理解AI应用语义、追踪其内部决策路径、并有效诊断问题的全链路监控体系，是当前行业面临的共性难题。小红书的实践指明，可观测平台已从最初的“服务业务”演进到“服务AI”，并进一步走向“自身智能化”，即平台本身开始利用AI技术进行自我优化和决策辅助。</p>
+<h3 id="技术原理深挖智能基础设施与ai应用的全链路透视">技术原理深挖：智能基础设施与AI应用的全链路透视</h3>
+<p>小红书的实践围绕两大核心领域展开：AI基础设施（AI Infra）观测和AI应用观测，并在此基础上构建可观测AI Agent。</p>
+<ol>
+<li>
+<p><strong>AI基础设施的深度观测与稳定性体系</strong>：</p>
+<ul>
+<li><strong>GPU故障诊断</strong>：在大规模AI训练中，GPU故障是常见的算力浪费根源。小红书通过深入了解GPU硬件特性和驱动行为，结合实时监控数据，实现了对GPU故障的快速诊断与定位。这包括识别硬件老化、驱动异常、甚至因通信阻塞导致的“卡死”现象。这种能力对于保障稀缺算力的有效利用至关重要，也与百度百舸在万卡集群训练稳定性系统上的实践异曲同工<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>训练任务稳定性保障</strong>：除了硬件故障，训练任务本身的逻辑错误或资源争抢也可能导致“Hang”。小红书的方案通过对训练过程的精细化指标采集和异常检测，能够发现训练中断、性能抖动等问题，并通过自动化诊断机制，大幅缩短故障发现与定位的时间。例如，利用AIOps的算法能力进行异常检测、时序预测和根因分析，自动化提炼规则并指挥监测系统<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ul>
+</li>
+<li>
+<p><strong>AI应用的全链路监控落地实践</strong>：
+AI应用的复杂性要求可观测系统能够提供端到端的可见性。小红书的方案可能涉及以下关键技术：</p>
+<ul>
+<li><strong>分布式追踪（Distributed Tracing）增强</strong>：针对AI应用特有的推理请求、模型调用、Agent决策链等环节，定制化追踪上下文，确保从用户请求到模型响应的全过程可追溯。这需要对现有追踪基建进行兼容性改造和扩展。</li>
+<li><strong>语义层面的监控</strong>：除了传统的系统指标，还需要监控AI应用的关键业务指标（如准确率、召回率、延迟、成本等），并通过机器学习方法分析这些指标的波动，预警潜在的AI服务退化。</li>
+</ul>
+</li>
+<li>
+<p><strong>可观测AI Agent场景建设与落地</strong>：
+这是可观测性进化的<strong>关键跃迁</strong>。传统AIOps（Algorithmic IT Operations）通过机器学习算法对运维数据进行分析，实现异常检测和初步诊断。而结合大模型（LLM）的AI Agent，则赋予了可观测平台更高的“能动性”和“智能洞察力”<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<ul>
+<li><strong>智能决策辅助</strong>：可观测AI Agent能够从海量监控数据中提炼更高层次的洞察，甚至对潜在风险进行预测，并提供故障处理建议。例如，当系统出现异常时，Agent可以结合历史故障知识、代码库和运维手册，生成一份初步的故障报告和修复方案。</li>
+<li><strong>自适应与自优化</strong>：长远来看，这些Agent将具备学习和适应能力，能够根据系统的新变化自动调整监控策略、优化告警阈值，甚至在某些场景下实现<strong>自我修复</strong>，将可观测平台从被动的数据呈现工具转变为具备主动决策和优化能力的智能系统。小红书将传统的AIOps能力与大模型结合，旨在实现产品化落地，提供可复制的工程经验。</li>
+</ul>
+</li>
+</ol>
+<h3 id="商业价值与产业生态重塑">商业价值与产业生态重塑</h3>
+<p>小红书的稳定性工程实践不仅是技术层面的突破，更蕴含着巨大的商业价值和对产业生态的深远影响。</p>
+<ul>
+<li><strong>商业敏锐度</strong>：在一个竞争激烈的AI应用市场，<strong>稳定性就是生产力</strong>。对于小红书这样的头部平台，AI基础设施的稳定直接关乎用户体验、内容分发效率和商业模式的顺畅运行。高效的GPU故障诊断和训练稳定性保障，能大幅降低算力资源浪费，直接节约巨大的运营成本；而AI应用的平稳运行则保障了内容创作、推荐等核心功能的可靠性，支撑其商业模式的持续创新与增长。</li>
+<li><strong>产业生态洞察</strong>：可观测性能力的提升，将促进整个AI产业生态的协同进化。它将催生更专业、更智能的AI运维工具和服务市场，包括针对异构算力环境的监控方案、AI应用性能管理（APM）平台、以及基于大模型的智能故障诊断Agent等。这不仅是软件工程领域的一次深刻变革（AI &amp; Software Engineering），更是对AI基础设施、平台和应用服务商提出的更高要求。</li>
+<li><strong>投资逻辑分析</strong>：在AI领域，除了对模型和应用层的投资，对<strong>AI基础设施的稳定性和效率提升</strong>的投资将成为新的战略高地。能够提供高效、智能可观测解决方案的公司，将在即将到来的AI竞赛中占据有利位置。这种投资逻辑是驱动技术进步的底层动力，尤其是在AI Agent逐渐成为“数字员工”的趋势下<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+</ul>
+<h3 id="哲学思辨与未来展望ai的自我诊断之路">哲学思辨与未来展望：AI的自我诊断之路</h3>
+<p>从哲学层面审视，当AI被用来观测和优化AI系统自身时，我们正触及一个关于<strong>智能体自我认知和自我优化</strong>的深层议题。可观测AI Agent不仅是工具，它们更像是AI系统内部的“哨兵”和“医生”，具备了一定程度的自主学习和决策能力。这不禁引发我们思考：</p>
+<ul>
+<li>这种“自我诊断”的AI系统，在未来能否实现真正的<strong>自我进化与迭代</strong>？</li>
+<li>当可观测性平台本身成为一个智能体，其决策的<strong>透明度和可解释性</strong>如何保障？</li>
+<li>人类运维工程师的角色将如何演变？是从执行者转变为更高层次的“系统设计师”和“策略制定者”，与AI Agent协同工作？</li>
+</ul>
+<p>展望未来3-5年，可观测性将不再是AI系统的辅助功能，而会成为其<strong>不可或缺的组成部分</strong>。</p>
+<ul>
+<li><strong>平台智能化将普及</strong>：大部分AI基础设施和应用的可观测平台将普遍融入大模型能力，实现自动化诊断、预测性维护和智能决策辅助。</li>
+<li><strong>Agentic AI的普及</strong>：可观测AI Agent将成为企业级AI应用的标准配置，不仅监测AI运行状况，更能主动干预和优化。</li>
+<li><strong>跨领域融合加深</strong>：可观测性将与数据治理、模型安全、伦理审查等领域深度融合，形成一个全面的AI治理框架。</li>
+<li><strong>标准化与开源生态</strong>：围绕大模型可观测性的标准和开源工具将逐渐成熟，进一步降低AI应用的落地门槛。</li>
+</ul>
+<p>小红书的案例是一个缩影，它生动地展示了在大模型引发的“第二波”AI革命中，基础设施层面的创新如何成为决定AI能否规模化、可靠化、可持续发展的关键。可观测性不再只是保障系统稳定，它正在重新定义AI系统自身的边界，并指引着一个更具韧性、更自主的智能未来。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>百度百舸万卡集群的训练稳定性系统设计和实践 - 极客公园 · 极客公园 · (2024/10/09) · 检索日期2024/01/15&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>AIOps在小红书的探索与实践——故障定位与诊断 - 53AI · 53AI · (2024/10/09) · 检索日期2024/01/15&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>[PDF] 中国AI Agent 行业研究报告（二） · 东财证券研究所 · (2024/03/13) · 检索日期2024/01/15&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>[PDF] 大模型落地应用 - 华东分院 · 华东分院 · (2024/01/12) · 检索日期2024/01/15&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型可观测性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">稳定性工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/aiops/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AIOps</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/gpu%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GPU故障诊断</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A7%E4%B8%9A%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">产业生态</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/sre-ai-20250920001005911-0/">大模型未能独立执掌SRE根因分析，但人类-AI协作已开启运维新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agents-20250919141004945-0/">智能体元年：AI Agents如何重塑企业智能的底层逻辑与未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/arm-lumex-csstops-20250916144004764-3/">Arm Lumex CSS：边缘智能的范式转移与万亿级TOPS的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250911154004727-1/">AI Agent与算力“军备竞赛”：重塑组织结构，呼唤社会深层变革</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aic-20250911114004707-0/">AI不再是“工具人”？它已空降你的群聊，甚至帮你“C位出道”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250911111004888-3/">模型上下文协议：AI Agent迈向自主智能的“万能接口”与生态重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250909121004713-0/">AI Agent纪元：从辅助工具到核心生产力，重塑全球企业格局的智能涌现</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentai-agent-20250909054004597-0/">Agent中间件：从抽象到精控——AI Agent工程化的深层演进</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250908201005713-1/">超越“迷惑硬件”：AI正从独立功能蜕变为无处不在的智能属性</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250908091005114-0/">AI浪潮再进化：智能体驱动的未来商业图景与颠覆性定价策略</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250907174005497-0/">AI的“记忆”革命：从瞬时上下文到终身智慧，重塑智能体的未来边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-10-20250825161004590-1/">钉钉“AI 1.0”：工作范式的深层重构与人机协作的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250820181004619-0/">钉钉深耕垂域AI：从泛化智能到行业专属的战略深潜与生态重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250815154005416-1/">金融智能体的“融合共生”范式：重塑金融业的智慧边界与未来韧性</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agentai-profiling-20250813121005512-2/">AI Agent与AI Profiling：智能运维的“双支柱”，重塑企业运营的未来范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
