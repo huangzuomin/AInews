@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>谷歌Gemini Robotics 1.5：具身智能从“行动”到“思考”与“泛化”的跃迁 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌DeepMind的Gemini Robotics 1.5系列模型实现了机器人从“行动”到“思考”的智能跃迁，通过解耦的推理与执行模块以及革命性的“跨具身学习”能力，大幅降低了通用机器人的开发与部署门槛。这不仅预示着机器人商业化潜力的全面释放，更引发了对智能本质、人机关系及AI伦理的深层思辨，开启了具身智能加速发展的全新纪元。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/gemini-robotics-15-20250926124004720-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/gemini-robotics-15-20250926124004720-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="谷歌Gemini Robotics 1.5：具身智能从“行动”到“思考”与“泛化”的跃迁">
+  <meta property="og:description" content="谷歌DeepMind的Gemini Robotics 1.5系列模型实现了机器人从“行动”到“思考”的智能跃迁，通过解耦的推理与执行模块以及革命性的“跨具身学习”能力，大幅降低了通用机器人的开发与部署门槛。这不仅预示着机器人商业化潜力的全面释放，更引发了对智能本质、人机关系及AI伦理的深层思辨，开启了具身智能加速发展的全新纪元。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-26T12:40:04+08:00">
+    <meta property="article:modified_time" content="2025-09-26T12:40:04+08:00">
+    <meta property="article:tag" content="具身智能">
+    <meta property="article:tag" content="机器人">
+    <meta property="article:tag" content="跨具身学习">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="商业化">
+    <meta property="article:tag" content="谷歌DeepMind">
+
+  <meta itemprop="name" content="谷歌Gemini Robotics 1.5：具身智能从“行动”到“思考”与“泛化”的跃迁">
+  <meta itemprop="description" content="谷歌DeepMind的Gemini Robotics 1.5系列模型实现了机器人从“行动”到“思考”的智能跃迁，通过解耦的推理与执行模块以及革命性的“跨具身学习”能力，大幅降低了通用机器人的开发与部署门槛。这不仅预示着机器人商业化潜力的全面释放，更引发了对智能本质、人机关系及AI伦理的深层思辨，开启了具身智能加速发展的全新纪元。">
+  <meta itemprop="datePublished" content="2025-09-26T12:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-26T12:40:04+08:00">
+  <meta itemprop="wordCount" content="71">
+  <meta itemprop="keywords" content="具身智能,机器人,跨具身学习,AI Agent,商业化,谷歌DeepMind">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="谷歌Gemini Robotics 1.5：具身智能从“行动”到“思考”与“泛化”的跃迁">
+  <meta name="twitter:description" content="谷歌DeepMind的Gemini Robotics 1.5系列模型实现了机器人从“行动”到“思考”的智能跃迁，通过解耦的推理与执行模块以及革命性的“跨具身学习”能力，大幅降低了通用机器人的开发与部署门槛。这不仅预示着机器人商业化潜力的全面释放，更引发了对智能本质、人机关系及AI伦理的深层思辨，开启了具身智能加速发展的全新纪元。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2026,%202025_12-31-18-451.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-26 12:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B0%B7%E6%AD%8CGemini&amp;#43;Robotics&amp;#43;1.5%EF%BC%9A%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BB%8E%E2%80%9C%E8%A1%8C%E5%8A%A8%E2%80%9D%E5%88%B0%E2%80%9C%E6%80%9D%E8%80%83%E2%80%9D%E4%B8%8E%E2%80%9C%E6%B3%9B%E5%8C%96%E2%80%9D%E7%9A%84%E8%B7%83%E8%BF%81%20-%20%E8%B0%B7%E6%AD%8CDeepMind%E7%9A%84Gemini&amp;#43;Robotics&amp;#43;1.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%8E%E2%80%9C%E8%A1%8C%E5%8A%A8%E2%80%9D%E5%88%B0%E2%80%9C%E6%80%9D%E8%80%83%E2%80%9D%E7%9A%84%E6%99%BA%E8%83%BD%E8%B7%83%E8%BF%81%EF%BC%8C%E9%80%9A%E8%BF%87%E8%A7%A3%E8%80%A6%E7%9A%84%E6%8E%A8%E7%90%86%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9D%97%E4%BB%A5%E5%8F%8A%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84%E2%80%9C%E8%B7%A8%E5%85%B7%E8%BA%AB%E5%AD%A6%E4%B9%A0%E2%80%9D%E8%83%BD%E5%8A%9B%EF%BC%8C%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E9%80%9A%E7%94%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E5%BC%80%E5%8F%91%E4%B8%8E%E9%83%A8%E7%BD%B2%E9%97%A8%E6%A7%9B%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%95%86%E4%B8%9A%E5%8C%96%E6%BD%9C%E5%8A%9B%E7%9A%84%E5%85%A8%E9%9D%A2%E9%87%8A%E6%94%BE%EF%BC%8C%E6%9B%B4%E5%BC%95%E5%8F%91%E4%BA%86%E5%AF%B9%E6%99%BA%E8%83%BD%E6%9C%AC%E8%B4%A8%E3%80%81%E4%BA%BA%E6%9C%BA%E5%85%B3%E7%B3%BB%E5%8F%8AAI%E4%BC%A6%E7%90%86%E7%9A%84%E6%B7%B1%E5%B1%82%E6%80%9D%E8%BE%A8%EF%BC%8C%E5%BC%80%E5%90%AF%E4%BA%86%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%8A%A0%E9%80%9F%E5%8F%91%E5%B1%95%E7%9A%84%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgemini-robotics-15-20250926124004720-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B0%B7%E6%AD%8CGemini&amp;#43;Robotics&amp;#43;1.5%EF%BC%9A%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BB%8E%E2%80%9C%E8%A1%8C%E5%8A%A8%E2%80%9D%E5%88%B0%E2%80%9C%E6%80%9D%E8%80%83%E2%80%9D%E4%B8%8E%E2%80%9C%E6%B3%9B%E5%8C%96%E2%80%9D%E7%9A%84%E8%B7%83%E8%BF%81%20-%20%E8%B0%B7%E6%AD%8CDeepMind%E7%9A%84Gemini&amp;#43;Robotics&amp;#43;1.5%E7%B3%BB%E5%88%97%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%8E%E2%80%9C%E8%A1%8C%E5%8A%A8%E2%80%9D%E5%88%B0%E2%80%9C%E6%80%9D%E8%80%83%E2%80%9D%E7%9A%84%E6%99%BA%E8%83%BD%E8%B7%83%E8%BF%81%EF%BC%8C%E9%80%9A%E8%BF%87%E8%A7%A3%E8%80%A6%E7%9A%84%E6%8E%A8%E7%90%86%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9D%97%E4%BB%A5%E5%8F%8A%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84%E2%80%9C%E8%B7%A8%E5%85%B7%E8%BA%AB%E5%AD%A6%E4%B9%A0%E2%80%9D%E8%83%BD%E5%8A%9B%EF%BC%8C%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E9%80%9A%E7%94%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E5%BC%80%E5%8F%91%E4%B8%8E%E9%83%A8%E7%BD%B2%E9%97%A8%E6%A7%9B%E3%80%82%E8%BF%99%E4%B8%8D%E4%BB%85%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%95%86%E4%B8%9A%E5%8C%96%E6%BD%9C%E5%8A%9B%E7%9A%84%E5%85%A8%E9%9D%A2%E9%87%8A%E6%94%BE%EF%BC%8C%E6%9B%B4%E5%BC%95%E5%8F%91%E4%BA%86%E5%AF%B9%E6%99%BA%E8%83%BD%E6%9C%AC%E8%B4%A8%E3%80%81%E4%BA%BA%E6%9C%BA%E5%85%B3%E7%B3%BB%E5%8F%8AAI%E4%BC%A6%E7%90%86%E7%9A%84%E6%B7%B1%E5%B1%82%E6%80%9D%E8%BE%A8%EF%BC%8C%E5%BC%80%E5%90%AF%E4%BA%86%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%8A%A0%E9%80%9F%E5%8F%91%E5%B1%95%E7%9A%84%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgemini-robotics-15-20250926124004720-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">谷歌Gemini Robotics 1.5：具身智能从“行动”到“思考”与“泛化”的跃迁</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌DeepMind最新发布的Gemini Robotics 1.5系列模型，赋予了机器人前所未有的“思考”与“规划”能力，并通过创新的“跨具身学习”机制，极大加速了通用机器人的研发与部署，预示着具身智能进入一个商业化加速、社会影响深远的全新纪元。</p></blockquote>
+<p>谷歌DeepMind近日推出Gemini Robotics 1.5系列模型，被誉为机器人领域的又一次“大脑”升级，其突破性地融合了高级推理、规划与跨形态学习能力，正在重塑我们对具身智能的理解和期待。这不仅是技术层面的SOTA进展，更是在商业应用和社会伦理维度引发深远变革的里程碑事件。</p>
+<h3 id="技术核心思考与行动的解耦与协同">技术核心：思考与行动的解耦与协同</h3>
+<p>Gemini Robotics 1.5系列的发布，标志着机器人智能从单纯的“感知-行动”循环迈向了更为复杂的“感知-推理-规划-行动-反思”的具身智能agent范式。这一飞跃的背后，是两个核心模型的精妙协同：</p>
+<ul>
+<li><strong>Gemini Robotics-ER 1.5 (Embodied Reasoning)</strong>：作为首个为具身推理优化的“思维模型”<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，它专注于对物理世界的深度理解和逻辑决策。Gemini Robotics-ER 1.5能够综合视觉信息，进行物体检测、状态估计、轨迹预测，并生成详细的多步骤行动计划。更重要的是，它拥有调用外部数字工具（如谷歌搜索）的能力，能主动获取信息并融入决策，例如为出行打包行李时主动查询天气并添加雨伞，展现出<strong>超越指令的自主规划与预测能力</strong>。其在学术和内部基准测试中均表现出最先进的性能<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>Gemini Robotics 1.5 (Visual-Language-Action)</strong>：该模型则负责将Gemini Robotics-ER 1.5生成的自然语言指令转化为机器人的具体运动指令并加以执行。它不仅能理解指令，还能在行动前进行内部推理与分析，并能用自然语言解释其思考过程<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这种<strong>决策透明度</strong>是未来人机协作和伦理治理的关键基石。</li>
+</ul>
+<p>这种“大脑”与“小脑”的协同工作，实现了具身智能的解耦与统一。ER模型负责宏观策略和环境理解，而VLA模型则专注于精细动作执行和反馈，显著提升了机器人应对长周期、复杂任务和多样化环境的泛化能力。</p>
+<h3 id="跨具身学习迈向通用智能机器人的决定性一步">跨具身学习：迈向通用智能机器人的决定性一步</h3>
+<p>长期以来，机器人领域面临的一个核心挑战是：不同形态、不同自由度的机器人之间，其学习到的技能难以通用。一个为双臂工业机器人训练的抓取技能，往往不能直接迁移到四足机器人或人形机器人上。Gemini Robotics 1.5在**跨具身学习（Cross-Embodiment Learning）**能力上的突破，正是对这一瓶颈的决定性回应<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<blockquote>
+<p>“Gemini Robotics 1.5展现出卓越的跨具身学习能力。它能将从一个机器人学到的动作迁移到另一个机器人，无需针对每种新形态专门调整模型。这一突破加速了新行为的学习进程，助力机器人变得更智能、更实用。”<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这意味着，通过Gemini Robotics 1.5，一个在衣柜场景中获得经验的机器人（例如ALOHA2）能够将其知识结构泛化，使得从未接触过该场景的另一类机器人（例如双臂Franka）也能完成开门、拿衣服等全新动作<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。这种“泛化学习”能力，将<strong>指数级地加速通用机器人的研发周期</strong>，降低训练成本，并使得机器人在物流、零售、家庭服务等不同场景间的技能共享成为可能。从工程角度看，这预示着机器人不再是单一用途的工具，而将演变为一个可以不断积累、共享和迭代经验的智能物种网络。</p>
+<h3 id="商业版图与产业生态的重塑">商业版图与产业生态的重塑</h3>
+<p>Gemini Robotics 1.5系列模型的发布，对AI与机器人产业的商业版图将产生颠覆性影响。</p>
+<ul>
+<li><strong>市场潜力的释放</strong>：“思考”能力和“跨具身学习”大幅降低了机器人部署的复杂度与成本。过去需要为特定任务定制化训练的机器人，现在可以通过预训练模型和少量微调实现快速部署。这将加速通用服务机器人（如家庭助理、商用清洁、仓库管理等）的市场渗透，打开数万亿美元的潜在市场空间。</li>
+<li><strong>投资逻辑的转变</strong>：资本将更青睐那些能够利用通用AI模型实现快速产品迭代和大规模复制的机器人企业。专注于底层模型研发的巨头（如Google DeepMind）将掌握核心技术护城河，而应用层企业则需迅速构建基于这些模型的产品和解决方案。</li>
+<li><strong>产业生态的融合</strong>：机器人硬件厂商、AI模型开发者、云服务提供商以及垂直行业解决方案商将形成更紧密的生态协同。谷歌通过其Gemini家族模型赋能具身智能，进一步巩固其在AI领域的领导地位，并有望将AI大模型的能力无缝扩展到物理世界，形成软硬件一体化的巨型生态系统。</li>
+<li><strong>新型商业模式</strong>：未来可能会出现“机器人技能商店”或“具身智能即服务（Embodied AI-as-a-Service）”的模式，用户可以按需下载或订阅特定技能，让机器人执行各种任务。这极大地提高了机器人的<strong>资产利用率和投资回报率（ROI）</strong>。</li>
+</ul>
+<h3 id="哲学思辨智能边界的拓宽与社会伦理的考量">哲学思辨：智能边界的拓宽与社会伦理的考量</h3>
+<p>当机器人能够“思考”并“跨物种学习”时，我们不得不深入探讨其深层的哲学意义。</p>
+<ul>
+<li><strong>智能的本质</strong>：机器人不仅能执行指令，还能进行情境推理、主动规划，甚至用自然语言解释其决策过程，这模糊了传统上对“智能”的定义。我们是否正在见证一种新的、非生物的认知形式的诞生？这种智能与人类智能的异同何在？</li>
+<li><strong>人机关系重构</strong>：具备高度自主性和学习能力的机器人将不再是简单的工具，而是更为紧密的“智能伙伴”<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这要求我们重新审视人机协作的边界，以及如何建立互信、高效、安全的互动模式。当机器人能够主动干预并超越指令时，人类的控制权和责任边界将面临挑战。</li>
+<li><strong>伦理与治理</strong>：随着机器人自主性的增强，其行为的<strong>可解释性、可预测性和可控性</strong>成为核心伦理议题。Gemini Robotics 1.5模型能够解释其思考过程，这为构建更透明、可审计的AI系统提供了可能。但同时，“跨具身学习”带来的快速能力泛化，也对<strong>AI安全和偏见传播</strong>提出了更高要求，一旦学习到不当行为，其影响可能迅速扩散到整个机器人网络。各国政府、科技企业和学术界需要加快制定具身智能的伦理规范和监管框架。</li>
+</ul>
+<h3 id="未来展望具身智能的加速纪元">未来展望：具身智能的加速纪元</h3>
+<p>未来3-5年内，Gemini Robotics 1.5及其后续版本将加速具身智能的商业化和普及。我们有望看到：</p>
+<ul>
+<li><strong>更普及的通用服务机器人</strong>：在家庭、养老、医疗、零售等领域，能够执行复杂、多变任务的机器人将变得常见。它们或许能像家庭成员一样，不仅完成家务，还能主动规划和提供个性化服务。</li>
+<li><strong>工业与物流效率的飞跃</strong>：在工厂和仓库中，机器人将能够更灵活地适应生产线变化，处理非结构化任务，并实现跨类型设备的技能共享，显著提升自动化水平。</li>
+<li><strong>与数字世界的深度融合</strong>：具身智能机器人将成为物理世界与数字世界之间的桥梁，通过调用互联网信息和数字工具，更好地理解和改造物理环境。</li>
+<li><strong>安全与挑战并存</strong>：尽管潜力巨大，但实现真正的通用机器人仍面临挑战，包括<strong>成本、能效、物理鲁棒性、安全可靠性以及复杂的社会接受度</strong>等问题。</li>
+</ul>
+<p>谷歌Gemini Robotics 1.5的发布，不仅仅是一项技术创新，它更像是一张通往智能体（AI Agent）物理化、泛化学习的蓝图。它预示着一个由“思考”和“学习”驱动的机器人新纪元，正加速向我们走来，深刻影响着人类文明的进程。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://m.36kr.com/p/3482984281906057">谷歌发布机器人最新「大脑」模型，思考能力SOTA，还能「跨物种」学习</a>·36氪·新智元（2025/9/26）·检索日期2025/9/26&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://m.cnyes.com/news/id/6169078">Gemini Robotics 1.5！有大腦的機器人能自主思考還能「跨物種」學習</a>·鉅亨網·（2025/9/26）·检索日期2025/9/26&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.icloudnews.net/a/105441.html">谷歌DeepMind的新型AI模型可通过网络搜索帮助机器人完成任务</a>·iCloudNews·（2025/9/26）·检索日期2025/9/26&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">具身智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器人</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%B7%A8%E5%85%B7%E8%BA%AB%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">跨具身学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%B0%B7%E6%AD%8Cdeepmind/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">谷歌DeepMind</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250804131006053-0/">具身智能浪潮再起：从数据瓶颈到智能涌现，AI Agent如何重塑物理世界？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250819184004596-1/">具身智能元年：宇泛智能的“软硬兼施”全栈突围与未来镜像</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250731101004711-0/">当机器穿上人皮：宇树的成本革命与具身智能的中国式务实</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/colmo-ai-agent-20250730181005002-0/">具身智能照亮未来之家：COLMO AI Agent如何重塑家居智能边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250721204005162-0/">中国机器人“淘金热”：从实验室到交易所的“速度与激情”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ipo-20250627181004735-0/">具身智能热潮下的资本豪赌：宇树科技IPO的深层考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250618222005660-0/">智能体浪潮：从“独角兽”涌现窥探自主AI的深层演进与未来挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-robotics-15--20250926001006492-0/">具身智能的破晓：Gemini Robotics 1.5 如何重塑物理世界与未来商业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2025-09-22-ai-2025-09-22-/">AI早报 2025年09月22日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-09-21-09-21-2025-ai-/">09-21日报|2025：AI的‘全景敞视’与‘能源黑洞’——狂飙的智能体，谁来管，谁来供血？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-20250919214006746-1/">华为云AI全景布局：从算力重构到具身智能，共塑企业级AI新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250917164004815-0/">具身智能的「五年耐心」：从模拟涌现到物理世界的鸿沟跋涉</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-09-14-2025-09-14-ai-/">2025年09月14日报|人类，你还敢不敢“卷”？AI高斯、实时智能与信任的巨浪</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250913104005587-0/">当AI开始“下苦力”：宇树科技敲响具身智能的上市钟声</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250905121005394-1/">端云共舞，智能涌现：AI Agent如何重塑下一代终端与商业范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
