@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="百亿美金独角兽Thinking Machines Lab解决了大语言模型推理中的非确定性难题，指出其根源在于“批次大小变化”而非浮点数非结合性。通过批处理不变性内核优化，他们实现了LLM输出的逐位一致性，这不仅将显著提升AI产品的商业可靠性，更将解锁“真正同策略强化学习”，为AI的科学可复现性与伦理治理奠定关键基石。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/llmai-20250911164005634-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/llmai-20250911164005634-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元">
+  <meta property="og:description" content="百亿美金独角兽Thinking Machines Lab解决了大语言模型推理中的非确定性难题，指出其根源在于“批次大小变化”而非浮点数非结合性。通过批处理不变性内核优化，他们实现了LLM输出的逐位一致性，这不仅将显著提升AI产品的商业可靠性，更将解锁“真正同策略强化学习”，为AI的科学可复现性与伦理治理奠定关键基石。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-11T16:40:05+08:00">
+    <meta property="article:modified_time" content="2025-09-11T16:40:05+08:00">
+    <meta property="article:tag" content="LLM推理">
+    <meta property="article:tag" content="确定性">
+    <meta property="article:tag" content="批处理不变性">
+    <meta property="article:tag" content="深度学习">
+    <meta property="article:tag" content="AI基础设施">
+    <meta property="article:tag" content="机器学习工程">
+
+  <meta itemprop="name" content="告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元">
+  <meta itemprop="description" content="百亿美金独角兽Thinking Machines Lab解决了大语言模型推理中的非确定性难题，指出其根源在于“批次大小变化”而非浮点数非结合性。通过批处理不变性内核优化，他们实现了LLM输出的逐位一致性，这不仅将显著提升AI产品的商业可靠性，更将解锁“真正同策略强化学习”，为AI的科学可复现性与伦理治理奠定关键基石。">
+  <meta itemprop="datePublished" content="2025-09-11T16:40:05+08:00">
+  <meta itemprop="dateModified" content="2025-09-11T16:40:05+08:00">
+  <meta itemprop="wordCount" content="93">
+  <meta itemprop="keywords" content="LLM推理,确定性,批处理不变性,深度学习,AI基础设施,机器学习工程">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元">
+  <meta name="twitter:description" content="百亿美金独角兽Thinking Machines Lab解决了大语言模型推理中的非确定性难题，指出其根源在于“批次大小变化”而非浮点数非结合性。通过批处理不变性内核优化，他们实现了LLM输出的逐位一致性，这不仅将显著提升AI产品的商业可靠性，更将解锁“真正同策略强化学习”，为AI的科学可复现性与伦理治理奠定关键基石。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2011,%202025_16-32-19-872.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-11 16:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%91%8A%E5%88%AB%E2%80%9C%E8%96%9B%E5%AE%9A%E8%B0%94%E7%9A%84%E7%AD%94%E6%A1%88%E2%80%9D%EF%BC%9A%E7%99%BE%E4%BA%BF%E7%8B%AC%E8%A7%92%E5%85%BD%E9%87%8D%E5%A1%91LLM%E6%8E%A8%E7%90%86%E7%A1%AE%E5%AE%9A%E6%80%A7%EF%BC%8C%E5%BC%80%E5%90%AFAI%E7%A0%94%E5%8F%91%E6%96%B0%E7%BA%AA%E5%85%83%20-%20%E7%99%BE%E4%BA%BF%E7%BE%8E%E9%87%91%E7%8B%AC%E8%A7%92%E5%85%BDThinking&amp;#43;Machines&amp;#43;Lab%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B8%AD%E7%9A%84%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E6%8C%87%E5%87%BA%E5%85%B6%E6%A0%B9%E6%BA%90%E5%9C%A8%E4%BA%8E%E2%80%9C%E6%89%B9%E6%AC%A1%E5%A4%A7%E5%B0%8F%E5%8F%98%E5%8C%96%E2%80%9D%E8%80%8C%E9%9D%9E%E6%B5%AE%E7%82%B9%E6%95%B0%E9%9D%9E%E7%BB%93%E5%90%88%E6%80%A7%E3%80%82%E9%80%9A%E8%BF%87%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8D%E5%8F%98%E6%80%A7%E5%86%85%E6%A0%B8%E4%BC%98%E5%8C%96%EF%BC%8C%E4%BB%96%E4%BB%AC%E5%AE%9E%E7%8E%B0%E4%BA%86LLM%E8%BE%93%E5%87%BA%E7%9A%84%E9%80%90%E4%BD%8D%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%8C%E8%BF%99%E4%B8%8D%E4%BB%85%E5%B0%86%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87AI%E4%BA%A7%E5%93%81%E7%9A%84%E5%95%86%E4%B8%9A%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%8C%E6%9B%B4%E5%B0%86%E8%A7%A3%E9%94%81%E2%80%9C%E7%9C%9F%E6%AD%A3%E5%90%8C%E7%AD%96%E7%95%A5%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E2%80%9D%EF%BC%8C%E4%B8%BAAI%E7%9A%84%E7%A7%91%E5%AD%A6%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7%E4%B8%8E%E4%BC%A6%E7%90%86%E6%B2%BB%E7%90%86%E5%A5%A0%E5%AE%9A%E5%85%B3%E9%94%AE%E5%9F%BA%E7%9F%B3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllmai-20250911164005634-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%91%8A%E5%88%AB%E2%80%9C%E8%96%9B%E5%AE%9A%E8%B0%94%E7%9A%84%E7%AD%94%E6%A1%88%E2%80%9D%EF%BC%9A%E7%99%BE%E4%BA%BF%E7%8B%AC%E8%A7%92%E5%85%BD%E9%87%8D%E5%A1%91LLM%E6%8E%A8%E7%90%86%E7%A1%AE%E5%AE%9A%E6%80%A7%EF%BC%8C%E5%BC%80%E5%90%AFAI%E7%A0%94%E5%8F%91%E6%96%B0%E7%BA%AA%E5%85%83%20-%20%E7%99%BE%E4%BA%BF%E7%BE%8E%E9%87%91%E7%8B%AC%E8%A7%92%E5%85%BDThinking&amp;#43;Machines&amp;#43;Lab%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B8%AD%E7%9A%84%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E6%8C%87%E5%87%BA%E5%85%B6%E6%A0%B9%E6%BA%90%E5%9C%A8%E4%BA%8E%E2%80%9C%E6%89%B9%E6%AC%A1%E5%A4%A7%E5%B0%8F%E5%8F%98%E5%8C%96%E2%80%9D%E8%80%8C%E9%9D%9E%E6%B5%AE%E7%82%B9%E6%95%B0%E9%9D%9E%E7%BB%93%E5%90%88%E6%80%A7%E3%80%82%E9%80%9A%E8%BF%87%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8D%E5%8F%98%E6%80%A7%E5%86%85%E6%A0%B8%E4%BC%98%E5%8C%96%EF%BC%8C%E4%BB%96%E4%BB%AC%E5%AE%9E%E7%8E%B0%E4%BA%86LLM%E8%BE%93%E5%87%BA%E7%9A%84%E9%80%90%E4%BD%8D%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%8C%E8%BF%99%E4%B8%8D%E4%BB%85%E5%B0%86%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87AI%E4%BA%A7%E5%93%81%E7%9A%84%E5%95%86%E4%B8%9A%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%8C%E6%9B%B4%E5%B0%86%E8%A7%A3%E9%94%81%E2%80%9C%E7%9C%9F%E6%AD%A3%E5%90%8C%E7%AD%96%E7%95%A5%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E2%80%9D%EF%BC%8C%E4%B8%BAAI%E7%9A%84%E7%A7%91%E5%AD%A6%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7%E4%B8%8E%E4%BC%A6%E7%90%86%E6%B2%BB%E7%90%86%E5%A5%A0%E5%AE%9A%E5%85%B3%E9%94%AE%E5%9F%BA%E7%9F%B3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllmai-20250911164005634-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Thinking Machines Lab通过揭示LLM推理非确定性的真正根源在于“批次大小变化”而非传统认为的浮点数非结合性，并创新性地提出了批处理不变性内核优化方案。这一突破不仅解决了大模型输出一致性这一长期痛点，更将赋能“真正同策略强化学习”，为AI的科学可复现性、商业可靠性与伦理治理奠定坚实基础。</p></blockquote>
+<p>在人工智能领域，尤其是大语言模型（LLM）的快速迭代中，一个看似微小却深远影响着其可靠性和可信度的问题，长期以来如影随形——<strong>非确定性推理</strong>。即使将温度参数（temperature）降至零，期待模型给出唯一、确定的答案，LLM API在实际中仍常常提供不同的结果。这不仅困扰着开发者，也制约了AI在关键应用场景中的大规模落地。如今，这家成立仅七个月便估值百亿美元的独角兽企业Thinking Machines Lab，由前OpenAI副总裁Lilian Weng联合创立，以一篇万字长文，首次公开其核心研究成果，直指并攻克了这一顽疾<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>长期以来，业界普遍将LLM推理的非确定性归因于“并发+浮点数”假说，即GPU上浮点运算的非结合性与并行执行的组合，导致不同执行顺序下的结果差异<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。然而，Thinking Machines Lab在其首篇博客文章“Defeating Nondeterminism in LLM Inference”中，挑战了这一流行观点。</p>
+<p>他们的核心发现是：<strong>LLM前向传播并不需要原子加法；其非确定性真正来源是“批次大小变化”而非“原子竞争”</strong><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。这意味着，在大模型推理服务中，由于服务器负载和请求批次大小的动态变化，导致计算图中的某些内核（kernel）在不同批次下采取了不同的归约路径或计算策略，进而产生微小的浮点数差异，并随着层层传播被放大，最终表现为模型输出的非确定性。</p>
+<p>为了克服这一难题，Thinking Machines提出了“批处理不变性”（Batch Invariance）的解决方案，即确保计算内核无论批处理大小如何变化，都执行相同的数值计算序列。他们重点关注了Transformer架构中涉及归约操作的三个关键部分：</p>
+<ol>
+<li><strong>批处理不变的RMSNorm（数据并行RMSNorm）</strong>：通过为每个核心分配一个批处理元素，确保每个归约都在单个核心内完成，从而避免核心间的通信和数值差异。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li><strong>批处理不变的矩阵乘法（数据并行Matmul）</strong>：采用将输出张量分割成二维分块并分配给不同核心的策略，确保每个核心在内部完成点积计算。虽然为实现批处理不变性可能导致约20%的性能损失（相比cuBLAS），但这对于大模型推理而言通常在可接受范围内。<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li><strong>批处理不变的注意力机制</strong>：这是最复杂的环节，因为它涉及两个矩阵乘法并在特征维度和序列维度上进行归约。传统的带KV缓存的FlashAttention会因KV块数不同而破坏批处理不变性。Thinking Machines的解决方案是<strong>在kernel启动前统一更新KV-cache页表，保证任意时刻KV布局一致</strong>。同时，对于分裂归约策略，他们建议<strong>不再固定分割的数量，而是固定每个分割的大小</strong>，以确保无论处理多少个查询token，都能执行相同的归约顺序，实现批处理不变性。<sup id="fnref3:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ol>
+<p>通过在vLLM的FlexAttention后端以及torch.Library上进行实现与实验，Thinking Machines Lab成功证明了启用批处理不变内核后，LLM推理可以实现<strong>逐位（bitwise）一致</strong>的完全确定性。在Qwen/Qwen3-235B-A22B-Instruct-2507模型上进行的1000次采样实验显示，传统方法下产生了80个不同补全，而启用批处理不变内核后，所有1000个补全完全相同。<sup id="fnref4:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="产业生态影响评估">产业生态影响评估</h3>
+<p>Thinking Machines Lab的这一突破，不仅仅是技术上的精进，更是对整个AI产业生态的深远影响。</p>
+<ul>
+<li><strong>商业敏锐度：重塑AI产品可靠性基石。</strong> 对于那些将LLM集成到关键业务流程中的企业而言，结果的非确定性是一个巨大的障碍。想象一下，一个金融分析模型对同一组数据给出不同建议，或一个法律助手对相同查询生成不同法律条款，其风险和信任成本是不可估量的。批处理不变性为企业提供了<strong>可预测、可调试、可审计</strong>的AI产品，显著提升了商业应用的可靠性和合规性，从而降低了企业的采纳门槛和运营风险。这为LLM的“工业化”部署铺平了道路。</li>
+<li><strong>产业生态洞察：推动AI基础设施的进化。</strong> Thinking Machines选择在vLLM这样的开源推理框架上进行演示，表明了其对现有生态的赋能。未来的LLM推理服务将不再仅仅追求速度和成本效率，<strong>确定性将成为其核心竞争力之一</strong>。这可能催生一批专注于提供高确定性、高复现性AI推理服务的中间件和平台，进一步丰富和优化AI基础设施层。</li>
+<li><strong>投资逻辑分析：基础研究的长期价值回归。</strong> 在资本追逐应用层快速变现的当下，Thinking Machines作为一家估值百亿美元的独角兽，却将目光聚焦于如此底层的、近乎“枯燥”的数值计算问题，其战略眼光值得深思。这反映出头部资本和顶尖人才对于AI技术深层、根本性问题的长期投资逻辑。解决这些基础性难题，将为更高层级的AI创新（如更强大的Agent、更安全的自动驾驶）解锁新的可能性，其潜在回报远超短期商业化收益。</li>
+</ul>
+<h3 id="未来发展路径预测">未来发展路径预测</h3>
+<p>Thinking Machines Lab的成果，预示着AI领域即将迎来一场更深层次的变革，尤其是在研发范式和社会影响层面。</p>
+<ul>
+<li><strong>真正的同策略强化学习（True On-Policy RL）成为可能。</strong> 这或许是此项技术最激动人心的前瞻性洞察之一。研究指出，由于训练和推理之间存在的数值差异，所谓的“同策略强化学习”（on-policy RL，如RLHF）在实践中无形地变成了“异策略强化学习”（off-policy RL）。这意味着训练策略与采样策略存在偏差，导致训练过程的不稳定甚至崩溃。而<strong>确定性推理能够让采样器与训练器实现逐位一致的数值同步</strong>，使得KL散度始终为0，从而实现“真正的同策略RL”。这无疑将极大地提升RLHF等对齐技术的效率和稳定性，加速AI模型在复杂任务上的泛化和性能提升，直接影响未来AGI的研发路径<sup id="fnref5:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+<li><strong>科学可复现性的基石。</strong> 可复现性是科学进步的基石。在AI for Science日益重要的今天，如果AI模型的实验结果无法复现，其科学价值将大打折扣。Thinking Machines的解决方案，让AI的数值计算过程变得透明和可控，为AI在药物发现、材料科学、气候建模等领域的应用提供了<strong>严谨的科学保障</strong>。这将推动AI从“启发式工具”向“可靠的科学发现伙伴”转变。</li>
+<li><strong>AI伦理与治理的新维度。</strong> 随着AI系统在社会中的影响力日益增强，对其行为的可解释性、公平性和安全性要求也越来越高。确定性推理使得每次输入都能产生相同的输出，这为<strong>AI系统的调试、测试、审计提供了前所未有的确定性</strong>。它将有助于识别和修复模型中的偏见，增强系统的透明度，并为未来的AI法规和治理框架提供坚实的技术支撑。当系统行为可预测时，我们才能更好地理解、控制和信任它。</li>
+<li><strong>哲学思辨：对“万事怕认真”的呼唤。</strong> 正如Thinking Machines所言，现代软件系统层层抽象，机器学习中的非确定性与微小数值差异，往往让人想“睁一只眼闭一只眼”，认为“反正系统本就概率化，多一点不确定也无妨”。这种“算了吧”的心态阻碍了深度洞察和系统性解决问题的动力。Thinking Machines的实践证明，只要“认真”深挖，这些根源非确定性是可以被定位和修复的。这不仅是对技术人员的激励，更是对整个AI社区的一种哲学召唤：<strong>重新审视并坚守科学的严谨性与确定性，即使面对看似混沌的智能系统。</strong><sup id="fnref6:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<p>Thinking Machines Lab的“Connection Machine”旗舰产品及其“联结主义”研究专栏，正呼应着早期AI时代对神经网络与生物大脑相似性的探索<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这似乎暗示着，在AI发展的高速公路上，我们需要时不时停下来，重新审视那些被忽视的基础性问题。通过攻克LLM推理的非确定性难题，Thinking Machines不仅解决了当前AI应用的痛点，更以其对确定性和可复现性的追求，为AI研发的未来描绘了一幅更为清晰、严谨且充满潜力的宏伟蓝图。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>成立7个月首发声！百亿美金独角兽万字雄文：攻克LLM推理 ... · 新智元 · 新智元（2025/9/11）·检索日期2025/9/11&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Thinking Machines Lab首次发长文，揭开LLM推理不确定性 ... · 华尔街见闻 · （2025/9/11）·检索日期2025/9/11&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Defeating Nondeterminism in LLM Inference · Thinking Machines Blog · Horace He（2025/9/11）·检索日期2025/9/11&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/llm%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LLM推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A1%AE%E5%AE%9A%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">确定性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8D%E5%8F%98%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">批处理不变性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">深度学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器学习工程</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250911114004718-1/">马斯克押注“活化”AI：从芯片到星链，构建一个具身智能的万亿级闭环生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rest-rlllmai-20250910181004916-3/">清华ReST-RL：LLM推理觉醒的突破，重塑AI自主性与软件工程范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dataai-20250908151004720-0/">Data与AI深层融合：新质生产力引擎下的企业智能变革与全球竞速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigartner-20250904111004724-3/">AI浪潮下的基础设施再进化：Gartner揭示自主可控、算力消费与韧性构建新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250903201005083-1/">电力的博弈：奥特曼的印度AI豪赌，与马斯克的“东方密码”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aihinton-20250903194004854-2/">AI之酶与伦理回响：Hinton诺奖演讲深度解析玻尔兹曼机，警示大模型开放风险</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiaigeoffrey-hinton-20250903191005895-2/">AI教父的深层警示与AI母亲的微光：Geoffrey Hinton的自我救赎之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/scaling-laws-20250902161004991-5/">回溯深度学习的“第一性原理”：Scaling Laws的历史轨迹、商业密码与哲学深思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250829191005877-1/">智算引力波：无问芯穹如何重塑中国AI算力基础设施与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/90ai-20250828011005144-0/">谷歌在弗吉尼亚狂撒90亿：AI“基建狂魔”这回要怎么“卷”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiaiapi-20250827114005702-1/">从流量盲点到智能治理：AI网关如何定义AI时代的API管理</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aibengiohintontop-5ai-20250826104004911-3/">AI顶流炸街！Bengio百万引用屠榜，Hinton、何恺明组团空降全球TOP 5，学术圈“流量密码”被AI拿捏了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/jeff-deanai-20250825124004871-3/">从茶水间闲聊到万亿帝国：Jeff Dean的AI革命与永不停歇的求索</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20250822204005209-1/">奥特曼的预言与OpenAI的困境：泡沫中的炼金术与数字基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cohere-command-a-reasoningai-20250822121004917-2/">Cohere Command A Reasoning：重塑企业级AI的经济学与认知边界</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

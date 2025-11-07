@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>揭秘大模型优化器“加速陷阱”：斯坦福实证敲响效率与科研诚信警钟 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="一项由斯坦福大学团队主导的严谨研究揭示，多数新型大模型优化器宣称的1.4至2倍加速效果存在“陷阱”，在严格测试下实际加速远低于预期，且随模型规模增大而衰减至约1.1倍。这项发现不仅挑战了AI研发效率的现有认知，更强调了科研诚信、严格基准评测的重要性，并预示着未来大模型成本降低将依赖于硬件、数据、架构等多维度系统性优化，而非单一算法的“魔法”。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20250908114004903-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20250908114004903-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="揭秘大模型优化器“加速陷阱”：斯坦福实证敲响效率与科研诚信警钟">
+  <meta property="og:description" content="一项由斯坦福大学团队主导的严谨研究揭示，多数新型大模型优化器宣称的1.4至2倍加速效果存在“陷阱”，在严格测试下实际加速远低于预期，且随模型规模增大而衰减至约1.1倍。这项发现不仅挑战了AI研发效率的现有认知，更强调了科研诚信、严格基准评测的重要性，并预示着未来大模型成本降低将依赖于硬件、数据、架构等多维度系统性优化，而非单一算法的“魔法”。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-08T11:40:04+08:00">
+    <meta property="article:modified_time" content="2025-09-08T11:40:04+08:00">
+    <meta property="article:tag" content="AI优化器">
+    <meta property="article:tag" content="大模型训练">
+    <meta property="article:tag" content="效率提升">
+    <meta property="article:tag" content="算法评估">
+    <meta property="article:tag" content="科研诚信">
+    <meta property="article:tag" content="商业敏锐">
+
+  <meta itemprop="name" content="揭秘大模型优化器“加速陷阱”：斯坦福实证敲响效率与科研诚信警钟">
+  <meta itemprop="description" content="一项由斯坦福大学团队主导的严谨研究揭示，多数新型大模型优化器宣称的1.4至2倍加速效果存在“陷阱”，在严格测试下实际加速远低于预期，且随模型规模增大而衰减至约1.1倍。这项发现不仅挑战了AI研发效率的现有认知，更强调了科研诚信、严格基准评测的重要性，并预示着未来大模型成本降低将依赖于硬件、数据、架构等多维度系统性优化，而非单一算法的“魔法”。">
+  <meta itemprop="datePublished" content="2025-09-08T11:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-08T11:40:04+08:00">
+  <meta itemprop="wordCount" content="61">
+  <meta itemprop="keywords" content="AI优化器,大模型训练,效率提升,算法评估,科研诚信,商业敏锐">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="揭秘大模型优化器“加速陷阱”：斯坦福实证敲响效率与科研诚信警钟">
+  <meta name="twitter:description" content="一项由斯坦福大学团队主导的严谨研究揭示，多数新型大模型优化器宣称的1.4至2倍加速效果存在“陷阱”，在严格测试下实际加速远低于预期，且随模型规模增大而衰减至约1.1倍。这项发现不仅挑战了AI研发效率的现有认知，更强调了科研诚信、严格基准评测的重要性，并预示着未来大模型成本降低将依赖于硬件、数据、架构等多维度系统性优化，而非单一算法的“魔法”。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%281%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-08 11:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%8F%AD%E7%A7%98%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E5%99%A8%E2%80%9C%E5%8A%A0%E9%80%9F%E9%99%B7%E9%98%B1%E2%80%9D%EF%BC%9A%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%AE%9E%E8%AF%81%E6%95%B2%E5%93%8D%E6%95%88%E7%8E%87%E4%B8%8E%E7%A7%91%E7%A0%94%E8%AF%9A%E4%BF%A1%E8%AD%A6%E9%92%9F%20-%20%E4%B8%80%E9%A1%B9%E7%94%B1%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E5%9B%A2%E9%98%9F%E4%B8%BB%E5%AF%BC%E7%9A%84%E4%B8%A5%E8%B0%A8%E7%A0%94%E7%A9%B6%E6%8F%AD%E7%A4%BA%EF%BC%8C%E5%A4%9A%E6%95%B0%E6%96%B0%E5%9E%8B%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E5%99%A8%E5%AE%A3%E7%A7%B0%E7%9A%841.4%E8%87%B32%E5%80%8D%E5%8A%A0%E9%80%9F%E6%95%88%E6%9E%9C%E5%AD%98%E5%9C%A8%E2%80%9C%E9%99%B7%E9%98%B1%E2%80%9D%EF%BC%8C%E5%9C%A8%E4%B8%A5%E6%A0%BC%E6%B5%8B%E8%AF%95%E4%B8%8B%E5%AE%9E%E9%99%85%E5%8A%A0%E9%80%9F%E8%BF%9C%E4%BD%8E%E4%BA%8E%E9%A2%84%E6%9C%9F%EF%BC%8C%E4%B8%94%E9%9A%8F%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E5%A2%9E%E5%A4%A7%E8%80%8C%E8%A1%B0%E5%87%8F%E8%87%B3%E7%BA%A61.1%E5%80%8D%E3%80%82%E8%BF%99%E9%A1%B9%E5%8F%91%E7%8E%B0%E4%B8%8D%E4%BB%85%E6%8C%91%E6%88%98%E4%BA%86AI%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87%E7%9A%84%E7%8E%B0%E6%9C%89%E8%AE%A4%E7%9F%A5%EF%BC%8C%E6%9B%B4%E5%BC%BA%E8%B0%83%E4%BA%86%E7%A7%91%E7%A0%94%E8%AF%9A%E4%BF%A1%E3%80%81%E4%B8%A5%E6%A0%BC%E5%9F%BA%E5%87%86%E8%AF%84%E6%B5%8B%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%EF%BC%8C%E5%B9%B6%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%88%90%E6%9C%AC%E9%99%8D%E4%BD%8E%E5%B0%86%E4%BE%9D%E8%B5%96%E4%BA%8E%E7%A1%AC%E4%BB%B6%E3%80%81%E6%95%B0%E6%8D%AE%E3%80%81%E6%9E%B6%E6%9E%84%E7%AD%89%E5%A4%9A%E7%BB%B4%E5%BA%A6%E7%B3%BB%E7%BB%9F%E6%80%A7%E4%BC%98%E5%8C%96%EF%BC%8C%E8%80%8C%E9%9D%9E%E5%8D%95%E4%B8%80%E7%AE%97%E6%B3%95%E7%9A%84%E2%80%9C%E9%AD%94%E6%B3%95%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250908114004903-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%8F%AD%E7%A7%98%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E5%99%A8%E2%80%9C%E5%8A%A0%E9%80%9F%E9%99%B7%E9%98%B1%E2%80%9D%EF%BC%9A%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%AE%9E%E8%AF%81%E6%95%B2%E5%93%8D%E6%95%88%E7%8E%87%E4%B8%8E%E7%A7%91%E7%A0%94%E8%AF%9A%E4%BF%A1%E8%AD%A6%E9%92%9F%20-%20%E4%B8%80%E9%A1%B9%E7%94%B1%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E5%9B%A2%E9%98%9F%E4%B8%BB%E5%AF%BC%E7%9A%84%E4%B8%A5%E8%B0%A8%E7%A0%94%E7%A9%B6%E6%8F%AD%E7%A4%BA%EF%BC%8C%E5%A4%9A%E6%95%B0%E6%96%B0%E5%9E%8B%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E5%99%A8%E5%AE%A3%E7%A7%B0%E7%9A%841.4%E8%87%B32%E5%80%8D%E5%8A%A0%E9%80%9F%E6%95%88%E6%9E%9C%E5%AD%98%E5%9C%A8%E2%80%9C%E9%99%B7%E9%98%B1%E2%80%9D%EF%BC%8C%E5%9C%A8%E4%B8%A5%E6%A0%BC%E6%B5%8B%E8%AF%95%E4%B8%8B%E5%AE%9E%E9%99%85%E5%8A%A0%E9%80%9F%E8%BF%9C%E4%BD%8E%E4%BA%8E%E9%A2%84%E6%9C%9F%EF%BC%8C%E4%B8%94%E9%9A%8F%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E5%A2%9E%E5%A4%A7%E8%80%8C%E8%A1%B0%E5%87%8F%E8%87%B3%E7%BA%A61.1%E5%80%8D%E3%80%82%E8%BF%99%E9%A1%B9%E5%8F%91%E7%8E%B0%E4%B8%8D%E4%BB%85%E6%8C%91%E6%88%98%E4%BA%86AI%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87%E7%9A%84%E7%8E%B0%E6%9C%89%E8%AE%A4%E7%9F%A5%EF%BC%8C%E6%9B%B4%E5%BC%BA%E8%B0%83%E4%BA%86%E7%A7%91%E7%A0%94%E8%AF%9A%E4%BF%A1%E3%80%81%E4%B8%A5%E6%A0%BC%E5%9F%BA%E5%87%86%E8%AF%84%E6%B5%8B%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%EF%BC%8C%E5%B9%B6%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%88%90%E6%9C%AC%E9%99%8D%E4%BD%8E%E5%B0%86%E4%BE%9D%E8%B5%96%E4%BA%8E%E7%A1%AC%E4%BB%B6%E3%80%81%E6%95%B0%E6%8D%AE%E3%80%81%E6%9E%B6%E6%9E%84%E7%AD%89%E5%A4%9A%E7%BB%B4%E5%BA%A6%E7%B3%BB%E7%BB%9F%E6%80%A7%E4%BC%98%E5%8C%96%EF%BC%8C%E8%80%8C%E9%9D%9E%E5%8D%95%E4%B8%80%E7%AE%97%E6%B3%95%E7%9A%84%E2%80%9C%E9%AD%94%E6%B3%95%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20250908114004903-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">揭秘大模型优化器“加速陷阱”：斯坦福实证敲响效率与科研诚信警钟</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>一项来自斯坦福大学的权威研究，由清华姚班校友领衔，深度揭示了当前大模型预训练优化器普遍存在的“加速陷阱”。研究证实，多数新型优化器宣称的1.4至2倍加速效果，在严格、公平的基准测试下远低于预期，且随模型规模增大而衰减，最终仅剩约1.1倍，这一发现不仅对AI研发的效率认知带来冲击，更对整个产业生态的投资逻辑与科研诚信提出了深刻反思。</p></blockquote>
+<p>近年来，随着大语言模型（LLMs）参数规模的爆炸式增长，其训练成本已飙升至天文数字。例如，在DeepSeek V3的预训练过程中，成本占比高达95%以上。这使得每一分算力的节省都如同黄金般珍贵，也因此催生了大量宣称能显著加速预训练过程的新型优化器，挑战着长期以来作为“默认选项”的AdamW的地位。这些优化器通常声称能将训练速度提升1.4倍乃至2倍，为业界描绘了一幅成本骤降的美好图景。然而，斯坦福大学一项由清华姚班校友Kaiyue Wen、马腾宇教授和Percy Liang教授团队联合完成的严谨研究<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，如今却为这股“加速热潮”泼了一盆冷水，揭露了其背后隐藏的“陷阱”。</p>
+<h3 id="算法神话的破灭深度学习优化器效率的再审视">算法神话的破灭：深度学习优化器效率的再审视</h3>
+<p>该研究核心在于对11种主流深度学习优化器进行了迄今为止最严格、最系统的基准评测。研究人员发现，此前许多优化器声称的“显著加速”，很大程度上源于<strong>不当的基线超参数调优</strong>和<strong>局限于小规模模型的实验</strong>。这种“非公平竞赛”导致了对真实效率的误判。</p>
+<p>斯坦福团队摒弃了过往方法的短板，采用了三阶段超参数调优策略，并横跨多种模型规模（从130M到1.2B参数）和数据-模型比（1×、2×、4×、8× Chinchilla范式）进行全面测试。其核心发现令人警醒：</p>
+<ul>
+<li><strong>加速神话的终结：</strong> 经过细致的超参数调优后，所有新型优化器相对于精心调优的AdamW基线，其加速效果均未超过1.4倍。这远低于此前文献中普遍宣传的1.4倍至2倍。</li>
+<li><strong>规模效应的衰减：</strong> 优化器的加速优势并非一成不变。例如，Muon、Soap等在小模型（0.1B参数）上能带来约1.3倍加速，但在模型规模扩大至1.2B参数、且数据-模型比为8×Chinchilla时，其加速效果会显著下降至约1.1倍。这意味着，模型越大，这些优化器的相对优势越小。</li>
+<li><strong>早期损失曲线的误导性：</strong> 研究强调，仅凭训练早期的损失曲线来判断优化器性能是高度误导性的。在整个学习率衰减周期中，不同优化器的损失曲线会多次交叉，最终的性能排名与中期检查点的表现可能大相径庭，只有在目标训练预算下进行全面评估才具有参考价值。</li>
+</ul>
+<p>研究还揭示了优化器设计的新见解：对于小模型（0.1B–0.5B参数），<strong>基于矩阵的优化器</strong>（如Muon、Soap、Kron）持续优于基于标量的优化器（如AdamW、Lion、Mars），能带来约1.3倍的加速。然而，优化器的最优选择也<strong>高度依赖于“数据-模型比”</strong>。在较低的Chinchilla比例下，Muon表现优异；但当数据-模型比增至8倍甚至更高时，Kron和Soap则可能超越Muon，这暗示了随着数据预算的增加，保持二阶动量的自适应特性变得更加关键。</p>
+<h3 id="效率悖论与科研诚信的拷问">效率悖论与科研诚信的拷问</h3>
+<p>这项研究不仅是技术细节的澄清，更是一次对AI研究范式深层问题的拷问。在追求极致效率和突破性成果的驱动下，快速迭代的AI领域有时会忽略最基本的科学严谨性。Percy Liang教授作为基础模型研究中心（CRFM）主任，同时也是可复现性研究的坚定倡导者，其团队的介入并非偶然，这反映出AI领域对<strong>科研可复现性和基准评测标准</strong>的日益重视。</p>
+<blockquote>
+<p>“许多声称的加速源于超参数调优不足，因为公平的扫参会消除大多数表面的优势；基于早期或不一致的评估进行比较可能具有误导性；即使表现最好的替代方案也只提供温和的加速，且随模型规模增大而进一步减弱。”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种“效率悖论”——即在渴望巨大突破时，实际提升却微乎其微——不仅浪费了宝贵的计算资源，也可能导致整个研究社区在“假性进步”的泥沼中徘徊。它警示我们，<strong>过度关注表面的“加速因子”而忽视深层原理和严格验证，可能导致研究资源的错配和技术路线的偏航</strong>。这引人深思，在快速发展的AI前沿，如何平衡创新速度与科学严谨，确保每一次“突破”都建立在坚实可信的基础之上？</p>
+<h3 id="大模型时代的商业图景与投资逻辑重构">大模型时代的商业图景与投资逻辑重构</h3>
+<p>从商业和投资视角看，斯坦福的这项研究无疑是一剂“清醒剂”。大模型的高昂预训练成本是限制其普惠性和商业化落地的主要瓶颈之一。此前关于“魔法优化器”的乐观预期，曾让许多创业公司和投资者寄希望于通过算法层面的“四两拨千斤”来破解算力难题。</p>
+<p>然而，研究结果表明，<strong>指望单一优化器带来革命性的成本削减是不切实际的</strong>。即使是最优秀的优化器，在1.2B参数模型上也仅能提供1.1倍的加速，这意味着在预训练时间或成本上，仅能带来约9%的节省。对于动辄数千万甚至上亿美元的训练任务而言，这种节省虽然有益，但远不足以改变整体商业格局。</p>
+<ul>
+<li><strong>产业生态影响：</strong> 这一发现将促使大模型开发者将目光从“优化器竞赛”转向更<strong>系统性的效率提升方案</strong>。这意味着对AI芯片、分布式训练框架、数据处理流水线、模型架构创新（如稀疏化、MoE）等多个维度的综合优化将变得更加重要。</li>
+<li><strong>投资逻辑转向：</strong> 投资者在评估AI技术和公司时，需要更加务实。那些声称通过“黑科技”优化器实现成本骤降的叙事，将面临更严格的审视。资本将更青睐那些在硬件、数据、架构层面有深厚积累，并能提供<strong>端到端效率解决方案</strong>的公司。AdamW的“稳定胜出”也表明，对于追求模型稳健性和快速部署的企业而言，成熟、可靠的算法依然是首选。</li>
+<li><strong>实用性导向：</strong> 对于实际应用而言，企业在选择优化器时需进行<strong>定制化的严格评估</strong>。考虑到模型规模、数据集特性和训练预算，盲目追求“最新”优化器可能适得其反，甚至浪费资源。根据斯坦福的研究，针对小模型可考虑矩阵型优化器，而高数据-模型比下则有不同偏好，这要求更精细化的决策。</li>
+</ul>
+<h3 id="展望未来超越优化器的系统性效率革命">展望未来：超越优化器的系统性效率革命</h3>
+<p>如果说优化器并非解决大模型高成本的“银弹”，那么未来效率的突破点将会在哪里？这项研究无疑指明了方向：AI效率的革命将是一场<strong>系统性、多维度协同的战役</strong>。</p>
+<ol>
+<li><strong>硬件层面的持续创新：</strong> 专用AI芯片（ASICs）、新型GPU架构、量子计算等将提供更底层的算力支撑。</li>
+<li><strong>数据效率的深挖：</strong> 高质量的数据筛选、合成数据技术、更高效的数据增强和主动学习策略，将减少无效训练，提高数据利用率。</li>
+<li><strong>模型架构的颠覆：</strong> 稀疏化、知识蒸馏、MoE（Mixture of Experts）等更高效的模型架构，以及创新的注意力机制和前馈网络设计，将从根本上降低模型复杂度和计算量。</li>
+<li><strong>软件与系统工程的优化：</strong> 高性能分布式训练框架、编译器优化、更智能的资源调度和弹性伸缩，将最大化现有算力的效能。</li>
+<li><strong>科研伦理与标准化：</strong> 更严格的基准评测体系、更高透明度的研究发布、以及社区协作下的标准建立，将确保每次技术进步都建立在扎实可信的基础之上，避免“加速陷阱”的再次出现。</li>
+</ol>
+<p>从哲学层面来看，这场对优化器效率的“实锤”并非简单的技术更迭，而是<strong>AI领域从野蛮生长走向成熟的标志</strong>。它提醒我们，真正的进步往往需要耐心、严谨的科学探索，而非浮躁的“快餐式”创新。在通往通用人工智能（AGI）的漫漫征途上，只有脚踏实地，回归科学的本质，才能确保我们不会误入歧途。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://arxiv.org/abs/2509.02046">Fantastic Pretraining Optimizers and Where to Find Them</a>·alphaXiv·Kaiyue Wen, Tengyu Ma, Percy Liang (2025/9/2)·检索日期2025/9/8&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%98%E5%8C%96%E5%99%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI优化器</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型训练</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">效率提升</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算法评估</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A7%91%E7%A0%94%E8%AF%9A%E4%BF%A1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">科研诚信</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E6%95%8F%E9%94%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业敏锐</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/salesforceai-20250905084005284-0/">数字铡刀：Salesforce、AI与效率的危险炼金术</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgptai-20250904024004734-1/">超越ChatGPT：汤森路透如何通过“智能代理”重塑法律，消弭AI幻觉，驱动百倍效率飞跃</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aito-p-20250826104004921-4/">AI的办公室‘影子战’：当打工人自掏腰包，To P模式如何改写商业剧本</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ue8m0-fp8ai-20250822114005672-1/">UE8M0 FP8：中国AI硬核突围，重塑算力主权的战略宣言</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250817101004683-0/">大模型重塑金融风控：从“模型对抗”到敏捷智能的信任前线</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ainhs-20250817054005282-0/">AI也能“赶鸭子上架”？NHS这波操作，要让出院“飞”起来！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/megatronapp-20250727161005238-0/">万亿参数时代的效率炼金术：MegatronApp如何重塑大模型训练的经济与可控性</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cosynai-20250726044005054-0/">CoSyn：开放智能的视界曙光，重塑AI格局的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-20250725204005561-0/">苹果AI的“道德牌”：数据伦理、商业博弈与下一代AI生态的重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2025-07-19-ai-2025-07-19-/">AI早报 2025年07月19日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/atlassianai-20250709211005463-2/">Atlassian引领下的智能体AI规模化：一场深植文化的未来企业范式重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630101004746-0/">AI赋能下“微型团队”崛起：重塑创业范式，通向“一人独角兽”的路径与挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250626081004120-1/">超越表面智能：多模态AI“幻觉悖论”揭示的感知与推理深层张力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624161004451-3/">AI智能体重塑短剧工业：效率井喷背后的内容平权与全球化野心</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/comate-ai-ideai-20250624161004432-0/">百度Comate AI IDE：重塑软件工程工作流的“AI原生”范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

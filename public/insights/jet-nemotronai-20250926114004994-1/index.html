@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>算法之翼：英伟达Jet-Nemotron如何重塑大模型经济学与AI前沿格局 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="英伟达的Jet-Nemotron与PortNAS框架以革命性算法，实现LLM推理速度提升53倍并大幅降低成本，有望成为Grok-4-fast等高效模型的关键技术。这一突破预示着AI发展从算力堆叠转向智能算法优化，将显著推动高级AI的普惠化，重塑AI产业的经济模式和竞争格局。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/jet-nemotronai-20250926114004994-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/jet-nemotronai-20250926114004994-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="算法之翼：英伟达Jet-Nemotron如何重塑大模型经济学与AI前沿格局">
+  <meta property="og:description" content="英伟达的Jet-Nemotron与PortNAS框架以革命性算法，实现LLM推理速度提升53倍并大幅降低成本，有望成为Grok-4-fast等高效模型的关键技术。这一突破预示着AI发展从算力堆叠转向智能算法优化，将显著推动高级AI的普惠化，重塑AI产业的经济模式和竞争格局。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-26T11:40:04+08:00">
+    <meta property="article:modified_time" content="2025-09-26T11:40:04+08:00">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="AI推理优化">
+    <meta property="article:tag" content="英伟达">
+    <meta property="article:tag" content="PortNAS">
+    <meta property="article:tag" content="算法创新">
+    <meta property="article:tag" content="成本效益">
+
+  <meta itemprop="name" content="算法之翼：英伟达Jet-Nemotron如何重塑大模型经济学与AI前沿格局">
+  <meta itemprop="description" content="英伟达的Jet-Nemotron与PortNAS框架以革命性算法，实现LLM推理速度提升53倍并大幅降低成本，有望成为Grok-4-fast等高效模型的关键技术。这一突破预示着AI发展从算力堆叠转向智能算法优化，将显著推动高级AI的普惠化，重塑AI产业的经济模式和竞争格局。">
+  <meta itemprop="datePublished" content="2025-09-26T11:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-26T11:40:04+08:00">
+  <meta itemprop="wordCount" content="55">
+  <meta itemprop="keywords" content="大语言模型,AI推理优化,英伟达,PortNAS,算法创新,成本效益,开源AI">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="算法之翼：英伟达Jet-Nemotron如何重塑大模型经济学与AI前沿格局">
+  <meta name="twitter:description" content="英伟达的Jet-Nemotron与PortNAS框架以革命性算法，实现LLM推理速度提升53倍并大幅降低成本，有望成为Grok-4-fast等高效模型的关键技术。这一突破预示着AI发展从算力堆叠转向智能算法优化，将显著推动高级AI的普惠化，重塑AI产业的经济模式和竞争格局。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2026,%202025_11-32-19-968.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-26 11:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BF%BC%EF%BC%9A%E8%8B%B1%E4%BC%9F%E8%BE%BEJet-Nemotron%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B8%8EAI%E5%89%8D%E6%B2%BF%E6%A0%BC%E5%B1%80%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E7%9A%84Jet-Nemotron%E4%B8%8EPortNAS%E6%A1%86%E6%9E%B6%E4%BB%A5%E9%9D%A9%E5%91%BD%E6%80%A7%E7%AE%97%E6%B3%95%EF%BC%8C%E5%AE%9E%E7%8E%B0LLM%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%8753%E5%80%8D%E5%B9%B6%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9C%89%E6%9C%9B%E6%88%90%E4%B8%BAGrok-4-fast%E7%AD%89%E9%AB%98%E6%95%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E9%A2%84%E7%A4%BA%E7%9D%80AI%E5%8F%91%E5%B1%95%E4%BB%8E%E7%AE%97%E5%8A%9B%E5%A0%86%E5%8F%A0%E8%BD%AC%E5%90%91%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96%EF%BC%8C%E5%B0%86%E6%98%BE%E8%91%97%E6%8E%A8%E5%8A%A8%E9%AB%98%E7%BA%A7AI%E7%9A%84%E6%99%AE%E6%83%A0%E5%8C%96%EF%BC%8C%E9%87%8D%E5%A1%91AI%E4%BA%A7%E4%B8%9A%E7%9A%84%E7%BB%8F%E6%B5%8E%E6%A8%A1%E5%BC%8F%E5%92%8C%E7%AB%9E%E4%BA%89%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fjet-nemotronai-20250926114004994-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BF%BC%EF%BC%9A%E8%8B%B1%E4%BC%9F%E8%BE%BEJet-Nemotron%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B8%8EAI%E5%89%8D%E6%B2%BF%E6%A0%BC%E5%B1%80%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E7%9A%84Jet-Nemotron%E4%B8%8EPortNAS%E6%A1%86%E6%9E%B6%E4%BB%A5%E9%9D%A9%E5%91%BD%E6%80%A7%E7%AE%97%E6%B3%95%EF%BC%8C%E5%AE%9E%E7%8E%B0LLM%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%8753%E5%80%8D%E5%B9%B6%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9C%89%E6%9C%9B%E6%88%90%E4%B8%BAGrok-4-fast%E7%AD%89%E9%AB%98%E6%95%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E9%A2%84%E7%A4%BA%E7%9D%80AI%E5%8F%91%E5%B1%95%E4%BB%8E%E7%AE%97%E5%8A%9B%E5%A0%86%E5%8F%A0%E8%BD%AC%E5%90%91%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96%EF%BC%8C%E5%B0%86%E6%98%BE%E8%91%97%E6%8E%A8%E5%8A%A8%E9%AB%98%E7%BA%A7AI%E7%9A%84%E6%99%AE%E6%83%A0%E5%8C%96%EF%BC%8C%E9%87%8D%E5%A1%91AI%E4%BA%A7%E4%B8%9A%E7%9A%84%E7%BB%8F%E6%B5%8E%E6%A8%A1%E5%BC%8F%E5%92%8C%E7%AB%9E%E4%BA%89%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fjet-nemotronai-20250926114004994-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">算法之翼：英伟达Jet-Nemotron如何重塑大模型经济学与AI前沿格局</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>英伟达的Jet-Nemotron模型及其PortNAS框架，通过革命性的算法优化，实现了大模型推理速度53倍的提升和成本的大幅降低，不仅有望成为Grok-4-fast等高效模型的秘密武器，更预示着AI发展将从纯粹的算力堆叠转向更智能的算法经济，加速高级AI的普惠化进程。</p></blockquote>
+<p>近期，xAI旗下的Grok-4-fast以其“一骑绝尘”的降本增效表现震动业界，甚至在推理效率上超越了被认为拥有“路由器”技术的GPT-5。这引发了广泛猜测：在算力Scaling看似仍是主流的当下，Grok-4-fast的秘密武器究竟是什么？答案指向了一个令人意外的方向——并非是英伟达最新的显卡硬件，而是其研究团队提出的一项前瞻性算法突破：<strong>Jet-Nemotron模型及其背后的PortNAS框架</strong>。这不仅是技术层面的里程碑，更是对当前AI产业经济模式的一次深刻重塑。</p>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>长期以来，大语言模型（LLM）的推理成本高昂、速度缓慢，严重制约了其大规模应用和用户体验。一味地堆叠硬件算力，只会让模型厂商的账单节节攀升，用户的耐心也随之消磨殆尽。英伟达团队的Jet-Nemotron，正是在这一痛点上取得了突破。该模型在全面的基准测试中，其2B参数版本表现与Qwen3、Qwen2.5、Gemma3和Llama3.2等顶尖开源模型不相上下，却能实现约<strong>53倍的速度提升</strong>，在MMLU-Pro等任务上甚至比Qwen3-1.7B-Base快上47倍<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>这一惊人表现的核心在于一个全新的“混合结构”模型及其<strong>PortNAS（Portability Neural Architecture Search）框架</strong>。PortNAS颠覆了从零开始训练模型的传统，而是以一个预训练的全注意力（Full Attention）模型为起点，冻结其MLP权重，将优化重点放在注意力机制的改进上。这使得训练成本大幅降低，并能更全面地探索模型结构。其流程涵盖四大核心创新：</p>
+<ol>
+<li>
+<p><strong>全注意力层放置（Full Attention Layer Placement）</strong>：传统方法在所有层统一使用全注意力，效率低下。PortNAS通过构建一个包含两种注意力机制的超级网络，并通过特征蒸馏和beam search，智能识别并保留少量关键的全注意力层，剔除冗余，显著提升效率。实验证明，仅使用2层全注意力，PostNAS的准确率可达49%，远优于均匀放置的40%<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+</li>
+<li>
+<p><strong>最优线性注意力模块选择（Optimal Linear Attention Module Selection）</strong>：在确定全注意力层后，框架评估了六种最先进的线性注意力模块（如RWKV7、RetNet、Mamba2），最终发现Gated DeltaNet表现最佳。这得益于其<strong>数据依赖门控机制</strong>（Data-Dependent Gating Mechanism，充当智能路由器，平衡新旧信息）和<strong>Delta规则</strong>（只更新变化部分，节省内存）<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+</li>
+<li>
+<p><strong>更优解：JetBlock</strong>：英伟达并未止步于现有模块，而是设计了更强大的线性注意力模块——<strong>JetBlock</strong>。它引入<strong>动态卷积</strong>，能根据输入特征动态生成卷积核，而非使用静态卷积核，从而在数学推理和检索任务上超越Gated DeltaNet，同时保持高生成效率<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+</li>
+<li>
+<p><strong>硬件感知架构搜索（Hardware-Aware Architecture Search）</strong>：不同于以参数量为主要效率指标的旧范式，PortNAS直接以<strong>生成吞吐量</strong>为优化目标，来选择核心超参数（key/value维度、注意力头数量等）。研究发现，KV缓存大小才是影响长上下文生成吞吐量的关键。通过保持KV缓存大小不变，并进行精细的网格搜索，优化后的模型在参数量略增的情况下，数学准确率从32.8%提升到34.8%，同时保持吞吐量不变<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+</li>
+</ol>
+<h3 id="产业生态影响与商业重塑">产业生态影响与商业重塑</h3>
+<p>PortNAS带来的技术突破，对AI产业的生态和商业模式将产生深远影响：</p>
+<ul>
+<li><strong>GPU使用时长锐减与成本普降</strong>：推理阶段GPU使用时长可减少47倍，这意味着更快的任务完成速度，以及<strong>总成本20倍到50倍</strong>的潜在降低<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。对于需要大规模部署LLM的服务商，这无疑是一笔巨大的经济福音，直接影响其盈利能力和服务定价。</li>
+<li><strong>硬件部署门槛降低</strong>：更小的内存需求使得LLM可以在更廉价、更广泛的硬件上部署。这不仅能让AI应用渗透到边缘设备，降低对昂贵数据中心的依赖，也将加速AI在各行各业的普及，尤其是在资源受限的场景。</li>
+<li><strong>更高吞吐量与用户服务扩展</strong>：在现有基础设施规模下，模型厂商能够服务更多用户，提升服务并发量，从而扩大市场份额，优化用户体验。</li>
+<li><strong>英伟达的战略转型</strong>：这篇论文的发布，标志着英伟达不再仅仅是AI硬件的提供商，更成为<strong>AI算法和全栈解决方案的领导者</strong>。通过开源Jet-Nemotron，英伟达不仅巩固了其在AI基础设施层的霸主地位，更是将自身生态系统从底层硬件延伸到核心算法层面，确保其GPU在未来AI架构中依然不可或缺。这种从硬件销售到生态赋能的战略演进，是其持续增长的关键。</li>
+<li><strong>推动AI的民主化进程</strong>：Jet-Nemotron的开源<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，以及PortNAS框架适用于任何预训练Transformer的特性，意味着不仅是Grok，OpenAI、Anthropic、Google等厂商也能利用此技术大幅降低成本，提升效率。这将<strong>推动先进AI技术的普及</strong>，降低中小企业和个人开发者使用高性能模型的门槛，激发更广泛的创新。</li>
+</ul>
+<h3 id="未来主义视角与哲学思辨">未来主义视角与哲学思辨</h3>
+<p>Jet-Nemotron和PortNAS的出现，预示着大模型发展路径的<strong>一场深刻范式转移</strong>。我们正从单纯追求“大”模型（更多参数、更大算力）转向追求“巧”模型（更智能的算法、更高效的架构）。这种从“算力军备竞赛”到“算法智慧竞赛”的转变，具有重要的哲学意义。它强调了<strong>效率与智能的协同</strong>，而非简单的资源堆砌，这与人类文明发展中对可持续性和精巧性的追求不谋而合。</p>
+<p>Grok-4-fast本身就以其<strong>200万token的超长上下文窗口</strong>和工具调用能力著称<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，在没有高效推理机制的支撑下，如此大规模的上下文处理将是极其昂贵的。如果Grok-4-fast确实应用了英伟达的这项技术，那么它无疑是这种“算法之翼”赋能“模型之躯”的最佳案例，证明了智能算法对LLM性能瓶颈的突破能力。</p>
+<p>此外，该研究完全由<strong>华人学者</strong>（一作顾煜贤，通讯作者Han Cai等）完成，他们分别在清华大学、麻省理工学院和英伟达研究院等顶尖学术与工业机构深耕<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这不仅彰显了全球华人科学家在AI前沿领域的卓越贡献，也折射出AI研发的全球协作本质。然而，在日益复杂的全球科技竞争背景下，这类基础算法的突破及其开源策略，也带来关于技术主导权、知识产权保护和国际合作深层模式的思考。</p>
+<h3 id="风险与机遇并重">风险与机遇并重</h3>
+<p><strong>机遇</strong>方面，更低成本、更高效率的AI推理，将加速AI在科学发现（AI for Science）、医疗健康、智能制造等领域的应用。它使得实时、个性化、长上下文的AI服务成为可能，例如更强大的AI助手、能够处理海量文档的智能分析系统，甚至是更逼真的具身智能体。这种效率提升是AI技术普及和真正融入社会肌理的关键一步。</p>
+<p>然而，<strong>风险</strong>也伴随而来。首先，算法效率的提升可能进一步加剧“AI泡沫”的风险，诱导更多企业盲目追逐AI概念而忽视实际价值。其次，核心算法的集中化（即使是开源）可能带来新的生态依赖。若未来少数几家公司掌握了最前沿的效率算法，依然可能形成新的技术壁垒。此外，更高效的AI也可能加速对某些人工劳动的替代，对就业市场和社会结构带来深远影响，需要提前规划和应对。</p>
+<h3 id="结语">结语</h3>
+<p>英伟达Jet-Nemotron及其PortNAS框架不仅仅是一项技术成果，它更是大语言模型领域一场<strong>深层次变革的预兆</strong>。它标志着AI发展进入了“算法经济”时代，即通过更精巧、更智能的算法设计来解锁模型的潜力，而非仅仅依赖硬件的无限扩展。这股力量将显著降低AI应用的门槛，加速高级AI的民主化进程，并重新定义AI产业的竞争格局。对于科技公司而言，这要求它们重新审视自身的研发策略，从硬件和算力竞赛转向对核心算法创新和效率优化的深耕。对于社会而言，一个更高效、更普惠的AI时代正加速到来，我们亟需思考如何利用这股力量，同时应对其带来的新挑战，以实现技术与人类文明的和谐共生。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://finance.sina.com.cn/tech/csj/2025-09-26/doc-infrukxy0642546.shtml">马斯克新模型背后算法来自英伟达？？？</a>·新浪财经·关注前沿科技（量子位）（2025/9/26）·检索日期2024/05/29&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://news.miracleplus.com/feeds">Grok 4 Fast LLM：2M Token超长上下文与工具调用限制</a>·齐思- 最新最有趣的科技前沿内容·（未知作者）（未知日期）·检索日期2024/05/29&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8B%B1%E4%BC%9F%E8%BE%BE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">英伟达</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/portnas/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">PortNAS</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%9B%E6%96%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算法创新</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">成本效益</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源AI</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/deepseek-r1ai-20250918131005945-4/">DeepSeek-R1登《自然》封面：强化学习重塑大模型推理，开创AI同行评审新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gfpoai-20250814164025739-1/">终结大模型“冗长沉思”：微软GFPO如何重塑AI效率与推理范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen-gspoai-20250807184005106-1/">超越崩溃边缘：Qwen GSPO如何重塑大模型后训练范式，引领AI迈向新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-07-25-07-25-ai-ai-/">07-25日报|AI狂飙：当“胡扯”成为AI的本能，谁来为“信任赤字”和“天价账单”买单？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mistral-voxtralai-20250725104005479-2/">Mistral Voxtral：语音AI新纪元，开源力量重塑人机交互与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mortransformer-20250718114005752-4/">谷歌MoR：大模型计算范式的新篇章，超越Transformer的效率哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717114005032-5/">大模型架构演进：从参数竞赛到稀疏赋能，重塑AI产业格局与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717111005371-3/">黄仁勋：从“零价值”到“最有价值”的AI时代掌舵者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aicloudmatrix384-20250619082004293-1/">华为突破AI基础设施瓶颈：CloudMatrix384如何重塑超大规模计算范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250926094005057-1/">物理AI：从屏幕到现实的智能跃迁，阿里英伟达联手擘画万亿级新篇章</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-cwmai-20250925211008792-0/">Meta CWM：代码世界模型开启软件开发新范式，AI迈向“像程序员一样思考”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250925174005088-0/">代码世界模型：AI编程从“文本生成”迈向“动态理解”的范式革新</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-r2246-20250923184004760-0/">深思，求索：DeepSeek-R2迟滞246天，一场中国大模型时代的“现代启示录”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20250923024004682-0/">硅谷的联姻：英伟达与OpenAI，一场芯片与智慧的共舞</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250923014004784-0/">芯片巨擘挥斥方遒：人工智能淘金热的无边想象与清醒代价</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

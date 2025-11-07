@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>深潜AI可观测性：火山引擎如何重塑Prometheus，驾驭大模型复杂未来 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="随着大模型应用日益普及，传统可观测系统面临高基数数据爆炸、实时性不足等挑战。火山引擎通过对Prometheus的深度优化，如预聚合、分片查询和实时缓存等技术，显著提升了AI大模型可观测系统的稳定性与性能，并降低了推理延迟。此举不仅展示了云服务商在AI基础设施领域的战略竞争，更揭示了未来AI系统走向高度自我管理与智能运维的演进趋势。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aiprometheus-20250912101005005-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aiprometheus-20250912101005005-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="深潜AI可观测性：火山引擎如何重塑Prometheus，驾驭大模型复杂未来">
+  <meta property="og:description" content="随着大模型应用日益普及，传统可观测系统面临高基数数据爆炸、实时性不足等挑战。火山引擎通过对Prometheus的深度优化，如预聚合、分片查询和实时缓存等技术，显著提升了AI大模型可观测系统的稳定性与性能，并降低了推理延迟。此举不仅展示了云服务商在AI基础设施领域的战略竞争，更揭示了未来AI系统走向高度自我管理与智能运维的演进趋势。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-12T10:10:05+08:00">
+    <meta property="article:modified_time" content="2025-09-12T10:10:05+08:00">
+    <meta property="article:tag" content="大模型可观测性">
+    <meta property="article:tag" content="Prometheus优化">
+    <meta property="article:tag" content="云原生监控">
+    <meta property="article:tag" content="火山引擎">
+    <meta property="article:tag" content="AI基础设施">
+    <meta property="article:tag" content="高基数数据">
+
+  <meta itemprop="name" content="深潜AI可观测性：火山引擎如何重塑Prometheus，驾驭大模型复杂未来">
+  <meta itemprop="description" content="随着大模型应用日益普及，传统可观测系统面临高基数数据爆炸、实时性不足等挑战。火山引擎通过对Prometheus的深度优化，如预聚合、分片查询和实时缓存等技术，显著提升了AI大模型可观测系统的稳定性与性能，并降低了推理延迟。此举不仅展示了云服务商在AI基础设施领域的战略竞争，更揭示了未来AI系统走向高度自我管理与智能运维的演进趋势。">
+  <meta itemprop="datePublished" content="2025-09-12T10:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-09-12T10:10:05+08:00">
+  <meta itemprop="wordCount" content="69">
+  <meta itemprop="keywords" content="大模型可观测性,Prometheus优化,云原生监控,火山引擎,AI基础设施,高基数数据">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深潜AI可观测性：火山引擎如何重塑Prometheus，驾驭大模型复杂未来">
+  <meta name="twitter:description" content="随着大模型应用日益普及，传统可观测系统面临高基数数据爆炸、实时性不足等挑战。火山引擎通过对Prometheus的深度优化，如预聚合、分片查询和实时缓存等技术，显著提升了AI大模型可观测系统的稳定性与性能，并降低了推理延迟。此举不仅展示了云服务商在AI基础设施领域的战略竞争，更揭示了未来AI系统走向高度自我管理与智能运维的演进趋势。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2012,%202025_10-03-52-980.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-12 10:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%B7%B1%E6%BD%9CAI%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%EF%BC%9A%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91Prometheus%EF%BC%8C%E9%A9%BE%E9%A9%AD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A4%8D%E6%9D%82%E6%9C%AA%E6%9D%A5%20-%20%E9%9A%8F%E7%9D%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E6%97%A5%E7%9B%8A%E6%99%AE%E5%8F%8A%EF%BC%8C%E4%BC%A0%E7%BB%9F%E5%8F%AF%E8%A7%82%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%9D%A2%E4%B8%B4%E9%AB%98%E5%9F%BA%E6%95%B0%E6%95%B0%E6%8D%AE%E7%88%86%E7%82%B8%E3%80%81%E5%AE%9E%E6%97%B6%E6%80%A7%E4%B8%8D%E8%B6%B3%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E%E9%80%9A%E8%BF%87%E5%AF%B9Prometheus%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%8C%96%EF%BC%8C%E5%A6%82%E9%A2%84%E8%81%9A%E5%90%88%E3%80%81%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AE%9E%E6%97%B6%E7%BC%93%E5%AD%98%E7%AD%89%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%82%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%B8%8E%E6%80%A7%E8%83%BD%EF%BC%8C%E5%B9%B6%E9%99%8D%E4%BD%8E%E4%BA%86%E6%8E%A8%E7%90%86%E5%BB%B6%E8%BF%9F%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%95%86%E5%9C%A8AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%A2%86%E5%9F%9F%E7%9A%84%E6%88%98%E7%95%A5%E7%AB%9E%E4%BA%89%EF%BC%8C%E6%9B%B4%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%9C%AA%E6%9D%A5AI%E7%B3%BB%E7%BB%9F%E8%B5%B0%E5%90%91%E9%AB%98%E5%BA%A6%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E8%B6%8B%E5%8A%BF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiprometheus-20250912101005005-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%B7%B1%E6%BD%9CAI%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%EF%BC%9A%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91Prometheus%EF%BC%8C%E9%A9%BE%E9%A9%AD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A4%8D%E6%9D%82%E6%9C%AA%E6%9D%A5%20-%20%E9%9A%8F%E7%9D%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E6%97%A5%E7%9B%8A%E6%99%AE%E5%8F%8A%EF%BC%8C%E4%BC%A0%E7%BB%9F%E5%8F%AF%E8%A7%82%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%9D%A2%E4%B8%B4%E9%AB%98%E5%9F%BA%E6%95%B0%E6%95%B0%E6%8D%AE%E7%88%86%E7%82%B8%E3%80%81%E5%AE%9E%E6%97%B6%E6%80%A7%E4%B8%8D%E8%B6%B3%E7%AD%89%E6%8C%91%E6%88%98%E3%80%82%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E%E9%80%9A%E8%BF%87%E5%AF%B9Prometheus%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%8C%96%EF%BC%8C%E5%A6%82%E9%A2%84%E8%81%9A%E5%90%88%E3%80%81%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%AE%9E%E6%97%B6%E7%BC%93%E5%AD%98%E7%AD%89%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%82%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%B8%8E%E6%80%A7%E8%83%BD%EF%BC%8C%E5%B9%B6%E9%99%8D%E4%BD%8E%E4%BA%86%E6%8E%A8%E7%90%86%E5%BB%B6%E8%BF%9F%E3%80%82%E6%AD%A4%E4%B8%BE%E4%B8%8D%E4%BB%85%E5%B1%95%E7%A4%BA%E4%BA%86%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%95%86%E5%9C%A8AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%A2%86%E5%9F%9F%E7%9A%84%E6%88%98%E7%95%A5%E7%AB%9E%E4%BA%89%EF%BC%8C%E6%9B%B4%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%9C%AA%E6%9D%A5AI%E7%B3%BB%E7%BB%9F%E8%B5%B0%E5%90%91%E9%AB%98%E5%BA%A6%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E8%B6%8B%E5%8A%BF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiprometheus-20250912101005005-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">深潜AI可观测性：火山引擎如何重塑Prometheus，驾驭大模型复杂未来</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>随着大模型技术深入应用，其高基数、高实时性、高并发的特性正将传统可观测系统推向极限。火山引擎通过对Prometheus进行深度工程优化，在数据处理、查询效率和系统稳定性上实现突破，不仅为字节跳动内部大规模AI服务提供了坚实保障，更预示着云服务商在AI基础设施领域的竞争正从算力延伸至更深层次的智能运维，驱动着AI系统向更高层次的自我感知与治理迈进。</p></blockquote>
+<h3 id="大模型时代可观测性的隐形战场与prometheus的极限挑战">大模型时代：可观测性的“隐形战场”与Prometheus的极限挑战</h3>
+<p>当Agentic AI、具身智能与多模态模型以惊人的速度重塑数字世界时，我们往往关注其前端的智能涌现，却容易忽略支撑这些宏伟愿景的“隐形战场”——即底层基础设施的<strong>可观测性</strong>。可观测性并非仅仅是监控系统的健康状态，它更像是AI系统的神经系统，实时感知、分析、诊断并响应着每一个微小的数据信号。作为云原生监控领域的事实标准，Prometheus被广泛应用于AI大模型和智能驾驶领域的可观测任务，但其在面对AI时代特有的挑战时，正遭遇前所未有的瓶力。</p>
+<p>核心痛点首先聚焦于<strong>高基数时序数据爆炸</strong>。大模型训练与推理场景，特别是像火山方舟这样接入海量端点的平台，能够轻松产生十亿级别的时序基数。这不仅包含传统的CPU、内存等指标，更包括了GPU利用率、模型推理延迟、Token吞吐量、甚至多智能体协作中的细粒度状态变化。每一个独特的标签组合（label/tag）都会导致一个全新的时序序列，这些爆炸性的“标签海洋”使得Prometheus原生的倒排索引和查询效率面临巨大压力，引发查询耗时过长甚至系统不稳定的风险<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。其次，<strong>在线推理服务的实时性与弹性调度</strong>提出严苛要求。AI应用高峰时段需要快速扩容，传统基于K8s HPA（Horizontal Pod Autoscaler）的CPU/内存指标已不足以精准反映AI工作负载，需要更细粒度、更实时的GPU等自定义指标作为扩缩容依据。同时，推理服务的流量亲和性调度对指标实时性提出了亚秒级要求。最后，<strong>大规模多租户QoS保障</strong>成为云服务商的必修课。在共享集群环境下，单一租户的大流量写入或大查询可能相互影响，对其他租户的可用性造成冲击。这些都构成了当前AI可观测性的深层挑战。</p>
+<h3 id="火山引擎的工程解法重构prometheus驾驭ai复杂性">火山引擎的工程解法：重构Prometheus，驾驭AI复杂性</h3>
+<p>面对这些挑战，字节跳动（火山引擎）基础架构可观测团队的郭刚平及其团队，在服务火山方舟等AI领域客户的过程中，积累了宝贵的实践经验，并对托管Prometheus（VMP）进行了系统性的深度优化。他们的核心演进思路是构建一个<strong>端到端、高度弹性、面向大规模场景的监控架构</strong>。</p>
+<p>火山引擎的优化实践体现在多个维度：</p>
+<ul>
+<li><strong>高基数问题治理</strong>：
+<ul>
+<li>针对高流失率、短时高基数时序场景，VMP采用了<strong>查询预聚合</strong>策略，通过在采集端和存储端进行数据聚合，显著降低基数，并通过与业务侧对齐打点最佳实践方案，从源头减少不合理数据生成。</li>
+<li>在面对难以预测的高基数时，系统具备<strong>查询熔断机制</strong>，防止过大查询对稳定性造成冲击，类似于数据库的全表扫描防护<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ul>
+</li>
+<li><strong>实时性与弹性调度</strong>：
+<ul>
+<li>为满足在线推理对指标可用性及实时性的严苛需求，VMP引入了<strong>近用户集群侧实时指标缓存</strong>，有效降低TTFT（Time To First Token）延迟高达40% <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，这对于提升AI应用的用户体验和响应速度至关重要。</li>
+</ul>
+</li>
+<li><strong>大流量租户QoS保障</strong>：
+<ul>
+<li>在写入链路，实现了<strong>大流量租户网关自动拆分独立分组</strong>，避免租户间相互影响。</li>
+<li>在查询链路，通过<strong>大查询发现和治理</strong>机制，结合面向&quot;Never OOM&quot;的查询组件设计，确保查询服务的鲁棒性。</li>
+<li>创新性地采用了<strong>Shuffle Sharding查询聚合工作区</strong>，突破了单集群规模上限，并通过<strong>Sharding写入与聚合查询</strong>实现了数据在多个Prometheus实例间的水平扩展与统一视图。这种基于查询下推的聚合方式，相比社区原生的RemoteRead机制，大幅减少了原始数据的传输量，提升了查询效率<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ul>
+</li>
+</ul>
+<p>这些技术实践共同构建了一个能够稳定支撑十亿级时序读写、具备弹性伸缩和QoS保障能力的AI可观测平台，将Prometheus从单一实例的局限中解放出来，使其能够适应大模型时代的“无尽”数据洪流。</p>
+<h3 id="产业生态变局从基础设施到ai核心竞争力的延伸">产业生态变局：从基础设施到AI核心竞争力的延伸</h3>
+<p>火山引擎对Prometheus的深度优化，不仅是技术层面的胜利，更是<strong>云服务商在AI时代战略布局的缩影</strong>。随着AI技术成为核心生产力，提供稳定、高效、可观测的AI基础设施，已成为各云计算巨头竞争的新高地。火山引擎作为字节跳动的云服务品牌，其策略优势在于能够将字节跳动内部如抖音、火山方舟等超大规模AI业务的<strong>实战经验和技术沉淀，反哺并产品化为面向外部客户的通用服务</strong>。这种“内部验证、外部赋能”的模式，赋予了火山引擎在AI可观测领域独特的竞争力。</p>
+<p>放眼整个产业，阿里云也在同期发力大规模AI可观测。其Prometheus 2.0方案剑指<strong>全栈可观测</strong>，将时序存储与日志、Trace等数据形态实现统一，并自研C++查询引擎以实现更高性能、稳定性和QoS控制<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。这表明，行业趋势正从单一指标监控走向<strong>指标、日志、追踪三位一体的融合观测</strong>，并进一步向**可观测数据生态从“基础设施层”延伸到“业务模型层”**演进，为AI工程化落地提供全面的洞察工具。</p>
+<p>未来，AI可观测性将不再仅仅是运维工具，它将成为<strong>AI技术栈的核心组成部分</strong>，是模型训练、推理、部署、迭代全生命周期中不可或缺的基石。云服务商通过提供此类深度优化的可观测解决方案，正在将AI的“黑箱”变得更加透明，从而降低AI应用的门槛，加速企业级AI的普及和创新。</p>
+<h3 id="超越指标ai可观测性的哲学深度与未来范式">超越指标：AI可观测性的哲学深度与未来范式</h3>
+<p>从哲学思辨的角度看，AI可观测性的演进反映了技术系统对自身“内省”能力的渴望。高基数数据并非仅仅是量的问题，它映射出AI系统内在<strong>复杂性与涌现性</strong>的本质。每一个标签，都可能代表了模型内部或外部环境的一个独特维度，这些维度的组合构成了AI在特定时刻的“状态指纹”。理解并管理这些指纹，是驯服AI巨兽，确保其按预期行为的关键。</p>
+<p>从“监控”到“可观测”，再到<strong>AIOps（Artificial Intelligence for IT Operations）<strong>的未来，我们看到的是一个从被动响应到主动预测，从人工干预到智能自愈的范式转变。正如火山引擎展望的“更高性能、更低成本的下一代时序存储”、“Inplace时序数据分析能力”和“AIOps能力内外复用上云”，这不仅仅是技术指标的提升，更是一种关于</strong>AI自我管理AI</strong>的未来图景。当AI系统能够通过自身产生的数据，自动理解其行为模式、预测潜在故障、甚至自我修复和优化时，我们便迈入了技术与智能高度融合的新纪元。</p>
+<p>这种能力将深刻影响人类与技术的关系，解放工程师从繁琐的运维工作中，将更多精力投入到创新和业务发展。对于社会而言，一个具备高度可观测性的AI基础设施，意味着更可靠的自动驾驶、更精准的医疗诊断、更智能的城市管理。然而，这也提出新的伦理思考：当AI基础设施开始“思考”和“行动”时，我们如何确保其决策的透明性、可解释性和可控性？</p>
+<p>总而言之，火山引擎在Prometheus上的优化实践，是当前AI时代底层技术创新的一次集中体现。它不仅解决了工程上的具体难题，更在产业竞争中划定新边界，并预示着一个AI系统能够更好地感知、理解和管理自身，从而推动人类文明进程加速的未来。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://qcon.infoq.cn/2025/shanghai/presentation/6636">火山引擎 Prometheus 面向大模型场景的优化实践｜QCon 上海</a> · QCon全球软件开发大会 (2025/10/23-25) · 字节跳动研发工程师郭刚平 (检索日期2024/5/7)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://developer.volcengine.com/articles/7490493002389929996">Prometheus 性能调优：大模型和智能驾驶可观测的高基数问题</a> · 火山引擎开发者社区 · 火山引擎可观测团队 (2025/5/6) · 检索日期2024/5/7&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://observability.cn/article/yl146rc5sbrrxfxy/">剑指大规模AI 可观测，阿里云Prometheus 2.0 应运而生</a> · Observability.cn (检索日期2024/5/7)&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型可观测性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/prometheus%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Prometheus优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%9B%91%E6%8E%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">云原生监控</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">火山引擎</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%AB%98%E5%9F%BA%E6%95%B0%E6%95%B0%E6%8D%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">高基数数据</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250617193006124-2/">字节跳动的AI Agent豪赌：重塑数字未来的关键战役</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/llmai-20250911164005634-1/">告别“薛定谔的答案”：百亿独角兽重塑LLM推理确定性，开启AI研发新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250911114004718-1/">马斯克押注“活化”AI：从芯片到星链，构建一个具身智能的万亿级闭环生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dataai-20250908151004720-0/">Data与AI深层融合：新质生产力引擎下的企业智能变革与全球竞速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigartner-20250904111004724-3/">AI浪潮下的基础设施再进化：Gartner揭示自主可控、算力消费与韧性构建新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250903201005083-1/">电力的博弈：奥特曼的印度AI豪赌，与马斯克的“东方密码”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250829191005877-1/">智算引力波：无问芯穹如何重塑中国AI算力基础设施与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/90ai-20250828011005144-0/">谷歌在弗吉尼亚狂撒90亿：AI“基建狂魔”这回要怎么“卷”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiaiapi-20250827114005702-1/">从流量盲点到智能治理：AI网关如何定义AI时代的API管理</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20250822204005209-1/">奥特曼的预言与OpenAI的困境：泡沫中的炼金术与数字基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250820204004982-3/">上海的“独角兽”们：当人工智能遇上大数据，是涅槃还是新一轮资本炼金？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250815101006591-3/">谷歌的“奥德赛”：从搜索框到算力沙漠的90亿美元赌注</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250815094030802-3/">谷歌的“奥德赛”：从搜索框到算力沙漠的90亿美元赌注</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5-20250815061005505-0/">GPT-5的代理智能微光：基建鸿沟、生态博弈与智能体时代的未来路径</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250814044005047-0/">算力淘金潮：谷歌在俄克拉荷马掘金，深挖AI新纪元的地基</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>确定性AI的黎明：Thinking Machines如何用“批次不变性”重塑LLM与可信赖智能 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Thinking Machines由OpenAI前高管Mira Murati创立，通过发布首个研究成果，成功解决大语言模型推理中的“批次不变性”问题，实现了LLM输出的确定性。这项突破性技术不仅为构建更可靠、可控的AI系统奠定基础，还为企业级AI应用和AI Agent的稳定发展打开了新的可能性，其背后是深厚的资本布局和对AI未来范式的深刻探索。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aithinking-machinesllm-20250911154004745-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aithinking-machinesllm-20250911154004745-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="确定性AI的黎明：Thinking Machines如何用“批次不变性”重塑LLM与可信赖智能">
+  <meta property="og:description" content="Thinking Machines由OpenAI前高管Mira Murati创立，通过发布首个研究成果，成功解决大语言模型推理中的“批次不变性”问题，实现了LLM输出的确定性。这项突破性技术不仅为构建更可靠、可控的AI系统奠定基础，还为企业级AI应用和AI Agent的稳定发展打开了新的可能性，其背后是深厚的资本布局和对AI未来范式的深刻探索。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-11T15:40:04+08:00">
+    <meta property="article:modified_time" content="2025-09-11T15:40:04+08:00">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="AI推理确定性">
+    <meta property="article:tag" content="批次不变性">
+    <meta property="article:tag" content="AI初创">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="企业级AI">
+
+  <meta itemprop="name" content="确定性AI的黎明：Thinking Machines如何用“批次不变性”重塑LLM与可信赖智能">
+  <meta itemprop="description" content="Thinking Machines由OpenAI前高管Mira Murati创立，通过发布首个研究成果，成功解决大语言模型推理中的“批次不变性”问题，实现了LLM输出的确定性。这项突破性技术不仅为构建更可靠、可控的AI系统奠定基础，还为企业级AI应用和AI Agent的稳定发展打开了新的可能性，其背后是深厚的资本布局和对AI未来范式的深刻探索。">
+  <meta itemprop="datePublished" content="2025-09-11T15:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-11T15:40:04+08:00">
+  <meta itemprop="wordCount" content="93">
+  <meta itemprop="keywords" content="大语言模型,AI推理确定性,批次不变性,AI初创,AI Agent,企业级AI">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="确定性AI的黎明：Thinking Machines如何用“批次不变性”重塑LLM与可信赖智能">
+  <meta name="twitter:description" content="Thinking Machines由OpenAI前高管Mira Murati创立，通过发布首个研究成果，成功解决大语言模型推理中的“批次不变性”问题，实现了LLM输出的确定性。这项突破性技术不仅为构建更可靠、可控的AI系统奠定基础，还为企业级AI应用和AI Agent的稳定发展打开了新的可能性，其背后是深厚的资本布局和对AI未来范式的深刻探索。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2011,%202025_15-33-38-826.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-11 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%A1%AE%E5%AE%9A%E6%80%A7AI%E7%9A%84%E9%BB%8E%E6%98%8E%EF%BC%9AThinking&amp;#43;Machines%E5%A6%82%E4%BD%95%E7%94%A8%E2%80%9C%E6%89%B9%E6%AC%A1%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%E9%87%8D%E5%A1%91LLM%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%B5%96%E6%99%BA%E8%83%BD%20-%20Thinking&amp;#43;Machines%E7%94%B1OpenAI%E5%89%8D%E9%AB%98%E7%AE%A1Mira&amp;#43;Murati%E5%88%9B%E7%AB%8B%EF%BC%8C%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E9%A6%96%E4%B8%AA%E7%A0%94%E7%A9%B6%E6%88%90%E6%9E%9C%EF%BC%8C%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B8%AD%E7%9A%84%E2%80%9C%E6%89%B9%E6%AC%A1%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86LLM%E8%BE%93%E5%87%BA%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E3%80%82%E8%BF%99%E9%A1%B9%E7%AA%81%E7%A0%B4%E6%80%A7%E6%8A%80%E6%9C%AF%E4%B8%8D%E4%BB%85%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E5%8F%AF%E9%9D%A0%E3%80%81%E5%8F%AF%E6%8E%A7%E7%9A%84AI%E7%B3%BB%E7%BB%9F%E5%A5%A0%E5%AE%9A%E5%9F%BA%E7%A1%80%EF%BC%8C%E8%BF%98%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E5%BA%94%E7%94%A8%E5%92%8CAI&amp;#43;Agent%E7%9A%84%E7%A8%B3%E5%AE%9A%E5%8F%91%E5%B1%95%E6%89%93%E5%BC%80%E4%BA%86%E6%96%B0%E7%9A%84%E5%8F%AF%E8%83%BD%E6%80%A7%EF%BC%8C%E5%85%B6%E8%83%8C%E5%90%8E%E6%98%AF%E6%B7%B1%E5%8E%9A%E7%9A%84%E8%B5%84%E6%9C%AC%E5%B8%83%E5%B1%80%E5%92%8C%E5%AF%B9AI%E6%9C%AA%E6%9D%A5%E8%8C%83%E5%BC%8F%E7%9A%84%E6%B7%B1%E5%88%BB%E6%8E%A2%E7%B4%A2%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faithinking-machinesllm-20250911154004745-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%A1%AE%E5%AE%9A%E6%80%A7AI%E7%9A%84%E9%BB%8E%E6%98%8E%EF%BC%9AThinking&amp;#43;Machines%E5%A6%82%E4%BD%95%E7%94%A8%E2%80%9C%E6%89%B9%E6%AC%A1%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%E9%87%8D%E5%A1%91LLM%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%B5%96%E6%99%BA%E8%83%BD%20-%20Thinking&amp;#43;Machines%E7%94%B1OpenAI%E5%89%8D%E9%AB%98%E7%AE%A1Mira&amp;#43;Murati%E5%88%9B%E7%AB%8B%EF%BC%8C%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E9%A6%96%E4%B8%AA%E7%A0%94%E7%A9%B6%E6%88%90%E6%9E%9C%EF%BC%8C%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B8%AD%E7%9A%84%E2%80%9C%E6%89%B9%E6%AC%A1%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86LLM%E8%BE%93%E5%87%BA%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E3%80%82%E8%BF%99%E9%A1%B9%E7%AA%81%E7%A0%B4%E6%80%A7%E6%8A%80%E6%9C%AF%E4%B8%8D%E4%BB%85%E4%B8%BA%E6%9E%84%E5%BB%BA%E6%9B%B4%E5%8F%AF%E9%9D%A0%E3%80%81%E5%8F%AF%E6%8E%A7%E7%9A%84AI%E7%B3%BB%E7%BB%9F%E5%A5%A0%E5%AE%9A%E5%9F%BA%E7%A1%80%EF%BC%8C%E8%BF%98%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E5%BA%94%E7%94%A8%E5%92%8CAI&amp;#43;Agent%E7%9A%84%E7%A8%B3%E5%AE%9A%E5%8F%91%E5%B1%95%E6%89%93%E5%BC%80%E4%BA%86%E6%96%B0%E7%9A%84%E5%8F%AF%E8%83%BD%E6%80%A7%EF%BC%8C%E5%85%B6%E8%83%8C%E5%90%8E%E6%98%AF%E6%B7%B1%E5%8E%9A%E7%9A%84%E8%B5%84%E6%9C%AC%E5%B8%83%E5%B1%80%E5%92%8C%E5%AF%B9AI%E6%9C%AA%E6%9D%A5%E8%8C%83%E5%BC%8F%E7%9A%84%E6%B7%B1%E5%88%BB%E6%8E%A2%E7%B4%A2%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faithinking-machinesllm-20250911154004745-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">确定性AI的黎明：Thinking Machines如何用“批次不变性”重塑LLM与可信赖智能</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>由OpenAI前高管组建的Thinking Machines发布首个核心成果，通过解决大语言模型推理中的“批次不变性”问题，成功实现LLM输出的确定性。这不仅为构建更可靠、可控的AI系统奠定基础，也预示着企业级AI应用和AI Agent发展的重大突破，其背后是深厚的资本布局和对AI未来范式的深刻探索。</p></blockquote>
+<p>2025年，AI领域最受瞩目的初创公司之一，由前OpenAI CTO Mira Murati领衔的Thinking Machines，在估值高达120亿美元、完成20亿美元创纪录种子轮融资后，终于揭开了其首篇研究博客的神秘面纱。这篇名为“Defeating Nondeterminism in LLM Inference”（《克服LLM推理中的不确定性》）的文章，没有带来惊艳的基座模型，却直指大语言模型（LLM）长期以来一个核心痛点：<em>推理结果的非确定性</em>。这并非简单的技术修补，而是对AI系统可靠性与可控性的<strong>底层范式重构</strong>，为AI Agent和企业级AI的规模化应用铺平了道路。</p>
+<h3 id="技术原理与核心创新告别llm推理的薛定谔之猫">技术原理与核心创新：告别LLM推理的“薛定谔之猫”</h3>
+<p>长期以来，即便是将采样温度（sampling temperature）设置为零，大语言模型在面对相同输入时，也常常输出不尽相同的文本。这种“薛定谔之猫”式的非确定性，严重阻碍了LLM在金融、医疗、法律等对可复现性、可审计性要求极高的关键领域的应用，也为AI Agent的可靠训练和部署带来了挑战。业界普遍认为这源于GPU浮点数运算的非结合性与并行执行的随机组合<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>然而，Thinking Machines通过深入研究发现，问题的核心并非仅此。真正的“罪魁祸首”是<strong>批次不变性（Batch Invariance）的缺失</strong>。在大模型实际部署中，服务器会根据负载动态调整推理批次的大小。而现有的GPU计算内核（如矩阵乘法、RMSNorm等）往往会因此改变其内部的计算顺序或策略。浮点数运算固有的微小差异，在Transformer模型多层迭代中被不断放大，最终导致即使输入完全相同，在不同批次大小下也会产生不同的输出。</p>
+<p>Thinking Machines的创新之处在于，他们提出并实现了一系列批次不变的计算内核，以确保核心操作的计算顺序不受批次大小变化的影响：</p>
+<ul>
+<li><strong>RMSNorm的批次不变性</strong>：通过为每个批次元素分配一个独立的计算核心，确保每个元素的归约顺序固定，从而在批次大小变化时保持归约策略不变。</li>
+<li><strong>矩阵乘法的批次不变性</strong>：将输出张量拆分为2D块，并为每个块分配独立的核心，确保点积计算和归约操作在核心内部完成。为了避免因批次大小变化导致并行策略或张量核心指令切换，他们采用了为所有输入形状编译统一内核配置的方法，即便这会带来约20%的性能损失，但在其看来是可接受的代价。</li>
+<li><strong>注意力机制的批次不变性</strong>：在注意力内核执行前，优先更新KV缓存和页表，确保无论序列如何拆分处理，KV存储布局始终一致。同时，通过固定每个拆分块的大小（例如256），使拆分数量随KV长度自适应，保障归约顺序不依赖批次大小。</li>
+</ul>
+<p>实验验证进一步证实了这些技术的有效性。在Qwen/Qwen3-235B-A22B-Instruct-2507模型上的测试显示，使用批次不变性内核后，1000次相同输入的推理结果<strong>完全一致</strong>，彻底解决了非确定性问题。更重要的是，这使得<strong>真正的在线策略强化学习（Online Policy RL）成为可能</strong>，KL散度始终保持为0，无需离线校正，极大地提升了RL训练的稳定性和效率。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="商业价值与产业生态重塑从可靠性到规模化ai">商业价值与产业生态重塑：从可靠性到规模化AI</h3>
+<p>Thinking Machines对LLM推理确定性的解决，其商业价值不容小觑。这不仅是一项技术上的精进，更是<strong>开启企业级AI大规模应用的关键钥匙</strong>。</p>
+<ul>
+<li><strong>解锁关键应用场景</strong>：在金融欺诈检测、药物研发模拟、自动驾驶决策、法律文档生成等高风险、高精度要求的领域，AI的确定性输出是构建信任、确保合规和实现可靠性的前提。一个无法复现结果的模型，在这些场景下是不可接受的。Thinking Machines的成果将极大地拓展LLM的应用边界和商业潜力。</li>
+<li><strong>赋能AI Agent的演进</strong>：真正的在线策略强化学习，是构建具有自主学习、自我优化能力的AI Agent不可或缺的基石。一个能够稳定、可预测地与环境交互并学习的Agent，将是通向AGI道路上的重要里程碑。Thinking Machines的技术，将使得AI Agent的训练和部署更加稳健、高效，大幅降低开发和维护成本。</li>
+<li><strong>重塑AI基础设施投资逻辑</strong>：高达20亿美元的种子轮融资，由a16z领投，Nvidia、Accel、ServiceNow、CISCO、AMD、Jane Street等一众战略投资者跟投，这不仅仅是对团队的信任，更是对AI基础设施中<strong>可靠性作为核心价值</strong>的深刻洞察。资本市场意识到，如果AI要真正融入社会和经济的核心环节，其底层计算必须具备工业级的稳定性和可信赖性。Thinking Machines正在构建的，正是未来AI世界的“坚实地基”。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+<li><strong>“连接主义”的复兴与开源战略</strong>：公司产品被命名为“Connection Machine”，致敬上世纪60年代的连接主义先驱。这不仅体现了团队对AI历史的深刻理解，更暗示了其构建一个互联互通、底层开放的AI生态系统的雄心。Mira Murati此前也透露，Thinking Machines的产品将包含重要的<strong>开源组件</strong>，旨在吸引开发者关注并促进社区合作，这与OpenAI近期的闭源策略形成鲜明对比，或将引发新一轮的AI开源生态竞争。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<h3 id="哲学思辨与未来图景通往可信赖智能的基石">哲学思辨与未来图景：通往可信赖智能的基石</h3>
+<p>Thinking Machines的突破引发了更深层次的哲学思考：我们如何理解和控制智能？</p>
+<ul>
+<li><strong>从概率到确定性的飞跃</strong>：传统上，大语言模型常被视为概率生成器，其输出具有内在的随机性。而确定性推理的实现，意味着我们能够将AI系统从“黑箱”式的概率决策者，转化为更接近于工程学意义上的<strong>可控、可验证的计算实体</strong>。这种转变对于建立人机信任至关重要。</li>
+<li><strong>AI Agent与自主系统的伦理基石</strong>：当AI Agent开始自主决策并采取行动时，其行为的可预测性和可复现性将是伦理治理、安全审计和责任划分的根本前提。确定性推理为AI Agent提供了<strong>可追溯的行为链</strong>，使我们能够更好地理解和控制它们的决策过程，从而为构建更安全、更负责任的通用人工智能奠定基础。</li>
+<li><strong>效率与可靠性的两难</strong>：为了实现确定性，Thinking Machines牺牲了约20%的性能。这提出了一个核心问题：<em>在追求极致计算效率和可控、可信赖性之间，AI开发者和使用者应如何权衡？</em> 这个问题将深刻影响未来AI系统在不同应用场景下的架构选择和部署策略。它预示着，在AI的成熟阶段，性能将不再是唯一衡量标准，<strong>可靠性与安全性将上升到同等重要的地位</strong>。</li>
+</ul>
+<h3 id="风险与机遇并存ai可靠性的双刃剑">风险与机遇并存：AI可靠性的双刃剑</h3>
+<p>确定性推理的突破带来了巨大机遇，但也伴随着潜在风险。</p>
+<p><strong>机遇方面</strong>，确定的推理能力将极大地拓宽AI的应用边界，尤其是在医疗诊断、金融交易、自动驾驶和科学研究等对精度和可靠性有极高要求的领域。它也将加速AI Agent的部署和普及，推动通用人工智能的稳健发展。在法律和金融合规场景中，确定性使得AI的决策路径可审计，大幅降低了应用风险。</p>
+<p><strong>风险方面</strong>，过度强调“确定性”可能会掩盖模型本身的局限性。确定性只保证结果的可重复性，而非其“正确性”或“最优性”。如果模型本身存在偏见或泛化能力不足，确定性地重复错误决策可能带来更严重的后果。此外，性能牺牲也可能限制其在某些对延迟敏感的大规模应用中的部署。如何平衡确定性与效率、如何确保确定性结果的“正确性”，是接下来需要业界共同解决的问题。</p>
+<p>Thinking Machines的第一枪，没有轰轰烈烈的模型发布，却以一个看似“微小”却极其核心的技术突破，重塑了人们对大语言模型基础能力和未来走向的认知。它不仅仅是关于一个bug的修复，更是关于<strong>未来可靠、可控、可信赖AI系统基石的奠定</strong>。随着“Connection Machine”产品的逐步落地，Thinking Machines或将真正弥合AI的概率之美与工程的确定之严谨之间的鸿沟，引领AI进入一个更为成熟、负责任的新阶段。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Defeating Nondeterminism in LLM Inference</a>·Thinking Machines·2025/9/11·检索日期2025/9/11&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.qbitai.com/2025/09/330325.html">她们估值840亿，刚发了第一个AI成果</a>·量子位·闻乐 鹭羽（2025/9/11）·检索日期2025/9/11&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://venturebeat.com/ai/mira-murati-says-her-startup-thinking-machines-will-release-new-product-in-months-with-significant-open-source-component">Mira Murati says her startup Thinking Machines will release new product in months, with significant open source component</a>·VentureBeat·2025/9/11·检索日期2025/9/11&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86%E7%A1%AE%E5%AE%9A%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理确定性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%89%B9%E6%AC%A1%E4%B8%8D%E5%8F%98%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">批次不变性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%88%9D%E5%88%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI初创</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%81%E4%B8%9A%E7%BA%A7ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">企业级AI</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250811101005191-0/">自主智能系统：AI Agent如何定义未来生产力与人类协作的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/freewheel-chatbi-20250629141004930-0/">FreeWheel ChatBI：大模型如何赋能视频广告智能分析，革新企业数据决策范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-office80-20250908194004521-0/">字节跳动“扣子空间”：AI Office的终局，从“80分实习生”到全栈生态的生产力革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250908091005114-0/">AI浪潮再进化：智能体驱动的未来商业图景与颠覆性定价策略</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cratedbai-20250904171004850-3/">从分钟到毫秒：CrateDB如何重塑AI时代的数据基础设施与智能未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250904104004731-0/">自主进化：AI Agent如何定义下一代智能运维的边界与未来协同范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/bed-llmai-20250902181004766-0/">苹果BED-LLM：无需微调的提问革命，AI从被动知识库到主动智能探寻者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250902134340244-1/">智能体驱动的需求工程：知识融合与协同自治重塑企业生产力边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250901104005081-0/">当AI照镜子：大语言模型“身份认同”的涌现与多智能体博弈的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20250828114004907-2/">阿里巴巴数据分析Agent：从自动化到智能决策的范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agentsre-20250826184006331-3/">AI Agent重塑运维知识：从碎片化经验到自主SRE的智能进化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ovis25ai-20250826114007416-2/">效率与智能的协同：阿里Ovis2.5如何重塑多模态AI的边界与商业未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-10-20250825161004590-1/">钉钉“AI 1.0”：工作范式的深层重构与人机协作的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5ai-agentagi-20250823051004940-2/">GPT-5在企业编排任务中折戟：AI Agent通往AGI之路的真实考验与商业重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250822121004894-0/">代码的觉醒：AI Agent如何定义未来软件工程的自主与协同</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

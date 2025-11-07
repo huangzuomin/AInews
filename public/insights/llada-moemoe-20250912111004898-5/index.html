@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>LLaDA-MoE：扩散语言模型的MoE化挑战自回归霸权，效率与精度的新范式之争 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="蚂蚁集团与人民大学联合发布的LLaDA-MoE，是全球首个原生MoE架构的扩散语言模型，其性能与主流自回归模型Qwen2.5-3B-Instruct持平，并在推理速度上占据优势，为AGI探索开辟了新路径。然而，该技术仍需在应对“效率悖论”和提升序列级准确性方面持续优化，以在更广泛的商业应用中证明其价值。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/llada-moemoe-20250912111004898-5/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/llada-moemoe-20250912111004898-5/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="LLaDA-MoE：扩散语言模型的MoE化挑战自回归霸权，效率与精度的新范式之争">
+  <meta property="og:description" content="蚂蚁集团与人民大学联合发布的LLaDA-MoE，是全球首个原生MoE架构的扩散语言模型，其性能与主流自回归模型Qwen2.5-3B-Instruct持平，并在推理速度上占据优势，为AGI探索开辟了新路径。然而，该技术仍需在应对“效率悖论”和提升序列级准确性方面持续优化，以在更广泛的商业应用中证明其价值。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-09-12T11:10:04+08:00">
+    <meta property="article:modified_time" content="2025-09-12T11:10:04+08:00">
+    <meta property="article:tag" content="扩散语言模型">
+    <meta property="article:tag" content="MoE架构">
+    <meta property="article:tag" content="非自回归模型">
+    <meta property="article:tag" content="人工智能开源">
+    <meta property="article:tag" content="大模型效率">
+    <meta property="article:tag" content="范式之争">
+
+  <meta itemprop="name" content="LLaDA-MoE：扩散语言模型的MoE化挑战自回归霸权，效率与精度的新范式之争">
+  <meta itemprop="description" content="蚂蚁集团与人民大学联合发布的LLaDA-MoE，是全球首个原生MoE架构的扩散语言模型，其性能与主流自回归模型Qwen2.5-3B-Instruct持平，并在推理速度上占据优势，为AGI探索开辟了新路径。然而，该技术仍需在应对“效率悖论”和提升序列级准确性方面持续优化，以在更广泛的商业应用中证明其价值。">
+  <meta itemprop="datePublished" content="2025-09-12T11:10:04+08:00">
+  <meta itemprop="dateModified" content="2025-09-12T11:10:04+08:00">
+  <meta itemprop="wordCount" content="54">
+  <meta itemprop="keywords" content="扩散语言模型,MoE架构,非自回归模型,人工智能开源,大模型效率,范式之争">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LLaDA-MoE：扩散语言模型的MoE化挑战自回归霸权，效率与精度的新范式之争">
+  <meta name="twitter:description" content="蚂蚁集团与人民大学联合发布的LLaDA-MoE，是全球首个原生MoE架构的扩散语言模型，其性能与主流自回归模型Qwen2.5-3B-Instruct持平，并在推理速度上占据优势，为AGI探索开辟了新路径。然而，该技术仍需在应对“效率悖论”和提升序列级准确性方面持续优化，以在更广泛的商业应用中证明其价值。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-09-Sep%2012,%202025_11-07-25-398.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-09-12 11:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=LLaDA-MoE%EF%BC%9A%E6%89%A9%E6%95%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84MoE%E5%8C%96%E6%8C%91%E6%88%98%E8%87%AA%E5%9B%9E%E5%BD%92%E9%9C%B8%E6%9D%83%EF%BC%8C%E6%95%88%E7%8E%87%E4%B8%8E%E7%B2%BE%E5%BA%A6%E7%9A%84%E6%96%B0%E8%8C%83%E5%BC%8F%E4%B9%8B%E4%BA%89%20-%20%E8%9A%82%E8%9A%81%E9%9B%86%E5%9B%A2%E4%B8%8E%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E7%9A%84LLaDA-MoE%EF%BC%8C%E6%98%AF%E5%85%A8%E7%90%83%E9%A6%96%E4%B8%AA%E5%8E%9F%E7%94%9FMoE%E6%9E%B6%E6%9E%84%E7%9A%84%E6%89%A9%E6%95%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E6%80%A7%E8%83%BD%E4%B8%8E%E4%B8%BB%E6%B5%81%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8BQwen2.5-3B-Instruct%E6%8C%81%E5%B9%B3%EF%BC%8C%E5%B9%B6%E5%9C%A8%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E4%B8%8A%E5%8D%A0%E6%8D%AE%E4%BC%98%E5%8A%BF%EF%BC%8C%E4%B8%BAAGI%E6%8E%A2%E7%B4%A2%E5%BC%80%E8%BE%9F%E4%BA%86%E6%96%B0%E8%B7%AF%E5%BE%84%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E8%AF%A5%E6%8A%80%E6%9C%AF%E4%BB%8D%E9%9C%80%E5%9C%A8%E5%BA%94%E5%AF%B9%E2%80%9C%E6%95%88%E7%8E%87%E6%82%96%E8%AE%BA%E2%80%9D%E5%92%8C%E6%8F%90%E5%8D%87%E5%BA%8F%E5%88%97%E7%BA%A7%E5%87%86%E7%A1%AE%E6%80%A7%E6%96%B9%E9%9D%A2%E6%8C%81%E7%BB%AD%E4%BC%98%E5%8C%96%EF%BC%8C%E4%BB%A5%E5%9C%A8%E6%9B%B4%E5%B9%BF%E6%B3%9B%E7%9A%84%E5%95%86%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%AD%E8%AF%81%E6%98%8E%E5%85%B6%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllada-moemoe-20250912111004898-5%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=LLaDA-MoE%EF%BC%9A%E6%89%A9%E6%95%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84MoE%E5%8C%96%E6%8C%91%E6%88%98%E8%87%AA%E5%9B%9E%E5%BD%92%E9%9C%B8%E6%9D%83%EF%BC%8C%E6%95%88%E7%8E%87%E4%B8%8E%E7%B2%BE%E5%BA%A6%E7%9A%84%E6%96%B0%E8%8C%83%E5%BC%8F%E4%B9%8B%E4%BA%89%20-%20%E8%9A%82%E8%9A%81%E9%9B%86%E5%9B%A2%E4%B8%8E%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E7%9A%84LLaDA-MoE%EF%BC%8C%E6%98%AF%E5%85%A8%E7%90%83%E9%A6%96%E4%B8%AA%E5%8E%9F%E7%94%9FMoE%E6%9E%B6%E6%9E%84%E7%9A%84%E6%89%A9%E6%95%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E6%80%A7%E8%83%BD%E4%B8%8E%E4%B8%BB%E6%B5%81%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8BQwen2.5-3B-Instruct%E6%8C%81%E5%B9%B3%EF%BC%8C%E5%B9%B6%E5%9C%A8%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6%E4%B8%8A%E5%8D%A0%E6%8D%AE%E4%BC%98%E5%8A%BF%EF%BC%8C%E4%B8%BAAGI%E6%8E%A2%E7%B4%A2%E5%BC%80%E8%BE%9F%E4%BA%86%E6%96%B0%E8%B7%AF%E5%BE%84%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E8%AF%A5%E6%8A%80%E6%9C%AF%E4%BB%8D%E9%9C%80%E5%9C%A8%E5%BA%94%E5%AF%B9%E2%80%9C%E6%95%88%E7%8E%87%E6%82%96%E8%AE%BA%E2%80%9D%E5%92%8C%E6%8F%90%E5%8D%87%E5%BA%8F%E5%88%97%E7%BA%A7%E5%87%86%E7%A1%AE%E6%80%A7%E6%96%B9%E9%9D%A2%E6%8C%81%E7%BB%AD%E4%BC%98%E5%8C%96%EF%BC%8C%E4%BB%A5%E5%9C%A8%E6%9B%B4%E5%B9%BF%E6%B3%9B%E7%9A%84%E5%95%86%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%AD%E8%AF%81%E6%98%8E%E5%85%B6%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fllada-moemoe-20250912111004898-5%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">LLaDA-MoE：扩散语言模型的MoE化挑战自回归霸权，效率与精度的新范式之争</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>蚂蚁集团与人民大学联合发布的LLaDA-MoE是首个原生MoE架构的扩散语言模型，在多项基准测试中性能比肩主流自回归模型Qwen2.5-3B-Instruct，并展现数倍推理速度优势，挑战了传统自回归范式。然而，其真实世界效率与精度仍需在多样化任务中接受进一步验证，尤其是在对序列级准确性要求极高的场景下。</p></blockquote>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>语言模型领域长期以来由**自回归模型（Autoregressive Models, ARMs）**主导，它们通过逐词元（token-by-token）的顺序生成方式，在文本生成质量上取得了突破性进展。然而，这种固有串行机制带来了显著的推理速度限制，尤其是在处理长序列时，并且难以捕捉词元间的双向依赖关系，这在复杂推理任务中尤为明显。</p>
+<p>面对这一挑战，**扩散语言模型（Diffusion Language Models, dLLMs）**应运而生，其核心在于采用非自回归的掩码扩散机制，理论上支持并行生成多个词元，从而大幅提升推理效率。在此背景下，蚂蚁集团与中国人民大学联合研发的LLaDA-MoE，标志着dLLM领域的一个重要里程碑——<strong>首次通过原生训练的MoE（Mixture-of-Experts）架构，在大规模语言模型中实现了这一范式。</strong></p>
+<p>LLaDA-MoE的关键创新点在于：</p>
+<ul>
+<li><strong>原生MoE架构集成</strong>：这是业界首个在dLLM中原生训练MoE架构的模型。MoE通过稀疏激活实现“参数扩展、计算高效”的优势，仅激活部分专家网络即可完成计算，使得模型在总参数量巨大的情况下，实际计算成本更低。LLaDA-MoE以7B总参数、激活1.4B参数的MoE架构，在约20T数据上从零训练，验证了工业级大规模训练的扩展性和稳定性。</li>
+<li><strong>性能突破与效率提升</strong>：LLaDA-MoE在HumanEval、MBPP、GSM8K等17项基准测试中平均提升8.4%，与自回归模型Qwen2.5-3B-Instruct（3B参数）性能打平，却能保有数倍的推理速度优势。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这一成绩挑战了“语言模型必须自回归”的主流认知，展现了dLLM在语言智能（如上下文学习、指令遵循、代码和数学推理）上的潜力。</li>
+<li><strong>“MoE放大器”定律验证</strong>：实验再次验证了“MoE放大器”定律在dLLM领域同样成立，这为后续开发10B–100B甚至更大规模的稀疏dLLM提供了可行路径，预示着dLLM模型规模化拓展的新方向。</li>
+</ul>
+<h3 id="性能辩证效率与精度的新权衡">性能辩证：效率与精度的新权衡</h3>
+<p>尽管LLaDA-MoE展现出令人振奋的性能数据和推理速度优势，但对dLLM实际效率与精度的辩证思考至关重要。此前的研究，包括来自北京大学和蚂蚁集团的联合分析，曾指出扩散语言模型在实践中遭遇“效率悖论”<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>该研究观察到，现有开源dLLMs在某些任务上，为了达到与自回归模型相当的准确率，需要更多的采样步骤，从而导致更高的推理成本。特别是在对**序列错误率（Sequence Error Rate, SER）**要求极高的任务，如数学推理（例如GSM8K）和代码生成时，dLLM为达到低SER所需的采样步数会随序列长度线性增长，这可能抵消其潜在的并行效率优势，甚至导致整体速度慢于自回归模型。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 例如，在与Qwen2.5-7B的对比中，早期的扩散模型如Dream-v0-7B和LLaDA-8B在效率和准确率上均处于劣势。</p>
+<p>这并非否认LLaDA-MoE的进步，而是强调技术评估的<strong>复杂性与情境性</strong>。LLaDA-MoE宣称在代码、数学等任务上与Qwen2.5-3B-Instruct打平，这可能意味着其通过MoE架构和优化的训练策略，有效缓解了部分“效率悖论”的挑战。然而，dLLM在不同任务类型、不同序列长度下的<strong>泛化效率与精度表现</strong>，仍需持续关注和深入实证。可以预见，dLLM在生成文本流畅性高、高吞吐量、对序列级别不完美容忍度较高的场景（如长篇幅创意写作）中，将更具效率优势；而在对逻辑严谨性、精确性要求极高的场景，则需要更精细的优化。</p>
+<h3 id="产业生态与商业潜能">产业生态与商业潜能</h3>
+<p>蚂蚁集团与人民大学的此次发布，不仅是技术层面的突破，更具有深远的<strong>产业生态和商业价值</strong>意义。</p>
+<p>首先，<strong>开放生态的构建</strong>是其战略核心。蚂蚁集团承诺近期将完全开源LLaDA-MoE的模型权重和自研推理框架，这无疑将极大地<strong>加速全球AI社区在dLLM上的技术发展</strong>。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 开源不仅能汇聚全球智慧，共同解决dLLM的挑战，也能促使更多开发者基于此模型进行创新，拓展其应用边界，形成一个活跃的生态系统，降低企业应用门槛。</p>
+<p>其次，<strong>成本效益的优化</strong>预示着巨大的商业潜力。如果LLaDA-MoE能在保持与ARMs相当性能的同时，实现数倍的推理速度提升和更低的实际计算成本（通过激活更少的参数），这将<strong>显著降低大模型的部署和运营成本</strong>。这对于需要在边缘设备运行AI模型、或在云计算环境中提供大规模推理服务的企业而言，具有极高的吸引力。例如，在金融科技领域，蚂蚁集团可以将dLLM应用于智能客服、个性化金融报告生成、风险评估报告撰写等需要快速响应和大规模文本处理的场景，从而提升效率、降低成本、优化用户体验。</p>
+<p>此外，<strong>大学与产业的深度融合</strong>模式也值得关注。人民大学高瓴人工智能学院与蚂蚁集团的联合研发，是产学研协同创新、将前沿理论转化为工业级应用的最佳实践。这种模式不仅有助于解决复杂技术难题，也能培养更多具备实战经验的AI人才，形成良性循环。</p>
+<h3 id="通向agi的范式之争与未来演进">通向AGI的范式之争与未来演进</h3>
+<p>LLaDA-MoE的发布，将dLLM与MoE架构的结合推向了前沿，进一步深化了关于<strong>通向通用人工智能（AGI）核心范式</strong>的思辨。蚂蚁集团通用人工智能研究中心主任蓝振忠指出，“自回归不是终点，扩散模型同样可以成为通向 AGI 的主干道。”<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这句话充满未来主义的哲学思辨色彩，直指当前AI发展路径选择的核心。</p>
+<p><strong>并行生成能力</strong>被认为是实现更高效、更类人智能的关键一步。传统的自回归模型在处理复杂推理、规划等任务时，由于其固有顺序性，可能难以模拟人类大脑的非线性、并行思考模式。dLLM通过掩码扩散机制和MoE架构，为模型赋予了更强的并行处理能力和更灵活的信息流动方式，这对于实现AGI所要求的复杂认知功能至关重要。</p>
+<p>未来3-5年，我们可能看到：</p>
+<ul>
+<li><strong>dLLM与ARMs的融合与协同</strong>：鉴于两种架构各自的优劣，未来可能会出现混合架构，将dLLM的并行效率与ARMs的序列精度优势相结合，以适应更广泛的任务需求。</li>
+<li><strong>稀疏化模型的持续演进</strong>：MoE架构在dLLM上的成功应用，将推动更多稀疏化技术在大模型中的探索，降低训练和推理成本，加速模型大型化。</li>
+<li><strong>特定应用场景的爆发</strong>：随着dLLM效率瓶颈的进一步突破，它们将在对实时性、吞吐量要求高的应用中展现更大价值，例如实时内容创作、智能虚拟人对话、多模态内容生成等。</li>
+<li><strong>算力基础设施的升级</strong>：为了支持dLLM的并行计算需求，AI芯片、分布式训练框架和推理引擎将持续优化，提供更强大的算力支撑。蚂蚁同步开源的深度优化推理引擎就是这一趋势的体现。</li>
+</ul>
+<p>LLaDA-MoE不仅仅是一个新的模型，它更是对现有AI范式的一次有力挑战，为AGI的探索开辟了新的路径。它提醒我们，在追逐智能的道路上，永远没有唯一的答案，只有不断演进和融合的创新。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>蚂蚁、人大联合发布首个原生MoE扩散语言模型，多项基测与 Qwen2.5-3B-Instruct 打平 · InfoQ（2025/9/12）· 检索日期2025/9/12&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>扩散语言模型真的会比自回归好？理论分析结果可能恰恰相反 · 知乎 · 机器之心（2023/11/14）· 检索日期2025/9/12&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E6%89%A9%E6%95%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">扩散语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/moe%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MoE架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9D%9E%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">非自回归模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%BC%80%E6%BA%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能开源</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8C%83%E5%BC%8F%E4%B9%8B%E4%BA%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">范式之争</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/longcat-flash-20250902164004971-5/">美团LongCat-Flash：当大模型遇上“外卖调度”，算力经济的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rstar2-agentai-20250902161004983-4/">微软rStar2-Agent：小模型逆袭巨头，引领AI“聪明思考”新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/transformermambaai-20250819104004624-0/">突破Transformer瓶颈：英伟达Mamba混合架构重塑AI推理经济学与开源格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agentsgenflow-20250806144005387-3/">AI Agents与生成式共生：百度文库GenFlow如何定义内容创作的未来范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen3-coderagentic-20250728171005242-0/">Qwen3-Coder：Agentic编程大模型如何重塑软件开发范式与未来劳动力结构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k2-20250723171005470-1/">Kimi K2：技术深潜与策略反击，重塑大模型竞赛下半场</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717114005032-5/">大模型架构演进：从参数竞赛到稀疏赋能，重塑AI产业格局与伦理边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-25moeai-20250619200339623-3/">谷歌Gemini 2.5系列重磅发布：以稀疏MoE架构重塑AI经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-25ai-20250618122004575-1/">谷歌Gemini 2.5系列模型稳定发布：性能、性价比与AI生态的深层博弈</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
