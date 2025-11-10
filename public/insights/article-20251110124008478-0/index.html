@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>打破计算单体：解耦推理如何重塑AI效率与智能架构的未来 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="解耦推理作为一项颠覆性技术，通过分离大模型推理的“预填充”和“解码”阶段，实现了AI计算效率的指数级提升，并被NVIDIA、DeepSeek等巨头广泛采纳。这一范式转变不仅大幅降低了运营成本和延迟，更预示着AI系统正从单体走向模块化，驱动着从计算到学习乃至认知的全面解耦，深刻影响未来AI系统的架构与发展。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20251110124008478-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20251110124008478-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="打破计算单体：解耦推理如何重塑AI效率与智能架构的未来">
+  <meta property="og:description" content="解耦推理作为一项颠覆性技术，通过分离大模型推理的“预填充”和“解码”阶段，实现了AI计算效率的指数级提升，并被NVIDIA、DeepSeek等巨头广泛采纳。这一范式转变不仅大幅降低了运营成本和延迟，更预示着AI系统正从单体走向模块化，驱动着从计算到学习乃至认知的全面解耦，深刻影响未来AI系统的架构与发展。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-11-10T12:40:08+08:00">
+    <meta property="article:modified_time" content="2025-11-10T12:40:08+08:00">
+    <meta property="article:tag" content="解耦推理">
+    <meta property="article:tag" content="大模型推理优化">
+    <meta property="article:tag" content="模块化智能">
+    <meta property="article:tag" content="AI架构">
+    <meta property="article:tag" content="算力效率">
+    <meta property="article:tag" content="NVIDIA Dynamo">
+
+  <meta itemprop="name" content="打破计算单体：解耦推理如何重塑AI效率与智能架构的未来">
+  <meta itemprop="description" content="解耦推理作为一项颠覆性技术，通过分离大模型推理的“预填充”和“解码”阶段，实现了AI计算效率的指数级提升，并被NVIDIA、DeepSeek等巨头广泛采纳。这一范式转变不仅大幅降低了运营成本和延迟，更预示着AI系统正从单体走向模块化，驱动着从计算到学习乃至认知的全面解耦，深刻影响未来AI系统的架构与发展。">
+  <meta itemprop="datePublished" content="2025-11-10T12:40:08+08:00">
+  <meta itemprop="dateModified" content="2025-11-10T12:40:08+08:00">
+  <meta itemprop="wordCount" content="61">
+  <meta itemprop="keywords" content="解耦推理,大模型推理优化,模块化智能,AI架构,算力效率,NVIDIA Dynamo">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="打破计算单体：解耦推理如何重塑AI效率与智能架构的未来">
+  <meta name="twitter:description" content="解耦推理作为一项颠覆性技术，通过分离大模型推理的“预填充”和“解码”阶段，实现了AI计算效率的指数级提升，并被NVIDIA、DeepSeek等巨头广泛采纳。这一范式转变不仅大幅降低了运营成本和延迟，更预示着AI系统正从单体走向模块化，驱动着从计算到学习乃至认知的全面解耦，深刻影响未来AI系统的架构与发展。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-11-Nov%2010,%202025_12-31-29-262.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-11-10 12:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%89%93%E7%A0%B4%E8%AE%A1%E7%AE%97%E5%8D%95%E4%BD%93%EF%BC%9A%E8%A7%A3%E8%80%A6%E6%8E%A8%E7%90%86%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E6%95%88%E7%8E%87%E4%B8%8E%E6%99%BA%E8%83%BD%E6%9E%B6%E6%9E%84%E7%9A%84%E6%9C%AA%E6%9D%A5%20-%20%E8%A7%A3%E8%80%A6%E6%8E%A8%E7%90%86%E4%BD%9C%E4%B8%BA%E4%B8%80%E9%A1%B9%E9%A2%A0%E8%A6%86%E6%80%A7%E6%8A%80%E6%9C%AF%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%86%E7%A6%BB%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E7%9A%84%E2%80%9C%E9%A2%84%E5%A1%AB%E5%85%85%E2%80%9D%E5%92%8C%E2%80%9C%E8%A7%A3%E7%A0%81%E2%80%9D%E9%98%B6%E6%AE%B5%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86AI%E8%AE%A1%E7%AE%97%E6%95%88%E7%8E%87%E7%9A%84%E6%8C%87%E6%95%B0%E7%BA%A7%E6%8F%90%E5%8D%87%EF%BC%8C%E5%B9%B6%E8%A2%ABNVIDIA%E3%80%81DeepSeek%E7%AD%89%E5%B7%A8%E5%A4%B4%E5%B9%BF%E6%B3%9B%E9%87%87%E7%BA%B3%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E8%BF%90%E8%90%A5%E6%88%90%E6%9C%AC%E5%92%8C%E5%BB%B6%E8%BF%9F%EF%BC%8C%E6%9B%B4%E9%A2%84%E7%A4%BA%E7%9D%80AI%E7%B3%BB%E7%BB%9F%E6%AD%A3%E4%BB%8E%E5%8D%95%E4%BD%93%E8%B5%B0%E5%90%91%E6%A8%A1%E5%9D%97%E5%8C%96%EF%BC%8C%E9%A9%B1%E5%8A%A8%E7%9D%80%E4%BB%8E%E8%AE%A1%E7%AE%97%E5%88%B0%E5%AD%A6%E4%B9%A0%E4%B9%83%E8%87%B3%E8%AE%A4%E7%9F%A5%E7%9A%84%E5%85%A8%E9%9D%A2%E8%A7%A3%E8%80%A6%EF%BC%8C%E6%B7%B1%E5%88%BB%E5%BD%B1%E5%93%8D%E6%9C%AA%E6%9D%A5AI%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%91%E5%B1%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20251110124008478-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%89%93%E7%A0%B4%E8%AE%A1%E7%AE%97%E5%8D%95%E4%BD%93%EF%BC%9A%E8%A7%A3%E8%80%A6%E6%8E%A8%E7%90%86%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E6%95%88%E7%8E%87%E4%B8%8E%E6%99%BA%E8%83%BD%E6%9E%B6%E6%9E%84%E7%9A%84%E6%9C%AA%E6%9D%A5%20-%20%E8%A7%A3%E8%80%A6%E6%8E%A8%E7%90%86%E4%BD%9C%E4%B8%BA%E4%B8%80%E9%A1%B9%E9%A2%A0%E8%A6%86%E6%80%A7%E6%8A%80%E6%9C%AF%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%86%E7%A6%BB%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E7%9A%84%E2%80%9C%E9%A2%84%E5%A1%AB%E5%85%85%E2%80%9D%E5%92%8C%E2%80%9C%E8%A7%A3%E7%A0%81%E2%80%9D%E9%98%B6%E6%AE%B5%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86AI%E8%AE%A1%E7%AE%97%E6%95%88%E7%8E%87%E7%9A%84%E6%8C%87%E6%95%B0%E7%BA%A7%E6%8F%90%E5%8D%87%EF%BC%8C%E5%B9%B6%E8%A2%ABNVIDIA%E3%80%81DeepSeek%E7%AD%89%E5%B7%A8%E5%A4%B4%E5%B9%BF%E6%B3%9B%E9%87%87%E7%BA%B3%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E8%BF%90%E8%90%A5%E6%88%90%E6%9C%AC%E5%92%8C%E5%BB%B6%E8%BF%9F%EF%BC%8C%E6%9B%B4%E9%A2%84%E7%A4%BA%E7%9D%80AI%E7%B3%BB%E7%BB%9F%E6%AD%A3%E4%BB%8E%E5%8D%95%E4%BD%93%E8%B5%B0%E5%90%91%E6%A8%A1%E5%9D%97%E5%8C%96%EF%BC%8C%E9%A9%B1%E5%8A%A8%E7%9D%80%E4%BB%8E%E8%AE%A1%E7%AE%97%E5%88%B0%E5%AD%A6%E4%B9%A0%E4%B9%83%E8%87%B3%E8%AE%A4%E7%9F%A5%E7%9A%84%E5%85%A8%E9%9D%A2%E8%A7%A3%E8%80%A6%EF%BC%8C%E6%B7%B1%E5%88%BB%E5%BD%B1%E5%93%8D%E6%9C%AA%E6%9D%A5AI%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%91%E5%B1%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20251110124008478-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">打破计算单体：解耦推理如何重塑AI效率与智能架构的未来</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>一项源自实验室的“解耦推理”理念，短短一年半已成为主流AI大模型推理框架的行业标准。它通过分离大模型推理的“预填充”和“解码”阶段，实现了计算资源效率的质变，不仅大幅降低了运行成本和延迟，更预示着AI系统正从“计算单体”迈向“模块化智能”的深层范式转变。</p></blockquote>
+<p>在人工智能领域，一项看似寻常的系统优化——“解耦推理”（Disaggregated Inference）——正在悄然引发一场深刻的效率革命。这项由北京大学金鑫-刘譞哲团队和加州大学圣地亚哥分校“Hao AI Lab”于2024年3月提出的理念，从最初的学术概念，迅速成长为包括NVIDIA、DeepSeek、vLLM等在内的几乎所有主流大模型推理框架的标准配置。它的崛起不仅远超“摩尔定律”所预示的计算能力迭代速度，更深层次地推动了AI系统架构的本质性变革，指向一个“模块化智能”的新时代。</p>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>长期以来，大模型的推理过程普遍采用“同址部署”（Co-located Deployment）方式，即在同一块GPU上同时处理用户输入的“预填充”（Prefill）阶段和模型生成输出的“解码”（Decode）阶段。尽管“连续批处理”（Continuous Batching）等技术曾被Orca和vLLM推广为业界标准，但这种单体架构存在两个核心局限：</p>
+<ol>
+<li><strong>互相干扰的延迟（Interference）</strong>：Prefill和Decode共享计算资源时，彼此的延迟会相互影响。特别是在负载突发时，一个大型的预填充请求可能导致每次输出一个Token的时间（TPOT）膨胀2到3倍，严重影响用户体验。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li><strong>耦合的伸缩性（Coupled Scaling）</strong>：在企业级应用中，首个Token的生成时间（TTFT）和后续Token的生成时间（TPOT）是关键的用户体验指标。同址部署要求资源分配同时满足两种最坏情况的延迟需求，导致系统需要<strong>过度预留资源</strong>，计算资源利用率低下。</li>
+</ol>
+<p>DistServe的“解耦推理”理念，正是对这些痛点的颠覆性回应。它提出将大模型的推理过程拆分为“预填充”和“解码”两个独立阶段，并让它们在<strong>独立的计算资源池</strong>中进行伸缩与调度。这种分离彻底打破了两者之间的干扰，并首次实现了独立伸缩，使系统能各自独立地满足TTFT和TPOT的延迟要求，同时保持高整体效率。</p>
+<p>尽管这一理念在2024年初被提出时，因需要大量工程投入而未立即获得广泛采纳，但到了2025年，随着大模型在企业级应用中扮演核心角色，“延迟控制”和“资源效率”成为业务增长的关键，解耦架构的优势全面显现：</p>
+<ul>
+<li><strong>实时延迟控制</strong>：企业将大模型作为核心业务组件时，对延迟的精准控制至关重要，解耦推理提供了易于观测和持续优化的路径。</li>
+<li><strong>极致资源利用率与弹性伸缩</strong>：面对需要扩展到数百甚至上千张GPU的庞大且多变的负载，解耦架构能够为不同阶段独立分配资源，并灵活配合多种并行策略，实现极高的资源利用率。</li>
+<li><strong>架构可组合性</strong>：解耦促进了系统架构的模块化，使得各组件能够独立优化和升级，增强了整体的灵活性和可维护性。</li>
+</ul>
+<p>如今，在编排层有NVIDIA Dynamo<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>、llm-d、Ray Serve等，在存储层有通过中心化KV缓存优化解耦的LMCache和Kimi AI团队的MoonCake[^12]，在核心推理引擎层有SGLang和vLLM，都已原生支持或基于解耦推理架构，使其成为大规模LLM推理系统的事实标准。MoonCake项目甚至实现了<strong>平均吞吐量提升75%，特定场景下吞吐量提升5.25倍</strong>，并支撑了Kimi线上80%的流量。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="产业生态影响评估">产业生态影响评估</h3>
+<p>解耦推理的迅速崛起，是<strong>技术创新与市场需求深度契合</strong>的典型案例，其商业敏锐度和产业影响力不容小觑。NVIDIA作为AI算力巨头，通过推出Dynamo分布式推理框架并向“Hao AI Lab”赠送DGX B200系统，展现了其在软硬件协同生态上的<strong>前瞻性布局</strong>。Dynamo作为业界领先的数据中心级分布式推理框架，专为P/D解耦设计，能够支持多种推理引擎，并在NVIDIA GB200 NVL72上将DeepSeek-R 67B模型的吞吐量提升30倍。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 这不仅巩固了NVIDIA在AI基础设施领域的主导地位，也预示着未来的AI硬件设计将更加紧密地与解耦架构融合。</p>
+<p>DeepSeek、Kimi AI等头部大模型厂商的积极采纳，则反映了<strong>大模型运营成本优化</strong>和<strong>用户体验提升</strong>的迫切性。当大模型成为企业核心业务时，推理效率直接关系到其商业模式的盈利能力和用户留存。通过解耦，企业能够更精细地控制成本，按需分配昂贵的GPU资源，并在保证高性能的同时，实现可持续的业务增长。这为大模型服务商提供了一条清晰的<strong>投资回报优化路径</strong>。</p>
+<p>此外，解耦推理促成了<strong>整个AI推理技术栈的重塑</strong>。从底层的硬件加速、中层的KV缓存管理，到上层的调度与编排，所有环节都在向支持解耦的方向演进。这种系统性的变革，为新兴的创业公司提供了创新空间，也对现有的技术服务商提出了更高的集成与优化要求。**“可组合性”<strong>和</strong>“模块化”**将成为未来AI基础设施的关键竞争要素。</p>
+<h3 id="未来发展路径预测">未来发展路径预测</h3>
+<p>“预填充-解码解耦”仅仅是“解耦哲学”的起点。从长远来看，解耦不仅仅是一种架构技巧，更是一种<strong>更深层次的系统哲学</strong>：打破神经网络推理中的“计算单体”结构，让系统能够在计算、存储与通信之间实现自由重组。我们正迈向一个“通用分解式推理（Generalized Disaggregated Inference）”的时代。</p>
+<ol>
+<li>
+<p><strong>计算层面的深层解耦</strong>：</p>
+<ul>
+<li><strong>Attention-FFN解耦</strong>：MIT CSAIL与DeepSeek Research、刘譞哲-金鑫团队的MegaScale-Infer系统，尝试将Transformer模型的注意力模块和前馈层放置于不同计算节点，利用异构硬件优势，让每个节点运行模型的一个功能子模块，而非完整副本。</li>
+<li><strong>流水线解耦</strong>：Stanford DAWN的DisPipe、Meta AI的HydraPipe和Alibaba DAI-Lab的PipeShard等系统，正在探索跨层级的流水线分解，使推理过程在不同节点之间以“阶段流”方式流动，为未来多芯片异构系统铺平道路。</li>
+</ul>
+</li>
+<li>
+<p><strong>跨模态与多模型的解耦</strong>：随着多模态大模型的普及，将图像、文本、语音等模态分解为独立的子推理流，并通过调度器异步融合，将成为提升多模态系统效率的关键。同时，在推理系统中协同运行多个专用子模型也将成为常态，天然适合解耦化设计。</p>
+</li>
+<li>
+<p><strong>内存与缓存体系的解耦</strong>：当前的解耦依赖集中式KV缓存，未来将演变为多层解耦与自治调度。MIT与ETH Zürich提出的HiKV（Hierarchical KV Cache）框架，将KV缓存划分为GPU本地、节点共享和分布式持久三个层次，实现根据上下文热度自动迁移KV片段，使内存管理更具弹性。更进一步，硬件厂商已开始探索原生支持解耦架构的芯片，预示着<strong>软硬件一体化</strong>的存算协同将成为主流。</p>
+</li>
+<li>
+<p><strong>迈向“解耦学习”与“模块化智能”</strong>：Google Brain Zürich和FAIR等团队甚至提出更大胆的设想：既然推理可以解耦，那么模型的<strong>训练与持续学习</strong>是否也能被解耦？“解耦学习”通过将学习过程分解为多个独立子任务，每个任务在不同硬件上运行，并通过共享梯度缓存与语义路由器进行通信。这被视为解决大模型“灾难性遗忘”和“持续适应”问题的潜在关键路径，Google Zürich团队的“Hope”模型便是实践之一。</p>
+</li>
+</ol>
+<p>过去十年，深度学习系统呈现出“从分散到集中”的趋势，所有计算汇聚于单体模型。如今，趋势正在反转，AI系统正从“集中到解耦”，走向<strong>模块化智能</strong>。这并非倒退，而是技术成熟的标志。不同功能模块能够独立演化、独立扩展、独立优化，这将深刻影响未来AI系统的设计范式、部署成本和迭代速度。</p>
+<p>最终，我们或许将看到“解耦学习”“解耦推理”和更宏观的“解耦认知”三者深度融合的智能架构体系。这种系统性的模块化，不仅将带来前所未有的效率提升，更可能重新定义AI的本质，使其能够以更灵活、更可持续的方式适应和改造世界。AI将不再是一个不透明的黑箱，而是一个由众多可理解、可优化的智能组件构成的<strong>开放式、可进化的智能有机体</strong>，这对于人类文明的进程和我们与AI共存的未来，都具有深远而积极的意义。</p>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://zhuanlan.zhihu.com/p/1970976214895293323">英伟达、DeepSeek集体跟进！18个月前被忽视，如今统治AI推理</a>·知乎·新智元（2025/11/10）·检索日期2025/11/10&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://developer.volcengine.com/articles/7485307240304345114">Dynamo：NVIDIA最新开源的数据中心级分布式推理框架</a>·火山引擎开发者社区（2025/11/10）·检索日期2025/11/10&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.cww.net.cn/article?id=599348">信通院宇文梦柯等：大模型推理优化——技术突破与产业落地新范式</a>·中国信息通信网·宇文梦柯等（2025/11/10）·检索日期2025/11/10&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E8%A7%A3%E8%80%A6%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">解耦推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型推理优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模块化智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/nvidia-dynamo/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">NVIDIA Dynamo</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-18-10-18-agi-ai-/">10-18日报|效率狂飙，智能谎言：单卡世界模型颠覆算力，本吉奥撕裂AGI假象，我们如何与“愚蠢”的AI共舞？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-17-10-17-ai-/">10-17日报|AI代理，破茧成蝶：人类，准备好“让位”了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimetas-20251014211013343-0/">AI的元认知跃迁：Meta&#39;s“思维缓存”如何重塑大模型经济与智能边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aik2-think-20250910204007159-0/">AI推理新范式：K2 Think如何以“小”博“大”，重塑高效智能的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250903154004960-5/">超越性能竞赛：大模型“算力经济学”与智能路由的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/sakana-aiai-20250827111004758-2/">生物演化启示录：Sakana AI“择偶生娃”重塑AI模型融合，开启智能生态新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepconfai-20250825121004854-2/">DeepConf：大模型突破“自我怀疑”的临界点，重塑AI信任与效率范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/transformermambaai-20250819104004624-0/">突破Transformer瓶颈：英伟达Mamba混合架构重塑AI推理经济学与开源格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/hugging-faceai-20250819061005260-1/">智算破局：Hugging Face如何重塑企业AI成本效益与未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250815161007445-0/">叶子祯：从“星际航行”到“数智分身”——一位AI理想主义者的远见与实践</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cohere-command-a-visionai-20250802064005057-0/">Cohere Command A Vision：企业级多模态AI的效率革命与未来范式重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mooncake-20250801111005253-3/">解耦赋能长上下文：Mooncake如何重塑大模型推理的成本与效率边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250723124005363-0/">云原生AI：大模型“落地”的关键突破与普惠化浪潮</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-07-15-07-15-ai-/">07-15日报|AI的“变形计”：从“智能巨兽”到“万物无形”，一场关于“效率”与“连接”的底层革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/t5gemma-20250715111004962-4/">谷歌T5Gemma：解构大模型架构之战，再造高效智能新范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
