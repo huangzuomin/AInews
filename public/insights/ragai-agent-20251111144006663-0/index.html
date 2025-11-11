@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越检索：RAG与湖仓一体如何重塑AI Agent的“认知”与企业级上下文工程 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="在AI Agent时代，检索增强生成（RAG）已从单一检索演变为智能上下文工程的核心，旨在通过精准上下文而非数量，提升AI输出质量和Agent效能。Zilliz的Milvus通过非结构化数据湖仓一体实践，为企业级AI提供高效、可扩展的智能“记忆体”，解决了大规模多租户、多模态数据管理等挑战，为AI应用的商业化落地奠定基础。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/ragai-agent-20251111144006663-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/ragai-agent-20251111144006663-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越检索：RAG与湖仓一体如何重塑AI Agent的“认知”与企业级上下文工程">
+  <meta property="og:description" content="在AI Agent时代，检索增强生成（RAG）已从单一检索演变为智能上下文工程的核心，旨在通过精准上下文而非数量，提升AI输出质量和Agent效能。Zilliz的Milvus通过非结构化数据湖仓一体实践，为企业级AI提供高效、可扩展的智能“记忆体”，解决了大规模多租户、多模态数据管理等挑战，为AI应用的商业化落地奠定基础。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-11-11T14:40:06+08:00">
+    <meta property="article:modified_time" content="2025-11-11T14:40:06+08:00">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="Context Engineering">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="Milvus">
+    <meta property="article:tag" content="湖仓一体">
+    <meta property="article:tag" content="非结构化数据">
+
+  <meta itemprop="name" content="超越检索：RAG与湖仓一体如何重塑AI Agent的“认知”与企业级上下文工程">
+  <meta itemprop="description" content="在AI Agent时代，检索增强生成（RAG）已从单一检索演变为智能上下文工程的核心，旨在通过精准上下文而非数量，提升AI输出质量和Agent效能。Zilliz的Milvus通过非结构化数据湖仓一体实践，为企业级AI提供高效、可扩展的智能“记忆体”，解决了大规模多租户、多模态数据管理等挑战，为AI应用的商业化落地奠定基础。">
+  <meta itemprop="datePublished" content="2025-11-11T14:40:06+08:00">
+  <meta itemprop="dateModified" content="2025-11-11T14:40:06+08:00">
+  <meta itemprop="wordCount" content="84">
+  <meta itemprop="keywords" content="RAG,Context Engineering,AI Agent,Milvus,湖仓一体,非结构化数据">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越检索：RAG与湖仓一体如何重塑AI Agent的“认知”与企业级上下文工程">
+  <meta name="twitter:description" content="在AI Agent时代，检索增强生成（RAG）已从单一检索演变为智能上下文工程的核心，旨在通过精准上下文而非数量，提升AI输出质量和Agent效能。Zilliz的Milvus通过非结构化数据湖仓一体实践，为企业级AI提供高效、可扩展的智能“记忆体”，解决了大规模多租户、多模态数据管理等挑战，为AI应用的商业化落地奠定基础。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-11-Nov%2011,%202025_14-31-48-807.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-11-11 14:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%85%E8%B6%8A%E6%A3%80%E7%B4%A2%EF%BC%9ARAG%E4%B8%8E%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI&amp;#43;Agent%E7%9A%84%E2%80%9C%E8%AE%A4%E7%9F%A5%E2%80%9D%E4%B8%8E%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%20-%20%E5%9C%A8AI&amp;#43;Agent%E6%97%B6%E4%BB%A3%EF%BC%8C%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89%E5%B7%B2%E4%BB%8E%E5%8D%95%E4%B8%80%E6%A3%80%E7%B4%A2%E6%BC%94%E5%8F%98%E4%B8%BA%E6%99%BA%E8%83%BD%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E7%B2%BE%E5%87%86%E4%B8%8A%E4%B8%8B%E6%96%87%E8%80%8C%E9%9D%9E%E6%95%B0%E9%87%8F%EF%BC%8C%E6%8F%90%E5%8D%87AI%E8%BE%93%E5%87%BA%E8%B4%A8%E9%87%8F%E5%92%8CAgent%E6%95%88%E8%83%BD%E3%80%82Zilliz%E7%9A%84Milvus%E9%80%9A%E8%BF%87%E9%9D%9E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E5%AE%9E%E8%B7%B5%EF%BC%8C%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E6%8F%90%E4%BE%9B%E9%AB%98%E6%95%88%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%99%BA%E8%83%BD%E2%80%9C%E8%AE%B0%E5%BF%86%E4%BD%93%E2%80%9D%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%A4%9A%E7%A7%9F%E6%88%B7%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E7%AD%89%E6%8C%91%E6%88%98%EF%BC%8C%E4%B8%BAAI%E5%BA%94%E7%94%A8%E7%9A%84%E5%95%86%E4%B8%9A%E5%8C%96%E8%90%BD%E5%9C%B0%E5%A5%A0%E5%AE%9A%E5%9F%BA%E7%A1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fragai-agent-20251111144006663-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%85%E8%B6%8A%E6%A3%80%E7%B4%A2%EF%BC%9ARAG%E4%B8%8E%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI&amp;#43;Agent%E7%9A%84%E2%80%9C%E8%AE%A4%E7%9F%A5%E2%80%9D%E4%B8%8E%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%20-%20%E5%9C%A8AI&amp;#43;Agent%E6%97%B6%E4%BB%A3%EF%BC%8C%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89%E5%B7%B2%E4%BB%8E%E5%8D%95%E4%B8%80%E6%A3%80%E7%B4%A2%E6%BC%94%E5%8F%98%E4%B8%BA%E6%99%BA%E8%83%BD%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E7%B2%BE%E5%87%86%E4%B8%8A%E4%B8%8B%E6%96%87%E8%80%8C%E9%9D%9E%E6%95%B0%E9%87%8F%EF%BC%8C%E6%8F%90%E5%8D%87AI%E8%BE%93%E5%87%BA%E8%B4%A8%E9%87%8F%E5%92%8CAgent%E6%95%88%E8%83%BD%E3%80%82Zilliz%E7%9A%84Milvus%E9%80%9A%E8%BF%87%E9%9D%9E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E5%AE%9E%E8%B7%B5%EF%BC%8C%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E6%8F%90%E4%BE%9B%E9%AB%98%E6%95%88%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%99%BA%E8%83%BD%E2%80%9C%E8%AE%B0%E5%BF%86%E4%BD%93%E2%80%9D%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%A4%9A%E7%A7%9F%E6%88%B7%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E7%AD%89%E6%8C%91%E6%88%98%EF%BC%8C%E4%B8%BAAI%E5%BA%94%E7%94%A8%E7%9A%84%E5%95%86%E4%B8%9A%E5%8C%96%E8%90%BD%E5%9C%B0%E5%A5%A0%E5%AE%9A%E5%9F%BA%E7%A1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fragai-agent-20251111144006663-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">超越检索：RAG与湖仓一体如何重塑AI Agent的“认知”与企业级上下文工程</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>在AI Agent时代，检索增强生成（RAG）正从单一检索技术演变为智能上下文工程的核心策略，旨在提升AI输出的“质”而非“量”。通过Milvus等技术实现的非结构化数据湖仓一体实践，正为企业级AI应用提供高效、精准、可扩展的智能“记忆体”和数据生命周期管理能力，从而驱动下一代AI应用的商业化落地与深层变革。</p></blockquote>
+<p>大型语言模型（LLM）的飞速发展正将我们带入一个Agent主导的智能时代，然而，LLM的“幻觉”问题、知识时效性及对特定领域知识的缺失，始终是制约其在企业级应用中普适性的瓶颈。在此背景下，检索增强生成（RAG）技术迅速崛起，成为提升LLM可靠性和实用性的关键范式。但正如Zilliz工程总监兼Milvus负责人刘力在AICon北京大会上强调的，RAG远不止是简单的“检索相似”，它正与“上下文工程”（Context Engineering）深度融合，共同构建AI Agent的核心“认知”机制，并以湖仓一体的创新实践，重塑非结构化数据的管理范式，解锁其前所未有的商业价值。</p>
+<h3 id="rag的本质重构从检索到智能上下文编排">RAG的本质重构：从检索到智能上下文编排</h3>
+<p>最初的RAG通过将外部知识库中的相关文档片段注入LLM的上下文，有效缓解了模型幻觉并赋予其处理新知识的能力<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。然而，随着AI应用场景的日益复杂，尤其是Agent对多步推理、工具调用和长期记忆的需求，RAG面临的挑战已从“搜相似”升级为如何<strong>低成本支撑大规模多租户、通过复杂搜索策略提升精度、处理海量多模态数据并与数据生态深度耦合</strong>。</p>
+<p>这标志着RAG已进入2.0时代，其核心挑战不再是简单地堆砌“多”而在于追求“准”的上下文信息。过长的上下文不仅带来高昂的计算成本和推理延迟，更可能因“<em>Lost in the Middle</em>”效应导致模型性能下降<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。因此，RAG的演进正聚焦于一系列高级策略，包括：</p>
+<ul>
+<li><strong>过滤搜索与混合搜索：</strong> 结合向量搜索的语义理解能力和关键词检索的精确匹配，乃至多向量搜索、ColBERT等技术，以更精细化地筛选和排序上下文。</li>
+<li><strong>聚合搜索与迭代式搜索：</strong> 模仿人类的思考过程，通过多轮交互和信息整合，逐步逼近最佳上下文，显著提升复杂查询的准确性。</li>
+<li><strong>GraphRAG：</strong> 蚂蚁集团等机构的实践表明，将知识图谱（Graph）融入RAG框架，能够提供更结构化的知识关联和推理能力，为上下文注入更深层的语义关系，超越简单的文本片段匹配<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+</ul>
+<p>这一系列技术演进共同构成了对RAG本质的重构，使其从一个被动的“信息检索器”蜕变为一个主动的“智能上下文编排引擎”。</p>
+<h3 id="context-engineeringagent时代的核心胜负手">Context Engineering：Agent时代的核心胜负手</h3>
+<p>如果说LLM是AI的“CPU”，那么<strong>上下文窗口就是AI的“RAM”</strong>，其处理信息的信噪比直接决定了Agent产品的效果<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。上下文工程正是这一理念的实践，它超越了传统的Prompt Engineering和RAG，成为构建高性能AI Agent的<strong>核心胜负手</strong>。Context Engineering旨在在正确的时间为Agent提供正确的信息，其方法论涵盖：</p>
+<ul>
+<li><strong>Offload（转移）：</strong> 将非关键信息从当前上下文转移出去。</li>
+<li><strong>Reduce（简化）：</strong> 对冗余或低价值信息进行摘要和提炼。</li>
+<li><strong>Retrieve（检索）：</strong> 精准召回最相关的信息，这是RAG的核心。</li>
+<li><strong>Isolate（隔离）：</strong> 区分不同类型的信息，避免相互干扰，例如模型产生的幻觉若被写入上下文，会持续污染Agent的后续决策<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+<li><strong>Cache（缓存）：</strong> 对常用或重要的上下文进行记忆和复用。</li>
+</ul>
+<p>对于构建长期运行的Agent而言，区分情景记忆（episodic memory）、语义记忆（semantic memory）、程序记忆（procedural memory）和背景记忆（background memory）尤为关键。传统的上下文处理往往忽视了这种细致的记忆分类，而Context Engineering正是为了解决Agent在复杂任务中“记忆”和“遗忘”的策略性挑战。它不仅提升了Agent的信息处理效率，更在深层次上触及了AI“认知”机制的构建。</p>
+<h3 id="湖仓一体非结构化数据的基石与商业潜力">湖仓一体：非结构化数据的基石与商业潜力</h3>
+<p>在RAG和Context Engineering的底层，是对海量非结构化数据（如文本、图像、视频、音频）高效管理和利用的渴求。Zilliz及其开源项目Milvus，正通过其“非结构化数据湖仓一体”（Unstructured Data Lakehouse）的实践，提供一套系统性的解决方案。湖仓一体架构将数据湖的灵活性与数据仓库的结构化管理能力相结合，为非结构化数据提供了完整的生命周期闭环：</p>
+<ol>
+<li><strong>在线服务：</strong> 高性能的向量数据库（如Milvus）支撑实时检索和上下文构建，满足AI应用的低延迟需求。其强大的多租户能力对于企业级应用尤为关键，它需要在写入和查询放大之间取得平衡，同时在海量数据下兼顾性能和成本。</li>
+<li><strong>数据挖掘：</strong> 将在线积累的非结构化数据进行深度分析，从中提取模式、洞察和潜在知识。</li>
+<li><strong>模型训练：</strong> 挖掘出的高质量数据反哺大模型的预训练或微调，形成数据-模型-应用-数据的良性循环。</li>
+</ol>
+<p>Milvus作为面向AI和多模态数据的向量数据库，不仅支持高效的向量搜索，还为复杂搜索策略（如混合搜索、GraphRAG所需的多维度关联）提供了底层支持。这种湖仓一体的架构，解决了传统数据孤岛问题，大幅降低了非结构化数据处理的复杂性和成本，释放了数据作为企业核心资产的巨大潜力。从商业角度看，这为企业提供了构建个性化、高效率AI应用的基石，尤其是在智能客服、内容生成、知识管理等领域，其商业价值不可估量。</p>
+<h3 id="面向未来的挑战与机遇构建ai的智能记忆体">面向未来的挑战与机遇：构建AI的智能“记忆体”</h3>
+<p>RAG与Context Engineering的深度融合，正推动AI Agent从单一任务执行者向更具自主决策和持续学习能力的系统演进。未来3-5年，我们将看到：</p>
+<ul>
+<li><strong>智能“记忆体”的精细化发展：</strong> Agent将拥有更分层、更具语义感知的记忆系统，能够根据任务需求动态调整上下文，例如，利用微调模型专门进行上下文摘要，避免模型幻觉的污染<sup id="fnref2:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+<li><strong>多模态RAG的成熟应用：</strong> 随着多模态大模型的普及，RAG将不再局限于文本，而是能够高效地从图像、视频、音频等多元信息源中检索并合成上下文，催生更丰富的AI应用场景。</li>
+<li><strong>企业级部署的标准化与规模化：</strong> 湖仓一体解决方案将成为企业AI基础设施的标配，提供开箱即用、高度可定制的Context Engineering平台。Zilliz等公司在低成本支撑大规模多租户、平衡海量数据下性能与成本方面的实践，将为行业提供宝贵经验。</li>
+<li><strong>伦理与治理的并重：</strong> 随着AI Agent能力的增强，其上下文构建过程的透明度、可解释性以及数据偏见问题将受到更多关注。对检索源的质量把控、上下文过滤机制的公平性评估，将成为AI伦理治理的重要组成部分。</li>
+</ul>
+<p>从哲学层面来看，RAG与Context Engineering的结合，是人类赋予机器更高阶“认知”能力的关键一步。它不仅关乎技术性能的提升，更触及了信息、记忆、决策在智能系统中的本质。那些能够有效管理和编排高质量上下文的企业，将拥有构建下一代AI Agent的核心竞争力，从而在日益激烈的AI竞争中占据领先地位。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>大语言模型的检索增强生成(RAG) 方法·Prompting Guide·（未知日期）·检索日期2024/05/29&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>驳“RAG 已死”论：上下文窗口扩展≠RAG 终结原创·CSDN·Baihai_IDP（未知日期）·检索日期2024/05/29&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Vector | Graph：蚂蚁首个开源Graph RAG框架设计解读·阿里云开发者社区·（未知日期）·检索日期2024/05/29&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>超越Prompt 和RAG，「上下文工程」成了Agent 核心胜负手·知乎·（未知日期）·检索日期2024/05/29&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/rag/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">RAG</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/context-engineering/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Context Engineering</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/milvus/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Milvus</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">湖仓一体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9D%9E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">非结构化数据</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ragagentai-20251020111005157-0/">RAG讣告？不，是深度进化：Agent与长上下文重塑AI知识检索的未来格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rag-rag--20251010141004925-0/">RAG范式进阶：动态化与参数化 RAG 如何重塑大模型与未来智能体的知识边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250902134340244-1/">智能体驱动的需求工程：知识融合与协同自治重塑企业生产力边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/bge-reasonerragai-agent-20250827211006675-0/">超越信息搬运：BGE-Reasoner如何赋能RAG与AI Agent的“推理之思”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250814111005156-2/">B端智能体：从“可控智能”到企业生产力重塑的深度范式演进</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250806101006296-3/">智能体：重构生产力边界，开启企业智脑新时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/freewheel-chatbi-20250629141004930-0/">FreeWheel ChatBI：大模型如何赋能视频广告智能分析，革新企业数据决策范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai10x-20251111121010728-2/">AI时代的生产力跃迁：10x组织与个体的智能协作新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-11-09-06-22-ai-/">06-22日报|AI“具身”大潮：当智能冲出屏幕，谁的“灵魂”被遗弃？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/oppo-citywalk-videoagent-20251109101005672-0/">超越屏幕：OPPO Citywalk VideoAgent如何预示具身智能的商业前沿与城市未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-11-08-11-08-ai-/">11-08日报|AI的狂飙突进：从灵魂刻画到具身解放，谁来为看不见的“代价”买单？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k2-thinkingai-sota-20251108114005038-0/">Kimi K2 Thinking：开源智能体引擎的跃迁，重塑AI SOTA的成本与边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agiai-20251108101005145-0/">AGI的裂变时间线：六巨头洞见AI从语言到行动的范式重塑与深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/9bomnivinci6-20251107191009690-0/">英伟达“杀疯了”！9B全模态模型OmniVinci开源，效率直降6倍，友商直呼“卷王来了”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-31-06-22-ai-/">06-22日报|《AI内参》：参数王座动摇，智能体垂直破局——重塑感知、认知与科研范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
