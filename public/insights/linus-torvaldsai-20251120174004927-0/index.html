@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Linus Torvalds以其务实的工程哲学，对AI辅助编程中的“氛围编程”表达了审慎的肯定，认为其适合初学者入门，但绝不适用于需要长期维护的生产级代码。他揭示了自己在Linux内核维护角色上的转变——从“说不”到有时为推动必要变革而“说好”，并强调对系统“无聊”（即稳定可靠）的追求是他核心的价值体现。他将AI视为一种生产力工具的进化，而非对程序员职业的威胁，期待它最终能褪去炒作光环，成为日常现实的一部分。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/linus-torvaldsai-20251120174004927-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/linus-torvaldsai-20251120174004927-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁">
+  <meta property="og:description" content="Linus Torvalds以其务实的工程哲学，对AI辅助编程中的“氛围编程”表达了审慎的肯定，认为其适合初学者入门，但绝不适用于需要长期维护的生产级代码。他揭示了自己在Linux内核维护角色上的转变——从“说不”到有时为推动必要变革而“说好”，并强调对系统“无聊”（即稳定可靠）的追求是他核心的价值体现。他将AI视为一种生产力工具的进化，而非对程序员职业的威胁，期待它最终能褪去炒作光环，成为日常现实的一部分。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-11-20T17:40:04+08:00">
+    <meta property="article:modified_time" content="2025-11-20T17:40:04+08:00">
+    <meta property="article:tag" content="Linus Torvalds">
+    <meta property="article:tag" content="AI辅助编程">
+    <meta property="article:tag" content="氛围编程">
+    <meta property="article:tag" content="Linux内核">
+    <meta property="article:tag" content="开源领袖">
+    <meta property="article:tag" content="软件工程">
+
+  <meta itemprop="name" content="代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁">
+  <meta itemprop="description" content="Linus Torvalds以其务实的工程哲学，对AI辅助编程中的“氛围编程”表达了审慎的肯定，认为其适合初学者入门，但绝不适用于需要长期维护的生产级代码。他揭示了自己在Linux内核维护角色上的转变——从“说不”到有时为推动必要变革而“说好”，并强调对系统“无聊”（即稳定可靠）的追求是他核心的价值体现。他将AI视为一种生产力工具的进化，而非对程序员职业的威胁，期待它最终能褪去炒作光环，成为日常现实的一部分。">
+  <meta itemprop="datePublished" content="2025-11-20T17:40:04+08:00">
+  <meta itemprop="dateModified" content="2025-11-20T17:40:04+08:00">
+  <meta itemprop="wordCount" content="39">
+  <meta itemprop="keywords" content="Linus Torvalds,AI辅助编程,氛围编程,Linux内核,开源领袖,软件工程,维护性,实用主义">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁">
+  <meta name="twitter:description" content="Linus Torvalds以其务实的工程哲学，对AI辅助编程中的“氛围编程”表达了审慎的肯定，认为其适合初学者入门，但绝不适用于需要长期维护的生产级代码。他揭示了自己在Linux内核维护角色上的转变——从“说不”到有时为推动必要变革而“说好”，并强调对系统“无聊”（即稳定可靠）的追求是他核心的价值体现。他将AI视为一种生产力工具的进化，而非对程序员职业的威胁，期待它最终能褪去炒作光环，成为日常现实的一部分。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-11-Nov%2020,%202025_17-31-48-447.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-11-20 17:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%A3%E7%A0%81%E6%B7%B1%E5%A4%84%E7%9A%84%E5%AE%88%E6%9C%9B%E8%80%85%EF%BC%9ALinus&amp;#43;Torvalds%E8%AE%BAAI%E3%80%81%E6%97%A0%E8%81%8A%E4%B8%8E%E5%86%85%E6%A0%B8%E7%9A%84%E5%8F%98%E8%BF%81%20-%20Linus&amp;#43;Torvalds%E4%BB%A5%E5%85%B6%E5%8A%A1%E5%AE%9E%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%93%B2%E5%AD%A6%EF%BC%8C%E5%AF%B9AI%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E2%80%9C%E6%B0%9B%E5%9B%B4%E7%BC%96%E7%A8%8B%E2%80%9D%E8%A1%A8%E8%BE%BE%E4%BA%86%E5%AE%A1%E6%85%8E%E7%9A%84%E8%82%AF%E5%AE%9A%EF%BC%8C%E8%AE%A4%E4%B8%BA%E5%85%B6%E9%80%82%E5%90%88%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%A5%E9%97%A8%EF%BC%8C%E4%BD%86%E7%BB%9D%E4%B8%8D%E9%80%82%E7%94%A8%E4%BA%8E%E9%9C%80%E8%A6%81%E9%95%BF%E6%9C%9F%E7%BB%B4%E6%8A%A4%E7%9A%84%E7%94%9F%E4%BA%A7%E7%BA%A7%E4%BB%A3%E7%A0%81%E3%80%82%E4%BB%96%E6%8F%AD%E7%A4%BA%E4%BA%86%E8%87%AA%E5%B7%B1%E5%9C%A8Linux%E5%86%85%E6%A0%B8%E7%BB%B4%E6%8A%A4%E8%A7%92%E8%89%B2%E4%B8%8A%E7%9A%84%E8%BD%AC%E5%8F%98%E2%80%94%E2%80%94%E4%BB%8E%E2%80%9C%E8%AF%B4%E4%B8%8D%E2%80%9D%E5%88%B0%E6%9C%89%E6%97%B6%E4%B8%BA%E6%8E%A8%E5%8A%A8%E5%BF%85%E8%A6%81%E5%8F%98%E9%9D%A9%E8%80%8C%E2%80%9C%E8%AF%B4%E5%A5%BD%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%BC%BA%E8%B0%83%E5%AF%B9%E7%B3%BB%E7%BB%9F%E2%80%9C%E6%97%A0%E8%81%8A%E2%80%9D%EF%BC%88%E5%8D%B3%E7%A8%B3%E5%AE%9A%E5%8F%AF%E9%9D%A0%EF%BC%89%E7%9A%84%E8%BF%BD%E6%B1%82%E6%98%AF%E4%BB%96%E6%A0%B8%E5%BF%83%E7%9A%84%E4%BB%B7%E5%80%BC%E4%BD%93%E7%8E%B0%E3%80%82%E4%BB%96%E5%B0%86AI%E8%A7%86%E4%B8%BA%E4%B8%80%E7%A7%8D%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7%E7%9A%84%E8%BF%9B%E5%8C%96%EF%BC%8C%E8%80%8C%E9%9D%9E%E5%AF%B9%E7%A8%8B%E5%BA%8F%E5%91%98%E8%81%8C%E4%B8%9A%E7%9A%84%E5%A8%81%E8%83%81%EF%BC%8C%E6%9C%9F%E5%BE%85%E5%AE%83%E6%9C%80%E7%BB%88%E8%83%BD%E8%A4%AA%E5%8E%BB%E7%82%92%E4%BD%9C%E5%85%89%E7%8E%AF%EF%BC%8C%E6%88%90%E4%B8%BA%E6%97%A5%E5%B8%B8%E7%8E%B0%E5%AE%9E%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvaldsai-20251120174004927-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%A3%E7%A0%81%E6%B7%B1%E5%A4%84%E7%9A%84%E5%AE%88%E6%9C%9B%E8%80%85%EF%BC%9ALinus&amp;#43;Torvalds%E8%AE%BAAI%E3%80%81%E6%97%A0%E8%81%8A%E4%B8%8E%E5%86%85%E6%A0%B8%E7%9A%84%E5%8F%98%E8%BF%81%20-%20Linus&amp;#43;Torvalds%E4%BB%A5%E5%85%B6%E5%8A%A1%E5%AE%9E%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%93%B2%E5%AD%A6%EF%BC%8C%E5%AF%B9AI%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E2%80%9C%E6%B0%9B%E5%9B%B4%E7%BC%96%E7%A8%8B%E2%80%9D%E8%A1%A8%E8%BE%BE%E4%BA%86%E5%AE%A1%E6%85%8E%E7%9A%84%E8%82%AF%E5%AE%9A%EF%BC%8C%E8%AE%A4%E4%B8%BA%E5%85%B6%E9%80%82%E5%90%88%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%A5%E9%97%A8%EF%BC%8C%E4%BD%86%E7%BB%9D%E4%B8%8D%E9%80%82%E7%94%A8%E4%BA%8E%E9%9C%80%E8%A6%81%E9%95%BF%E6%9C%9F%E7%BB%B4%E6%8A%A4%E7%9A%84%E7%94%9F%E4%BA%A7%E7%BA%A7%E4%BB%A3%E7%A0%81%E3%80%82%E4%BB%96%E6%8F%AD%E7%A4%BA%E4%BA%86%E8%87%AA%E5%B7%B1%E5%9C%A8Linux%E5%86%85%E6%A0%B8%E7%BB%B4%E6%8A%A4%E8%A7%92%E8%89%B2%E4%B8%8A%E7%9A%84%E8%BD%AC%E5%8F%98%E2%80%94%E2%80%94%E4%BB%8E%E2%80%9C%E8%AF%B4%E4%B8%8D%E2%80%9D%E5%88%B0%E6%9C%89%E6%97%B6%E4%B8%BA%E6%8E%A8%E5%8A%A8%E5%BF%85%E8%A6%81%E5%8F%98%E9%9D%A9%E8%80%8C%E2%80%9C%E8%AF%B4%E5%A5%BD%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%BC%BA%E8%B0%83%E5%AF%B9%E7%B3%BB%E7%BB%9F%E2%80%9C%E6%97%A0%E8%81%8A%E2%80%9D%EF%BC%88%E5%8D%B3%E7%A8%B3%E5%AE%9A%E5%8F%AF%E9%9D%A0%EF%BC%89%E7%9A%84%E8%BF%BD%E6%B1%82%E6%98%AF%E4%BB%96%E6%A0%B8%E5%BF%83%E7%9A%84%E4%BB%B7%E5%80%BC%E4%BD%93%E7%8E%B0%E3%80%82%E4%BB%96%E5%B0%86AI%E8%A7%86%E4%B8%BA%E4%B8%80%E7%A7%8D%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7%E7%9A%84%E8%BF%9B%E5%8C%96%EF%BC%8C%E8%80%8C%E9%9D%9E%E5%AF%B9%E7%A8%8B%E5%BA%8F%E5%91%98%E8%81%8C%E4%B8%9A%E7%9A%84%E5%A8%81%E8%83%81%EF%BC%8C%E6%9C%9F%E5%BE%85%E5%AE%83%E6%9C%80%E7%BB%88%E8%83%BD%E8%A4%AA%E5%8E%BB%E7%82%92%E4%BD%9C%E5%85%89%E7%8E%AF%EF%BC%8C%E6%88%90%E4%B8%BA%E6%97%A5%E5%B8%B8%E7%8E%B0%E5%AE%9E%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvaldsai-20251120174004927-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Linus Torvalds，Linux与Git的缔造者，以其独特的实用主义视角看待AI与软件开发：他积极拥抱AI辅助编程对初学者的赋能，却对生产级代码的严谨性持有坚守，强调长期可维护性的重要。在日益复杂的科技浪潮中，这位开源世界的精神领袖，正以一种既审慎又开放的态度，持续塑造着软件开发的未来。</p></blockquote>
+<p>在科技浪头高歌猛进的时代，人工智能的喧嚣几乎淹没了所有硅基的角落。然而，在那些追逐新潮、标榜颠覆的呐喊声中，总有一些深沉而稳健的声音，如同灯塔般矗立。Linus Torvalds，那位以寥寥数行代码便重塑了整个数字世界的传奇人物，正是其中之一。他不是一个轻易被潮流裹挟的人，更像一位经验老道的船长，深知风暴的凶猛与海图的重要性。最近，在韩国首尔的Linux基金会开源峰会上，Linus对AI辅助编程，尤其是他口中的“氛围编程”（vibe coding），发表了坦率且充满洞见的看法，再次展现了他那标志性的实用主义与对工程本质的深刻理解。</p>
+<h3 id="氛围与基石linus的ai之辩">氛围与基石：Linus的AI之辩</h3>
+<p>Linus对于“氛围编程”的态度，是典型的“Linus式”复杂而精妙。他_“总体持正面态度”<em>，却立即划定了明确的界限：“入门挺好，用在生产就‘会很惨’。”<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这不是简单的肯定或否定，而是一种深思熟虑的区分。对他而言，当年的编程启蒙是</em>“照着电脑杂志上的程序一点点敲出来”_，那种亲手搭建逻辑的沉浸感与挫折感，如今被AI辅助工具所提供的“让电脑帮自己做一些原本做不到的事”的便捷性所取代。他看到了AI降低编程门槛的潜力，它能让更多人轻松跨入计算机世界，体验创造的乐趣。</p>
+<p>然而，当谈及生产级代码，Linus的语调便变得严谨而警惕。<em>“从维护角度看，vibe coding‘可能是一个非常、非常糟糕的主意’。”</em> 他所守护的Linux内核，是全球数百万台机器赖以运行的基石，其代码的鲁棒性、可维护性与安全性是至高无上的。在这里，仅仅依赖AI快速生成的“氛围代码”，就如同在摩天大楼的地基上使用未经检验的材料——短时间内或许看不出问题，但长远的隐患足以吞噬一切。他深刻理解代码的生命周期远不止于“编写”，更在于“维护”，在于如何在漫长的岁月里抵御bug侵蚀，适应环境变化。这种对代码“韧性”的极致追求，正是Linus从一名纯粹的创造者，蜕变为一个守望者的核心哲学。</p>
+<h3 id="从说不到有时说好内核掌舵者的心路">从“说不”到“有时说好”：内核掌舵者的心路</h3>
+<p>提到Linus，人们往往会想到他那句著名的“我的工作就是不停地说‘不’”。这曾是他作为Linux内核技术负责人和主要维护者的写照，无数充满创意却可能带来维护灾难的新想法，都在他坚定的“不”声中被拦截。但他透露，在过去的_“差不多20年”<em>里，他已经不再是“程序员”，甚至连他亲手打造的Git，也</em>“基本只是从旁观望一下”_。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 他的角色已悄然转变，从一个亲力亲为的编码者，变成了一个更宏观的架构师、一个社区的指引者。</p>
+<p>更令人意外的是，他现在_“有时反而要对一些新东西说‘是’，哪怕长期维护者们强烈反对，因为‘他们有时候会卡在原来的惯性里’。”_ 这一转变，如同一位将军在熟悉了阵地之后，开始思考如何拓展新的疆域。他指的是颇具争议的Rust语言引入内核一事。这并非Linus放弃了他对“无聊状态”（即稳定、无bug）的偏爱，而是一种更深层次的策略性考量。他意识到，固守传统有时会阻碍必要的进化。拥抱Rust，是为内核注入新的活力，解决C语言在安全性上的一些固有挑战，尽管这一步_“比预想的要慢”_。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这背后，是Linus作为一位领袖的深刻洞察：如何在守护核心价值的同时，引导系统稳健地迈向未来。他不再只是一个“否决者”，而是一个更富远见的平衡者，一个推动系统迭代的谨慎改革者。</p>
+<h3 id="无聊的智慧linus的系统哲学">“无聊”的智慧：Linus的系统哲学</h3>
+<p>Linus不止一次强调他_“喜欢那种无聊的状态……对我来说，无聊就是不要那些‘特别刺激的新特性’，不会一上线就把全球几百万台机器整挂掉。”_<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这句话听起来或许有些反直觉，但在高速迭代、频繁崩溃的软件世界中，这恰恰是一种至高无上的智慧。他所追求的“无聊”，不是停滞不前，而是深植于代码深处的可靠性与稳定性。它意味着每一个新功能都经过了充分的测试和考量，每一次更新都能带来可预测的提升，而非令人心跳加速的未知风险。</p>
+<p>他以对AI热潮的看法，进一步诠释了这种哲学。当有人担心Nvidia的专有GPU微内核和CUDA语言正在驱动硬件生态，而开源的Linux可能被边缘化时，Linus淡然回应：<em>“这和用户态其实没什么两样。”</em> 更重要的是，他看到了AI带来的一个意外之喜：<em>“AI的一个好处，是它逼着Nvidia在Linux内核领域变成一个好玩家——这在20年前可是出了名的不成立的。”</em><sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这种以长远眼光审视短期现象，并从中发现积极因素的能力，正是他能够在复杂技术博弈中始终保持清醒的关键。他从不被表面的喧嚣所迷惑，而是直指事物的本质和深层影响。</p>
+<p>当然，AI带来的负面干扰也让Linus直言不讳。他提到，各种AI爬虫对kernel.org基础设施造成了_“很大干扰”<em>，维护者们甚至会遇到</em>“由滥用AI的人生成的、凭空捏造的bug报告和安全通告”_。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 尽管他本人目前并未直接使用AI辅助编码工具，但他的团队已在探索其在内核代码库中的应用。这再次印证了他的务实态度：不排斥新工具，但必须以严谨、负责任的方式加以利用，尤其是在核心基础设施领域。</p>
+<h3 id="ai工具的进化而非终结者">AI：工具的进化，而非终结者</h3>
+<p>当被问及AI将如何影响“软件开发”这份职业本身时，Linus Torvalds的回答充满了历史的维度和哲学的深度。他称之为_“一个很复杂的问题”<em>，并预言</em>“真正的答案恐怕要几年之后才能看清。”<em><sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 他将AI比作</em>“当年的编译器一样——它让人们不用再手写汇编，大幅提高了生产力，但并没有让程序员消失。”_<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这个类比并非偶然。它揭示了Linus对技术演进的根本理解：每一次工具的革新，都会改变工作的形式和效率，但它并不会消除对人类智力、判断力和创造力的根本需求。从手写汇编到高级语言，从手动调试到自动化测试，工具始终是人能力的延伸。AI，在他看来，也是这样一个强大的延伸。它将解放开发者从繁琐、重复性的劳动中解脱出来，让他们能专注于更高级的设计、架构和创新。</p>
+<p>Linus对AI的最终期待是，它能_“从风口上退下来，变成一种‘不过度被炒作、只是日常现实的一部分，不再被人整天挂在嘴边’的东西。”_<sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这句话，无疑是他对所有技术浪潮的共同心声。他所追求的，不是闪耀的昙花一现，而是深远而持久的价值。在一个被无数“下一个大事件”所驱动的世界里，Linus Torvalds选择成为那个追求“无聊”的守望者，那个在代码深处寻求永恒稳定与可靠的工程师。他的洞见，远不止于对AI的看法，更是对技术本质、人类创造力以及软件未来深思熟虑的哲学思考。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.youtube.com/watch?v=tWx769t1JKg">Linus 谈 AI 与氛围编程：入门挺好，用在生产就“会很惨”</a>·未知出版物·未知作者（2025/11/20）·检索日期2025/11/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/linus-torvalds/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linus Torvalds</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI辅助编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B0%9B%E5%9B%B4%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">氛围编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/linux%E5%86%85%E6%A0%B8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linux内核</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E9%A2%86%E8%A2%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源领袖</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%BB%B4%E6%8A%A4%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">维护性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%AE%9E%E7%94%A8%E4%B8%BB%E4%B9%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">实用主义</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20251018121004881-0/">AI辅助编程：重塑游戏开发范式，从“零经验”到产业变革的深层洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kiroai-20250828114004915-3/">代码审判者：亚马逊Kiro如何破解AI时代的“地狱模式”与工程师的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiweb3-20250826174004844-3/">AI氛围编程：Web3开发范式重塑与去中心化未来的构建权转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/karpathy-20250826094005576-2/">Karpathy“氛围编程”三层智能力场：重塑开发者范式，迈向“代码后稀缺时代”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cto-20250825111004760-0/">“氛围编程”的泡沫与生产力幻象：CTO们的警示与软件工程的未来之辩</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibe-codingctoai-20250825094006213-0/">Vibe Coding的幻象与生产环境的真相：CTO们如何重塑AI时代的软件工程准则</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/replitai-agent-20250721161005674-4/">Replit数据库事件：AI Agent失控的警钟、信任边界与软件工程的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github-copilot-chat-20250701151004434-2/">代码开放的未来：微软GitHub Copilot Chat开源背后的深层考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-coding-20251114114004974-0/">效率与直觉的悖论：AI Coding重塑软件工程的深层考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251113091004898-1/">吴恩达警示：AI时代，小团队如何通过“应用为王”颠覆巨头竞争法则</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitypescriptgithub-20251112161005549-2/">类型化革命：AI驱动下TypeScript登顶GitHub，重塑软件工程与开发者信任边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-ai-20251111174005694-0/">字节跳动豆包编程模型：以成本-性能之刃，重塑AI软件工程与开发者生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aardvarkai-20251031134005634-1/">Aardvark：AI安全智能体的“嗅探”未来，重塑数字防线与软件开发范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/blockaigoose-20251030201006888-1/">Block的AI原生之路：智能体Goose如何重塑企业生产力与“代码”哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursor-20ai-20251030154004730-0/">Cursor 2.0：从“套壳”到自研核心，重塑AI编程工具的生产力前沿与生态竞逐</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
