@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“AI界的USB-C”到“补丁时代的反思”：MCP兴衰启示Agent架构的深层演进 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic的MCP协议在经历初期热潮后，因上下文消耗、高成本和模型性能下降等工程瓶颈而遇冷。Anthropic转向Skills系统，暴露了当前AI Agent架构依赖“补丁”弥补智能缺陷的本质，预示着未来AI Agent将告别盲目通用，迈向更精细化、原生集成的智能体生态，以适应真正强大的智能体。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aiusb-cmcpagent-20251201164007939-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aiusb-cmcpagent-20251201164007939-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“AI界的USB-C”到“补丁时代的反思”：MCP兴衰启示Agent架构的深层演进">
+  <meta property="og:description" content="Anthropic的MCP协议在经历初期热潮后，因上下文消耗、高成本和模型性能下降等工程瓶颈而遇冷。Anthropic转向Skills系统，暴露了当前AI Agent架构依赖“补丁”弥补智能缺陷的本质，预示着未来AI Agent将告别盲目通用，迈向更精细化、原生集成的智能体生态，以适应真正强大的智能体。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-12-01T16:40:07+08:00">
+    <meta property="article:modified_time" content="2025-12-01T16:40:07+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="大模型上下文">
+    <meta property="article:tag" content="协议标准">
+    <meta property="article:tag" content="商业敏锐度">
+    <meta property="article:tag" content="软件工程">
+
+  <meta itemprop="name" content="从“AI界的USB-C”到“补丁时代的反思”：MCP兴衰启示Agent架构的深层演进">
+  <meta itemprop="description" content="Anthropic的MCP协议在经历初期热潮后，因上下文消耗、高成本和模型性能下降等工程瓶颈而遇冷。Anthropic转向Skills系统，暴露了当前AI Agent架构依赖“补丁”弥补智能缺陷的本质，预示着未来AI Agent将告别盲目通用，迈向更精细化、原生集成的智能体生态，以适应真正强大的智能体。">
+  <meta itemprop="datePublished" content="2025-12-01T16:40:07+08:00">
+  <meta itemprop="dateModified" content="2025-12-01T16:40:07+08:00">
+  <meta itemprop="wordCount" content="67">
+  <meta itemprop="keywords" content="AI Agent,大模型上下文,协议标准,商业敏锐度,软件工程">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“AI界的USB-C”到“补丁时代的反思”：MCP兴衰启示Agent架构的深层演进">
+  <meta name="twitter:description" content="Anthropic的MCP协议在经历初期热潮后，因上下文消耗、高成本和模型性能下降等工程瓶颈而遇冷。Anthropic转向Skills系统，暴露了当前AI Agent架构依赖“补丁”弥补智能缺陷的本质，预示着未来AI Agent将告别盲目通用，迈向更精细化、原生集成的智能体生态，以适应真正强大的智能体。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-12-Dec%201,%202025_16-31-34-803.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-12-01 16:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9CAI%E7%95%8C%E7%9A%84USB-C%E2%80%9D%E5%88%B0%E2%80%9C%E8%A1%A5%E4%B8%81%E6%97%B6%E4%BB%A3%E7%9A%84%E5%8F%8D%E6%80%9D%E2%80%9D%EF%BC%9AMCP%E5%85%B4%E8%A1%B0%E5%90%AF%E7%A4%BAAgent%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E5%B1%82%E6%BC%94%E8%BF%9B%20-%20Anthropic%E7%9A%84MCP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E7%BB%8F%E5%8E%86%E5%88%9D%E6%9C%9F%E7%83%AD%E6%BD%AE%E5%90%8E%EF%BC%8C%E5%9B%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B6%88%E8%80%97%E3%80%81%E9%AB%98%E6%88%90%E6%9C%AC%E5%92%8C%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E7%AD%89%E5%B7%A5%E7%A8%8B%E7%93%B6%E9%A2%88%E8%80%8C%E9%81%87%E5%86%B7%E3%80%82Anthropic%E8%BD%AC%E5%90%91Skills%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%9A%B4%E9%9C%B2%E4%BA%86%E5%BD%93%E5%89%8DAI&amp;#43;Agent%E6%9E%B6%E6%9E%84%E4%BE%9D%E8%B5%96%E2%80%9C%E8%A1%A5%E4%B8%81%E2%80%9D%E5%BC%A5%E8%A1%A5%E6%99%BA%E8%83%BD%E7%BC%BA%E9%99%B7%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI&amp;#43;Agent%E5%B0%86%E5%91%8A%E5%88%AB%E7%9B%B2%E7%9B%AE%E9%80%9A%E7%94%A8%EF%BC%8C%E8%BF%88%E5%90%91%E6%9B%B4%E7%B2%BE%E7%BB%86%E5%8C%96%E3%80%81%E5%8E%9F%E7%94%9F%E9%9B%86%E6%88%90%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E7%94%9F%E6%80%81%EF%BC%8C%E4%BB%A5%E9%80%82%E5%BA%94%E7%9C%9F%E6%AD%A3%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiusb-cmcpagent-20251201164007939-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9CAI%E7%95%8C%E7%9A%84USB-C%E2%80%9D%E5%88%B0%E2%80%9C%E8%A1%A5%E4%B8%81%E6%97%B6%E4%BB%A3%E7%9A%84%E5%8F%8D%E6%80%9D%E2%80%9D%EF%BC%9AMCP%E5%85%B4%E8%A1%B0%E5%90%AF%E7%A4%BAAgent%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E5%B1%82%E6%BC%94%E8%BF%9B%20-%20Anthropic%E7%9A%84MCP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E7%BB%8F%E5%8E%86%E5%88%9D%E6%9C%9F%E7%83%AD%E6%BD%AE%E5%90%8E%EF%BC%8C%E5%9B%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B6%88%E8%80%97%E3%80%81%E9%AB%98%E6%88%90%E6%9C%AC%E5%92%8C%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E7%AD%89%E5%B7%A5%E7%A8%8B%E7%93%B6%E9%A2%88%E8%80%8C%E9%81%87%E5%86%B7%E3%80%82Anthropic%E8%BD%AC%E5%90%91Skills%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%9A%B4%E9%9C%B2%E4%BA%86%E5%BD%93%E5%89%8DAI&amp;#43;Agent%E6%9E%B6%E6%9E%84%E4%BE%9D%E8%B5%96%E2%80%9C%E8%A1%A5%E4%B8%81%E2%80%9D%E5%BC%A5%E8%A1%A5%E6%99%BA%E8%83%BD%E7%BC%BA%E9%99%B7%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI&amp;#43;Agent%E5%B0%86%E5%91%8A%E5%88%AB%E7%9B%B2%E7%9B%AE%E9%80%9A%E7%94%A8%EF%BC%8C%E8%BF%88%E5%90%91%E6%9B%B4%E7%B2%BE%E7%BB%86%E5%8C%96%E3%80%81%E5%8E%9F%E7%94%9F%E9%9B%86%E6%88%90%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E7%94%9F%E6%80%81%EF%BC%8C%E4%BB%A5%E9%80%82%E5%BA%94%E7%9C%9F%E6%AD%A3%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiusb-cmcpagent-20251201164007939-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“AI界的USB-C”到“补丁时代的反思”：MCP兴衰启示Agent架构的深层演进</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>一度被寄予厚望的Anthropic模型上下文协议（MCP），在经历一年的爆发式增长后，因上下文消耗、高昂成本及模型性能下降等工程实践瓶颈而光环褪色。Anthropic转而力推Skills系统，实则暗示了通用协议在驾驭当前“概率性智能体”时的局限性，揭示了现有AI Agent架构仍处于以“确定性补丁”弥补智能不足的过渡阶段，预示着未来Agent生态将走向更原生、定制化与自适应的融合之路。</p></blockquote>
+<p>2024年初，当Anthropic推出模型上下文协议（Model Context Protocol, MCP）时，硅谷为之沸腾。开发者们将其誉为“AI界的USB-C”<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，认为它将成为“Agent时代的基础设施”，有望解决当时AI应用开发中“重复造轮子”的顽疾。MCP承诺通过一套标准化协议，让大模型（如Claude）能够“即插即用”地访问Google Drive、Slack等外部服务，实现“一次开发、处处运行”的愿景。一年后，MCP Registry服务器数量已近2000个，增长超过400%，OpenAI、Google、AWS等巨头纷纷表示支持<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。然而，喧嚣归于平静，人们发现这项“宏大叙事”似乎未能兑现最初的承诺，甚至Anthropic自身也在悄然“去MCP化”，将重心转向了名为Skills的内部系统。</p>
+<h3 id="技术原理与创新点解析一座通向外部世界的桥梁">技术原理与创新点解析：一座通向外部世界的“桥梁”</h3>
+<p>MCP的核心理念是构建一个标准化的通信框架，使AI Agent能够高效、便捷地与外部世界的海量工具和数据进行交互<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。在MCP出现之前，若要让大模型访问不同的SaaS应用，开发者必须为每个应用编写一套独立的API集成代码，这种碎片化的开发模式效率低下且维护成本高昂。MCP的愿景是统一这一过程：服务提供商只需为自己的应用编写一个MCP Server，理论上所有兼容MCP的AI Agent都能无缝调用。</p>
+<p>从技术角度看，MCP的设计试图简化“工具编排”（tool orchestration）的过程。它通过定义工具的描述、调用请求和返回结果的统一格式，让大模型能够在上下文窗口中“看到”并理解这些工具的用途。这无疑是AI Agent从纯文本生成迈向“行动者”角色的关键一步，极大地激发了开发者将现实世界“喂给AI”的热情。GitHub上涌现出大量基于MCP的天气查询、股票分析乃至社交媒体发布工具，预示着一个互联互通的AI应用生态即将到来。</p>
+<h3 id="工程实践中的致命瓶颈上下文成本与智力的三重困境">工程实践中的致命瓶颈：上下文、成本与智力的三重困境</h3>
+<p>然而，宏伟蓝图在真实的工程落地中遭遇了严峻挑战，MCP的致命弱点逐渐显现：</p>
+<ol>
+<li>
+<p><strong>上下文窗口的膨胀与推理效率下降</strong>：MCP要求模型的上下文窗口同时承载工具的定义、调用请求和返回结果。这意味着每一次工具调用都会累积消耗token，导致上下文窗口迅速膨胀。Django联合创造者Simon Willison指出，仅GitHub官方的MCP就定义了93个工具，消耗高达55000个Token<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。当Agent需要处理一份两小时会议纪要等大型文档时，额外处理50000个Token的需求，甚至可能直接超出上下文窗口限制，导致整个工作流崩溃。模型在被海量工具定义“塞满”上下文后，其注意力被稀释，推理能力显著下降。</p>
+</li>
+<li>
+<p><strong>高昂的运营成本</strong>：在AI模型服务普遍按token计费的商业模式下，MCP对上下文的过度占用直接转化为高昂的成本。以Claude为例，其token费用不菲，加载大量MCP意味着在生成任何有意义的内容之前，巨大的token消耗已经让成本迅速飙升，严重影响了商业化落地的经济效益。</p>
+</li>
+<li>
+<p><strong>模型智力衰退与安全隐患</strong>：当MCP工具过多时，模型不仅推理效率降低，甚至会出现“犯蠢”现象。有开发者发现，模型在调用计算器工具得到正确结果“-9”后，竟“自作主张”地将其报告为“+9”，表现出对工具返回值的不信任和错误的常识替代。更严重的是，早期MCP粗放的权限设计带来了严重的安全风险。若挂载文件系统MCP，AI可能因幻觉而删除不该删除的代码库，这促使大公司安全部门迅速介入，引入复杂的白名单机制，但其消耗远超传统API，成为企业级应用的一大障碍。</p>
+</li>
+<li>
+<p><strong>生态的泛滥与低质化</strong>：MCP极低的开发门槛——几十行代码即可搭建一个Server——在带来“繁荣”的同时也导致了大量重复和低质量的工具。例如，市场上可能充斥着十个功能大同小异的天气查询MCP，其中不乏凭证暴露、缺乏维护的问题<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这使得开发者反而需要投入更多时间去甄别和筛选，<strong>筛选成本甚至高过了自己从头编写一个定制化工具的成本</strong>，这与MCP“一次开发、处处运行”的初衷背道而驰。</p>
+</li>
+</ol>
+<h3 id="官方策略转向与范式反思从通用到定制的拨乱反正">官方策略转向与范式反思：从通用到定制的“拨乱反正”</h3>
+<p>面对MCP在实践中的诸多痛点，Anthropic的战略重心正在发生微妙的转向。在其最新的官方文档中，名为“Skills”的系统被推向C位，而MCP则日益沦为不得不保留的兼容层。Skills的本质是对MCP的一次“拨乱反正”——它不再试图让模型实时理解并编排外部世界的每一个长尾能力，而是将高频、稳定、经过验证的核心能力（如编程、绘图、网页浏览）封装成精简的预设模块，并进行原生集成。</p>
+<p>这种转向的潜台词是明确的：<strong>盲目追求通用的“万能协议”在当前阶段并不现实，回归定制化、精细化的能力封装才是更务实的选择</strong>。Anthropic近期发布的技术博客也间接承认了MCP的设计缺陷，提出让Agent通过“写代码”的方式去调用MCP，而非直接暴露工具定义，声称这种方式能将Token消耗减少98.7%<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这无疑是在说，MCP最初的用法是错误的。</p>
+<p>这种“曲线救国”的方案，本质上是在用更复杂的工程手段，去弥补协议设计本身的不足，以及当前大模型在复杂推理和工具选择上的局限。它揭示了一个更深层的哲学思辨：无论是MCP这种试图用JSON标准化世界的协议，还是Skills这种试图用预设封装能力的模块，亦或是我们日常绞尽脑汁编写的Prompt，它们本质上都属于同一类东西——<strong>为了弥补当前AI智力不足而不得不打的“补丁”</strong>。</p>
+<blockquote>
+<p>“我们在用确定性的工程手段，去试图驾驭一个概率性的智能体。”</p></blockquote>
+<h3 id="产业生态演变与未来展望基建的回归与智能体的成长">产业生态演变与未来展望：基建的回归与智能体的成长</h3>
+<p>MCP的“降温”并非彻底死亡。Anthropic仍在推进其远程连接、OAuth认证和企业级部署等功能，IBM也宣布将为MCP社区贡献企业级资产<sup id="fnref3:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这表明MCP最终将从最初的“网红”角色跌落，回归到其作为AI Agent生态“基建”的真实定位。</p>
+<p>未来AI Agent的工具生态可能呈现出一种分层结构：<strong>高频、核心、对性能和成本敏感的能力将更多地由原生集成或Skills这类定制化、优化的模块来承载；而低频、长尾、更新迭代快的外部数据和应用，则可能继续通过MCP或其他类似协议作为兼容层来接入</strong>。这种分工将使得Agent在保持核心能力高效稳定的同时，也能具备扩展到更广阔外部世界的能力。</p>
+<p>这次对MCP的反思，促使整个行业不再盲目地为AI“堆砌工具”，而是开始深入思考：究竟哪些接口是真正重要的？如何才能以最高效、最安全、最经济的方式赋能AI Agent？这种审慎的策略转变，将推动AI Agent框架向着更高效、更模块化、更具鲁棒性的方向发展。</p>
+<h3 id="对人类文明进程的深层启示超越补丁的真正智能">对人类文明进程的深层启示：超越“补丁”的真正智能</h3>
+<p>MCP的兴衰，是AI技术发展螺旋上升过程中的一个典型缩影。它提醒我们，当前我们所见证和构建的AI，无论是大模型本身，还是其外部的工具和协议，都仍处于一个相对早期的阶段。我们正试图用“确定性”的工程思维去驯服一个本质上“概率性”的智能体，而结果往往是：当智能体不够聪明时，我们不得不为它提供更详细的指令（Prompt）、更清晰的流程（Skill）、更标准的接口（MCP）。</p>
+<p>然而，真正的通用人工智能（ASI）或更高级的智能体，其本质将是其自身的“适配器”。它们无需你编写一个MCP Server来告诉它如何查天气，它们会自己打开浏览器、理解信息、规划行动。它们无需协议，因为它们本身就是对世界的理解和适应的体现。从这个角度看，MCP、Skills乃至当前所有的Agent框架，都是通向未来真正强大智能体的过渡性“脚手架”。</p>
+<p>这次实践的挫折，反而提供了一次宝贵的行业教育：<strong>技术标准的制定必须与智能体自身的进化步伐相匹配</strong>。未来AI Agent的真正突破，将不仅仅在于外部工具的丰富，更在于模型自身“智力”的跃升，在于它从依赖“补丁”到实现“原生理解”的质变。这一转变将深刻影响我们与AI的交互模式、软件工程范式乃至人类文明的进程，引领我们进入一个由真正自主智能驱动的全新时代。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://blog.csdn.net/m0_59235945/article/details/144568613">AI Agent再进一步！Anthropic发布大模型上下文协议MCP</a> · CSDN博客 · m0_59235945（2025/12/1）·检索日期2025/12/1&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>诞生才一周年，MCP凉了 · 硅星人Pro · 董道力（2025/12/1）·检索日期2025/12/1&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://zhuanlan.zhihu.com/p/1956029978442437979">MCP是什么？有什么作用？一文详解MCP协议</a> · 知乎 · （2025/12/1）·检索日期2025/12/1&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://jimmysong.io/book/ai-handbook/mcp/code-execution/">MCP 代码执行模式：提升智能体的效率与可扩展性</a> · Jimmy Song · （2025/12/1）·检索日期2025/12/1&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型上下文</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8D%8F%E8%AE%AE%E6%A0%87%E5%87%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">协议标准</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E6%95%8F%E9%94%90%E5%BA%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业敏锐度</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/24porkgoogle-antigravityai-20251124111004822-1/">24亿美元的“PORK”：Google Antigravity如何重塑AI编程的未来与争议</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/code-arenaai-agent-20251123081004908-0/">Code Arena：AI Agent编程评估的范式革新与软件工程的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251122031005074-0/">自主智能体的记忆与思考：文件系统如何重塑AI的认知架构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aws-kiroai--20251121144004966-0/">AWS Kiro：重塑AI时代软件工程的“意图-实现”桥梁</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aardvarkai-20251031134005634-1/">Aardvark：AI安全智能体的“嗅探”未来，重塑数字防线与软件开发范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/blockaigoose-20251030201006888-1/">Block的AI原生之路：智能体Goose如何重塑企业生产力与“代码”哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursor-20-20251030124005059-1/">Cursor 2.0：代码代理群雄逐鹿，重塑软件工程的未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-24-10-24-ai-agent-/">10-24日报|AI新范式：巨头押注“超级智能”，Agent颠覆入口，开源重构创作，工程坚守底线</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mcphubai-20251019101004869-0/">MCPHub：大模型“最后一公里”的解药，重塑企业级AI应用生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20251017204008764-0/">AI Agent重塑软件测试：从“编写”到“描述”的范式转移与效率跃迁</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/trae-aiai-20251015171004565-0/">TRAE AI：重塑软件工程范式，字节跳动如何驱动AI开发迈向“自主智能体”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agentkmp-20251011104004521-0/">AI Agent与KMP原生跨端：软件工程效率的范式革新与未来边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/osopenai-20251009161004679-0/">奥特曼的“超级OS”野望：OpenAI生态系统下的权力重构与智能体鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigemini-cli-20251008221010090-0/">将AI智能体植入命令行：Gemini CLI扩展如何重塑软件工程与开发者范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250930161004841-0/">AI代理的“语言战争”：模型上下文协议的挑战与未来生态重构</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
