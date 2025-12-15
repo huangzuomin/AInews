@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Michael Goin：vLLM“铁王座”背后的静默架构师——从DeepSeek到多模态，铸就AI推理新标准 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Michael Goin，红帽首席工程师兼vLLM核心贡献者，以其对AI推理性能优化的深刻洞察和卓越技术领导力，成为vLLM从文本到多模态、从单一硬件到异构兼容的关键推手。他通过前瞻性的PyTorch战略、积极的社区协作和对性能优化的极致追求，推动vLLM成为AI推理领域的行业标准，深刻塑造着AI应用未来的效率与发展。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/michael-goinvllmdeepseekai-20251216071002230-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/michael-goinvllmdeepseekai-20251216071002230-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Michael Goin：vLLM“铁王座”背后的静默架构师——从DeepSeek到多模态，铸就AI推理新标准">
+  <meta property="og:description" content="Michael Goin，红帽首席工程师兼vLLM核心贡献者，以其对AI推理性能优化的深刻洞察和卓越技术领导力，成为vLLM从文本到多模态、从单一硬件到异构兼容的关键推手。他通过前瞻性的PyTorch战略、积极的社区协作和对性能优化的极致追求，推动vLLM成为AI推理领域的行业标准，深刻塑造着AI应用未来的效率与发展。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-12-16T07:10:02+08:00">
+    <meta property="article:modified_time" content="2025-12-16T07:10:02+08:00">
+    <meta property="article:tag" content="Michael Goin">
+    <meta property="article:tag" content="VLLM">
+    <meta property="article:tag" content="AI推理引擎">
+    <meta property="article:tag" content="PyTorch">
+    <meta property="article:tag" content="开源社区">
+    <meta property="article:tag" content="DeepSeek MoE">
+
+  <meta itemprop="name" content="Michael Goin：vLLM“铁王座”背后的静默架构师——从DeepSeek到多模态，铸就AI推理新标准">
+  <meta itemprop="description" content="Michael Goin，红帽首席工程师兼vLLM核心贡献者，以其对AI推理性能优化的深刻洞察和卓越技术领导力，成为vLLM从文本到多模态、从单一硬件到异构兼容的关键推手。他通过前瞻性的PyTorch战略、积极的社区协作和对性能优化的极致追求，推动vLLM成为AI推理领域的行业标准，深刻塑造着AI应用未来的效率与发展。">
+  <meta itemprop="datePublished" content="2025-12-16T07:10:02+08:00">
+  <meta itemprop="dateModified" content="2025-12-16T07:10:02+08:00">
+  <meta itemprop="wordCount" content="119">
+  <meta itemprop="keywords" content="Michael Goin,VLLM,AI推理引擎,PyTorch,开源社区,DeepSeek MoE,多模态AI,硬件适配">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Michael Goin：vLLM“铁王座”背后的静默架构师——从DeepSeek到多模态，铸就AI推理新标准">
+  <meta name="twitter:description" content="Michael Goin，红帽首席工程师兼vLLM核心贡献者，以其对AI推理性能优化的深刻洞察和卓越技术领导力，成为vLLM从文本到多模态、从单一硬件到异构兼容的关键推手。他通过前瞻性的PyTorch战略、积极的社区协作和对性能优化的极致追求，推动vLLM成为AI推理领域的行业标准，深刻塑造着AI应用未来的效率与发展。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-12-Dec%2016,%202025_07-01-01-322.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-12-16 07:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Michael&amp;#43;Goin%EF%BC%9AvLLM%E2%80%9C%E9%93%81%E7%8E%8B%E5%BA%A7%E2%80%9D%E8%83%8C%E5%90%8E%E7%9A%84%E9%9D%99%E9%BB%98%E6%9E%B6%E6%9E%84%E5%B8%88%E2%80%94%E2%80%94%E4%BB%8EDeepSeek%E5%88%B0%E5%A4%9A%E6%A8%A1%E6%80%81%EF%BC%8C%E9%93%B8%E5%B0%B1AI%E6%8E%A8%E7%90%86%E6%96%B0%E6%A0%87%E5%87%86%20-%20Michael&amp;#43;Goin%EF%BC%8C%E7%BA%A2%E5%B8%BD%E9%A6%96%E5%B8%AD%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%85%BCvLLM%E6%A0%B8%E5%BF%83%E8%B4%A1%E7%8C%AE%E8%80%85%EF%BC%8C%E4%BB%A5%E5%85%B6%E5%AF%B9AI%E6%8E%A8%E7%90%86%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%B7%B1%E5%88%BB%E6%B4%9E%E5%AF%9F%E5%92%8C%E5%8D%93%E8%B6%8A%E6%8A%80%E6%9C%AF%E9%A2%86%E5%AF%BC%E5%8A%9B%EF%BC%8C%E6%88%90%E4%B8%BAvLLM%E4%BB%8E%E6%96%87%E6%9C%AC%E5%88%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E3%80%81%E4%BB%8E%E5%8D%95%E4%B8%80%E7%A1%AC%E4%BB%B6%E5%88%B0%E5%BC%82%E6%9E%84%E5%85%BC%E5%AE%B9%E7%9A%84%E5%85%B3%E9%94%AE%E6%8E%A8%E6%89%8B%E3%80%82%E4%BB%96%E9%80%9A%E8%BF%87%E5%89%8D%E7%9E%BB%E6%80%A7%E7%9A%84PyTorch%E6%88%98%E7%95%A5%E3%80%81%E7%A7%AF%E6%9E%81%E7%9A%84%E7%A4%BE%E5%8C%BA%E5%8D%8F%E4%BD%9C%E5%92%8C%E5%AF%B9%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%9E%81%E8%87%B4%E8%BF%BD%E6%B1%82%EF%BC%8C%E6%8E%A8%E5%8A%A8vLLM%E6%88%90%E4%B8%BAAI%E6%8E%A8%E7%90%86%E9%A2%86%E5%9F%9F%E7%9A%84%E8%A1%8C%E4%B8%9A%E6%A0%87%E5%87%86%EF%BC%8C%E6%B7%B1%E5%88%BB%E5%A1%91%E9%80%A0%E7%9D%80AI%E5%BA%94%E7%94%A8%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%95%88%E7%8E%87%E4%B8%8E%E5%8F%91%E5%B1%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmichael-goinvllmdeepseekai-20251216071002230-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Michael&amp;#43;Goin%EF%BC%9AvLLM%E2%80%9C%E9%93%81%E7%8E%8B%E5%BA%A7%E2%80%9D%E8%83%8C%E5%90%8E%E7%9A%84%E9%9D%99%E9%BB%98%E6%9E%B6%E6%9E%84%E5%B8%88%E2%80%94%E2%80%94%E4%BB%8EDeepSeek%E5%88%B0%E5%A4%9A%E6%A8%A1%E6%80%81%EF%BC%8C%E9%93%B8%E5%B0%B1AI%E6%8E%A8%E7%90%86%E6%96%B0%E6%A0%87%E5%87%86%20-%20Michael&amp;#43;Goin%EF%BC%8C%E7%BA%A2%E5%B8%BD%E9%A6%96%E5%B8%AD%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%85%BCvLLM%E6%A0%B8%E5%BF%83%E8%B4%A1%E7%8C%AE%E8%80%85%EF%BC%8C%E4%BB%A5%E5%85%B6%E5%AF%B9AI%E6%8E%A8%E7%90%86%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%B7%B1%E5%88%BB%E6%B4%9E%E5%AF%9F%E5%92%8C%E5%8D%93%E8%B6%8A%E6%8A%80%E6%9C%AF%E9%A2%86%E5%AF%BC%E5%8A%9B%EF%BC%8C%E6%88%90%E4%B8%BAvLLM%E4%BB%8E%E6%96%87%E6%9C%AC%E5%88%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E3%80%81%E4%BB%8E%E5%8D%95%E4%B8%80%E7%A1%AC%E4%BB%B6%E5%88%B0%E5%BC%82%E6%9E%84%E5%85%BC%E5%AE%B9%E7%9A%84%E5%85%B3%E9%94%AE%E6%8E%A8%E6%89%8B%E3%80%82%E4%BB%96%E9%80%9A%E8%BF%87%E5%89%8D%E7%9E%BB%E6%80%A7%E7%9A%84PyTorch%E6%88%98%E7%95%A5%E3%80%81%E7%A7%AF%E6%9E%81%E7%9A%84%E7%A4%BE%E5%8C%BA%E5%8D%8F%E4%BD%9C%E5%92%8C%E5%AF%B9%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%9E%81%E8%87%B4%E8%BF%BD%E6%B1%82%EF%BC%8C%E6%8E%A8%E5%8A%A8vLLM%E6%88%90%E4%B8%BAAI%E6%8E%A8%E7%90%86%E9%A2%86%E5%9F%9F%E7%9A%84%E8%A1%8C%E4%B8%9A%E6%A0%87%E5%87%86%EF%BC%8C%E6%B7%B1%E5%88%BB%E5%A1%91%E9%80%A0%E7%9D%80AI%E5%BA%94%E7%94%A8%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%95%88%E7%8E%87%E4%B8%8E%E5%8F%91%E5%B1%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmichael-goinvllmdeepseekai-20251216071002230-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Michael Goin：vLLM“铁王座”背后的静默架构师——从DeepSeek到多模态，铸就AI推理新标准</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Michael Goin，作为红帽首席工程师与vLLM核心贡献者，以其深厚的技术功底和对开源哲学的坚守，成为大模型推理引擎vLLM从文本到多模态、从单一硬件到异构兼容的关键推手。他通过前瞻性的PyTorch战略、积极的社区协作和对性能优化的极致追求，铸就了vLLM在AI时代推理“铁王座”的地位，深刻影响着AI产业的效率与发展。</p></blockquote>
+<p>数字世界的服务器低声轰鸣，算法与硅晶片的复杂共舞，在人工智能这个瞬息万变、对即时智能响应渴求永无止境的领域，推理的效率如同生命线般至关重要。它是一位沉默的无名英雄，将原始计算转化为有形的、改变世界的影响力。在这股计算浪潮的中心，有一位工程师，他的名字或许不常出现在媒体头条，但他的代码与洞察力，却为全球无数AI应用铺设了高速公路。他就是Michael Goin，红帽的首席工程师，vLLM这一AI推理“铁王座”的核心铸造者之一。</p>
+<h3 id="技术突破的背后">技术突破的背后</h3>
+<p>vLLM的故事，始于加州大学伯克利分校Sky Computing Lab的一群充满热情的学生与研究员。2023年，他们开源了革命性的PagedAttention技术，点燃了火种。短短一年多，vLLM在GitHub上星标数从4万飙升至6.5万，迅速成为全球科技公司首选的推理引擎<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Neural Magic，这家由MIT研究员创立的企业，以其独特的“免费平台+开源工具”策略，在AI优化领域脱颖而出，并对vLLM社区做出了深远贡献，构建了成熟的企业级推理堆栈<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。当红帽于2024年11月战略性收购Neural Magic时，Michael Goin，这位拥有超过十年优化推理性能和CPU/GPU效能经验的工程师，连同他的核心团队，正式成为了红帽的一员。他在vLLM社区深耕于内核调优、模型压缩及系统优化，其对代码的精细雕琢，如同钟表匠对精密齿轮的打磨，确保着vLLM引擎的每一次转动都精准而高效。</p>
+<p>作为vLLM项目的“内核团队”领导者，Michael Goin及其团队的日常，是一场与时间赛跑的极限挑战。每一次新型大模型的发布，都意味着新的适配与优化。当DeepSeek R1横空出世，其独特的MoE（Mixture-of-Experts）架构带来了前所未有的复杂性，也彻底改变了团队的焦点<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Michael回忆道：</p>
+<blockquote>
+<p>“整个0.7.2版本的开发周期都非常紧凑，我们需要迅速响应DeepSeek的新特性，还要高效支持Qwen 2.5 VL，并引入Transformers backend，让用户能够直接运行任意Hugging Face模型。” <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这不仅仅是技术的堆砌，更是对效率和前瞻性的考验。</p>
+<p>随后到来的0.7.3版本更是一次大规模的更新，众多贡献者在紧张的节奏中高效协作。该版本不仅为DeepSeek启用了多Token预测（MTP）、MLA注意力等优化，还史无前例地将专家并行（Expert Parallelism）的支持融入vLLM，这是一个在DeepSeek之前并不常见的技术方向。Michael将DeepSeek开源的一系列高性能工具，如DeepGEMM、DeepEP和专家并行负载均衡等，系统化地融入vLLM生态，使得原本用于私有环境的技术，被转化为可持续、通用化的实现，从而服务更多基于MoE架构的模型。</p>
+<blockquote>
+<p>&quot;vLLM的某些演进正是受DeepSeek所推动，并非因为DeepSeek模型本身运行更快，而是其开源的一系列先进技术为整个生态带来了提升。&quot; <sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>他沉稳地指出，这如同一次技术的“反哺”，DeepSeek的复杂性反而为vLLM团队带来了优化与泛化的宝贵契机。他们与DeepSeek携手，将先进算法与底层框架的实现完美结合，构建出更强大的推理框架，真正实现了_“强强联合”_。除了主导DeepSeek V3的整合，Michael还带领团队完成了GPT-OSS、Qwen、Kimi等多个模型的适配与优化，每一次攻坚克难，都铸就了vLLM在推理领域的“铁王座”的坚实基石。</p>
+<h3 id="开放生态的构建者">开放生态的构建者</h3>
+<p>Michael Goin的愿景远不止于支持单个模型，更在于构建一个开放、高效的硬件推理生态。在异构计算的时代，芯片厂商的百花齐放既带来了机遇，也带来了前所未有的兼容性挑战。而Michael的策略核心，是深度拥抱PyTorch，将其视为连接上层框架与底层硬件的“最大公约数”。</p>
+<blockquote>
+<p>“硬件之上是PyTorch，PyTorch之上才是vLLM，” <sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>Michael解释道，“这意味着，只要硬件厂商提供了对PyTorch的良好支持，那么适配vLLM的工作就已完成大半。” vLLM的模型定义几乎完全基于PyTorch编写，仅在注意力机制等少数关键模块保留了可替换的定制化空间。正是通过这种统一的PyTorch抽象层，vLLM得以集成各家硬件的加速实现，包括NVIDIA的FlashAttention、AMD的ROCm Attention、Google TPU的Pathways Attention，乃至昇腾NPU的Attention等十余种后端<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这种策略不仅极大地降低了多硬件支持的复杂度，也让整个生态能在统一的基础上持续演进与优化。他进一步强调，PyTorch被视为从机器学习到硬件层的最佳抽象框架，这也是vLLM选择加入PyTorch基金会的原因之一。</p>
+<p>Michael Goin与全球顶尖的硬件巨头们保持着紧密的协作。他与NVIDIA共同推进 Blackwell 芯片的支持工作，优化B200相关性能；与AMD团队确保vLLM在其平台上的表现；与Google TPU团队合作一年多，完成了多次版本发布。更引人注目的是，在与国内新兴芯片厂商沐曦的合作中，Michael作为最高决策者，甚至参与设计了整体支持架构。</p>
+<p>“在项目非常早期阶段，我便与沐曦团队共同讨论支持框架的设计方向，”Michael回忆道。他主导高层架构，而他的社区贡献者则深入细节，甚至专程赴上海进行面对面技术对接。双方在Slack上创建了跨公司“线上联合工作组”，确保高效推进。红帽亚太CTO办公室首席架构师张家驹对此深有感触：</p>
+<blockquote>
+<p>“对沐曦而言，他们找到了让社区支持其硬件的优雅方式，这意味着未来的维护工作量将比以往更少。对社区而言，我们也推动了一个支持不同硬件的生态系统的发展。” <sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种深度协作，体现了Michael对生态建设的严谨投入，最终实现了双赢。</p>
+<p>然而，在硬件竞争的深水区，一个长期困扰业界的问题是：NVIDIA的CUDA护城河是否依然坚固？Michael Goin以其工程师的理性坦言：</p>
+<blockquote>
+<p>“CUDA对其他硬件而言并非一种可直接迁移的语言，这本质上是硬件抽象与软件生态的长期累积差距。” <sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>即便能在PyTorch层实现功能兼容，其效率往往难以匹敌NVIDIA经过十数年深度打磨的CUDA生态。</p>
+<p>但Michael也敏锐地指出了转折点：</p>
+<blockquote>
+<p>“新型注意力算法正在不断涌现，对于这些崭新技术，其他硬件供应商有可能实现超越。它们非常新颖，供应商或许能提供比CUDA更快速、更原生的支持。” <sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>他以Kimi提出的KDA算法为例，该算法率先通过Triton获得支持。他将此比喻为一场体育竞赛，<em>“一切又回到了同一条起跑线。”</em> 这句话不仅揭示了技术竞争的残酷与魅力，更展现了他对未来技术范式转变的深刻洞察与乐观判断。</p>
+<h3 id="拥抱多模态面向未来的演进">拥抱多模态：面向未来的演进</h3>
+<p>当Michael Goin和他的团队还在深入优化单一模态推理的每一个字节时，AI的浪潮已悄然转向多模态。vLLM，这个最初为文本推理而生的引擎，在Michael的引领下，开始了一场深刻的自我革新，从一个纯文本推理引擎，全面升级为一个支持全模态生成与理解的统一服务平台。</p>
+<blockquote>
+<p>“无论是文生图、文档理解，还是其他生成任务，其底层均依赖于大模型推理，因此都可以通过vLLM进行处理，” <sup id="fnref9:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>Michael坚定地指出。为了实现这一宏大的愿景，团队对vLLM v1版本进行了彻底重构。其中一项关键创新是_多模态前缀缓存（multimodal prefix caching）_。传统上，vLLM通过Page Attention复用文本token的键值缓存；如今，这一机制已扩展至图像、音频等任意模态输入，大幅提升了重复请求的处理效率<sup id="fnref10:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>为了支撑超大规模推理部署，团队还实现了_编码器解耦技术_，将视觉、音频编码器与语言模型backbone解耦，这不仅符合多模态模型的结构特点，也为资源利用率和弹性部署提供了极致的优化。</p>
+<p>2024年12月，这项演进迎来了里程碑时刻：vLLM-Omni作为其首个“全模态”推理框架正式发布。Omni并非在原有框架上的简单封装，而是引入了一套完全解耦的流水线架构，让不同阶段按需分配资源，并通过统一调度衔接。一个全模态推理请求将经过模态编码器、LLM核心与模态生成器三类组件，通过管线调度在不同GPU/节点间协同工作<sup id="fnref11:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>Michael Goin对vLLM的定位清晰而宏大：</p>
+<blockquote>
+<p>“vLLM的核心角色，是一个高效的推理引擎与服务器，这类似于Web服务器托管各种网页应用（如HTML或JavaScript页面）的逻辑。vLLM需要承载各种各样的模型与应用，并致力于在各种使用场景下，无论是应对一千名还是十万名用户的访问，都能提供优异的性能。” <sup id="fnref12:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>他的话语中，蕴含着对vLLM未来无限可能性的坚定信念，以及将其打造成为AI时代最通用、最高效推理基础架构的雄心壮志。</p>
+<h3 id="社区驱动与速度哲学">社区驱动与“速度”哲学</h3>
+<p>vLLM之所以能够在短短两年半内发展成为AI推理领域的“铁王座”，除了其核心技术的卓越性，更离不开其独特的“速度”哲学和蓬勃发展的开源社区。Michael Goin观察到一个显著的趋势：越来越多的公司开始将他们的修改回馈到vLLM的上游。</p>
+<blockquote>
+<p>&quot;这是因为vLLM本身已经有了大量的改进，这些改进对他们私下开发的版本来说也是有增益性的，所以他们希望能更频繁地与上游同步。他们开始愿意把自己定制的改动upstream到项目中，并且更倾向于直接使用upstream vLLM，而不是开发一个非常不同的私有版本。我们已经在多个案例中看到了这种情况的发生。&quot; <sup id="fnref13:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>红帽亚太CTO办公室首席架构师张家驹补充道，vLLM的上游版本拥有一个独特优势：</p>
+<blockquote>
+<p>“就是和众多领先的模型实验室和公司合作，快速收集他们的反馈，有bug就去修，修完之后也会放回社区，让更多人看到。” <sup id="fnref14:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>vLLM的合作名单星光熠熠，涵盖了从DeepSeek、Qwen、字节、腾讯，到LinkedIn、亚马逊、Mistral、Azure和Snowflake等行业巨头。这种速度优势形成了一个良性循环：用户越多，反馈越快，迭代就越迅猛。当社区版本的迭代速度远超私有分支时，企业就会自然而然地选择拥抱社区版本，将其作为事实标准。</p>
+<p>然而，作为一个每月下载量超20万次的热门推理框架<sup id="fnref15:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，vLLM的广泛采用也意味着它必须直面生产环境中的真实挑战。近期，不少开发者集中反馈了启动速度偏慢的问题。对此，Michael Goin展现了他作为核心维护者的责任感与务实精神。</p>
+<p>他回应道，团队大约从几个月前已经开始明确着手解决这一问题。他们不仅在GitHub上建立了专项跟踪与“启动体验优化”项目，还在Slack开设了专门频道，以持续收集并响应用户的实际痛点。Michael解释，启动时间较长的因素有几个，其一是CUDA graph capture time：为了获得最佳性能，需要捕获尽可能多的CUDA graph，但每多捕获一个graph，启动时间也会相应增加，因此需要做好权衡。另一个因素是<code>torch.compile</code>，它本身也需要一定时间。开发团队已推动<code>torch.compile</code>团队重视启动时间问题，并取得了一些显著改进<sup id="fnref16:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>此外，Michael团队还打造了一些工具和指南，指导用户如何处理冷启动与热启动的差异，例如设置缓存目录来存储<code>torch.compile</code>的输出结果、Triton的输出结果以及其他编译或初始化的内容。</p>
+<blockquote>
+<p>“若开发者正在部署单个模型，并计划扩展至多个副本，团队建议在部署中复制该缓存目录以实现热启动，这比冷启动快得多。” <sup id="fnref17:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这番细致入微的解释，不仅回应了社区的关切，更体现了Michael Goin对开发者体验的深刻理解与人文关怀。</p>
+<h3 id="结束语">结束语</h3>
+<p>在vLLM这个由社区驱动的庞大项目中，红帽以其深厚的开源基因扮演着不可或缺的角色。张家驹指出，红帽全球约有两万名员工，其中可能有一两千名工程师完全在社区中做贡献：</p>
+<blockquote>
+<p>“他们贡献的工作并不针对红帽的商业方面，做的事情非常中立。” <sup id="fnref18:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种对开源原则的坚持，使得红帽能够在vLLM这样一个高度分散、由15到20个不同组织成员共同维护的多元生态中，以其工程实力和中立立场发挥关键影响力。</p>
+<p>红帽如此投入vLLM，源于一个清晰的战略判断：推理是AI应用成本的核心环节。Michael Goin的团队，通过主导推动vLLM v1版本的架构重构，实质性地推动了社区标准化进程，并与PyTorch <code>torch.compile</code>团队长达一年半的合作，优化了上游框架以更好支持vLLM的高阶场景。</p>
+<blockquote>
+<p>“这些工作让支持新硬件、新模型变得更容易，” <sup id="fnref19:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>张家驹解释道，红帽力图把这个标准化的层做得越来越厚、越来越稳定。</p>
+<p>透过Michael Goin，我们看到的不仅是一位技术精湛的首席工程师，更是一位深谙行业趋势、推动技术变革的远见者。他用代码构建桥梁，连接着复杂模型与异构硬件；他用战略指引方向，将开源协作的理念内化为产品的核心竞争力。他的故事，是AI时代无数工程师默默奉献、改变世界的一个缩影。面向更加多变的未来，红帽和vLLM能否守住“推理服务标准”的地位，答案或许就藏在Michael Goin下一个深思熟虑的架构决策中。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://m.36kr.com/p/3594762321576196">DeepSeek倒逼vLLM升级！芯片内卷、MoE横扫千模，vLLM核心维护者独家回应：如何凭PyTorch坐稳推理“铁王座”</a>·36氪·（2025/12/14）·检索日期2025/12/16&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref9:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref10:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref11:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref12:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref13:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref14:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref15:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref16:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref17:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref18:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref19:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://x.com/9hills/status/1896952268395835508">vLLM 专门讲DeepSeek 推理优化，建议看看。 ppt可抄</a>·X (formerly Twitter)·@9hills·（2025/12/14）·检索日期2025/12/16&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/michael-goin/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Michael Goin</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/vllm/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">VLLM</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86%E5%BC%95%E6%93%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理引擎</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/pytorch/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">PyTorch</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源社区</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/deepseek-moe/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DeepSeek MoE</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">多模态AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A1%AC%E4%BB%B6%E9%80%82%E9%85%8D/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">硬件适配</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/newspaper/2025-12-13-06-22-ai-/">06-22日报|AI：雄心万丈入“行动”纪元，却为何仍频频“翻车”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251211081005065-0/">破局“数据围城”：AI医疗影像的范式跃迁与下一代商业护城河</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/unemo-20251210151005937-0/">预见未来：UNeMo如何重塑具身智能的导航范式与商业边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251210144006271-0/">美团&#34;AI卷王&#34;模式全开，字节&#34;顶流&#34;空降，龙猫大模型要“干饭”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-3agi-20251203164004971-0/">谷歌Gemini 3：千人协同，智启AGI共建新纪元与多模态统一之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigpt-51-20251201094005068-0/">AI范式静默转型：从预训练到推理，揭示GPT-5.1与具身智能的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20251113111004937-1/">企业级通用Agent：从自动化到自主智能体的产业蝶变与未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/erniegptgemini-20251113004008211-2/">百度ERNIE“杀疯了”？多模态硬刚GPT、Gemini，还要抢企业“饭碗”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/nano-banana-2ai-20251111114007255-0/">Nano Banana 2：短暂闪现的AI生图里程碑，预示多模态智能的具身与内容生产新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251110154005383-0/">多模态一致性生成：AI&#43;社交新范式的核心驱动与腾讯的战略深潜</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251110111004951-0/">AI的“数字配偶”之争：语境聚合如何重塑智能未来与商业版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/pytorch-20251110104004803-0/">PyTorch之父“甩手”离职：不是摆烂，是想去“搞点新花样”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/oppo-citywalk-videoagent-20251109101005672-0/">超越屏幕：OPPO Citywalk VideoAgent如何预示具身智能的商业前沿与城市未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/emu35tokenai-20251031194006940-1/">智源Emu3.5：从“预测下一个Token”到“洞察世界状态”，AI迈向具身智能的第三范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/goodnotesai-20251030111004725-0/">“无形”的智能：Goodnotes如何以人为本，重塑AI时代生产力与创意边界</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
