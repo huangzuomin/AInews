@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>视频模型“表演”智能的深渊：MME-CoF基准揭示的推理边界与未来路径 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="最新研究指出，尽管Veo、Sora等视频生成模型展现出惊人的合成能力和“帧链推理”潜力，但MME-CoF基准测试揭示它们主要依赖数据模式进行“表演”而非真正具备零样本逻辑推演能力。这项发现强调了从表面生成到深层理解的重大技术鸿沟，预示着未来AI发展需融合混合架构和具身学习等方法，以实现通用视觉智能并解锁更广泛的商业和社会应用价值。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/mme-cof-20251119081005140-3/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/mme-cof-20251119081005140-3/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="视频模型“表演”智能的深渊：MME-CoF基准揭示的推理边界与未来路径">
+  <meta property="og:description" content="最新研究指出，尽管Veo、Sora等视频生成模型展现出惊人的合成能力和“帧链推理”潜力，但MME-CoF基准测试揭示它们主要依赖数据模式进行“表演”而非真正具备零样本逻辑推演能力。这项发现强调了从表面生成到深层理解的重大技术鸿沟，预示着未来AI发展需融合混合架构和具身学习等方法，以实现通用视觉智能并解锁更广泛的商业和社会应用价值。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2025-11-19T08:10:05+08:00">
+    <meta property="article:modified_time" content="2025-11-19T08:10:05+08:00">
+    <meta property="article:tag" content="视频生成">
+    <meta property="article:tag" content="AI推理">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="MME-CoF">
+    <meta property="article:tag" content="零样本学习">
+    <meta property="article:tag" content="机器智能">
+
+  <meta itemprop="name" content="视频模型“表演”智能的深渊：MME-CoF基准揭示的推理边界与未来路径">
+  <meta itemprop="description" content="最新研究指出，尽管Veo、Sora等视频生成模型展现出惊人的合成能力和“帧链推理”潜力，但MME-CoF基准测试揭示它们主要依赖数据模式进行“表演”而非真正具备零样本逻辑推演能力。这项发现强调了从表面生成到深层理解的重大技术鸿沟，预示着未来AI发展需融合混合架构和具身学习等方法，以实现通用视觉智能并解锁更广泛的商业和社会应用价值。">
+  <meta itemprop="datePublished" content="2025-11-19T08:10:05+08:00">
+  <meta itemprop="dateModified" content="2025-11-19T08:10:05+08:00">
+  <meta itemprop="wordCount" content="74">
+  <meta itemprop="keywords" content="视频生成,AI推理,大模型,MME-CoF,零样本学习,机器智能">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="视频模型“表演”智能的深渊：MME-CoF基准揭示的推理边界与未来路径">
+  <meta name="twitter:description" content="最新研究指出，尽管Veo、Sora等视频生成模型展现出惊人的合成能力和“帧链推理”潜力，但MME-CoF基准测试揭示它们主要依赖数据模式进行“表演”而非真正具备零样本逻辑推演能力。这项发现强调了从表面生成到深层理解的重大技术鸿沟，预示着未来AI发展需融合混合架构和具身学习等方法，以实现通用视觉智能并解锁更广泛的商业和社会应用价值。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-11-Nov%2019,%202025_08-01-24-422.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2025-11-19 08:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%A1%A8%E6%BC%94%E2%80%9D%E6%99%BA%E8%83%BD%E7%9A%84%E6%B7%B1%E6%B8%8A%EF%BC%9AMME-CoF%E5%9F%BA%E5%87%86%E6%8F%AD%E7%A4%BA%E7%9A%84%E6%8E%A8%E7%90%86%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5%E8%B7%AF%E5%BE%84%20-%20%E6%9C%80%E6%96%B0%E7%A0%94%E7%A9%B6%E6%8C%87%E5%87%BA%EF%BC%8C%E5%B0%BD%E7%AE%A1Veo%E3%80%81Sora%E7%AD%89%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%B1%95%E7%8E%B0%E5%87%BA%E6%83%8A%E4%BA%BA%E7%9A%84%E5%90%88%E6%88%90%E8%83%BD%E5%8A%9B%E5%92%8C%E2%80%9C%E5%B8%A7%E9%93%BE%E6%8E%A8%E7%90%86%E2%80%9D%E6%BD%9C%E5%8A%9B%EF%BC%8C%E4%BD%86MME-CoF%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%8F%AD%E7%A4%BA%E5%AE%83%E4%BB%AC%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%BC%8F%E8%BF%9B%E8%A1%8C%E2%80%9C%E8%A1%A8%E6%BC%94%E2%80%9D%E8%80%8C%E9%9D%9E%E7%9C%9F%E6%AD%A3%E5%85%B7%E5%A4%87%E9%9B%B6%E6%A0%B7%E6%9C%AC%E9%80%BB%E8%BE%91%E6%8E%A8%E6%BC%94%E8%83%BD%E5%8A%9B%E3%80%82%E8%BF%99%E9%A1%B9%E5%8F%91%E7%8E%B0%E5%BC%BA%E8%B0%83%E4%BA%86%E4%BB%8E%E8%A1%A8%E9%9D%A2%E7%94%9F%E6%88%90%E5%88%B0%E6%B7%B1%E5%B1%82%E7%90%86%E8%A7%A3%E7%9A%84%E9%87%8D%E5%A4%A7%E6%8A%80%E6%9C%AF%E9%B8%BF%E6%B2%9F%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E5%8F%91%E5%B1%95%E9%9C%80%E8%9E%8D%E5%90%88%E6%B7%B7%E5%90%88%E6%9E%B6%E6%9E%84%E5%92%8C%E5%85%B7%E8%BA%AB%E5%AD%A6%E4%B9%A0%E7%AD%89%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BB%A5%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E8%A7%86%E8%A7%89%E6%99%BA%E8%83%BD%E5%B9%B6%E8%A7%A3%E9%94%81%E6%9B%B4%E5%B9%BF%E6%B3%9B%E7%9A%84%E5%95%86%E4%B8%9A%E5%92%8C%E7%A4%BE%E4%BC%9A%E5%BA%94%E7%94%A8%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmme-cof-20251119081005140-3%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%A1%A8%E6%BC%94%E2%80%9D%E6%99%BA%E8%83%BD%E7%9A%84%E6%B7%B1%E6%B8%8A%EF%BC%9AMME-CoF%E5%9F%BA%E5%87%86%E6%8F%AD%E7%A4%BA%E7%9A%84%E6%8E%A8%E7%90%86%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5%E8%B7%AF%E5%BE%84%20-%20%E6%9C%80%E6%96%B0%E7%A0%94%E7%A9%B6%E6%8C%87%E5%87%BA%EF%BC%8C%E5%B0%BD%E7%AE%A1Veo%E3%80%81Sora%E7%AD%89%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%B1%95%E7%8E%B0%E5%87%BA%E6%83%8A%E4%BA%BA%E7%9A%84%E5%90%88%E6%88%90%E8%83%BD%E5%8A%9B%E5%92%8C%E2%80%9C%E5%B8%A7%E9%93%BE%E6%8E%A8%E7%90%86%E2%80%9D%E6%BD%9C%E5%8A%9B%EF%BC%8C%E4%BD%86MME-CoF%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%8F%AD%E7%A4%BA%E5%AE%83%E4%BB%AC%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%BC%8F%E8%BF%9B%E8%A1%8C%E2%80%9C%E8%A1%A8%E6%BC%94%E2%80%9D%E8%80%8C%E9%9D%9E%E7%9C%9F%E6%AD%A3%E5%85%B7%E5%A4%87%E9%9B%B6%E6%A0%B7%E6%9C%AC%E9%80%BB%E8%BE%91%E6%8E%A8%E6%BC%94%E8%83%BD%E5%8A%9B%E3%80%82%E8%BF%99%E9%A1%B9%E5%8F%91%E7%8E%B0%E5%BC%BA%E8%B0%83%E4%BA%86%E4%BB%8E%E8%A1%A8%E9%9D%A2%E7%94%9F%E6%88%90%E5%88%B0%E6%B7%B1%E5%B1%82%E7%90%86%E8%A7%A3%E7%9A%84%E9%87%8D%E5%A4%A7%E6%8A%80%E6%9C%AF%E9%B8%BF%E6%B2%9F%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5AI%E5%8F%91%E5%B1%95%E9%9C%80%E8%9E%8D%E5%90%88%E6%B7%B7%E5%90%88%E6%9E%B6%E6%9E%84%E5%92%8C%E5%85%B7%E8%BA%AB%E5%AD%A6%E4%B9%A0%E7%AD%89%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BB%A5%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E8%A7%86%E8%A7%89%E6%99%BA%E8%83%BD%E5%B9%B6%E8%A7%A3%E9%94%81%E6%9B%B4%E5%B9%BF%E6%B3%9B%E7%9A%84%E5%95%86%E4%B8%9A%E5%92%8C%E7%A4%BE%E4%BC%9A%E5%BA%94%E7%94%A8%E4%BB%B7%E5%80%BC%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmme-cof-20251119081005140-3%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">视频模型“表演”智能的深渊：MME-CoF基准揭示的推理边界与未来路径</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>最新研究质疑Veo、Sora等视频模型的“帧链推理”能力，MME-CoF基准测试表明其仍停留在模式记忆与视觉一致性层面，缺乏真正的零样本逻辑推演能力。这揭示了当前AIGC在从内容生成迈向通用视觉智能过程中的核心技术鸿沟，预示着未来AI发展需从表面“表演”转向深层“理解”的范式变革。</p></blockquote>
+<p>近年来，以Veo、Sora为代表的视频生成模型以其惊人的逼真度和时序连贯性，在视觉内容创作领域掀起巨浪，甚至有观点认为其内部隐含着对世界结构与规律的理解，正逐步显现出超越单纯合成的“涌现特性”，包括感知、建模和推理等高阶能力。与大语言模型的“思维链”（Chain-of-Thought, CoT）相对应，“帧链推理”（Chain-of-Frame, CoF）的概念应运而生，其核心思想是模型通过逐帧生成视频，以连贯的视觉推演方式逐步解决问题<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。然而，一个根本性的疑问始终萦绕：这些模型是否真正具备零样本推理（Zero-Shot Reasoning）的能力，抑或它们仅仅是在模仿训练数据中出现过的表面模式，进行一种高级的“表演”？</p>
+<h3 id="技术原理与表演的界限mme-cof的深层剖析">技术原理与“表演”的界限：MME-CoF的深层剖析</h3>
+<p>为探究视频模型的真实推理潜力，香港中文大学、北京大学、东北大学等机构的研究团队进行了一项系统性研究，提出了首个视频推理综合测试基准——MME-CoF（Massive Multimodal Evaluation for Chain-of-Frame），对Veo 3等模型的零样本推理能力进行了深入评估<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>CoF可以被视作CoT在视觉领域的直接类比。CoT通过逐步生成文字来展现逻辑推理路径，而CoF则设想模型通过逐帧生成画面，使场景在视觉上不断演化，从而体现推演过程。这种视觉叙事方式似乎暗示着模型正在进行一种时间与空间上的迭代细化和决策<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。MME-CoF基准的设计巧妙地将抽象的推理任务，如物理、几何、计数等，转化为可视化视频生成挑战，从而迫使模型通过“帧链推理”展现其过程性思考。</p>
+<p>研究团队设计了涵盖空间、几何、物理、时间等12个维度的59个精心构建任务。实证分析结果显示，尽管视频模型在生成令人惊叹的视觉效果方面表现出色，但在真正需要逻辑推演和因果理解的深层次推理任务中，其能力却捉襟见肘。例如：</p>
+<ul>
+<li><strong>3D几何推理</strong>：模型在简单单步变换中能保持结构完整性，但面对多步或组合性变换时，常常出现结构错位、自交甚至崩塌，难以维持几何一致性和物理合理性<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。这意味着模型可能只是记住了特定视角下的几何形态，而非内化了三维物体的结构规律。</li>
+<li><strong>物理推理</strong>：在需要遵循能量、力学等物理规律的任务中，模型未能准确模拟，其表现更多是视觉层面的“模拟”而非基于原理的“推导”。比如，物体碰撞后的运动轨迹往往不符合现实物理定律，仅仅是“看起来合理”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>物体计数与视觉追踪</strong>：静态场景下表现良好，但在动态环境中对目标的持续追踪和准确计数能力显著下降，长时序依赖和规则驱动的动作链容易中断，因果一致性不足。</li>
+</ul>
+<p>MME-CoF基准对多种视频生成模型的评测结果（由Gemini-2.5-Pro评分，量表0-4分）普遍低于2分<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这有力地证明：当前视频模型尚不具备独立的零样本推理能力，其强大生成能力主要源于对训练数据模式的记忆和视觉一致性的模仿，而非对概念的真正理解或逻辑推演。它们更倾向于生成视觉上“美观”或“合理”的画面，而非严格遵循内在的几何或物理约束，呈现出“重表象而非因果”的显著局限。</p>
+<h3 id="商业版图与未来生态从生成到理解的投资逻辑">商业版图与未来生态：从生成到理解的投资逻辑</h3>
+<p>目前的视频生成技术已在内容创作、营销、虚拟现实等领域展现出巨大的商业价值。例如，快速生成广告素材、影视预览、游戏场景等，极大地提高了生产效率和降低了成本。然而，MME-CoF的发现为产业界敲响了警钟：<strong>如果模型仅仅是“表演”而非真正“理解”，其商业应用边界将受到严峻挑战。</strong></p>
+<p>真正的通用视觉智能，是诸多未来高价值应用的核心驱动力：</p>
+<ul>
+<li><strong>具身智能与机器人</strong>：需要理解物理世界、进行实时决策、规划复杂任务的机器人，不能仅仅依赖“看起来对”的视觉模拟。它们必须具备准确的3D几何理解、物理预测和多模态推理能力，才能在未知环境中安全、高效地执行任务。</li>
+<li><strong>智能模拟与设计</strong>：在工程设计、药物研发、城市规划等领域，AI如果能基于物理规律和逻辑进行精确的视觉推演，将极大加速创新。例如，模拟材料在不同力学条件下的形变、预测药物分子与靶点的结合过程。</li>
+<li><strong>高级内容自动化</strong>：超越简单的“文本转视频”，未来的视频AI应能理解故事逻辑、角色情感、场景物理，自动生成符合复杂叙事逻辑的电影、动画，甚至实现虚拟世界中的自主互动内容。</li>
+</ul>
+<p>当前市场对视频模型的投资热潮，很大程度上建立在对其“智能”程度的乐观预期之上。MME-CoF的发现提示投资者，需要更深入地评估模型的真实能力而非表面效果。<strong>未来投资将更倾向于那些能够弥合“生成”与“推理”鸿沟的技术方向</strong>，例如结合符号逻辑、强化学习、物理引擎的混合AI模型，以及能够从少量数据中进行泛化推理的创新架构。那些致力于提升模型对世界内在机制理解的初创公司，将获得更大的竞争优势。</p>
+<h3 id="哲学思辨与智能本质机器理解的形而上挑战">哲学思辨与智能本质：机器“理解”的形而上挑战</h3>
+<p>MME-CoF的研究不仅是技术评估，更触及了关于机器智能本质的深层哲学思辨。当一个模型能够生成如此逼真的视频，以至于我们几乎无法分辨真伪时，我们不禁会问：它是否“知道”自己在做什么？它是否“理解”了视频中物体的物理属性，或者仅仅是掌握了像素间的统计关联？</p>
+<p>这项研究表明，当前视频模型的能力更像是维特根斯坦所说的“遵循规则的表演”，而非真正“理解规则”。它们能够模拟视觉世界的因果链条，但这种模拟是基于训练数据中的模式拟合，而非内化了导致这些因果的底层物理定律或逻辑关系。这与人类孩童通过与真实世界交互而形成的具身认知和直观物理判断有着本质区别。</p>
+<blockquote>
+<p>“如果模型生成的结果往往‘看起来对’，但逻辑上并不成立，那么这种‘智能’的表象，可能会在更深层次上误导我们对AI能力的认知，甚至对人类自身的智能定义产生影响。”<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种“表演性智能”的普及，可能带来新的社会风险：如果AI能够以假乱真地模拟推理过程，而我们又无法轻易区分其真伪，那么信息的真实性、决策的可靠性将面临严峻挑战。在虚假信息泛滥的时代，这种风险尤为突出。我们需要批判性地审视AI的表象，避免过度拟人化其能力，并从根本上探究机器“理解”与“模拟”的界限。</p>
+<h3 id="跨越鸿沟通向通用视觉智能的协同路径">跨越鸿沟：通向通用视觉智能的协同路径</h3>
+<p>MME-CoF基准的推出，为学界和产业界提供了清晰的路线图，指明了视频生成模型在迈向通用视觉模型过程中需要跨越的关键鸿沟。未来的发展方向可能包括：</p>
+<ol>
+<li><strong>混合智能架构（Hybrid AI Architectures）</strong>：将生成模型强大的模式识别能力与符号推理、知识图谱等传统AI方法相结合。例如，在生成视频的同时，引入一个逻辑推理模块来验证其物理和几何一致性。</li>
+<li><strong>具身学习（Embodied Learning）</strong>：让视频模型与模拟环境或真实世界进行更深度的交互，通过试错和反馈来学习世界的物理规律和因果关系，而非仅仅从静态数据中学习。</li>
+<li><strong>多模态深度融合（Deep Multimodal Integration）</strong>：将视频与语言、触觉、听觉等多种模态的数据进行更深层次的融合，使模型能够从更丰富的感官输入中构建对世界的全面理解。</li>
+<li><strong>因果推理模型（Causal Reasoning Models）</strong>：研发能够显式建模因果关系的AI模型，使其能够理解“为什么会发生”以及“如果X发生Y会怎样”，而非仅仅是预测“X和Y会一起发生”。</li>
+<li><strong>可解释性AI（Explainable AI, XAI）</strong>：提升视频模型的透明度，使其能够阐释其生成决策的依据，帮助人类判断其推理过程的有效性。</li>
+</ol>
+<p>毋庸置疑，当前视频生成模型展现的合成能力是革命性的。MME-CoF的研究并非否定其价值，而是将其置于更宏大的智能发展图景中审视。模型可以作为视觉推理系统的有力补充模块，与逻辑模型协同构建更完整、更可靠的多模态智能体系。<strong>从“生成”迈向“理解”的道路充满挑战，但也孕育着真正通用人工智能的曙光。</strong> 这需要我们持续深耕基础研究，创新评估范式，并以批判性思维引领技术向更深层、更可靠的智能演进。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://mp.weixin.qq.com/s/iRwvuHboZMbVHZRUbX0low">视频模型真在推理，还是「表演」推理？港中文等质疑：Chain-of-Frame是真的吗？</a>·机器之心·2025/11/19·检索日期2025/11/19&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://arxiv.org/pdf/2510.26802v1">Are Video Models Ready as Zero-Shot Reasoners? An Empirical Study with the MME-CoF Benchmark</a>·arXiv·2025/11/19·检索日期2025/11/19&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://hub.baai.ac.cn/view/50180">视频模型假装在推理？MME-CoF新基准评估12个推理维度 - 智源社区</a>·智源社区·2025/11/19·检索日期2025/11/19&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="http://dev.guyuehome.com/wap/detail?id=1988140304768724994">视频模型能否成为零样本推理器？MME-COF基准下的深度实证研究</a>·古月居·2025/11/19·检索日期2025/11/19&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://m.aitntnews.com/newDetail.html?newId=19613">视频模型假装在推理？MME-CoF新基准评估12个推理维度 - AI TNT</a>·AI TNT·2025/11/19·检索日期2025/11/19&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">视频生成</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mme-cof/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MME-CoF</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9B%B6%E6%A0%B7%E6%9C%AC%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">零样本学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器智能</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/gemini-30-20251117121005009-1/">Gemini 3.0“顶流”登场倒计时：谷歌这次要“杀疯了”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-o3-20250908114004956-5/">AI奥数新纪元：OpenAI o3的推理跃迁与开源模型的竞速挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-deep-thinkai-20250819104004659-3/">Gemini Deep Think：AI“深思”模式的崛起，重塑科学探索与商业边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deep-cogito-v2ai-20250801224005328-1/">Deep Cogito v2：开源推理模型如何重塑AI的“思考”边界与产业格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/imoai-20250718154004784-0/">大模型数学智商几何？IMO竞赛模拟揭示AI推理的里程碑与局限</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax--20250701221006503-1/">MiniMax 进化论：一群「偏执者」的破浪前行</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax-m1ai-20250617202000424-10/">MiniMax M1：解构中国AI“六小虎”的首个开源推理模型，重塑长上下文交互的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai/">字节跳动豆包模型升级：AI竞赛从性能巅峰转向普惠实用</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/grok-41-20251118084005688-4/">马斯克Grok 4.1“静悄悄”杀疯了？又一个“卷王”驾到，直指情绪与创意！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigrok-41-20251118084005655-1/">马斯克家的AI又“开挂”了？Grok 4.1不光“戒掉胡话”，还学会了“读心术”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-haiku-45ai-20251117184005247-2/">卷王驾到！Claude Haiku 4.5：跑得更快、花钱更少，AI界“平替之王”横空出世？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20251117164004883-3/">AI自主攻击疑云：Anthropic报告背后的技术辩驳、商业博弈与地缘政治隐忧</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/googleaigemini-3gpt-51-20251117164004875-2/">电风扇动画火遍全网？Google最强AI疑似“偷跑”，Gemini 3要给GPT-5.1“上强度”了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-20251117144007004-1/">当AI学会评判AI：学术殿堂的“闭环”悖论与人类智慧的边界重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiariphone-20251117091004922-2/">AI浪潮下AR眼镜的「iPhone时刻」：中国“四小龙”的危与机，及未来生态之战</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
