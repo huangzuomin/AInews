@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>代码狗都要失业了？LangChain 祭出“全自动”大招：LangSmith Agent Builder 终于转正！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="LangChain 正式发布 LangSmith Agent Builder (GA)，这款无代码工具让任何人都能通过自然语言对话创建具有记忆和规划能力的 AI Agent。它支持连接 Gmail、Slack 等常用软件，极大降低了智能体开发的门槛。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/langchain-langsmith-agent-builder--20260114001012535-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/langchain-langsmith-agent-builder--20260114001012535-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="代码狗都要失业了？LangChain 祭出“全自动”大招：LangSmith Agent Builder 终于转正！">
+  <meta property="og:description" content="LangChain 正式发布 LangSmith Agent Builder (GA)，这款无代码工具让任何人都能通过自然语言对话创建具有记忆和规划能力的 AI Agent。它支持连接 Gmail、Slack 等常用软件，极大降低了智能体开发的门槛。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-01-14T00:10:12+08:00">
+    <meta property="article:modified_time" content="2026-01-14T00:10:12+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="LangChain">
+    <meta property="article:tag" content="无代码">
+    <meta property="article:tag" content="生产力">
+    <meta property="article:tag" content="智能体手搓大师">
+
+  <meta itemprop="name" content="代码狗都要失业了？LangChain 祭出“全自动”大招：LangSmith Agent Builder 终于转正！">
+  <meta itemprop="description" content="LangChain 正式发布 LangSmith Agent Builder (GA)，这款无代码工具让任何人都能通过自然语言对话创建具有记忆和规划能力的 AI Agent。它支持连接 Gmail、Slack 等常用软件，极大降低了智能体开发的门槛。">
+  <meta itemprop="datePublished" content="2026-01-14T00:10:12+08:00">
+  <meta itemprop="dateModified" content="2026-01-14T00:10:12+08:00">
+  <meta itemprop="wordCount" content="140">
+  <meta itemprop="keywords" content="AI Agent,LangChain,无代码,生产力,智能体手搓大师">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="代码狗都要失业了？LangChain 祭出“全自动”大招：LangSmith Agent Builder 终于转正！">
+  <meta name="twitter:description" content="LangChain 正式发布 LangSmith Agent Builder (GA)，这款无代码工具让任何人都能通过自然语言对话创建具有记忆和规划能力的 AI Agent。它支持连接 Gmail、Slack 等常用软件，极大降低了智能体开发的门槛。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-01-Jan%2014,%202026_00-01-21-050.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-01-14 00:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%A3%E7%A0%81%E7%8B%97%E9%83%BD%E8%A6%81%E5%A4%B1%E4%B8%9A%E4%BA%86%EF%BC%9FLangChain&amp;#43;%E7%A5%AD%E5%87%BA%E2%80%9C%E5%85%A8%E8%87%AA%E5%8A%A8%E2%80%9D%E5%A4%A7%E6%8B%9B%EF%BC%9ALangSmith&amp;#43;Agent&amp;#43;Builder&amp;#43;%E7%BB%88%E4%BA%8E%E8%BD%AC%E6%AD%A3%EF%BC%81%20-%20LangChain&amp;#43;%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83&amp;#43;LangSmith&amp;#43;Agent&amp;#43;Builder&amp;#43;%28GA%29%EF%BC%8C%E8%BF%99%E6%AC%BE%E6%97%A0%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7%E8%AE%A9%E4%BB%BB%E4%BD%95%E4%BA%BA%E9%83%BD%E8%83%BD%E9%80%9A%E8%BF%87%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%AF%B9%E8%AF%9D%E5%88%9B%E5%BB%BA%E5%85%B7%E6%9C%89%E8%AE%B0%E5%BF%86%E5%92%8C%E8%A7%84%E5%88%92%E8%83%BD%E5%8A%9B%E7%9A%84&amp;#43;AI&amp;#43;Agent%E3%80%82%E5%AE%83%E6%94%AF%E6%8C%81%E8%BF%9E%E6%8E%A5&amp;#43;Gmail%E3%80%81Slack&amp;#43;%E7%AD%89%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%EF%BC%8C%E6%9E%81%E5%A4%A7%E9%99%8D%E4%BD%8E%E4%BA%86%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%A8%E6%A7%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flangchain-langsmith-agent-builder--20260114001012535-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%A3%E7%A0%81%E7%8B%97%E9%83%BD%E8%A6%81%E5%A4%B1%E4%B8%9A%E4%BA%86%EF%BC%9FLangChain&amp;#43;%E7%A5%AD%E5%87%BA%E2%80%9C%E5%85%A8%E8%87%AA%E5%8A%A8%E2%80%9D%E5%A4%A7%E6%8B%9B%EF%BC%9ALangSmith&amp;#43;Agent&amp;#43;Builder&amp;#43;%E7%BB%88%E4%BA%8E%E8%BD%AC%E6%AD%A3%EF%BC%81%20-%20LangChain&amp;#43;%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83&amp;#43;LangSmith&amp;#43;Agent&amp;#43;Builder&amp;#43;%28GA%29%EF%BC%8C%E8%BF%99%E6%AC%BE%E6%97%A0%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7%E8%AE%A9%E4%BB%BB%E4%BD%95%E4%BA%BA%E9%83%BD%E8%83%BD%E9%80%9A%E8%BF%87%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%AF%B9%E8%AF%9D%E5%88%9B%E5%BB%BA%E5%85%B7%E6%9C%89%E8%AE%B0%E5%BF%86%E5%92%8C%E8%A7%84%E5%88%92%E8%83%BD%E5%8A%9B%E7%9A%84&amp;#43;AI&amp;#43;Agent%E3%80%82%E5%AE%83%E6%94%AF%E6%8C%81%E8%BF%9E%E6%8E%A5&amp;#43;Gmail%E3%80%81Slack&amp;#43;%E7%AD%89%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%EF%BC%8C%E6%9E%81%E5%A4%A7%E9%99%8D%E4%BD%8E%E4%BA%86%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%A8%E6%A7%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flangchain-langsmith-agent-builder--20260114001012535-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">代码狗都要失业了？LangChain 祭出“全自动”大招：LangSmith Agent Builder 终于转正！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>只要你会说人话，就能手搓出能打、能记、能干活的 AI 智能体！LangChain 旗下的 LangSmith Agent Builder 结束公测正式 GA，主打一个“无代码”降维打击。</p></blockquote>
+<p>现在的 AI 圈儿，没个 Agent（智能体）都不好意思跟人打招呼。但以前想折腾个 Agent，你得一边抱着 Python 文档狂啃，一边对着 Prompt（提示词）反复横跳。今天，作为 LLM 开发框架届的“带大哥”，LangChain 宣布其 <strong>LangSmith Agent Builder 正式进入 GA（一般可用）阶段</strong><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。这意味着，哪怕你一行代码都不会写，只要会“打字”，就能亲手捏出一个帮你处理日常琐事的 AI 劳模。</p>
+<h3 id="只要动动嘴ai-就能帮你打工">只要动动嘴，AI 就能帮你打工？</h3>
+<p>这玩意儿到底有多神奇？简单来说，它把 Agent 的开发门槛从“写代码”直接拉到了“发微信”的水平。你只需要用大白话描述你的需求，Agent Builder 就能自动帮你生成 Prompt 模板，并配置好工具<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<blockquote>
+<p>“这哪是开发啊，这简直是在给 AI 下圣旨。”</p></blockquote>
+<p>不仅如此，它还集成了不少“黑科技”：</p>
+<ul>
+<li><strong>多步规划与长效记忆</strong>：它内置了 <code>deepagents</code> 软件包，让 Agent 不再是“转头就忘”的鱼类，而是能处理复杂、多步骤任务，并从你的纠错中不断进化的“卷王”<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+<li><strong>工具箱大甩卖</strong>：通过 MCP（模型上下文协议），你可以一键给 Agent 连接 Gmail、Slack 甚至 Linear。让它帮你读邮件、回消息、排日程，那都是基本操作<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+<li><strong>非工作流式的自由</strong>：不同于某些刻板的流程编排工具，它主打一个“灵活”。就像 B 站大佬评价的那样，它是无代码、非工作流式的智能体构建器<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+</ul>
+<h3 id="技术大揭秘这玩意儿到底怎么工作的">技术大揭秘：这玩意儿到底怎么工作的？</h3>
+<p>别看表面上云淡风轻，背后其实全是 LangChain 的“硬核”积淀。Agent Builder 本质上是把复杂的开发流程封装成了一个**文本到 Agent（Text-to-Agent）**的体验<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>它会根据你的描述，自动进行工具选择和逻辑推理。当你对它的表现不满意时，直接在界面上“指点”两句，它就能实时调整指令。最厚道的是，在 Beta 期间，Plus 和 Enterprise 用户可以免费白嫖这个 Agent Builder<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h3 id="行业地震谁笑了谁哭了">行业“地震”：谁笑了谁哭了？</h3>
+<p>LangSmith Agent Builder 的 GA，无疑是给 Coze（扣子）和 Dify 这些同类平台又加了一把火。对于那些苦于招不到 AI 程序员的小型团队，或者想提高效率的职场白领来说，这简直是福音。</p>
+<p>但我们也得冷静思考：当“开发”变成一种“对话”，传统的胶水代码程序员是否会感到一丝丝凉意？不过换个角度看，这其实是把开发者从繁琐的配置中解放出来，去思考更有价值的<strong>逻辑闭环</strong>。</p>
+<p>毕竟，工具再强，也得看用它的人脑洞够不够大。如果你已经有了 LangSmith 账号，不如现在就去试试，看看能不能捏出一个能帮你回复老板微信的“带薪摸鱼”神器？</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.linkedin.com/posts/harrison-chase-961287118_langsmith-agent-builder-today-were-releasing-activity-7389350292670038017-p0gX">Introducing LangSmith Agent Builder: No-Code AI Agent Creation</a> · LinkedIn · Harrison Chase (2025/10/29) · 检索日期2025/10/29&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.youtube.com/watch?v=97iiCrHPOpw">Get Started with LangSmith Agent Builder</a> · YouTube · LangChain (2025/10/29) · 检索日期2025/10/29&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://docs.langchain.com/langsmith/agent-builder">Agent Builder - Docs by LangChain</a> · LangChain Docs (2025/10/29) · 检索日期2025/10/29&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.bilibili.com/video/BV1LJ1eBqEED/">️ LangSmith Agent Builder 发布！无代码“非工作流”式智能体构建器！</a> · Bilibili · 沧海九粟 (2025/10/30) · 检索日期2025/10/30&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/langchain/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LangChain</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%97%A0%E4%BB%A3%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">无代码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生产力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E6%89%8B%E6%90%93%E5%A4%A7%E5%B8%88/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能体手搓大师</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/langsmith-fetchai-agent-20251211014004911-2/">卷王上线！LangSmith Fetch：终端里也能给AI Agent“做大保健”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-langsmith-agent-builder-agent-20251203004005934-0/">AI Agent 也能『手搓』了？LangSmith Agent Builder 公测，人人都是『驯Agent师』的时代要来了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentopenai-agentkitai-20251008011006787-0/">Agent之战：从编码框架到可视化平台，OpenAI AgentKit如何重塑AI工作流生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentai-agent-20250909054004597-0/">Agent中间件：从抽象到精控——AI Agent工程化的深层演进</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/langchainllmai-agent-20250904004004742-1/">LangChain“统一语言”大作战：LLM告别“方言时代”，AI Agent终于“能听懂人话”了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/langchain-align-evalsai-20250731074004581-0/">弥合信任鸿沟：LangChain Align Evals如何重塑企业级AI评估的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/codingshellagentai-20250723161005197-0/">终结Coding？ShellAgent：三句话「召唤」AI女友，程序员要失业了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250626051004237-0/">企业AI的“万物互联”：从模型爆炸到智能编排的范式转变</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-20260113091005816-0/">Anthropic深夜整活：白领的饭碗，这次真的要被这个“数字同事”端走了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-20260113081004210-0/">字节AI出海“不装了”：左手抓快乐，右手卖效率，连OpenAI都坐不住了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-12-31-12-31-2025-ai-/">12-31日报| 2025终局之战：抢原子、抢工厂、抢“肉身”，AI进入硬核收割期</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai--20251230201002853-0/">AI 应用也玩“开黑”？模力工场最新榜单：单打独斗已死，团队化才是硬道理！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025metamanusai-20251230191003544-1/">2025岁末最强“钞能力”：Meta闪电强娶Manus，中国AI天才的“豪门”转身</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025-aiapp-20251230181004292-1/">2025 AI大复盘：有人在拧螺丝，有人在拆大厂招牌，而你的APP可能要“失业”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/90-meta-manus--20251230154003896-0/">起猛了！90后中国创业者成 Meta 副总裁：Manus 凭什么让扎克伯格豪掷数十亿美金？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
