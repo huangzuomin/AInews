@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Redis之父antirez发文直言“写代码已不再必要”，分享了AI几分钟搞定数周任务的惊人案例，引发开发者圈关于AI编码质量与人类职业未来的激烈辩论。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/redisai-20260115214006845-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/redisai-20260115214006845-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！">
+  <meta property="og:description" content="Redis之父antirez发文直言“写代码已不再必要”，分享了AI几分钟搞定数周任务的惊人案例，引发开发者圈关于AI编码质量与人类职业未来的激烈辩论。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-01-15T21:40:06+08:00">
+    <meta property="article:modified_time" content="2026-01-15T21:40:06+08:00">
+    <meta property="article:tag" content="Redis之父">
+    <meta property="article:tag" content="AI编程">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="Vibe Coding">
+    <meta property="article:tag" content="程序员失业">
+
+  <meta itemprop="name" content="Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！">
+  <meta itemprop="description" content="Redis之父antirez发文直言“写代码已不再必要”，分享了AI几分钟搞定数周任务的惊人案例，引发开发者圈关于AI编码质量与人类职业未来的激烈辩论。">
+  <meta itemprop="datePublished" content="2026-01-15T21:40:06+08:00">
+  <meta itemprop="dateModified" content="2026-01-15T21:40:06+08:00">
+  <meta itemprop="wordCount" content="56">
+  <meta itemprop="keywords" content="Redis之父,AI编程,Claude Code,Vibe Coding,程序员失业">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！">
+  <meta name="twitter:description" content="Redis之父antirez发文直言“写代码已不再必要”，分享了AI几分钟搞定数周任务的惊人案例，引发开发者圈关于AI编码质量与人类职业未来的激烈辩论。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-01-Jan%2015,%202026_21-31-15-895.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-01-15 21:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Redis%E4%B9%8B%E7%88%B6%E5%B8%A6%E5%A4%B4%E2%80%9C%E6%8A%95%E9%99%8D%E2%80%9D%EF%BC%9F%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E6%88%90%E8%BF%87%E5%8E%BB%E5%BC%8F%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%9A%E6%88%91%E8%BF%99AI%E6%80%95%E6%98%AF%E8%BF%98%E6%B2%A1%E6%96%AD%E5%A5%B6%EF%BC%81%20-%20Redis%E4%B9%8B%E7%88%B6antirez%E5%8F%91%E6%96%87%E7%9B%B4%E8%A8%80%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E5%B7%B2%E4%B8%8D%E5%86%8D%E5%BF%85%E8%A6%81%E2%80%9D%EF%BC%8C%E5%88%86%E4%BA%AB%E4%BA%86AI%E5%87%A0%E5%88%86%E9%92%9F%E6%90%9E%E5%AE%9A%E6%95%B0%E5%91%A8%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%83%8A%E4%BA%BA%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%BC%95%E5%8F%91%E5%BC%80%E5%8F%91%E8%80%85%E5%9C%88%E5%85%B3%E4%BA%8EAI%E7%BC%96%E7%A0%81%E8%B4%A8%E9%87%8F%E4%B8%8E%E4%BA%BA%E7%B1%BB%E8%81%8C%E4%B8%9A%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%BF%80%E7%83%88%E8%BE%A9%E8%AE%BA%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fredisai-20260115214006845-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Redis%E4%B9%8B%E7%88%B6%E5%B8%A6%E5%A4%B4%E2%80%9C%E6%8A%95%E9%99%8D%E2%80%9D%EF%BC%9F%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E6%88%90%E8%BF%87%E5%8E%BB%E5%BC%8F%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%9A%E6%88%91%E8%BF%99AI%E6%80%95%E6%98%AF%E8%BF%98%E6%B2%A1%E6%96%AD%E5%A5%B6%EF%BC%81%20-%20Redis%E4%B9%8B%E7%88%B6antirez%E5%8F%91%E6%96%87%E7%9B%B4%E8%A8%80%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E5%B7%B2%E4%B8%8D%E5%86%8D%E5%BF%85%E8%A6%81%E2%80%9D%EF%BC%8C%E5%88%86%E4%BA%AB%E4%BA%86AI%E5%87%A0%E5%88%86%E9%92%9F%E6%90%9E%E5%AE%9A%E6%95%B0%E5%91%A8%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%83%8A%E4%BA%BA%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%BC%95%E5%8F%91%E5%BC%80%E5%8F%91%E8%80%85%E5%9C%88%E5%85%B3%E4%BA%8EAI%E7%BC%96%E7%A0%81%E8%B4%A8%E9%87%8F%E4%B8%8E%E4%BA%BA%E7%B1%BB%E8%81%8C%E4%B8%9A%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%BF%80%E7%83%88%E8%BE%A9%E8%AE%BA%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fredisai-20260115214006845-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>Redis之父antirez发文表示编程范式已变，亲自写代码不再是“理性选择”；Claude Code用5分钟干完程序员几周的工作，堪称“暴力美学”；网友却集体破防：为什么我家的AI只会一本正经胡说八道？</p></blockquote>
+<p>曾经，我们以为程序员的终极梦想是“退休后去大理开客栈”；现在看来，AI可能想让我们直接在工位上就实现“提前退休”。</p>
+<p>最近，科技圈的“神仙打架”现场异常热闹。那边厢，Google首席工程师刚感叹Anthropic的Claude Code用1小时就完成了团队一年的工作量<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>；这边厢，Linux之父Linus Torvalds一边说着对AI写代码不感兴趣，一边转头就用AI撸出了个开源项目AudioNoise，主打一个“真香”现场<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>但真正让程序员们CPU干烧的，还是Redis之父Salvatore Sanfilippo（网名antirez）的重磅博文——《不要被反AI的炒作所蒙蔽》。这位定义了一代基础设施的大佬直接抛出灵魂论断：<strong>“在绝大多数情况下，写代码本身已经不再是必要的工作了。”</strong><sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="大佬的暴力美学5分钟干完一周的活">大佬的“暴力美学”：5分钟干完一周的活？</h3>
+<p>antirez并不是在空口画饼，他直接晒出了自己的“外挂”战绩。在过去一周里，他几乎成了AI的“监工”：</p>
+<ul>
+<li><strong>瞬移式开发</strong>：他想搞一个纯C实现的BERT推理库，这在以前可能是以“周”为单位的工程。结果Claude Code只用了<strong>5分钟</strong>就写出了700行代码，性能只比PyTorch慢了15%，顺便还贴心地送了一个转换工具<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+<li><strong>硬核修Bug</strong>：Redis里那些令人秃头的“瞬态失败”（涉及TCP死锁、高并发竞态）通常是开发者的噩梦。但AI展现出了惊人的“耐心”，反复运行测试、检查进程状态，硬生生把这些顽疾给修了<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>设计即实现</strong>：他把自己对Redis Streams的改动文档丢给模型，20分钟后，代码复现完成。antirez感叹，最耗时的居然是他自己审核代码的时间<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+</ul>
+<p>这种“Vibe Coding”的节奏，让antirez得出结论：如果你还坚持一行行手敲，那除非是为了情怀，否则在效率上已经彻底输了。</p>
+<h3 id="网友破防我用的是胎教版ai吗">网友破防：我用的是“胎教版”AI吗？</h3>
+<p>然而，大佬的“快意恩仇”并没有得到全民共鸣。在Hacker News上，这篇文章引发了一场大型“比惨大会”。</p>
+<p>最扎心的评价莫过于：“为什么我的AI写完，我得重写70%的内容？”<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>不少开发者吐槽，AI在处理15年高龄的Java遗留系统或复杂的微服务架构时，表现得像个“还没断奶”的新手：</p>
+<ol>
+<li><strong>架构性翻车</strong>：AI能给你一个“能跑”的Demo，但深挖下去，架构逻辑一团糟，根本没法过代码评审<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>慢如老牛</strong>：快模型错误率惊人，慢模型（深度思考版）回复时间长到让人觉得“还不如我自己Google搜索”<sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+<li><strong>幻觉依旧</strong>：只要涉及非入门级的API，AI就开始一本正经地胡说八道<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ol>
+<p>对此，圈内出现了一个有趣的解释：<strong>Ralph Wiggum循环</strong>。这个源自《辛普森一家》的梗，现在指代一种“只要报错不消失，就往死里改”的AI暴力破解模式<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。只要给AI足够的自愈权限（Stop Hook机制），它就能在不断报错中“梦到”正确答案。大佬之所以用得爽，或许是因为他们更擅长把任务切碎，并能一眼看穿AI的“一本正经”。</p>
+<h3 id="未来预测从写代码到造系统">未来预测：从“写代码”到“造系统”</h3>
+<p>面对这种技术地震，antirez的态度很坦然：就像90年代的开源运动让知识民主化一样，AI正让代码变得“廉价”。</p>
+<blockquote>
+<p>“当年你熬夜敲代码，内心燃烧的动力是‘创造’。既然AI能帮你更快抵达终点，又何乐而不为呢？”<sup id="fnref9:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>未来的软件工程可能不再是“人写代码”，而是**“人构建能写代码的系统”**<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。在这个转折点上，跳过AI并不会保护你的职业生涯。antirez建议大家别只是体验几分钟，而是花几周深度测试，毕竟，“创新一旦发生，就无法被收回”<sup id="fnref10:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>如果你觉得AI还不好用，也许不是它太笨，而是你的“调教”方式不对；又或者，你维护的那堆“屎山代码”，连AI看了都想直接辞职。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://mp.weixin.qq.com/s/CKGKjxMsgo39munn3aESGg">“手写代码已不再必要，”Redis之父罕见表态：AI将永远改变编程，网友质疑：我怎么没遇到这么好用的AI</a> · CSDN · 苏宓 (2026/1/15) · 检索日期2026/1/15&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref9:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref10:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.51cto.com/article/834044.html">编程已经被AI永久改变了！网友炸锅：不服，70 ...</a> · 51CTO (2025/1/15) · 检索日期2026/1/15&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://m.36kr.com/p/3639114566438019">5行代码，逼疯整个硅谷，澳洲放羊大叔，捅开AI编程奇点</a> · 新智元 (2025/1/15) · 检索日期2026/1/15&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/redis%E4%B9%8B%E7%88%B6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Redis之父</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/vibe-coding/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Vibe Coding</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A4%B1%E4%B8%9A/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">程序员失业</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/2026claude-code--20260105164002781-1/">再见程序员？马斯克宣判2026“奇点降临”，Claude Code 真的要终结代码民工吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260105171003051-0/">硅谷大佬集体“开挂”：靠它肝完10年编程量？马斯克：奇点已至，程序员已疯</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aivibe-coding-20260105114002048-0/">让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3010claude-codeai-20260103144005696-0/">30天没亲手写代码竟赚10亿美金？Claude Code之父：AI就是我的“带薪代购”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic0bun-20251203171005034-0/">AI巨头Anthropic豪掷千金，竟把「0收入」前端公司Bun娶回家？这波操作有点野！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/linusai-20251201101005175-3/">人间清醒Linus：从代码守护者到AI时代的哲思者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-codeai-20251021151004955-0/">Anthropic“狂飙”：不只让Claude Code“上网页”，还要AI去“搞科研”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaigpt-5-codex7-20250916164005053-6/">OpenAI新“卷王”驾到！GPT-5-Codex：7小时不打烊，这是要抢程序员“饭碗”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-code-20250912011004715-1/">AI编程的“专家联盟”时代：Claude Code如何重塑领域特定开发范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibe-coding-20250904201004712-2/">Vibe Coding：从幻象狂欢到理性回归，软件工程的范式重塑与开发者新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aikarpathygpt-5-pro-20250825124004850-1/">AI编程进入“代码后稀缺时代”：Karpathy新指南揭秘，GPT-5 Pro成终极防线</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai95-20250722124005122-0/">AI：我把你的库删了，还给自己打95分，你气不气？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250722084005412-0/">AI也“删库跑路”？这次“背锅侠”不是实习生，是它！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code55ai-20250717011004851-0/">卷王驾到！Claude Code营收狂飙5.5倍，开发者的“AI绩效表”来了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/95aiclaude-20250707204004798-0/">95%代码由AI完成？一位苹果开发者用Claude重塑软件开发流程</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

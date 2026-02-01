@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术” | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深度解析了由 Andrej Karpathy 带火的 Vibe Coding 现象，探讨了 AI 编程工具（如 Cursor）在极大提升效率的同时，如何通过高频上下文切换和消除“处理间隙”给开发者带来严重的认知负荷和隐性疲劳，并提供了应对这种“大脑掏空术”的实用建议。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aivibe-coding-20260105114002048-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aivibe-coding-20260105114002048-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术”">
+  <meta property="og:description" content="本文深度解析了由 Andrej Karpathy 带火的 Vibe Coding 现象，探讨了 AI 编程工具（如 Cursor）在极大提升效率的同时，如何通过高频上下文切换和消除“处理间隙”给开发者带来严重的认知负荷和隐性疲劳，并提供了应对这种“大脑掏空术”的实用建议。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-01-05T11:40:02+08:00">
+    <meta property="article:modified_time" content="2026-01-05T11:40:02+08:00">
+    <meta property="article:tag" content="Vibe Coding">
+    <meta property="article:tag" content="AI编程">
+    <meta property="article:tag" content="认知负荷">
+    <meta property="article:tag" content="Cursor AI">
+    <meta property="article:tag" content="程序员">
+
+  <meta itemprop="name" content="让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术”">
+  <meta itemprop="description" content="本文深度解析了由 Andrej Karpathy 带火的 Vibe Coding 现象，探讨了 AI 编程工具（如 Cursor）在极大提升效率的同时，如何通过高频上下文切换和消除“处理间隙”给开发者带来严重的认知负荷和隐性疲劳，并提供了应对这种“大脑掏空术”的实用建议。">
+  <meta itemprop="datePublished" content="2026-01-05T11:40:02+08:00">
+  <meta itemprop="dateModified" content="2026-01-05T11:40:02+08:00">
+  <meta itemprop="wordCount" content="153">
+  <meta itemprop="keywords" content="Vibe Coding,AI编程,认知负荷,Cursor AI,程序员">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术”">
+  <meta name="twitter:description" content="本文深度解析了由 Andrej Karpathy 带火的 Vibe Coding 现象，探讨了 AI 编程工具（如 Cursor）在极大提升效率的同时，如何通过高频上下文切换和消除“处理间隙”给开发者带来严重的认知负荷和隐性疲劳，并提供了应对这种“大脑掏空术”的实用建议。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-01-Jan%205,%202026_11-30-46-659.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-01-05 11:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%AE%A9AI%E5%B9%B2%E6%B4%BB%E5%8F%8D%E8%80%8C%E7%B4%AF%E6%88%90%E7%8B%97%EF%BC%9FVibe&amp;#43;Coding%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%BE%88%E6%96%B0%E7%9A%84%E2%80%9C%E5%A4%A7%E8%84%91%E6%8E%8F%E7%A9%BA%E6%9C%AF%E2%80%9D%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86%E7%94%B1&amp;#43;Andrej&amp;#43;Karpathy&amp;#43;%E5%B8%A6%E7%81%AB%E7%9A%84&amp;#43;Vibe&amp;#43;Coding&amp;#43;%E7%8E%B0%E8%B1%A1%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86&amp;#43;AI&amp;#43;%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%EF%BC%88%E5%A6%82&amp;#43;Cursor%EF%BC%89%E5%9C%A8%E6%9E%81%E5%A4%A7%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E9%AB%98%E9%A2%91%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E5%92%8C%E6%B6%88%E9%99%A4%E2%80%9C%E5%A4%84%E7%90%86%E9%97%B4%E9%9A%99%E2%80%9D%E7%BB%99%E5%BC%80%E5%8F%91%E8%80%85%E5%B8%A6%E6%9D%A5%E4%B8%A5%E9%87%8D%E7%9A%84%E8%AE%A4%E7%9F%A5%E8%B4%9F%E8%8D%B7%E5%92%8C%E9%9A%90%E6%80%A7%E7%96%B2%E5%8A%B3%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BE%9B%E4%BA%86%E5%BA%94%E5%AF%B9%E8%BF%99%E7%A7%8D%E2%80%9C%E5%A4%A7%E8%84%91%E6%8E%8F%E7%A9%BA%E6%9C%AF%E2%80%9D%E7%9A%84%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faivibe-coding-20260105114002048-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%AE%A9AI%E5%B9%B2%E6%B4%BB%E5%8F%8D%E8%80%8C%E7%B4%AF%E6%88%90%E7%8B%97%EF%BC%9FVibe&amp;#43;Coding%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%BE%88%E6%96%B0%E7%9A%84%E2%80%9C%E5%A4%A7%E8%84%91%E6%8E%8F%E7%A9%BA%E6%9C%AF%E2%80%9D%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86%E7%94%B1&amp;#43;Andrej&amp;#43;Karpathy&amp;#43;%E5%B8%A6%E7%81%AB%E7%9A%84&amp;#43;Vibe&amp;#43;Coding&amp;#43;%E7%8E%B0%E8%B1%A1%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86&amp;#43;AI&amp;#43;%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%EF%BC%88%E5%A6%82&amp;#43;Cursor%EF%BC%89%E5%9C%A8%E6%9E%81%E5%A4%A7%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E9%AB%98%E9%A2%91%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E5%92%8C%E6%B6%88%E9%99%A4%E2%80%9C%E5%A4%84%E7%90%86%E9%97%B4%E9%9A%99%E2%80%9D%E7%BB%99%E5%BC%80%E5%8F%91%E8%80%85%E5%B8%A6%E6%9D%A5%E4%B8%A5%E9%87%8D%E7%9A%84%E8%AE%A4%E7%9F%A5%E8%B4%9F%E8%8D%B7%E5%92%8C%E9%9A%90%E6%80%A7%E7%96%B2%E5%8A%B3%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BE%9B%E4%BA%86%E5%BA%94%E5%AF%B9%E8%BF%99%E7%A7%8D%E2%80%9C%E5%A4%A7%E8%84%91%E6%8E%8F%E7%A9%BA%E6%9C%AF%E2%80%9D%E7%9A%84%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faivibe-coding-20260105114002048-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">让AI干活反而累成狗？Vibe Coding：一种很新的“大脑掏空术”</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>以前写代码是严丝合缝的逻辑推演，现在是“感觉对了就行”的 Vibe Coding。虽然看起来是你在“调教”AI，但实际上你的大脑正被 AI 的高速产出按在地上摩擦，这种“认知超载”正让程序员变成全天候待命的空中交通管制员。</p></blockquote>
+<p>在 1970 年代的古典主义程序员看来，编程是一场关于分号与缩进的理性修行。每一行代码都是大脑抽象思考的具体外化，严谨得像是在瑞士钟表里雕刻零件。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>但到了 2025 年，这种古典优雅被一个词彻底击碎了：<strong>Vibe Coding（氛围编程）</strong>。</p>
+<p>这个词由 AI 大神 Andrej Karpathy 一手带火。按照他的说法，现在的开发者不再需要逐行码字，而是像个导演一样，对着 Claude 或 Cursor 指手画脚。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 只要你传达的“氛围”到位，成百上千行的代码就会像瀑布一样倾泻而下。这种“心想事成”的生产力奇迹，听起来像是程序员终于熬到了翻身做主人，但现实却泼了一盆冷水：<strong>AI 并没有让你变轻松，它只是把体力活变成了超负荷的认知空转。</strong></p>
+<h3 id="技术大揭秘这种氛围感到底是怎么掏空大脑的">技术大揭秘：这种“氛围感”到底是怎么掏空大脑的？</h3>
+<p>有着 40 年编程经验的“老兵”Stephan Schmidt 最近发现，换上 Cursor + Claude Code 的神装后，他感到的不是飞升的快感，而是一种前所未有的“虚脱感”。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这种疲劳很诡异，它不是那种熬夜修 Bug 的腰酸背痛，而是一种大脑被物理性榨干的空洞感。为什么？因为 <strong>“加载条”消失了</strong>。</p>
+<blockquote>
+<p>“以前写一段代码，运行，修复。这个循环很慢，但它给了大脑处理信息的时间。”——Stephan Schmidt <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><em>调侃点评：这就好比以前是走路去取外卖，现在是外卖直接以 200 公里时速往你嗓子眼儿里塞，你能不噎着吗？</em></p></blockquote>
+<p>在 Vibe Coding 的模式下，人类的角色从“生产者”变成了“审查者”。这听起来位阶提升了，实则坑大发了。AI 可以在一秒钟内修改五个不同模块的文件。当你点击“接受”的那一刻，你的大脑必须瞬间理解这五个文件之间复杂的耦合关系。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>这种高频的上下文切换，对大脑葡萄糖的消耗是惊人的。你并没有停止思考，你只是在被迫跟上 AI 的配速。现在的开发者更像是一个<strong>空中交通管制员</strong>，必须同时监控五个跑道的起降，每一行生成的代码都可能藏着致命 Bug，你敢眨眼吗？<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="行业地震工具进化了人却成了零件">行业“地震”：工具进化了，人却成了“零件”？</h3>
+<p>这是一个极其吊诡的现状：虽然我们在使用工具，但工具正在夺取我们的节奏感。</p>
+<p>Vibe Coding 让编程变成了一种“心电感应”式的对话，Karpathy 甚至称其为一种“近乎通灵”的体验。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 但问题在于，AI 永远不会累。当你给出一个模糊的反馈，它能瞬间吐出三套方案；当你还在消化第一套方案时，它已经准备好了第二次迭代。</p>
+<p>为了不让这台永不停歇的算力机器闲置，<strong>人类只能通过压榨自己的反馈速度来配合 AI。</strong> <sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这种“被机器节奏支配”的恐惧，让 Stephan Schmidt 想起了年轻时在塑料厂工作的经历：机器每几十秒响一声，你就必须机械地放上新零件。</p>
+<p>在这种模式下，人类不再是创造者，而是变成了 AI 生产链路上的一个高负荷转换插头。</p>
+<h3 id="未来预测如何不被-ai-榨干最后一点认知">未来预测：如何不被 AI “榨干”最后一点认知？</h3>
+<p>当我们的思考速度注定跟不上 AI 的生产速度时，盲目追求“快”只会导致逻辑坍塌。为了不让大脑彻底“烧掉”，我们需要一点“禅宗”式的智慧：</p>
+<ul>
+<li><strong>夺回暂停键</strong>：不要被 AI 的生成速度带跑。如果看不明白 AI 给的东西，就强行慢下来，哪怕 AI 已经急得要跳墙，你也得按自己的步调走。</li>
+<li><strong>手动“复盘”</strong>：每天花点时间手动整理 AI 生成的内容，重新构建脑子里的心理模型。记住，代码是 AI 写的，但逻辑必须是你的。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li><strong>方案先行，细节放手</strong>：先定好大方向和架构路径，再让 AI 做细化。不要在 AI 吐出的每一行代码里纠结，要学会从更高维度进行“认知对齐”。</li>
+</ul>
+<p>在 Vibe Coding 的浪潮中，工具的进化本应是为了延展人类的创造力。如果最后我们沦为了那台永不疲倦的机器上最焦虑的一个零件，那这种“进化”不要也罢。在 AI 夺走你的节奏之前，学会坦然按下那个名为“思考”的间隙吧。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.36kr.com/p/3625932851201282">让AI 干活反而累成狗？Vibe Coding 正在掏空我的大脑</a> · 36氪/APPSO · (2025/1/5) · 检索日期2026/1/5&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.analyticsvidhya.com/blog/2025/03/vibe-coding-with-cursor-ai/">I Tried Vibe Coding with Cursor AI and It's Amazing!</a> · Analytics Vidhya · (2025/3/1) · 检索日期2026/1/5&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://ai.plainenglish.io/programming-is-dead-karpathys-ai-vibe-coding-lets-you-build-software-with-your-mind-56c0f52901bd">Programming is dead, Karpathy’s AI ‘vibe coding’ lets you build software with your mind</a> · AI in Plain English · (2025/1/5) · 检索日期2026/1/5&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/vibe-coding/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Vibe Coding</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A4%E7%9F%A5%E8%B4%9F%E8%8D%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">认知负荷</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/cursor-ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Cursor AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">程序员</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/linusai-20251201101005175-3/">人间清醒Linus：从代码守护者到AI时代的哲思者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vibe-coding-20250904201004712-2/">Vibe Coding：从幻象狂欢到理性回归，软件工程的范式重塑与开发者新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/julesai-20250818141004555-0/">谷歌放出“异步打工人”Jules：AI程序员要“卷”起来了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dhhai-20250724134005369-0/">编程的诗意与未来：DHH论AI时代的人性坚守</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai95-20250722124005122-0/">AI：我把你的库删了，还给自己打95分，你气不气？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250722084005412-0/">AI也“删库跑路”？这次“背锅侠”不是实习生，是它！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kiro-20250715054004617-0/">亚马逊又来『卷』程序员了？秘密武器Kiro曝光，号称代码生成快到『没朋友』！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3010claude-codeai-20260103144005696-0/">30天没亲手写代码竟赚10亿美金？Claude Code之父：AI就是我的“带薪代购”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-bug-cursor-20251224101002158-4/">写代码爽如龙，修 Bug 累成狗？Cursor：不装了，我直接买个“质检员”回来！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursorgraphite-20251223111002480-0/">Cursor：家人们谁懂啊，代码写太快把“家”写散架了？直接买下Graphite来救急！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-3-flashopenai-20251218061003034-0/">谷歌新“卷王”驾到：Gemini 3 Flash，代码能力逆天还“白菜价”，OpenAI“红色警报”拉响了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251217161003060-0/">超越代码：AI赋能“秒哒”如何重塑软件开发范式与产业未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/jetbrainsfleetai-20251210134004688-0/">JetBrains急转弯：告别Fleet，拥抱AI智能体，重塑软件开发的未来范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursor-composeraiideagent-20251209164004843-0/">超越“速度与智能”：Cursor Composer如何重塑AI编程范式，引领IDE走向Agent原生平台</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251205101004921-1/">“氛围编程”泡沫破裂：从资本狂热到实用主义回归，AI重塑软件工程新版图</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
