@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>凌晨两点被窝“投喂”Bug？Claude Code支持Telegram遥控，AI编程彻底“龙虾化”了！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深度解析了 Anthropic 旗下 Claude Code 新推出的 Channels 功能。该功能允许开发者通过 Telegram 和 Discord 远程控制 AI 编写代码，标志着 AI 编程工具正式迈入“远程遥控”与“异步协作”的“龙虾化”时代。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/bugclaude-codetelegramai-20260320164005659-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/bugclaude-codetelegramai-20260320164005659-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="凌晨两点被窝“投喂”Bug？Claude Code支持Telegram遥控，AI编程彻底“龙虾化”了！">
+  <meta property="og:description" content="本文深度解析了 Anthropic 旗下 Claude Code 新推出的 Channels 功能。该功能允许开发者通过 Telegram 和 Discord 远程控制 AI 编写代码，标志着 AI 编程工具正式迈入“远程遥控”与“异步协作”的“龙虾化”时代。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-03-20T16:40:05+08:00">
+    <meta property="article:modified_time" content="2026-03-20T16:40:05+08:00">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="AI 编程">
+    <meta property="article:tag" content="龙虾化">
+    <meta property="article:tag" content="MCP 协议">
+    <meta property="article:tag" content="赛博搬砖">
+
+  <meta itemprop="name" content="凌晨两点被窝“投喂”Bug？Claude Code支持Telegram遥控，AI编程彻底“龙虾化”了！">
+  <meta itemprop="description" content="本文深度解析了 Anthropic 旗下 Claude Code 新推出的 Channels 功能。该功能允许开发者通过 Telegram 和 Discord 远程控制 AI 编写代码，标志着 AI 编程工具正式迈入“远程遥控”与“异步协作”的“龙虾化”时代。">
+  <meta itemprop="datePublished" content="2026-03-20T16:40:05+08:00">
+  <meta itemprop="dateModified" content="2026-03-20T16:40:05+08:00">
+  <meta itemprop="wordCount" content="183">
+  <meta itemprop="keywords" content="Claude Code,AI 编程,龙虾化,MCP 协议,赛博搬砖">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="凌晨两点被窝“投喂”Bug？Claude Code支持Telegram遥控，AI编程彻底“龙虾化”了！">
+  <meta name="twitter:description" content="本文深度解析了 Anthropic 旗下 Claude Code 新推出的 Channels 功能。该功能允许开发者通过 Telegram 和 Discord 远程控制 AI 编写代码，标志着 AI 编程工具正式迈入“远程遥控”与“异步协作”的“龙虾化”时代。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-03-Mar%2020,%202026_16-32-18-783.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-03-20 16:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%87%8C%E6%99%A8%E4%B8%A4%E7%82%B9%E8%A2%AB%E7%AA%9D%E2%80%9C%E6%8A%95%E5%96%82%E2%80%9DBug%EF%BC%9FClaude&amp;#43;Code%E6%94%AF%E6%8C%81Telegram%E9%81%A5%E6%8E%A7%EF%BC%8CAI%E7%BC%96%E7%A8%8B%E5%BD%BB%E5%BA%95%E2%80%9C%E9%BE%99%E8%99%BE%E5%8C%96%E2%80%9D%E4%BA%86%EF%BC%81%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86&amp;#43;Anthropic&amp;#43;%E6%97%97%E4%B8%8B&amp;#43;Claude&amp;#43;Code&amp;#43;%E6%96%B0%E6%8E%A8%E5%87%BA%E7%9A%84&amp;#43;Channels&amp;#43;%E5%8A%9F%E8%83%BD%E3%80%82%E8%AF%A5%E5%8A%9F%E8%83%BD%E5%85%81%E8%AE%B8%E5%BC%80%E5%8F%91%E8%80%85%E9%80%9A%E8%BF%87&amp;#43;Telegram&amp;#43;%E5%92%8C&amp;#43;Discord&amp;#43;%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6&amp;#43;AI&amp;#43;%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80&amp;#43;AI&amp;#43;%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%AD%A3%E5%BC%8F%E8%BF%88%E5%85%A5%E2%80%9C%E8%BF%9C%E7%A8%8B%E9%81%A5%E6%8E%A7%E2%80%9D%E4%B8%8E%E2%80%9C%E5%BC%82%E6%AD%A5%E5%8D%8F%E4%BD%9C%E2%80%9D%E7%9A%84%E2%80%9C%E9%BE%99%E8%99%BE%E5%8C%96%E2%80%9D%E6%97%B6%E4%BB%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fbugclaude-codetelegramai-20260320164005659-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%87%8C%E6%99%A8%E4%B8%A4%E7%82%B9%E8%A2%AB%E7%AA%9D%E2%80%9C%E6%8A%95%E5%96%82%E2%80%9DBug%EF%BC%9FClaude&amp;#43;Code%E6%94%AF%E6%8C%81Telegram%E9%81%A5%E6%8E%A7%EF%BC%8CAI%E7%BC%96%E7%A8%8B%E5%BD%BB%E5%BA%95%E2%80%9C%E9%BE%99%E8%99%BE%E5%8C%96%E2%80%9D%E4%BA%86%EF%BC%81%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86&amp;#43;Anthropic&amp;#43;%E6%97%97%E4%B8%8B&amp;#43;Claude&amp;#43;Code&amp;#43;%E6%96%B0%E6%8E%A8%E5%87%BA%E7%9A%84&amp;#43;Channels&amp;#43;%E5%8A%9F%E8%83%BD%E3%80%82%E8%AF%A5%E5%8A%9F%E8%83%BD%E5%85%81%E8%AE%B8%E5%BC%80%E5%8F%91%E8%80%85%E9%80%9A%E8%BF%87&amp;#43;Telegram&amp;#43;%E5%92%8C&amp;#43;Discord&amp;#43;%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6&amp;#43;AI&amp;#43;%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80&amp;#43;AI&amp;#43;%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%AD%A3%E5%BC%8F%E8%BF%88%E5%85%A5%E2%80%9C%E8%BF%9C%E7%A8%8B%E9%81%A5%E6%8E%A7%E2%80%9D%E4%B8%8E%E2%80%9C%E5%BC%82%E6%AD%A5%E5%8D%8F%E4%BD%9C%E2%80%9D%E7%9A%84%E2%80%9C%E9%BE%99%E8%99%BE%E5%8C%96%E2%80%9D%E6%97%B6%E4%BB%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fbugclaude-codetelegramai-20260320164005659-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">凌晨两点被窝“投喂”Bug？Claude Code支持Telegram遥控，AI编程彻底“龙虾化”了！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>别再盯着终端屏幕抠代码了！Claude Code 新增 Channels 功能，支持通过 Telegram 和 Discord 远程“发号施令”。只要在手机上给 AI 递个话，家里的电脑就能自动搬砖。从此，程序员终于实现了“人在马桶坐，代码天上来”的带薪摸鱼（或半夜被迫营业）新境界。</p></blockquote>
+<p>程序员的终极梦想是什么？不是年薪百万，而是“我还没到工位，活儿已经干完了”。</p>
+<p>就在这两天，Anthropic 旗下的 AI 编程“悍将” Claude Code 又整了个大活。其工程师 Thariq Shihipar 宣布，Claude Code 正式上线 <strong>Channels 功能</strong>。简单来说，就是给你的 AI 编程助手配了个“对讲机”，首批支持 Telegram 和 Discord。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这意味着，那个曾经只能锁死在终端里的“黑窗口”工具，现在终于长腿跑到了你的手机里。这种“通过即时通讯软件远程遥控 AI 搬砖”的模式，被圈内戏称为 <strong>“龙虾化”（Lobster-ization）</strong>——致敬了那个把这种交互模式带火的开源项目 OpenClaw（其 Logo 正是一只龙虾）。</p>
+<h3 id="赛博忠犬凌晨两点的灵光一闪有救了">赛博忠犬：凌晨两点的“灵光一闪”有救了</h3>
+<p>想象一下这个扎心的场景：凌晨两点，你刚躺下准备进入梦乡，突然脑子里蹦出一个绝妙的重构方案，或者想起下午写的代码有个致命的逻辑漏洞。</p>
+<p>以前的你：挣扎着爬起来，打开电脑，等待开机，在蓝光刺激下彻底失眠。
+现在的你：翻身摸出手机，打开 Telegram 给 Claude 发条消息：“嘿，把支付模块的那个风控逻辑改一下，加个异常捕获，顺便把测试跑了。”</p>
+<p>几秒钟后，你放在书房的 Mac Mini 悄然亮屏。Claude Code 就像一只永不睡觉的“赛博忠犬”，立刻开始翻阅项目、修改代码、运行单元测试。等你第二天慢悠悠吃完早餐打开 GitHub，一个注释清晰、测试全绿的 Pull Request 已经静静地躺在那儿等你了。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这就是所谓的**“氛围编程”**：你只管输出意志，剩下的脏活累活，AI 在后台帮你默默搞定。</p>
+<h3 id="技术大揭秘它是怎么偷跑进你手机的">技术大揭秘：它是怎么“偷跑”进你手机的？</h3>
+<p>很多小伙伴可能会问：这不就是个远程桌面吗？还真不是。</p>
+<p>这背后的功臣是一个叫 <strong>MCP（模型上下文协议）</strong> 的“万能插座”。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> Anthropic 去年底开源了这个标准，旨在解决 AI 与各种工具对接时的“适配器难题”。</p>
+<p>这次的 Channels 功能，本质上就是一个 MCP server。它的操作逻辑非常“极客”：</p>
+<ol>
+<li><strong>安装插件</strong>：在终端敲下一行 <code>/plugin install telegram@claude-plugins-official</code>。</li>
+<li><strong>安全配对</strong>：配置一个 Bot，设置白名单（毕竟你也不想路人甲在群里发条消息就黑了你的电脑）。</li>
+<li><strong>一键启动</strong>：带上 <code>--channels</code> 参数运行，通道就此打通。</li>
+</ol>
+<p>好玩的是，这种交互非常“拟人”。当你通过 Telegram 下达任务时，对话框会显示“正在输入…”，这提示 Claude 已经开始在你的本地环境里翻箱倒柜了。它甚至能把运行结果、报错截图甚至生成的文件（50MB 以内）直接回传给你。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<blockquote>
+<p><strong>调侃式点评</strong>：这种“已读且正在狂写”的既视感，比催甲方打款时的反馈感强多了。</p></blockquote>
+<h3 id="行业地震ai-交互的窗口时代要终结了">行业“地震”：AI 交互的“窗口时代”要终结了？</h3>
+<p>在此之前，大家用 AI 还是习惯于“打开网页 -&gt; 输入 Prompt -&gt; 复制粘贴”。但 Anthropic 最近的一系列动作（Dispatch 功能、百万级上下文、现在的 Channels）都在传递一个信号：<strong>AI 应当是“随时待命”的搭档，而不是一个需要特意点击的网页。</strong><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup><sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>虽然目前 Claude Code 的这个龙虾化还处于“呼吸机模式”——即你的本地终端必须开着会话，通道才有效。相比之下，它的“老对手” OpenClaw 已经能做到本地守护进程 7×24 小时待命。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>但 Anthropic 的优势在于**“正规军”的安全性**。Channels 维护着独立的发送者 ID 白名单，验证粒度精准到人。即便你在一个几百人的 Discord 频道里调戏 AI，只要对方不在你的白名单上，Claude 就会优雅地装死，绝不执行任何越权指令。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>当用户习惯了“发条消息就把活干了”，传统的对话框交互可能真的要成为历史了。龙虾化不是终点，而是一张通往“自主 Agent 时代”的入场券。</p>
+<p>接下来的问题只有一个：既然 AI 已经能半夜帮我写代码了，那它什么时候能顺便帮我把明天的早会也开了？</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.163.com/dy/article/KOFITB7F05568W0A.html">Claude Code也要龙虾化，凌晨床上发条消息，Mac Mini瞬间亮屏狂敲代码</a> · 36氪/新智元 · KingHZ 好困 (2026/03/20) · 检索日期 2026/03/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://code.claude.com/docs/zh-CN/overview">Claude Code 概述- Claude Code Docs</a> · Claude Code Docs · Anthropic (2026/03/20) · 检索日期 2026/03/20&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.woshipm.com/ai/6190336.html">AI产品经理进阶：万字深析大模型的MCP（上）</a> · 人人都是产品经理 · AI贾维斯 (2026/03/20) · 检索日期 2026/03/20&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.reddit.com/r/ClaudeCode/comments/1ryf2pd/introducing_claude_code_channels/">Introducing Claude Code Channels</a> · Reddit (2026/03/20) · 检索日期 2026/03/20&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://hub.baai.ac.cn/view/53134">Claude一夜拆掉AI编程天花板！百万token上下文登场，吞下整个代码库</a> · 智源社区/新智元 (2026/03/15) · 检索日期 2026/03/20&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI 编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%BE%99%E8%99%BE%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">龙虾化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mcp-%E5%8D%8F%E8%AE%AE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MCP 协议</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%B5%9B%E5%8D%9A%E6%90%AC%E7%A0%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">赛博搬砖</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/99aianthropic-20260226101006418-0/">99%的代码都归AI管了？Anthropic联创：程序员正集体转型“包工头”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github-claude-code-4--20260210104004955-0/">GitHub 沦陷倒计时：Claude Code 拿下 4% 提交，手写代码竟成了“复古奢侈品”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-chatgpt--20260320104005829-0/">奥特曼真的急了！OpenAI 拉响“红色警报”：ChatGPT 也要玩“超级全家桶”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-ai-jeremy-howard-dario--20260318154007311-0/">当心被 AI 喂成“废柴”！元老级大师 Jeremy Howard 怒喷：马斯克和 Dario 根本不懂软件工程</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/500anthropicai-20260310214013053-0/">深夜“血洗”500亿市场！Anthropic扔出AI代码审计军团，传统安全商：你礼貌吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260310084005249-1/">小红书惊现“AI老公团”：当赛博爱人长出手脚，人类竟成了“电子宠物”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-codeideai-20260223081005377-0/">“软件工程师”要成历史遗迹？Claude Code之父：我把IDE卸了，AI正在自己组队“打怪”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/26ai-20260213104005864-1/">2.6万亿！AI圈最强“备胎”逆袭：英伟达微软两头下注，马斯克又破防了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-claude-code-ai--20260212121006292-3/">每提一个 Claude Code 请求就点一根烟：这届程序员快被 AI “榨干”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-02-10-02-10-ai-/">02-10日报| 电子的肉搏与氛围的权杖：AI 正在“暴力”接管现实世界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/1000anthropic-20260209154006717-0/">效率狂飙1000倍！想进Anthropic当“快乐工蜂”？你得先学会「杀死自我」</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/redisai-20260115214006845-1/">Redis之父带头“投降”？手写代码成过去式，程序员：我这AI怕是还没断奶！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025ai-20260115194005383-0/">从“对话框”到“全场景智能”：2025年度AI生产力工具深度评测与趋势洞察</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260105171003051-0/">硅谷大佬集体“开挂”：靠它肝完10年编程量？马斯克：奇点已至，程序员已疯</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2026claude-code--20260105164002781-1/">再见程序员？马斯克宣判2026“奇点降临”，Claude Code 真的要终结代码民工吗？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
