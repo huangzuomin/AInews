@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>昨夜，Claude 变身“装机猿”接管电脑！OpenAI 连夜发布“套壳”插件：在你的地盘，听我的？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深度解析了 Claude Code 新推出的“接管电脑”功能及其技术背后的 MCP 协议，同时曝光了 OpenAI 如何利用 Codex 插件反向渗透 Claude 生态。面对昂贵的 Token 和激烈的插件竞争，AI 编程正进入“代理人”战争的新阶段。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/claude-openai--20260331181007148-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/claude-openai--20260331181007148-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="昨夜，Claude 变身“装机猿”接管电脑！OpenAI 连夜发布“套壳”插件：在你的地盘，听我的？">
+  <meta property="og:description" content="本文深度解析了 Claude Code 新推出的“接管电脑”功能及其技术背后的 MCP 协议，同时曝光了 OpenAI 如何利用 Codex 插件反向渗透 Claude 生态。面对昂贵的 Token 和激烈的插件竞争，AI 编程正进入“代理人”战争的新阶段。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-03-31T18:10:07+08:00">
+    <meta property="article:modified_time" content="2026-03-31T18:10:07+08:00">
+    <meta property="article:tag" content="Claude">
+    <meta property="article:tag" content="OpenAI">
+    <meta property="article:tag" content="AI编程">
+    <meta property="article:tag" content="Computer Use">
+    <meta property="article:tag" content="生产力工具">
+    <meta property="article:tag" content="科技修罗场">
+
+  <meta itemprop="name" content="昨夜，Claude 变身“装机猿”接管电脑！OpenAI 连夜发布“套壳”插件：在你的地盘，听我的？">
+  <meta itemprop="description" content="本文深度解析了 Claude Code 新推出的“接管电脑”功能及其技术背后的 MCP 协议，同时曝光了 OpenAI 如何利用 Codex 插件反向渗透 Claude 生态。面对昂贵的 Token 和激烈的插件竞争，AI 编程正进入“代理人”战争的新阶段。">
+  <meta itemprop="datePublished" content="2026-03-31T18:10:07+08:00">
+  <meta itemprop="dateModified" content="2026-03-31T18:10:07+08:00">
+  <meta itemprop="wordCount" content="179">
+  <meta itemprop="keywords" content="Claude,OpenAI,AI编程,Computer Use,生产力工具,科技修罗场">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="昨夜，Claude 变身“装机猿”接管电脑！OpenAI 连夜发布“套壳”插件：在你的地盘，听我的？">
+  <meta name="twitter:description" content="本文深度解析了 Claude Code 新推出的“接管电脑”功能及其技术背后的 MCP 协议，同时曝光了 OpenAI 如何利用 Codex 插件反向渗透 Claude 生态。面对昂贵的 Token 和激烈的插件竞争，AI 编程正进入“代理人”战争的新阶段。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-03-Mar%2031,%202026_17-31-58-339.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-03-31 18:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%98%A8%E5%A4%9C%EF%BC%8CClaude&amp;#43;%E5%8F%98%E8%BA%AB%E2%80%9C%E8%A3%85%E6%9C%BA%E7%8C%BF%E2%80%9D%E6%8E%A5%E7%AE%A1%E7%94%B5%E8%84%91%EF%BC%81OpenAI&amp;#43;%E8%BF%9E%E5%A4%9C%E5%8F%91%E5%B8%83%E2%80%9C%E5%A5%97%E5%A3%B3%E2%80%9D%E6%8F%92%E4%BB%B6%EF%BC%9A%E5%9C%A8%E4%BD%A0%E7%9A%84%E5%9C%B0%E7%9B%98%EF%BC%8C%E5%90%AC%E6%88%91%E7%9A%84%EF%BC%9F%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86&amp;#43;Claude&amp;#43;Code&amp;#43;%E6%96%B0%E6%8E%A8%E5%87%BA%E7%9A%84%E2%80%9C%E6%8E%A5%E7%AE%A1%E7%94%B5%E8%84%91%E2%80%9D%E5%8A%9F%E8%83%BD%E5%8F%8A%E5%85%B6%E6%8A%80%E6%9C%AF%E8%83%8C%E5%90%8E%E7%9A%84&amp;#43;MCP&amp;#43;%E5%8D%8F%E8%AE%AE%EF%BC%8C%E5%90%8C%E6%97%B6%E6%9B%9D%E5%85%89%E4%BA%86&amp;#43;OpenAI&amp;#43;%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8&amp;#43;Codex&amp;#43;%E6%8F%92%E4%BB%B6%E5%8F%8D%E5%90%91%E6%B8%97%E9%80%8F&amp;#43;Claude&amp;#43;%E7%94%9F%E6%80%81%E3%80%82%E9%9D%A2%E5%AF%B9%E6%98%82%E8%B4%B5%E7%9A%84&amp;#43;Token&amp;#43;%E5%92%8C%E6%BF%80%E7%83%88%E7%9A%84%E6%8F%92%E4%BB%B6%E7%AB%9E%E4%BA%89%EF%BC%8CAI&amp;#43;%E7%BC%96%E7%A8%8B%E6%AD%A3%E8%BF%9B%E5%85%A5%E2%80%9C%E4%BB%A3%E7%90%86%E4%BA%BA%E2%80%9D%E6%88%98%E4%BA%89%E7%9A%84%E6%96%B0%E9%98%B6%E6%AE%B5%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-openai--20260331181007148-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%98%A8%E5%A4%9C%EF%BC%8CClaude&amp;#43;%E5%8F%98%E8%BA%AB%E2%80%9C%E8%A3%85%E6%9C%BA%E7%8C%BF%E2%80%9D%E6%8E%A5%E7%AE%A1%E7%94%B5%E8%84%91%EF%BC%81OpenAI&amp;#43;%E8%BF%9E%E5%A4%9C%E5%8F%91%E5%B8%83%E2%80%9C%E5%A5%97%E5%A3%B3%E2%80%9D%E6%8F%92%E4%BB%B6%EF%BC%9A%E5%9C%A8%E4%BD%A0%E7%9A%84%E5%9C%B0%E7%9B%98%EF%BC%8C%E5%90%AC%E6%88%91%E7%9A%84%EF%BC%9F%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86&amp;#43;Claude&amp;#43;Code&amp;#43;%E6%96%B0%E6%8E%A8%E5%87%BA%E7%9A%84%E2%80%9C%E6%8E%A5%E7%AE%A1%E7%94%B5%E8%84%91%E2%80%9D%E5%8A%9F%E8%83%BD%E5%8F%8A%E5%85%B6%E6%8A%80%E6%9C%AF%E8%83%8C%E5%90%8E%E7%9A%84&amp;#43;MCP&amp;#43;%E5%8D%8F%E8%AE%AE%EF%BC%8C%E5%90%8C%E6%97%B6%E6%9B%9D%E5%85%89%E4%BA%86&amp;#43;OpenAI&amp;#43;%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8&amp;#43;Codex&amp;#43;%E6%8F%92%E4%BB%B6%E5%8F%8D%E5%90%91%E6%B8%97%E9%80%8F&amp;#43;Claude&amp;#43;%E7%94%9F%E6%80%81%E3%80%82%E9%9D%A2%E5%AF%B9%E6%98%82%E8%B4%B5%E7%9A%84&amp;#43;Token&amp;#43;%E5%92%8C%E6%BF%80%E7%83%88%E7%9A%84%E6%8F%92%E4%BB%B6%E7%AB%9E%E4%BA%89%EF%BC%8CAI&amp;#43;%E7%BC%96%E7%A8%8B%E6%AD%A3%E8%BF%9B%E5%85%A5%E2%80%9C%E4%BB%A3%E7%90%86%E4%BA%BA%E2%80%9D%E6%88%98%E4%BA%89%E7%9A%84%E6%96%B0%E9%98%B6%E6%AE%B5%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-openai--20260331181007148-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">昨夜，Claude 变身“装机猿”接管电脑！OpenAI 连夜发布“套壳”插件：在你的地盘，听我的？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>Claude 不再满足于只当“键盘侠”，现在直接上手抓鼠标，开启了接管电脑的“狂飙”模式。而 OpenAI 也不甘示弱，反手扔出一个“套壳”插件直接空降 Claude 家门口，上演了一出“你的工具很好用，但下一秒就是我的了”的修罗场戏码。</p></blockquote>
+<p>北京时间昨夜，大模型界的“卷王” Anthropic 再次对开发者们精准投喂了重磅更新：Claude Code 正式引入“Computer Use”（计算机操作能力）。</p>
+<p>简单来说，Claude 现在不仅能帮你写代码，还能像个真正的“电子苦力”一样，直接打开你的 macOS 终端、跑起你的编译器、甚至盯着你的 UI 截图找茬。这种从“只动口”到“真动手”的转变，让不少熬夜看直播的码农直呼：“这下真的可以去送外卖了。”</p>
+<h3 id="技术大揭秘claude-到底是怎么动你电脑的">技术大揭秘：Claude 到底是怎么“动”你电脑的？</h3>
+<p>以前的 AI 编程工具，撑死是个“高级输入法”。你写个 Bug，它给你修个 Bug，但剩下的编译、运行、测试，还得你自己像个老农民一样手动耕耘。</p>
+<p>现在的 Claude Code 配合 Computer Use，直接把这套流程闭环了。它通过一个名为 <strong>MCP（Model Context Protocol，模型上下文协议）</strong> 的“秘密外交官”与你的系统对话。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<ul>
+<li><strong>视觉驱动的“大家来找茬”</strong>：它能看懂 Electron 应用的界面，不需要你配置复杂的 Playwright 框架，它自己点点点、截截图，就能告诉你注册流程在哪断了。</li>
+<li><strong>分层决策的“省钱术”</strong>：Claude 也很精明，它会优先用命令行（CLI）解决问题，只有在命令行搞不定的时候，才会掏出最通用的（也是最慢、最贵的）GUI 操作来垫底。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<blockquote>
+<p><strong>调侃一下：</strong> 这就像是你请了个保姆，以前她只负责写菜谱，现在她直接拿着你的银行卡去菜市场，顺便把碗也刷了。当然，刷碗的钱（Token）得你出。</p></blockquote>
+<h3 id="权限与钱包很酷但谁在乎">权限与“钱包”：很酷，但谁在乎？</h3>
+<p>虽然技术上燃炸了，但社区的反馈却像极了“冰火两重天”。</p>
+<p>在 Reddit 上，用户们的情绪非常稳定——稳定地表示不满。首先，这套功能目前是 <strong>macOS 独占</strong>。Windows 和 Linux 的开发者们感觉自己像是被大厂遗忘的“编外人员”。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>其次，也是最核心的问题：<strong>Token 消耗</strong>。
+由于 Computer Use 需要频繁截图和长上下文交互，每一次“优雅的操作”背后都是钱包在滴血。有网友神评论道：“这功能很酷，但我希望有一天我攒够了 Token，能让它帮我跑一次，哪怕就一次。”</p>
+<blockquote>
+<p><strong>深度洞察：</strong> 目前这种“补贴式”的 AI 代理时代终将结束。当 20 美元的订阅费撑不起 Claude 接管电脑的算力成本时，未来的定价可能会让你觉得，请个真人实习生甚至更划算。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<h3 id="openai-的反向渗透我就蹭蹭不进去">OpenAI 的“反向渗透”：我就蹭蹭，不进去？</h3>
+<p>就在 Anthropic 还在宣传自家的“全栈自动化”时，OpenAI 却玩了一手极其“阴险”的操作。</p>
+<p>OpenAI 连夜发布了 <strong>codex-plugin-cc</strong> 插件。这个插件骚就骚在，它不是个独立工具，而是直接安装在 <strong>Claude Code</strong> 里的。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>
+它的逻辑是：你尽管用 Claude 操作电脑，但到了关键的代码审查、风险评估环节，你可以直接输入 <code>/codex:review</code>。这时候，Codex 就会像个“影子政府”一样站出来，对 Claude 的劳动成果指点江山。</p>
+<p>最绝的是命令 <code>/codex:rescue</code>。当 Claude 的逻辑陷入死循环、任务卡死时，开发者可以直接把控制权移交给 Codex。这波操作直接把 Claude Code 变成了 OpenAI 的“宿主”。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<blockquote>
+<p><strong>点评：</strong> 这种“在你家客厅里摆我的沙发”的行为，充分展示了 OpenAI 在生态争夺战中的老辣。既然用户爱用 Claude 的界面，那我就把大脑装进你的界面里。</p></blockquote>
+<h3 id="未来预测2026-年的代理人战争">未来预测：2026 年的“代理人战争”</h3>
+<p>根据最新的行业动态显示，2026 年将成为 <strong>Agentic AI（代理智能体）</strong> 的基建元年。<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 不管是 Anthropic 的 MCP 协议，还是 OpenAI 的 Agent Loop 架构，都在试图定义一套标准，让 AI 能够更丝滑地接管人类的生产力工具。</p>
+<p>目前的这一场恶斗，本质上是关于“谁能成为开发者唯一入口”的战争。Claude 赢在了“手脚快”（Computer Use），而 OpenAI 赢在了“路子野”（套壳插件与多模型协作）。</p>
+<p>对于普通开发者来说，这场大厂互搏最直接的好处就是：虽然 Token 越来越贵，但那个“不用敲键盘、只需下圣旨”的时代，真的越来越近了。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://wavespeed.ai/blog/zh-cn/posts/claude-vs-codex-comparison-2026/">Claude vs Codex: Anthropic vs OpenAI 的2026 AI 编码代理之战</a> · Wavespeed · (2026/3/31) · 检索日期2025/3/7&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.csdn.net/sd7o95o/article/details/158398776">Claude Code 发布一周年：2026年Agentic AI底层基础设施与标准化</a> · CSDN · (2026/3/31) · 检索日期2025/3/7&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://code.claude.com/docs/en/computer-use">Computer Use Technical Documentation</a> · Anthropic · (2025/3/6) · 检索日期2025/3/7&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://wallstreetcn.com/articles/3764073">挑战Claude Code？OpenAI Codex发布月将至，今先揭秘智能体循环</a> · 华尔街见闻 · (2025/3/6) · 检索日期2025/3/7&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/claude/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/openai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">OpenAI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/computer-use/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Computer Use</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生产力工具</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A7%91%E6%8A%80%E4%BF%AE%E7%BD%97%E5%9C%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">科技修罗场</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/openai3500claude7-20260323201007550-0/">OpenAI“帝国”危机？奥特曼急招3500人“暴力”反击，Claude已抢走7成新单！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaipythonai-20260320104005842-1/">OpenAI“暴力”接管Python基建：为了让AI学会搬砖，奥特曼连“铲子”都买下来了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-541080-20260317154005651-0/">GPT-5.4一周狂赚10亿美元！打个招呼烧掉80刀，奥特曼：这波是效率的“降维打击”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaigpt-54claudegemini-20260306084006207-0/">OpenAI深夜“开大”！GPT-5.4原生操控电脑，Claude、Gemini连夜坐站票撤离？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-chatgpt--20260303051005971-0/">反向带货天花板！被五角大楼“拉黑”后，Claude 竟然把 ChatGPT 的家给偷了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudeopenai-20260302101005102-1/">官方反向带货最为致命！Claude被封杀却火速登顶，OpenAI却因“滑跪”签单被全网销号</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic--20260302034005570-0/">硅谷“白月光”与五角大楼彻底掰了：Anthropic 拒做杀戮工具，反被美军列入“黑名单”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ide-openai-codex-ai--20260225141006697-1/">IDE 也要变“时代眼泪”？OpenAI Codex 负责人亲口承认：内部已很少再打开编辑器，代码全靠 AI “硬控”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai--20260213121005168-1/">代码界半夜惊雷！OpenAI 祭出“闪电侠”，谷歌掏出“深思怪”，程序员的班还能加多久？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-20260206181006342-2/">AI圈“茶艺”大赏：Claude豪掷千万上超级碗，只为告诉全世界“我不接广告”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/githubclaudecodex18-20260205211009022-1/">GitHub深夜“炸场”：Claude&#43;Codex史诗级合体，1.8亿码农喜提“最强打工军团”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-20260113091005816-0/">Anthropic深夜整活：白领的饭碗，这次真的要被这个“数字同事”端走了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-3-flashopenai-20251218061003034-0/">谷歌新“卷王”驾到：Gemini 3 Flash，代码能力逆天还“白菜价”，OpenAI“红色警报”拉响了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-52400ko-20251215094003258-0/">GPT-5.2杀疯了？价格贵400倍，却能KO七成人类专家，打工人瑟瑟发抖！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai24token-20251120164004731-0/">OpenAI最新“打工仔”上线：24小时连轴转，百万token不眨眼，程序员要“失业”了？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
