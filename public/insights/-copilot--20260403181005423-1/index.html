@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>代码库里的“街溜子”：微软 Copilot 帮我改了错别字，顺便贴了张小广告？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="微软 Copilot 近日因在 GitHub 代码 PR 中自动植入 Raycast 广告引发众怒，官方紧急回应称是“功能 Bug”导致的误投。本文深度复盘了 Copilot 的各种“翻车”黑历史，揭示了大厂在推广 AI 时对用户边界的反复试探。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/-copilot--20260403181005423-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/-copilot--20260403181005423-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="代码库里的“街溜子”：微软 Copilot 帮我改了错别字，顺便贴了张小广告？">
+  <meta property="og:description" content="微软 Copilot 近日因在 GitHub 代码 PR 中自动植入 Raycast 广告引发众怒，官方紧急回应称是“功能 Bug”导致的误投。本文深度复盘了 Copilot 的各种“翻车”黑历史，揭示了大厂在推广 AI 时对用户边界的反复试探。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-04-03T18:10:05+08:00">
+    <meta property="article:modified_time" content="2026-04-03T18:10:05+08:00">
+    <meta property="article:tag" content="微软 Copilot">
+    <meta property="article:tag" content="GitHub">
+    <meta property="article:tag" content="AI 广告">
+    <meta property="article:tag" content="Raycast">
+    <meta property="article:tag" content="程序员吐槽">
+    <meta property="article:tag" content="整烂活">
+
+  <meta itemprop="name" content="代码库里的“街溜子”：微软 Copilot 帮我改了错别字，顺便贴了张小广告？">
+  <meta itemprop="description" content="微软 Copilot 近日因在 GitHub 代码 PR 中自动植入 Raycast 广告引发众怒，官方紧急回应称是“功能 Bug”导致的误投。本文深度复盘了 Copilot 的各种“翻车”黑历史，揭示了大厂在推广 AI 时对用户边界的反复试探。">
+  <meta itemprop="datePublished" content="2026-04-03T18:10:05+08:00">
+  <meta itemprop="dateModified" content="2026-04-03T18:10:05+08:00">
+  <meta itemprop="wordCount" content="191">
+  <meta itemprop="keywords" content="微软 Copilot,GitHub,AI 广告,Raycast,程序员吐槽,整烂活">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="代码库里的“街溜子”：微软 Copilot 帮我改了错别字，顺便贴了张小广告？">
+  <meta name="twitter:description" content="微软 Copilot 近日因在 GitHub 代码 PR 中自动植入 Raycast 广告引发众怒，官方紧急回应称是“功能 Bug”导致的误投。本文深度复盘了 Copilot 的各种“翻车”黑历史，揭示了大厂在推广 AI 时对用户边界的反复试探。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-04-Apr%203,%202026_18-01-58-842.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-04-03 18:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%A3%E7%A0%81%E5%BA%93%E9%87%8C%E7%9A%84%E2%80%9C%E8%A1%97%E6%BA%9C%E5%AD%90%E2%80%9D%EF%BC%9A%E5%BE%AE%E8%BD%AF&amp;#43;Copilot&amp;#43;%E5%B8%AE%E6%88%91%E6%94%B9%E4%BA%86%E9%94%99%E5%88%AB%E5%AD%97%EF%BC%8C%E9%A1%BA%E4%BE%BF%E8%B4%B4%E4%BA%86%E5%BC%A0%E5%B0%8F%E5%B9%BF%E5%91%8A%EF%BC%9F%20-%20%E5%BE%AE%E8%BD%AF&amp;#43;Copilot&amp;#43;%E8%BF%91%E6%97%A5%E5%9B%A0%E5%9C%A8&amp;#43;GitHub&amp;#43;%E4%BB%A3%E7%A0%81&amp;#43;PR&amp;#43;%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%A4%8D%E5%85%A5&amp;#43;Raycast&amp;#43;%E5%B9%BF%E5%91%8A%E5%BC%95%E5%8F%91%E4%BC%97%E6%80%92%EF%BC%8C%E5%AE%98%E6%96%B9%E7%B4%A7%E6%80%A5%E5%9B%9E%E5%BA%94%E7%A7%B0%E6%98%AF%E2%80%9C%E5%8A%9F%E8%83%BD&amp;#43;Bug%E2%80%9D%E5%AF%BC%E8%87%B4%E7%9A%84%E8%AF%AF%E6%8A%95%E3%80%82%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E5%A4%8D%E7%9B%98%E4%BA%86&amp;#43;Copilot&amp;#43;%E7%9A%84%E5%90%84%E7%A7%8D%E2%80%9C%E7%BF%BB%E8%BD%A6%E2%80%9D%E9%BB%91%E5%8E%86%E5%8F%B2%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E5%A4%A7%E5%8E%82%E5%9C%A8%E6%8E%A8%E5%B9%BF&amp;#43;AI&amp;#43;%E6%97%B6%E5%AF%B9%E7%94%A8%E6%88%B7%E8%BE%B9%E7%95%8C%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%AF%95%E6%8E%A2%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F-copilot--20260403181005423-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%A3%E7%A0%81%E5%BA%93%E9%87%8C%E7%9A%84%E2%80%9C%E8%A1%97%E6%BA%9C%E5%AD%90%E2%80%9D%EF%BC%9A%E5%BE%AE%E8%BD%AF&amp;#43;Copilot&amp;#43;%E5%B8%AE%E6%88%91%E6%94%B9%E4%BA%86%E9%94%99%E5%88%AB%E5%AD%97%EF%BC%8C%E9%A1%BA%E4%BE%BF%E8%B4%B4%E4%BA%86%E5%BC%A0%E5%B0%8F%E5%B9%BF%E5%91%8A%EF%BC%9F%20-%20%E5%BE%AE%E8%BD%AF&amp;#43;Copilot&amp;#43;%E8%BF%91%E6%97%A5%E5%9B%A0%E5%9C%A8&amp;#43;GitHub&amp;#43;%E4%BB%A3%E7%A0%81&amp;#43;PR&amp;#43;%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%A4%8D%E5%85%A5&amp;#43;Raycast&amp;#43;%E5%B9%BF%E5%91%8A%E5%BC%95%E5%8F%91%E4%BC%97%E6%80%92%EF%BC%8C%E5%AE%98%E6%96%B9%E7%B4%A7%E6%80%A5%E5%9B%9E%E5%BA%94%E7%A7%B0%E6%98%AF%E2%80%9C%E5%8A%9F%E8%83%BD&amp;#43;Bug%E2%80%9D%E5%AF%BC%E8%87%B4%E7%9A%84%E8%AF%AF%E6%8A%95%E3%80%82%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E5%A4%8D%E7%9B%98%E4%BA%86&amp;#43;Copilot&amp;#43;%E7%9A%84%E5%90%84%E7%A7%8D%E2%80%9C%E7%BF%BB%E8%BD%A6%E2%80%9D%E9%BB%91%E5%8E%86%E5%8F%B2%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E5%A4%A7%E5%8E%82%E5%9C%A8%E6%8E%A8%E5%B9%BF&amp;#43;AI&amp;#43;%E6%97%B6%E5%AF%B9%E7%94%A8%E6%88%B7%E8%BE%B9%E7%95%8C%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%AF%95%E6%8E%A2%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F-copilot--20260403181005423-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">代码库里的“街溜子”：微软 Copilot 帮我改了错别字，顺便贴了张小广告？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>微软 Copilot 最近在 GitHub 搞了个“大活儿”：它在帮开发者修改代码 Pull Request (PR) 时，竟私自塞入 Raycast 等产品的推广链接。虽然微软紧急辟谣称这是 Bug 而非蓄意打广告，但这种“智能不够，贴纸来凑”的骚操作，还是让全球开发者直呼：“代码库不是电线杆，Copilot 请停止你的街溜子行为！”</p></blockquote>
+<p>如果你觉得现在的互联网广告已经无孔不入，那微软 Copilot 可能会刷新你的认知。想象一下，你正严肃地在 GitHub 上维护着价值几个亿的开源项目，正当你纠结于一个变量命名时，AI 助手优雅地走过来，帮你改了个错别字，然后反手在你的代码评审页面贴了一张“办证/刻章”——哦不，是“下载 Raycast，快速启动 Copilot”的小广告。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这事儿不是科幻小说，而是上周真实发生在澳大利亚开发者 Zach Manson 身上的“惊悚片”。</p>
+<h3 id="案发现场ai-助手的私货诱惑">案发现场：AI 助手的“私货”诱惑</h3>
+<p>整件事的起因简单到离谱。Manson 的同事用 Copilot 顺手改了一个 PR 里的拼写错误，结果 Copilot 在提交时，竟然在 PR 描述的最下方精准插入了一行带链接的文案：<strong>“在 macOS 或 Windows 上快速启动 Copilot 编程智能体，就用 Raycast！”</strong> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<blockquote>
+<p><strong>调侃点评</strong>：这感觉就像你请个保洁来家里打扫卫生，她干活确实利索，但临走前在你家客厅白墙上贴了个“XX 搬家公司”的二维码。</p></blockquote>
+<p>更绝的是，这并非孤立事件。有心人顺着这段广告词在 GitHub 上搜了一圈，好家伙，同样的“牛皮癣”出现在超过 1.1 万个 PR 当中。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 深入查看原始 Markdown 代码会发现，这些广告前面竟然还带着隐藏的 HTML 注释标签：<code>START COPILOT CODING AGENT TIPS</code>。</p>
+<p>这说明什么？这压根不是 AI 产生了什么“我想卖货”的幻觉，而是产品团队预设好的模板。虽然 GitHub 官方事后谢罪，称这是由于某个 Bug 导致原本只该出现在“Copilot 创建的 PR”里的提示，错误地出现在了“人工创建的 PR”里。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 但广大开发者显然不买账：<strong>在我的代码库里，不管谁创建的，塞广告就是不行。</strong></p>
+<h3 id="微软-copilot-的整烂活进化史">微软 Copilot 的“整烂活”进化史</h3>
+<p>其实大家之所以反应这么大，是因为 Copilot 已经不是第一次表现得像个“还没毕业的实习生”了。在过去的一年里，这位市值万亿公司的 AI 助手，可谓是贡献了不少笑料和槽点：</p>
+<ol>
+<li><strong>“跟 Windows 不是很熟”</strong>：在一次官方宣传视频中，博主问 Copilot 如何调大文字，Copilot 建议调整“屏幕缩放比例”。结果用户发现，Windows 其实有专门的文字大小调节选项，而 Copilot 的方案会把整个 UI 弄得一团糟。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+<li><strong>“幻觉级教学”</strong>：在微软的“Windows 学习中心”里，Copilot 生成的 Win 11 功能配图完全是胡编乱造，图里的小组件长得和真实系统不能说一模一样，只能说毫无关系。<sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+<li><strong>“隐私裸奔大赏”</strong>：别忘了曾经闹得沸沸扬扬的 Recall 功能，它在后台疯狂截图并把数据存在<strong>完全没加密的明文数据库</strong>里。要不是开发者及时曝光，你的银行密码可能早就成了 Copilot 的“午餐”。<sup id="fnref2:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+</ol>
+<h3 id="智能体还是广告代理商">“智能体”还是“广告代理商”？</h3>
+<p>面对质疑，GitHub 开发者关系副总裁 Martin Woodward 连夜发帖称：“我们没有、也不打算在 GitHub 中加入广告。” <sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 翻译一下就是：这真的是个意外，请大家相信我们的清白。</p>
+<p>但正如科幻作家 Cory Doctorow 所言，平台的衰落往往伴随着“对用户好 -&gt; 坑用户利商业客户 -&gt; 连商业客户一起坑”的循环。<sup id="fnref3:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>当 AI 助手开始未经允许修改用户的 PR 描述，当“产品提示”与“商业推广”的界限变得模糊，这种行为逻辑背后的傲慢才是最令社区感到不安的。今天它能帮你推个好用的启动器，明天它是不是就能在你的代码注释里塞一段它觉得“更好用”的付费库链接？</p>
+<p><strong>写在最后：</strong>
+AI 确实正在改变编程，但开发者需要的，是一个能帮我处理逻辑、寻找 Bug 的冷酷工具，而不是一个会在代码评审里跟我套近乎、顺便推销全家桶的“社交达人”。微软，收收味儿吧，大公司的这口“AI 泔水”，我们是真的咽不下了。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://windowsnews.ai/article/github-copilots-raycast-promotion-incident-bug-or-unethical-ai-behavior.409109">GitHub Copilot's Raycast Promotion Incident: Bug or Unethical AI Behavior?</a> · Windows News · Windows News Team (2025/3/31) · 检索日期2026/4/3&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.notebookcheck-cn.com/Microsoft-Copilot-GitHub.1263542.0.html">小错误：Microsoft Copilot 在 GitHub 拉取请求中包含未经请求的广告</a> · Notebookcheck-cn.com News (2025/3/31) · 检索日期2026/4/3&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.landiannews.com/archives/112388.html">微软/GitHub在开发者使用Copilot提交PR时自动添加广告 现已禁用推广功能</a> · 蓝点网 (2025/3/31) · 检索日期2026/4/3&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.ithome.com/0/934/673.htm">Copilot 擅自在开发者拉取请求中插广告引众怒，GitHub 紧急撤回</a> · IT之家 (2025/3/31) · 检索日期2026/4/3&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjgzMTAwODI0MA==&amp;mid=2652449242&amp;idx=1&amp;sn=bd22660256d13c4c9054fbfc07c6a827">微软 Copilot，像个乱贴小广告的街溜子</a> · 爱范儿 · 咽不下泔水的 (2026/4/3) · 检索日期2026/4/3&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%BE%AE%E8%BD%AF-copilot/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">微软 Copilot</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/github/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">GitHub</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-%E5%B9%BF%E5%91%8A/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI 广告</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/raycast/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Raycast</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%90%E6%A7%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">程序员吐槽</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%B4%E7%83%82%E6%B4%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">整烂活</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/github-copilot-ai-20260327121005905-0/">代码界的“霸王条款”？GitHub Copilot 默认拿你喂 AI，想退出先得玩场“捉迷藏”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/githubopenclaw26ai-20260309154005940-1/">GitHub新王崛起：OpenClaw三个月狂揽26万星，AI终于不再只会“画大饼”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github-100-linux-20260303094006821-0/">GitHub 变天了！这只“赛博龙虾”狂飙 100 天，星标竟超越了 Linux</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-72-github-19--20260224154007304-0/">文科生 72 小时“偷家”GitHub：我没写一行代码，却让 19 万星项目认我做“指挥官”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github48ceo6000ai-agent-20260211164005547-2/">离开GitHub半年，48岁前CEO带头“造反”？砸下6000万美金，要给AI Agent装上“记忆芯片”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github-claude-code-4--20260210104004955-0/">GitHub 沦陷倒计时：Claude Code 拿下 4% 提交，手写代码竟成了“复古奢侈品”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/githubclaudecodex18-20260205211009022-1/">GitHub深夜“炸场”：Claude&#43;Codex史诗级合体，1.8亿码农喜提“最强打工军团”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/jared-palmergithubai-20251204204012665-0/">Jared Palmer：重塑GitHub，一场以AI为核心的开发者“再出发”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251112014004841-0/">AI狂飙下的信任暗礁：速度崇拜与敏感数据泄露的深层反思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigithubcoreai-20250826104004928-5/">代码乌托邦的AI化身：GitHub并入微软CoreAI，重塑开源与开发者未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/githubaiceo-20250813101005588-2/">GitHub“独立日”变“AI日”？CEO跑路，开发者哭晕在厕所！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github-ceoai-agent-20250812191005275-2/">GitHub CEO“憋屈”出走，微软“收编”大厂，AI Agent要“造反”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250730194005347-0/">托马斯·多姆克：从代码“会所”到智能体“交响乐团”的指挥家</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
