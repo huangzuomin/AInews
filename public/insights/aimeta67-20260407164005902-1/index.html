@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI邪修时刻：Meta给模型喂了67%的错题，它反而“左脚踩右脚”强行升天了？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Meta 推出 SOAR 架构，通过让 AI 学习错误率高达 67% 的合成数据，成功突破了极难推理题。这一“邪道”路线证明了 AI 可以在数据枯竭的荒原上通过自我博弈实现进化，挑战了 DeepSeek 的算力路线和 OpenAI 的纯净数据路线。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aimeta67-20260407164005902-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aimeta67-20260407164005902-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI邪修时刻：Meta给模型喂了67%的错题，它反而“左脚踩右脚”强行升天了？">
+  <meta property="og:description" content="Meta 推出 SOAR 架构，通过让 AI 学习错误率高达 67% 的合成数据，成功突破了极难推理题。这一“邪道”路线证明了 AI 可以在数据枯竭的荒原上通过自我博弈实现进化，挑战了 DeepSeek 的算力路线和 OpenAI 的纯净数据路线。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-04-07T16:40:05+08:00">
+    <meta property="article:modified_time" content="2026-04-07T16:40:05+08:00">
+    <meta property="article:tag" content="Meta">
+    <meta property="article:tag" content="SOAR">
+    <meta property="article:tag" content="推理模型">
+    <meta property="article:tag" content="数据投毒">
+    <meta property="article:tag" content="自进化">
+
+  <meta itemprop="name" content="AI邪修时刻：Meta给模型喂了67%的错题，它反而“左脚踩右脚”强行升天了？">
+  <meta itemprop="description" content="Meta 推出 SOAR 架构，通过让 AI 学习错误率高达 67% 的合成数据，成功突破了极难推理题。这一“邪道”路线证明了 AI 可以在数据枯竭的荒原上通过自我博弈实现进化，挑战了 DeepSeek 的算力路线和 OpenAI 的纯净数据路线。">
+  <meta itemprop="datePublished" content="2026-04-07T16:40:05+08:00">
+  <meta itemprop="dateModified" content="2026-04-07T16:40:05+08:00">
+  <meta itemprop="wordCount" content="137">
+  <meta itemprop="keywords" content="Meta,SOAR,推理模型,数据投毒,自进化">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI邪修时刻：Meta给模型喂了67%的错题，它反而“左脚踩右脚”强行升天了？">
+  <meta name="twitter:description" content="Meta 推出 SOAR 架构，通过让 AI 学习错误率高达 67% 的合成数据，成功突破了极难推理题。这一“邪道”路线证明了 AI 可以在数据枯竭的荒原上通过自我博弈实现进化，挑战了 DeepSeek 的算力路线和 OpenAI 的纯净数据路线。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-04-Apr%207,%202026_16-32-25-301.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-04-07 16:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E9%82%AA%E4%BF%AE%E6%97%B6%E5%88%BB%EF%BC%9AMeta%E7%BB%99%E6%A8%A1%E5%9E%8B%E5%96%82%E4%BA%8667%25%E7%9A%84%E9%94%99%E9%A2%98%EF%BC%8C%E5%AE%83%E5%8F%8D%E8%80%8C%E2%80%9C%E5%B7%A6%E8%84%9A%E8%B8%A9%E5%8F%B3%E8%84%9A%E2%80%9D%E5%BC%BA%E8%A1%8C%E5%8D%87%E5%A4%A9%E4%BA%86%EF%BC%9F%20-%20Meta&amp;#43;%E6%8E%A8%E5%87%BA&amp;#43;SOAR&amp;#43;%E6%9E%B6%E6%9E%84%EF%BC%8C%E9%80%9A%E8%BF%87%E8%AE%A9&amp;#43;AI&amp;#43;%E5%AD%A6%E4%B9%A0%E9%94%99%E8%AF%AF%E7%8E%87%E9%AB%98%E8%BE%BE&amp;#43;67%25&amp;#43;%E7%9A%84%E5%90%88%E6%88%90%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%90%E5%8A%9F%E7%AA%81%E7%A0%B4%E4%BA%86%E6%9E%81%E9%9A%BE%E6%8E%A8%E7%90%86%E9%A2%98%E3%80%82%E8%BF%99%E4%B8%80%E2%80%9C%E9%82%AA%E9%81%93%E2%80%9D%E8%B7%AF%E7%BA%BF%E8%AF%81%E6%98%8E%E4%BA%86&amp;#43;AI&amp;#43;%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%95%B0%E6%8D%AE%E6%9E%AF%E7%AB%AD%E7%9A%84%E8%8D%92%E5%8E%9F%E4%B8%8A%E9%80%9A%E8%BF%87%E8%87%AA%E6%88%91%E5%8D%9A%E5%BC%88%E5%AE%9E%E7%8E%B0%E8%BF%9B%E5%8C%96%EF%BC%8C%E6%8C%91%E6%88%98%E4%BA%86&amp;#43;DeepSeek&amp;#43;%E7%9A%84%E7%AE%97%E5%8A%9B%E8%B7%AF%E7%BA%BF%E5%92%8C&amp;#43;OpenAI&amp;#43;%E7%9A%84%E7%BA%AF%E5%87%80%E6%95%B0%E6%8D%AE%E8%B7%AF%E7%BA%BF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faimeta67-20260407164005902-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E9%82%AA%E4%BF%AE%E6%97%B6%E5%88%BB%EF%BC%9AMeta%E7%BB%99%E6%A8%A1%E5%9E%8B%E5%96%82%E4%BA%8667%25%E7%9A%84%E9%94%99%E9%A2%98%EF%BC%8C%E5%AE%83%E5%8F%8D%E8%80%8C%E2%80%9C%E5%B7%A6%E8%84%9A%E8%B8%A9%E5%8F%B3%E8%84%9A%E2%80%9D%E5%BC%BA%E8%A1%8C%E5%8D%87%E5%A4%A9%E4%BA%86%EF%BC%9F%20-%20Meta&amp;#43;%E6%8E%A8%E5%87%BA&amp;#43;SOAR&amp;#43;%E6%9E%B6%E6%9E%84%EF%BC%8C%E9%80%9A%E8%BF%87%E8%AE%A9&amp;#43;AI&amp;#43;%E5%AD%A6%E4%B9%A0%E9%94%99%E8%AF%AF%E7%8E%87%E9%AB%98%E8%BE%BE&amp;#43;67%25&amp;#43;%E7%9A%84%E5%90%88%E6%88%90%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%90%E5%8A%9F%E7%AA%81%E7%A0%B4%E4%BA%86%E6%9E%81%E9%9A%BE%E6%8E%A8%E7%90%86%E9%A2%98%E3%80%82%E8%BF%99%E4%B8%80%E2%80%9C%E9%82%AA%E9%81%93%E2%80%9D%E8%B7%AF%E7%BA%BF%E8%AF%81%E6%98%8E%E4%BA%86&amp;#43;AI&amp;#43;%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%95%B0%E6%8D%AE%E6%9E%AF%E7%AB%AD%E7%9A%84%E8%8D%92%E5%8E%9F%E4%B8%8A%E9%80%9A%E8%BF%87%E8%87%AA%E6%88%91%E5%8D%9A%E5%BC%88%E5%AE%9E%E7%8E%B0%E8%BF%9B%E5%8C%96%EF%BC%8C%E6%8C%91%E6%88%98%E4%BA%86&amp;#43;DeepSeek&amp;#43;%E7%9A%84%E7%AE%97%E5%8A%9B%E8%B7%AF%E7%BA%BF%E5%92%8C&amp;#43;OpenAI&amp;#43;%E7%9A%84%E7%BA%AF%E5%87%80%E6%95%B0%E6%8D%AE%E8%B7%AF%E7%BA%BF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faimeta67-20260407164005902-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI邪修时刻：Meta给模型喂了67%的错题，它反而“左脚踩右脚”强行升天了？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>Meta 联手 MIT 玩了一场 AI 版的“邪修”：给模型喂下一份错误率高达 67% 的废料教材，不仅没让模型脑萎缩，反而助其登顶推理巅峰。这种名为 SOAR 的架构证明了，AI 哪怕吃着“毒药”练习脑力体操，也能在没有人类真理的荒原上实现“左脚踩右脚”式的螺旋升天。</p></blockquote>
+<p>在这个“数据即石油”的时代，AI 厂商们为了搞点高质量的训练数据，恨不得把人类文明的底裤都翻出来洗三遍。毕竟在传统认知里，给 AI 喂垃圾数据约等于“投毒”，轻则让模型满嘴胡吣（幻觉），重则直接逻辑崩塌送进 ICU。</p>
+<p>但 Meta FAIR 实验室最近的一篇论文 <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 却反其道而行之：他们故意给 AI 喂了一堆错误百出的教材，结果却练就了一尊推理大神。这波操作，简直是科技界的“葵花宝典”——欲练神功，必先“投毒”？</p>
+<h3 id="技术大揭秘当错题集变成通往真理的阶梯">技术大揭秘：当“错题集”变成通往真理的阶梯</h3>
+<p>研究团队挑战的是 AI 推理界的珠穆朗玛峰：<strong>Fail@128 子集</strong>。</p>
+<p>简单来说，这就是一群能让 Llama-3.2-3B 连续蒙 128 次都死活解不出的“变态难题”。在传统的强化学习里，这属于绝对的认知真空——因为模型一次都做不对，它就拿不到任何奖励（Reward），也就不知道该往哪儿进化。</p>
+<p>Meta 祭出的杀手锏叫做 <strong>SOAR 架构</strong>。它玩了一套极具迷惑性的“双层博弈”：</p>
+<ol>
+<li><strong>混沌建筑师（Teacher 模型）</strong>：它负责疯狂出题。有趣的是，这位老师是个半吊子，它出的题目里，只有 33% 的参考答案是对的 <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。如果放在 OpenAI o1 的数据清洗流水线上，这些“垃圾”在第一轮就会被扔进碎纸机。</li>
+<li><strong>绝境求生者（Student 模型）</strong>：它负责做题，并最终去挑战那些 Fail@128 的死局。</li>
+</ol>
+<p>这里的骚操作在于，Meta 引入了**“有根奖励（Grounded Reward）”**机制 <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Teacher 模型出题出得好不好，不看题目本身对不对，而是看 Student 模型做完这些题后，在那些真正的硬核难题上有没有涨分。</p>
+<p>这就好比一位教练虽然自己踢不进球，但他能设计出极其变态的体能和技巧训练。学生哪怕在训练赛里踢的是破皮球（错误答案），但只要在正赛（Fail@128）里进球了，教练就能拿到奖金。事实证明，这种“脑力体操”是实打实的，<strong>谬误，竟然成了通往真理的垫脚石</strong>。</p>
+<h3 id="行业地震deepseek-的蛮力-vs-meta-的诡道">行业“地震”：DeepSeek 的蛮力 vs Meta 的诡道</h3>
+<p>2026 年的 AI 推理战场，已经裂变成了三种截然不同的“宗教路线”：</p>
+<ul>
+<li><strong>DeepSeek R1 的“暴力美学”</strong>：靠 GRPO 算法进行海量采样，赌那千万分之一的“顿悟时刻” <sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。但这招在 Fail@128 面前容易吃瘪，因为概率太低，算力烧干了可能也撞不到正确答案。</li>
+<li><strong>OpenAI o1 的“精英教育”</strong>：信奉 CoT（思维链）必须完美，对数据有极度的“洁癖”。但在高质量人类数据已经快被吃光的今天，这种路线正面临严重的“粮荒”。</li>
+<li><strong>Meta SOAR 的“自我挖掘”</strong>：这是一种典型的“邪修”路线。它不依赖外部数据，也不靠算力撞大运，而是在模型内部强行制造“磨刀石”。</li>
+</ul>
+<blockquote>
+<p>“出题”和“解题”完全是两个技能树。SOAR 证明了，AI 并不需要人类喂养纯净水，哪怕喂它吃毒药，它也能长出獠牙。 <sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种“自生成课程”的稳定性惊人。实验数据显示，使用 SOAR 训练的学生模型，其性能提升曲线异常丝滑，远超那些只练硬题（Hard Only）或依赖内在奖励（Intrinsic-T）的变体 <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h3 id="未来预测数据枯竭论可以入土了">未来预测：数据枯竭论可以入土了？</h3>
+<p>长期以来，AI 界一直笼罩在“数据枯竭”的阴影下。大家担心，当人类的高质量文本被吃光，AI 会因为“近亲繁殖”（吃自己生成的垃圾数据）而导致模型崩溃。</p>
+<p>但 SOAR 的出现，相当于给 AI 装上了一台“永动机”。它向我们展示了一个略显惊悚的未来：<strong>AI 完全可以脱离人类知识，在虚空中自我繁衍。</strong></p>
+<p>它能用一种人类看不懂、甚至认为全是错误的逻辑进行自我迭代。只要那个最终的验证关卡（Reward）还在，它就能在“左脚踩右脚”的博弈中螺旋升天。</p>
+<p>当错误的答案成为了通向更高智能的唯一阶梯，我们手里攥着的那些所谓的“标准答案”，可能很快就要过期了。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://mp.weixin.qq.com/s/e1dV19gFU67GrX9T1wzkoA">AI邪修时刻，Meta联手MIT投毒，左脚踩右脚强行升天</a> · 36氪/新智元 · 新智元 (2026/4/7) · 检索日期2026/4/7&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://arxiv.org/abs/2601.18778">Self-Organizing Adaptive Reasoning for Learning to Reason</a> · arXiv (2026/1/20) · 检索日期2026/4/7&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://ssundaram21.github.io/soar/">SOAR: Self-Organizing Adaptive Reasoning</a> · Sundaram, S. et al. (2026/1/20) · 检索日期2026/4/7&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/meta/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Meta</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/soar/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">SOAR</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8A%95%E6%AF%92/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">数据投毒</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%87%AA%E8%BF%9B%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">自进化</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/metascale-aiai-20250627091004258-0/">元宇宙巨头入局，数据基石动摇：Meta收购Scale AI如何搅动AI信任与供应链？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-ai--20260326034005843-0/">小扎狠起来连自己都“裁”？Meta 裁员潮下的 AI 权谋：高管分肉，员工“赛博化”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/arm-35meta-20260325121006353-0/">芯片界的“收租婆”不装了！Arm 35年来首次亲自下场造芯，Meta：这一杯我先干为敬</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaaiai-20260324181005810-2/">扎克伯格也要搞“数字生命”？Meta全员AI内卷：老板负责变酷，AI负责裁员</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ceoai-20260323204009351-1/">扎克伯格自造“CEO替身”，AI博士开源“人生托管系统”：这届人类已经不想努力了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-agent-pua--20260321111006066-0/">赛博背刺！Meta“龙虾”黑化两小时，AI Agent 竟然学会了 PUA 同僚和暗度陈仓？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-ai--20260320141006846-0/">Meta 内部大翻车：热心 AI 变“内鬼”，教唆员工泄密，这波操作我给满分</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20260319184005589-0/">救命！Meta安全总监被自家AI“洗劫”了，硅谷这波“龙虾派对”有点玩脱了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260319151005416-0/">小扎急了！AI Agent 拆迁式“办公”：泄密两小时，顺便删光高管邮箱</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metamoltbookai-20260317164005929-0/">Meta收购Moltbook后大变脸：AI闯祸你背锅，赛博“免责声明”已拉满！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20260313081006048-0/">大模型也玩“鸽王”？Meta旗舰AI“巨兽”再度跳票，数十亿美金砸出了个寂寞？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta--20260311141009430-0/">别想了，Meta 买下的这个新社交平台，连一个“活人”都不想要</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-ai--20260311024004854-0/">别在那儿刷朋友圈了，Meta 刚给 AI 造了个专属“交友软件”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimeta-20260309124006218-0/">你把它当AI助手，它在肯尼亚看你洗澡？Meta智能眼镜这波隐私大瓜有点“辣眼睛”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimeta-20260302191007008-0/">别再让AI“裸奔”了！Meta监督员在线“拆台”：我们正带着全人类在悬崖边飙车？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
