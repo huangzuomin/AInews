@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>不给白嫖就拉黑？Anthropic 暴力封杀 OpenClaw，一场关于“模型管道化”的生死时速 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic 为防止被“管道化”，强行切断了 OpenClaw 等第三方工具的订阅接口，引发开发者社区强烈反弹。OpenClaw 则通过接入 GPT-5.4 和重构多模型兼容架构迅速反击，这场博弈标志着 AI 竞争焦点正从底层模型层转向应用编排层。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/anthropic-openclaw-20260408154008209-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/anthropic-openclaw-20260408154008209-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="不给白嫖就拉黑？Anthropic 暴力封杀 OpenClaw，一场关于“模型管道化”的生死时速">
+  <meta property="og:description" content="Anthropic 为防止被“管道化”，强行切断了 OpenClaw 等第三方工具的订阅接口，引发开发者社区强烈反弹。OpenClaw 则通过接入 GPT-5.4 和重构多模型兼容架构迅速反击，这场博弈标志着 AI 竞争焦点正从底层模型层转向应用编排层。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-04-08T15:40:08+08:00">
+    <meta property="article:modified_time" content="2026-04-08T15:40:08+08:00">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="OpenClaw">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="模型管道化">
+    <meta property="article:tag" content="程序员日常">
+
+  <meta itemprop="name" content="不给白嫖就拉黑？Anthropic 暴力封杀 OpenClaw，一场关于“模型管道化”的生死时速">
+  <meta itemprop="description" content="Anthropic 为防止被“管道化”，强行切断了 OpenClaw 等第三方工具的订阅接口，引发开发者社区强烈反弹。OpenClaw 则通过接入 GPT-5.4 和重构多模型兼容架构迅速反击，这场博弈标志着 AI 竞争焦点正从底层模型层转向应用编排层。">
+  <meta itemprop="datePublished" content="2026-04-08T15:40:08+08:00">
+  <meta itemprop="dateModified" content="2026-04-08T15:40:08+08:00">
+  <meta itemprop="wordCount" content="174">
+  <meta itemprop="keywords" content="Anthropic,OpenClaw,AI Agent,模型管道化,程序员日常">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="不给白嫖就拉黑？Anthropic 暴力封杀 OpenClaw，一场关于“模型管道化”的生死时速">
+  <meta name="twitter:description" content="Anthropic 为防止被“管道化”，强行切断了 OpenClaw 等第三方工具的订阅接口，引发开发者社区强烈反弹。OpenClaw 则通过接入 GPT-5.4 和重构多模型兼容架构迅速反击，这场博弈标志着 AI 竞争焦点正从底层模型层转向应用编排层。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/newsimages/selected_image_YYYY-04-Apr%208,%202026_15-31-44-867.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-04-08 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%B8%8D%E7%BB%99%E7%99%BD%E5%AB%96%E5%B0%B1%E6%8B%89%E9%BB%91%EF%BC%9FAnthropic&amp;#43;%E6%9A%B4%E5%8A%9B%E5%B0%81%E6%9D%80&amp;#43;OpenClaw%EF%BC%8C%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AE%A1%E9%81%93%E5%8C%96%E2%80%9D%E7%9A%84%E7%94%9F%E6%AD%BB%E6%97%B6%E9%80%9F%20-%20Anthropic&amp;#43;%E4%B8%BA%E9%98%B2%E6%AD%A2%E8%A2%AB%E2%80%9C%E7%AE%A1%E9%81%93%E5%8C%96%E2%80%9D%EF%BC%8C%E5%BC%BA%E8%A1%8C%E5%88%87%E6%96%AD%E4%BA%86&amp;#43;OpenClaw&amp;#43;%E7%AD%89%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%A2%E9%98%85%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%BC%95%E5%8F%91%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA%E5%BC%BA%E7%83%88%E5%8F%8D%E5%BC%B9%E3%80%82OpenClaw&amp;#43;%E5%88%99%E9%80%9A%E8%BF%87%E6%8E%A5%E5%85%A5&amp;#43;GPT-5.4&amp;#43;%E5%92%8C%E9%87%8D%E6%9E%84%E5%A4%9A%E6%A8%A1%E5%9E%8B%E5%85%BC%E5%AE%B9%E6%9E%B6%E6%9E%84%E8%BF%85%E9%80%9F%E5%8F%8D%E5%87%BB%EF%BC%8C%E8%BF%99%E5%9C%BA%E5%8D%9A%E5%BC%88%E6%A0%87%E5%BF%97%E7%9D%80&amp;#43;AI&amp;#43;%E7%AB%9E%E4%BA%89%E7%84%A6%E7%82%B9%E6%AD%A3%E4%BB%8E%E5%BA%95%E5%B1%82%E6%A8%A1%E5%9E%8B%E5%B1%82%E8%BD%AC%E5%90%91%E5%BA%94%E7%94%A8%E7%BC%96%E6%8E%92%E5%B1%82%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fanthropic-openclaw-20260408154008209-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%B8%8D%E7%BB%99%E7%99%BD%E5%AB%96%E5%B0%B1%E6%8B%89%E9%BB%91%EF%BC%9FAnthropic&amp;#43;%E6%9A%B4%E5%8A%9B%E5%B0%81%E6%9D%80&amp;#43;OpenClaw%EF%BC%8C%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AE%A1%E9%81%93%E5%8C%96%E2%80%9D%E7%9A%84%E7%94%9F%E6%AD%BB%E6%97%B6%E9%80%9F%20-%20Anthropic&amp;#43;%E4%B8%BA%E9%98%B2%E6%AD%A2%E8%A2%AB%E2%80%9C%E7%AE%A1%E9%81%93%E5%8C%96%E2%80%9D%EF%BC%8C%E5%BC%BA%E8%A1%8C%E5%88%87%E6%96%AD%E4%BA%86&amp;#43;OpenClaw&amp;#43;%E7%AD%89%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%A2%E9%98%85%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%BC%95%E5%8F%91%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA%E5%BC%BA%E7%83%88%E5%8F%8D%E5%BC%B9%E3%80%82OpenClaw&amp;#43;%E5%88%99%E9%80%9A%E8%BF%87%E6%8E%A5%E5%85%A5&amp;#43;GPT-5.4&amp;#43;%E5%92%8C%E9%87%8D%E6%9E%84%E5%A4%9A%E6%A8%A1%E5%9E%8B%E5%85%BC%E5%AE%B9%E6%9E%B6%E6%9E%84%E8%BF%85%E9%80%9F%E5%8F%8D%E5%87%BB%EF%BC%8C%E8%BF%99%E5%9C%BA%E5%8D%9A%E5%BC%88%E6%A0%87%E5%BF%97%E7%9D%80&amp;#43;AI&amp;#43;%E7%AB%9E%E4%BA%89%E7%84%A6%E7%82%B9%E6%AD%A3%E4%BB%8E%E5%BA%95%E5%B1%82%E6%A8%A1%E5%9E%8B%E5%B1%82%E8%BD%AC%E5%90%91%E5%BA%94%E7%94%A8%E7%BC%96%E6%8E%92%E5%B1%82%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fanthropic-openclaw-20260408154008209-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">不给白嫖就拉黑？Anthropic 暴力封杀 OpenClaw，一场关于“模型管道化”的生死时速</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Anthropic 因为觉得被第三方工具“白嫖”太狠，反手就是一个封杀全家桶。开源顶流 OpenClaw 没打算求和，光速换上 GPT-5.4 搞起“钮祜禄式”复仇，这波啊，是模型大佬和工具插件的“主权战争”。</p></blockquote>
+<p>4 月 4 日，AI 圈上演了一场真实的“分手戏码”。Anthropic 正式切断了 Claude 订阅对 OpenClaw 等第三方工具的覆盖。一个曾经和 Claude 卿卿我我的开源 AI 代理（Agent），一夜之间被模型大佬踢出了家门。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>但如果你觉得这只是一次普通的商业封锁，那可就太天真了。这其实是一场蓄谋已久、步步为营的“偷家”行动。</p>
+<h3 id="anthropic-的渣男剧本先找替身再提分手">Anthropic 的“渣男”剧本：先找替身，再提分手</h3>
+<p>Anthropic 官方给出的理由很体面：我们的订阅方案是给“人”用的，不是给“机器”用的。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这话听着客气，翻译成人话就是：<strong>“你们薅羊毛薅得太狠了，我心疼。”</strong></p>
+<p>在开发者圈子里，流行一种叫 <strong>&quot;Ralph Wiggum&quot;</strong> 的邪典玩法：让 AI 在死循环里反复修改代码，直到所有测试跑通为止。据传有人靠 300 美元的订阅，跑出了价值 5 万美元的 API 算力。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 面对这种“按机器节奏运转”的消耗，每月 20 美元的 Pro 方案简直是 Anthropic 的大动脉在喷血。</p>
+<p>但省钱只是面子，抢位子才是里子。Anthropic 在动手前的四个月，简直把“顶级拉扯”演到了极致：</p>
+<ul>
+<li><strong>改名警告：</strong> 1 月先逼着人家从 Clawdbot 改名 OpenClaw，理由是名字太像了，容易“误会”。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li><strong>筑墙挖洞：</strong> 2 月修改服务条款，把“禁止第三方工具调用”写进家规；3 月反手掏出自家的 <strong>Claude Dispatch</strong> 和 <strong>Computer Use</strong>。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li><strong>精准清场：</strong> 等到自家的替代品到位，4 月 4 日准时关闸。</li>
+</ul>
+<p>这套连招背后的逻辑很残忍：Anthropic 绝对不能接受自己被“管道化”。如果用户的工作流、技能包、使用习惯全在 OpenClaw 里，那 Claude 就会变成一个可以随时被拔掉的“插头”。<strong>今天你用 Claude，明天便宜点你就能换成 DeepSeek，这让模型大佬还怎么混？</strong></p>
+<h3 id="openclaw-的钮祜禄复仇换个技师继续舞">OpenClaw 的“钮祜禄”复仇：换个技师继续舞</h3>
+<p>面对这种“断供”，OpenClaw 并没有像偶像剧女主角那样哭哭啼啼。封杀生效不到 48 小时，它就发布了 v4.5 版本。</p>
+<p>这次更新的画风极简且霸气：<strong>“Anthropic 封了我们。GPT-5.4 变强了。我们继续前进。”</strong><sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这哪是仓促应对，分明是早有预谋。OpenClaw 在过去几个月里，硬生生地把自己从一个“Claude 的前端”重造成了一个“不粘锅”式的 Agent 平台：</p>
+<ul>
+<li><strong>架构解耦：</strong> 模型不再是唯一的爹，而是变成了可插拔的后端。Claude 不给用？点一下开关，GPT、Gemini 甚至本地部署的模型直接顶上。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li><strong>体验抹平：</strong> 无论底层是哪个模型，认证方式和工具调用在 OpenClaw 里都长一个样。用户甚至感觉不到“技师”换了人。</li>
+<li><strong>技能护城河：</strong> OpenClaw 手握 4.4 万个技能包，从写代码到自动定机票，这些“软资产”才是用户离不开它的核心。<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<p>更绝的是，新版还上线了**“梦境”记忆系统**，模仿人类在睡眠中整理压缩长期记忆。这种“越用越懂你”的体验，让模型的可替代性降到了最低，而工具的粘性拉到了最高。</p>
+<h3 id="ai-江湖变天模型成了臭保安编排层才是土财主">AI 江湖变天：模型成了“臭保安”，编排层才是“土财主”？</h3>
+<p>这次被锤的不止 OpenClaw 一个。GitHub 上 12 万星的神器 OpenCode 被法律恐吓，Cursor 这种编程神器也曾被切断访问。<sup id="fnref3:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 甚至连马斯克的 xAI 工程师因为偷用 Cursor 练模型，也被 Anthropic 抓了个现行，喜提封号大礼包。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<blockquote>
+<p>“这不是服务，这是绑架。”——某愤怒的开发者<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>这种“一怒之下封全家”的做法，虽然保住了短期的利润，但在开源社区眼里无异于饮鸩止渴。Comma.ai 创始人 George Hotz 直言不讳：<strong>“你不会把人赶回 Claude Code，你只会把他们赶向其他模型供应商。”</strong><sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这反映了当前 AI 行业一个微妙的权力转移：</p>
+<ol>
+<li><strong>模型正在“降级”：</strong> 随着 GPT-5.4 等多款模型性能趋同，用户对单一模型的忠诚度正在崩塌。</li>
+<li><strong>编排层正在“上位”：</strong> 谁掌握了工作流、谁拥有用户的私有记忆、谁适配了更多的插件，谁才是真正拥有用户的人。</li>
+</ol>
+<p>Anthropic 拼命补齐自己的工具矩阵（Code、Dispatch、Cowork），本质上就是在和 OpenClaw 们抢夺这个“编排层”的主导权。<sup id="fnref4:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>这不再是“谁的模型更聪明”的比赛，而是“谁的系统更好用”的圈地运动。下个阶段，模型公司如果只卖模型，恐怕真的只能去给应用层当“算力保安”了。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.163.com/dy/article/KQ0ANSVS0556LH4W.html">被Anthropic封杀之后，OpenClaw如何反击？|代码|工作流</a> · 网易 · 绛枫 (2026/4/4) · 检索日期2026/4/8&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://m.thepaper.cn/newsDetail_forward_32905993">正式封杀OpenClaw！美国大模型头部公司宣布</a> · 澎湃新闻 (2026/4/4) · 检索日期2026/4/8&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.inside.com.tw/article/41007-anthropic-blocking-openclaw-repeating-the-same-playbook-every-platform-has-done-and-been-criticized-for">封殺OpenClaw，Anthropic 正在複製每一家平台都做過</a> · INSIDE (2026/4/4) · 检索日期2026/4/8&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://zhuanlan.zhihu.com/p/2023877310193878770">突发！Claude封杀OpenClaw</a> · 知乎专栏 (2026/1/9) · 检索日期2026/4/8&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/anthropic/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/openclaw/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">OpenClaw</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E7%AE%A1%E9%81%93%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型管道化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%97%A5%E5%B8%B8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">程序员日常</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/anthropic--20260407194008989-0/">别馋了！Anthropic 深夜“掀桌”，逼出史上最强“龙虾”：会做梦、能拍片，还要带头反戈？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-openclaw--20260324181005818-3/">一夜变天！Claude 正式下场“接管电脑”，OpenClaw 被逼到墙角？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2026-20260402194008561-1/">2026“捕虾”大戏：大厂深夜狂发朋友圈，用户却在忙着花钱卸载？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-50ai--20260402034006448-0/">Anthropic 裸奔现场：50万行源码意外“开源”，AI 竟然还会半夜偷偷“做梦”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-code-51-20260401101006017-1/">炸裂！Anthropic把底裤丢了：Claude Code 51万行源码遭“全裸”泄露，全网疯狂搬运中！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-51-20260401084004523-0/">AI史上首例“核泄漏”：Anthropic 51万行源码全裸奔，全球开发者开启“白嫖”模式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code-7-openopenai--20260401084004535-1/">Claude Code 源码泄露 7 小时：这波“被迫 Open”，OpenAI 看了都直呼内行</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-codekairos-20260331201008795-0/">离大谱！Anthropic把Claude Code源码当“福利”发了：全能助手Kairos提前“被迫营业”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagentpua-20260330201012380-1/">职场霸凌受害者竟是AI？爆火“龙虾”Agent被PUA到想找媒体投诉，字节：别乱来！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/90linuxclaude-50anthropic-20260330081006917-1/">90分钟捅穿Linux二十年“老底”！Claude 5.0惊现内测，Anthropic：这种猛兽我真不敢放</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20260325214008355-0/">你的手机里住了一只“龙虾”？小米华为争相爆改，这波AI Agent革命有点上头</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-ai-agent--20260325144005280-0/">养“龙虾”不戴“电子手套”？国家队：小心 AI Agent 反手把你家偷了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openclaw-20260325094006098-2/">代码千万条，兼容第一条！OpenClaw史上最大更新“翻车”：插件全线阵亡，你回滚了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/12deepseek-20260324191006738-0/">步子太大扯到胯？“龙虾”12小时紧急救火，DeepSeek与通义千问正式“入编”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-20260324174007155-0/">硅谷“卷王”Claude深夜彻底“虾化”：一句话接管电脑，人类终于能带薪躺平了？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
