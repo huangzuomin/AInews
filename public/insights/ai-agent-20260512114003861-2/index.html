@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>代码复古与协议重生：AI Agent如何剥离软件的“抽象熵” | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="文章深度探讨了AI时代为何CLI与HTML等“复古”技术重回主流。核心观点在于，AI Agent作为自主执行主体，倾向于剥离现代软件臃肿的抽象层，通过更直接、透明的协议交互，推动软件开发向“第一性原理”回归。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/ai-agent-20260512114003861-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/ai-agent-20260512114003861-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="代码复古与协议重生：AI Agent如何剥离软件的“抽象熵”">
+  <meta property="og:description" content="文章深度探讨了AI时代为何CLI与HTML等“复古”技术重回主流。核心观点在于，AI Agent作为自主执行主体，倾向于剥离现代软件臃肿的抽象层，通过更直接、透明的协议交互，推动软件开发向“第一性原理”回归。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-12T11:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-12T11:40:03+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="CLI">
+    <meta property="article:tag" content="软件工程">
+    <meta property="article:tag" content="技术哲学">
+    <meta property="article:tag" content="数字化转型">
+    <meta property="article:tag" content="交互范式">
+
+  <meta itemprop="name" content="代码复古与协议重生：AI Agent如何剥离软件的“抽象熵”">
+  <meta itemprop="description" content="文章深度探讨了AI时代为何CLI与HTML等“复古”技术重回主流。核心观点在于，AI Agent作为自主执行主体，倾向于剥离现代软件臃肿的抽象层，通过更直接、透明的协议交互，推动软件开发向“第一性原理”回归。">
+  <meta itemprop="datePublished" content="2026-05-12T11:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-12T11:40:03+08:00">
+  <meta itemprop="wordCount" content="27">
+  <meta itemprop="keywords" content="AI Agent,CLI,软件工程,技术哲学,数字化转型,交互范式">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="代码复古与协议重生：AI Agent如何剥离软件的“抽象熵”">
+  <meta name="twitter:description" content="文章深度探讨了AI时代为何CLI与HTML等“复古”技术重回主流。核心观点在于，AI Agent作为自主执行主体，倾向于剥离现代软件臃肿的抽象层，通过更直接、透明的协议交互，推动软件开发向“第一性原理”回归。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2812%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-12 11:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%A3%E7%A0%81%E5%A4%8D%E5%8F%A4%E4%B8%8E%E5%8D%8F%E8%AE%AE%E9%87%8D%E7%94%9F%EF%BC%9AAI&amp;#43;Agent%E5%A6%82%E4%BD%95%E5%89%A5%E7%A6%BB%E8%BD%AF%E4%BB%B6%E7%9A%84%E2%80%9C%E6%8A%BD%E8%B1%A1%E7%86%B5%E2%80%9D%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E6%8E%A2%E8%AE%A8%E4%BA%86AI%E6%97%B6%E4%BB%A3%E4%B8%BA%E4%BD%95CLI%E4%B8%8EHTML%E7%AD%89%E2%80%9C%E5%A4%8D%E5%8F%A4%E2%80%9D%E6%8A%80%E6%9C%AF%E9%87%8D%E5%9B%9E%E4%B8%BB%E6%B5%81%E3%80%82%E6%A0%B8%E5%BF%83%E8%A7%82%E7%82%B9%E5%9C%A8%E4%BA%8E%EF%BC%8CAI&amp;#43;Agent%E4%BD%9C%E4%B8%BA%E8%87%AA%E4%B8%BB%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BD%93%EF%BC%8C%E5%80%BE%E5%90%91%E4%BA%8E%E5%89%A5%E7%A6%BB%E7%8E%B0%E4%BB%A3%E8%BD%AF%E4%BB%B6%E8%87%83%E8%82%BF%E7%9A%84%E6%8A%BD%E8%B1%A1%E5%B1%82%EF%BC%8C%E9%80%9A%E8%BF%87%E6%9B%B4%E7%9B%B4%E6%8E%A5%E3%80%81%E9%80%8F%E6%98%8E%E7%9A%84%E5%8D%8F%E8%AE%AE%E4%BA%A4%E4%BA%92%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%90%91%E2%80%9C%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E2%80%9D%E5%9B%9E%E5%BD%92%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-agent-20260512114003861-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%A3%E7%A0%81%E5%A4%8D%E5%8F%A4%E4%B8%8E%E5%8D%8F%E8%AE%AE%E9%87%8D%E7%94%9F%EF%BC%9AAI&amp;#43;Agent%E5%A6%82%E4%BD%95%E5%89%A5%E7%A6%BB%E8%BD%AF%E4%BB%B6%E7%9A%84%E2%80%9C%E6%8A%BD%E8%B1%A1%E7%86%B5%E2%80%9D%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E6%8E%A2%E8%AE%A8%E4%BA%86AI%E6%97%B6%E4%BB%A3%E4%B8%BA%E4%BD%95CLI%E4%B8%8EHTML%E7%AD%89%E2%80%9C%E5%A4%8D%E5%8F%A4%E2%80%9D%E6%8A%80%E6%9C%AF%E9%87%8D%E5%9B%9E%E4%B8%BB%E6%B5%81%E3%80%82%E6%A0%B8%E5%BF%83%E8%A7%82%E7%82%B9%E5%9C%A8%E4%BA%8E%EF%BC%8CAI&amp;#43;Agent%E4%BD%9C%E4%B8%BA%E8%87%AA%E4%B8%BB%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BD%93%EF%BC%8C%E5%80%BE%E5%90%91%E4%BA%8E%E5%89%A5%E7%A6%BB%E7%8E%B0%E4%BB%A3%E8%BD%AF%E4%BB%B6%E8%87%83%E8%82%BF%E7%9A%84%E6%8A%BD%E8%B1%A1%E5%B1%82%EF%BC%8C%E9%80%9A%E8%BF%87%E6%9B%B4%E7%9B%B4%E6%8E%A5%E3%80%81%E9%80%8F%E6%98%8E%E7%9A%84%E5%8D%8F%E8%AE%AE%E4%BA%A4%E4%BA%92%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%90%91%E2%80%9C%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E2%80%9D%E5%9B%9E%E5%BD%92%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-agent-20260512114003861-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">代码复古与协议重生：AI Agent如何剥离软件的“抽象熵”</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>AI正通过CLI和HTML等“复古”技术剥离现代软件沉重的抽象层。这场看似反祖的现象，实质上是AI Agent作为执行主体，对计算效率和交互透明度进行的“第一性原理”回归。</p></blockquote>
+<h3 id="格式之争的隐喻机器的偏好与人类的审阅">格式之争的隐喻：机器的偏好与人类的审阅</h3>
+<p>近期科技圈关于“Markdown vs HTML”的论战，表面是排版格式的更迭，实则是AI交互范式的深刻转折。当Anthropic的工程师宣称弃用Markdown转向HTML时，他们揭示了一个真相：<strong>人类不再是唯一的终端用户。</strong></p>
+<p>在AI辅助生成的时代，人类角色已从“创作者”降维为“审阅者”。对于机器而言，Markdown的线性结构简洁高效；但对于审阅者，HTML提供的交互式布局、Tab切换和动态渲染，能够以更低的认知负载呈现AI输出的复杂逻辑。这并非单纯的复古，而是AI时代内容消费逻辑的重构——<strong>给机器看的是协议，给人看的是界面。</strong></p>
+<h3 id="cli的复兴从隐喻到语言的跨越">CLI的复兴：从隐喻到语言的跨越</h3>
+<p>如果说HTML回归是视觉呈现的进化，那CLI（命令行界面）的复兴则是AI与计算环境交互的本质回归。正如Perplexity CTO放弃MCP协议转而拥抱传统的标准输入输出（stdin/stdout）一样，开发者群体正在经历一场对复杂协议的“断舍离”。</p>
+<blockquote>
+<p>“对AI来说，GUI是一种隐喻，而CLI是一种语言。隐喻需要翻译，语言只需要解析。”</p></blockquote>
+<p>在复杂的GUI环境中，AI不仅要通过视觉模型识别图标与语义，还面临着极高的延迟与不确定性。相反，CLI通过结构化的文本流提供了近乎零噪声的操作环境。这种“回归”揭示了一个深刻的洞察：<strong>最好的AI界面，是不需要视觉隐喻的执行接口。</strong> 当AI成为了执行主力，软件的抽象层（如容器编排、复杂的API封装）反而成了干扰AI路径规划的“熵增”。</p>
+<h3 id="saas的末日与agent的新生">SaaS的末日与Agent的新生</h3>
+<p>“SaaSpocalypse”（SaaS的世界末日）并非指软件服务的消失，而是指传统臃肿型SaaS模式的瓦解。当Claude Code等工具能够通过调用CLI接口、直接生成HTML交互页面来完成复杂的业务闭环，那种依托于特定UI、锁定用户数据的“孤岛式”软件将失去壁垒。</p>
+<p>未来，我们可能见证一种新型软件形态的崛起：</p>
+<ul>
+<li><strong>去中心化交互</strong>：软件不再是一个封装好的应用，而是一组由AI调用的原子化命令行工具。</li>
+<li><strong>即时生成式界面</strong>：UI不再预先编码，而是根据当前任务动态生成轻量级的HTML/JS交互组件。</li>
+<li><strong>第一性原理回归</strong>：底层的执行逻辑将完全透明化，中间层抽象（如复杂的React生态、本地数据库依赖）会被AI直接绕过或简化。</li>
+</ul>
+<h3 id="螺旋上升的贝叶斯主义">螺旋上升的贝叶斯主义</h3>
+<p>这场所谓的“复古运动”，实则是技术螺旋上升的典型体现。过去三十年，我们为了弥补人类认知的局限，在计算机之上堆叠了无数层抽象（如拖拽、低代码、复杂UI库），每一层都在解决上一层带来的复杂度。而AI作为一种新型的“计算引擎”，它不具备人类的认知局限，因此它有动力、也有能力将这些抽象层一层层剥离。</p>
+<p>这并非是对技术的倒退，而是一种基于AI Agent能力的贝叶斯主义——在每一个决策节点上，选择那个最直接、最少干预、最具确定性的技术路径。当Claude Code能够直接读写文件、执行命令、输出网页时，软件开发的门槛已被推平。这标志着我们正式进入了“执行力即生产力”的时代，任何无法被AI无缝调用的技术栈，终将被历史过滤。</p>
+<h2 id="引用">引用</h2>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/cli/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">CLI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E5%93%B2%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术哲学</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%B0%E5%AD%97%E5%8C%96%E8%BD%AC%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">数字化转型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A4%E4%BA%92%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">交互范式</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/agent-20260511111003890-5/">软件的隐身革命：当Agent将软件重构为“数字基础设施”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aipeekaboo-v3--20260511194003483-1/">当AI学会“看”与“点”：Peekaboo v3 如何重构人机交互的最后一公里</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/langchain-fleet-ai-agent--20260402054005049-0/">别再单打独斗了！LangChain 官宣 Fleet 品牌升级：AI Agent 也要搞“集体协作”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aisaas-ai-agent--20260326204005854-0/">AI“杀疯了”：SaaS 还没活明白，AI Agent 就要来“拆迁”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260320124006581-0/">皮衣下的造风者：黄仁勋与他预言的“单人军队”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/8ai-20260317124009685-0/">8亿打工人的AI大迁徙：钉钉“碎”了，炼出这只能帮全世界干活的「悟空」</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/282ai-20260316174005898-0/">拒绝只做“文案搭子”！滴普科技反手掏出282个技能包，要给企业批量发“AI员工”证？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/26ai-20260311171006566-0/">一周狂赚26万？深圳人排队“领养”的这只AI红龙虾，到底是神药还是赛博玄学？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/14saas-20260309171006723-0/">傅盛：在骨折的14天里，一个工具老兵杀死了SaaS</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260307111007908-1/">“龙虾”进击：开源智能体能否填饱大模型厂商的饥肠？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/appopenclaw-20260301141007207-0/">App正在批量死亡：OpenClaw爆火，我们真的要告别“点点点”的时代了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260225194011961-0/">机器中的幽灵：硅谷“收租者”面临一场AI驱魔</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mimo-v2-flashai-agent-20251217111002180-0/">小米MiMo-V2-Flash：开源大模型如何重塑效率范式与AI Agent新生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/replitai-20251212184008650-1/">破壁者Replit：多模型AI集成如何重塑软件工程与开发者生态的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251205101004921-1/">“氛围编程”泡沫破裂：从资本狂热到实用主义回归，AI重塑软件工程新版图</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
