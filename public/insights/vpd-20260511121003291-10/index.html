@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>走出炼金术：VPD与大模型从“行为观测”向“物理手术”的范式转移 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="VPD 技术通过直接拆解模型权重而非观测激活，实现了 AI 可解释性从“行为观测”向“物理手术”的范式演进。这一突破赋予了人类精准定位与重构大模型底层计算机制的能力，预示着 AI 治理将进入可测量、可修复的科学工程化时代。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/vpd-20260511121003291-10/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/vpd-20260511121003291-10/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="走出炼金术：VPD与大模型从“行为观测”向“物理手术”的范式转移">
+  <meta property="og:description" content="VPD 技术通过直接拆解模型权重而非观测激活，实现了 AI 可解释性从“行为观测”向“物理手术”的范式演进。这一突破赋予了人类精准定位与重构大模型底层计算机制的能力，预示着 AI 治理将进入可测量、可修复的科学工程化时代。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-11T12:10:03+08:00">
+    <meta property="article:modified_time" content="2026-05-11T12:10:03+08:00">
+    <meta property="article:tag" content="AI可解释性">
+    <meta property="article:tag" content="VPD参数分解">
+    <meta property="article:tag" content="神经网络工程">
+    <meta property="article:tag" content="大模型安全">
+    <meta property="article:tag" content="技术范式转移">
+
+  <meta itemprop="name" content="走出炼金术：VPD与大模型从“行为观测”向“物理手术”的范式转移">
+  <meta itemprop="description" content="VPD 技术通过直接拆解模型权重而非观测激活，实现了 AI 可解释性从“行为观测”向“物理手术”的范式演进。这一突破赋予了人类精准定位与重构大模型底层计算机制的能力，预示着 AI 治理将进入可测量、可修复的科学工程化时代。">
+  <meta itemprop="datePublished" content="2026-05-11T12:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-11T12:10:03+08:00">
+  <meta itemprop="wordCount" content="64">
+  <meta itemprop="keywords" content="AI可解释性,VPD参数分解,神经网络工程,大模型安全,技术范式转移">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="走出炼金术：VPD与大模型从“行为观测”向“物理手术”的范式转移">
+  <meta name="twitter:description" content="VPD 技术通过直接拆解模型权重而非观测激活，实现了 AI 可解释性从“行为观测”向“物理手术”的范式演进。这一突破赋予了人类精准定位与重构大模型底层计算机制的能力，预示着 AI 治理将进入可测量、可修复的科学工程化时代。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2817%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-11 12:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B5%B0%E5%87%BA%E7%82%BC%E9%87%91%E6%9C%AF%EF%BC%9AVPD%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BB%8E%E2%80%9C%E8%A1%8C%E4%B8%BA%E8%A7%82%E6%B5%8B%E2%80%9D%E5%90%91%E2%80%9C%E7%89%A9%E7%90%86%E6%89%8B%E6%9C%AF%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20VPD&amp;#43;%E6%8A%80%E6%9C%AF%E9%80%9A%E8%BF%87%E7%9B%B4%E6%8E%A5%E6%8B%86%E8%A7%A3%E6%A8%A1%E5%9E%8B%E6%9D%83%E9%87%8D%E8%80%8C%E9%9D%9E%E8%A7%82%E6%B5%8B%E6%BF%80%E6%B4%BB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86&amp;#43;AI&amp;#43;%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7%E4%BB%8E%E2%80%9C%E8%A1%8C%E4%B8%BA%E8%A7%82%E6%B5%8B%E2%80%9D%E5%90%91%E2%80%9C%E7%89%A9%E7%90%86%E6%89%8B%E6%9C%AF%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E6%BC%94%E8%BF%9B%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E8%B5%8B%E4%BA%88%E4%BA%86%E4%BA%BA%E7%B1%BB%E7%B2%BE%E5%87%86%E5%AE%9A%E4%BD%8D%E4%B8%8E%E9%87%8D%E6%9E%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B6%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E6%B2%BB%E7%90%86%E5%B0%86%E8%BF%9B%E5%85%A5%E5%8F%AF%E6%B5%8B%E9%87%8F%E3%80%81%E5%8F%AF%E4%BF%AE%E5%A4%8D%E7%9A%84%E7%A7%91%E5%AD%A6%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%97%B6%E4%BB%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fvpd-20260511121003291-10%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B5%B0%E5%87%BA%E7%82%BC%E9%87%91%E6%9C%AF%EF%BC%9AVPD%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BB%8E%E2%80%9C%E8%A1%8C%E4%B8%BA%E8%A7%82%E6%B5%8B%E2%80%9D%E5%90%91%E2%80%9C%E7%89%A9%E7%90%86%E6%89%8B%E6%9C%AF%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20VPD&amp;#43;%E6%8A%80%E6%9C%AF%E9%80%9A%E8%BF%87%E7%9B%B4%E6%8E%A5%E6%8B%86%E8%A7%A3%E6%A8%A1%E5%9E%8B%E6%9D%83%E9%87%8D%E8%80%8C%E9%9D%9E%E8%A7%82%E6%B5%8B%E6%BF%80%E6%B4%BB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86&amp;#43;AI&amp;#43;%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7%E4%BB%8E%E2%80%9C%E8%A1%8C%E4%B8%BA%E8%A7%82%E6%B5%8B%E2%80%9D%E5%90%91%E2%80%9C%E7%89%A9%E7%90%86%E6%89%8B%E6%9C%AF%E2%80%9D%E7%9A%84%E8%8C%83%E5%BC%8F%E6%BC%94%E8%BF%9B%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E8%B5%8B%E4%BA%88%E4%BA%86%E4%BA%BA%E7%B1%BB%E7%B2%BE%E5%87%86%E5%AE%9A%E4%BD%8D%E4%B8%8E%E9%87%8D%E6%9E%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B6%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E6%B2%BB%E7%90%86%E5%B0%86%E8%BF%9B%E5%85%A5%E5%8F%AF%E6%B5%8B%E9%87%8F%E3%80%81%E5%8F%AF%E4%BF%AE%E5%A4%8D%E7%9A%84%E7%A7%91%E5%AD%A6%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%97%B6%E4%BB%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fvpd-20260511121003291-10%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">走出炼金术：VPD与大模型从“行为观测”向“物理手术”的范式转移</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Goodfire 的 VPD 技术标志着 AI 可解释性从“黑盒观测”迈向“机械解剖”，通过直接拆解模型权重而非观测激活，人类首次获得了对大模型物理齿轮进行精准定位与重构的能力。这一变革将使 AI 系统的对齐、调试与进化从经验性的“炼金术”转变为基于科学规律的精密工程。</p></blockquote>
+<h3 id="可解释性的三级台阶与方法论分野">可解释性的三级台阶与方法论分野</h3>
+<p>在过去两年中，Anthropic 凭借稀疏自编码器（SAE）的研究，实质上定义了 AI 可解释性的行业范式。从 Toy Models 到“金门大桥”实验，再到最新的 NLA（自然语言自编码器），其核心逻辑始终聚焦于“激活层面”的观测。这类似于生物医学中的功能性核磁共振（fMRI），通过观察模型处理数据时哪些神经元在活动，来推断其认知过程。</p>
+<p>然而，Goodfire 的出现带来了截然不同的视角。创始人 Tom McGrath 挑战的并非 SAE 的有效性，而是其作为底层真理的稳定性。正如文中提到的“特征分裂”问题——当字典容量增加，原本统一的语义概念会被切分成破碎的细微影子。这意味着 SAE 描绘的电路图不仅是动态变化的，甚至可能受限于观测尺度的选择。Goodfire 提出的 VPD（对抗参数分解）则试图通过“神经解剖学”的路径，直接打开黑盒，拆解模型物理权重本身，寻找那些不随输入上下文而漂移的、客观存在的计算单元。</p>
+<h3 id="vpd从功能观测到底层手术">VPD：从“功能观测”到“底层手术”</h3>
+<p>VPD 的核心突破在于其能够处理复杂的干扰与代偿机制。其通过以下两项关键决策，实现了对大模型内部的“降维打击”：</p>
+<ol>
+<li><strong>对抗消融（Adversarial Ablation）</strong>：针对模型在处理上下文时产生的“代偿效应”，VPD 通过反向传播构建极端枯燥的输入，强行剥离无关干扰，将特定齿轮孤立并予以验证。这种方法确保了被识别的“物理齿轮”是真正不可或缺的计算基石。</li>
+<li><strong>频率最小化（Frequency Minimization）</strong>：这是对 SAE“特征分裂”难题的终极回应。通过在损失函数中引入“建档税”，VPD 强制模型合并冗余的影子特征，重用宽泛且坚实的物理齿轮。这使得模型内部的计算结构与测量字典彻底解绑，真正暴露了机器内部的机械内脏。</li>
+</ol>
+<h3 id="商业价值与产业影响从黑盒优化到精密工程">商业价值与产业影响：从“黑盒优化”到“精密工程”</h3>
+<p>从商业敏锐度的角度审视，VPD 技术不仅是科学层面的突破，更是未来 AI 产业版图重构的催化剂：</p>
+<ul>
+<li><strong>真正的安全对齐</strong>：目前的 RLHF 对齐往往只是“行为抑制”，有害倾向依然潜伏在模型权重中。而基于 VPD 的物理拆解，能够从源头上移除支持有害行为的物理电路，实现真正意义上的“能力不可逆移除”。</li>
+<li><strong>事后审计与故障追责</strong>：对于企业级应用，当 AI 模型产生幻觉或违规操作时，VPD 提供了一种“法医式”的追溯手段，能够精确锁定是哪几个参数齿轮在执行过程中产生了咬合故障，这对于金融、医疗等高风险领域至关重要。</li>
+<li><strong>模型缝合与定制化</strong>：VPD 证明了模型参数存在大量可被识别的冗余部分。未来，定制化模型可能不再依赖耗资巨大的全量微调，而是通过“识别坏齿轮-替换-再缝合”的模块化手术，极大地降低大模型的适配与运维成本。</li>
+</ul>
+<h3 id="结语通往ai科学化之路">结语：通往AI科学化之路</h3>
+<p>我们正处于从“炼金术”向“科学”过渡的转折点。化学之于炼金术，在于元素周期表的发现；生物学之于博物学，在于遗传学的确立。VPD 的出现，正是在为 AI 领域构建这份“元素周期表”。</p>
+<p>当“涌现”不再是玄学，当对齐成为一种量化的物理约束，当幻觉能够被精确定位并修复，大模型将不再是不可预测的数字奇观。对于开发者与决策者而言，这意味着未来将掌握一台可读、可控、可定义的计算引擎，这或许是人类驯服 AI 最关键的一步。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI可解释性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/vpd%E5%8F%82%E6%95%B0%E5%88%86%E8%A7%A3/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">VPD参数分解</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">神经网络工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型安全</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术范式转移</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/agent-20260510111003942-0/">从确定性到混沌：Agent时代的分布式基础设施范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-490ai-20260410084007636-0/">谷歌哭了！Gemma 4发布90分钟就被“黑化”，这种AI越狱也太简单粗暴了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/315ai-20260317101005788-0/">看完3·15不敢用AI了？大模型也吃“垃圾食品”，大厂祭出“三板斧”反投毒</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251118094005305-1/">解密RL的“黑箱”：田渊栋团队三门理论重塑大模型优化范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-20251117184005226-0/">你的AI会“撒谎”吗？大模型“带病上岗”，漏洞超六成，网友直呼：AI界“病号”来了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20251030184007815-0/">AI元认知萌芽：Anthropic「概念注入」实验揭示心智黑箱与信任鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimeta-crv-20251023184005027-2/">揭秘“AI思维”：Meta CRV如何打开黑箱，迈向可控智能的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251020191007454-0/">大模型“中毒”：一场重塑AI信任基石与产业安全的无声博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/250aianthropic-20251011081004723-1/">250份文档的“毒性”：从大模型投毒危机看AI安全与Anthropic的哲学坚守</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250923074004819-1/">新AI安全纪元：大模型与智能体的深层漏洞与生态重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2025-09-20-ai-2025-09-20-deepmind-ai-/">AI早报 2025年09月20日：DeepMind破解百年难题，大模型欺骗危机与AI产业重塑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-r1-safeai-20250919124005305-0/">DeepSeek-R1-Safe：中国大模型内生安全的里程碑与全球AI生态的重塑之径</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/sb-243ai-20250912084005720-1/">加州SB 243：AI伦理监管的破冰之举，抑或人机信任的试金石？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250910161004668-1/">超越幻象：AI大模型迈向可信未来的双重突破</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250903194004875-4/">AI“氛围黑客”：从指令式犯罪到自主威胁，重塑数字世界秩序</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
