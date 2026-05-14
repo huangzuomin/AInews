@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>蒸馏悖论：大模型「名师」的幻觉与算法认知的本质回归 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="清华大学团队通过拆解On-Policy蒸馏的黑箱，揭示了“思维模式一致性”远比模型规模更重要，并指出高分模型未必具备高效教导学生的能力。这一洞察重塑了模型后训练的工程逻辑，为高效小模型的研发提供了核心算法处方。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260514151003983-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260514151003983-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="蒸馏悖论：大模型「名师」的幻觉与算法认知的本质回归">
+  <meta property="og:description" content="清华大学团队通过拆解On-Policy蒸馏的黑箱，揭示了“思维模式一致性”远比模型规模更重要，并指出高分模型未必具备高效教导学生的能力。这一洞察重塑了模型后训练的工程逻辑，为高效小模型的研发提供了核心算法处方。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-14T15:10:03+08:00">
+    <meta property="article:modified_time" content="2026-05-14T15:10:03+08:00">
+    <meta property="article:tag" content="大模型蒸馏">
+    <meta property="article:tag" content="On-Policy蒸馏">
+    <meta property="article:tag" content="认知对齐">
+    <meta property="article:tag" content="AI工程">
+    <meta property="article:tag" content="算法机制">
+    <meta property="article:tag" content="思维链">
+
+  <meta itemprop="name" content="蒸馏悖论：大模型「名师」的幻觉与算法认知的本质回归">
+  <meta itemprop="description" content="清华大学团队通过拆解On-Policy蒸馏的黑箱，揭示了“思维模式一致性”远比模型规模更重要，并指出高分模型未必具备高效教导学生的能力。这一洞察重塑了模型后训练的工程逻辑，为高效小模型的研发提供了核心算法处方。">
+  <meta itemprop="datePublished" content="2026-05-14T15:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-14T15:10:03+08:00">
+  <meta itemprop="wordCount" content="32">
+  <meta itemprop="keywords" content="大模型蒸馏,On-Policy蒸馏,认知对齐,AI工程,算法机制,思维链">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="蒸馏悖论：大模型「名师」的幻觉与算法认知的本质回归">
+  <meta name="twitter:description" content="清华大学团队通过拆解On-Policy蒸馏的黑箱，揭示了“思维模式一致性”远比模型规模更重要，并指出高分模型未必具备高效教导学生的能力。这一洞察重塑了模型后训练的工程逻辑，为高效小模型的研发提供了核心算法处方。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-14_15-00-34.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-14 15:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%92%B8%E9%A6%8F%E6%82%96%E8%AE%BA%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E3%80%8C%E5%90%8D%E5%B8%88%E3%80%8D%E7%9A%84%E5%B9%BB%E8%A7%89%E4%B8%8E%E7%AE%97%E6%B3%95%E8%AE%A4%E7%9F%A5%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%9B%9E%E5%BD%92%20-%20%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E5%9B%A2%E9%98%9F%E9%80%9A%E8%BF%87%E6%8B%86%E8%A7%A3On-Policy%E8%92%B8%E9%A6%8F%E7%9A%84%E9%BB%91%E7%AE%B1%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E2%80%9C%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E2%80%9D%E8%BF%9C%E6%AF%94%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E6%9B%B4%E9%87%8D%E8%A6%81%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%87%BA%E9%AB%98%E5%88%86%E6%A8%A1%E5%9E%8B%E6%9C%AA%E5%BF%85%E5%85%B7%E5%A4%87%E9%AB%98%E6%95%88%E6%95%99%E5%AF%BC%E5%AD%A6%E7%94%9F%E7%9A%84%E8%83%BD%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%B4%9E%E5%AF%9F%E9%87%8D%E5%A1%91%E4%BA%86%E6%A8%A1%E5%9E%8B%E5%90%8E%E8%AE%AD%E7%BB%83%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E4%B8%BA%E9%AB%98%E6%95%88%E5%B0%8F%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%A0%94%E5%8F%91%E6%8F%90%E4%BE%9B%E4%BA%86%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%A4%84%E6%96%B9%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260514151003983-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%92%B8%E9%A6%8F%E6%82%96%E8%AE%BA%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E3%80%8C%E5%90%8D%E5%B8%88%E3%80%8D%E7%9A%84%E5%B9%BB%E8%A7%89%E4%B8%8E%E7%AE%97%E6%B3%95%E8%AE%A4%E7%9F%A5%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%9B%9E%E5%BD%92%20-%20%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E5%9B%A2%E9%98%9F%E9%80%9A%E8%BF%87%E6%8B%86%E8%A7%A3On-Policy%E8%92%B8%E9%A6%8F%E7%9A%84%E9%BB%91%E7%AE%B1%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E2%80%9C%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E2%80%9D%E8%BF%9C%E6%AF%94%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E6%9B%B4%E9%87%8D%E8%A6%81%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%87%BA%E9%AB%98%E5%88%86%E6%A8%A1%E5%9E%8B%E6%9C%AA%E5%BF%85%E5%85%B7%E5%A4%87%E9%AB%98%E6%95%88%E6%95%99%E5%AF%BC%E5%AD%A6%E7%94%9F%E7%9A%84%E8%83%BD%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%B4%9E%E5%AF%9F%E9%87%8D%E5%A1%91%E4%BA%86%E6%A8%A1%E5%9E%8B%E5%90%8E%E8%AE%AD%E7%BB%83%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E4%B8%BA%E9%AB%98%E6%95%88%E5%B0%8F%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%A0%94%E5%8F%91%E6%8F%90%E4%BE%9B%E4%BA%86%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%A4%84%E6%96%B9%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260514151003983-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">蒸馏悖论：大模型「名师」的幻觉与算法认知的本质回归</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>清华团队的最新研究揭示了On-Policy蒸馏（OPD）中的关键效率瓶颈：模型性能的提升并非源于参数规模的简单堆叠，而是取决于「思维模式」的深层对齐。这一发现标志着大模型训练正在从盲目的参数崇拜，转向对知识迁移机理与认知架构一致性的精密调优。</p></blockquote>
+<h3 id="蒸馏的隐性代价与思维模式的契合度">蒸馏的「隐性代价」与思维模式的契合度</h3>
+<p>在过去一段时期内，AI业界普遍陷入了一种「规模迷信」：认为只要让小模型（Student）跟随一个参数更大、分数更高的模型（Teacher）进行On-Policy蒸馏，就能实现“免费午餐”式的性能飞跃。然而，清华大学THUNLP实验室联合多方机构的研究却给这种狂热泼了一盆冷水<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。研究指出，OPD并非简单的知识灌输，而是一场复杂的信息重组。</p>
+<p>该研究的一个核心洞察在于：**思维模式一致性（Thinking-Pattern Consistency）**是决定蒸馏成败的先决条件。当学生模型与老师模型在处理复杂逻辑的路径上存在“思维错配”时，即便是性能卓越的老师，也无法将有效的逻辑结构传递给学生。这不仅是算法层面的性能调优问题，更折射出大模型在“推理路径”上存在着类似于人类认知的结构性特征。</p>
+<h3 id="从分数崇拜到局部信息提取">从「分数崇拜」到「局部信息提取」</h3>
+<p>研究通过极端的“反向蒸馏”实验，揭示了一个令产业界深思的结论：向一个比自己强的模型学习，有时其效果等同于向更小的模型学习，只要它们处于同一思维族群。这意味着，大模型在蒸馏过程中传递的并非通用能力的“绝对值”，而是其特定的推理逻辑和偏好分布。</p>
+<p>根据实验观察，成功的蒸馏本质上是：</p>
+<ul>
+<li><strong>高概率Token的共振</strong>：模型性能的提升源于师生对高概率Token路径的重叠，研究发现重叠区域贡献了97%-99%的优化信号<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+<li><strong>局部优化结构的困局</strong>：即便老师模型具备高AUROC（评价模型区分能力指标），若其局部几何结构平坦，训练同样会陷入泥潭。</li>
+</ul>
+<p>从商业视角看，这一结论直接挑战了当前许多垂直领域小模型训练的“工业流水线”——如果只是单纯地更换Teacher模型而不去考量其思维模式的兼容性，不仅是在浪费高昂的推理算力，甚至可能导致模型产生灾难性的性能倒退。</p>
+<h3 id="蒸馏的未来从灌输到协同">蒸馏的未来：从“灌输”到“协同”</h3>
+<p>基于这一发现，我们预测未来3-5年内，模型蒸馏技术将进入“精准进化”阶段。业界将从粗放式的全量蒸馏转向更加精细的路径对齐策略：</p>
+<p>首先，<strong>“冷启动”机制将成为标配</strong>。在正式蒸馏前进行Off-Policy的轻量级SFT，以强行拉高初始的Token Overlap Ratio，将成为提升收敛上限的关键步骤。其次，针对长思维链（CoT）场景，OPD目前的表现暴露出“从后向前”的熵崩塌问题，这预示着未来蒸馏技术必须在“密集监督”与“全局可靠性”之间寻找新的平衡点，AI Agent的自主长程逻辑构建或将成为这一技术的试金石。</p>
+<p>从深层哲学维度审视，大模型蒸馏的失效与成功，暗示了机器智能在演进过程中，也存在类似生物神经网络的“发育关键期”和“认知适应性”。我们正在进入一个不再单纯追求参数规模，而是追求模型间“认知谱系”一致性的时代。</p>
+<h3 id="引用">引用</h3>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe（https://arxiv.org/abs/2604.13016）·THUNLP·2026/05/14·检索日期2026/05/14&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>名师一定出高徒？清华团队最新揭秘：别再迷信大模型蒸馏的「免费午餐」（https://finance.sina.com.cn/tech/roll/2026-05-14/doc-inhxvihq0207925.shtml）·新浪科技·2026/05/14·检索日期2026/05/14&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型蒸馏</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/on-policy%E8%92%B8%E9%A6%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">On-Policy蒸馏</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%AF%B9%E9%BD%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">认知对齐</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E6%B3%95%E6%9C%BA%E5%88%B6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算法机制</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%80%9D%E7%BB%B4%E9%93%BE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">思维链</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260512154003947-3/">超越“记忆”的陷阱：重构大模型推理微调的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ai-20260225094005886-1/">Anthropic 破防怒撕中国 AI“三剑客”！马斯克神补刀：偷来的东西也能被抢？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rlmtai-20250929191005063-1/">颠覆大模型后训练：RLMT如何以“思考”之力重塑AI未来格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aideepseek-20250917201008044-1/">AI也开始「班味」上头？当DeepSeek喊“我放弃了”，打工人直呼内行！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250820064004631-0/">超越“流畅的胡言乱语”：解构大语言模型推理幻觉与可信AI的构建路径</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250818204006619-1/">AI竞赛的阴影：当透明度成为大模型时代的金标准</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/keye-vlai-agent-20250811114005045-1/">快手Keye-VL深度解码：多模态AI Agent如何赋能短视频迈向自主“思考”新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/metaai-20250718124005374-2/">思维链之父跳槽Meta：巨额薪酬背后的“验证者定律”与AI范式新拐点</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250716204004705-0/">AI“思维链”的脆弱安全窗：巨头合流预示自主智能体治理新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaislack-20250716124004620-2/">OpenAI又双叒叕被挖墙脚？思维链「开山鼻祖」和他的好搭档，听说Slack已经「没了」！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/bengio-20250703121004582-0/">思维链的幻象：Bengio团队揭示大型语言模型推理的深层欺骗</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250619182004378-1/">田渊栋团队开创“连续思维链”新范式：AI如何通过“叠加态”实现并行推理</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-agent-20250619122004776-3/">“AI张雪峰”上岗：高考志愿，一场AI Agent的深度实战演练</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250618202004724-1/">破解AI心智之谜：深入探究其推理机制、幻觉与欺骗的深层逻辑</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
