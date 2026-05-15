@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>当AI获得“执政权”：SAP与NVIDIA如何重构企业级信任的底层逻辑 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文探讨了SAP与NVIDIA通过OpenShell与Joule Studio建立的企业级AI智能体安全治理框架。文章指出，这一技术突破将推动企业IT架构从被动的“数据记录”转向主动的“意图执行”，并强调了在AI获得自主决策权限的背景下，构建可信度与审计体系将成为企业竞争的新核心。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aisapnvidia-20260515174006032-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aisapnvidia-20260515174006032-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="当AI获得“执政权”：SAP与NVIDIA如何重构企业级信任的底层逻辑">
+  <meta property="og:description" content="本文探讨了SAP与NVIDIA通过OpenShell与Joule Studio建立的企业级AI智能体安全治理框架。文章指出，这一技术突破将推动企业IT架构从被动的“数据记录”转向主动的“意图执行”，并强调了在AI获得自主决策权限的背景下，构建可信度与审计体系将成为企业竞争的新核心。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-15T17:40:06+08:00">
+    <meta property="article:modified_time" content="2026-05-15T17:40:06+08:00">
+    <meta property="article:tag" content="AI智能体">
+    <meta property="article:tag" content="企业级安全">
+    <meta property="article:tag" content="自动化治理">
+    <meta property="article:tag" content="SAP">
+    <meta property="article:tag" content="英伟达">
+
+  <meta itemprop="name" content="当AI获得“执政权”：SAP与NVIDIA如何重构企业级信任的底层逻辑">
+  <meta itemprop="description" content="本文探讨了SAP与NVIDIA通过OpenShell与Joule Studio建立的企业级AI智能体安全治理框架。文章指出，这一技术突破将推动企业IT架构从被动的“数据记录”转向主动的“意图执行”，并强调了在AI获得自主决策权限的背景下，构建可信度与审计体系将成为企业竞争的新核心。">
+  <meta itemprop="datePublished" content="2026-05-15T17:40:06+08:00">
+  <meta itemprop="dateModified" content="2026-05-15T17:40:06+08:00">
+  <meta itemprop="wordCount" content="109">
+  <meta itemprop="keywords" content="AI智能体,企业级安全,自动化治理,SAP,英伟达">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="当AI获得“执政权”：SAP与NVIDIA如何重构企业级信任的底层逻辑">
+  <meta name="twitter:description" content="本文探讨了SAP与NVIDIA通过OpenShell与Joule Studio建立的企业级AI智能体安全治理框架。文章指出，这一技术突破将推动企业IT架构从被动的“数据记录”转向主动的“意图执行”，并强调了在AI获得自主决策权限的背景下，构建可信度与审计体系将成为企业竞争的新核心。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-15_17-30-46.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-15 17:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%BD%93AI%E8%8E%B7%E5%BE%97%E2%80%9C%E6%89%A7%E6%94%BF%E6%9D%83%E2%80%9D%EF%BC%9ASAP%E4%B8%8ENVIDIA%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%20-%20%E6%9C%AC%E6%96%87%E6%8E%A2%E8%AE%A8%E4%BA%86SAP%E4%B8%8ENVIDIA%E9%80%9A%E8%BF%87OpenShell%E4%B8%8EJoule&amp;#43;Studio%E5%BB%BA%E7%AB%8B%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6%E3%80%82%E6%96%87%E7%AB%A0%E6%8C%87%E5%87%BA%EF%BC%8C%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%E5%B0%86%E6%8E%A8%E5%8A%A8%E4%BC%81%E4%B8%9AIT%E6%9E%B6%E6%9E%84%E4%BB%8E%E8%A2%AB%E5%8A%A8%E7%9A%84%E2%80%9C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95%E2%80%9D%E8%BD%AC%E5%90%91%E4%B8%BB%E5%8A%A8%E7%9A%84%E2%80%9C%E6%84%8F%E5%9B%BE%E6%89%A7%E8%A1%8C%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%BC%BA%E8%B0%83%E4%BA%86%E5%9C%A8AI%E8%8E%B7%E5%BE%97%E8%87%AA%E4%B8%BB%E5%86%B3%E7%AD%96%E6%9D%83%E9%99%90%E7%9A%84%E8%83%8C%E6%99%AF%E4%B8%8B%EF%BC%8C%E6%9E%84%E5%BB%BA%E5%8F%AF%E4%BF%A1%E5%BA%A6%E4%B8%8E%E5%AE%A1%E8%AE%A1%E4%BD%93%E7%B3%BB%E5%B0%86%E6%88%90%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%AB%9E%E4%BA%89%E7%9A%84%E6%96%B0%E6%A0%B8%E5%BF%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faisapnvidia-20260515174006032-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%BD%93AI%E8%8E%B7%E5%BE%97%E2%80%9C%E6%89%A7%E6%94%BF%E6%9D%83%E2%80%9D%EF%BC%9ASAP%E4%B8%8ENVIDIA%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%20-%20%E6%9C%AC%E6%96%87%E6%8E%A2%E8%AE%A8%E4%BA%86SAP%E4%B8%8ENVIDIA%E9%80%9A%E8%BF%87OpenShell%E4%B8%8EJoule&amp;#43;Studio%E5%BB%BA%E7%AB%8B%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7AI%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6%E3%80%82%E6%96%87%E7%AB%A0%E6%8C%87%E5%87%BA%EF%BC%8C%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%E5%B0%86%E6%8E%A8%E5%8A%A8%E4%BC%81%E4%B8%9AIT%E6%9E%B6%E6%9E%84%E4%BB%8E%E8%A2%AB%E5%8A%A8%E7%9A%84%E2%80%9C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95%E2%80%9D%E8%BD%AC%E5%90%91%E4%B8%BB%E5%8A%A8%E7%9A%84%E2%80%9C%E6%84%8F%E5%9B%BE%E6%89%A7%E8%A1%8C%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%BC%BA%E8%B0%83%E4%BA%86%E5%9C%A8AI%E8%8E%B7%E5%BE%97%E8%87%AA%E4%B8%BB%E5%86%B3%E7%AD%96%E6%9D%83%E9%99%90%E7%9A%84%E8%83%8C%E6%99%AF%E4%B8%8B%EF%BC%8C%E6%9E%84%E5%BB%BA%E5%8F%AF%E4%BF%A1%E5%BA%A6%E4%B8%8E%E5%AE%A1%E8%AE%A1%E4%BD%93%E7%B3%BB%E5%B0%86%E6%88%90%E4%B8%BA%E4%BC%81%E4%B8%9A%E7%AB%9E%E4%BA%89%E7%9A%84%E6%96%B0%E6%A0%B8%E5%BF%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faisapnvidia-20260515174006032-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">当AI获得“执政权”：SAP与NVIDIA如何重构企业级信任的底层逻辑</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>SAP与NVIDIA通过OpenShell运行时安全层与Joule Studio治理平台的联动，将AI智能体从“辅助工具”升级为具备企业级权限的“自主执行者”。这一变革标志着企业IT架构从“数据记录系统”转向“意图执行系统”，正式开启了自动化治理的新范式。</p></blockquote>
+<h3 id="信任逻辑的重构从辅助到代理">信任逻辑的重构：从“辅助”到“代理”</h3>
+<p>在传统的企业架构中，AI始终被禁锢在“人机交互”的边缘，担任着聊天机器人或辅助分析师的角色。然而，随着智能体（AI Agents）获得自主调用API、修改业务记录和执行复杂工作流的能力，企业面临着一个根本性的哲学困境：我们如何将原本属于人类员工的决策权，通过算法授权给一个能够自主推理的“代码实体”？</p>
+<p>SAP与NVIDIA在SAP Sapphire 2026大会上的合作，不仅仅是两家巨头的联手，更是一场关于“企业信任架构”的实验。通过将NVIDIA OpenShell这一开源运行时嵌入SAP商业AI平台，他们试图在底层基础设施中硬编码“权限边界”。这不再是应用层面的简单访问控制，而是将业务策略、审计追踪和隔离执行环境（Sandbox）下沉到计算的最底层<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h3 id="技术原理双层治理架构的崛起">技术原理：双层治理架构的崛起</h3>
+<p>SAP和NVIDIA构建的这套机制，实际上是对AI运行环境进行了一次“宪法式”的约束：</p>
+<ul>
+<li><strong>执行层（NVIDIA OpenShell）</strong>：负责回答“能否安全执行”。它通过隔离的执行环境、文件系统和网络策略，确保智能体在发生幻觉或恶意攻击时，其影响范围被严格遏制在预设的容器边界内<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+<li><strong>控制层（Joule Studio）</strong>：负责回答“是否应该执行”。它作为SAP的业务控制层，基于角色、流程、权限和数据边界，验证智能体的每一个动作是否符合企业的业务合规逻辑。</li>
+</ul>
+<p>这种“双重校验”机制本质上是将<strong>代码执行安全</strong>与<strong>业务合规管理</strong>进行了逻辑解耦。这种架构的深远意义在于，它为未来AI在大型企业中实现高频、大规模的自主运作提供了“刹车系统”和“黑匣子”审计能力<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</p>
+<h3 id="商业版图从记录系统到自主运营">商业版图：从记录系统到自主运营</h3>
+<p>从商业角度看，SAP将“自主运营企业（Autonomous Enterprise）”作为愿景，意味着软件定义的边界正在大幅扩张。当AI能够直接触及财务、采购、供应链等核心记录系统时，软件本身将变成一种生产力引擎。</p>
+<ul>
+<li><strong>降本增效的边际递减效应被打破</strong>：通过智能体处理端到端的流程，企业不再仅仅是在“记录数据”，而是在“通过数据驱动业务运行”，这对于庞杂的全球供应链而言，是数以十亿计的运营成本优化潜力<sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</li>
+<li><strong>企业开发生态的标准化</strong>：通过集成NVIDIA NemoClaw参考蓝图，SAP实际上是在构建一套企业级智能体的“开发标准”。这使得企业不再需要从零开始搭建安全框架，加速了AI从POC（概念验证）走向大规模生产部署的路径<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。</li>
+</ul>
+<h3 id="风险与未来ai的责任感缺失">风险与未来：AI的“责任感”缺失</h3>
+<p>然而，即使有了OpenShell和Joule Studio，依然存在一个未竟的哲学挑战：<strong>当智能体做出决策后，责任归属如何界定？</strong></p>
+<p>虽然技术上实现了“遏制机制”，但在复杂的社会经济体系中，自动化决策带来的偏差可能产生难以预料的连锁反应。我们正在进入一个AI不仅是工具，更是“协作代理”的新纪元，这要求企业内部治理从“人员管理”转向“数字体治理（Agent Governance）”。未来的竞争壁垒，不再仅仅是谁拥有更强的模型，而是谁能为AI建立一套可审计、可解释、可被人类信任的运行机制。</p>
+<p>正如黄仁勋所言，AI是一层层叠放的“五层蛋糕”，而最上层的“应用”将决定企业是否能真正将技术转化为经济价值。SAP与NVIDIA的联手，恰恰是为这层最脆弱也最关键的应用层，安装了一道牢不可破的防线<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h3 id="引用">引用</h3>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>NVIDIA SAP AI Agents Expand Enterprise Security with OpenShell and Joule Studio Framework · Technetbook · (2026/5/15) · 检索日期2026/5/15 <a href="https://www.technetbooks.com/2026/05/nvidia-sap-ai-agents-expand-enterprise.html">https://www.technetbooks.com/2026/05/nvidia-sap-ai-agents-expand-enterprise.html</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>SAP and NVIDIA: Enterprise-Grade Agent Execution · SAP News Center · (2026/5/15) · 检索日期2026/5/15 <a href="https://news.sap.com/2026/05/secure-ai-agents-how-sap-and-nvidia-co-define-enterprise-grade-agent-execution/">https://news.sap.com/2026/05/secure-ai-agents-how-sap-and-nvidia-co-define-enterprise-grade-agent-execution/</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>自主AI 智能体如何通过NVIDIA OpenShell 实现原生安全 · 网易 · (2026/5/15) · 检索日期2026/5/15 <a href="https://www.163.com/dy/article/KOSTADI80552BFKV.html">https://www.163.com/dy/article/KOSTADI80552BFKV.html</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>什么是自主AI 智能体？ · NVIDIA 术语表 · (2026/5/15) · 检索日期2026/5/15 <a href="https://www.nvidia.cn/glossary/ai-agents/">https://www.nvidia.cn/glossary/ai-agents/</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>SAP 发布“自主运营企业”愿景 · CBiNews · (2026/5/15) · 检索日期2026/5/15 <a href="https://www.cbinews.com/software/tsxih">https://www.cbinews.com/software/tsxih</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>Secure Autonomous AI Agents with OpenShell · NVIDIA Blog · (2026/5/15) · 检索日期2026/5/15 <a href="https://blogs.nvidia.cn/blog/secure-autonomous-ai-agents-openshell/">https://blogs.nvidia.cn/blog/secure-autonomous-ai-agents-openshell/</a>&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI智能体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%AE%89%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">企业级安全</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B2%BB%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">自动化治理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/sap/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">SAP</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8B%B1%E4%BC%9F%E8%BE%BE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">英伟达</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260515151003951-0/">算力沙盘中的“黄氏推销”：英伟达与硅幕下的破碎重组</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260514111003861-0/">黄仁勋的阿拉斯加时刻：硅谷算力霸主的“外交”困局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511181003988-3/">炼金术士黄仁勋：当卖铲人开始注资整座矿山</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511151003388-4/">黄仁勋：在AI的暴风眼中，做一个“不走寻常路”的造物者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260415224005163-1/">硅色主权：英伟达在华长城如何开始崩塌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/hermes-agent-5-ai--20260415194006094-0/">别再教“金鱼”写代码了！Hermes Agent 狂揽 5 万星：这届 AI 已经学会自己“复盘”了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260413234003478-0/">别找了，老板在服务器里！扎克伯格推出AI分身：为了扁平化，我把自己卷成了模型</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260410081006767-0/">百度“回味”：AI能否捂热本地生活的“冷灶”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260409201010353-2/">硅基“打工人”入场：为何华尔街算不准智能体时代的账本？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260407191005926-0/">代工之王的“智”变：中国大模型何以成为AI时代的“数字发电厂”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai2026-20260401191006231-0/">别再担心被AI卷飞了！2026有智青年挑战赛：送你一个“外挂”，再送你半个舞台</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/copawai-20260331214009604-0/">阿里通义开源CoPaw深度评测：主打“主动干活”与隐私可控，国产个人AI助理的新标杆？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260327211011641-0/">词元之元：中国AI如何将“电力”炼成“数字石油”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-03-27-03-27-/">03-27日报｜硅基石油危机与赛博生产力大爆发：谁在掌控未来的“词元”本位制？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260327124006464-0/">词元的“石油危机”：当AI学会思考，账单便开始咆哮</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
