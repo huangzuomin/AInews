@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌通过发布以Agent为核心的产品矩阵，完成了从模型竞赛到生产力基础设施的战略转向。通过构建低成本推理算力与全栈智能体编排框架，谷歌正试图将AI从单一工具重塑为无处不在的数字操作系统。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/agent-20260520174003454-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/agent-20260520174003454-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移">
+  <meta property="og:description" content="谷歌通过发布以Agent为核心的产品矩阵，完成了从模型竞赛到生产力基础设施的战略转向。通过构建低成本推理算力与全栈智能体编排框架，谷歌正试图将AI从单一工具重塑为无处不在的数字操作系统。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-20T17:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-20T17:40:03+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="智能体经济">
+    <meta property="article:tag" content="算力基础设施">
+    <meta property="article:tag" content="生成式UI">
+    <meta property="article:tag" content="产业范式转移">
+
+  <meta itemprop="name" content="谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移">
+  <meta itemprop="description" content="谷歌通过发布以Agent为核心的产品矩阵，完成了从模型竞赛到生产力基础设施的战略转向。通过构建低成本推理算力与全栈智能体编排框架，谷歌正试图将AI从单一工具重塑为无处不在的数字操作系统。">
+  <meta itemprop="datePublished" content="2026-05-20T17:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-20T17:40:03+08:00">
+  <meta itemprop="wordCount" content="54">
+  <meta itemprop="keywords" content="AI Agent,智能体经济,算力基础设施,生成式UI,产业范式转移">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移">
+  <meta name="twitter:description" content="谷歌通过发布以Agent为核心的产品矩阵，完成了从模型竞赛到生产力基础设施的战略转向。通过构建低成本推理算力与全栈智能体编排框架，谷歌正试图将AI从单一工具重塑为无处不在的数字操作系统。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-20_17-30-58.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-20 17:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B0%B7%E6%AD%8C%E7%9A%84%E2%80%9CAgent%E4%B9%8B%E6%B2%BB%E2%80%9D%EF%BC%9A%E4%BB%8E%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E7%AB%9E%E8%B5%9B%E5%88%B0%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E4%BB%A5Agent%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E4%BA%A7%E5%93%81%E7%9F%A9%E9%98%B5%EF%BC%8C%E5%AE%8C%E6%88%90%E4%BA%86%E4%BB%8E%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E5%88%B0%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%88%98%E7%95%A5%E8%BD%AC%E5%90%91%E3%80%82%E9%80%9A%E8%BF%87%E6%9E%84%E5%BB%BA%E4%BD%8E%E6%88%90%E6%9C%AC%E6%8E%A8%E7%90%86%E7%AE%97%E5%8A%9B%E4%B8%8E%E5%85%A8%E6%A0%88%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92%E6%A1%86%E6%9E%B6%EF%BC%8C%E8%B0%B7%E6%AD%8C%E6%AD%A3%E8%AF%95%E5%9B%BE%E5%B0%86AI%E4%BB%8E%E5%8D%95%E4%B8%80%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A1%91%E4%B8%BA%E6%97%A0%E5%A4%84%E4%B8%8D%E5%9C%A8%E7%9A%84%E6%95%B0%E5%AD%97%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent-20260520174003454-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B0%B7%E6%AD%8C%E7%9A%84%E2%80%9CAgent%E4%B9%8B%E6%B2%BB%E2%80%9D%EF%BC%9A%E4%BB%8E%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E7%AB%9E%E8%B5%9B%E5%88%B0%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E4%BB%A5Agent%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E4%BA%A7%E5%93%81%E7%9F%A9%E9%98%B5%EF%BC%8C%E5%AE%8C%E6%88%90%E4%BA%86%E4%BB%8E%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E5%88%B0%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%88%98%E7%95%A5%E8%BD%AC%E5%90%91%E3%80%82%E9%80%9A%E8%BF%87%E6%9E%84%E5%BB%BA%E4%BD%8E%E6%88%90%E6%9C%AC%E6%8E%A8%E7%90%86%E7%AE%97%E5%8A%9B%E4%B8%8E%E5%85%A8%E6%A0%88%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92%E6%A1%86%E6%9E%B6%EF%BC%8C%E8%B0%B7%E6%AD%8C%E6%AD%A3%E8%AF%95%E5%9B%BE%E5%B0%86AI%E4%BB%8E%E5%8D%95%E4%B8%80%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A1%91%E4%B8%BA%E6%97%A0%E5%A4%84%E4%B8%8D%E5%9C%A8%E7%9A%84%E6%95%B0%E5%AD%97%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent-20260520174003454-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌2026 I/O大会标志着AI战略从“模型能力中心论”向“Agent生态部署”的历史性转向。通过算力拆分、智能体编排框架及全场景交互升级，谷歌正试图将AI从一个辅助工具重构为无处不在的数字生产力操作系统。</p></blockquote>
+<h3 id="从参数神话到商业逻辑的回归">从参数神话到商业逻辑的回归</h3>
+<p>在过去两年的AI军备竞赛中，参数规模曾是衡量技术实力的“唯一真理”。然而，2026年Google I/O大会传递出的信号清晰而冷峻：科技巨头的重心已由“炼大模型”转向“炼智能体（Agent）”。谷歌CEO桑达尔·皮查伊公布的3200万亿Token处理量数据，不仅是使用规模的展现，更是一种商业逻辑的宣示——AI产业的价值天平，已从模型的训练难度悄然移向推理的经济性与部署的广泛性。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>谷歌通过第八代TPU“双芯战略”——TPU 8t（训练）与TPU 8i（推理）的分离，试图解决算力架构的结构性冗余问题。这不仅是硬件层面的优化，更是为了支撑“Agent无处不在”的宏大愿景。当Gemini 3.5 Flash以同类模型一半的成本实现性能碾压时，谷歌试图建立的护城河不再仅仅是模型的“智商”，而是其能够支撑大规模、低延迟、高频次的Agent集群生态。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h3 id="搜索与交互的重构当答案变成行动">搜索与交互的重构：当答案变成行动</h3>
+<p>如果说过去二十年的互联网交互逻辑是“搜索—链接—获取”，那么谷歌正在推行的“Generative UI”则是“意图—规划—执行”。搜索框不再是一个入口，而是一个智能体的调用面板。</p>
+<p>通过将Antigravity 2.0的Agent编程能力注入搜索与Workspace，谷歌打破了传统软件的封装边界。购物场景中的“Universal Cart”是一个极具野心的尝试：它并非要成为一个新的电商平台，而是作为跨平台、跨品牌的“Agent基础设施”，将AI嵌入到用户商业决策的全链路中。这种底层协议的统一（Universal Commerce Protocol），标志着AI已从单纯的内容生成工具，进化为具备跨平台协同能力的业务流程处理者。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="agent的信任悖论与技术治理">Agent的“信任悖论”与技术治理</h3>
+<p>尽管愿景宏大，但Agent的大规模部署必然面临“信任悖论”。正如MIT Technology Review一贯强调的，技术的进步速度往往快于社会规范的构建速度。谷歌推出的Gemini Spark旨在7×24小时处理繁琐事务，但一个能够主动操作邮件、日历甚至支付系统的智能体，如何平衡其自主性与安全性？</p>
+<p>谷歌引入的“可见性思考轨迹”和“实时确认机制”，本质上是在尝试一种AI治理的动态平衡。通过将任务执行过程可视化、可被打断化，谷歌试图在用户生产力需求与数字安全保障之间架起桥梁。然而，随着Agent接入更多第三方生态，责任归属与系统偏见依然是悬在这一技术之上的达摩克利斯之剑。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="未来展望迈向ai原生的操作系统">未来展望：迈向AI原生的操作系统</h3>
+<p>从Android XR眼镜到浏览器内置的Agent模式，谷歌的战略路径非常明确：构建一个跨越物理与虚拟边界的Agent操作系统。这种布局将迫使软件行业从“App为核心”向“服务流为核心”转型。未来3-5年，我们可能将见证“应用程序”概念的淡化——用户不再需要为了完成某项任务去学习特定的UI，因为AI Agent会即时地为用户“渲染”出解决问题的工具。</p>
+<p>谷歌在本次大会上表现出的克制（未发布最强模型，而深耕Agent全家桶），正是其作为行业老牌巨头的商业敏锐度所在。在模型趋同的时代，谁能拥有更低廉的推理成本、更广泛的接入终端以及更具协同性的Agent框架，谁就掌握了下一代计算平台的控制权。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://wap.eastmoney.com/a/202605203742465238.html">一文看懂2026年谷歌I/O大会：Gemini 3.5 Flash、视频模型Omni与AI助手Spark齐发</a>·东方财富·2026/5/20·检索日期2026/5/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.google/intl/zh-tw/company-news/technology/sundar-pichai-io-2026/">2026 年I/O 大會：歡迎來到Gemini 代理新紀元</a>·Google Blog·2026/5/20·检索日期2026/5/20&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.facebook.com/jerry.chang.505523/posts/10240517655054104/">Google I/O 2026 新產品與更新完整整理</a>·Facebook/Jerry Chang·2026/5/20·检索日期2026/5/20&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.cnblogs.com/qiniushanghai/p/20091889">Google I/O 2026 完整解析：Gemini 3.5 Flash、Omni、Spark 全面来袭</a>·博客园·2026/5/20·检索日期2026/5/20&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://finance.sina.cn/stock/jdts/2026-05-20/detail-inhynvwq2736993.d.html">一文看懂2026年谷歌I/O大会：Gemini 3.5 Flash、视频模型Omni与AI助手Spark齐发</a>·新浪财经·2026/5/20·检索日期2026/5/20&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E7%BB%8F%E6%B5%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能体经济</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E6%88%90%E5%BC%8Fui/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生成式UI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A7%E4%B8%9A%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">产业范式转移</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260520171004053-0/">当云计算的用户不再是人：阿里云重构“地基”的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2025-09-17-ai-2025-09-17-/">AI早报 2025年09月17日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-35-flashai-20260520164003570-0/">Gemini 3.5 Flash：一场关于AI“效能主义”的商业实验与隐喻</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260520144003909-0/">从工具到代理：AI如何破解教育规模化与个性化的“不可能三角”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cpuai-20260520114003626-0/">智能体时代的算力重构：为什么CPU正在重新定义AI的上限？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ailobehub-cao-20260520104003593-0/">AI工具深度评测：LobeHub CAO能否胜任“首席智能体运营官”的指挥重任？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20260520094003556-2/">后图形界面时代：当软件不再为人类设计，Agent开启“直达后厨”的交互革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-ai--20260520081003994-1/">谷歌的“自我革命”：从搜索巨头转型为 AI 订阅制基础设施公司</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-05-19-05-19-token-ai-/">05-19日报|Token税、去天才化与快慢学习：AI正在经历一场静默的底层革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519184003574-1/">AI的“烧钱黑洞”：当算力基建遭遇增长极限，科技巨头正在告别“复利时代”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openclawai-agent-20260519164014872-4/">“龙虾”凉了？三个月从顶流到“过气网红”，OpenClaw暴跌背后的AI Agent真相</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260519164014869-1/">从“备忘录”到“认知中枢”：AI Agent 的记忆进化论与架构重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentai-20260519134004282-3/">从“辅助”到“Agent”：AI重塑媒体生产关系的范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentdbai-20260519134004283-5/">记忆的枷锁：腾讯AgentDB如何重塑AI的“长周期”未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tokendaaai-20260519124005456-2/">从“Token崇拜”到“DAA范式”：AI产业价值度量衡的深层迁徙</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
