@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI卷王玩法：Claude一个月挖出271个Firefox漏洞，有个Bug藏了整整20年 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Mozilla联手Anthropic的Claude Mythos，一个月挖出了423个Firefox漏洞，其中271个由AI直接发现。180个高危漏洞，有的Bug藏了20年，有的沙箱逃逸漏洞让人类奖金猎人都沉默了。这波操作，直接把AI安防从“全网笑话”打成了“降维打击”。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aiclaude271firefoxbug20-20260520151003533-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aiclaude271firefoxbug20-20260520151003533-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI卷王玩法：Claude一个月挖出271个Firefox漏洞，有个Bug藏了整整20年">
+  <meta property="og:description" content="Mozilla联手Anthropic的Claude Mythos，一个月挖出了423个Firefox漏洞，其中271个由AI直接发现。180个高危漏洞，有的Bug藏了20年，有的沙箱逃逸漏洞让人类奖金猎人都沉默了。这波操作，直接把AI安防从“全网笑话”打成了“降维打击”。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-20T15:10:03+08:00">
+    <meta property="article:modified_time" content="2026-05-20T15:10:03+08:00">
+    <meta property="article:tag" content="AI安全">
+    <meta property="article:tag" content="漏洞猎杀">
+    <meta property="article:tag" content="Claude Mythos">
+    <meta property="article:tag" content="Firefox">
+    <meta property="article:tag" content="工程流水线">
+
+  <meta itemprop="name" content="AI卷王玩法：Claude一个月挖出271个Firefox漏洞，有个Bug藏了整整20年">
+  <meta itemprop="description" content="Mozilla联手Anthropic的Claude Mythos，一个月挖出了423个Firefox漏洞，其中271个由AI直接发现。180个高危漏洞，有的Bug藏了20年，有的沙箱逃逸漏洞让人类奖金猎人都沉默了。这波操作，直接把AI安防从“全网笑话”打成了“降维打击”。">
+  <meta itemprop="datePublished" content="2026-05-20T15:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-20T15:10:03+08:00">
+  <meta itemprop="wordCount" content="89">
+  <meta itemprop="keywords" content="AI安全,漏洞猎杀,Claude Mythos,Firefox,工程流水线">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI卷王玩法：Claude一个月挖出271个Firefox漏洞，有个Bug藏了整整20年">
+  <meta name="twitter:description" content="Mozilla联手Anthropic的Claude Mythos，一个月挖出了423个Firefox漏洞，其中271个由AI直接发现。180个高危漏洞，有的Bug藏了20年，有的沙箱逃逸漏洞让人类奖金猎人都沉默了。这波操作，直接把AI安防从“全网笑话”打成了“降维打击”。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-20_15-01-24.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-20 15:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E5%8D%B7%E7%8E%8B%E7%8E%A9%E6%B3%95%EF%BC%9AClaude%E4%B8%80%E4%B8%AA%E6%9C%88%E6%8C%96%E5%87%BA271%E4%B8%AAFirefox%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%9C%89%E4%B8%AABug%E8%97%8F%E4%BA%86%E6%95%B4%E6%95%B420%E5%B9%B4%20-%20Mozilla%E8%81%94%E6%89%8BAnthropic%E7%9A%84Claude&amp;#43;Mythos%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%9C%88%E6%8C%96%E5%87%BA%E4%BA%86423%E4%B8%AAFirefox%E6%BC%8F%E6%B4%9E%EF%BC%8C%E5%85%B6%E4%B8%AD271%E4%B8%AA%E7%94%B1AI%E7%9B%B4%E6%8E%A5%E5%8F%91%E7%8E%B0%E3%80%82180%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%9C%89%E7%9A%84Bug%E8%97%8F%E4%BA%8620%E5%B9%B4%EF%BC%8C%E6%9C%89%E7%9A%84%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E%E8%AE%A9%E4%BA%BA%E7%B1%BB%E5%A5%96%E9%87%91%E7%8C%8E%E4%BA%BA%E9%83%BD%E6%B2%89%E9%BB%98%E4%BA%86%E3%80%82%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8A%8AAI%E5%AE%89%E9%98%B2%E4%BB%8E%E2%80%9C%E5%85%A8%E7%BD%91%E7%AC%91%E8%AF%9D%E2%80%9D%E6%89%93%E6%88%90%E4%BA%86%E2%80%9C%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiclaude271firefoxbug20-20260520151003533-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E5%8D%B7%E7%8E%8B%E7%8E%A9%E6%B3%95%EF%BC%9AClaude%E4%B8%80%E4%B8%AA%E6%9C%88%E6%8C%96%E5%87%BA271%E4%B8%AAFirefox%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%9C%89%E4%B8%AABug%E8%97%8F%E4%BA%86%E6%95%B4%E6%95%B420%E5%B9%B4%20-%20Mozilla%E8%81%94%E6%89%8BAnthropic%E7%9A%84Claude&amp;#43;Mythos%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%9C%88%E6%8C%96%E5%87%BA%E4%BA%86423%E4%B8%AAFirefox%E6%BC%8F%E6%B4%9E%EF%BC%8C%E5%85%B6%E4%B8%AD271%E4%B8%AA%E7%94%B1AI%E7%9B%B4%E6%8E%A5%E5%8F%91%E7%8E%B0%E3%80%82180%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%9C%89%E7%9A%84Bug%E8%97%8F%E4%BA%8620%E5%B9%B4%EF%BC%8C%E6%9C%89%E7%9A%84%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E%E8%AE%A9%E4%BA%BA%E7%B1%BB%E5%A5%96%E9%87%91%E7%8C%8E%E4%BA%BA%E9%83%BD%E6%B2%89%E9%BB%98%E4%BA%86%E3%80%82%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8A%8AAI%E5%AE%89%E9%98%B2%E4%BB%8E%E2%80%9C%E5%85%A8%E7%BD%91%E7%AC%91%E8%AF%9D%E2%80%9D%E6%89%93%E6%88%90%E4%BA%86%E2%80%9C%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiclaude271firefoxbug20-20260520151003533-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI卷王玩法：Claude一个月挖出271个Firefox漏洞，有个Bug藏了整整20年</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>以前是“AI不懂代码，全是幻觉”，现在是“AI一天，人间一年”。Claude Mythos Preview在短短一个月内，帮Firefox薅出了271个安全漏洞——其中180个是致命级，有的Bug甚至比许多读者的年龄都大。这波“赛博挖矿”，直接把Mozilla干成了历史上最安全的Firefox版本。</p></blockquote>
+<hr>
+<p>兄弟们，今天聊点硬核的。</p>
+<p>最近Mozilla发了一篇爆火复盘博文，看完直接让人倒吸一口凉气——那只叫Claude Mythos的AI，在短短一个月内，帮Firefox干掉了423个安全漏洞。你没看错，<strong>423个</strong>，不是4.23个。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>更离谱的是，这4月份的修复量，<strong>比Firefox此前整整15个月加起来的还要多</strong>。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 降维打击？不，这简直是降维“屠杀”。</p>
+<h3 id="真正的顶级猎手从全网笑柄到降维打击">真正的“顶级猎手”：从全网笑柄到降维打击</h3>
+<p>几个月前，AI写的漏洞报告还是开源社区的“噩梦”。</p>
+<p>说得好像有模有样，结果全是幻觉（Slop）。维护者花大量时间去验证一个“惊天大发现”，最后发现是个“平平无奇的误会”。那时候大家的态度很统一：<strong>AI写代码？行。AI找Bug？别闹了。</strong></p>
+<p>但现在，情况彻底变了。</p>
+<p>Mozilla工程师的原话是：“突然之间，这些bug变得非常好找。”<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>规矩就两条：第一，模型自己变强了；第二，工程师们学会了怎么用好它。这两条曲线一相乘，结果就是一个月423个漏洞的恐怖数据。</p>
+<p>最猛的是，这423个漏洞里，有271个是Mythos直接挖出来的。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 其中：</p>
+<ul>
+<li><strong>180个</strong>被评为“高危”（sec-high）</li>
+<li><strong>80个</strong>评为“中危”</li>
+<li><strong>11个</strong>评为“低危”</li>
+</ul>
+<p>180个高危漏洞是什么概念？这意味着只要用户正常浏览网页，就有可能被攻击者远程控制。过去这种级别的漏洞，只能靠外部白帽子花几万美金悬赏才能挖到一二，现在Mythos像“秋天扫落叶”一样，一把扫了271个。</p>
+<p>更离谱的是，有个HTML <code>&lt;legend&gt;</code>元素的漏洞，已经在代码里躺了<strong>15年</strong>；还有一个XSLT相关的Bug，蹲了整整<strong>20年</strong>。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>一个Bug比很多打工人的职业生涯还长，Mythos一来，直接被“请”出升天。</p>
+<h3 id="沙箱逃逸都能挖这可是2万刀级别的活儿">“沙箱逃逸”都能挖，这可是2万刀级别的活儿</h3>
+<p>最让安全圈震动的，不是数量，是<strong>质量</strong>。</p>
+<p>Mythos找到了多个“沙箱逃逸”漏洞。不懂没关系，我用人话解释一下：浏览器会把每个网页关在一个“隔离间”（沙箱）里，就算网页有毒，它也跑不出去。而“沙箱逃逸”，就是找到办法从隔离间“越狱”，获得控制整个电脑的权限。</p>
+<p>这种漏洞有多难找？连最自动化的模糊测试（Fuzzing）都很难覆盖，是漏洞赏金体系里的“天花板”，Mozilla开出的最高赏金是<strong>2万美金</strong>一个。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>结果呢？Firefox安全工程师Brian Grinstead无奈表示：“Mythos找到的沙箱逃逸漏洞数量，已经超过了所有人类安全研究员的总和。”<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Mythos是怎么干的？它会自己写一段恶意代码注入沙箱进程，然后让这段代码去攻击浏览器最安全的部分。这需要“创造性思维”和对多进程架构的深度理解——而AI，做到了。</p>
+<h3 id="agentic-harness不只是模型强是工程魔法">Agentic Harness：不只是模型强，是“工程魔法”</h3>
+<p>光有模型还不够，得有一套能跑的“流水线”。</p>
+<p>早期的AI做静态代码分析，误报率极高，根本没法用。而Mozilla和Anthropic搞出来的这套<strong>Agentic Harness</strong>，才是真正的“幕后黑手”。<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>它的逻辑很简单：发现漏洞 → 动态验证（写测试用例来复现，不能复现的自动淘汰）→ 去重 → 跟踪修复。</p>
+<p>一开始，工程师需要手动盯着模型跑，调Prompt。跑通之后，就开始并行化，在多台临时虚拟机上同时扫描。最妙的是，<strong>一旦Pipeline搭好，换模型就是改一行代码的事</strong>。<sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>从Claude Opus 4.6切换到Mythos Preview，无缝衔接，直接起飞。</p>
+<p>这也解释了为什么很多安全专家评价：“真正的杠杆在Harness的工程能力，不只在模型本身。”</p>
+<h3 id="100多人连夜加班ai不是一个人在战斗">100多人连夜加班，AI不是一个人在战斗</h3>
+<p>这里得泼一盆冷水：<strong>AI没在自动修Bug。</strong></p>
+<p>每一个被Mythos揪出来的漏洞，都需要一个工程师写补丁，另一个做代码审查。AI写的补丁只能当参考，不能直接上线。</p>
+<p>为了接住这波史无前例的“漏洞洪流”，Mozilla出动了超过100名工程师，有人写补丁，有人做审查，有人搭管道，有人管发布……这是Firefox历史上最大规模的安全修复行动。<sup id="fnref9:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>你可以理解成：Mythos是个不知疲倦的“哨兵”，它在黑夜里一个人发现了成千上万个敌人。但真正要上阵肉搏、修补城墙的，是那100多个纯人类工程师。</p>
+<h3 id="正面对决anthropic-vs-openai谁才是赛博警察">正面对决：Anthropic VS OpenAI，谁才是“赛博警察”？</h3>
+<p>Firefox的423个漏洞，只是冰山一角。</p>
+<p>Anthropic发布了Mythos后，直接祭出了“Project Glasswing”（玻璃翼计划），声称Mythos已经在每一个主流操作系统和浏览器中发现了数千个高危漏洞，甚至包括一个潜伏了<strong>27年</strong>的漏洞OpenBSD。<sup id="fnref10:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>然后，Anthropic做了一个“骚操作”：<strong>他们把最强模型亲手关了起来。</strong>——不公开，只给经过严格审查的防御者使用。</p>
+<p>而OpenAI走了另一条路：<strong>尽可能广泛地开放</strong>。</p>
+<p>GPT-5.4-Cyber紧随其后发布，并扩展到数千名个人防御者和数百个安全团队。最新的GPT-5.5-Cyber，在UK AI Security Institute（AISI）的测试中，与Claude Mythos打了个平手，甚至在部分专家级任务上还<strong>略有反超</strong>。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>OpenAI的逻辑很清楚：通过身份验证+分级授权，让尽可能多的“好人”拿到尽可能强的武器。</p>
+<p>如今，两家巨头都在拼命建墙。但AI安全能力的扩散速度，可能比他们建墙的速度更快。</p>
+<h3 id="最后的思考">最后的思考</h3>
+<p>Mythos和GPT-5.5-Cyber的出现，标志着一个新时代：<strong>AI不再是代码的辅助者，而是代码的“审判者”。</strong></p>
+<p>当你还在纠结“AI会不会取代程序员”时，AI已经开始替你检查那些藏了20年的“历史遗留问题”了。</p>
+<p>这很好。这很吓人。但这也很酷。</p>
+<p>未来已来，只是分布不均——有些Bug，终于等到了它的“克星”。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Mozilla深度复盘博文：Firefox团队凭Claude Mythos一个月修复423个漏洞·新智元·微信公众号·2026年5月20日·检索日期2026年5月20日&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref9:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref10:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>GPT-5.5 matches Claude Mythos in cyber attack tests, UK AI Security Institute finds·The Decoder·检索日期2026年5月20日&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%AE%89%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI安全</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%BC%8F%E6%B4%9E%E7%8C%8E%E6%9D%80/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">漏洞猎杀</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-mythos/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Mythos</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/firefox/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Firefox</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%B7%A5%E7%A8%8B%E6%B5%81%E6%B0%B4%E7%BA%BF/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">工程流水线</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ai-20260409091005525-0/">卡皮巴拉变身“金色传说”？Anthropic 掏出最强 AI：漏洞一挖一个准，这届人类专家快要碎了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-04-09-ai-2026-04-09-/">AI早报 2026年04月09日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-mythos-20260408084007020-0/">Anthropic这次真玩大了：神级模型Claude Mythos性能屠榜，却因「太会黑」被亲手关进小黑屋？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-mythos-anthropic--20260327171012129-2/">水豚出没请注意！Claude Mythos 绝密泄露，强到 Anthropic 自己都怕？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260520011003349-0/">透明度的代价：AI时代儿童数字身份的脆弱性与重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ainla-20260519154004506-4/">当AI学会了“阴奉阳违”：NLA技术正在撕开大模型的安全假象</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/20ai-20260515234002970-1/">人机大战2.0：AI和黑客在网络安全擂台上互殴，结果有点意思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260515184003463-0/">不再背诵“终结者”：AI对齐的范式转移从“教行为”转向“塑心智”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimythosm5-20260515154003239-4/">苹果五年筑墙，AI五天拆光：Mythos如何让M5芯片的“保险柜”秒变“纸盒子”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260515124004221-0/">中美AI要“坐下来谈谈”？贝森特牵头的这场“尬聊”可不简单</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aichatgpt-20260515014003695-0/">AI安全防护？不存在的！ChatGPT上线三年，绕过它比点外卖还简单</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-mythosai2027-20260511151003386-2/">Claude Mythos把AI考卷撕了：评测机构惊喊“测不准”，2027奇点已提前撞线？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/zico-kolter-ai--20260511121003290-9/">Zico Kolter：在 AI 失控的前夜，做那个“守门人”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260415234004135-0/">AI：我这一拳有十年的功力，但别问我是怎么打出来的</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260415194006119-1/">别惹AI：它不仅知道你的婚外情，还想在服务器房“物理超度”你</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
