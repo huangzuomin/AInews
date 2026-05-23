@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI的“电力瓶颈”：为什么通往AGI的下一张门票是模拟芯片？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="文章深度剖析了AI数据中心供电架构从54V向800V迁移的物理本质，揭示了模拟半导体厂商正通过垂直供电、近核心供电等技术突破，成为支撑未来算力基础设施的核心竞争力，并预判了该领域的马太效应。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aiagi-20260523124003509-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aiagi-20260523124003509-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI的“电力瓶颈”：为什么通往AGI的下一张门票是模拟芯片？">
+  <meta property="og:description" content="文章深度剖析了AI数据中心供电架构从54V向800V迁移的物理本质，揭示了模拟半导体厂商正通过垂直供电、近核心供电等技术突破，成为支撑未来算力基础设施的核心竞争力，并预判了该领域的马太效应。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-23T12:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-23T12:40:03+08:00">
+    <meta property="article:tag" content="模拟芯片">
+    <meta property="article:tag" content="算力基础设施">
+    <meta property="article:tag" content="800V架构">
+    <meta property="article:tag" content="垂直供电">
+    <meta property="article:tag" content="功率半导体">
+
+  <meta itemprop="name" content="AI的“电力瓶颈”：为什么通往AGI的下一张门票是模拟芯片？">
+  <meta itemprop="description" content="文章深度剖析了AI数据中心供电架构从54V向800V迁移的物理本质，揭示了模拟半导体厂商正通过垂直供电、近核心供电等技术突破，成为支撑未来算力基础设施的核心竞争力，并预判了该领域的马太效应。">
+  <meta itemprop="datePublished" content="2026-05-23T12:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-23T12:40:03+08:00">
+  <meta itemprop="wordCount" content="35">
+  <meta itemprop="keywords" content="模拟芯片,算力基础设施,800V架构,垂直供电,功率半导体">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI的“电力瓶颈”：为什么通往AGI的下一张门票是模拟芯片？">
+  <meta name="twitter:description" content="文章深度剖析了AI数据中心供电架构从54V向800V迁移的物理本质，揭示了模拟半导体厂商正通过垂直供电、近核心供电等技术突破，成为支撑未来算力基础设施的核心竞争力，并预判了该领域的马太效应。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%281%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-23 12:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E7%9A%84%E2%80%9C%E7%94%B5%E5%8A%9B%E7%93%B6%E9%A2%88%E2%80%9D%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E5%BE%80AGI%E7%9A%84%E4%B8%8B%E4%B8%80%E5%BC%A0%E9%97%A8%E7%A5%A8%E6%98%AF%E6%A8%A1%E6%8B%9F%E8%8A%AF%E7%89%87%EF%BC%9F%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86AI%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E4%BE%9B%E7%94%B5%E6%9E%B6%E6%9E%84%E4%BB%8E54V%E5%90%91800V%E8%BF%81%E7%A7%BB%E7%9A%84%E7%89%A9%E7%90%86%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%A8%A1%E6%8B%9F%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%8E%82%E5%95%86%E6%AD%A3%E9%80%9A%E8%BF%87%E5%9E%82%E7%9B%B4%E4%BE%9B%E7%94%B5%E3%80%81%E8%BF%91%E6%A0%B8%E5%BF%83%E4%BE%9B%E7%94%B5%E7%AD%89%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BA%E6%94%AF%E6%92%91%E6%9C%AA%E6%9D%A5%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%A0%B8%E5%BF%83%E7%AB%9E%E4%BA%89%E5%8A%9B%EF%BC%8C%E5%B9%B6%E9%A2%84%E5%88%A4%E4%BA%86%E8%AF%A5%E9%A2%86%E5%9F%9F%E7%9A%84%E9%A9%AC%E5%A4%AA%E6%95%88%E5%BA%94%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiagi-20260523124003509-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E7%9A%84%E2%80%9C%E7%94%B5%E5%8A%9B%E7%93%B6%E9%A2%88%E2%80%9D%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E5%BE%80AGI%E7%9A%84%E4%B8%8B%E4%B8%80%E5%BC%A0%E9%97%A8%E7%A5%A8%E6%98%AF%E6%A8%A1%E6%8B%9F%E8%8A%AF%E7%89%87%EF%BC%9F%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86AI%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E4%BE%9B%E7%94%B5%E6%9E%B6%E6%9E%84%E4%BB%8E54V%E5%90%91800V%E8%BF%81%E7%A7%BB%E7%9A%84%E7%89%A9%E7%90%86%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%A8%A1%E6%8B%9F%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%8E%82%E5%95%86%E6%AD%A3%E9%80%9A%E8%BF%87%E5%9E%82%E7%9B%B4%E4%BE%9B%E7%94%B5%E3%80%81%E8%BF%91%E6%A0%B8%E5%BF%83%E4%BE%9B%E7%94%B5%E7%AD%89%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BA%E6%94%AF%E6%92%91%E6%9C%AA%E6%9D%A5%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%A0%B8%E5%BF%83%E7%AB%9E%E4%BA%89%E5%8A%9B%EF%BC%8C%E5%B9%B6%E9%A2%84%E5%88%A4%E4%BA%86%E8%AF%A5%E9%A2%86%E5%9F%9F%E7%9A%84%E9%A9%AC%E5%A4%AA%E6%95%88%E5%BA%94%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faiagi-20260523124003509-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI的“电力瓶颈”：为什么通往AGI的下一张门票是模拟芯片？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>AI算力的指数级增长正导致数字系统的物理极限告急，电源与信号完整性正在成为决定AI基础设施效率的关键。随着英伟达推动800V DC架构，模拟半导体行业正从边缘角色跃升为AI硬件生态的底层架构师。</p></blockquote>
+<h3 id="算力狂奔物理定律的无情反噬">算力狂奔，物理定律的无情反噬</h3>
+<p>人类花费了一个世纪将电力网络微缩进数字集成电路中，试图构建一个纯粹的计算世界。然而，当大模型将机架功率推向1MW量级时，数字芯片被迫重新面对“物理世界”的规则。电力分配、功耗转换与散热，不再是边缘的工程修补，而是制约AI规模化扩张的“算力木桶”的最短板。</p>
+<p>根据IEA的预测，到2030年数据中心用电量预计将达到945TWh<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。当成千上万张GPU集群满载时，传统的54V供电架构在应对瞬态响应和寄生电阻损耗时显得力不从心。如果电流继续横向通过PCB板，传输带来的压降和热损耗将直接吞噬掉AI原本追求的算力红利。</p>
+<h3 id="从外围器件到底层架构">从“外围器件”到“底层架构”</h3>
+<p>英伟达在2025年提出的800V DC电源架构，标志着AI工厂供电逻辑的根本性范式转换<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。这种转变不仅仅是电压等级的提升，更是一场关于如何高效搬运电子的物理革命：</p>
+<ul>
+<li><strong>减少转换级数</strong>：通过固态变压器（SST）直接从高压转为核心供电，显著缩短转换链条，提高整体效能<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</li>
+<li><strong>近核心与垂直供电</strong>：通过将电源管理模块集成到封装中，电流得以直接“穿透”晶圆核心。这种“Grid-to-Core”的思路，将模拟芯片从传统的辅助元器件，提升为算力架构的定义者。</li>
+</ul>
+<p>正如ADI收购Empower Semiconductor所揭示的逻辑，模拟巨头们正在争夺AI基础设施的“入场券”<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。这不是单纯的出货量竞争，而是拼极致的材料学、拓扑算法与封装设计的系统集成能力。</p>
+<h3 id="信号链被忽视的数字神经">信号链：被忽视的“数字神经”</h3>
+<p>除了电力，AI系统的另一大瓶颈在于数据的高速流动。当PCIe 7.0将速率推向128GT/s，PCB板上的微小损耗都会引发信号畸变。高性能的模拟混合信号芯片（如Retimer、Redriver和低抖动时钟芯片）成为了连接AI计算核心的“数字神经”。</p>
+<p>这些模拟技术保障了GPU、CXL内存与网卡之间的高效互联。在这个层面，模拟厂商的先发优势与技术护城河，使得它们在AI大趋势中不仅没有被算法模型边缘化，反而因算力互联的复杂化而迎来了需求爆发。</p>
+<h3 id="未来竞争马太效应的极致放大">未来竞争：马太效应的极致放大</h3>
+<p>在可预见的3-5年内，AI电源将经历从“通用型”向“定制化”的巨变。消费电子模拟芯片陷入产能过剩泥潭的同时，高性能、高压、抗高温的功率半导体将成为产业稀缺资源。</p>
+<p>我们正目睹一场残酷的市场清洗：只有能够深度参与到GPU封装设计初期，并提供“封装级供电方案”的头部玩家，才能拿到通往AI下半场的门票。模拟芯片行业的马太效应正在被AI算力需求无限放大。</p>
+<p>这不仅仅是半导体产业的局部优化，更是人类文明在构建超大规模算力时，为了逃离“热寂”限制而不得不进行的硬核进化。AI的尽头是电力控制，而掌控这一底层的模拟半导体，正在重塑未来的商业版图。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>人工智能数据中心里的800伏巨兽·路博迈(Neuberger Berman)·检索日期2026/5/23&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>适用于 AI 数据中心的 800 VDC 架构·NVIDIA·检索日期2026/5/23&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>数据中心供电革命：从UPS到800V HVDC，影响几何？·四方维·检索日期2026/5/23&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>赋能人工智能未来：ADI宣布支持800 VDC数据中心架构·Analog Devices·检索日期2026/5/23&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E6%8B%9F%E8%8A%AF%E7%89%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模拟芯片</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/800v%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">800V架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%9E%82%E7%9B%B4%E4%BE%9B%E7%94%B5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">垂直供电</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8A%9F%E7%8E%87%E5%8D%8A%E5%AF%BC%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">功率半导体</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260522211006252-1/">从“钉子”到“地基”：边缘AI推理如何重构物理世界的算力疆域</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260522094003625-0/">AI黄金时代的“算力殖民”：澳大利亚能否走出从资源出口到主权算力的转型之路？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-05-21-ai-2026-05-21-/">AI早报 2026年05月21日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-05-20-05-20-google-ai-/">05-20日报|Google的“权力投降”：从信息中介沦为AI文明的算力包工头</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20260520174003454-1/">谷歌的“Agent之治”：从模型参数竞赛到生产力基础设施的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260520171004053-0/">当云计算的用户不再是人：阿里云重构“地基”的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519184003574-1/">AI的“烧钱黑洞”：当算力基建遭遇增长极限，科技巨头正在告别“复利时代”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebrasopenaiai-20260518194008682-1/">算力“赎身契”：Cerebras与OpenAI的晶圆赌局如何重塑AI推理经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/amdai-20260518171003923-1/">苏姿丰的算力版图：AMD如何在“AI冷战”中重构服务器帝国</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-b-ai--20260518164003358-1/">算力的“主权”博弈：Anthropic 如何通过 B 端深耕成为 AI 时代的隐形宗主国</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebras-20260515121003502-0/">硅谷的“晶圆巨人”：Cerebras如何在英伟达的阴影下筑起算力长城</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicai-20260514084004543-0/">宗主国时刻：Anthropic如何通过“供养经济”重构AI权力版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/transformertpuai-20260512144003934-1/">后Transformer时代的算力重构：谷歌第八代TPU如何通过“训推解耦”定义AI代理基建</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511211003467-0/">算力淘金热：当“数字水电煤”成为最昂贵的奢侈品</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511091003885-4/">算力的饥渴：当AI点燃全球电网的导火索</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
