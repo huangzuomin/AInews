@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文剖析了从“Token离散范式”向“连续语义流建模”转型的技术本质，指出大模型目前的结构局限在于无法模拟真实的物理世界规律。随着ELF与Cola DLM等连续模型的出现，AI界正在重塑语义建模底座，这一趋势将彻底改变行业定价体系并加速通往具备自主认知能力的通用人工智能（AGI）。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/tokenagi-20260525164003294-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/tokenagi-20260525164003294-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道">
+  <meta property="og:description" content="本文剖析了从“Token离散范式”向“连续语义流建模”转型的技术本质，指出大模型目前的结构局限在于无法模拟真实的物理世界规律。随着ELF与Cola DLM等连续模型的出现，AI界正在重塑语义建模底座，这一趋势将彻底改变行业定价体系并加速通往具备自主认知能力的通用人工智能（AGI）。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-25T16:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-25T16:40:03+08:00">
+    <meta property="article:tag" content="人工智能">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="连续语义建模">
+    <meta property="article:tag" content="技术范式演进">
+    <meta property="article:tag" content="AGI">
+    <meta property="article:tag" content="字节跳动">
+
+  <meta itemprop="name" content="越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道">
+  <meta itemprop="description" content="本文剖析了从“Token离散范式”向“连续语义流建模”转型的技术本质，指出大模型目前的结构局限在于无法模拟真实的物理世界规律。随着ELF与Cola DLM等连续模型的出现，AI界正在重塑语义建模底座，这一趋势将彻底改变行业定价体系并加速通往具备自主认知能力的通用人工智能（AGI）。">
+  <meta itemprop="datePublished" content="2026-05-25T16:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-25T16:40:03+08:00">
+  <meta itemprop="wordCount" content="29">
+  <meta itemprop="keywords" content="人工智能,大语言模型,连续语义建模,技术范式演进,AGI,字节跳动">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道">
+  <meta name="twitter:description" content="本文剖析了从“Token离散范式”向“连续语义流建模”转型的技术本质，指出大模型目前的结构局限在于无法模拟真实的物理世界规律。随着ELF与Cola DLM等连续模型的出现，AI界正在重塑语义建模底座，这一趋势将彻底改变行业定价体系并加速通往具备自主认知能力的通用人工智能（AGI）。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-25_16-30-30.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-25 16:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%8A%E8%BF%87Token%E7%9A%84%E5%9B%9A%E7%AC%BC%EF%BC%9A%E5%BD%93%E2%80%9C%E8%BF%9E%E7%BB%AD%E6%B5%81%E2%80%9D%E6%88%90%E4%B8%BA%E9%80%9A%E5%BE%80AGI%E7%9A%84%E9%9A%90%E7%A7%98%E8%88%AA%E9%81%93%20-%20%E6%9C%AC%E6%96%87%E5%89%96%E6%9E%90%E4%BA%86%E4%BB%8E%E2%80%9CToken%E7%A6%BB%E6%95%A3%E8%8C%83%E5%BC%8F%E2%80%9D%E5%90%91%E2%80%9C%E8%BF%9E%E7%BB%AD%E8%AF%AD%E4%B9%89%E6%B5%81%E5%BB%BA%E6%A8%A1%E2%80%9D%E8%BD%AC%E5%9E%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%8C%87%E5%87%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9B%AE%E5%89%8D%E7%9A%84%E7%BB%93%E6%9E%84%E5%B1%80%E9%99%90%E5%9C%A8%E4%BA%8E%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E8%A7%84%E5%BE%8B%E3%80%82%E9%9A%8F%E7%9D%80ELF%E4%B8%8ECola&amp;#43;DLM%E7%AD%89%E8%BF%9E%E7%BB%AD%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%87%BA%E7%8E%B0%EF%BC%8CAI%E7%95%8C%E6%AD%A3%E5%9C%A8%E9%87%8D%E5%A1%91%E8%AF%AD%E4%B9%89%E5%BB%BA%E6%A8%A1%E5%BA%95%E5%BA%A7%EF%BC%8C%E8%BF%99%E4%B8%80%E8%B6%8B%E5%8A%BF%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E8%A1%8C%E4%B8%9A%E5%AE%9A%E4%BB%B7%E4%BD%93%E7%B3%BB%E5%B9%B6%E5%8A%A0%E9%80%9F%E9%80%9A%E5%BE%80%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E8%AE%A4%E7%9F%A5%E8%83%BD%E5%8A%9B%E7%9A%84%E9%80%9A%E7%94%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%88AGI%EF%BC%89%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ftokenagi-20260525164003294-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%8A%E8%BF%87Token%E7%9A%84%E5%9B%9A%E7%AC%BC%EF%BC%9A%E5%BD%93%E2%80%9C%E8%BF%9E%E7%BB%AD%E6%B5%81%E2%80%9D%E6%88%90%E4%B8%BA%E9%80%9A%E5%BE%80AGI%E7%9A%84%E9%9A%90%E7%A7%98%E8%88%AA%E9%81%93%20-%20%E6%9C%AC%E6%96%87%E5%89%96%E6%9E%90%E4%BA%86%E4%BB%8E%E2%80%9CToken%E7%A6%BB%E6%95%A3%E8%8C%83%E5%BC%8F%E2%80%9D%E5%90%91%E2%80%9C%E8%BF%9E%E7%BB%AD%E8%AF%AD%E4%B9%89%E6%B5%81%E5%BB%BA%E6%A8%A1%E2%80%9D%E8%BD%AC%E5%9E%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%8C%87%E5%87%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9B%AE%E5%89%8D%E7%9A%84%E7%BB%93%E6%9E%84%E5%B1%80%E9%99%90%E5%9C%A8%E4%BA%8E%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E8%A7%84%E5%BE%8B%E3%80%82%E9%9A%8F%E7%9D%80ELF%E4%B8%8ECola&amp;#43;DLM%E7%AD%89%E8%BF%9E%E7%BB%AD%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%87%BA%E7%8E%B0%EF%BC%8CAI%E7%95%8C%E6%AD%A3%E5%9C%A8%E9%87%8D%E5%A1%91%E8%AF%AD%E4%B9%89%E5%BB%BA%E6%A8%A1%E5%BA%95%E5%BA%A7%EF%BC%8C%E8%BF%99%E4%B8%80%E8%B6%8B%E5%8A%BF%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E8%A1%8C%E4%B8%9A%E5%AE%9A%E4%BB%B7%E4%BD%93%E7%B3%BB%E5%B9%B6%E5%8A%A0%E9%80%9F%E9%80%9A%E5%BE%80%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E8%AE%A4%E7%9F%A5%E8%83%BD%E5%8A%9B%E7%9A%84%E9%80%9A%E7%94%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%88AGI%EF%BC%89%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ftokenagi-20260525164003294-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：
+当前大模型普遍依赖离散的“Token序列”作为认知媒介，这在本质上构成了限制机器理解复杂世界规律的结构性瓶颈。以何恺明团队的ELF和字节跳动Seed团队的Cola DLM为标志，AI界正尝试将语义建模从离散空间迁移至连续潜空间，试图通过更符合物理世界本质的“流”模型，跨越通往AGI的最后一道认识论鸿沟。</p>
+<h3 id="语言的局限认知建模的结构性坍塌">语言的局限：认知建模的结构性坍塌</h3>
+<p>如果说过去五年的大模型浪潮是一场针对人类语言结构的“统计学胜利”，那么今天，这场胜利的余晖已经触及了认知的硬上限。正如维特根斯坦所言，“语言的边界即世界的边界”。现行自回归架构将人类认知强行压缩为离散的Token序列，虽然在模拟表达上趋于完美，但却永远无法触及那些潜藏于人类大脑感觉皮层中、未经符号化编码的连续直觉——因果感、空间感知与具身反馈。</p>
+<p>当我们审视Ilya Sutskever关于“预训练终结”的预言，以及Yann LeCun对自回归范式的批判时，核心的分歧点在于：<strong>我们是在模拟“人类如何说话”，还是在建模“世界如何运作”？</strong> 离散Token本质上是一种有损压缩协议，当模型被困在符号序列的“囚笼”中，即便规模扩张至无限，也无法推演出非符号化的世界物理规律。</p>
+<h3 id="连续空间的逃逸重构语义原动力">连续空间的“逃逸”：重构语义原动力</h3>
+<p>2026年5月，何恺明团队提出的ELF（Embedded Language Flows）以及字节跳动Seed团队的Cola DLM，不仅是学术上的技术迭代，更是一次范式层面的“逃逸”。</p>
+<p>这些模型的核心突破在于：<strong>彻底摒弃了在Token空间内进行逐点去噪的思路</strong>，将整个语义生成过程置于连续的潜空间（Latent Space）。ELF通过流匹配（Flow Matching）技术，从噪声平滑演化至目标嵌入，仅在生成的最后一步完成离散化映射。这种做法的本质价值在于：</p>
+<ul>
+<li><strong>计算效率的飞跃</strong>：ELF仅用32步采样即可超越离散模型1024步的效果，训练数据需求降低了一个数量级。</li>
+<li><strong>语义稳定性的重构</strong>：如Cola DLM所验证，模型不再是记忆词表间的转移概率，而是在建模一种抽象、连续的“语义状态”。这使得模型终于能够将语义意义上的共性识别为统一的向量，而非将不同的表达视为独立的对齐任务。</li>
+</ul>
+<h3 id="产业的暗流与商业版图的重置">产业的暗流与商业版图的重置</h3>
+<p>从商业敏锐度来看，这一架构变迁对AI产业链的影响是深远且残酷的。如果连续空间建模成为主流，首当其冲的便是当前围绕“Token”建立的商业逻辑。</p>
+<p>现有的收费模式基于输入输出的Token计数，这是因为Token是离散且透明的计算颗粒度。一旦计算迁移至连续空间，输出的长度将与计算耗时脱钩，整个定价逻辑将面临崩溃与重构。此外，对于那些致力于“多模态桥接”的中间件厂商而言，如果基础模型原生工作于统一的连续空间，文本与图像、视频之间的隔阂自然消解，其存在的价值空间将瞬间缩减。</p>
+<p>巨头们的布局早已显露端倪。Google深耕原生多模态统一，旨在为所有模态建立统一坐标系；OpenAI虽在Sora上经历过战术调整，但其对于Agent架构的执着，本质上也是在寻找脱离纯语言文本、进入交互式反馈体系的路径。</p>
+<h3 id="下一代agi的通关密码">下一代AGI的通关密码</h3>
+<p>尽管连续路线证明了效率与优雅，但我们必须清醒地意识到：连续空间只是解开了语言的桎梏，并未直接赋予机器AGI。</p>
+<p>如果模型不再受限于人类语言的编码格式，它需要的新训练信号从何而来？目前的答案正指向<strong>主动探索与自我改进（RSI）</strong>。正如LeCun所言，“生成只是模拟，预测才是理解”。通向AGI的未来，很可能不再依赖于人类已有的海量文本库，而是模型在物理世界（或高度仿真的世界模型）中进行干预、观察后果、并基于因果反馈进行递归学习的过程。</p>
+<p>我们正在见证一场认知的“数字化转型”——从“记录人类语言”的录音机，演进为“构建世界模型”的思考者。虽然技术落地的路径依然漫长，但当第一批模型开始在连续的向量流中思考时，我们已经站在了新范式的起点。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人工智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BF%9E%E7%BB%AD%E8%AF%AD%E4%B9%89%E5%BB%BA%E6%A8%A1/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">连续语义建模</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F%E6%BC%94%E8%BF%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术范式演进</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/agi/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AGI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">字节跳动</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/seedance158-20260401084004555-2/">字节Seedance“大堵车”：想看15秒视频？先排8小时队，或者氪金一千万</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2026ai-20260316184004069-0/">硅谷的寒流与红包的余温：2026年初全球AI市场的增长焦虑与本土博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agi-nature--20260204214008326-0/">别找了，AGI 就在屏幕后面瞪着你呢！Nature 锐评：别再嘴硬，图灵预言早已成真</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/lecunhassabis-20251224081002274-1/">爷不干了！LeCun怒斥大模型是“胡扯”并离职创业，诺奖得主Hassabis：大力出奇迹你不懂</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-20251127164005214-1/">杨植麟与月之暗面：在技术理想主义的潮汐中，铸造Kimi的灯塔</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251119154005006-0/">夏立雪：终结云计算“流水线”，以“思考”重塑智能体基础设施的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagent-20251029134004669-0/">廖谦：从字节“狼性”产品经理到AI营销Agent的“造船人”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mitai-20251022091004990-1/">超越“开普勒之眼”：哈佛&amp;MIT揭示AI通往“牛顿之思”的深层鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/autocodeai-20251020164005953-0/">AutoCode：AI出题机的崛起，重塑编程竞赛与通用智能的评估范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5openai-20250929154006317-0/">GPT-5炸场：OpenAI又搞了个什么“大动作”？是真香还是“就这”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250829154004904-1/">谷歌“香蕉幻境”：多模态AI跨越生成与理解的边界，开启智能共创时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250829151004689-0/">智能悖论：AI助手重塑商业版图，具身智能与伦理治理仍是未竟之途</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5-20250820114005534-0/">GPT-5的“双轴”智能范式：超越规模，重塑人机协作新边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/greg-brockman-20250819164005186-0/">Greg Brockman：在“象牙塔”之外，探索智能的无限边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/greg-brockmanai-20250818081006857-2/">Greg Brockman：在AI纪元中，探寻推理的“分水岭”与算力的“星辰大海”</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
