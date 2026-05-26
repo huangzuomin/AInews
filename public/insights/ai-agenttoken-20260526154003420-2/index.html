@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>你的AI Agent在养“赘肉”？龙虾之父开源“瘦身大法”，省token如省钱 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="苹果“龙虾之父”大神手撕开发者，吐槽大家给AI Agent写的技能描述太啰嗦，既浪费token又拉低性能。他开源了一个“体检工具”，专门帮开发者砍掉技能提示词里的“赘肉”，核心原则是“提示词像路标，别当说明书”，引发全网AI打工人狂赞。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/ai-agenttoken-20260526154003420-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/ai-agenttoken-20260526154003420-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="你的AI Agent在养“赘肉”？龙虾之父开源“瘦身大法”，省token如省钱">
+  <meta property="og:description" content="苹果“龙虾之父”大神手撕开发者，吐槽大家给AI Agent写的技能描述太啰嗦，既浪费token又拉低性能。他开源了一个“体检工具”，专门帮开发者砍掉技能提示词里的“赘肉”，核心原则是“提示词像路标，别当说明书”，引发全网AI打工人狂赞。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-26T15:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-26T15:40:03+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="提示词优化">
+    <meta property="article:tag" content="开源工具">
+    <meta property="article:tag" content="降本增效">
+    <meta property="article:tag" content="Token">
+
+  <meta itemprop="name" content="你的AI Agent在养“赘肉”？龙虾之父开源“瘦身大法”，省token如省钱">
+  <meta itemprop="description" content="苹果“龙虾之父”大神手撕开发者，吐槽大家给AI Agent写的技能描述太啰嗦，既浪费token又拉低性能。他开源了一个“体检工具”，专门帮开发者砍掉技能提示词里的“赘肉”，核心原则是“提示词像路标，别当说明书”，引发全网AI打工人狂赞。">
+  <meta itemprop="datePublished" content="2026-05-26T15:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-26T15:40:03+08:00">
+  <meta itemprop="wordCount" content="68">
+  <meta itemprop="keywords" content="AI Agent,提示词优化,开源工具,降本增效,Token">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="你的AI Agent在养“赘肉”？龙虾之父开源“瘦身大法”，省token如省钱">
+  <meta name="twitter:description" content="苹果“龙虾之父”大神手撕开发者，吐槽大家给AI Agent写的技能描述太啰嗦，既浪费token又拉低性能。他开源了一个“体检工具”，专门帮开发者砍掉技能提示词里的“赘肉”，核心原则是“提示词像路标，别当说明书”，引发全网AI打工人狂赞。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-26_15-31-13.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-26 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BD%A0%E7%9A%84AI&amp;#43;Agent%E5%9C%A8%E5%85%BB%E2%80%9C%E8%B5%98%E8%82%89%E2%80%9D%EF%BC%9F%E9%BE%99%E8%99%BE%E4%B9%8B%E7%88%B6%E5%BC%80%E6%BA%90%E2%80%9C%E7%98%A6%E8%BA%AB%E5%A4%A7%E6%B3%95%E2%80%9D%EF%BC%8C%E7%9C%81token%E5%A6%82%E7%9C%81%E9%92%B1%20-%20%E8%8B%B9%E6%9E%9C%E2%80%9C%E9%BE%99%E8%99%BE%E4%B9%8B%E7%88%B6%E2%80%9D%E5%A4%A7%E7%A5%9E%E6%89%8B%E6%92%95%E5%BC%80%E5%8F%91%E8%80%85%EF%BC%8C%E5%90%90%E6%A7%BD%E5%A4%A7%E5%AE%B6%E7%BB%99AI&amp;#43;Agent%E5%86%99%E7%9A%84%E6%8A%80%E8%83%BD%E6%8F%8F%E8%BF%B0%E5%A4%AA%E5%95%B0%E5%97%A6%EF%BC%8C%E6%97%A2%E6%B5%AA%E8%B4%B9token%E5%8F%88%E6%8B%89%E4%BD%8E%E6%80%A7%E8%83%BD%E3%80%82%E4%BB%96%E5%BC%80%E6%BA%90%E4%BA%86%E4%B8%80%E4%B8%AA%E2%80%9C%E4%BD%93%E6%A3%80%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E4%B8%93%E9%97%A8%E5%B8%AE%E5%BC%80%E5%8F%91%E8%80%85%E7%A0%8D%E6%8E%89%E6%8A%80%E8%83%BD%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E7%9A%84%E2%80%9C%E8%B5%98%E8%82%89%E2%80%9D%EF%BC%8C%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99%E6%98%AF%E2%80%9C%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%83%8F%E8%B7%AF%E6%A0%87%EF%BC%8C%E5%88%AB%E5%BD%93%E8%AF%B4%E6%98%8E%E4%B9%A6%E2%80%9D%EF%BC%8C%E5%BC%95%E5%8F%91%E5%85%A8%E7%BD%91AI%E6%89%93%E5%B7%A5%E4%BA%BA%E7%8B%82%E8%B5%9E%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-agenttoken-20260526154003420-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BD%A0%E7%9A%84AI&amp;#43;Agent%E5%9C%A8%E5%85%BB%E2%80%9C%E8%B5%98%E8%82%89%E2%80%9D%EF%BC%9F%E9%BE%99%E8%99%BE%E4%B9%8B%E7%88%B6%E5%BC%80%E6%BA%90%E2%80%9C%E7%98%A6%E8%BA%AB%E5%A4%A7%E6%B3%95%E2%80%9D%EF%BC%8C%E7%9C%81token%E5%A6%82%E7%9C%81%E9%92%B1%20-%20%E8%8B%B9%E6%9E%9C%E2%80%9C%E9%BE%99%E8%99%BE%E4%B9%8B%E7%88%B6%E2%80%9D%E5%A4%A7%E7%A5%9E%E6%89%8B%E6%92%95%E5%BC%80%E5%8F%91%E8%80%85%EF%BC%8C%E5%90%90%E6%A7%BD%E5%A4%A7%E5%AE%B6%E7%BB%99AI&amp;#43;Agent%E5%86%99%E7%9A%84%E6%8A%80%E8%83%BD%E6%8F%8F%E8%BF%B0%E5%A4%AA%E5%95%B0%E5%97%A6%EF%BC%8C%E6%97%A2%E6%B5%AA%E8%B4%B9token%E5%8F%88%E6%8B%89%E4%BD%8E%E6%80%A7%E8%83%BD%E3%80%82%E4%BB%96%E5%BC%80%E6%BA%90%E4%BA%86%E4%B8%80%E4%B8%AA%E2%80%9C%E4%BD%93%E6%A3%80%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E4%B8%93%E9%97%A8%E5%B8%AE%E5%BC%80%E5%8F%91%E8%80%85%E7%A0%8D%E6%8E%89%E6%8A%80%E8%83%BD%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E7%9A%84%E2%80%9C%E8%B5%98%E8%82%89%E2%80%9D%EF%BC%8C%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99%E6%98%AF%E2%80%9C%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%83%8F%E8%B7%AF%E6%A0%87%EF%BC%8C%E5%88%AB%E5%BD%93%E8%AF%B4%E6%98%8E%E4%B9%A6%E2%80%9D%EF%BC%8C%E5%BC%95%E5%8F%91%E5%85%A8%E7%BD%91AI%E6%89%93%E5%B7%A5%E4%BA%BA%E7%8B%82%E8%B5%9E%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-agenttoken-20260526154003420-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">你的AI Agent在养“赘肉”？龙虾之父开源“瘦身大法”，省token如省钱</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>你给AI Agent写的“技能说明书”是不是越来越像长篇小说？苹果“龙虾之父”Peter Steinberger看不下去了，亲自下场写了个“体检”工具，教你把几百字的技能描述砍成“穴居人短信”。<strong>核心原则：给Agent的提示词要像路标，别当百科全书。</strong></p></blockquote>
+<p>什么？你给AI Agent写了个“技能”（Skill），结果它每次调用都磨磨唧唧、智商掉线，甚至还偷偷烧你的钱包？</p>
+<p>别急着骂模型不行，问题可能出在你自己身上。</p>
+<p>最近，苹果前工程师、江湖人称“龙虾之父”的大神Peter Steinberger<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>在社交媒上开喷了：<strong>“各位，别把技能描述写得像本书一样，乱七八糟的东西都塞进上下文。”</strong></p>
+<p>言下之意，你们这些开发者写的提示词，是个Agent看了都得先干两斤“信息冗余”的蛋白粉，然后再被各种噪音迷得晕头转向。</p>
+<h3 id="-你的agent正在为你的话痨买单">### 你的Agent，正在为你的“话痨”买单</h3>
+<p>这事儿表面看是文案水平问题，实际上一笔经济账。</p>
+<p>现在的AI Agent调用技能，那可都是按token（令牌）计费的。你每多加一句看似贴心的描述，Agent每次调用就要多付一笔真金白银的token账单。更扎心的是，你写得越多，Agent在浩瀚的信息海洋里找“关键按钮”就越费劲。</p>
+<p>有网友现身说法<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>：写了90多词的描述，Agent死活选不对技能；一狠心砍到40词以内，Agent反而一次命中，又快又准。</p>
+<p>这就像一个面试官，你递给他一本三百万字的《个人传记》，让他从里面找出你会不会写代码——他大概率会翻到一半就睡着了。而你递给他一张写着“精通Python，3年全栈经验”的便签，他立刻就知道你该坐哪张桌子。</p>
+<p>龙虾之父Peter的主张很硬核：<strong>Skill要像路标，目的是让Agent找到路，别把整本说明书挂在路标上。</strong></p>
+<h3 id="-手把手教你给agent瘦身开源体检神器">### 手把手教你给Agent“瘦身”：开源“体检”神器</h3>
+<p>光喊口号没用，Peter直接把家伙事儿给大伙端出来了——一个名为 <code>skill-cleaner</code> 的开源体检工具<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>这玩意儿就是帮你给一堆乱七八糟的“技能脚本”做一次全面体检和“抽脂手术”。他本人先是秀了一波肌肉：这个 <code>skill-cleaner</code> 自己的Skill.md（技能描述文件）只有区区56行提示词，<strong>简洁到像“穴居人”刻在墙上的符号</strong>。而真正干活的脚本，足足有近千行代码。</p>
+<p>这波操作，直接封神。<strong>再体会一下，精简到极致的描述是路标，复杂的代码才是藏在路标背后的工具箱。</strong></p>
+<p>那么，这款“瘦身军医”到底能干什么？五个核心功能，步步扎心：</p>
+<ol>
+<li><strong>技能预算审计</strong>：上来就算账！自动核算每个技能占用了多少上下文空间。<strong>意思就是“兄弟，你这一身腱子肉，有一半可能是脂肪，咱得看看怎么减。”</strong></li>
+<li><strong>重复技能检测</strong>：扫雷模式全开。自动扫描你代码库里所有技能，看看有没有同名或功能高度重合的“双胞胎”，赶紧标记出来，砍掉一个。</li>
+<li><strong>闲置技能筛查</strong>：打开你的技能“运动步数记录”，找出那些长期没被Agent调用、躺尸吃灰的“僵尸技能”，列个清理清单。</li>
+<li><strong>根目录审计</strong>：理清每个技能是从哪个文件夹来的，哪些开了哪些关了。<strong>就像给杂乱的背包做一次“全包收纳盘点”。</strong></li>
+<li><strong>描述压缩优化</strong>：核心功能！把那些写了30个字的客套话“请帮我检查一下当前代码中是否有可能存在的bug并进行修复”，直接压缩成“debug, inspect, fix”。<strong>翻译腔去死，性感“穴居人”万岁！</strong></li>
+</ol>
+<p>具体怎么压缩？Peter还贴心地做了三步走：</p>
+<ul>
+<li><strong>文本预处理</strong>：全部转小写、去掉废话标点。</li>
+<li><strong>场景识别</strong>：工具内置了一套动作词库。比如“调试类”对应 <code>debug, inspect, fix</code>；“部署类”对应 <code>deploy, release, verify</code>。</li>
+<li><strong>标准化替换</strong>：直接把你那100字的优雅说明，替换成这几个高频短动词。</li>
+</ul>
+<p>效果多炸裂？测试运行后，报告一目了然。甚至有网友调侃，Peter本人后来在评论区发帖都开始用这种“穴居人”风格：<strong>“install skill, agent smart, user happy.”</strong> 真是把省token这仨字刻进DNA了。</p>
+<h3 id="-这不是抠门是专业">### 这不是抠门，是专业</h3>
+<p>可能会有人说，省那几毛钱的token至于吗？至于。在AI大规模落地的今天，每一毫秒延迟和每一个token的浪费，乘以百万次调用，都是巨额的成本和无谓的消耗。</p>
+<p><strong>这背后，其实是整个AI软件工程思维正在发生质变。</strong></p>
+<p>以前我们追求“全功能、大而全”，现在我们追求“精准、轻盈、高内聚”。给Agent写提示词，不再是写小说，而是写API文档——要的是原子化、标准化，让Agent像调用函数一样 “func(param)” 就完事，而不是读一篇小作文。</p>
+<p><strong>所以，别再做那个“把整本使用手册贴在路标上的老好人了”。</strong></p>
+<h3 id="-结尾">### 结尾</h3>
+<p>这件事给所有AI应用开发者（以及那些被各种“通用”Agent折磨的用户）提了个醒：<strong>降本增效的密码，可能就藏在你那堆又臭又长的Skill描述里。</strong></p>
+<p>现在，快去GitHub给Peter点个Star，然后冲进你的代码库，给你的Agent技能们来一次脱胎换骨的“大瘦身”吧。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Peter Steinberger 在X上相关讨论，https://x.com/steipete/status/2058917897590673525&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>skill-cleaner项目地址，https://github.com/steipete/agent-scripts/tree/main/skills/skill-cleaner&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">提示词优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源工具</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%99%8D%E6%9C%AC%E5%A2%9E%E6%95%88/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">降本增效</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/token/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Token</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/token-20260327094006147-0/">老板：别废话，先烧一百万Token给我看看！揭秘被写进工资条的“数字口粮”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-54-openai--20260319191006096-1/">GPT-5.4 养龙虾太贵？OpenAI 反手就是一个“一折优惠券”，这波降维打击你受得了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-54-mininano-13-openai--20260318084005136-1/">GPT-5.4 mini/nano 突袭：1/3 价格养出“满血”战力，OpenAI 这是要卷死谁？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent--20260204151007595-0/">别再迷信大模型了！亚马逊云科技：数据才是“真大腿”，Agent 正在成为你的新同事</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aios-20251210194008899-1/">从“一键去AI”看操作系统未来：用户自主权与智能体OS的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagent-20250709211005494-5/">飞书AI王炸：真·Agent驾到，多维表格开启「用嘴搭系统」新时代！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aipc-20260526114003387-1/">重构控制台：AI时代下的PC为何从“边缘”回归“枢纽”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-codeai-20260526081003252-0/">当巨头沦为“渠道商”：微软叫停Claude Code背后的AI生态焦虑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-05-26-ai-2026-05-26-/">AI早报 2026年05月26日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260525114003525-2/">大模型的尽头，是费大厨辣椒炒肉？干饭人的世界，早已被AI入侵！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/alphagoai-20260525084003406-6/">AlphaGo之父的新战场：当“人造社会”成为下一代AI智能体的演化考场</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai10-20260524141003345-0/">AI当老板，10万美元打水漂：这波「赛博裁员」实验，翻车翻得有点彻底</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/grab-20260524081003309-0/">从“救火”到“重构”：Grab的多智能体架构如何定义软件工程的未来范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-05-24-ai-2026-05-24-/">AI早报 2026年05月24日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-05-23-ai-2026-05-23-/">AI早报 2026年05月23日</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
