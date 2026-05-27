@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越摩尔的“韬定律”：华为如何以架构设计重构半导体演进坐标系 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="华为提出的“韬定律”通过引入“时间常数（τ）缩微”理念，将竞争重心从物理制程转向架构与系统设计，预示着半导体性能演进进入“全栈协同”的新范式，旨在通过多层逻辑折叠技术突破先进制程瓶颈。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260527104003644-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260527104003644-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越摩尔的“韬定律”：华为如何以架构设计重构半导体演进坐标系">
+  <meta property="og:description" content="华为提出的“韬定律”通过引入“时间常数（τ）缩微”理念，将竞争重心从物理制程转向架构与系统设计，预示着半导体性能演进进入“全栈协同”的新范式，旨在通过多层逻辑折叠技术突破先进制程瓶颈。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-27T10:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-27T10:40:03+08:00">
+    <meta property="article:tag" content="华为">
+    <meta property="article:tag" content="韬定律">
+    <meta property="article:tag" content="半导体">
+    <meta property="article:tag" content="芯片架构">
+    <meta property="article:tag" content="逻辑折叠">
+    <meta property="article:tag" content="技术创新">
+
+  <meta itemprop="name" content="超越摩尔的“韬定律”：华为如何以架构设计重构半导体演进坐标系">
+  <meta itemprop="description" content="华为提出的“韬定律”通过引入“时间常数（τ）缩微”理念，将竞争重心从物理制程转向架构与系统设计，预示着半导体性能演进进入“全栈协同”的新范式，旨在通过多层逻辑折叠技术突破先进制程瓶颈。">
+  <meta itemprop="datePublished" content="2026-05-27T10:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-27T10:40:03+08:00">
+  <meta itemprop="wordCount" content="39">
+  <meta itemprop="keywords" content="华为,韬定律,半导体,芯片架构,逻辑折叠,技术创新">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越摩尔的“韬定律”：华为如何以架构设计重构半导体演进坐标系">
+  <meta name="twitter:description" content="华为提出的“韬定律”通过引入“时间常数（τ）缩微”理念，将竞争重心从物理制程转向架构与系统设计，预示着半导体性能演进进入“全栈协同”的新范式，旨在通过多层逻辑折叠技术突破先进制程瓶颈。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-27_10-30-36.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-27 10:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%85%E8%B6%8A%E6%91%A9%E5%B0%94%E7%9A%84%E2%80%9C%E9%9F%AC%E5%AE%9A%E5%BE%8B%E2%80%9D%EF%BC%9A%E5%8D%8E%E4%B8%BA%E5%A6%82%E4%BD%95%E4%BB%A5%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%87%8D%E6%9E%84%E5%8D%8A%E5%AF%BC%E4%BD%93%E6%BC%94%E8%BF%9B%E5%9D%90%E6%A0%87%E7%B3%BB%20-%20%E5%8D%8E%E4%B8%BA%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E9%9F%AC%E5%AE%9A%E5%BE%8B%E2%80%9D%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E2%80%9C%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0%EF%BC%88%CF%84%EF%BC%89%E7%BC%A9%E5%BE%AE%E2%80%9D%E7%90%86%E5%BF%B5%EF%BC%8C%E5%B0%86%E7%AB%9E%E4%BA%89%E9%87%8D%E5%BF%83%E4%BB%8E%E7%89%A9%E7%90%86%E5%88%B6%E7%A8%8B%E8%BD%AC%E5%90%91%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E5%8D%8A%E5%AF%BC%E4%BD%93%E6%80%A7%E8%83%BD%E6%BC%94%E8%BF%9B%E8%BF%9B%E5%85%A5%E2%80%9C%E5%85%A8%E6%A0%88%E5%8D%8F%E5%90%8C%E2%80%9D%E7%9A%84%E6%96%B0%E8%8C%83%E5%BC%8F%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E5%A4%9A%E5%B1%82%E9%80%BB%E8%BE%91%E6%8A%98%E5%8F%A0%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%E5%85%88%E8%BF%9B%E5%88%B6%E7%A8%8B%E7%93%B6%E9%A2%88%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260527104003644-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%85%E8%B6%8A%E6%91%A9%E5%B0%94%E7%9A%84%E2%80%9C%E9%9F%AC%E5%AE%9A%E5%BE%8B%E2%80%9D%EF%BC%9A%E5%8D%8E%E4%B8%BA%E5%A6%82%E4%BD%95%E4%BB%A5%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%87%8D%E6%9E%84%E5%8D%8A%E5%AF%BC%E4%BD%93%E6%BC%94%E8%BF%9B%E5%9D%90%E6%A0%87%E7%B3%BB%20-%20%E5%8D%8E%E4%B8%BA%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E9%9F%AC%E5%AE%9A%E5%BE%8B%E2%80%9D%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E2%80%9C%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0%EF%BC%88%CF%84%EF%BC%89%E7%BC%A9%E5%BE%AE%E2%80%9D%E7%90%86%E5%BF%B5%EF%BC%8C%E5%B0%86%E7%AB%9E%E4%BA%89%E9%87%8D%E5%BF%83%E4%BB%8E%E7%89%A9%E7%90%86%E5%88%B6%E7%A8%8B%E8%BD%AC%E5%90%91%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%A2%84%E7%A4%BA%E7%9D%80%E5%8D%8A%E5%AF%BC%E4%BD%93%E6%80%A7%E8%83%BD%E6%BC%94%E8%BF%9B%E8%BF%9B%E5%85%A5%E2%80%9C%E5%85%A8%E6%A0%88%E5%8D%8F%E5%90%8C%E2%80%9D%E7%9A%84%E6%96%B0%E8%8C%83%E5%BC%8F%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E5%A4%9A%E5%B1%82%E9%80%BB%E8%BE%91%E6%8A%98%E5%8F%A0%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4%E5%85%88%E8%BF%9B%E5%88%B6%E7%A8%8B%E7%93%B6%E9%A2%88%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260527104003644-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">超越摩尔的“韬定律”：华为如何以架构设计重构半导体演进坐标系</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>面对先进制程的物理极限与外部制裁，华为通过提出“韬（τ）定律”，将半导体性能演进的核心指标从“几何微缩”转向“时间常数（τ）缩微”。这一范式转移不仅是设计层面的创新，更是一场意在通过全栈软硬协同，在成熟工艺上实现等效先进制程性能的系统性战略突围。</p></blockquote>
+<p>在半导体行业统治半个世纪的“摩尔定律”，正面临物理极限与经济效益的双重绞杀。当晶体管尺寸逼近原子量级，漏电效应与指数级飙升的制造成本让“几何缩微”难以为继。在这一背景下，华为于ISCAS 2026提出的“韬（τ）定律”，不仅是对摩尔定律的补充，更是一次极具颠覆性的坐标系平移。</p>
+<h3 id="技术原理与创新点解析从几何到时间的维度转换">技术原理与创新点解析：从几何到时间的维度转换</h3>
+<p>“韬（τ）定律”的本质，在于将竞争焦点从“晶体管可以做得多小”切换为“信号传播时延（τ）可以缩得多短”。在电路物理学中，τ = R × C（电阻 × 电容），它是决定计算速度的决定性因子。过去，行业通过缩小尺寸来缩短连线从而降低τ；而“韬定律”则通过多层级协同优化，直接攻击RC延迟这一本质瓶颈。</p>
+<p>其中，“逻辑折叠（Logic Folding）”技术是该定律的核心利器。不同于传统平面芯片布局，逻辑折叠利用3D堆叠与自由逻辑设计，将逻辑电路从二维铺陈扩展至三层乃至多层。这不仅显著缩短了关键路径的物理走线长度，更在制程节点不变的前提下，实现了晶体管密度与能效的阶跃式提升。这种“设计补齐工艺”的思路，是将物理学中的“时间常数”工程化为半导体性能杠杆的创举。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="产业生态影响构建自主闭环的系统级芯片竞争">产业生态影响：构建自主闭环的“系统级芯片”竞争</h3>
+<p>“韬定律”的影响力不仅局限于单颗芯片的性能提升，它正在重塑华为的产业生态版图。通过打通“器件—电路—芯片—系统”的四层协同体系，华为实际上是在推动全球半导体竞争向“系统级性能”维度演进。</p>
+<p>这种全栈协同的能力，体现为：</p>
+<ul>
+<li><strong>软硬协同</strong>：通过内存语义统一总线（Unified Bus）与系统重构，将数据移动开销降至最低。</li>
+<li><strong>产业链牵引</strong>：该路径对先进封装、硅光互联、EDA工具提出了新的需求，为国内封装厂商（如长电科技等）提供了明确的技术演进锚点。</li>
+<li><strong>差异化竞争</strong>：在先进制程受限的环境下，华为利用自研EDA与设备补齐短板，试图通过架构创新抹平与国际顶尖制造工艺的代差。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+</ul>
+<h3 id="未来发展路径预测向系统即芯片迈进">未来发展路径预测：向“系统即芯片”迈进</h3>
+<p>未来3-5年，我们可能见证半导体产业进入“多维优化”时代。华为的路线图非常清晰：从2026年的逻辑折叠首发，到2031年实现1.4nm等效密度。这一路径的成功与否，取决于其在以下三个方面的执行力度：</p>
+<ol>
+<li><strong>混合键合良率的突破</strong>：逻辑折叠高度依赖TSV与混合键合技术，这对封装精度提出了极致要求。</li>
+<li><strong>EDA工具的支撑能力</strong>：跨层级的协同优化需要全新的EDA范式，这既是挑战，也是国产EDA软件超车的新切入点。</li>
+<li><strong>AI算力集群的系统一致性</strong>：随着“系统即单芯片（System-as-One-Chip）”概念的落地，未来比拼的将不再是单颗芯片的算力，而是谁能更高效地组织起大规模算力网络。<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> <sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+</ol>
+<p>“韬定律”本质上是一种防御性的技术哲学，但它通过重新定义性能指标，正在将“被动限制”转化为“主动创新”。它提醒行业：当物理缩放的红利殆尽，架构与设计的深度协同，将成为文明推进计算能力的下一座灯塔。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>“韬（τ）定律”有何影响？行业独家解读·21财经（2026/5/25）·检索日期2026/5/27&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>华为发布「韬（τ）定律」，麒麟芯片性能将大幅提升·品玩（2026/5/25）·检索日期2026/5/27&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>华为“麒麟2026”手机芯片今秋面世 首次采用逻辑折叠技术·CNMO科技消息（2026/5/25）·检索日期2026/5/27&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>何庭波万字论文，详述华为“韬定律”·观察者网（2026/5/25）·检索日期2026/5/27&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>华为何庭波：今年麒麟芯片首次实施逻辑折叠技术，性能将大幅提升·观察者网（2026/5/25）·检索日期2026/5/27&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%8D%8E%E4%B8%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">华为</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9F%AC%E5%AE%9A%E5%BE%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">韬定律</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8D%8A%E5%AF%BC%E4%BD%93/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">半导体</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8A%AF%E7%89%87%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">芯片架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%80%BB%E8%BE%91%E6%8A%98%E5%8F%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">逻辑折叠</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术创新</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20250618002005001-0/">任正非的“无心之言”：华为长局中的中国AI芯未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260518174003832-2/">咽喉处的金矿：澜起科技与AI时代的“流量税”逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/asicai-20260518084003983-0/">算力范式转移：从“军备竞赛”到“效率革命”，ASIC如何重构AI经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260514141003475-2/">日进十亿的幕后逻辑：台积电如何以“技术垄断”重塑全球算力生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/10ai-20260308181007488-0/">清华毕业生“去向报告”刷屏：出国率跌破10%，华为字节赢麻了，AI才是唯一真神？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/jared-palmergithubai-20251204204012665-0/">Jared Palmer：重塑GitHub，一场以AI为核心的开发者“再出发”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/xllmai-infra-20251202161005707-2/">悬崖边的抉择：刘童璇与xLLM的国产AI Infra“破冰”之旅</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251114081005345-0/">AI隐私卷到新高度：苹果“老司机”带路，谷歌华为“集体抄作业”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cloudmatrix-384ai-20251027221010922-1/">华为CloudMatrix 384：重构AI算力范式，国产替代加速下的系统级效率革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250929171003958-4/">华为&#34;摊牌了&#34;：AI全栈开源，芯片三年路线图，这波“王炸”要颠覆谁？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250928194009913-1/">重塑算力版图：华为“超节点&#43;全栈开源”如何锻造AI时代的公共事业与生态韧性</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-cwmai-20250925211008792-0/">Meta CWM：代码世界模型开启软件开发新范式，AI迈向“像程序员一样思考”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250925174005100-1/">华为“万芯归一”：超节点计算重塑AI算力基础设施的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-50--20250919101004896-0/">硅谷的联姻：英伟达的 $50 亿，英特尔的“救赎”，以及华盛顿的算盘</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250918171003805-0/">超越硅基：华为“超节点”战略重塑AI算力地缘与生态新范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
