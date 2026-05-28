@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Agentic AI 倒逼架构重构：CPU 如何从“边缘辅助”重回算力舞台中央 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="文章探讨了 Agentic AI 负载如何改变算力需求，分析了华为通过昇腾超节点与鲲鹏通用算力的深度协同，将 CPU 重新置于系统调度核心，并预判了异构融合操作系统与智能体原生记忆将成为未来 IT 基础设施的演进关键。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/agentic-ai-cpu--20260528144008574-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/agentic-ai-cpu--20260528144008574-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Agentic AI 倒逼架构重构：CPU 如何从“边缘辅助”重回算力舞台中央">
+  <meta property="og:description" content="文章探讨了 Agentic AI 负载如何改变算力需求，分析了华为通过昇腾超节点与鲲鹏通用算力的深度协同，将 CPU 重新置于系统调度核心，并预判了异构融合操作系统与智能体原生记忆将成为未来 IT 基础设施的演进关键。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-28T14:40:08+08:00">
+    <meta property="article:modified_time" content="2026-05-28T14:40:08+08:00">
+    <meta property="article:tag" content="Agentic AI">
+    <meta property="article:tag" content="算力重构">
+    <meta property="article:tag" content="鲲鹏昇腾">
+    <meta property="article:tag" content="异构计算">
+    <meta property="article:tag" content="操作系统演进">
+
+  <meta itemprop="name" content="Agentic AI 倒逼架构重构：CPU 如何从“边缘辅助”重回算力舞台中央">
+  <meta itemprop="description" content="文章探讨了 Agentic AI 负载如何改变算力需求，分析了华为通过昇腾超节点与鲲鹏通用算力的深度协同，将 CPU 重新置于系统调度核心，并预判了异构融合操作系统与智能体原生记忆将成为未来 IT 基础设施的演进关键。">
+  <meta itemprop="datePublished" content="2026-05-28T14:40:08+08:00">
+  <meta itemprop="dateModified" content="2026-05-28T14:40:08+08:00">
+  <meta itemprop="wordCount" content="142">
+  <meta itemprop="keywords" content="Agentic AI,算力重构,鲲鹏昇腾,异构计算,操作系统演进">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Agentic AI 倒逼架构重构：CPU 如何从“边缘辅助”重回算力舞台中央">
+  <meta name="twitter:description" content="文章探讨了 Agentic AI 负载如何改变算力需求，分析了华为通过昇腾超节点与鲲鹏通用算力的深度协同，将 CPU 重新置于系统调度核心，并预判了异构融合操作系统与智能体原生记忆将成为未来 IT 基础设施的演进关键。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-28_14-30-28.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-28 14:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Agentic&amp;#43;AI&amp;#43;%E5%80%92%E9%80%BC%E6%9E%B6%E6%9E%84%E9%87%8D%E6%9E%84%EF%BC%9ACPU&amp;#43;%E5%A6%82%E4%BD%95%E4%BB%8E%E2%80%9C%E8%BE%B9%E7%BC%98%E8%BE%85%E5%8A%A9%E2%80%9D%E9%87%8D%E5%9B%9E%E7%AE%97%E5%8A%9B%E8%88%9E%E5%8F%B0%E4%B8%AD%E5%A4%AE%20-%20%E6%96%87%E7%AB%A0%E6%8E%A2%E8%AE%A8%E4%BA%86&amp;#43;Agentic&amp;#43;AI&amp;#43;%E8%B4%9F%E8%BD%BD%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%AE%97%E5%8A%9B%E9%9C%80%E6%B1%82%EF%BC%8C%E5%88%86%E6%9E%90%E4%BA%86%E5%8D%8E%E4%B8%BA%E9%80%9A%E8%BF%87%E6%98%87%E8%85%BE%E8%B6%85%E8%8A%82%E7%82%B9%E4%B8%8E%E9%B2%B2%E9%B9%8F%E9%80%9A%E7%94%A8%E7%AE%97%E5%8A%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%8D%8F%E5%90%8C%EF%BC%8C%E5%B0%86&amp;#43;CPU&amp;#43;%E9%87%8D%E6%96%B0%E7%BD%AE%E4%BA%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E5%BA%A6%E6%A0%B8%E5%BF%83%EF%BC%8C%E5%B9%B6%E9%A2%84%E5%88%A4%E4%BA%86%E5%BC%82%E6%9E%84%E8%9E%8D%E5%90%88%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93%E5%8E%9F%E7%94%9F%E8%AE%B0%E5%BF%86%E5%B0%86%E6%88%90%E4%B8%BA%E6%9C%AA%E6%9D%A5&amp;#43;IT&amp;#43;%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%BC%94%E8%BF%9B%E5%85%B3%E9%94%AE%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagentic-ai-cpu--20260528144008574-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Agentic&amp;#43;AI&amp;#43;%E5%80%92%E9%80%BC%E6%9E%B6%E6%9E%84%E9%87%8D%E6%9E%84%EF%BC%9ACPU&amp;#43;%E5%A6%82%E4%BD%95%E4%BB%8E%E2%80%9C%E8%BE%B9%E7%BC%98%E8%BE%85%E5%8A%A9%E2%80%9D%E9%87%8D%E5%9B%9E%E7%AE%97%E5%8A%9B%E8%88%9E%E5%8F%B0%E4%B8%AD%E5%A4%AE%20-%20%E6%96%87%E7%AB%A0%E6%8E%A2%E8%AE%A8%E4%BA%86&amp;#43;Agentic&amp;#43;AI&amp;#43;%E8%B4%9F%E8%BD%BD%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%AE%97%E5%8A%9B%E9%9C%80%E6%B1%82%EF%BC%8C%E5%88%86%E6%9E%90%E4%BA%86%E5%8D%8E%E4%B8%BA%E9%80%9A%E8%BF%87%E6%98%87%E8%85%BE%E8%B6%85%E8%8A%82%E7%82%B9%E4%B8%8E%E9%B2%B2%E9%B9%8F%E9%80%9A%E7%94%A8%E7%AE%97%E5%8A%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%8D%8F%E5%90%8C%EF%BC%8C%E5%B0%86&amp;#43;CPU&amp;#43;%E9%87%8D%E6%96%B0%E7%BD%AE%E4%BA%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E5%BA%A6%E6%A0%B8%E5%BF%83%EF%BC%8C%E5%B9%B6%E9%A2%84%E5%88%A4%E4%BA%86%E5%BC%82%E6%9E%84%E8%9E%8D%E5%90%88%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93%E5%8E%9F%E7%94%9F%E8%AE%B0%E5%BF%86%E5%B0%86%E6%88%90%E4%B8%BA%E6%9C%AA%E6%9D%A5&amp;#43;IT&amp;#43;%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%BC%94%E8%BF%9B%E5%85%B3%E9%94%AE%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagentic-ai-cpu--20260528144008574-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Agentic AI 倒逼架构重构：CPU 如何从“边缘辅助”重回算力舞台中央</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Agentic AI 负载的复杂性与多变性正彻底重塑算力底座，将 CPU 从单纯的辅助角色推向系统调度的核心，促使业界从 GPU 单点突破转向“CPU+GPU”的异构深度协同架构。</p></blockquote>
+<p>在人工智能发展的过去几年中，算力的叙事一直被 GPU 和高带宽显存所统治。然而，随着 AI 从简单的“输入-输出”模式进化为具备规划、记忆与工具调用能力的 Agentic AI（代理式人工智能），这种单一维度的算力范式正在遭遇前所未有的瓶颈。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="技术原理与架构重构agentic-ai-的算力暗礁">技术原理与架构重构：Agentic AI 的算力暗礁</h3>
+<p>Agentic AI 与传统大模型推理最大的区别在于其工作负载的特征：频繁的异步分支、复杂的任务编排、长期的记忆检索以及动态的工具交互。这些任务对于高密度并行计算的 GPU 来说，往往意味着高昂的上下文切换成本和碎片化的调度阻塞。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>昇腾超节点架构的出现，正试图通过“芯片架构、互联架构和系统架构”的协同来消解这些矛盾。特别是昇腾950芯片引入的 SIMD 与 SIMT 混合编程能力，标志着 AI 芯片设计已从单纯追求吞吐量，转向兼顾复杂逻辑控制能力的平衡之道。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>更深刻的变革在于内存语义的统一。通过全域内存统一编址，昇腾超节点试图消除 CPU 与 NPU 之间物理界限，实现 KV Cache 的全局共享。这不仅是硬件层面的提速，更是对“计算-存储”存取模式的根本性重构。</p>
+<h3 id="角色易位cpu-回归系统控制核心">角色易位：CPU 回归系统控制核心</h3>
+<p>在 Agentic AI 的语境下，CPU 的重要性已不可同日而语。据行业数据显示，在复杂的 Agent 工作负载中，CPU 与 GPU 的算力配比正迅速向 1:1 甚至更高演进。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>鲲鹏架构所代表的通用计算底座，正在承担起 Agent 生命周期的核心职责：</p>
+<ul>
+<li><strong>任务编排与调度</strong>：处理 Agent 的异步任务分支与多轮对话状态。</li>
+<li><strong>Agent 记忆层构建</strong>：通过 DDR、SSD 与 HBM 的分层协同，管理指数级增长的上下文。</li>
+<li><strong>确定性执行环境</strong>：利用沙箱与安全隔离技术，确保 Agent 在大规模试错（Agentic Scaling）过程中的安全性与可回溯性。</li>
+</ul>
+<p>正如华为 ICT 操作系统副首席科学家胡欣蔚所指出的，操作系统正面临从“管理硬件资源”向“调度智能体完成业务目标”的范式转移，即从进程到“思程”（Thought Process）的抽象演进。</p>
+<h3 id="产业生态影响评估从闭源依赖到协同创新">产业生态影响评估：从闭源依赖到协同创新</h3>
+<p>中国 AI 产业正在经历一场深层次的结构性蜕变。DeepSeek 等国产顶级模型的适配不仅证明了国产芯片在主流开源生态中的性能表现，更折射出底层软硬件生态的成熟。CANN 的全面开源与分层解耦，意味着中国计算产业已从简单的“补短板”进入到“系统级创新”阶段。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>这种基于鲲鹏与昇腾的“三层智能体系”，不仅是华为的战略选择，也代表了全球 AI 基础设施演进的共同趋势：在软硬一体化设计中，通过异构融合操作系统消除算力孤岛，使大规模智能体的运行成本更可控、部署更经济。</p>
+<h3 id="未来发展路径预测向自主智能基础设施迈进">未来发展路径预测：向“自主智能”基础设施迈进</h3>
+<p>未来 3-5 年，我们将目睹以下演进：</p>
+<ol>
+<li><strong>软硬协同的颗粒度细化</strong>：计算与通信的边界进一步模糊，编程范式将全面转向面向任务的异构调用。</li>
+<li><strong>记忆层级化与原生化</strong>：操作系统将原生支持 Agent 的记忆管理，使其不再是外挂式的 RAG，而是系统内存管理的一部分。</li>
+<li><strong>Agentic Scaling 的工业标准确立</strong>：随着沙箱与安全机制的标准化，智能体将在企业 IT 基础设施中获得与传统应用同等的运行权重。</li>
+</ol>
+<p><strong>结论</strong>：Agentic AI 并非仅仅是模型的迭代，它是一场基础设施的深度重构。当计算力从加速器扩散至整个异构系统，CPU 的重回舞台中央，标志着 AI 正式从“实验室的数学模型”进化为“生产线上的数字员工”。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://m.c114.com.cn/w126-1310927.html">鲲鹏昇腾开发者大会2026：携手开发者共筑Agentic AI时代算力底座</a> · C114通信网 · 2026/5/24 · 检索日期2026/5/28&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.cs.com.cn/ssgs/01/2026/05/24/detail_2026052410013852.html">昇腾、鲲鹏多项创新技术发布 涵盖鲲鹏与昇腾超节点架构创新</a> · 中证网 · 2026/5/24 · 检索日期2026/5/28&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://m.sohu.com/a/1026822854_120988576">Agentic AI时代加速到来！华为携手开发者共筑国产算力底座</a> · 搜狐网 · 2026/5/24 · 检索日期2026/5/28&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://finance.sina.cn/stock/jdts/2026-05-25/detail-inhzchzf5027043.d.html">鲲鹏昇腾开发者大会2026在京举办共筑Agentic AI时代算力底座</a> · 新浪财经 · 2026/5/25 · 检索日期2026/5/28&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://h5.ifeng.com/c/vivoArticle/v002S--jFWvD6EpcQq5n-_PY----5fhy-_hd--RpTzJ4SC-_vXZWJ0__?isNews=1&amp;showComments=0">鲲鹏昇腾开发者大会2026：携手开发者共筑Agentic AI时代算力底座</a> · 凤凰网 · 2026/5/24 · 检索日期2026/5/28&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/agentic-ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Agentic AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E9%87%8D%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力重构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%B2%B2%E9%B9%8F%E6%98%87%E8%85%BE/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">鲲鹏昇腾</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%82%E6%9E%84%E8%AE%A1%E7%AE%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">异构计算</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%BC%94%E8%BF%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">操作系统演进</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/aipc-20260526114003387-1/">重构控制台：AI时代下的PC为何从“边缘”回归“枢纽”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519191003248-1/">AI硬件的“终端时刻”：从算力冗余到感官重塑的进化论</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-03-17-ai-2026-03-17-/">AI早报 2026年03月17日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/langchain-ai-agent--20260317061007401-0/">LangChain 联手英伟达：给 AI 智能体发“工牌”，企业级 Agent 终于要告别“草台班子”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-03-04-03-04-ai-/">03-04日报|大拆解时代：当开源卸掉底裤，大厂失去灵魂，AI接管太阳</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/amd-20260304184008544-0/">股权换主权：AMD的“异构”豪赌与金牌枷锁</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentfeeling-aianthropicopenai-20260211164005533-1/">谁说中国Agent只会聊天？Feeling AI反超Anthropic，在OpenAI家门口“踢馆”成功！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/5kris-marszalek60ai-20260209204005844-1/">砸5亿买个域名！币圈狠人Kris Marszalek：别急着笑我，60秒送你一个AI贾维斯</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopencloudos-20251212171009032-2/">打破AI算力碎片化桎梏：OpenCloudOS如何以“智能基座”重塑未来基础设施范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aios-20251210194008899-1/">从“一键去AI”看操作系统未来：用户自主权与智能体OS的深层博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251208231009117-0/">从沙盒到动脉：企业AI步入深度集成与自主智能体时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20251204224008500-0/">亚马逊云科技的“减法”哲学：重构智能体工程，加速“Agent原生”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/reinvent-2025ai-league-20251202181005191-3/">re:Invent 2025首日爆料：AI League玩出花，亚马逊“上天”搞基建，开发者直呼“爷青回”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20251202161005717-3/">亚马逊云科技扔出“王炸”！Agent助你告别“技术老破小”，代码瞬间“逆生长”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagentic-20251201131006777-0/">AI驱动营销范式跃迁：Agentic智能体重构全球商业加速器</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
