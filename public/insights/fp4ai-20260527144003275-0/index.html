@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越随机性的迷思：FP4训练突破如何重塑AI算力经济学 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本研究揭示了FP4训练不稳定的本质是结构性微缩放误差，而非随机性缺失。通过采用确定性变换策略，研究在AMD MI355X上跑通了全流程预训练，为进一步降低AI算力成本、推动低位宽训练范式提供了关键的技术路径。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/fp4ai-20260527144003275-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/fp4ai-20260527144003275-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越随机性的迷思：FP4训练突破如何重塑AI算力经济学">
+  <meta property="og:description" content="本研究揭示了FP4训练不稳定的本质是结构性微缩放误差，而非随机性缺失。通过采用确定性变换策略，研究在AMD MI355X上跑通了全流程预训练，为进一步降低AI算力成本、推动低位宽训练范式提供了关键的技术路径。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-27T14:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-27T14:40:03+08:00">
+    <meta property="article:tag" content="AI芯片">
+    <meta property="article:tag" content="深度学习优化">
+    <meta property="article:tag" content="MXFP4">
+    <meta property="article:tag" content="算力经济学">
+    <meta property="article:tag" content="大模型训练">
+
+  <meta itemprop="name" content="超越随机性的迷思：FP4训练突破如何重塑AI算力经济学">
+  <meta itemprop="description" content="本研究揭示了FP4训练不稳定的本质是结构性微缩放误差，而非随机性缺失。通过采用确定性变换策略，研究在AMD MI355X上跑通了全流程预训练，为进一步降低AI算力成本、推动低位宽训练范式提供了关键的技术路径。">
+  <meta itemprop="datePublished" content="2026-05-27T14:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-27T14:40:03+08:00">
+  <meta itemprop="wordCount" content="23">
+  <meta itemprop="keywords" content="AI芯片,深度学习优化,MXFP4,算力经济学,大模型训练">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越随机性的迷思：FP4训练突破如何重塑AI算力经济学">
+  <meta name="twitter:description" content="本研究揭示了FP4训练不稳定的本质是结构性微缩放误差，而非随机性缺失。通过采用确定性变换策略，研究在AMD MI355X上跑通了全流程预训练，为进一步降低AI算力成本、推动低位宽训练范式提供了关键的技术路径。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-27_14-30-21.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-27 14:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%85%E8%B6%8A%E9%9A%8F%E6%9C%BA%E6%80%A7%E7%9A%84%E8%BF%B7%E6%80%9D%EF%BC%9AFP4%E8%AE%AD%E7%BB%83%E7%AA%81%E7%A0%B4%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E7%AE%97%E5%8A%9B%E7%BB%8F%E6%B5%8E%E5%AD%A6%20-%20%E6%9C%AC%E7%A0%94%E7%A9%B6%E6%8F%AD%E7%A4%BA%E4%BA%86FP4%E8%AE%AD%E7%BB%83%E4%B8%8D%E7%A8%B3%E5%AE%9A%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E7%BB%93%E6%9E%84%E6%80%A7%E5%BE%AE%E7%BC%A9%E6%94%BE%E8%AF%AF%E5%B7%AE%EF%BC%8C%E8%80%8C%E9%9D%9E%E9%9A%8F%E6%9C%BA%E6%80%A7%E7%BC%BA%E5%A4%B1%E3%80%82%E9%80%9A%E8%BF%87%E9%87%87%E7%94%A8%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8F%98%E6%8D%A2%E7%AD%96%E7%95%A5%EF%BC%8C%E7%A0%94%E7%A9%B6%E5%9C%A8AMD&amp;#43;MI355X%E4%B8%8A%E8%B7%91%E9%80%9A%E4%BA%86%E5%85%A8%E6%B5%81%E7%A8%8B%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%8C%E4%B8%BA%E8%BF%9B%E4%B8%80%E6%AD%A5%E9%99%8D%E4%BD%8EAI%E7%AE%97%E5%8A%9B%E6%88%90%E6%9C%AC%E3%80%81%E6%8E%A8%E5%8A%A8%E4%BD%8E%E4%BD%8D%E5%AE%BD%E8%AE%AD%E7%BB%83%E8%8C%83%E5%BC%8F%E6%8F%90%E4%BE%9B%E4%BA%86%E5%85%B3%E9%94%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E8%B7%AF%E5%BE%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffp4ai-20260527144003275-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%85%E8%B6%8A%E9%9A%8F%E6%9C%BA%E6%80%A7%E7%9A%84%E8%BF%B7%E6%80%9D%EF%BC%9AFP4%E8%AE%AD%E7%BB%83%E7%AA%81%E7%A0%B4%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91AI%E7%AE%97%E5%8A%9B%E7%BB%8F%E6%B5%8E%E5%AD%A6%20-%20%E6%9C%AC%E7%A0%94%E7%A9%B6%E6%8F%AD%E7%A4%BA%E4%BA%86FP4%E8%AE%AD%E7%BB%83%E4%B8%8D%E7%A8%B3%E5%AE%9A%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E7%BB%93%E6%9E%84%E6%80%A7%E5%BE%AE%E7%BC%A9%E6%94%BE%E8%AF%AF%E5%B7%AE%EF%BC%8C%E8%80%8C%E9%9D%9E%E9%9A%8F%E6%9C%BA%E6%80%A7%E7%BC%BA%E5%A4%B1%E3%80%82%E9%80%9A%E8%BF%87%E9%87%87%E7%94%A8%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8F%98%E6%8D%A2%E7%AD%96%E7%95%A5%EF%BC%8C%E7%A0%94%E7%A9%B6%E5%9C%A8AMD&amp;#43;MI355X%E4%B8%8A%E8%B7%91%E9%80%9A%E4%BA%86%E5%85%A8%E6%B5%81%E7%A8%8B%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%8C%E4%B8%BA%E8%BF%9B%E4%B8%80%E6%AD%A5%E9%99%8D%E4%BD%8EAI%E7%AE%97%E5%8A%9B%E6%88%90%E6%9C%AC%E3%80%81%E6%8E%A8%E5%8A%A8%E4%BD%8E%E4%BD%8D%E5%AE%BD%E8%AE%AD%E7%BB%83%E8%8C%83%E5%BC%8F%E6%8F%90%E4%BE%9B%E4%BA%86%E5%85%B3%E9%94%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E8%B7%AF%E5%BE%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffp4ai-20260527144003275-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">超越随机性的迷思：FP4训练突破如何重塑AI算力经济学</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>AMD与宾夕法尼亚州立大学的最新研究证实，FP4训练不稳定的根源在于结构性微缩放误差而非随机性不足，通过确定性变换替代随机化，成功实现了全流程原生FP4预训练，预示着大模型算力成本将迎来新一轮的量级压缩。</p></blockquote>
+<h3 id="技术诊断的范式转移">技术诊断的范式转移</h3>
+<p>长期以来，大模型训练精度从FP16到FP8的演进被视为理所当然的性能红利，但当技术触碰FP4的边界时，行业陷入了“混乱”。此前的主流观点认为，低精度带来的剧烈抖动是因为舍入噪声的积累，因此业界寄希望于通过随机舍入或随机Hadamard旋转等“统计平滑”手段来拯救收敛性。</p>
+<p>然而，这篇发表于2026年5月的论文提供了一个极具反直觉的洞察：<strong>随机性并非“良药”，反而是致病源。</strong> 研究团队通过对Transformer线性层的前向传播、激活梯度（Dgrad）和权重梯度（Wgrad）进行解耦实验，发现Wgrad是精度崩塌的“罪魁祸首”。在Wgrad路径中，MXFP4微缩放引入的结构化误差，若配合每步变化的随机策略，会产生非线性的误差累积放大。确定性Hadamard旋转之所以有效，是因为它提供了一种可预测的、静态的变换模式，使得量化误差保持在模型可修正的线性范围内。</p>
+<h3 id="算力效率的二次解耦">算力效率的“二次解耦”</h3>
+<p>这一发现不仅是算法层面的修复，更具备深远的商业敏锐度。实验数据显示，在AMD Instinct MI355X硬件上，通过确定性稳定化，端到端训练性能实现了9-10%的实际加速。更重要的商业信号在于：</p>
+<ul>
+<li><strong>硬件效能的完全释放</strong>：此前的硬件（如Blackwell架构）虽宣称支持FP4，但多被局限于推理侧。此次实验证明，MI355X的原生FP4算力可直接转化为训练吞吐量，这意味着数据中心的计算密度在不增加电力消耗的前提下，获得了理论上的翻倍潜力。</li>
+<li><strong>开放标准的胜利</strong>：MXFP4作为OCP（开放计算项目）标准的一部分，此次验证展示了跨生态的可移植性。这打破了特定厂商的“闭源算法”垄断，为中小规模企业利用标准硬件进行高效预训练提供了路径。</li>
+</ul>
+<h3 id="产业格局的深层连锁反应">产业格局的深层连锁反应</h3>
+<p>从大模型生态来看，这一技术的成熟将引发三个层次的变革：</p>
+<ol>
+<li><strong>训练成本的边际递减</strong>：继DeepSeek-V3以FP8压低成本后，FP4的规模化应用将进一步降低训练门槛。这种成本的下降不仅仅是数字上的，更意味着AI开发过程中的“试错成本”大幅降低，从而刺激更多企业进行长尾领域的小参数模型自研。</li>
+<li><strong>梯度路径的哲学思辨</strong>：算法的进化正在从“海量数据+暴力计算”向“计算结构优化”转向。当技术能够通过数学变换（如确定性旋转）抵消硬件精度损失时，这意味着我们正在学会如何用更低的物质熵，换取更高的逻辑熵。</li>
+<li><strong>算力供需关系再平衡</strong>：随着训练效率提升，现有算力储备的“寿命”被延长，缓解了当前算力资源紧张的局面。同时，这也对上游芯片厂商提出了更高的要求——即如何在不牺牲稳定性的前提下，进一步缩减数据位宽。</li>
+</ol>
+<h3 id="未来发展路径预测">未来发展路径预测</h3>
+<p>未来3-5年，我们预计大模型训练将进入“位宽下钻”时代。FP4不会是终点，甚至FP2或定制化的块浮点格式（Block Floating Point）也将进入视野。但正如研究者所警告的，FP4训练的行为具备高度的“设置依赖性”——针对不同的模型架构（如MoE与Dense架构差异）和数据集，稳定化策略可能需要动态调优。</p>
+<p>我们正站在一个临界点：AI硬件性能的增长速度已无法单靠晶体管的物理堆砌，必须依赖软件与算法对于低精度计算结构的精细重构。这场关于“FP4稳定性”的争论，实际上是计算科学在应对AI规模化浪潮时，对于“精度与效率”这一永恒矛盾的最新阶段总结。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%8A%AF%E7%89%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI芯片</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">深度学习优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mxfp4/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MXFP4</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E7%BB%8F%E6%B5%8E%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力经济学</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型训练</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260527091003299-2/">大模型的价格博弈：从“烧钱买增长”到“算力经济学”的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/adam-20260525194003166-0/">超越Adam：在算法的“崎岖地形”中重塑大模型的进化逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260525084003401-0/">萨姆·奥特曼的“信用赌局”：当AI造芯梦想撞上冷酷的资本算术</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260522154003513-0/">超越摩尔定律的视觉重构：AI摄像头如何从“被动监视”进化为物理世界的“实时映射”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aibtai-20260521224006555-0/">买得起AI显卡，买不起新手机？BT老总警告：AI狂潮正在“吃掉”你的内存芯片</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-20260519111003807-3/">DeepSeek的“去天才化”逻辑：一种比摩尔定律更具破坏力的工程主义哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebrasopenaiai-20260518194008682-1/">算力“赎身契”：Cerebras与OpenAI的晶圆赌局如何重塑AI推理经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/token-20260515211003597-0/">超越算力堆叠：从“Token叠加”看大模型预训练的“粗读”范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebras-20260515014003696-1/">硅谷的“造神”运动：Cerebras的豪赌与资本的贪婪</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebras-20260514141003475-1/">硅基王朝的「岁贡」：Cerebras如何以赎身之礼换取神坛入场券</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260514111003861-0/">黄仁勋的阿拉斯加时刻：硅谷算力霸主的“外交”困局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260512154003947-3/">超越“记忆”的陷阱：重构大模型推理微调的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/transformertpuai-20260512144003934-1/">后Transformer时代的算力重构：谷歌第八代TPU如何通过“训推解耦”定义AI代理基建</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/610sk9-20260510094003464-1/">年薪610万、工服成相亲神器：SK海力士的9倍狂飙是“封神”还是“赌命”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-04-16-ai-2026-04-16-/">AI早报 2026年04月16日</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

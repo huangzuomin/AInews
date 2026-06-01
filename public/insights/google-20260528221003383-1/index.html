@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深入分析了谷歌AI搜索出现的基础拼写错误，指出这是大语言模型Token化处理机制的内在局限。文章探讨了技术架构如何限制AI的认知能力，并从商业信誉与未来技术演进的角度，强调了AI从单纯文本生成向具备自我认知与工具调用能力的智能代理转型的必要性。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/google-20260528221003383-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/google-20260528221003383-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界">
+  <meta property="og:description" content="本文深入分析了谷歌AI搜索出现的基础拼写错误，指出这是大语言模型Token化处理机制的内在局限。文章探讨了技术架构如何限制AI的认知能力，并从商业信誉与未来技术演进的角度，强调了AI从单纯文本生成向具备自我认知与工具调用能力的智能代理转型的必要性。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-28T22:10:03+08:00">
+    <meta property="article:modified_time" content="2026-05-28T22:10:03+08:00">
+    <meta property="article:tag" content="大语言模型">
+    <meta property="article:tag" content="Transformer架构">
+    <meta property="article:tag" content="AI算法缺陷">
+    <meta property="article:tag" content="搜索产业变革">
+    <meta property="article:tag" content="智能代理">
+    <meta property="article:tag" content="认知科学">
+
+  <meta itemprop="name" content="当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界">
+  <meta itemprop="description" content="本文深入分析了谷歌AI搜索出现的基础拼写错误，指出这是大语言模型Token化处理机制的内在局限。文章探讨了技术架构如何限制AI的认知能力，并从商业信誉与未来技术演进的角度，强调了AI从单纯文本生成向具备自我认知与工具调用能力的智能代理转型的必要性。">
+  <meta itemprop="datePublished" content="2026-05-28T22:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-28T22:10:03+08:00">
+  <meta itemprop="wordCount" content="69">
+  <meta itemprop="keywords" content="大语言模型,Transformer架构,AI算法缺陷,搜索产业变革,智能代理,认知科学">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界">
+  <meta name="twitter:description" content="本文深入分析了谷歌AI搜索出现的基础拼写错误，指出这是大语言模型Token化处理机制的内在局限。文章探讨了技术架构如何限制AI的认知能力，并从商业信誉与未来技术演进的角度，强调了AI从单纯文本生成向具备自我认知与工具调用能力的智能代理转型的必要性。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-28_22-00-57.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-28 22:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%BD%93%E7%AE%97%E6%B3%95%E5%A4%B1%E8%AF%AD%EF%BC%9A%E4%BB%8E%E2%80%9C%E8%B0%B7%E6%AD%8C%E6%8B%BC%E4%B8%8D%E5%87%BAGoogle%E2%80%9D%E7%9C%8B%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%A4%E7%9F%A5%E7%9A%84%E6%B7%B1%E5%B1%82%E8%BE%B9%E7%95%8C%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E4%BA%86%E8%B0%B7%E6%AD%8CAI%E6%90%9C%E7%B4%A2%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8B%BC%E5%86%99%E9%94%99%E8%AF%AF%EF%BC%8C%E6%8C%87%E5%87%BA%E8%BF%99%E6%98%AF%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8BToken%E5%8C%96%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E7%9A%84%E5%86%85%E5%9C%A8%E5%B1%80%E9%99%90%E3%80%82%E6%96%87%E7%AB%A0%E6%8E%A2%E8%AE%A8%E4%BA%86%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%99%90%E5%88%B6AI%E7%9A%84%E8%AE%A4%E7%9F%A5%E8%83%BD%E5%8A%9B%EF%BC%8C%E5%B9%B6%E4%BB%8E%E5%95%86%E4%B8%9A%E4%BF%A1%E8%AA%89%E4%B8%8E%E6%9C%AA%E6%9D%A5%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E7%9A%84%E8%A7%92%E5%BA%A6%EF%BC%8C%E5%BC%BA%E8%B0%83%E4%BA%86AI%E4%BB%8E%E5%8D%95%E7%BA%AF%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%90%91%E5%85%B7%E5%A4%87%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5%E4%B8%8E%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E8%83%BD%E5%8A%9B%E7%9A%84%E6%99%BA%E8%83%BD%E4%BB%A3%E7%90%86%E8%BD%AC%E5%9E%8B%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgoogle-20260528221003383-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%BD%93%E7%AE%97%E6%B3%95%E5%A4%B1%E8%AF%AD%EF%BC%9A%E4%BB%8E%E2%80%9C%E8%B0%B7%E6%AD%8C%E6%8B%BC%E4%B8%8D%E5%87%BAGoogle%E2%80%9D%E7%9C%8B%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%A4%E7%9F%A5%E7%9A%84%E6%B7%B1%E5%B1%82%E8%BE%B9%E7%95%8C%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E4%BA%86%E8%B0%B7%E6%AD%8CAI%E6%90%9C%E7%B4%A2%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8B%BC%E5%86%99%E9%94%99%E8%AF%AF%EF%BC%8C%E6%8C%87%E5%87%BA%E8%BF%99%E6%98%AF%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8BToken%E5%8C%96%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E7%9A%84%E5%86%85%E5%9C%A8%E5%B1%80%E9%99%90%E3%80%82%E6%96%87%E7%AB%A0%E6%8E%A2%E8%AE%A8%E4%BA%86%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%99%90%E5%88%B6AI%E7%9A%84%E8%AE%A4%E7%9F%A5%E8%83%BD%E5%8A%9B%EF%BC%8C%E5%B9%B6%E4%BB%8E%E5%95%86%E4%B8%9A%E4%BF%A1%E8%AA%89%E4%B8%8E%E6%9C%AA%E6%9D%A5%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E7%9A%84%E8%A7%92%E5%BA%A6%EF%BC%8C%E5%BC%BA%E8%B0%83%E4%BA%86AI%E4%BB%8E%E5%8D%95%E7%BA%AF%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%90%91%E5%85%B7%E5%A4%87%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5%E4%B8%8E%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E8%83%BD%E5%8A%9B%E7%9A%84%E6%99%BA%E8%83%BD%E4%BB%A3%E7%90%86%E8%BD%AC%E5%9E%8B%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgoogle-20260528221003383-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌搜索AI拼写错误反映了当前大语言模型（LLM）基于Token而非字符处理语义的根本性架构缺陷。这一“认知参差”不仅挑战了搜索引擎作为权威信息源的信誉，更预示着未来AI架构必须在计算效率与感知深度之间寻找新的平衡点。</p></blockquote>
+<h3 id="从认知错位到系统性幻觉">从认知错位到系统性幻觉</h3>
+<p>近日，谷歌升级后的AI搜索功能因无法正确统计“Google”一词中的字母数量，在舆论场引发了广泛的嘲讽。然而，这并非简单的“AI犯蠢”，而是大模型底层运行机制的一次“公开处刑”。当AI将“Google”视为一个完整的Token（语义碎片）而非G-o-o-g-l-e的集合体时，它处理的本质是概率意义上的语言模式，而非人类逻辑下的物理符号排列。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这种现象被研究者称为“参差不齐的智能”（Jagged Intelligence）。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 大模型在处理高阶逻辑、代码编写时表现出的惊人天赋，与其在字母计数、空间几何判断等基础任务上的笨拙，形成了剧烈的反差。这种反直觉的智能分布，揭示了当前Transformer架构的一个深层真相：AI处理的是语言的“意象”，而非文字的“形状”。</p>
+<h3 id="架构的代价分词机制的囚徒困境">架构的代价：分词机制的囚徒困境</h3>
+<p>造成这一问题的核心，在于主流大模型依赖的“Tokenization（分词）”机制。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 为了提升运算效率，模型将文本切分为不同粒度的片段，这种压缩操作不可避免地导致了底层字符信息的丢失。正如人工智能研究者所指出的，要修复这一缺陷，最直接的手段是转向“字节级”模型，直接对底层字符进行序列处理。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>然而，商业世界有着残酷的算力账单。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 抛弃分词机制、直接处理字节意味着序列长度的指数级增长，这将带来惊人的计算开销。即便如Meta推出的Byte Latent Transformer（BLT）尝试通过动态分组优化效率，但在面对数千亿参数的生产级应用时，如何在“模拟人类阅读”与“维持计算边际成本”之间做出取舍，依然是摆在硅谷巨头面前的一道难题。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="搜索引擎的信誉重构">搜索引擎的信誉重构</h3>
+<p>这次翻车事件对谷歌而言，有着更为深远的商业隐忧。<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 搜索框作为过去25年互联网的“真理入口”，其核心价值在于准确性。当AI生成的概览（AI Overviews）取代了传统的链接列表，算法的每一次“幻觉”都会削弱用户对这一平台作为“权威来源”的信任。</p>
+<ul>
+<li><strong>技术边界的警示</strong>：当AI模型被嵌入高可信度场景时，其“概率性产出”与“确定性需求”之间的结构性矛盾会被迅速放大。</li>
+<li><strong>交互模式的重塑</strong>：从单纯的“搜索检索”向“智能对话”演进，迫使平台必须引入“认知自我知识”，即AI需学会识别自己的能力边界，并在必要时切换至计算器、代码解释器等外部确定性工具。<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<h3 id="未来展望走出语言陷阱">未来展望：走出“语言陷阱”</h3>
+<p>未来3-5年，大模型的发展路径将不再仅仅追求参数量的规模效应，而是向“多模态认知深度”转型。<sup id="fnref8:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 我们正目睹一种趋势：从单一的Transformer预测模型，转向具备规划能力、能够调用外部工具（Tool-use）的Agent架构。<sup id="fnref9:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>谷歌当前的尴尬，正是AI从“语言生成器”向“可靠智力代理”跨越过程中的阵痛。这不仅是一个拼写问题，更是一个关于如何让AI理解物理世界逻辑的哲学课题。如果AI连单词的构造都无法感知，那么它对复杂世界真实性的构建又该如何保证？这注定是一场技术与认知深度之间长期的博弈。</p>
+<h3 id="引用">引用</h3>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>为什么 AI 数不清 Strawberry 里有几个 r？Karpathy：我用表情包给你解释一下 · 机器之心 · 2026/5/28 · 2026/5/28&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref8:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref9:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>大型语言模型简介 · Google for Developers · 2026/5/28 · 2026/5/28&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Why Google’s AI can’t spell ‘Google’ (or anything else) · TechCrunch · 2026/5/28 · 2026/5/28&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Meta 、芝加哥大学等机构联合发布无Token大语言模型BLT · 知乎 · 2026/5/28 · 2026/5/28&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大语言模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/transformer%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Transformer架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%AE%97%E6%B3%95%E7%BC%BA%E9%99%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI算法缺陷</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%90%9C%E7%B4%A2%E4%BA%A7%E4%B8%9A%E5%8F%98%E9%9D%A9/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">搜索产业变革</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BB%A3%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能代理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">认知科学</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/naturetransformer-20251211191007418-0/">深层共鸣：Nature揭示大脑与Transformer的古老契合，重塑智能定义</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agiai-20251017194007665-0/">重塑AGI蓝图：本吉奥团队如何定义通用智能，并揭示当前AI的认知鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250619162004508-2/">AI效率悖论：大模型如何悄然重塑人类心智？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260527184003496-0/">不再追求“全天候清醒”：大模型“睡眠机制”带来的类脑智能进化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mnemisai-20260527094008195-3/">从“存储”到“认知”：微软Mnemis如何以建构主义重塑AI长记忆机制</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260526084003431-3/">AI原生游戏探索：深度评测《历史模拟器：崇祯》的逻辑内核与成本困境</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tokenagi-20260525164003294-0/">越过Token的囚笼：当“连续流”成为通往AGI的隐秘航道</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260525094003508-1/">当机器人学会“心智”：具脑磐石与世界模型的认知博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/google-io-2026-aigemini-20260521084003117-4/">Google I/O 2026 AI工具评测：Gemini新生态的“付费墙”与实用价值分析</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519181004534-1/">走出数字西西弗斯：持续学习如何打破大模型的“冻结”宿命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511091003884-3/">从“稳稳接住”到“失语”：AI生成能力背后的长尾幻觉与工程边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260415234004148-1/">别被它的“全能”骗了：揭秘AI的“锯齿状智能”，它将如何重塑你的职业？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-03-03-03-03-ai-/">03-03日报 | 赛博龙虾登顶，铁皮人冲刺，谁在为AI的“硬着陆”买单？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tabbit-ai--20260303181009066-0/">从“窗口”到“助手”：Tabbit AI 浏览器深度实测报告</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/promptai-20260223094006114-0/">起猛了，回老家发现我妈在研究Prompt，还要拿退休金“供养”AI教父？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

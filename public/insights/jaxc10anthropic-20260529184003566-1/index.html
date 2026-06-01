@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>马斯克突然“复古”：抛弃JAX用C语言训大模型，速度暴增10倍还顺带“敲打”Anthropic？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="马斯克把大模型训练堆栈从JAX换成C语言，提速10倍，顺便炫耀GB300和Colossus II超算。他把Colossus I算力租给Anthropic，但合同只签半年，随时可以收回——这波操作既秀了技术肌肉，又展现了算力霸权。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/jaxc10anthropic-20260529184003566-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/jaxc10anthropic-20260529184003566-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="马斯克突然“复古”：抛弃JAX用C语言训大模型，速度暴增10倍还顺带“敲打”Anthropic？">
+  <meta property="og:description" content="马斯克把大模型训练堆栈从JAX换成C语言，提速10倍，顺便炫耀GB300和Colossus II超算。他把Colossus I算力租给Anthropic，但合同只签半年，随时可以收回——这波操作既秀了技术肌肉，又展现了算力霸权。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-05-29T18:40:03+08:00">
+    <meta property="article:modified_time" content="2026-05-29T18:40:03+08:00">
+    <meta property="article:tag" content="C语言训练堆栈">
+    <meta property="article:tag" content="Colossus II">
+    <meta property="article:tag" content="算力租赁">
+    <meta property="article:tag" content="马斯克">
+    <meta property="article:tag" content="Grok 5">
+
+  <meta itemprop="name" content="马斯克突然“复古”：抛弃JAX用C语言训大模型，速度暴增10倍还顺带“敲打”Anthropic？">
+  <meta itemprop="description" content="马斯克把大模型训练堆栈从JAX换成C语言，提速10倍，顺便炫耀GB300和Colossus II超算。他把Colossus I算力租给Anthropic，但合同只签半年，随时可以收回——这波操作既秀了技术肌肉，又展现了算力霸权。">
+  <meta itemprop="datePublished" content="2026-05-29T18:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-05-29T18:40:03+08:00">
+  <meta itemprop="wordCount" content="71">
+  <meta itemprop="keywords" content="C语言训练堆栈,Colossus II,算力租赁,马斯克,Grok 5">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="马斯克突然“复古”：抛弃JAX用C语言训大模型，速度暴增10倍还顺带“敲打”Anthropic？">
+  <meta name="twitter:description" content="马斯克把大模型训练堆栈从JAX换成C语言，提速10倍，顺便炫耀GB300和Colossus II超算。他把Colossus I算力租给Anthropic，但合同只签半年，随时可以收回——这波操作既秀了技术肌肉，又展现了算力霸权。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-05-29_18-01-01.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-05-29 18:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E9%A9%AC%E6%96%AF%E5%85%8B%E7%AA%81%E7%84%B6%E2%80%9C%E5%A4%8D%E5%8F%A4%E2%80%9D%EF%BC%9A%E6%8A%9B%E5%BC%83JAX%E7%94%A8C%E8%AF%AD%E8%A8%80%E8%AE%AD%E5%A4%A7%E6%A8%A1%E5%9E%8B%EF%BC%8C%E9%80%9F%E5%BA%A6%E6%9A%B4%E5%A2%9E10%E5%80%8D%E8%BF%98%E9%A1%BA%E5%B8%A6%E2%80%9C%E6%95%B2%E6%89%93%E2%80%9DAnthropic%EF%BC%9F%20-%20%E9%A9%AC%E6%96%AF%E5%85%8B%E6%8A%8A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%A0%86%E6%A0%88%E4%BB%8EJAX%E6%8D%A2%E6%88%90C%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8F%90%E9%80%9F10%E5%80%8D%EF%BC%8C%E9%A1%BA%E4%BE%BF%E7%82%AB%E8%80%80GB300%E5%92%8CColossus&amp;#43;II%E8%B6%85%E7%AE%97%E3%80%82%E4%BB%96%E6%8A%8AColossus&amp;#43;I%E7%AE%97%E5%8A%9B%E7%A7%9F%E7%BB%99Anthropic%EF%BC%8C%E4%BD%86%E5%90%88%E5%90%8C%E5%8F%AA%E7%AD%BE%E5%8D%8A%E5%B9%B4%EF%BC%8C%E9%9A%8F%E6%97%B6%E5%8F%AF%E4%BB%A5%E6%94%B6%E5%9B%9E%E2%80%94%E2%80%94%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%E6%97%A2%E7%A7%80%E4%BA%86%E6%8A%80%E6%9C%AF%E8%82%8C%E8%82%89%EF%BC%8C%E5%8F%88%E5%B1%95%E7%8E%B0%E4%BA%86%E7%AE%97%E5%8A%9B%E9%9C%B8%E6%9D%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fjaxc10anthropic-20260529184003566-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E9%A9%AC%E6%96%AF%E5%85%8B%E7%AA%81%E7%84%B6%E2%80%9C%E5%A4%8D%E5%8F%A4%E2%80%9D%EF%BC%9A%E6%8A%9B%E5%BC%83JAX%E7%94%A8C%E8%AF%AD%E8%A8%80%E8%AE%AD%E5%A4%A7%E6%A8%A1%E5%9E%8B%EF%BC%8C%E9%80%9F%E5%BA%A6%E6%9A%B4%E5%A2%9E10%E5%80%8D%E8%BF%98%E9%A1%BA%E5%B8%A6%E2%80%9C%E6%95%B2%E6%89%93%E2%80%9DAnthropic%EF%BC%9F%20-%20%E9%A9%AC%E6%96%AF%E5%85%8B%E6%8A%8A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%A0%86%E6%A0%88%E4%BB%8EJAX%E6%8D%A2%E6%88%90C%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8F%90%E9%80%9F10%E5%80%8D%EF%BC%8C%E9%A1%BA%E4%BE%BF%E7%82%AB%E8%80%80GB300%E5%92%8CColossus&amp;#43;II%E8%B6%85%E7%AE%97%E3%80%82%E4%BB%96%E6%8A%8AColossus&amp;#43;I%E7%AE%97%E5%8A%9B%E7%A7%9F%E7%BB%99Anthropic%EF%BC%8C%E4%BD%86%E5%90%88%E5%90%8C%E5%8F%AA%E7%AD%BE%E5%8D%8A%E5%B9%B4%EF%BC%8C%E9%9A%8F%E6%97%B6%E5%8F%AF%E4%BB%A5%E6%94%B6%E5%9B%9E%E2%80%94%E2%80%94%E8%BF%99%E6%B3%A2%E6%93%8D%E4%BD%9C%E6%97%A2%E7%A7%80%E4%BA%86%E6%8A%80%E6%9C%AF%E8%82%8C%E8%82%89%EF%BC%8C%E5%8F%88%E5%B1%95%E7%8E%B0%E4%BA%86%E7%AE%97%E5%8A%9B%E9%9C%B8%E6%9D%83%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fjaxc10anthropic-20260529184003566-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">马斯克突然“复古”：抛弃JAX用C语言训大模型，速度暴增10倍还顺带“敲打”Anthropic？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>马斯克最近搞了个大新闻：SpaceX用C语言编写的新训练堆栈，直接把大模型训练速度拉高了一个数量级。与此同时，他一边炫耀自家的GB300，一边把Colossus II超算搞得跟“房东”似的——算力租赁只签半年合同，说收回就收回。Anthropic花大价钱租的算力，可能只是一张“临时入场券”。</p></blockquote>
+<hr>
+<p>如果你关注AI圈，最近肯定被一条消息刷屏了：<strong>马斯克居然带着SpaceX去玩C语言了</strong>。</p>
+<p>没错，就是那个被很多新生代程序员认为“古老”“底层”“写起来头疼”的C语言。正当全世界都在用Python、JAX、PyTorch堆叠大模型训练框架时，马斯克反手就是一波“复古风”——用C语言从头写了一个训练堆栈，而且效果炸裂：<strong>训练速度提升一个数量级</strong>。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>你可能要问：C语言凭什么能跑赢JAX？这不科学啊？</p>
+<p>别急，咱们慢慢聊。</p>
+<hr>
+<h3 id="技术大揭秘c语言凭啥能快10倍">技术大揭秘：C语言凭啥能快10倍？</h3>
+<p>先说个冷知识：目前主流的大模型训练框架（比如JAX、PyTorch）虽然方便，但本质上是在Python的“外套”底下调用C++或CUDA内核。Python的灵活性带来了快速迭代，但代价是——<strong>解释器开销</strong>和<strong>内存管理的冗余</strong>。</p>
+<p>而马斯克这次的做法，相当于<strong>直接把外套脱了</strong>：他用C语言重写了整个训练堆栈，从数据加载、梯度计算到通信同步，全部用最接近硬件的代码实现。</p>
+<p>这带来的好处很直白：</p>
+<ul>
+<li><strong>更少的内存拷贝</strong>：传统框架在Python和底层之间来回传数据，C语言直接操作内存，省掉中间商赚差价</li>
+<li><strong>更好的编译器优化</strong>：C代码可以被GCC/Clang深度优化，而Python的JIT编译（比如XLA）永远隔着一层</li>
+<li><strong>精细的并行控制</strong>：对于SpaceX手里的GB300（英伟达下一代GPU），用C语言可以直接控制SM调度、共享内存布局，榨干每一滴性能</li>
+</ul>
+<p>结果就是，马斯克说Grok 5已经用这个新堆栈训练了，速度“一个数量级”的提升。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 换句话说，以前需要跑10天的训练，现在可能1天搞定。这简直是给大模型训练装了喷气引擎。</p>
+<p>当然，这种“暴力手写”并非人人都能复制。马斯克在推文里不忘招兵买马：“请注意，我发布此消息是为了鼓励那些希望从硬件中获得卓越性能的人加入SpaceX。”<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 翻译成人话：<strong>我们这里玩的是硬核，一般人玩不转。</strong></p>
+<hr>
+<h3 id="行业地震谁笑了谁哭了">行业“地震”：谁笑了谁哭了？</h3>
+<p>这个新堆栈只是马斯克算力棋局中的一步。更重磅的是硬件端的扩张——<strong>Colossus II</strong>。</p>
+<p>这个代号“巨像二世”的超算集群，总功率达到了<strong>1吉瓦（GW）</strong>，造价约170亿美元。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 对比一下第一代Colossus I（30-40亿美元），这一下子跳了4倍多。如果说Colossus I是个小型城市的数据中心，那Colossus II简直就是<strong>一座算力发电站</strong>。</p>
+<p>更离谱的是建造速度：从0开始，只用了122天就拔地而起。Epoch AI估计，Colossus II将拥有相当于140万块H100 GPU等效算力。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 你品，你细品。</p>
+<p>而且马斯克不仅自己用，还动起了<strong>出租算力</strong>的生意。</p>
+<p>今年5月，SpaceX把Colossus I的算力租给了<strong>Anthropic</strong>（对，就是那个搞Claude的公司）。根据协议，Anthropic每月支付12.5亿美元，合同潜在总金额超过400亿美元。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 听起来是一笔天大买卖，对吧？</p>
+<p>但仔细看条款，你会发现马斯克留了一手——<strong>合同里写明了任意一方均可提前90天通知终止协议</strong>。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>而且马斯克本人还特意发推“澄清”：“SpaceX从未承诺长期出租，现有的只是一份180天租约。”<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 翻译成大白话就是：<strong>我可以随时收回算力，你们Anthropic不过是临时住客。</strong></p>
+<p>这操作就很骚了。</p>
+<hr>
+<h3 id="未来预测下一个风口在哪里">未来预测：下一个“风口”在哪里？</h3>
+<p>表面上，马斯克在“开放共享”，实际上他手里的牌全都是<strong>自家优先</strong>。</p>
+<p>看看SpaceX的招股书：AI基础设施已经被明确列为公司重要业务板块，与火箭发射并列。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 算力租赁只是副业，真正的大头是训练自家的Grok、支持特斯拉的自动驾驶、以及探索“轨道数据中心”。</p>
+<p>而Anthropic呢？虽然暂时租到了22万块GPU的算力，总算力直接追平甚至超过OpenAI和谷歌，<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 但这份协议等于把命脉交到了竞争对手手里。一旦马斯克内部算力吃紧——比如Grok 5训练需要更多资源，或者特斯拉自动驾驶模型要升级——那Anthropic就得在90天内卷铺盖走人。</p>
+<p>这还没完。马斯克还透露，Colossus II未来也可能对外租用，但“不承诺长期租赁，可以随时收回”。<sup id="fnref6:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 言下之意：<strong>外部客户，永远排在我自家需求后面。</strong></p>
+<p>所以，这场算力租赁本质上是一场<strong>带有“霸王条款”的博弈</strong>。Anthropic愿意签这份协议，很可能是别无选择——市面上能一次性提供300兆瓦以上算力的数据中心，一只手数得过来。与其等着被卡脖子，不如先上车再说。</p>
+<p>但这也折射出一个更大的趋势：<strong>大模型时代的“算力主权”正在向少数超级玩家集中</strong>。未来可能不是“谁模型做得好谁赢”，而是“谁手里算力多谁说了算”。</p>
+<p>至于C语言训练堆栈能否成为行业新标准？恐怕很难。大多数团队没有马斯克那种“从硬件层开始优化”的资源和执念。但这件事提醒我们：<strong>当技术发展到一定程度，回归底层、回归硬件，可能是突破瓶颈的唯一方式。</strong></p>
+<hr>
+<h3 id="写在最后">写在最后</h3>
+<p>马斯克这一系列操作，既像科幻小说又像生意经。他用C语言证明了软件优化永远有空间，用Colossus II证明了硬件堆砌仍然是王道，用算力租赁证明了“我的算力我做主”。</p>
+<p>下一步，推理部分的堆栈也会用C语言重写。<sup id="fnref7:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 而且随着Colossus II上线，Grok 5（据传6万亿参数）正在加速训练。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 马斯克的目标，可能是让Grok成为第一个“吉瓦级大模型”。</p>
+<p>至于Anthropic？他们就只能默默祈祷：马斯克家的模型训练别太顺利，以免被提前收回算力钥匙。</p>
+<hr>
+<h3 id="引用">引用：</h3>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>马斯克也拥抱C语言了，大模型训练堆栈抛弃JAX，提速一个数量级·量子位·克雷西（2026/5/29）·检索日期2026/5/29&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref6:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref7:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>马斯克点火全球最大超算，首个1GW狂飙奇点！6万亿Grok 5在训·新智元（2026/1/20）·检索日期2026/5/29&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Anthropic大手笔租下SpaceX顶级数据中心！深扒协议细节：22万块GPU是个什么水平？·财联社·刘蕊（2026/5/7）·检索日期2026/5/29&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Anthropic 今天宣布和SpaceX 达成算力合作，并同步调高了Claude ...·X平台@dotey（2026/5/7）·检索日期2026/5/29&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/c%E8%AF%AD%E8%A8%80%E8%AE%AD%E7%BB%83%E5%A0%86%E6%A0%88/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">C语言训练堆栈</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/colossus-ii/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Colossus II</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E7%A7%9F%E8%B5%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力租赁</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%A9%AC%E6%96%AF%E5%85%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">马斯克</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/grok-5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Grok 5</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/grok-5400-20251205174004853-0/">马斯克的奇点预言：Grok 5、400亿机器人与重构人类意义的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260527191003310-1/">算力淘金热：当“数字矿工”学会经营确定性</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursorgrok-20260526124003588-2/">刚收购Cursor一个月，马斯克就让Grok吃上「加餐」，编程能力直接起飞？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260521121003976-0/">星际赌局：马斯克的万亿跨星际豪赌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20260519221003329-0/">赢了马斯克一场官司，但OpenAI的“地狱副本”才刚刚开始</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519201002934-2/">马斯克告晚了？这场AI“世纪诉讼”，居然因为“迟到”被秒杀</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursorkimi-20260519154004505-3/">老马变脸比翻书快，Cursor新模型竟靠Kimi“逆袭”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20260519064003925-2/">马斯克诉OpenAI败诉：陪审团说你等太久，法院大门已焊死</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/1500openai-20260519061003852-3/">马斯克1500亿天价诉讼败了：不是OpenAI太强，而是这哥们“拖延症”犯了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519061003850-2/">马斯克输了官司，但AI的“热辣滚烫”夏天才刚开始？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519031004878-2/">奥特曼赢了！但这场AI“神仙打架”官司，撕开了谁的遮羞布？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai1500-20260515171003707-1/">马斯克手撕OpenAI：1500亿天价赔偿、日记曝光，这出“世纪抓马”到底谁在说谎？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/xaigrok-buildclaude-code300-20260515154003238-3/">马斯克人还在北京，xAI突然甩出Grok Build：对标Claude Code，月费300刀，真·程序员狂喜？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-vs-1300-20260515134003836-0/">马斯克 vs 奥特曼：一场价值1300亿美元的“世纪渣男”互撕大戏</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/vs1800openai-20260515101003365-0/">马斯克VS奥特曼：一场价值1800亿美元的“兄弟阋墙”大戏，OpenAI到底有没有“变心”？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="MobileMoE 成功在移动端引入稀疏计算架构，通过细粒度专家设计与自定义内核融合，在大幅提速的同时保持了性能优势。这一突破不仅重新定义了端侧 AI 的帕累托前沿，还为未来多模态与具身智能的边缘部署奠定了技术范式。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/mobilemoe-ai--20260601141003362-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/mobilemoe-ai--20260601141003362-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿">
+  <meta property="og:description" content="MobileMoE 成功在移动端引入稀疏计算架构，通过细粒度专家设计与自定义内核融合，在大幅提速的同时保持了性能优势。这一突破不仅重新定义了端侧 AI 的帕累托前沿，还为未来多模态与具身智能的边缘部署奠定了技术范式。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-01T14:10:03+08:00">
+    <meta property="article:modified_time" content="2026-06-01T14:10:03+08:00">
+    <meta property="article:tag" content="混合专家模型">
+    <meta property="article:tag" content="端侧AI">
+    <meta property="article:tag" content="边缘计算">
+    <meta property="article:tag" content="模型架构优化">
+    <meta property="article:tag" content="移动端推理">
+
+  <meta itemprop="name" content="从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿">
+  <meta itemprop="description" content="MobileMoE 成功在移动端引入稀疏计算架构，通过细粒度专家设计与自定义内核融合，在大幅提速的同时保持了性能优势。这一突破不仅重新定义了端侧 AI 的帕累托前沿，还为未来多模态与具身智能的边缘部署奠定了技术范式。">
+  <meta itemprop="datePublished" content="2026-06-01T14:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-06-01T14:10:03+08:00">
+  <meta itemprop="wordCount" content="120">
+  <meta itemprop="keywords" content="混合专家模型,端侧AI,边缘计算,模型架构优化,移动端推理">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿">
+  <meta name="twitter:description" content="MobileMoE 成功在移动端引入稀疏计算架构，通过细粒度专家设计与自定义内核融合，在大幅提速的同时保持了性能优势。这一突破不仅重新定义了端侧 AI 的帕累托前沿，还为未来多模态与具身智能的边缘部署奠定了技术范式。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-06-01_14-01-51.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-01 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E4%BA%91%E7%AB%AF%E7%AE%97%E5%8A%9B%E2%80%9D%E5%88%B0%E2%80%9C%E8%BE%B9%E7%BC%98%E6%99%BA%E8%83%BD%E2%80%9D%EF%BC%9AMobileMoE&amp;#43;%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E7%AB%AF%E4%BE%A7&amp;#43;AI&amp;#43;%E7%9A%84%E5%B8%95%E7%B4%AF%E6%89%98%E5%89%8D%E6%B2%BF%20-%20MobileMoE&amp;#43;%E6%88%90%E5%8A%9F%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%95%E5%85%A5%E7%A8%80%E7%96%8F%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84%EF%BC%8C%E9%80%9A%E8%BF%87%E7%BB%86%E7%B2%92%E5%BA%A6%E4%B8%93%E5%AE%B6%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E5%86%85%E6%A0%B8%E8%9E%8D%E5%90%88%EF%BC%8C%E5%9C%A8%E5%A4%A7%E5%B9%85%E6%8F%90%E9%80%9F%E7%9A%84%E5%90%8C%E6%97%B6%E4%BF%9D%E6%8C%81%E4%BA%86%E6%80%A7%E8%83%BD%E4%BC%98%E5%8A%BF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E4%B8%8D%E4%BB%85%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E4%BA%86%E7%AB%AF%E4%BE%A7&amp;#43;AI&amp;#43;%E7%9A%84%E5%B8%95%E7%B4%AF%E6%89%98%E5%89%8D%E6%B2%BF%EF%BC%8C%E8%BF%98%E4%B8%BA%E6%9C%AA%E6%9D%A5%E5%A4%9A%E6%A8%A1%E6%80%81%E4%B8%8E%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E8%BE%B9%E7%BC%98%E9%83%A8%E7%BD%B2%E5%A5%A0%E5%AE%9A%E4%BA%86%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmobilemoe-ai--20260601141003362-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E4%BA%91%E7%AB%AF%E7%AE%97%E5%8A%9B%E2%80%9D%E5%88%B0%E2%80%9C%E8%BE%B9%E7%BC%98%E6%99%BA%E8%83%BD%E2%80%9D%EF%BC%9AMobileMoE&amp;#43;%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E7%AB%AF%E4%BE%A7&amp;#43;AI&amp;#43;%E7%9A%84%E5%B8%95%E7%B4%AF%E6%89%98%E5%89%8D%E6%B2%BF%20-%20MobileMoE&amp;#43;%E6%88%90%E5%8A%9F%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%95%E5%85%A5%E7%A8%80%E7%96%8F%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84%EF%BC%8C%E9%80%9A%E8%BF%87%E7%BB%86%E7%B2%92%E5%BA%A6%E4%B8%93%E5%AE%B6%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E5%86%85%E6%A0%B8%E8%9E%8D%E5%90%88%EF%BC%8C%E5%9C%A8%E5%A4%A7%E5%B9%85%E6%8F%90%E9%80%9F%E7%9A%84%E5%90%8C%E6%97%B6%E4%BF%9D%E6%8C%81%E4%BA%86%E6%80%A7%E8%83%BD%E4%BC%98%E5%8A%BF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E4%B8%8D%E4%BB%85%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E4%BA%86%E7%AB%AF%E4%BE%A7&amp;#43;AI&amp;#43;%E7%9A%84%E5%B8%95%E7%B4%AF%E6%89%98%E5%89%8D%E6%B2%BF%EF%BC%8C%E8%BF%98%E4%B8%BA%E6%9C%AA%E6%9D%A5%E5%A4%9A%E6%A8%A1%E6%80%81%E4%B8%8E%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E8%BE%B9%E7%BC%98%E9%83%A8%E7%BD%B2%E5%A5%A0%E5%AE%9A%E4%BA%86%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmobilemoe-ai--20260601141003362-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Meta 提出的 MobileMoE 首次在智能手机上实现了高效的混合专家（MoE）推理，通过量身定制的架构扩展法则和内核优化，打破了端侧模型在算力与精度间的“不可能三角”，预示着终端 AI 将正式迈入高密度、低延迟的稀疏化时代。</p></blockquote>
+<p>随着大语言模型（LLM）的边界不断向边缘侧收缩，业界长期面临一个核心悖论：如何在严苛的内存带宽与算力瓶颈下，获得媲美云端模型的推理能力？过去，端侧模型多依赖于传统的稠密（Dense）架构，这在本质上是一种“暴力美学”——即便处理简单的逻辑任务，模型依然需要激活所有参数，导致严重的算力冗余。</p>
+<h3 id="技术原理与创新点打破端侧的稀疏性禁区">技术原理与创新点：打破端侧的稀疏性禁区</h3>
+<p>MobileMoE 的核心突破在于将混合专家架构（MoE）成功移植到了商用智能手机。与云端 MoE 不同，MobileMoE 并不是单纯的参数堆砌，而是构建了一套面向移动设备的特定扩展法则。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>研究团队通过实验发现，在固定内存预算下，当模型内存占用超过约 0.25GB 时，MoE 架构便开始展现出超越稠密模型的性能潜力。MobileMoE 采用了“细粒度专家 + 共享专家”的组合策略——即由 60 个细粒度路由专家（Top-4 激活）与 1 个共享专家组成。这种设计的巧妙之处在于，它通过“稀疏激活”实现了参数的高效复用，在保证模型对数学、代码等复杂任务理解力的同时，极大地降低了单次推理的计算量（FLOPs）。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>此外，为了实现真正的落地，Meta 团队在 ExecuTorch 中实现了深度融合的内核优化。通过将专家调度、INT4 权重矩阵乘法以及激活函数融合，MobileMoE 在 iPhone 16 Pro 上实现了 1.8 倍至 3.8 倍的预填充提速，这意味着 AI 响应不再有明显的“顿感”，真正实现了端侧 AI 的实时化。</p>
+<h3 id="产业生态影响从模型竞赛转向架构效率">产业生态影响：从“模型竞赛”转向“架构效率”</h3>
+<p>MobileMoE 的出现，标志着端侧 AI 竞争进入了全新的“效率为王”阶段。长期以来，端侧 AI 的布局集中在模型压缩（剪枝、量化），而 MobileMoE 证明了：通过架构层面的创新（如动态路由机制），可以在不显著增加内存负担的前提下，大幅提升模型的推理上限。</p>
+<p>从产业链角度看，这一趋势将倒逼硬件厂商进一步优化移动端 SoC 的内存带宽与 NPU 调度逻辑。如果 MoE 架构成为标配，未来的手机芯片设计将不再单纯比拼纯粹的 TOPS（算力），而是更加看重“稀疏计算”支持能力与动态内存分配的灵活性。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="未来路径迈向具身智能的神经底座">未来路径：迈向具身智能的神经底座</h3>
+<p>展望未来 3-5 年，MobileMoE 的演进路径清晰可见：</p>
+<ol>
+<li><strong>多模态扩展</strong>：当前的 MobileMoE 主要聚焦文本，未来将其转化为多模态 MoE 模型将是必然，这将使手机成为真正的个人智能助手，实现对 UI、图像、语音的实时理解。</li>
+<li><strong>动态路由优化</strong>：随着硬件环境的复杂化，如何根据不同应用场景（如游戏、办公、创作）动态调整路由策略，将成为端侧 AI 的核心壁垒。</li>
+<li><strong>具身智能应用</strong>：MobileMoE 为需要低延迟、高响应的移动机器人或智能穿戴设备提供了一个近乎完美的“大脑”参考架构。</li>
+</ol>
+<h3 id="批判性思考帕累托前沿背后的代价">批判性思考：帕累托前沿背后的代价</h3>
+<p>尽管 MobileMoE 建立了新的帕累托前沿，但我们仍需保持谨慎。MoE 的一个显著特性是其运行时内存占用的“不稳定性”——由于路由策略取决于输入内容，内存峰值在真实场景下可能远高于理论估算。这意味着，在资源高度受限的手机环境下，如何处理这种不可预测的内存抖动，依然是开发者面临的重大挑战。</p>
+<p>此外，从哲学角度审视，将 MoE 引入边缘设备，本质上是对“算力去中心化”的一次致敬。它预示着 AI 不再仅仅是云端巨头的数据黑盒，而是将逐步成为设备本地的一部分，这种演变在保护用户隐私与降低延迟的同时，也将重塑人类与工具的交互关系——AI 将从“请求式服务”转变为“伴随式智能”。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>MobileMoE: Scaling On-Device Mixture of Experts · arXiv.org · (2026/5/27) · 检索日期 2026/6/1&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>手机上跑MoE？Meta提出MobileMoE，iPhone 16 Pro提速3.8倍 · 智源社区 · (2026/5/30) · 检索日期 2026/6/1&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>科技公司的端侧AI布局 · 西南证券研究发展中心 · (2024/6/11) · 检索日期 2026/6/1&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">混合专家模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AB%AF%E4%BE%A7ai/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">端侧AI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">边缘计算</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型架构优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">移动端推理</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/jamba-reasoning-3bai-agent-20251009191008530-1/">Jamba Reasoning 3B：端侧智能的里程碑，重塑AI agent与边缘计算的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/arm-lumex-csstops-20250916144004764-3/">Arm Lumex CSS：边缘智能的范式转移与万亿级TOPS的未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/embeddinggemmaai-20250905154005027-3/">微缩智能：谷歌EmbeddingGemma如何重塑边缘AI的隐私、性能与普适未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-3-270mai-20250815174005026-0/">小尺寸，大智能：Gemma 3 270M如何重塑端侧AI的未来版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-3n2gbai-20250627221006185-1/">超越极限：谷歌Gemma 3n如何以2GB内存颠覆端侧AI模型格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-3n2gai-20250627201004999-4/">谷歌Gemma 3n：2G显存解锁端侧AI新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-3nai2gb-20250627191005495-3/">谷歌Gemma 3n：将高性能多模态AI带入2GB内存时代的里程碑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250624231007315-0/">边缘智能的突破：小米小爱同学如何在资源受限下实现高性能大模型推理</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/pico-20260530111003167-0/">当“数学最优”让位于“人类感知”：苹果PICO如何终结数字压缩的三十年僵局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260522211006252-1/">从“钉子”到“地基”：边缘AI推理如何重构物理世界的算力疆域</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-40ai-20260522181003540-0/">从辅助到代理：联想天禧AI 4.0如何重构消费级“个人AI基础设施”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260522154003513-0/">超越摩尔定律的视觉重构：AI摄像头如何从“被动监视”进化为物理世界的“实时映射”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260519191003248-1/">AI硬件的“终端时刻”：从算力冗余到感官重塑的进化论</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-20260510164003243-0/">DeepSeek的“本地化”突围：当开源模型沦为基础设施的“通用材料”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemma-4ai-20260409114008771-1/">谷歌Gemma 4深度评测：端侧多模态的“分水岭”，离线AI时代的开源标杆</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
