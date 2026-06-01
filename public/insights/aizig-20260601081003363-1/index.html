@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI写代码？Zig：对不起，你那是垃圾，我们不收 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Zig编程语言带头禁止AI辅助代码贡献，创始人直呼“垃圾贡献”浪费审查时间。QEMU、NetBSD、OBS等也加入“反AI”阵营，与硅谷拥抱AI的大趋势形成鲜明对比。文章剖析了开源社区在效率与质量之间的纠结，引人思考AI时代编程的真正意义。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/aizig-20260601081003363-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/aizig-20260601081003363-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI写代码？Zig：对不起，你那是垃圾，我们不收">
+  <meta property="og:description" content="Zig编程语言带头禁止AI辅助代码贡献，创始人直呼“垃圾贡献”浪费审查时间。QEMU、NetBSD、OBS等也加入“反AI”阵营，与硅谷拥抱AI的大趋势形成鲜明对比。文章剖析了开源社区在效率与质量之间的纠结，引人思考AI时代编程的真正意义。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-01T08:10:03+08:00">
+    <meta property="article:modified_time" content="2026-06-01T08:10:03+08:00">
+    <meta property="article:tag" content="AI编程">
+    <meta property="article:tag" content="Zig语言">
+    <meta property="article:tag" content="开源社区">
+    <meta property="article:tag" content="代码质量">
+    <meta property="article:tag" content="反AI禁令">
+
+  <meta itemprop="name" content="AI写代码？Zig：对不起，你那是垃圾，我们不收">
+  <meta itemprop="description" content="Zig编程语言带头禁止AI辅助代码贡献，创始人直呼“垃圾贡献”浪费审查时间。QEMU、NetBSD、OBS等也加入“反AI”阵营，与硅谷拥抱AI的大趋势形成鲜明对比。文章剖析了开源社区在效率与质量之间的纠结，引人思考AI时代编程的真正意义。">
+  <meta itemprop="datePublished" content="2026-06-01T08:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-06-01T08:10:03+08:00">
+  <meta itemprop="wordCount" content="80">
+  <meta itemprop="keywords" content="AI编程,Zig语言,开源社区,代码质量,反AI禁令">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI写代码？Zig：对不起，你那是垃圾，我们不收">
+  <meta name="twitter:description" content="Zig编程语言带头禁止AI辅助代码贡献，创始人直呼“垃圾贡献”浪费审查时间。QEMU、NetBSD、OBS等也加入“反AI”阵营，与硅谷拥抱AI的大趋势形成鲜明对比。文章剖析了开源社区在效率与质量之间的纠结，引人思考AI时代编程的真正意义。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-06-01_08-01-04.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-01 08:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%9FZig%EF%BC%9A%E5%AF%B9%E4%B8%8D%E8%B5%B7%EF%BC%8C%E4%BD%A0%E9%82%A3%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%8D%E6%94%B6%20-%20Zig%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%B8%A6%E5%A4%B4%E7%A6%81%E6%AD%A2AI%E8%BE%85%E5%8A%A9%E4%BB%A3%E7%A0%81%E8%B4%A1%E7%8C%AE%EF%BC%8C%E5%88%9B%E5%A7%8B%E4%BA%BA%E7%9B%B4%E5%91%BC%E2%80%9C%E5%9E%83%E5%9C%BE%E8%B4%A1%E7%8C%AE%E2%80%9D%E6%B5%AA%E8%B4%B9%E5%AE%A1%E6%9F%A5%E6%97%B6%E9%97%B4%E3%80%82QEMU%E3%80%81NetBSD%E3%80%81OBS%E7%AD%89%E4%B9%9F%E5%8A%A0%E5%85%A5%E2%80%9C%E5%8F%8DAI%E2%80%9D%E9%98%B5%E8%90%A5%EF%BC%8C%E4%B8%8E%E7%A1%85%E8%B0%B7%E6%8B%A5%E6%8A%B1AI%E7%9A%84%E5%A4%A7%E8%B6%8B%E5%8A%BF%E5%BD%A2%E6%88%90%E9%B2%9C%E6%98%8E%E5%AF%B9%E6%AF%94%E3%80%82%E6%96%87%E7%AB%A0%E5%89%96%E6%9E%90%E4%BA%86%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E5%9C%A8%E6%95%88%E7%8E%87%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E7%BA%A0%E7%BB%93%EF%BC%8C%E5%BC%95%E4%BA%BA%E6%80%9D%E8%80%83AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E7%9A%84%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faizig-20260601081003363-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%9FZig%EF%BC%9A%E5%AF%B9%E4%B8%8D%E8%B5%B7%EF%BC%8C%E4%BD%A0%E9%82%A3%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%8D%E6%94%B6%20-%20Zig%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%B8%A6%E5%A4%B4%E7%A6%81%E6%AD%A2AI%E8%BE%85%E5%8A%A9%E4%BB%A3%E7%A0%81%E8%B4%A1%E7%8C%AE%EF%BC%8C%E5%88%9B%E5%A7%8B%E4%BA%BA%E7%9B%B4%E5%91%BC%E2%80%9C%E5%9E%83%E5%9C%BE%E8%B4%A1%E7%8C%AE%E2%80%9D%E6%B5%AA%E8%B4%B9%E5%AE%A1%E6%9F%A5%E6%97%B6%E9%97%B4%E3%80%82QEMU%E3%80%81NetBSD%E3%80%81OBS%E7%AD%89%E4%B9%9F%E5%8A%A0%E5%85%A5%E2%80%9C%E5%8F%8DAI%E2%80%9D%E9%98%B5%E8%90%A5%EF%BC%8C%E4%B8%8E%E7%A1%85%E8%B0%B7%E6%8B%A5%E6%8A%B1AI%E7%9A%84%E5%A4%A7%E8%B6%8B%E5%8A%BF%E5%BD%A2%E6%88%90%E9%B2%9C%E6%98%8E%E5%AF%B9%E6%AF%94%E3%80%82%E6%96%87%E7%AB%A0%E5%89%96%E6%9E%90%E4%BA%86%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E5%9C%A8%E6%95%88%E7%8E%87%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E7%BA%A0%E7%BB%93%EF%BC%8C%E5%BC%95%E4%BA%BA%E6%80%9D%E8%80%83AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E7%9A%84%E7%9C%9F%E6%AD%A3%E6%84%8F%E4%B9%89%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Faizig-20260601081003363-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI写代码？Zig：对不起，你那是垃圾，我们不收</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>当硅谷大佬们忙着用AI写代码、卷效率的时候，开源编程语言Zig却反手贴了一张“AI禁止入内”的告示。创始人直呼AI辅助贡献是“垃圾”，不仅没用，还浪费审查者的宝贵时间。这是对AI编程潮流的硬核反击，还是对开源精神的另一种坚守？</p></blockquote>
+<h3 id="当ai编程成为政治正确zig却悄悄关上了门">当AI编程成为“政治正确”，Zig却悄悄关上了门</h3>
+<p>2026年的硅谷，AI写代码已经不是什么新鲜事了。Claude Code、OpenAI Codex这些工具满天飞，连Linux之父Linus Torvalds年初都开始在个人项目里用AI编程了<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。大厂们更是喜滋滋地喊出“未来XX%的代码将由AI编写”的flag，仿佛不用AI就是在退步。</p>
+<p>但就在这股全民AI狂欢中，有个开源项目默默拧上了<strong>暂停键</strong>——Zig编程语言。这家由非营利组织维护的小众但影响力不小的语言，直接在自己的行为准则里写死了：“禁止提交AI辅助生成的代码。不管是生成、改写、润色、编辑、头脑风暴还是调试，只要是AI碰过的，统统不要。”<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>简单翻译一下：<strong>AI大哥，请离我的代码仓库远一点。</strong></p>
+<h3 id="垃圾贡献zig创始人的原话没在客气">“垃圾贡献”：Zig创始人的原话，没在客气</h3>
+<p>在JetBrains的一期播客里，Zig的创建者兼首席开发者Andrew Kelley毫不留情地把AI辅助贡献称为“垃圾”<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。他举了个例子：有人提交了完全没有价值的pull request，甚至还是<strong>负价值</strong>——因为团队的代码审查资源本来就紧张，审核这些垃圾简直是在浪费生命。</p>
+<p>Zig团队当时还有200个未处理的pull request，而审查主要由少数核心成员负责。Kelley的吐槽很真实：“有些人把我们说过的话复制粘贴回对话框，试图用洗聊天记录的方式假装没在用AI。但我们一眼就能看出来，而且知道这种人永远不会给出高质量贡献。”</p>
+<p><strong>你看，AI写代码最大的痛点不是写不好，而是写出来的代码自己都看不懂。</strong></p>
+<h3 id="不止zig一场开源界的ai排雷运动">不止Zig：一场开源界的“AI排雷运动”</h3>
+<p>Zig不是一个人在战斗。除了它，还有几个老牌开源项目也举起了“No AI”的牌子：</p>
+<ul>
+<li><strong>QEMU</strong>：拒绝任何被认为包含AI生成内容的贡献<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+<li><strong>NetBSD</strong>：AI生成代码默认视为“受污染代码”，不得提交<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+<li><strong>OBS Studio</strong>：明说代码必须由人类编写<sup id="fnref2:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</li>
+</ul>
+<p>这些项目的态度很直接：不是反对技术本身，而是反对那些只会复制粘贴、连代码都解释不清的“路过型贡献者”糟蹋社区。</p>
+<h3 id="当效率遇上传帮带zig选的是后者">当“效率”遇上“传帮带”，Zig选的是后者</h3>
+<p>为什么Zig要这么刚？因为它的核心使命不是“最大化效率”，而是**“传帮带”**。Kelley说得明白：“我们都在努力变成更好的程序员。提交AI pull request的人，并没有帮助实现这个目标。”</p>
+<p>AI工具确实能让人写出更多代码，但开源项目真正需要的不是代码量，而是<strong>愿意留下来、搞懂架构、长期维护的人</strong>。AI贡献者就像外卖骑手——送一单就走，但厨房需要的是一位能掌勺的大厨。</p>
+<h3 id="zig-vs-bun同一个妈生的孩子命运却不同">Zig vs Bun：同一个妈生的孩子，命运却不同</h3>
+<p>说来也巧，Zig有个著名的“孩子”——Bun（那个用Zig开发的JavaScript运行时），后来被Anthropic收购。前几天Bun的创建者Jarred Sumner发推说，自己用Claude Code的新功能把Bun从Zig移植到了Rust<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。Bun拥抱AI，Zig拒绝AI，这操作让吃瓜群众直呼“父子反目”。</p>
+<p>但这也恰恰说明：<strong>AI写代码的争议不是一道非黑即白的题，而是场景选择题。</strong> 大厂追求速度，小项目追求质量，谁都没错。</p>
+<h3 id="最后龙虾之父的疑问">最后，龙虾之父的疑问</h3>
+<p>知名开发者Peter Steinberger（人称“龙虾之父”）忍不住在社交平台上感叹：“LLM连找bug都不行了吗？”<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<p>这个问题值得所有程序员思考：当我们把代码的生成、调试、甚至思维过程都交给AI，我们自己在做什么？是在“写代码”还是在“审核别人写的代码”？</p>
+<p>Zig的选择可能不是最适合每一个项目的答案，但它至少让我们停下来想一想：<strong>在效率至上的AI时代，那些需要人类深度参与的“慢功夫”，还有没有存在的意义？</strong></p>
+<p><strong>也许，真正的编程从来没有捷径。</strong></p>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Linux创始人Linus Torvalds开始使用AI辅助编程 · 来源见文中引用（2026年消息）· 检索日期2026/6/1&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Zig项目行为准则：禁止AI生成内容 · ziglang.org/code-of-conduct · 检索日期2026/6/1&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Zig创始人Andrew Kelley在JetBrains播客中的发言 · Business Insider报道：https://www.businessinsider.com/zig-programming-language-ai-rules-2026-5 · 检索日期2026/6/1&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>开源项目QEMU、NetBSD、OBS Studio的AI贡献禁令 · 凤凰网报道：https://i.ifeng.com/c/8tZW30YnGdU · 检索日期2026/6/1&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Bun创始人Jarred Sumner使用Claude Code将Bun移植到Rust · 推特截图，来源见36氪文章中的引用 · 检索日期2026/6/1&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>Peter Steinberger的评论 · 引自39氪文章截图 · 检索日期2026/6/1&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/zig%E8%AF%AD%E8%A8%80/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Zig语言</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源社区</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">代码质量</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%8F%8Dai%E7%A6%81%E4%BB%A4/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">反AI禁令</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/19ainodejs-claude-code-20260330201012367-0/">1.9万行AI代码引发的“血案”：Node.js 社区吵翻了，大佬们正联名封杀 Claude Code？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/github48ceo6000ai-agent-20260211164005547-2/">离开GitHub半年，48岁前CEO带头“造反”？砸下6000万美金，要给AI Agent装上“记忆芯片”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/linusai-20251201101005175-3/">人间清醒Linus：从代码守护者到AI时代的哲思者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251020154004863-1/">“严肃编程”：AI重塑企业级软件工程的质量、安全与未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250702124004480-4/">当AI生成万行“屎山”代码：产品经理的编程革命与隐忧</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen37-max--20260528124003999-0/">编程智能体新基座：Qwen3.7-Max 深度编程能力实测与评测</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagent-20260526194003437-0/">代码质量的“熵增”危机：AI编程Agent为何可能成为软件工程的沉没成本？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-ai--20260526174003218-2/">全家桶的陷阱：当谷歌与字节在 AI 编程赛道遭遇“信任危机”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-20260524164003347-0/">皮查伊自曝：写代码，我家Gemini确实菜了点</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-cloudai-20260522124003397-0/">Agent Cloud的崛起：为什么AI正在重构云计算的“生产力协议”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/composer-25-ai--20260519194003608-3/">超越成本的“黑魔法”：Composer 2.5 预示 AI 编程进入“自主进化”的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursorkimi-20260519154004505-3/">老马变脸比翻书快，Cursor新模型竟靠Kimi“逆袭”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openhumanai-agent-20260518184004006-1/">OpenHuman的野心：当AI Agent试图终结“应用”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-55ai-20260513204004296-0/">GPT-5.5：这道“地狱级”编程题，所有AI都挂了，就它一个“卷”赢了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/uber-aiai-20260512084003104-1/">Uber 四个月烧光全年AI预算：不是AI太贵，是程序员用得太狠了？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
