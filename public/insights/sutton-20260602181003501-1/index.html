@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Richard Sutton 提出的“生成认知”理论批判了当前 AI 对静态数据的过度依赖，主张智能应源于与物理环境的持续互动。这一范式转型预示着 AI 将从依赖预训练数据的“模式匹配器”向具备具身交互能力的“自主生存智能体”进化，彻底重构未来机器人的商业与技术格局。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/sutton-20260602181003501-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/sutton-20260602181003501-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质">
+  <meta property="og:description" content="Richard Sutton 提出的“生成认知”理论批判了当前 AI 对静态数据的过度依赖，主张智能应源于与物理环境的持续互动。这一范式转型预示着 AI 将从依赖预训练数据的“模式匹配器”向具备具身交互能力的“自主生存智能体”进化，彻底重构未来机器人的商业与技术格局。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-02T18:10:03+08:00">
+    <meta property="article:modified_time" content="2026-06-02T18:10:03+08:00">
+    <meta property="article:tag" content="生成认知">
+    <meta property="article:tag" content="具身智能">
+    <meta property="article:tag" content="强化学习">
+    <meta property="article:tag" content="AGI">
+    <meta property="article:tag" content="AI 范式转移">
+    <meta property="article:tag" content="自主系统">
+
+  <meta itemprop="name" content="超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质">
+  <meta itemprop="description" content="Richard Sutton 提出的“生成认知”理论批判了当前 AI 对静态数据的过度依赖，主张智能应源于与物理环境的持续互动。这一范式转型预示着 AI 将从依赖预训练数据的“模式匹配器”向具备具身交互能力的“自主生存智能体”进化，彻底重构未来机器人的商业与技术格局。">
+  <meta itemprop="datePublished" content="2026-06-02T18:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-06-02T18:10:03+08:00">
+  <meta itemprop="wordCount" content="68">
+  <meta itemprop="keywords" content="生成认知,具身智能,强化学习,AGI,AI 范式转移,自主系统">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质">
+  <meta name="twitter:description" content="Richard Sutton 提出的“生成认知”理论批判了当前 AI 对静态数据的过度依赖，主张智能应源于与物理环境的持续互动。这一范式转型预示着 AI 将从依赖预训练数据的“模式匹配器”向具备具身交互能力的“自主生存智能体”进化，彻底重构未来机器人的商业与技术格局。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-06-02_18-01-11.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-02 18:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%85%E8%B6%8A%E2%80%9C%E6%95%B0%E6%8D%AE%E5%96%82%E5%85%BB%E2%80%9D%EF%BC%9ASutton%E4%B8%8E%E2%80%9C%E7%94%9F%E6%88%90%E8%AE%A4%E7%9F%A5%E2%80%9D%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E6%99%BA%E8%83%BD%E7%9A%84%E6%9C%AC%E8%B4%A8%20-%20Richard&amp;#43;Sutton&amp;#43;%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E7%94%9F%E6%88%90%E8%AE%A4%E7%9F%A5%E2%80%9D%E7%90%86%E8%AE%BA%E6%89%B9%E5%88%A4%E4%BA%86%E5%BD%93%E5%89%8D&amp;#43;AI&amp;#43;%E5%AF%B9%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%87%E5%BA%A6%E4%BE%9D%E8%B5%96%EF%BC%8C%E4%B8%BB%E5%BC%A0%E6%99%BA%E8%83%BD%E5%BA%94%E6%BA%90%E4%BA%8E%E4%B8%8E%E7%89%A9%E7%90%86%E7%8E%AF%E5%A2%83%E7%9A%84%E6%8C%81%E7%BB%AD%E4%BA%92%E5%8A%A8%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%9E%8B%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E5%B0%86%E4%BB%8E%E4%BE%9D%E8%B5%96%E9%A2%84%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E2%80%9C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E5%99%A8%E2%80%9D%E5%90%91%E5%85%B7%E5%A4%87%E5%85%B7%E8%BA%AB%E4%BA%A4%E4%BA%92%E8%83%BD%E5%8A%9B%E7%9A%84%E2%80%9C%E8%87%AA%E4%B8%BB%E7%94%9F%E5%AD%98%E6%99%BA%E8%83%BD%E4%BD%93%E2%80%9D%E8%BF%9B%E5%8C%96%EF%BC%8C%E5%BD%BB%E5%BA%95%E9%87%8D%E6%9E%84%E6%9C%AA%E6%9D%A5%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E5%95%86%E4%B8%9A%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fsutton-20260602181003501-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%85%E8%B6%8A%E2%80%9C%E6%95%B0%E6%8D%AE%E5%96%82%E5%85%BB%E2%80%9D%EF%BC%9ASutton%E4%B8%8E%E2%80%9C%E7%94%9F%E6%88%90%E8%AE%A4%E7%9F%A5%E2%80%9D%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E6%99%BA%E8%83%BD%E7%9A%84%E6%9C%AC%E8%B4%A8%20-%20Richard&amp;#43;Sutton&amp;#43;%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E7%94%9F%E6%88%90%E8%AE%A4%E7%9F%A5%E2%80%9D%E7%90%86%E8%AE%BA%E6%89%B9%E5%88%A4%E4%BA%86%E5%BD%93%E5%89%8D&amp;#43;AI&amp;#43;%E5%AF%B9%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%87%E5%BA%A6%E4%BE%9D%E8%B5%96%EF%BC%8C%E4%B8%BB%E5%BC%A0%E6%99%BA%E8%83%BD%E5%BA%94%E6%BA%90%E4%BA%8E%E4%B8%8E%E7%89%A9%E7%90%86%E7%8E%AF%E5%A2%83%E7%9A%84%E6%8C%81%E7%BB%AD%E4%BA%92%E5%8A%A8%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%9E%8B%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E5%B0%86%E4%BB%8E%E4%BE%9D%E8%B5%96%E9%A2%84%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E2%80%9C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E5%99%A8%E2%80%9D%E5%90%91%E5%85%B7%E5%A4%87%E5%85%B7%E8%BA%AB%E4%BA%A4%E4%BA%92%E8%83%BD%E5%8A%9B%E7%9A%84%E2%80%9C%E8%87%AA%E4%B8%BB%E7%94%9F%E5%AD%98%E6%99%BA%E8%83%BD%E4%BD%93%E2%80%9D%E8%BF%9B%E5%8C%96%EF%BC%8C%E5%BD%BB%E5%BA%95%E9%87%8D%E6%9E%84%E6%9C%AA%E6%9D%A5%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E5%95%86%E4%B8%9A%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fsutton-20260602181003501-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>图灵奖得主 Richard Sutton 提出的“生成认知”框架，旨在打破 AI 对静态数据的过度依赖，主张智能的本质在于具身主体与物理世界的实时交互。这一范式转移预示着 AI 将从单纯的“信息处理工具”向具备自主生存能力的“生命化智能体”演进。</p></blockquote>
+<h3 id="范式危局被动表征的玻璃天花板">范式危局：被动表征的“玻璃天花板”</h3>
+<p>当前人工智能的狂飙突进，本质上是“表征主义”的胜利——通过在超大规模数据上进行模式匹配，模型构建了一个关于世界的统计学副本。然而，正如强化学习之父 Richard S. Sutton 与学者 Banafsheh Rafiee 在其新作中犀利指出的那样，这种依赖于“静态数据”和“预测模型”的路径，正陷入严重的瓶颈<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>我们正在见证一种“数据过载但智能稀缺”的错位：模型能生成以假乱真的视觉内容，却无法在真实物理环境中解决一个简单的开门任务。这种失衡的根源在于，主流范式将“感知”和“行动”割裂开来。AI 被训练去“看见”世界，而不是通过“触摸”和“改变”去理解世界。正如机器人学家 Rodney Brooks 所言，“世界本身就是它最好的模型”，任何试图在服务器中建立世界完整副本的努力，注定无法应对真实物理空间的开放性与复杂性。</p>
+<h3 id="技术重构从数据优化到经验生成">技术重构：从数据优化到经验生成</h3>
+<p>Sutton 提出的“生成认知”（Enactive Cognition）为 AI 提供了新的进化方向。与依赖人类标注数据不同，生成认知主张智能是在主体与环境的互动中实时产生的。这意味着未来的 AI 架构必须完成四个关键维度的转型：</p>
+<ul>
+<li><strong>经验的即时性</strong>：从基于预设数据集的监督学习，转向在环境互动中实时获取、修正并形成技能的持续学习。</li>
+<li><strong>感知与行动的统一</strong>：感知不再是行动的前奏，而是通过动作揭示环境结构的动态过程。</li>
+<li><strong>内在的自主性</strong>：智能体的目标设定应源于其对自身存在（自我维持）的保护，而非外部定义的损失函数。</li>
+<li><strong>具身的必然性</strong>：身体不仅是硬件接口，更是认知形成的必要约束和过滤器。</li>
+</ul>
+<p>这种从“处理数据”到“生成经验”的演进，实际上是将 AI 从“符号处理机”推向“生物学意义上的生命模型”。</p>
+<h3 id="产业重塑具身智能的商业临界点">产业重塑：具身智能的商业临界点</h3>
+<p>从资本与产业视角来看，这一研究不仅是学术上的反思，更是对未来万亿级机器人市场的底层路径矫正。如果说当前的大模型是 AI 的“大脑”，那么生成认知就是赋予这颗大脑“触觉”与“生存意志”的钥匙。</p>
+<p>商业敏锐度告诉我们，能够率先在动态环境中实现自主决策的系统，将拥有极高的护城河。目前，企业在自动驾驶、人形机器人领域的投入虽大，但大多仍被“环境异常处理”困扰——即缺乏在陌生环境中的应变能力。Sutton 的研究方向将加速 AI 产业链从单纯的算力堆砌，转向“感知-行动闭环”的硬件与算法协同创新，这将直接催生出一批具备真实作业能力的智能代理（Autonomous Agents）。</p>
+<h3 id="未来愿景走向生存式智能">未来愿景：走向“生存式智能”</h3>
+<p>从长远来看，生成认知的提出不仅是技术迭代，更是一场哲学层面的反思：智能是否必须具有肉身？如果 AI 无法感受物理阻力、温度与空间限制，它是否永远只能成为人类文明的“数字幻象”？</p>
+<p>未来 3-5 年，我们有望看到 AI 从“模仿人类语言模式”转向“在物理世界中学习生存规律”。这不仅会改变人类与机器的互动方式，更将深刻影响制造业、医疗救助及深空探索等领域的底层逻辑。当 AI 不再是被动地服务于数据，而是主动地与世界互动，我们距离真正的通用人工智能（AGI）或许才算真正跨出了第一步。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Toward Enactive Artificial Intelligence（https://chatpaper.com/zh-CN/paper/285835）·学术论文·Banafsheh Rafiee, Richard S. Sutton（2026/6/2）·检索日期2026/6/2&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>强化学习教父重出江湖，生成式AI的时代要结束了？（https://hub.baai.ac.cn/view/50170）·北京智源人工智能研究院·（2026/6/2）·检索日期2026/6/2&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E6%88%90%E8%AE%A4%E7%9F%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生成认知</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">具身智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">强化学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/agi/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AGI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI 范式转移</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%87%AA%E4%B8%BB%E7%B3%BB%E7%BB%9F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">自主系统</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/rsagent-20260527161003474-3/">从感知到行动：RSAgent如何终结视觉分割的“单次预测”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/composer-25-ai--20260519194003608-3/">超越成本的“黑魔法”：Composer 2.5 预示 AI 编程进入“自主进化”的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260325081005989-0/">机械公敌还是资本新贵？宇树科技的“直立行走”之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260305174005731-1/">哈萨比斯：在上帝的棋局中，做那个下棋的人</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2026agi-20260123124007153-0/">马斯克预言2026实现AGI：白领“集体毕业”，全人类“躺赢”时代真要来了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagi-20251204174004872-2/">世界模型：AI的“具身”之困与AGI的下一站征途</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251124161004804-0/">吴翼：从奶茶爱好者到具身智能布道者，用强化学习“智”造未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/physical-intelligence-06-20251118124005474-1/">具身智能的破局者：Physical Intelligence π*0.6与“纠错式”强化学习的商业与哲学深思</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agi-scaling-law-ai-20251118084005643-0/">李飞飞对AGI泼冷水： Scaling Law 困境下的空间智能范式转移与具身AI未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/suttonai-20251107154005942-1/">经验的觉醒：强化学习教父Sutton归来，预示通用AI新范式的“去中心化”未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/10poolside-20251031181004775-1/">英伟达10亿美元押注Poolside：代码智能体将如何重构软件开发与人类创造力？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-29-10-29-agi-ai-/">10-29日报|AGI幻影与权力新规：AI狂飙突进下的真假命题</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/andrej-karpathyai-20251021124005107-4/">Andrej Karpathy的AI十年论：从模型崩溃到智能体的慢动作烟花盛宴</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/andrej-karpathyagi-20251021104005206-4/">Andrej Karpathy的冷静预言：AGI远在十年之后，“智能体元年”仍是渐进式进化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/lukasz-kaiserai-20251013191010416-1/">大模型「第一性思考」：Lukasz Kaiser洞察AI新范式，从算力狂奔走向强化推理与具身智能的未来</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
