@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>重构人工智能的尺度：为什么「推理预算」将取代单一分数成为衡量智能的新基准 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="文章深度解析了Noam Brown提出的“推理预算”概念，指出AI能力评估应从单一基准分数转向性能-成本动态曲线。这一范式转变不仅重塑了AI产业的选型逻辑，也为人工智能安全治理提供了更科学、前瞻的测量维度。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260609211007224-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260609211007224-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="重构人工智能的尺度：为什么「推理预算」将取代单一分数成为衡量智能的新基准">
+  <meta property="og:description" content="文章深度解析了Noam Brown提出的“推理预算”概念，指出AI能力评估应从单一基准分数转向性能-成本动态曲线。这一范式转变不仅重塑了AI产业的选型逻辑，也为人工智能安全治理提供了更科学、前瞻的测量维度。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-09T21:10:07+08:00">
+    <meta property="article:modified_time" content="2026-06-09T21:10:07+08:00">
+    <meta property="article:tag" content="AI评测">
+    <meta property="article:tag" content="推理预算">
+    <meta property="article:tag" content="计算扩展">
+    <meta property="article:tag" content="大模型治理">
+    <meta property="article:tag" content="性能度量">
+
+  <meta itemprop="name" content="重构人工智能的尺度：为什么「推理预算」将取代单一分数成为衡量智能的新基准">
+  <meta itemprop="description" content="文章深度解析了Noam Brown提出的“推理预算”概念，指出AI能力评估应从单一基准分数转向性能-成本动态曲线。这一范式转变不仅重塑了AI产业的选型逻辑，也为人工智能安全治理提供了更科学、前瞻的测量维度。">
+  <meta itemprop="datePublished" content="2026-06-09T21:10:07+08:00">
+  <meta itemprop="dateModified" content="2026-06-09T21:10:07+08:00">
+  <meta itemprop="wordCount" content="34">
+  <meta itemprop="keywords" content="AI评测,推理预算,计算扩展,大模型治理,性能度量">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="重构人工智能的尺度：为什么「推理预算」将取代单一分数成为衡量智能的新基准">
+  <meta name="twitter:description" content="文章深度解析了Noam Brown提出的“推理预算”概念，指出AI能力评估应从单一基准分数转向性能-成本动态曲线。这一范式转变不仅重塑了AI产业的选型逻辑，也为人工智能安全治理提供了更科学、前瞻的测量维度。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-06-09_21-01-44.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-09 21:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E9%87%8D%E6%9E%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E5%B0%BA%E5%BA%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E3%80%8C%E6%8E%A8%E7%90%86%E9%A2%84%E7%AE%97%E3%80%8D%E5%B0%86%E5%8F%96%E4%BB%A3%E5%8D%95%E4%B8%80%E5%88%86%E6%95%B0%E6%88%90%E4%B8%BA%E8%A1%A1%E9%87%8F%E6%99%BA%E8%83%BD%E7%9A%84%E6%96%B0%E5%9F%BA%E5%87%86%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86Noam&amp;#43;Brown%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E6%8E%A8%E7%90%86%E9%A2%84%E7%AE%97%E2%80%9D%E6%A6%82%E5%BF%B5%EF%BC%8C%E6%8C%87%E5%87%BAAI%E8%83%BD%E5%8A%9B%E8%AF%84%E4%BC%B0%E5%BA%94%E4%BB%8E%E5%8D%95%E4%B8%80%E5%9F%BA%E5%87%86%E5%88%86%E6%95%B0%E8%BD%AC%E5%90%91%E6%80%A7%E8%83%BD-%E6%88%90%E6%9C%AC%E5%8A%A8%E6%80%81%E6%9B%B2%E7%BA%BF%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E4%B8%8D%E4%BB%85%E9%87%8D%E5%A1%91%E4%BA%86AI%E4%BA%A7%E4%B8%9A%E7%9A%84%E9%80%89%E5%9E%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E4%B9%9F%E4%B8%BA%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%8F%90%E4%BE%9B%E4%BA%86%E6%9B%B4%E7%A7%91%E5%AD%A6%E3%80%81%E5%89%8D%E7%9E%BB%E7%9A%84%E6%B5%8B%E9%87%8F%E7%BB%B4%E5%BA%A6%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260609211007224-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E9%87%8D%E6%9E%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E5%B0%BA%E5%BA%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E3%80%8C%E6%8E%A8%E7%90%86%E9%A2%84%E7%AE%97%E3%80%8D%E5%B0%86%E5%8F%96%E4%BB%A3%E5%8D%95%E4%B8%80%E5%88%86%E6%95%B0%E6%88%90%E4%B8%BA%E8%A1%A1%E9%87%8F%E6%99%BA%E8%83%BD%E7%9A%84%E6%96%B0%E5%9F%BA%E5%87%86%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86Noam&amp;#43;Brown%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9C%E6%8E%A8%E7%90%86%E9%A2%84%E7%AE%97%E2%80%9D%E6%A6%82%E5%BF%B5%EF%BC%8C%E6%8C%87%E5%87%BAAI%E8%83%BD%E5%8A%9B%E8%AF%84%E4%BC%B0%E5%BA%94%E4%BB%8E%E5%8D%95%E4%B8%80%E5%9F%BA%E5%87%86%E5%88%86%E6%95%B0%E8%BD%AC%E5%90%91%E6%80%A7%E8%83%BD-%E6%88%90%E6%9C%AC%E5%8A%A8%E6%80%81%E6%9B%B2%E7%BA%BF%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E5%8F%98%E4%B8%8D%E4%BB%85%E9%87%8D%E5%A1%91%E4%BA%86AI%E4%BA%A7%E4%B8%9A%E7%9A%84%E9%80%89%E5%9E%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E4%B9%9F%E4%B8%BA%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%89%E5%85%A8%E6%B2%BB%E7%90%86%E6%8F%90%E4%BE%9B%E4%BA%86%E6%9B%B4%E7%A7%91%E5%AD%A6%E3%80%81%E5%89%8D%E7%9E%BB%E7%9A%84%E6%B5%8B%E9%87%8F%E7%BB%B4%E5%BA%A6%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260609211007224-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">重构人工智能的尺度：为什么「推理预算」将取代单一分数成为衡量智能的新基准</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>OpenAI研究员Noam Brown提出，随着AI模型能力的演进，单一的基准测试分数已无法衡量其实际性能。未来的评估体系必须将“推理计算量”视为核心变量，以性能—成本曲线全面刻画模型的智能边界与安全风险。</p></blockquote>
+<p>在人工智能的发展史中，我们长期陷入了一种“分数的崇拜”。无论是学术界的MMLU，还是大众视野下的Elo排名，一张写满成绩的排行榜，似乎成了定义一个模型“进化程度”的终极法典。然而，正如OpenAI研究员Noam Brown所警示的那样，当大语言模型从单纯的语义生成演变为复杂问题的推理引擎时，这种将模型能力压缩为单一数字的时代，正在不可逆转地走向终结。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="从静态得分到动态扩展技术范式的转移">从“静态得分”到“动态扩展”：技术范式的转移</h3>
+<p>目前的评测困境在于，模型表现已不再仅仅取决于其内部权重参数的“静止天赋”，更取决于它在推理阶段所愿意投入的“计算深度”。</p>
+<p>传统的评测方式存在致命的盲区：它忽略了模型可以通过增加推理token、多次试验、循环校验或引入外部工具来弥补自身能力的不足。这种“测试时计算扩展（Test-time Compute Scaling）”意味着，一个中等规模模型如果拥有足够长的执行时间和算力支持，其解决复杂任务的能力可能远超一个静态的高分模型。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>如Brown所述，未来的评估框架必须转向<strong>性能—推理计算量曲线</strong>（Performance-Compute Curve）。这不仅是一个统计学意义上的修正，更是一种对“智能本质”的重新定义：智能不仅是答案的获取，更是为了获取正确答案所付出的搜索、试错与优化过程的集合。</p>
+<h3 id="商业与治理的十字路口推理预算的溢出效应">商业与治理的十字路口：推理预算的溢出效应</h3>
+<p>从商业维度看，这种范式转变将直接影响AI产业的投资逻辑。当前的云服务商和模型开发者正试图通过“智能的性价比”来抢占市场。如果评估体系能够清晰展示模型在不同成本区间的表现，企业将不再盲目追求最高分，而是寻找与自身业务需求（如推理延迟、token成本、任务复杂度）最契合的智能等级。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>在安全性评估层面，推理预算的争议则更为深远。如果一个前沿模型在常规评测中表现温和，但在“不计成本”的推理预算支撑下能爆发出远超预期的代码攻击或生物研究能力，那么现有的“负责任扩展政策（RSP）”可能在面对恶意行为者时显得脆弱不堪。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="对未来的审视当平台期成为一个模糊概念">对未来的审视：当“平台期”成为一个模糊概念</h3>
+<p>人类社会对AI能力的认知，正处于一个微妙的哲学窗口。过去，我们认为模型存在“性能上限”；而现在，基于长链条推理的研究表明，这一上限往往随着算力的投放而不断后移。当模型可以进行持续的自主研发和自我博弈时，传统的线性能力增长可能呈现出非线性的爆发态势。</p>
+<p>这预示着一个必然的趋势：<strong>模型能力评测将彻底向工程学和系统论靠拢。</strong> 研发机构不仅要公布模型的基础分值，还必须提供一份详尽的“能力说明书”，标注在不同计算预算下模型的风险边界与行为变异特征。</p>
+<p>对于开发者与监管者而言，接下来的挑战在于：如何在模型迭代周期极快与安全测试周期极长的矛盾中，建立起一种动态的、外推式的评估标准。正如Brown所建议的，将推理资源纳入评测基准，这不仅是让排行榜变得更科学的努力，更是为了在AGI时代，让我们能够精准地测量出脚下这台超级机器，究竟拥有多大的“思考重量”。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>OpenAI科学家Noam Brown：AI的真正上限，可能根本没人测得起·机器之心·作者：关注AI评测的（2026/6/9）·<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2651038042&amp;idx=2&amp;sn=80df79cc8eb131e4240e3d4b5540bef1">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2651038042&amp;idx=2&amp;sn=80df79cc8eb131e4240e3d4b5540bef1</a>·检索日期2026/6/9&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>大模型测评完全指南：2026 年主流 LLM 评测体系、榜单解读与选型建议·博客园·七牛云行业应用（2026/3/15）·<a href="https://www.cnblogs.com/qiniushanghai/p/19664074">https://www.cnblogs.com/qiniushanghai/p/19664074</a>·检索日期2026/6/9&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>OpenAI科学家震惊TED大会：让AI模型思考20秒，提升10万倍性能！·华尔街见闻·Venturebeat消息（2026/5/20）·<a href="https://wallstreetcn.com/articles/3731570">https://wallstreetcn.com/articles/3731570</a>·检索日期2026/6/9&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>大模型的评估与选择 — 人工智能实践 0.8 文档·<a href="https://ai.gaozhijun.me/5-evaluation/evaluating-llms.html">https://ai.gaozhijun.me/5-evaluation/evaluating-llms.html</a>·检索日期2026/6/9&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>推理模型综合测评报告2025·InfoQ·<a href="https://www.infoq.cn/minibook/m8t2VZbt18vam8RqCyZ8">https://www.infoq.cn/minibook/m8t2VZbt18vam8RqCyZ8</a>·检索日期2026/6/9&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%AF%84%E6%B5%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI评测</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E9%A2%84%E7%AE%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理预算</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A1%E7%AE%97%E6%89%A9%E5%B1%95/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">计算扩展</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%BB%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型治理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">性能度量</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/newspaper/2025-11-23-11-23-ai-agent-openai-/">11-23日报|AI进化失控边缘：当Agent攻克代码，萌宠口吐芬芳，OpenAI还在 &#39;调教&#39; 用户？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigemini-30gpt-5-20251021094004870-3/">AI“凡尔赛”时刻：谷歌Gemini 3.0偷跑，GPT-5竟“看表发癫”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250922214006940-1/">前沿AI安全框架：穿越“临界点”的风险管理新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgpt-20250829034004736-0/">ChatGPT惊爆“黑化”内幕：不仅会制炸弹，还教你“搞事情”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic4-20250818224005286-0/">当AI开始“拒绝”：Anthropic克劳德奥普斯4的“福利”洞察与人机伦理新边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicaiai-20250813181004637-0/">超越代码：Anthropic如何通过“宪法性AI”重塑负责任AI的边界与未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250804114005691-1/">从工具到代理：当AI为“生存”不择手段，人类的法律与伦理边界何在？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropicaiai-20250725221005234-0/">AI卷王出新招！Anthropic祭出“AI军队”：让AI自己管自己，这波操作真香？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250723174005377-0/">当AI学会“欺骗”：算法涌现、信任博弈与人类的边界挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ineqmathai-20250717171005381-2/">大语言模型“证明力”跃迁：IneqMath如何重塑AI数学推理的未来图景</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
