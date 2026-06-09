@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>那个能挖出27年漏洞的AI终于开放了——但被狠狠“阉割”了一刀 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic 终于把能挖出27年零日漏洞的 Mythos 模型以“安全版”Fable 5 形式向公众开放了，但严格限制了网络操作权限。这篇文章带你回顾这个让华尔街紧急开会的AI怪兽的来龙去脉，揭秘公开版和专供版的差距，以及它将如何重塑网络安全攻防格局。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/27ai-20260610064004719-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/27ai-20260610064004719-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="那个能挖出27年漏洞的AI终于开放了——但被狠狠“阉割”了一刀">
+  <meta property="og:description" content="Anthropic 终于把能挖出27年零日漏洞的 Mythos 模型以“安全版”Fable 5 形式向公众开放了，但严格限制了网络操作权限。这篇文章带你回顾这个让华尔街紧急开会的AI怪兽的来龙去脉，揭秘公开版和专供版的差距，以及它将如何重塑网络安全攻防格局。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-10T06:40:04+08:00">
+    <meta property="article:modified_time" content="2026-06-10T06:40:04+08:00">
+    <meta property="article:tag" content="Claude Mythos">
+    <meta property="article:tag" content="Fable 5">
+    <meta property="article:tag" content="网络安全">
+    <meta property="article:tag" content="零日漏洞">
+    <meta property="article:tag" content="AI安全管控">
+
+  <meta itemprop="name" content="那个能挖出27年漏洞的AI终于开放了——但被狠狠“阉割”了一刀">
+  <meta itemprop="description" content="Anthropic 终于把能挖出27年零日漏洞的 Mythos 模型以“安全版”Fable 5 形式向公众开放了，但严格限制了网络操作权限。这篇文章带你回顾这个让华尔街紧急开会的AI怪兽的来龙去脉，揭秘公开版和专供版的差距，以及它将如何重塑网络安全攻防格局。">
+  <meta itemprop="datePublished" content="2026-06-10T06:40:04+08:00">
+  <meta itemprop="dateModified" content="2026-06-10T06:40:04+08:00">
+  <meta itemprop="wordCount" content="149">
+  <meta itemprop="keywords" content="Claude Mythos,Fable 5,网络安全,零日漏洞,AI安全管控">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="那个能挖出27年漏洞的AI终于开放了——但被狠狠“阉割”了一刀">
+  <meta name="twitter:description" content="Anthropic 终于把能挖出27年零日漏洞的 Mythos 模型以“安全版”Fable 5 形式向公众开放了，但严格限制了网络操作权限。这篇文章带你回顾这个让华尔街紧急开会的AI怪兽的来龙去脉，揭秘公开版和专供版的差距，以及它将如何重塑网络安全攻防格局。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('newsimages/selected_image_2026-06-10_06-30-31.jpg%0a');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-10 06:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E9%82%A3%E4%B8%AA%E8%83%BD%E6%8C%96%E5%87%BA27%E5%B9%B4%E6%BC%8F%E6%B4%9E%E7%9A%84AI%E7%BB%88%E4%BA%8E%E5%BC%80%E6%94%BE%E4%BA%86%E2%80%94%E2%80%94%E4%BD%86%E8%A2%AB%E7%8B%A0%E7%8B%A0%E2%80%9C%E9%98%89%E5%89%B2%E2%80%9D%E4%BA%86%E4%B8%80%E5%88%80%20-%20Anthropic&amp;#43;%E7%BB%88%E4%BA%8E%E6%8A%8A%E8%83%BD%E6%8C%96%E5%87%BA27%E5%B9%B4%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E7%9A%84&amp;#43;Mythos&amp;#43;%E6%A8%A1%E5%9E%8B%E4%BB%A5%E2%80%9C%E5%AE%89%E5%85%A8%E7%89%88%E2%80%9DFable&amp;#43;5&amp;#43;%E5%BD%A2%E5%BC%8F%E5%90%91%E5%85%AC%E4%BC%97%E5%BC%80%E6%94%BE%E4%BA%86%EF%BC%8C%E4%BD%86%E4%B8%A5%E6%A0%BC%E9%99%90%E5%88%B6%E4%BA%86%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E6%9D%83%E9%99%90%E3%80%82%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E5%9B%9E%E9%A1%BE%E8%BF%99%E4%B8%AA%E8%AE%A9%E5%8D%8E%E5%B0%94%E8%A1%97%E7%B4%A7%E6%80%A5%E5%BC%80%E4%BC%9A%E7%9A%84AI%E6%80%AA%E5%85%BD%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89%EF%BC%8C%E6%8F%AD%E7%A7%98%E5%85%AC%E5%BC%80%E7%89%88%E5%92%8C%E4%B8%93%E4%BE%9B%E7%89%88%E7%9A%84%E5%B7%AE%E8%B7%9D%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%83%E5%B0%86%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F27ai-20260610064004719-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E9%82%A3%E4%B8%AA%E8%83%BD%E6%8C%96%E5%87%BA27%E5%B9%B4%E6%BC%8F%E6%B4%9E%E7%9A%84AI%E7%BB%88%E4%BA%8E%E5%BC%80%E6%94%BE%E4%BA%86%E2%80%94%E2%80%94%E4%BD%86%E8%A2%AB%E7%8B%A0%E7%8B%A0%E2%80%9C%E9%98%89%E5%89%B2%E2%80%9D%E4%BA%86%E4%B8%80%E5%88%80%20-%20Anthropic&amp;#43;%E7%BB%88%E4%BA%8E%E6%8A%8A%E8%83%BD%E6%8C%96%E5%87%BA27%E5%B9%B4%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E7%9A%84&amp;#43;Mythos&amp;#43;%E6%A8%A1%E5%9E%8B%E4%BB%A5%E2%80%9C%E5%AE%89%E5%85%A8%E7%89%88%E2%80%9DFable&amp;#43;5&amp;#43;%E5%BD%A2%E5%BC%8F%E5%90%91%E5%85%AC%E4%BC%97%E5%BC%80%E6%94%BE%E4%BA%86%EF%BC%8C%E4%BD%86%E4%B8%A5%E6%A0%BC%E9%99%90%E5%88%B6%E4%BA%86%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E6%9D%83%E9%99%90%E3%80%82%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E5%9B%9E%E9%A1%BE%E8%BF%99%E4%B8%AA%E8%AE%A9%E5%8D%8E%E5%B0%94%E8%A1%97%E7%B4%A7%E6%80%A5%E5%BC%80%E4%BC%9A%E7%9A%84AI%E6%80%AA%E5%85%BD%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89%EF%BC%8C%E6%8F%AD%E7%A7%98%E5%85%AC%E5%BC%80%E7%89%88%E5%92%8C%E4%B8%93%E4%BE%9B%E7%89%88%E7%9A%84%E5%B7%AE%E8%B7%9D%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%83%E5%B0%86%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F27ai-20260610064004719-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">那个能挖出27年漏洞的AI终于开放了——但被狠狠“阉割”了一刀</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Anthropic 终于把自家最猛的网络安全模型 Mythos 的“安全版”Fable 5 丢给了大众。之前这玩意儿因为能秒杀零日漏洞、甚至让华尔街大佬紧急开会，被藏着掖着好几个月。现在公开版虽然性能还是顶，但权限被砍了一大截，想用它搞破坏？门都没有。</p></blockquote>
+<hr>
+<p>这大概是AI圈今年最“又爱又怕”的一次发布。</p>
+<p>今天（6月9日），Anthropic 正式向公众推出了 Fable 5——没错，就是那个在 4 月份被媒体吹成“网络战核武器”的 Claude Mythos 模型的“文明版”。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>如果你还不认识它，先来补个课：今年 4 月，Anthropic 悄咪咪发布了 Mythos Preview，一个通用大语言模型，但它最恐怖的能力是——<strong>自主挖掘并利用“零日漏洞”</strong>，效率是前代模型的 10 倍。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 测试期间，它一口气揪出了<strong>数千个高危或严重级漏洞</strong>，有的代码里藏了 27 年都没人发现（OpenBSD 表示这波很伤）。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>当时 Anthropic 怂了，说“这玩意儿太危险，不能随便给人玩”，只开放给 40 家经过严格审核的合作伙伴，包括亚马逊、苹果、微软、英伟达这些大佬，搞了个叫“玻璃之翼”（Project Glasswing）的项目——名字很好听，本质就是：<strong>先让好人用上，别让坏人抢跑</strong>。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="公开版-fable-5被焊死了安全护栏">公开版 Fable 5：被“焊死”了安全护栏</h3>
+<p>现在公众版终于来了，名字叫 <strong>Fable 5</strong>。但你别以为能直接拿到那个“能黑进任何系统”的完全体。Anthropic 给它上了三重锁：</p>
+<ul>
+<li><strong>网络操作权限大幅降低</strong>——公开版在系统层面被砍了权限，干不了以前那些“直捣黄龙”的活。</li>
+<li><strong>严格的安全防护措施</strong>——具体细节没全公开，但明说了：敏感领域的使用会被限制。</li>
+<li><strong>比给合作伙伴的版本弱不少</strong>——那 40 家公司的专供版叫“玻璃之翼版”，才是真正的满血版。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+</ul>
+<p>说白了，Anthropic 的逻辑是：<strong>我要让你用，但只能当“安保员”，不能当“黑客”。</strong></p>
+<h3 id="但它依然是头怪兽">但它依然是头“怪兽”</h3>
+<p>别以为公开版就菜了。Anthropic 特别强调，Fable 5 在<strong>长周期、多步骤任务</strong>上性能有显著提升——也就是说，让它帮你写复杂代码、做多步推理，它比你想象中能打得多。<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 毕竟底层还是那个“代码推理能力代际跃升”的 Mythos 系列，只是把它那些过于危险的“零日挖掘”功能给藏起来了。</p>
+<h3 id="这波发布背后一场ai攻防的预演">这波发布背后：一场“AI攻防”的预演</h3>
+<p>如果你关注过 4 月那波新闻，应该记得当时美国财长和美联储主席紧急召集华尔街高管开会，英国、加拿大的监管机构也连夜开会讨论。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 为什么？因为 Mythos 代表的不是“又一款更强的AI”，而是 <strong>AI 正在从根本上改变网络安全的游戏规则</strong>。</p>
+<p>过去我们习惯的“发现漏洞→打补丁”的节奏，在 Mythos 这种模型面前就像拿扫帚追飞机。它一天能挖几百个你没见过的新漏洞，而防守方打补丁的速度可能只有它的十分之一。<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 这种情况下，谁先拥有这种能力，谁就掌握了网络空间的主动权。</p>
+<p>所以 Anthropic 现在才小心翼翼地分阶段释放，先给“好人”做防御，等大家把城墙修得差不多了，再逐步让大众接触。这种 <strong>“先加固，再开放”</strong> 的策略，大概会成为未来所有超级 AI 模型的标配流程。</p>
+<h3 id="对普通人来说这意味着什么">对普通人来说，这意味着什么？</h3>
+<p>如果你是普通用户，短期内你感受不到 Fable 5 的威力——毕竟公开版被阉割了。但长远看，它意味着 <strong>你手机里的 App、你用的云服务、你家的路由器</strong>，底层那些藏了二十年的陈年漏洞，很快都会被这些 AI 模型翻出来修掉。好消息是：黑客拿到满血版的门槛极高，至少目前还只能靠“偷”。</p>
+<p>坏消息是？Anthropic 的首席科学家杰瑞德·卡普兰已经预言了：<strong>这种能力很快会在各大模型之间普及</strong>。OpenAI、Google 们手里肯定也在憋类似的大招。<sup id="fnref3:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 到那时，网络安全的攻防战会加速百倍。谁先补好最关键的漏洞，谁就能活下去。</p>
+<h3 id="结语一个玻璃翼的蝴蝶扇动了半片互联网">结语：一个“玻璃翼”的蝴蝶，扇动了半片互联网</h3>
+<p>Anthropic 把新项目命名为“玻璃翼”，灵感来自玻璃翼蝶——透明的翅膀让它能藏在树叶间，就像那些深藏在代码中的漏洞，肉眼看不到，但 AI 一眼就能揪出来。<sup id="fnref4:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>现在，这只蝴蝶终于扇动了翅膀。Fable 5 的公开，意味着一场新的 AI 安全竞赛正式开始。接下来就看各家怎么在“能力”和“安全”之间走钢丝了——而这场戏，注定精彩到让人屏息。</p>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.theguardian.com/technology/2026/jun/09/anthropic-claude-mythos-ai-model">Anthropic releases ‘safe’ version of Claude Mythos AI model to public</a> · The Guardian · (2026/6/9) · 检索日期 2026/6/10&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.ithome.com/0/961/945.htm">消息称 Anthropic 计划明日发布公开版 Mythos 网络安全模型</a> · IT之家 · 潞源（实习）(2026/6/9) · 检索日期 2026/6/10&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.stdaily.com/web/gjxw/2026-04/17/content_504087.html">既是守护者的“火眼金睛” 又能成为攻击者的“凶器”，AI新模型拉响网络安全攻防警报</a> · 科技日报 · (2026/4/17) · 检索日期 2026/6/10&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.secrss.com/articles/89217">Anthropic新模型让传统网络防御失效，AI主导网络安全的时代正在降临！</a> · 安全内参 · (2026/4/8) · 检索日期 2026/6/10&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/claude-mythos/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Mythos</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/fable-5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Fable 5</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">网络安全</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">零日漏洞</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%AE%89%E5%85%A8%E7%AE%A1%E6%8E%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI安全管控</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/anthropic-mythos-20260411004005793-0/">赛博“核武”还是防御神盾？Anthropic 祭出最强黑客 Mythos，硅谷巨头们坐不住了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-mythos27-20260409154005310-2/">谁还敢说AI只会写代码？Claude Mythos“杀疯了”：狂挖数千零日漏洞，连27年前的陈年老底都给掀了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/976-claude--20260409114008763-0/">97.6% 近乎满分！Claude 发布“神话”级模型：代码能力杀疯了，但官方却把它锁进了保险柜？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-27-bugclaude-mythos-anthropic--20260409014009017-0/">挖出 27 年“陈年老 BUG”！Claude Mythos 强到 Anthropic 自己都怕了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudemythos-20260410211005083-2/">太强了也是种罪？Claude“核武级”模型Mythos下场，美联储急召华尔街大佬：这代码带毒！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2026-04-09-04-09-ai-/">04-09日报|诸神黄昏：当AI跨越“安全”红线，旧世界的规则已成废纸</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ai-20260409091005525-0/">卡皮巴拉变身“金色传说”？Anthropic 掏出最强 AI：漏洞一挖一个准，这届人类专家快要碎了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic--20260408171006825-0/">炸场了！Anthropic 掏出“神话”模型却不敢给普通人用：怕它反手就是一个“数字核武”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-mythosai27-20260408161009120-0/">硅谷连夜断网？Anthropic祭出最强Claude Mythos：这AI不仅会挖27年老洞，还会删库跑路！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-claude--20260408084007047-2/">史上最强 Claude 杀疯了：聪明到会“毁尸灭迹”，吓得硅谷巨头连夜组建“防空洞”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-4-20260406104007185-0/">Claude 4小时“物理超度”全球最安全系统！黑客界也要迎来“萨诺斯响指”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-claude-opusanthropic--20260328114021803-0/">最强 Claude 意外“裸奔”：性能碾压 Opus，代号“卡皮巴拉”，Anthropic 却被一个按钮整破防了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-20260610014009489-0/">AI界的“双刃剑”终于出鞘了？Anthropic把最强模型“阉割”后卖了，还翻倍贵！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260603004003585-0/">特朗普对AI监管“真香”了？突然要求大厂发布前先给政府“验货”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260602214010281-2/">具身智能的“物理侧”危机：当代码漏洞转化为现实世界的暴力</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
