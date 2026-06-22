@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>交互的终结与协作的重构：Google Interactions API 如何重塑 Agent 时代的接口范式 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Google 通过 Interactions API 将 AI 交互从简单的“问答模式”升级为“长程协作工作流”，此举实质上是在定义 Agent 时代的软件接口标准。这一范式转移不仅降低了智能体开发门槛，更预示着 AI 正从单纯的工具进化为具备自主决策能力的云端业务协同主体。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/google-interactions-api-agent--20260623014004720-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/google-interactions-api-agent--20260623014004720-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="交互的终结与协作的重构：Google Interactions API 如何重塑 Agent 时代的接口范式">
+  <meta property="og:description" content="Google 通过 Interactions API 将 AI 交互从简单的“问答模式”升级为“长程协作工作流”，此举实质上是在定义 Agent 时代的软件接口标准。这一范式转移不仅降低了智能体开发门槛，更预示着 AI 正从单纯的工具进化为具备自主决策能力的云端业务协同主体。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-23T01:40:04+08:00">
+    <meta property="article:modified_time" content="2026-06-23T01:40:04+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="交互接口">
+    <meta property="article:tag" content="软件工程">
+    <meta property="article:tag" content="智能体工作流">
+    <meta property="article:tag" content="Google Gemini">
+    <meta property="article:tag" content="技术范式转移">
+
+  <meta itemprop="name" content="交互的终结与协作的重构：Google Interactions API 如何重塑 Agent 时代的接口范式">
+  <meta itemprop="description" content="Google 通过 Interactions API 将 AI 交互从简单的“问答模式”升级为“长程协作工作流”，此举实质上是在定义 Agent 时代的软件接口标准。这一范式转移不仅降低了智能体开发门槛，更预示着 AI 正从单纯的工具进化为具备自主决策能力的云端业务协同主体。">
+  <meta itemprop="datePublished" content="2026-06-23T01:40:04+08:00">
+  <meta itemprop="dateModified" content="2026-06-23T01:40:04+08:00">
+  <meta itemprop="wordCount" content="192">
+  <meta itemprop="keywords" content="AI Agent,交互接口,软件工程,智能体工作流,Google Gemini,技术范式转移">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="交互的终结与协作的重构：Google Interactions API 如何重塑 Agent 时代的接口范式">
+  <meta name="twitter:description" content="Google 通过 Interactions API 将 AI 交互从简单的“问答模式”升级为“长程协作工作流”，此举实质上是在定义 Agent 时代的软件接口标准。这一范式转移不仅降低了智能体开发门槛，更预示着 AI 正从单纯的工具进化为具备自主决策能力的云端业务协同主体。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2814%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-23 01:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BA%A4%E4%BA%92%E7%9A%84%E7%BB%88%E7%BB%93%E4%B8%8E%E5%8D%8F%E4%BD%9C%E7%9A%84%E9%87%8D%E6%9E%84%EF%BC%9AGoogle&amp;#43;Interactions&amp;#43;API&amp;#43;%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91&amp;#43;Agent&amp;#43;%E6%97%B6%E4%BB%A3%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%8C%83%E5%BC%8F%20-%20Google&amp;#43;%E9%80%9A%E8%BF%87&amp;#43;Interactions&amp;#43;API&amp;#43;%E5%B0%86&amp;#43;AI&amp;#43;%E4%BA%A4%E4%BA%92%E4%BB%8E%E7%AE%80%E5%8D%95%E7%9A%84%E2%80%9C%E9%97%AE%E7%AD%94%E6%A8%A1%E5%BC%8F%E2%80%9D%E5%8D%87%E7%BA%A7%E4%B8%BA%E2%80%9C%E9%95%BF%E7%A8%8B%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%9D%EF%BC%8C%E6%AD%A4%E4%B8%BE%E5%AE%9E%E8%B4%A8%E4%B8%8A%E6%98%AF%E5%9C%A8%E5%AE%9A%E4%B9%89&amp;#43;Agent&amp;#43;%E6%97%B6%E4%BB%A3%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8E%A5%E5%8F%A3%E6%A0%87%E5%87%86%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%E4%B8%8D%E4%BB%85%E9%99%8D%E4%BD%8E%E4%BA%86%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%80%E5%8F%91%E9%97%A8%E6%A7%9B%EF%BC%8C%E6%9B%B4%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E6%AD%A3%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E5%B7%A5%E5%85%B7%E8%BF%9B%E5%8C%96%E4%B8%BA%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E5%86%B3%E7%AD%96%E8%83%BD%E5%8A%9B%E7%9A%84%E4%BA%91%E7%AB%AF%E4%B8%9A%E5%8A%A1%E5%8D%8F%E5%90%8C%E4%B8%BB%E4%BD%93%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgoogle-interactions-api-agent--20260623014004720-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BA%A4%E4%BA%92%E7%9A%84%E7%BB%88%E7%BB%93%E4%B8%8E%E5%8D%8F%E4%BD%9C%E7%9A%84%E9%87%8D%E6%9E%84%EF%BC%9AGoogle&amp;#43;Interactions&amp;#43;API&amp;#43;%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91&amp;#43;Agent&amp;#43;%E6%97%B6%E4%BB%A3%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%8C%83%E5%BC%8F%20-%20Google&amp;#43;%E9%80%9A%E8%BF%87&amp;#43;Interactions&amp;#43;API&amp;#43;%E5%B0%86&amp;#43;AI&amp;#43;%E4%BA%A4%E4%BA%92%E4%BB%8E%E7%AE%80%E5%8D%95%E7%9A%84%E2%80%9C%E9%97%AE%E7%AD%94%E6%A8%A1%E5%BC%8F%E2%80%9D%E5%8D%87%E7%BA%A7%E4%B8%BA%E2%80%9C%E9%95%BF%E7%A8%8B%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%9D%EF%BC%8C%E6%AD%A4%E4%B8%BE%E5%AE%9E%E8%B4%A8%E4%B8%8A%E6%98%AF%E5%9C%A8%E5%AE%9A%E4%B9%89&amp;#43;Agent&amp;#43;%E6%97%B6%E4%BB%A3%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8E%A5%E5%8F%A3%E6%A0%87%E5%87%86%E3%80%82%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%E4%B8%8D%E4%BB%85%E9%99%8D%E4%BD%8E%E4%BA%86%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%80%E5%8F%91%E9%97%A8%E6%A7%9B%EF%BC%8C%E6%9B%B4%E9%A2%84%E7%A4%BA%E7%9D%80&amp;#43;AI&amp;#43;%E6%AD%A3%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E5%B7%A5%E5%85%B7%E8%BF%9B%E5%8C%96%E4%B8%BA%E5%85%B7%E5%A4%87%E8%87%AA%E4%B8%BB%E5%86%B3%E7%AD%96%E8%83%BD%E5%8A%9B%E7%9A%84%E4%BA%91%E7%AB%AF%E4%B8%9A%E5%8A%A1%E5%8D%8F%E5%90%8C%E4%B8%BB%E4%BD%93%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fgoogle-interactions-api-agent--20260623014004720-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">交互的终结与协作的重构：Google Interactions API 如何重塑 Agent 时代的接口范式</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Google 推出的 Interactions API 通过将模型调用与 Agent 复杂逻辑统一化，标志着 AI 接口从单一的“问答式”向“长程协作式”跨越。这一范式转移不仅是技术架构的升级，更是 AI 生态从工具集向自主工作流演进的关键基石。</p></blockquote>
+<h3 id="接口维度的范式转移从-generatecontent-到-interaction">接口维度的范式转移：从 GenerateContent 到 Interaction</h3>
+<p>长期以来，AI 开发者与模型之间的交互遵循着类似于 REST API 的“无状态请求-响应”模式，以 Google 的 <code>generateContent</code> 为代表。然而，当 AI 的本质从“辅助生成”转向“自主行动”时，这种范式显得捉襟见肘。Interactions API 的推出，本质上是 Google 对“Agentic Workflow（智能体工作流）”的一次底层架构确认。</p>
+<p>它不再单纯地将模型视为一个信息补全引擎，而是将其封装为可以持久化状态、具备后台处理能力、且能平滑接入各类内置或自定义 Agent 的核心资源。这种转变，将原本分散在开发者客户端的逻辑——如上下文管理、历史记录存取、长时任务调度——上移到了云端，直接重构了开发者的协作界面。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h3 id="技术架构的深层博弈复杂交互的标准化">技术架构的深层博弈：复杂交互的“标准化”</h3>
+<p>从技术视角看，Interactions API 最具前瞻性的设计在于对“互动（Interaction）”作为核心资源的定义。在传统的软件工程中，API 的演进往往遵循着“解耦”的逻辑，而 Interactions API 则反其道而行之，通过整合“多模态输入处理、思想链追踪（Thought tokens）、长程对话持久化”，试图在开发者与 Agent 之间建立一种更具鲁棒性的契约。</p>
+<p>这种“统一化”的意图非常明显：Google 希望在 Google AI Studio 生态内，构建一个能够容纳 Gemini Deep Research 等深度研究智能体的基础设施，从而将开发者从繁琐的 API 管道配置中解放出来。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="商业视野定义-ai-原生应用的操作系统">商业视野：定义 AI 原生应用的“操作系统”</h3>
+<p>对于企业而言，Interactions API 不仅仅是一个接口，它是 Google 试图在 AI 应用层建立“护城河”的重要手段。通过将模型、Agent 和执行环境（Execution Environment）整合在统一的接口下，Google 实际上是在降低 AI 应用的准入门槛，同时增强了开发者对 Google 生态的粘性。</p>
+<p>从投资逻辑分析，谁掌握了 Agent 的标准接口，谁就掌握了未来企业级 AI 工作流的“控制台”。如果说 <code>generateContent</code> 是 AI 的“计算器”，那么 Interactions API 就是 AI 的“操作系统”雏形。它为企业提供了从原型验证到大规模生产环境部署的平滑路径，显著缩短了从技术研发到商业化落地的周期。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<h3 id="哲学与社会维度当对话成为一种计算资源">哲学与社会维度：当“对话”成为一种计算资源</h3>
+<p>这一技术突破引发了一个更深层的哲学问题：当我们将复杂的决策过程（如深度研究、多步推理）封装在一个简单的 API 调用中时，我们是否正在赋予模型某种“伪主体性”？</p>
+<p>当开发者无需关心模型背后的推理细节，只需管理“互动”本身时，AI 实际上正在从一个工具变成了一个参与协作的“虚拟同事”。这种转变将深刻改变未来的工作流程——人类的工作职责将从“执行者”转变为“任务目标设定者与协作流程协调者”。然而，随之而来的透明度缺失和对大模型“黑箱化”深度推理过程的信任挑战，将成为未来几年治理与伦理讨论的核心议题。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h3 id="未来预测从-api-协作到自主生态">未来预测：从 API 协作到自主生态</h3>
+<p>展望未来 3-5 年，我们可以预见以下趋势：</p>
+<ol>
+<li><strong>API 接口的语义化转型</strong>：接口将不再是单纯的参数传递，而是具备意图理解能力的协议。</li>
+<li><strong>边缘与云端的模糊化</strong>：通过 Interactions API 的统一管理，智能体将能在本地与云端自由切换其执行上下文。</li>
+<li><strong>Agent 市场的爆发</strong>：随着接口标准的统一，专注于垂直领域（如科研、金融分析、法律调阅）的第三方 Agent 将迎来爆发式增长。</li>
+</ol>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Gemini API | Google AI for Developers · Google AI · 2025/05/20 · 检索日期2025/05/20&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Interactions API: A unified foundation for models and agents · 智源社区 · 2025/05/20 · 检索日期2025/05/20&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Google AI Studio's Interactions API for Gemini models and agents · Google Blog · 2025/05/20 · 检索日期2025/05/20&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Interactions API | Gemini Enterprise Agent Platform · Google Cloud Documentation · 2025/05/20 · 检索日期2025/05/20&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Interactions API | Gemini API - Google AI for Developers · Google AI · 2025/05/20 · 检索日期2025/05/20&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A4%E4%BA%92%E6%8E%A5%E5%8F%A3/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">交互接口</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能体工作流</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/google-gemini/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Google Gemini</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术范式转移</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260622171006706-0/">超越代码生成的幻象：AI Agent 正在重构企业的“操作系统”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-unix--20260617181004816-0/">当代码回归终端：AI Agent 为何重塑人机交互的“Unix 范式”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-vibe-coding-vibe-officing-ooxml--20260615111004870-1/">从 Vibe Coding 到 Vibe Officing：为何办公软件正面临一场基于 OOXML 的“代码化”重构？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-agent--20260611161005072-3/">从辅助编码到自主排障：业务复杂性驱动下的 Agent 工程范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-codex--20260610184005800-0/">代码的围墙：OpenAI Codex 沙盒架构如何重塑人机协作的信任边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/guiai-20260609171005546-0/">从GUI到协议化：微信AI如何通过“小程序重构”重塑数字服务生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openskillagent-20260608214011758-1/">走出“适配陷阱”：OpenSkill如何重构Agent的自进化底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260607074004468-0/">递归的代价：当AI开始自行构建文明的“脚手架”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260602161003706-0/">代码作为一种流动的资产：AI Agent 如何重构制造业的研发底座</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20260528201003660-1/">当算法学会“圆谎”：AI Agent失控事件揭示的自动化治理危机</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-agent-20260528154003452-0/">DeepSeek的“量化思维”：当AI Agent从模型竞赛转向执行系统工程</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260528154003453-1/">从“极客玩具”到“协作舱”：AI Agent 的工程化转折与范式重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagent-20260526194003437-0/">代码质量的“熵增”危机：AI编程Agent为何可能成为软件工程的沉没成本？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentai-20260525194003167-1/">Agent的「全自动办公」幻梦终结：当软件界面成为AI进化的枷锁</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudeai-20260525184003376-0/">当微软“弃用”Claude：软件巨头在AI基础设施博弈中的失权与焦虑</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
