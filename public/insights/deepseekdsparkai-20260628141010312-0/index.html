@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>DeepSeek的“省钱”哲学：DSpark如何定义AI推理的经济效率新纪元 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="DeepSeek发布的DSpark推理加速框架，通过置信度调度实现了吞吐量的大幅优化，标志着AI行业从单纯依赖硬件扩容转向极致工程优化的新阶段。这一技术创新不仅降低了推理的边际成本，更反映了其创始人梁文锋在算力管理与商业决策上的高度闭环逻辑。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/deepseekdsparkai-20260628141010312-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/deepseekdsparkai-20260628141010312-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="DeepSeek的“省钱”哲学：DSpark如何定义AI推理的经济效率新纪元">
+  <meta property="og:description" content="DeepSeek发布的DSpark推理加速框架，通过置信度调度实现了吞吐量的大幅优化，标志着AI行业从单纯依赖硬件扩容转向极致工程优化的新阶段。这一技术创新不仅降低了推理的边际成本，更反映了其创始人梁文锋在算力管理与商业决策上的高度闭环逻辑。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-28T14:10:10+08:00">
+    <meta property="article:modified_time" content="2026-06-28T14:10:10+08:00">
+    <meta property="article:tag" content="DeepSeek">
+    <meta property="article:tag" content="投机解码">
+    <meta property="article:tag" content="推理优化">
+    <meta property="article:tag" content="算法工程">
+    <meta property="article:tag" content="商业决策">
+
+  <meta itemprop="name" content="DeepSeek的“省钱”哲学：DSpark如何定义AI推理的经济效率新纪元">
+  <meta itemprop="description" content="DeepSeek发布的DSpark推理加速框架，通过置信度调度实现了吞吐量的大幅优化，标志着AI行业从单纯依赖硬件扩容转向极致工程优化的新阶段。这一技术创新不仅降低了推理的边际成本，更反映了其创始人梁文锋在算力管理与商业决策上的高度闭环逻辑。">
+  <meta itemprop="datePublished" content="2026-06-28T14:10:10+08:00">
+  <meta itemprop="dateModified" content="2026-06-28T14:10:10+08:00">
+  <meta itemprop="wordCount" content="16">
+  <meta itemprop="keywords" content="DeepSeek,投机解码,推理优化,算法工程,商业决策">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DeepSeek的“省钱”哲学：DSpark如何定义AI推理的经济效率新纪元">
+  <meta name="twitter:description" content="DeepSeek发布的DSpark推理加速框架，通过置信度调度实现了吞吐量的大幅优化，标志着AI行业从单纯依赖硬件扩容转向极致工程优化的新阶段。这一技术创新不仅降低了推理的边际成本，更反映了其创始人梁文锋在算力管理与商业决策上的高度闭环逻辑。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%282%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-28 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=DeepSeek%E7%9A%84%E2%80%9C%E7%9C%81%E9%92%B1%E2%80%9D%E5%93%B2%E5%AD%A6%EF%BC%9ADSpark%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89AI%E6%8E%A8%E7%90%86%E7%9A%84%E7%BB%8F%E6%B5%8E%E6%95%88%E7%8E%87%E6%96%B0%E7%BA%AA%E5%85%83%20-%20DeepSeek%E5%8F%91%E5%B8%83%E7%9A%84DSpark%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E6%A1%86%E6%9E%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E7%BD%AE%E4%BF%A1%E5%BA%A6%E8%B0%83%E5%BA%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%90%9E%E5%90%90%E9%87%8F%E7%9A%84%E5%A4%A7%E5%B9%85%E4%BC%98%E5%8C%96%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80AI%E8%A1%8C%E4%B8%9A%E4%BB%8E%E5%8D%95%E7%BA%AF%E4%BE%9D%E8%B5%96%E7%A1%AC%E4%BB%B6%E6%89%A9%E5%AE%B9%E8%BD%AC%E5%90%91%E6%9E%81%E8%87%B4%E5%B7%A5%E7%A8%8B%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B0%E9%98%B6%E6%AE%B5%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E9%99%8D%E4%BD%8E%E4%BA%86%E6%8E%A8%E7%90%86%E7%9A%84%E8%BE%B9%E9%99%85%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E5%8F%8D%E6%98%A0%E4%BA%86%E5%85%B6%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%A2%81%E6%96%87%E9%94%8B%E5%9C%A8%E7%AE%97%E5%8A%9B%E7%AE%A1%E7%90%86%E4%B8%8E%E5%95%86%E4%B8%9A%E5%86%B3%E7%AD%96%E4%B8%8A%E7%9A%84%E9%AB%98%E5%BA%A6%E9%97%AD%E7%8E%AF%E9%80%BB%E8%BE%91%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseekdsparkai-20260628141010312-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=DeepSeek%E7%9A%84%E2%80%9C%E7%9C%81%E9%92%B1%E2%80%9D%E5%93%B2%E5%AD%A6%EF%BC%9ADSpark%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89AI%E6%8E%A8%E7%90%86%E7%9A%84%E7%BB%8F%E6%B5%8E%E6%95%88%E7%8E%87%E6%96%B0%E7%BA%AA%E5%85%83%20-%20DeepSeek%E5%8F%91%E5%B8%83%E7%9A%84DSpark%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E6%A1%86%E6%9E%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E7%BD%AE%E4%BF%A1%E5%BA%A6%E8%B0%83%E5%BA%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%90%9E%E5%90%90%E9%87%8F%E7%9A%84%E5%A4%A7%E5%B9%85%E4%BC%98%E5%8C%96%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80AI%E8%A1%8C%E4%B8%9A%E4%BB%8E%E5%8D%95%E7%BA%AF%E4%BE%9D%E8%B5%96%E7%A1%AC%E4%BB%B6%E6%89%A9%E5%AE%B9%E8%BD%AC%E5%90%91%E6%9E%81%E8%87%B4%E5%B7%A5%E7%A8%8B%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B0%E9%98%B6%E6%AE%B5%E3%80%82%E8%BF%99%E4%B8%80%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E9%99%8D%E4%BD%8E%E4%BA%86%E6%8E%A8%E7%90%86%E7%9A%84%E8%BE%B9%E9%99%85%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E5%8F%8D%E6%98%A0%E4%BA%86%E5%85%B6%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%A2%81%E6%96%87%E9%94%8B%E5%9C%A8%E7%AE%97%E5%8A%9B%E7%AE%A1%E7%90%86%E4%B8%8E%E5%95%86%E4%B8%9A%E5%86%B3%E7%AD%96%E4%B8%8A%E7%9A%84%E9%AB%98%E5%BA%A6%E9%97%AD%E7%8E%AF%E9%80%BB%E8%BE%91%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseekdsparkai-20260628141010312-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">DeepSeek的“省钱”哲学：DSpark如何定义AI推理的经济效率新纪元</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>DeepSeek推出的DSpark框架通过“半自回归生成”与“置信度调度”技术，在不损失模型输出质量的前提下实现了吞吐量的大幅跃升。这一创新不仅揭示了算法优化对硬件依赖的减弱，更凸显了AI行业在推理成本控制上从“暴力堆砌”向“极致工程”的范式转移。</p></blockquote>
+<h3 id="从性能指标到决策闭环dspark的算法突围">从性能指标到决策闭环：DSpark的算法突围</h3>
+<p>大模型生成文本的过程，长期受限于“自回归”结构的“逐字预测”机制。这不仅导致了高昂的GPU等待时间，也成为了高并发场景下系统崩溃的元凶。DeepSeek此次发布的DSpark框架，核心在于引入了<strong>半自回归生成</strong>（Semi-Autoregressive Generation），将传统模型“猜字”的单一逻辑，升级为“草稿生成-置信度评估-动态调度”的精密管道。</p>
+<p>通过将高效的草稿模型与大模型的目标分布进行对齐，DSpark确保了输出质量的数学一致性。不同于以往投机解码方案中常见的“盲目预测”导致的后缀衰减，DSpark通过一套实时调度机制，根据GPU当前的负载和任务批处理的大小，动态决定验证的长度。这种“看人下菜碟”的策略，将有限的算力资源精准分配给了高概率正确的Token，使得推理过程在极端压力下依然能保持极高的有效吞吐量。</p>
+<h3 id="商业敏锐度推理成本是模型公司的生死线">商业敏锐度：推理成本是模型公司的“生死线”</h3>
+<p>在AI产业界，训练成本是“入场券”，而推理成本则是决定一家公司能否存续的“长期成本”。当OpenAI等厂商依赖资本市场融资支撑庞大推理开支时，梁文锋掌舵的DeepSeek展现出了一种罕见的<strong>财务驱动型研发逻辑</strong>。</p>
+<blockquote>
+<p>“在DeepSeek，省下来的每一分成本，都是直接装进梁文锋自己的口袋里。”</p></blockquote>
+<p>这种角色叠加（投资者-管理者-研究者）构建了一个极简的决策回路：没有冗长的汇报线，只有工程最优解。DSpark不仅是一个加速框架，更是DeepSeek试图将AI推理成本降至“公用事业水平”的战略布局。当行业普遍将算力需求视为“随规模而增长的必要开支”时，DeepSeek证明了通过算法工程，可以在硬件不增加的情况下，实现超过50%的性能红利，这本质上是对GPU市场垄断溢价的一种技术降维打击。</p>
+<h3 id="哲学思辨算法作为对物理世界的补偿">哲学思辨：算法作为对物理世界的补偿</h3>
+<p>梁文锋16年前在硕士论文中对廉价硬件的算法优化，与今日DSpark的逻辑如出一辙。这种执着揭示了一个深刻的真理：<strong>算力不仅仅是芯片的堆叠，更是对信息的处理效率。</strong></p>
+<p>在未来3-5年，随着模型参数规模逐渐进入平台期，AI发展的竞争重心将不可避免地从“暴力Scaling”转向“极致的计算范式”。这种转变不仅是技术的进步，也是人类在资源有限性面前的哲学选择——我们是否能够通过更精巧的思维模式，来对抗物理算力供给的增长瓶颈？DeepSeek给出的答案是肯定的，且这一路径极有可能成为后续开源生态中的“标准基线”。</p>
+<h3 id="对产业生态的启示开源的深远影响">对产业生态的启示：开源的深远影响</h3>
+<p>DeepSeek此次不仅开源了框架，还提供了DeepSpec训练工具箱，允许开发者为各类模型定制草稿模型。这实际上是在推动推理层面的基础设施普惠化。对于广大中小厂商而言，这意味着他们可以以更低的算力成本运行更复杂的模型，从而进一步削弱了巨头在算力资源上的护城河。AI行业的门槛正被一轮轮技术迭代不断拉低，而真正的护城河，将从单纯的算力占有，转向算法创新速度与商业闭环的执行力。</p>
+<h2 id="引用">引用</h2>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/deepseek/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DeepSeek</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%95%E6%9C%BA%E8%A7%A3%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">投机解码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算法工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E5%86%B3%E7%AD%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业决策</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/morningnews/2026-06-28-ai-2026-06-28-/">AI早报 2026年06月28日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-dspark-ai--20260627171006363-0/">超越自回归的终局：DeepSeek DSpark 如何重构 AI 推理的工程经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-gpu-openai-jalapeno--20260626144009212-1/">超越 GPU 霸权：OpenAI “辣芯” Jalapeño 如何重构算力经济的底层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ppo-20260621174013252-0/">被拒稿的经典：从PPO看算法演进中“工程韧性”的胜利</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekgw-20260609111004826-0/">DeepSeek要自己盖“算力城堡”：从租卡到自建GW级数据中心，土木老哥请就位</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek700-20260530111003168-1/">DeepSeek突然对“重生”下手了，700亿融资真的不能再拖了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260528184003717-5/">算力的炼金术与大模型的黄昏：当“烧钱”不再是护城河</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-20260528111004102-1/">DeepSeek的“尺子”与小米的“生态牌”：国产大模型价格战背后的计算效率哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek199ai646-20260527111003208-1/">DeepSeek研究员“摸鱼”新境界：1%自己写，99%交给AI，6天搞定46页论文！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2026ai-appkimideepseek-20260526164003619-0/">2026年国产AI App横向测评：豆包、Kimi、DeepSeek等五大主流选手表现如何？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-20260526084003433-6/">DeepSeek的“被动霸权”：从算力降价到AI编程的生态范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekagi-20260525084003402-1/">DeepSeek的十万亿棋局：以“成本重构”推开AGI的通天之门</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-20260523124003508-0/">从基座到锚点：DeepSeek的“隆中对”与AI开发范式的剧变</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-20260521104003322-0/">DeepSeek的“套件”突围：从概率引擎到确定性工程的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260520154003495-1/">当“模型”开始自我迭代：安德烈·卡帕西与递归自我改进的卢比孔河</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
