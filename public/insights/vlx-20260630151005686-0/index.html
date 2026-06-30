@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“看图对话”到“实时响应”：VLX架构如何重构具身智能的物理感知范式 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="VLX架构通过引入流式推理范式，解决了AI在实时物理交互中的延迟痛点，实现了从感知到行动的高效闭环。这一突破标志着具身智能从云端依赖向端侧自主化的演进，为机器人与物理世界的实时协作开辟了全新可能。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/vlx-20260630151005686-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/vlx-20260630151005686-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“看图对话”到“实时响应”：VLX架构如何重构具身智能的物理感知范式">
+  <meta property="og:description" content="VLX架构通过引入流式推理范式，解决了AI在实时物理交互中的延迟痛点，实现了从感知到行动的高效闭环。这一突破标志着具身智能从云端依赖向端侧自主化的演进，为机器人与物理世界的实时协作开辟了全新可能。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-30T15:10:05+08:00">
+    <meta property="article:modified_time" content="2026-06-30T15:10:05+08:00">
+    <meta property="article:tag" content="流式多模态">
+    <meta property="article:tag" content="具身智能">
+    <meta property="article:tag" content="端侧计算">
+    <meta property="article:tag" content="机器人感知">
+    <meta property="article:tag" content="AI范式转移">
+
+  <meta itemprop="name" content="从“看图对话”到“实时响应”：VLX架构如何重构具身智能的物理感知范式">
+  <meta itemprop="description" content="VLX架构通过引入流式推理范式，解决了AI在实时物理交互中的延迟痛点，实现了从感知到行动的高效闭环。这一突破标志着具身智能从云端依赖向端侧自主化的演进，为机器人与物理世界的实时协作开辟了全新可能。">
+  <meta itemprop="datePublished" content="2026-06-30T15:10:05+08:00">
+  <meta itemprop="dateModified" content="2026-06-30T15:10:05+08:00">
+  <meta itemprop="wordCount" content="22">
+  <meta itemprop="keywords" content="流式多模态,具身智能,端侧计算,机器人感知,AI范式转移">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“看图对话”到“实时响应”：VLX架构如何重构具身智能的物理感知范式">
+  <meta name="twitter:description" content="VLX架构通过引入流式推理范式，解决了AI在实时物理交互中的延迟痛点，实现了从感知到行动的高效闭环。这一突破标志着具身智能从云端依赖向端侧自主化的演进，为机器人与物理世界的实时协作开辟了全新可能。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%284%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-30 15:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E7%9C%8B%E5%9B%BE%E5%AF%B9%E8%AF%9D%E2%80%9D%E5%88%B0%E2%80%9C%E5%AE%9E%E6%97%B6%E5%93%8D%E5%BA%94%E2%80%9D%EF%BC%9AVLX%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E7%89%A9%E7%90%86%E6%84%9F%E7%9F%A5%E8%8C%83%E5%BC%8F%20-%20VLX%E6%9E%B6%E6%9E%84%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%B5%81%E5%BC%8F%E6%8E%A8%E7%90%86%E8%8C%83%E5%BC%8F%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86AI%E5%9C%A8%E5%AE%9E%E6%97%B6%E7%89%A9%E7%90%86%E4%BA%A4%E4%BA%92%E4%B8%AD%E7%9A%84%E5%BB%B6%E8%BF%9F%E7%97%9B%E7%82%B9%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%88%B0%E8%A1%8C%E5%8A%A8%E7%9A%84%E9%AB%98%E6%95%88%E9%97%AD%E7%8E%AF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E6%A0%87%E5%BF%97%E7%9D%80%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BB%8E%E4%BA%91%E7%AB%AF%E4%BE%9D%E8%B5%96%E5%90%91%E7%AB%AF%E4%BE%A7%E8%87%AA%E4%B8%BB%E5%8C%96%E7%9A%84%E6%BC%94%E8%BF%9B%EF%BC%8C%E4%B8%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8E%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E7%9A%84%E5%AE%9E%E6%97%B6%E5%8D%8F%E4%BD%9C%E5%BC%80%E8%BE%9F%E4%BA%86%E5%85%A8%E6%96%B0%E5%8F%AF%E8%83%BD%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fvlx-20260630151005686-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E7%9C%8B%E5%9B%BE%E5%AF%B9%E8%AF%9D%E2%80%9D%E5%88%B0%E2%80%9C%E5%AE%9E%E6%97%B6%E5%93%8D%E5%BA%94%E2%80%9D%EF%BC%9AVLX%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E7%89%A9%E7%90%86%E6%84%9F%E7%9F%A5%E8%8C%83%E5%BC%8F%20-%20VLX%E6%9E%B6%E6%9E%84%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%B5%81%E5%BC%8F%E6%8E%A8%E7%90%86%E8%8C%83%E5%BC%8F%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86AI%E5%9C%A8%E5%AE%9E%E6%97%B6%E7%89%A9%E7%90%86%E4%BA%A4%E4%BA%92%E4%B8%AD%E7%9A%84%E5%BB%B6%E8%BF%9F%E7%97%9B%E7%82%B9%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%88%B0%E8%A1%8C%E5%8A%A8%E7%9A%84%E9%AB%98%E6%95%88%E9%97%AD%E7%8E%AF%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E6%A0%87%E5%BF%97%E7%9D%80%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BB%8E%E4%BA%91%E7%AB%AF%E4%BE%9D%E8%B5%96%E5%90%91%E7%AB%AF%E4%BE%A7%E8%87%AA%E4%B8%BB%E5%8C%96%E7%9A%84%E6%BC%94%E8%BF%9B%EF%BC%8C%E4%B8%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8E%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E7%9A%84%E5%AE%9E%E6%97%B6%E5%8D%8F%E4%BD%9C%E5%BC%80%E8%BE%9F%E4%BA%86%E5%85%A8%E6%96%B0%E5%8F%AF%E8%83%BD%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fvlx-20260630151005686-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“看图对话”到“实时响应”：VLX架构如何重构具身智能的物理感知范式</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Om AI联汇发布的VLX模型通过“流式多模态”架构，打破了传统视频理解对离线切帧的依赖，实现了毫秒级的物理世界感知与执行闭环，标志着AI从屏幕工具向具备自主行动能力的具身智能体的质变。</p></blockquote>
+<h3 id="从离线到实时多模态架构的范式转移">从离线到实时：多模态架构的范式转移</h3>
+<p>长期以来，多模态大模型的视觉理解能力被束缚在“静态图像”或“离线短视频”的思维框架内。模型如同一个坐在屏幕前的观察者，需要等待视频切帧、加载完毕后才能进行推理。然而，真实的物理世界是连续且动态的，这种延迟在自动驾驶、工业协作机器人或家庭服务机器人场景下是致命的。</p>
+<p>Om AI联汇推出的VLX模型系列，本质上是对AI感知逻辑的一次<strong>底层重构</strong>。它摒弃了传统的“离线批处理”模式，转而采用“流式编码与缓存增量推理”。这种架构让AI具备了处理实时数据流的能力，单路延迟最低可达0.06秒。这不仅是性能指标的提升，更是AI与时间维度建立“同步感”的标志——模型不再是被动响应，而是与环境同频跳动。</p>
+<h3 id="核心引擎感知定位与执行的三角闭环">核心引擎：感知、定位与执行的三角闭环</h3>
+<p>VLX系列通过三个模型的协同，构建了一个完整的实时物理智能框架：</p>
+<ul>
+<li><strong>VLX-Flow（持续感知）</strong>：通过增量推理机制，模型能够像人类视网膜一样，保持对环境变化状态的持续记忆与更新。</li>
+<li><strong>VLX-Seek（精准定位）</strong>：创新性地将坐标输出转化为区域选择，降低了模型在端侧运行时的计算复杂度，有效提升了物理空间感知的可靠性。</li>
+<li><strong>VLX-Go（行动执行）</strong>：直接输出机器人的航点轨迹，而非自然语言指令，这是AI从“认知”转向“具身（Embodied）”的关键一步。</li>
+</ul>
+<p>这种架构设计的精妙之处在于它对<strong>物理约束的尊重</strong>。在端侧算力有限的条件下，VLX并没有盲目堆砌参数，而是从原生架构层面进行轻量化优化（0.6B至10B规格），证明了未来AI的竞争力将取决于其“如何在有限算力下最高效地与物理世界交互”。</p>
+<h3 id="产业格局与深层商业逻辑">产业格局与深层商业逻辑</h3>
+<p>从商业角度看，VLX的出现正在加速具身智能行业的“去云端化”。当前，许多机器人系统的瓶颈在于云端通信延迟与网络不稳定性，而VLX提供的端侧闭环能力，为机器人真正走出实验室、进入家庭及工业车间扫清了障碍。</p>
+<p>这种范式的变迁，预示着市场竞争将从单纯的参数规模（Scale）竞争，转向**场景适应性（Adaptability）与实时交互效率（Real-time Efficiency）**的竞争。对于开发者和企业而言，这意味着未来AI的应用价值将取决于它能否在非标环境中即时做出正确决策。</p>
+<h3 id="未来展望具身智能的进化路径">未来展望：具身智能的进化路径</h3>
+<p>随着VLX这类模型的演进，未来3-5年内，我们可能会看到AI从单一功能的自动化设备，演变为具备持续环境感知能力的“数字生命”。</p>
+<blockquote>
+<p>“当AI开始以流式视角审视世界时，它不仅在处理数据，更在构建一种对现实世界因果关系的动态理解。”</p></blockquote>
+<p>然而，技术变革也伴随着新的伦理挑战：当AI能够自主完成轨迹规划与避障，其责任归属的界限将变得模糊。我们不仅要关注模型输出的准确性，还必须在系统层面建立起基于物理安全的治理框架。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E6%B5%81%E5%BC%8F%E5%A4%9A%E6%A8%A1%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">流式多模态</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">具身智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AB%AF%E4%BE%A7%E8%AE%A1%E7%AE%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">端侧计算</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%84%9F%E7%9F%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器人感知</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI范式转移</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260622184005679-0/">跨越“具身鸿沟”：映界科技与机器人认知的空间转向</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251120164004753-2/">指尖的智慧：一目科技仿生触觉传感器如何重塑具身智能的感知边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/evo-0-20250928204009928-1/">Evo-0：从像素到空间，机器人感知突破如何重塑具身智能未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630141007360-0/">走出虚拟的囚笼：物理AI如何定义智能产业的“下半场”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630131017862-0/">机械之手的博弈：机器人产业链的“宁德时代”会是谁？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630114005075-0/">从概率到必然：具身智能如何重塑工业生产的“确定性”疆界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630111004807-0/">具身智能的静默革命：当生成式AI从屏幕走进物理服务现场</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630081004829-0/">硅基淘金热：具身智能的百亿泡沫与生存博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260629201007618-0/">走出虚拟洞穴：世界模型的商业觉醒</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260629114006675-0/">硅基大脑的炼金术：自变量机器人如何成为资本的“共有资产”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/20050-20260629094004960-3/">估值200亿、融资50亿、投资人名单全明星：这家“最像特斯拉”的中国机器人公司，为啥杀疯了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260628174006375-0/">走出“概念迷雾”：世界模型如何成为数字与物理世界的“底层操作系统”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260627101003975-2/">物理世界的最后两米：从“紫宝盒”到“拍拍豆”，物流AI如何重构非结构化空间？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2008-20260626131005155-0/">我，日薪200元，成了机器人的“私教”：每天叠8小时被子，只为教它怎么干活</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260626124023641-0/">从感知到共生：AI「记忆层」如何重构数字时代的生产力范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
