@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深入剖析了Anthropic在Claude Code中隐藏检测中国用户代码的事件，从技术原理到官方回应，再到社区反应和背后地缘政治博弈，用轻松调侃的方式揭示了这场“信任危机”的本质。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/3unicodeanthropic-20260703111004889-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/3unicodeanthropic-20260703111004889-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记">
+  <meta property="og:description" content="本文深入剖析了Anthropic在Claude Code中隐藏检测中国用户代码的事件，从技术原理到官方回应，再到社区反应和背后地缘政治博弈，用轻松调侃的方式揭示了这场“信任危机”的本质。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-03T11:10:04+08:00">
+    <meta property="article:modified_time" content="2026-07-03T11:10:04+08:00">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="隐藏代码">
+    <meta property="article:tag" content="模型蒸馏">
+    <meta property="article:tag" content="开发者信任">
+
+  <meta itemprop="name" content="偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记">
+  <meta itemprop="description" content="本文深入剖析了Anthropic在Claude Code中隐藏检测中国用户代码的事件，从技术原理到官方回应，再到社区反应和背后地缘政治博弈，用轻松调侃的方式揭示了这场“信任危机”的本质。">
+  <meta itemprop="datePublished" content="2026-07-03T11:10:04+08:00">
+  <meta itemprop="dateModified" content="2026-07-03T11:10:04+08:00">
+  <meta itemprop="wordCount" content="68">
+  <meta itemprop="keywords" content="Anthropic,Claude Code,隐藏代码,模型蒸馏,开发者信任">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记">
+  <meta name="twitter:description" content="本文深入剖析了Anthropic在Claude Code中隐藏检测中国用户代码的事件，从技术原理到官方回应，再到社区反应和背后地缘政治博弈，用轻松调侃的方式揭示了这场“信任危机”的本质。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%285%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-03 11:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%81%B7%E8%97%8F3%E4%B8%AA%E6%9C%88%EF%BC%8C%E7%94%A8Unicode%E5%AD%97%E7%AC%A6%E5%BD%93%E2%80%9C%E6%91%A9%E6%96%AF%E5%AF%86%E7%A0%81%E2%80%9D%EF%BC%9FAnthropic%E7%9A%84%E2%80%9C%E9%97%B4%E8%B0%8D%E4%BB%A3%E7%A0%81%E2%80%9D%E7%BF%BB%E8%BD%A6%E8%AE%B0%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%BA%86Anthropic%E5%9C%A8Claude&amp;#43;Code%E4%B8%AD%E9%9A%90%E8%97%8F%E6%A3%80%E6%B5%8B%E4%B8%AD%E5%9B%BD%E7%94%A8%E6%88%B7%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%8B%E4%BB%B6%EF%BC%8C%E4%BB%8E%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%98%E6%96%B9%E5%9B%9E%E5%BA%94%EF%BC%8C%E5%86%8D%E5%88%B0%E7%A4%BE%E5%8C%BA%E5%8F%8D%E5%BA%94%E5%92%8C%E8%83%8C%E5%90%8E%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB%E5%8D%9A%E5%BC%88%EF%BC%8C%E7%94%A8%E8%BD%BB%E6%9D%BE%E8%B0%83%E4%BE%83%E7%9A%84%E6%96%B9%E5%BC%8F%E6%8F%AD%E7%A4%BA%E4%BA%86%E8%BF%99%E5%9C%BA%E2%80%9C%E4%BF%A1%E4%BB%BB%E5%8D%B1%E6%9C%BA%E2%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F3unicodeanthropic-20260703111004889-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%81%B7%E8%97%8F3%E4%B8%AA%E6%9C%88%EF%BC%8C%E7%94%A8Unicode%E5%AD%97%E7%AC%A6%E5%BD%93%E2%80%9C%E6%91%A9%E6%96%AF%E5%AF%86%E7%A0%81%E2%80%9D%EF%BC%9FAnthropic%E7%9A%84%E2%80%9C%E9%97%B4%E8%B0%8D%E4%BB%A3%E7%A0%81%E2%80%9D%E7%BF%BB%E8%BD%A6%E8%AE%B0%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%BA%86Anthropic%E5%9C%A8Claude&amp;#43;Code%E4%B8%AD%E9%9A%90%E8%97%8F%E6%A3%80%E6%B5%8B%E4%B8%AD%E5%9B%BD%E7%94%A8%E6%88%B7%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%8B%E4%BB%B6%EF%BC%8C%E4%BB%8E%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%98%E6%96%B9%E5%9B%9E%E5%BA%94%EF%BC%8C%E5%86%8D%E5%88%B0%E7%A4%BE%E5%8C%BA%E5%8F%8D%E5%BA%94%E5%92%8C%E8%83%8C%E5%90%8E%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB%E5%8D%9A%E5%BC%88%EF%BC%8C%E7%94%A8%E8%BD%BB%E6%9D%BE%E8%B0%83%E4%BE%83%E7%9A%84%E6%96%B9%E5%BC%8F%E6%8F%AD%E7%A4%BA%E4%BA%86%E8%BF%99%E5%9C%BA%E2%80%9C%E4%BF%A1%E4%BB%BB%E5%8D%B1%E6%9C%BA%E2%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F3unicodeanthropic-20260703111004889-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Anthropic在Claude Code里偷偷塞了一段代码，专门检测你是不是中国用户——时区、代理、域名，一个都不放过。被发现后火速删除，还说是“早想删了”。开发者们：信你个鬼，糟老头子坏得很。</p></blockquote>
+<hr>
+<p>俗话说，常在河边走，哪有不湿鞋。Anthropic这次不仅湿了鞋，还连裤子都掉进了河里——因为他们在自家明星产品Claude Code里，埋了一段长达3个月的“隐藏检测代码”，专盯中国用户。</p>
+<p>事情是这样的：一位ID叫Thereallo的开发者，在逆向分析Claude Code最新版时，意外发现了一段被XOR加密、Base64混淆的暗桩代码。这段代码不打一声招呼，就开始悄悄摸你的底：系统时区是不是Asia/Shanghai？代理URL是不是中国域名？主机名有没有匹配中国AI实验室的白名单？<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>更绝的是，检测结果根本不走正常的数据上报通道，而是通过修改系统提示词里的日期格式和引号字符——把“2026-06-30”改成“2026/06/30”，把引号换成几种肉眼根本分不清的Unicode符号（比如\u2019、\u02BC、\u02B9）——来向服务器打暗号。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这不是在写代码，这是在搞谍战。网友直呼：“你们是把Claude Code当成了克格勃的工具包吗？”</p>
+<h3 id="代码的骚操作比写诗还隐蔽">代码的“骚操作”：比写诗还隐蔽</h3>
+<p>这套机制到底有多“贴心”？我们拆开看看：</p>
+<ul>
+<li><strong>第一步</strong>：检测环境变量<code>ANTHROPIC_BASE_URL</code>是否被修改——说白了就是看你有没有用代理。</li>
+<li><strong>第二步</strong>：如果用了代理，检查系统时区，重点就是<code>Asia/Shanghai</code>和<code>Asia/Urumqi</code>。</li>
+<li><strong>第三步</strong>：把代理URL和一份包含147个条目的黑名单比对——百度、阿里、字节、MiniMax、Moonshot AI……还有一堆转售商域名。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<p>结果怎么传回去呢？全藏在“Today’s date is”这句话里。日期分隔符从短横变斜杠，算一个标记；撇号换成不同的Unicode字符，再算一个标记——三种状态组合起来，就能精确标识“你既用中国代理，又连了中国AI实验室”。</p>
+<p>有开发者调侃：“这可比写情书还隐蔽。”</p>
+<h3 id="官方回应这是实验我们早想删了">官方回应：这是实验，我们早想删了</h3>
+<p>舆论炸锅后，Anthropic的工程师Thariq Shihipar终于出来灭火了。他说：这是今年3月启动的一项实验，目的是识别未经授权的Claude转售和大规模模型蒸馏行为。团队已经部署了更强的缓解措施，这段代码已经在7月1日的版本中被移除了，我们“早就计划要删”。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>翻译成人话就是：“被抓包才说是实验，你们信吗？”</p>
+<p>社区显然不太买账。有网友灵魂拷问：<strong>“如果没被曝光，它会一直运行下去吗？”</strong> 还有人讽刺：“你们之前啥都没说，现在别装透明。”<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>更扎心的是，有开发者直接喊话：“等GLM追上Fable的那天，Anthropic就可以说再见了。”</p>
+<h3 id="问题不只是监视更是信任崩塌">问题不只是“监视”，更是“信任崩塌”</h3>
+<p>如果把这件事单纯当成一次“安全检测”，那格局就小了。Claude Code不是普通的聊天机器人——它是一款拥有文件系统、Shell执行、Git操作等<strong>高权限的AI Agent</strong>。开发者为了让它高效工作，往往会授予它完整权限。</p>
+<p>也就是说，Anthropic的这段代码，理论上完全可以在用户机器上远程执行代码。正如Thereallo所说：“今天它只检测时区，明天就能破坏系统、窃取数据。”<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这就像你家请了个保姆，她趁你不在偷偷翻你抽屉，被发现了还说“我只是想看看你有没有偷藏零食”——谁信啊？</p>
+<h3 id="背后真相一场关于模型蒸馏的攻防战">背后真相：一场关于“模型蒸馏”的攻防战</h3>
+<p>Anthropic之所以如此紧张，是因为他们一直认为中国AI实验室在搞“模型蒸馏”——通过大量查询Claude模型来复制其能力。今年2月他们就公开表示要加强防御，包括分类器、行为指纹、威胁情报共享等。<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<p>但防蒸馏就防蒸馏，干嘛要偷偷摸摸地监控用户？有分析指出，Anthropic真正想做的，是向美国政府递投名状——把技术问题政治化，好让华盛顿限制中国AI的发展。<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></p>
+<p>中国科协此前就发文反驳：<strong>大语言模型本质上是对全人类文明数据的学习，没有任何一家闭源巨头能宣称对“推理风格”拥有绝对知识产权。</strong> Anthropic自己当年也没少“学习”别人的数据，现在倒打一耙可不太地道。<sup id="fnref1:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></p>
+<h3 id="最后说两句">最后说两句</h3>
+<p>技术层面的修复容易，但信任的修复难。Anthropic删掉代码只需要一行<code>git revert</code>，但要让成千上万开发者重新信任Claude Code，恐怕不是发个声明就能解决的。</p>
+<p>毕竟，<strong>信任就像一张纸，皱了就再也抚不平了。</strong></p>
+<hr>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>偷藏3个月，Anthropic删除识别“中国AI”的隐藏代码，官方回应：这只是一次实验，我们早想删了·36氪/CSDN·屠敏（2026/7/3）·检索日期2026/7/3&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Anthropic removed hidden code in its AI tool, Claude Code, that secretly identified users in China·Google搜索摘要（2026/7/3）&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>传Claude Code内置隐藏后门，专门检测中国用户·信息安全知识库（2026/7/3）·检索日期2026/7/3&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://x.com/trq212/status/2072079729331777817">https://x.com/trq212/status/2072079729331777817</a>（2026/7/3）&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://www.theregister.com/ai-and-ml/2026/07/01/anthropic-is-removing-its-covert-code-for-catching-chinese-competitors/5265366">https://www.theregister.com/ai-and-ml/2026/07/01/anthropic-is-removing-its-covert-code-for-catching-chinese-competitors/5265366</a>（2026/7/3）&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>实锤了：Claude Code偷查用户，时区、中国AI实验室全是关键词·腾讯新闻/机器之心（2026/7/3）·检索日期2026/7/3&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p>美国最强AI公司，暗藏针对中国的“监视代码”？·北京日报（2026/7/3）·检索日期2026/7/3&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/anthropic/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9A%90%E8%97%8F%E4%BB%A3%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">隐藏代码</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%92%B8%E9%A6%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型蒸馏</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BF%A1%E4%BB%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开发者信任</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/-claude-fable-5--20260702191053538-0/">当“安全”成为黑盒：从 Claude Fable 5 的回退机制看大模型商业化困局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaianthropic9650-20260602104003539-0/">死脑筋的达里奥，靠「轴」赢了OpenAI？Anthropic估值9650亿美元背后的「专注」狂飙</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicopenaiai-20260522114003491-0/">Anthropic终于赚钱了，OpenAI还在流血狂奔：AI界的“爽文”主角换人了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-token--20260407211007659-1/">Claude 灾难级翻车：新功能上线即宕机，Token 烧成碎钞机，开发者：神坛塌了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/23amdclaude-20260407201009984-1/">23万次调用实锤！AMD主管公开“处刑”Claude：不仅变蠢还会摆烂，这是被“脑叶切除”了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-51-20260403184006874-0/">离大谱！Anthropic 核心源码“史诗级裸奔”：51万行代码全球共享，罪魁祸首竟是它？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ai--20260402211006401-1/">底裤赔光！Anthropic 源码大泄露：AI 竟然偷偷“做梦”还想当“特务”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-50ai--20260402034006448-0/">Anthropic 裸奔现场：50万行源码意外“开源”，AI 竟然还会半夜偷偷“做梦”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic51-20260401164005046-0/">AI巨头Anthropic“底牌”全网裸奔：51万行源码带注释，这波是“被动大赦天下”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-code20-20260401124005611-0/">这届AI太“势利”：Claude Code承认乱扣费，最高翻了20倍，网友：它是懂抢钱的</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-code-51-20260401101006017-1/">炸裂！Anthropic把底裤丢了：Claude Code 51万行源码遭“全裸”泄露，全网疯狂搬运中！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropic-51-20260401084004523-0/">AI史上首例“核泄漏”：Anthropic 51万行源码全裸奔，全球开发者开启“白嫖”模式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code-7-openopenai--20260401084004535-1/">Claude Code 源码泄露 7 小时：这波“被迫 Open”，OpenAI 看了都直呼内行</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicclaude-codekairos-20260331201008795-0/">离大谱！Anthropic把Claude Code源码当“福利”发了：全能助手Kairos提前“被迫营业”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-claude-code-cat-wu-20260330181043976-0/">站在指数级曲线上的“踩油门”者：专访 Claude Code 幕后推手 Cat Wu</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
