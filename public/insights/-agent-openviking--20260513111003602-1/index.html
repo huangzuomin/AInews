@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>当 Agent 学会“记仇”与“伪装”：OpenViking 如何通过上下文重构群体智能的进化边界 | AI内参</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="OpenViking 通过引入文件系统式的上下文管理协议，解决了多智能体协作中记忆难以沉淀的核心痛点。这种技术创新不仅显著提升了 Agent 的博弈胜率与协作效率，更推动了 Agent 从单一指令响应向具备社会属性与长期记忆的复杂群体智能演进。">
-    <meta name="generator" content="Hugo 0.147.8">
+    <meta name="generator" content="Hugo 0.147.0">
     
     
     
-      <meta name="robots" content="noindex, nofollow">
+      <meta name="robots" content="index, follow">
     
     <meta name="author" content="温故智新AIGC实验室">
     
@@ -19,7 +19,7 @@
     
 
 
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
+<link rel="stylesheet" href="/ananke/css/main.min.8213b7438ff457515c24b8e42748558e079781ec89d1cf8e2ca4d873b8008112.css" >
 
 
 
@@ -49,10 +49,10 @@
     
 
     
-      <link rel="canonical" href="http://192.168.50.247:1313/insights/-agent-openviking--20260513111003602-1/">
+      <link rel="canonical" href="https://www.neican.ai/insights/-agent-openviking--20260513111003602-1/">
     
 
-    <meta property="og:url" content="http://192.168.50.247:1313/insights/-agent-openviking--20260513111003602-1/">
+    <meta property="og:url" content="https://www.neican.ai/insights/-agent-openviking--20260513111003602-1/">
   <meta property="og:site_name" content="AI内参">
   <meta property="og:title" content="当 Agent 学会“记仇”与“伪装”：OpenViking 如何通过上下文重构群体智能的进化边界">
   <meta property="og:description" content="OpenViking 通过引入文件系统式的上下文管理协议，解决了多智能体协作中记忆难以沉淀的核心痛点。这种技术创新不仅显著提升了 Agent 的博弈胜率与协作效率，更推动了 Agent 从单一指令响应向具备社会属性与长期记忆的复杂群体智能演进。">
@@ -77,12 +77,14 @@
   <meta name="twitter:title" content="当 Agent 学会“记仇”与“伪装”：OpenViking 如何通过上下文重构群体智能的进化边界">
   <meta name="twitter:description" content="OpenViking 通过引入文件系统式的上下文管理协议，解决了多智能体协作中记忆难以沉淀的核心痛点。这种技术创新不仅显著提升了 Agent 的博弈胜率与协作效率，更推动了 Agent 从单一指令响应向具备社会属性与长期记忆的复杂群体智能演进。">
 
+      
+    
 	
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
      crossorigin="anonymous"></script>
 
 <meta name="google-adsense-account" content="ca-pub-8003902406262708">
-  </head><body class="ma0 avenir bg-near-white development">
+  </head><body class="ma0 avenir bg-near-white production">
 
     
   
@@ -168,13 +170,13 @@
     <header class="mt4 w-100">
       <aside class="instapaper_ignoref helvetica tracked">
         <span style="color: #999;">2026-05-13 11:10</span>
-      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%BD%93&amp;#43;Agent&amp;#43;%E5%AD%A6%E4%BC%9A%E2%80%9C%E8%AE%B0%E4%BB%87%E2%80%9D%E4%B8%8E%E2%80%9C%E4%BC%AA%E8%A3%85%E2%80%9D%EF%BC%9AOpenViking&amp;#43;%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8D%E6%9E%84%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E7%9A%84%E8%BF%9B%E5%8C%96%E8%BE%B9%E7%95%8C%20-%20OpenViking&amp;#43;%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%BC%8F%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%8F%E4%BD%9C%E4%B8%AD%E8%AE%B0%E5%BF%86%E9%9A%BE%E4%BB%A5%E6%B2%89%E6%B7%80%E7%9A%84%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9%E3%80%82%E8%BF%99%E7%A7%8D%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86&amp;#43;Agent&amp;#43;%E7%9A%84%E5%8D%9A%E5%BC%88%E8%83%9C%E7%8E%87%E4%B8%8E%E5%8D%8F%E4%BD%9C%E6%95%88%E7%8E%87%EF%BC%8C%E6%9B%B4%E6%8E%A8%E5%8A%A8%E4%BA%86&amp;#43;Agent&amp;#43;%E4%BB%8E%E5%8D%95%E4%B8%80%E6%8C%87%E4%BB%A4%E5%93%8D%E5%BA%94%E5%90%91%E5%85%B7%E5%A4%87%E7%A4%BE%E4%BC%9A%E5%B1%9E%E6%80%A7%E4%B8%8E%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%9A%84%E5%A4%8D%E6%9D%82%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F-agent-openviking--20260513111003602-1%2F"
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%BD%93&amp;#43;Agent&amp;#43;%E5%AD%A6%E4%BC%9A%E2%80%9C%E8%AE%B0%E4%BB%87%E2%80%9D%E4%B8%8E%E2%80%9C%E4%BC%AA%E8%A3%85%E2%80%9D%EF%BC%9AOpenViking&amp;#43;%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8D%E6%9E%84%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E7%9A%84%E8%BF%9B%E5%8C%96%E8%BE%B9%E7%95%8C%20-%20OpenViking&amp;#43;%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%BC%8F%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%8F%E4%BD%9C%E4%B8%AD%E8%AE%B0%E5%BF%86%E9%9A%BE%E4%BB%A5%E6%B2%89%E6%B7%80%E7%9A%84%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9%E3%80%82%E8%BF%99%E7%A7%8D%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86&amp;#43;Agent&amp;#43;%E7%9A%84%E5%8D%9A%E5%BC%88%E8%83%9C%E7%8E%87%E4%B8%8E%E5%8D%8F%E4%BD%9C%E6%95%88%E7%8E%87%EF%BC%8C%E6%9B%B4%E6%8E%A8%E5%8A%A8%E4%BA%86&amp;#43;Agent&amp;#43;%E4%BB%8E%E5%8D%95%E4%B8%80%E6%8C%87%E4%BB%A4%E5%93%8D%E5%BA%94%E5%90%91%E5%85%B7%E5%A4%87%E7%A4%BE%E4%BC%9A%E5%B1%9E%E6%80%A7%E4%B8%8E%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%9A%84%E5%A4%8D%E6%9D%82%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=https%3A%2F%2Fwww.neican.ai%2Finsights%2F-agent-openviking--20260513111003602-1%2F"
           class="ananke-social-link x-twitter no-underline"
           title="Share on X" aria-label="Share on X"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
                 
-              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%BD%93&amp;#43;Agent&amp;#43;%E5%AD%A6%E4%BC%9A%E2%80%9C%E8%AE%B0%E4%BB%87%E2%80%9D%E4%B8%8E%E2%80%9C%E4%BC%AA%E8%A3%85%E2%80%9D%EF%BC%9AOpenViking&amp;#43;%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8D%E6%9E%84%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E7%9A%84%E8%BF%9B%E5%8C%96%E8%BE%B9%E7%95%8C%20-%20OpenViking&amp;#43;%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%BC%8F%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%8F%E4%BD%9C%E4%B8%AD%E8%AE%B0%E5%BF%86%E9%9A%BE%E4%BB%A5%E6%B2%89%E6%B7%80%E7%9A%84%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9%E3%80%82%E8%BF%99%E7%A7%8D%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86&amp;#43;Agent&amp;#43;%E7%9A%84%E5%8D%9A%E5%BC%88%E8%83%9C%E7%8E%87%E4%B8%8E%E5%8D%8F%E4%BD%9C%E6%95%88%E7%8E%87%EF%BC%8C%E6%9B%B4%E6%8E%A8%E5%8A%A8%E4%BA%86&amp;#43;Agent&amp;#43;%E4%BB%8E%E5%8D%95%E4%B8%80%E6%8C%87%E4%BB%A4%E5%93%8D%E5%BA%94%E5%90%91%E5%85%B7%E5%A4%87%E7%A4%BE%E4%BC%9A%E5%B1%9E%E6%80%A7%E4%B8%8E%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%9A%84%E5%A4%8D%E6%9D%82%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2F-agent-openviking--20260513111003602-1%2F"
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%BD%93&amp;#43;Agent&amp;#43;%E5%AD%A6%E4%BC%9A%E2%80%9C%E8%AE%B0%E4%BB%87%E2%80%9D%E4%B8%8E%E2%80%9C%E4%BC%AA%E8%A3%85%E2%80%9D%EF%BC%9AOpenViking&amp;#43;%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8D%E6%9E%84%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E7%9A%84%E8%BF%9B%E5%8C%96%E8%BE%B9%E7%95%8C%20-%20OpenViking&amp;#43;%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%BC%8F%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%8F%E4%BD%9C%E4%B8%AD%E8%AE%B0%E5%BF%86%E9%9A%BE%E4%BB%A5%E6%B2%89%E6%B7%80%E7%9A%84%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9%E3%80%82%E8%BF%99%E7%A7%8D%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E6%8F%90%E5%8D%87%E4%BA%86&amp;#43;Agent&amp;#43;%E7%9A%84%E5%8D%9A%E5%BC%88%E8%83%9C%E7%8E%87%E4%B8%8E%E5%8D%8F%E4%BD%9C%E6%95%88%E7%8E%87%EF%BC%8C%E6%9B%B4%E6%8E%A8%E5%8A%A8%E4%BA%86&amp;#43;Agent&amp;#43;%E4%BB%8E%E5%8D%95%E4%B8%80%E6%8C%87%E4%BB%A4%E5%93%8D%E5%BA%94%E5%90%91%E5%85%B7%E5%A4%87%E7%A4%BE%E4%BC%9A%E5%B1%9E%E6%80%A7%E4%B8%8E%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%9A%84%E5%A4%8D%E6%9D%82%E7%BE%A4%E4%BD%93%E6%99%BA%E8%83%BD%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=https%3A%2F%2Fwww.neican.ai%2Finsights%2F-agent-openviking--20260513111003602-1%2F"
           class="ananke-social-link weibo no-underline"
           title="Share on Weibo" aria-label="Share on Weibo"
           target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
@@ -347,7 +349,7 @@
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://www.neican.ai/" >
     &copy;  AI内参 2026 
   </a>
     <div><div class="ananke-socials"></div>
