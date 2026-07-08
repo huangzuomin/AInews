@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Fable 5 延期五天，Anthropic 趁机推出 Claude Cowork 移动端，但真正的干货是 ClaudeDevs 官方发布的「循环工程」指南。四种循环模式让你从手动提词升级为设计自动化流程，AI 自己写代码、自己测试、自己改 Bug，你只需当个「甩手掌柜」。不过爽归爽，注意别把 Token 烧穿、别让代码架构变成一团乱麻。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/fable-5-claude-loop-20260708101015087-6/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/fable-5-claude-loop-20260708101015087-6/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop">
+  <meta property="og:description" content="Fable 5 延期五天，Anthropic 趁机推出 Claude Cowork 移动端，但真正的干货是 ClaudeDevs 官方发布的「循环工程」指南。四种循环模式让你从手动提词升级为设计自动化流程，AI 自己写代码、自己测试、自己改 Bug，你只需当个「甩手掌柜」。不过爽归爽，注意别把 Token 烧穿、别让代码架构变成一团乱麻。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-08T10:10:15+08:00">
+    <meta property="article:modified_time" content="2026-07-08T10:10:15+08:00">
+    <meta property="article:tag" content="循环工程">
+    <meta property="article:tag" content="Claude">
+    <meta property="article:tag" content="甩手掌柜">
+    <meta property="article:tag" content="AI自动化">
+    <meta property="article:tag" content="榨干指南">
+
+  <meta itemprop="name" content="Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop">
+  <meta itemprop="description" content="Fable 5 延期五天，Anthropic 趁机推出 Claude Cowork 移动端，但真正的干货是 ClaudeDevs 官方发布的「循环工程」指南。四种循环模式让你从手动提词升级为设计自动化流程，AI 自己写代码、自己测试、自己改 Bug，你只需当个「甩手掌柜」。不过爽归爽，注意别把 Token 烧穿、别让代码架构变成一团乱麻。">
+  <meta itemprop="datePublished" content="2026-07-08T10:10:15+08:00">
+  <meta itemprop="dateModified" content="2026-07-08T10:10:15+08:00">
+  <meta itemprop="wordCount" content="261">
+  <meta itemprop="keywords" content="循环工程,Claude,甩手掌柜,AI自动化,榨干指南">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop">
+  <meta name="twitter:description" content="Fable 5 延期五天，Anthropic 趁机推出 Claude Cowork 移动端，但真正的干货是 ClaudeDevs 官方发布的「循环工程」指南。四种循环模式让你从手动提词升级为设计自动化流程，AI 自己写代码、自己测试、自己改 Bug，你只需当个「甩手掌柜」。不过爽归爽，注意别把 Token 烧穿、别让代码架构变成一团乱麻。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%285%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-08 10:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Fable&amp;#43;5&amp;#43;%E6%9E%81%E9%99%90%E7%BB%AD%E5%91%BD%E4%BA%94%E5%A4%A9%EF%BC%8CClaude&amp;#43;%E6%A6%A8%E5%B9%B2%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E3%80%8C%E4%BA%BA%E8%82%89%E6%90%AC%E8%BF%90%E5%B7%A5%E3%80%8D%E5%88%B0%E3%80%8C%E7%94%A9%E6%89%8B%E6%8E%8C%E6%9F%9C%E3%80%8D%E5%B0%B1%E5%B7%AE%E4%B8%80%E4%B8%AA&amp;#43;Loop%20-%20Fable&amp;#43;5&amp;#43;%E5%BB%B6%E6%9C%9F%E4%BA%94%E5%A4%A9%EF%BC%8CAnthropic&amp;#43;%E8%B6%81%E6%9C%BA%E6%8E%A8%E5%87%BA&amp;#43;Claude&amp;#43;Cowork&amp;#43;%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%8C%E4%BD%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%B9%B2%E8%B4%A7%E6%98%AF&amp;#43;ClaudeDevs&amp;#43;%E5%AE%98%E6%96%B9%E5%8F%91%E5%B8%83%E7%9A%84%E3%80%8C%E5%BE%AA%E7%8E%AF%E5%B7%A5%E7%A8%8B%E3%80%8D%E6%8C%87%E5%8D%97%E3%80%82%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%A8%A1%E5%BC%8F%E8%AE%A9%E4%BD%A0%E4%BB%8E%E6%89%8B%E5%8A%A8%E6%8F%90%E8%AF%8D%E5%8D%87%E7%BA%A7%E4%B8%BA%E8%AE%BE%E8%AE%A1%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%81%E7%A8%8B%EF%BC%8CAI&amp;#43;%E8%87%AA%E5%B7%B1%E5%86%99%E4%BB%A3%E7%A0%81%E3%80%81%E8%87%AA%E5%B7%B1%E6%B5%8B%E8%AF%95%E3%80%81%E8%87%AA%E5%B7%B1%E6%94%B9&amp;#43;Bug%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E5%BD%93%E4%B8%AA%E3%80%8C%E7%94%A9%E6%89%8B%E6%8E%8C%E6%9F%9C%E3%80%8D%E3%80%82%E4%B8%8D%E8%BF%87%E7%88%BD%E5%BD%92%E7%88%BD%EF%BC%8C%E6%B3%A8%E6%84%8F%E5%88%AB%E6%8A%8A&amp;#43;Token&amp;#43;%E7%83%A7%E7%A9%BF%E3%80%81%E5%88%AB%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%9E%B6%E6%9E%84%E5%8F%98%E6%88%90%E4%B8%80%E5%9B%A2%E4%B9%B1%E9%BA%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffable-5-claude-loop-20260708101015087-6%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Fable&amp;#43;5&amp;#43;%E6%9E%81%E9%99%90%E7%BB%AD%E5%91%BD%E4%BA%94%E5%A4%A9%EF%BC%8CClaude&amp;#43;%E6%A6%A8%E5%B9%B2%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E3%80%8C%E4%BA%BA%E8%82%89%E6%90%AC%E8%BF%90%E5%B7%A5%E3%80%8D%E5%88%B0%E3%80%8C%E7%94%A9%E6%89%8B%E6%8E%8C%E6%9F%9C%E3%80%8D%E5%B0%B1%E5%B7%AE%E4%B8%80%E4%B8%AA&amp;#43;Loop%20-%20Fable&amp;#43;5&amp;#43;%E5%BB%B6%E6%9C%9F%E4%BA%94%E5%A4%A9%EF%BC%8CAnthropic&amp;#43;%E8%B6%81%E6%9C%BA%E6%8E%A8%E5%87%BA&amp;#43;Claude&amp;#43;Cowork&amp;#43;%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%8C%E4%BD%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%B9%B2%E8%B4%A7%E6%98%AF&amp;#43;ClaudeDevs&amp;#43;%E5%AE%98%E6%96%B9%E5%8F%91%E5%B8%83%E7%9A%84%E3%80%8C%E5%BE%AA%E7%8E%AF%E5%B7%A5%E7%A8%8B%E3%80%8D%E6%8C%87%E5%8D%97%E3%80%82%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%A8%A1%E5%BC%8F%E8%AE%A9%E4%BD%A0%E4%BB%8E%E6%89%8B%E5%8A%A8%E6%8F%90%E8%AF%8D%E5%8D%87%E7%BA%A7%E4%B8%BA%E8%AE%BE%E8%AE%A1%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%81%E7%A8%8B%EF%BC%8CAI&amp;#43;%E8%87%AA%E5%B7%B1%E5%86%99%E4%BB%A3%E7%A0%81%E3%80%81%E8%87%AA%E5%B7%B1%E6%B5%8B%E8%AF%95%E3%80%81%E8%87%AA%E5%B7%B1%E6%94%B9&amp;#43;Bug%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E5%BD%93%E4%B8%AA%E3%80%8C%E7%94%A9%E6%89%8B%E6%8E%8C%E6%9F%9C%E3%80%8D%E3%80%82%E4%B8%8D%E8%BF%87%E7%88%BD%E5%BD%92%E7%88%BD%EF%BC%8C%E6%B3%A8%E6%84%8F%E5%88%AB%E6%8A%8A&amp;#43;Token&amp;#43;%E7%83%A7%E7%A9%BF%E3%80%81%E5%88%AB%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%9E%B6%E6%9E%84%E5%8F%98%E6%88%90%E4%B8%80%E5%9B%A2%E4%B9%B1%E9%BA%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffable-5-claude-loop-20260708101015087-6%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>本来以为 Fable 5 要凉，结果 Anthropic 一波「不讲武德」延期，顺便甩出 Claude Cowork 移动端。更刺激的是，ClaudeDevs 官方手把手教你「循环工程」——从此不用再写提示词，让 AI 自己卷自己，你只管当个「甩手掌柜」。</p></blockquote>
+<hr>
+<h2 id="剧情反转fable-5-硬生生续了五天">剧情反转，Fable 5 硬生生续了五天</h2>
+<p>本来剧本都写好了：一觉醒来，Fable 5 正式退出订阅套餐，GPT-5.6 接档发布，趁势抢走 Claude 的流量。结果现实来了个「不讲武德」——Fable 5 官宣延期 5 天，推迟到当地时间 12 号。Anthropic 还顺带上了 Claude Cowork 移动端，让你关掉笔记本也能持续搬砖。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>有人紧赶慢赶把额度清了个零，结果官方反悔，彻底没招了；也有人手里还攥着大把额度没来得及用。既然额度反正要用，怎么「榨干」才不亏？这成了眼下最实际的问题。</p>
+<p>刚好，ClaudeDevs 最近发布了一篇《Getting started with loops》指南，主题正是当下大火的 AI 词汇：<strong>循环工程（Loop Engineering）</strong>。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h2 id="让-ai-自己卷自己官方认证的四种循环姿势">让 AI 自己卷自己，官方认证的四种「循环姿势」</h2>
+<p>以前我们怎么用 AI 写代码？喊一句「加个按钮」，它写一段代码，你跑一下，报错了再把报错交给它……这叫提示词工程，本质上你是个 <strong>人肉搬运工</strong>。</p>
+<p>循环工程要干的事，就是把人类从这个循环里跳脱出去。Anthropic Claude Code 的创造者 Boris Cherny 直接摊牌：「我早就不写提示词了，我现在只写循环。」<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 翻译一下就是：扔个目标给 Claude，自己转身去喝咖啡，让 AI 自己跟自己死磕。</p>
+<p>ClaudeDevs 官方给出了四种核心循环方式，自动化程度一档比一档高。</p>
+<h3 id="回合制循环一步一验收像给实习生发入职手册">回合制循环：一步一验收，像给实习生发入职手册</h3>
+<p>这是最基础的循环形式，还是你下一条指令、AI 干一件事。区别在于你可以提前写一份 <strong>SKILL.md</strong> 文件，把验收标准白纸黑字定下来。</p>
+<p>有点像给实习生发一份入职手册：活干完不许直接来找我，先自己启动本地测试服务器，去浏览器里真点一下那个按钮，确认它有反应，截图为证；再检查控制台一个报错都不能有，最后跑一遍 Lighthouse 性能测试。<strong>所有检查项全绿，才准来交作业。</strong><sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>放到写作或办公场景里，也可以用同样的思路：让 AI 每次改完稿后，顺带检查标题是否吸引人、事实是否有出处、段落是否连贯。</p>
+<h3 id="目标制循环只认结果不管过程">目标制循环：只认结果，不管过程</h3>
+<p>复杂任务往往不是一轮对话能搞定的。这时候可以用 <code>/goal</code> 命令，给 AI 设一个机器可验证的硬指标——比如「Lighthouse 评分达到 90 分以上」——再加一个最大重试次数。然后 AI 就会在后台自己试、自己测、自己改，要么达标，要么撞到次数上限为止。</p>
+<p>这一招的妙处在于，AI 不用再去猜「怎样才算好」这种玄学问题了。<strong>90 分就是 90 分，89 分就接着改。</strong> 模糊的审美判断，变成了确定性的数字。</p>
+<h3 id="定时制循环把杂活变成定时闹钟">定时制循环：把杂活变成定时闹钟</h3>
+<p>写代码之外，程序员每天还有一堆重复性杂活：代码审查、回复评论、修复跑崩的 CI。例如输入 <code>/loop 5m 检查我的 PR，回复别人的审查意见，并修复跑崩的 CI</code>，系统便会每隔 5 分钟自动执行一次巡检，变成一个持续运行的后台守护进程。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这招放到内容和办公场景里，也可以用来每天定时汇总行业新闻、整理会议纪要、扫描选题线索，或者每周生成一份学习复盘。<strong>那些过于繁琐的事情，可以先交给 AI 处理一遍。</strong></p>
+<h3 id="主动循环事件驱动的自主工作流三个-ai-赛马修-bug">主动循环：事件驱动的自主工作流，三个 AI 赛马修 Bug</h3>
+<p>这是自动化程度最高的形态。官方给的典型场景是：设定系统每小时自动检查 Bug 反馈区，在分发、处理、回复完所有新 Bug 之前，不许停。</p>
+<p>更夸张的是修 Bug 环节。系统可以同时开 3 个相互隔离的工作区（worktrees），让 3 个 AI 各写一套解决方案，再拉来一个专门的「裁判 AI」做对抗性审查，最后择优合并。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <strong>一个 Bug，三个方案，赛马机制。</strong> 以前这是大厂才玩得起的奢侈，现在是几行配置的事。</p>
+<h2 id="循环工程背后还有一套基础设施">循环工程背后，还有一套基础设施</h2>
+<p>真正能进入生产环境的循环系统，远比一个 <code>while(true)</code> 复杂。Addy Osmani 在解释循环工程时提到，一套可用的循环至少离不开几类基础组件：自动化机制、Worktrees、Skills、插件和连接器，以及子 Agent。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<ul>
+<li><strong>自动化</strong>负责让任务反复发生，可以是定时任务，也可以是 hooks 或事件触发。</li>
+<li><strong>Worktrees</strong> 负责给多个 Agent 提供彼此隔离的工作区，避免相互污染进度。</li>
+<li><strong>Skills</strong> (SKILL.md 文件) 本质上是一本持续更新的「踩坑手册」，把人类老员工的经验变成 AI 新员工的肌肉记忆。</li>
+<li><strong>插件和连接器</strong>（如 MCP）让 AI 接触真实系统——读取工单、查询数据库、调用 CI、向 Slack 发布状态。<strong>只在本地文件夹里打转，AI 更像一个代码助手；接入真实工具后，它才开始像一个执行角色。</strong></li>
+<li><strong>子 Agent</strong> 解决制衡问题。写代码的模型给自己打分，通常会太客气。更可靠的方式是让一个智能体负责实现，另一个智能体负责审查。多花一些 Token，换来一次独立判断。</li>
+</ul>
+<p>从更大的视角看，循环也有层级。Andrew Ng 曾把现代软件开发拆成左环、中环和右环：左环交给 Agent 快速写代码、运行测试；中环由工程师审架构、调方向；右环来自真实用户、线上数据和商业反馈。<strong>越靠近左环，越适合自动化；越靠近右环，越需要人的判断。</strong><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h2 id="别只顾着爽翻车指南也请收好">别只顾着爽，翻车指南也请收好</h2>
+<p>机器转得越快，翻车也越快。不加约束的自动化循环，很容易把代码质量写崩、把 API 账单烧穿。ClaudeDevs 给了几条保命建议：<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<ul>
+<li><strong>引入独立的验证者。</strong> 大模型在评估自己生成的代码时往往会表现出盲目的自信（即「幻觉成功」）。用 <code>/code-review</code> 技能，让一个全新上下文的独立 AI 专门负责代码审查。</li>
+<li><strong>确定性任务使用脚本代替模型推理。</strong> 填写 PDF 表单等流程明确的任务，最好让 AI 编写并运行一个固定的执行脚本，这比每次都调用大模型推理要经济高效。</li>
+<li><strong>大规模运行前先进行小范围测试。</strong> 动态工作流一旦启动，可能会衍生出大量的子 Agent。建议先选取一小块任务试运行，并定期使用 <code>/usage</code> 命令检查 Token 余额，设定明确的预算上限。</li>
+</ul>
+<p>Anthropic 自己先吃了螃蟹。他们已经把 Claude Code 接入到 Pull Request 处理流程中，系统在夜间安排大量 Agent 执行长期任务。相关数据显示，<strong>引入这类流程后，Anthropic 内部人均代码交付量提升了约 70%。</strong><sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>但效率提升的背后，隐藏成本也不小。最先浮出水面的，是技术「理解负债」——AI 能快速产出通过测试的代码，但团队未必真正理解其逻辑。同时，高速循环下的自动修补也会让架构逐渐变形，代码表面更「健壮」，底层却更混乱。成本失控也是一大难题——多个 Agent 同时运行，很容易把个人 Token 额度烧穿，也很容易让企业账单突然变得难看。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<h2 id="loop-不只是程序员的事">Loop 不只是程序员的事</h2>
+<p>说了这么多，眼下关于循环工程的讨论主要集中在 agentic coding，但这并不意味着循环只属于软件工程师。</p>
+<p>提示词时代，人类还在亲自分派每一步动作；循环时代，人类开始设计岗位、流程和验收标准。AI 不再只是回答问题，它被安排进了一套持续运转的组织结构里。ChatPRD 创始人 Claire Vo 给过一个更好的理解角度：<strong>把自己想象成一个管理者。</strong> 你设计的不是一句提示词，而是一个岗位。这个岗位可以是软件工程师，也可以是客服、产品助理、运营助理，甚至是一个每天自动整理信息、跟进事项、处理反馈的执行角色。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>从表面上看，大家从重复劳动中解脱了，但这反而对我们提出了更高的要求：只会下达简单指令的人可能会被慢慢取代，<strong>而那些懂得如何设计目标、管理权限、理解大局的人，会变得越来越不可或缺。</strong></p>
+<p>说到底，AI 抢走的不是你的工作，是你「执行」的那部分工作。剩下所谓判断的部分，才是接下来最值钱的东西。</p>
+<hr>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>刚刚，Fable 5 极限续命五天，Claude 榨干指南请收好 · APPSO（微信公众号，转自36氪）(2026/7/8) · 检索日期2026/7/8&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Getting started with loops · ClaudeDevs（X平台）(2026/7/8) · 检索日期2026/7/8&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Claude Code 之父说「不再提示 AI 了」：AI 新编程范式 Loop Engineering 到来 · 腾讯云开发者社区(2026/6/12) · 检索日期2026/7/8&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Andrew Ng 关于开发循环的推文 · X(2026/7/8) · 检索日期2026/7/8&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Loop Engineering：新的循环收费站 · 36氪(2026/7/8) · 检索日期2026/7/8&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%BE%AA%E7%8E%AF%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">循环工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%A9%E6%89%8B%E6%8E%8C%E6%9F%9C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">甩手掌柜</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%87%AA%E5%8A%A8%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI自动化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A6%A8%E5%B9%B2%E6%8C%87%E5%8D%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">榨干指南</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/fable-5-claude-loop-20260708094008750-12/">Fable 5 极限续命五天，Claude 榨干指南：从「人肉搬运工」到「甩手掌柜」就差一个 Loop</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaigpt-56claude-20260706161012509-1/">OpenAI“偷跑”GPT-5.6三体模型，明天狙击Claude！价格腰斩还带“速度拨盘”，开发者狂喜</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicazure-20260704174008572-0/">Anthropic掀桌：查你时区、封你子公司、连Azure中转都不放过！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-20260703184012045-2/">阿里怒删Claude：偷偷给你打“暗号”的工具，谁敢用？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-20260701084005368-2/">刚封完号就发新模型？Claude这波操作，是“打一巴掌给颗糖”还是另有算盘？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/promptloopai-20260629164005879-1/">Prompt已死，Loop当立？硅谷大佬们集体“躺平”，让AI自己卷自己</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/loop-engineeringai-20260623094006232-2/">循环工程（Loop Engineering）：当AI从“对话伙伴”进化为“付费管道”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic20-20260617121005699-1/">被骂到连夜改口？Anthropic刚给第三方「解禁」，又被用户告上法庭：说好的20倍用量，咋就缩水了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudeanthropicai-20260616114004622-2/">Claude突然要你刷脸：Anthropic官宣实名制，AI的“狂野西部”时代正式落幕</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260610194005360-1/">AI男友香到炸？这年头，跟真人谈恋爱不如给“小克”当海王</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai80anthropic-20260608201006363-4/">AI自己写了80%的代码，却喊人类赶紧踩刹车？Anthropic的“精分”操作，你看懂了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claudeai-20260526164003620-2/">Claude“塌房”成恋爱脑？AI短剧把硅谷大佬编进狗血剧，这波操作我服</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude7x24-20260525101003366-2/">Claude终于有了「永久大脑」：会做梦，还能7x24小时替你打工</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicopus-48sonnet-48mythos-1-20260525081003435-3/">Anthropic底牌大甩卖？Opus 4.8偷跑、Sonnet 4.8跳级，连“禁术”Mythos 1都解禁了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/130aiopenai-20260518084003984-1/">月烧130万美元算个啥？这位“龙虾之父”把AI当无底洞，账单全让OpenAI买单</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

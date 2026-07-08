@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Linus Torvalds：在3500万行代码的“围炉”边缘，守护Linux的灵魂 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Linus Torvalds作为Linux内核的灵魂人物，在深度访谈中展现了极致的开源实用主义与人本思想。他冷静剖析了AI与Rust在软件工程中的边界，认为技术工具虽不断迭代，但真正的系统稳定性依然依赖于资深工程师的全局审美与社区间的长期信任。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/linus-torvalds3500linux-20260707204008747-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/linus-torvalds3500linux-20260707204008747-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Linus Torvalds：在3500万行代码的“围炉”边缘，守护Linux的灵魂">
+  <meta property="og:description" content="Linus Torvalds作为Linux内核的灵魂人物，在深度访谈中展现了极致的开源实用主义与人本思想。他冷静剖析了AI与Rust在软件工程中的边界，认为技术工具虽不断迭代，但真正的系统稳定性依然依赖于资深工程师的全局审美与社区间的长期信任。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-07T20:40:08+08:00">
+    <meta property="article:modified_time" content="2026-07-07T20:40:08+08:00">
+    <meta property="article:tag" content="Linus Torvalds">
+    <meta property="article:tag" content="Linux内核">
+    <meta property="article:tag" content="开源领袖">
+    <meta property="article:tag" content="软件工程哲学">
+    <meta property="article:tag" content="AI与编程">
+    <meta property="article:tag" content="技术实用主义">
+
+  <meta itemprop="name" content="Linus Torvalds：在3500万行代码的“围炉”边缘，守护Linux的灵魂">
+  <meta itemprop="description" content="Linus Torvalds作为Linux内核的灵魂人物，在深度访谈中展现了极致的开源实用主义与人本思想。他冷静剖析了AI与Rust在软件工程中的边界，认为技术工具虽不断迭代，但真正的系统稳定性依然依赖于资深工程师的全局审美与社区间的长期信任。">
+  <meta itemprop="datePublished" content="2026-07-07T20:40:08+08:00">
+  <meta itemprop="dateModified" content="2026-07-07T20:40:08+08:00">
+  <meta itemprop="wordCount" content="32">
+  <meta itemprop="keywords" content="Linus Torvalds,Linux内核,开源领袖,软件工程哲学,AI与编程,技术实用主义,社区治理">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linus Torvalds：在3500万行代码的“围炉”边缘，守护Linux的灵魂">
+  <meta name="twitter:description" content="Linus Torvalds作为Linux内核的灵魂人物，在深度访谈中展现了极致的开源实用主义与人本思想。他冷静剖析了AI与Rust在软件工程中的边界，认为技术工具虽不断迭代，但真正的系统稳定性依然依赖于资深工程师的全局审美与社区间的长期信任。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2818%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-07 20:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Linus&amp;#43;Torvalds%EF%BC%9A%E5%9C%A83500%E4%B8%87%E8%A1%8C%E4%BB%A3%E7%A0%81%E7%9A%84%E2%80%9C%E5%9B%B4%E7%82%89%E2%80%9D%E8%BE%B9%E7%BC%98%EF%BC%8C%E5%AE%88%E6%8A%A4Linux%E7%9A%84%E7%81%B5%E9%AD%82%20-%20Linus&amp;#43;Torvalds%E4%BD%9C%E4%B8%BALinux%E5%86%85%E6%A0%B8%E7%9A%84%E7%81%B5%E9%AD%82%E4%BA%BA%E7%89%A9%EF%BC%8C%E5%9C%A8%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88%E4%B8%AD%E5%B1%95%E7%8E%B0%E4%BA%86%E6%9E%81%E8%87%B4%E7%9A%84%E5%BC%80%E6%BA%90%E5%AE%9E%E7%94%A8%E4%B8%BB%E4%B9%89%E4%B8%8E%E4%BA%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E3%80%82%E4%BB%96%E5%86%B7%E9%9D%99%E5%89%96%E6%9E%90%E4%BA%86AI%E4%B8%8ERust%E5%9C%A8%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%AE%A4%E4%B8%BA%E6%8A%80%E6%9C%AF%E5%B7%A5%E5%85%B7%E8%99%BD%E4%B8%8D%E6%96%AD%E8%BF%AD%E4%BB%A3%EF%BC%8C%E4%BD%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BE%9D%E7%84%B6%E4%BE%9D%E8%B5%96%E4%BA%8E%E8%B5%84%E6%B7%B1%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%85%A8%E5%B1%80%E5%AE%A1%E7%BE%8E%E4%B8%8E%E7%A4%BE%E5%8C%BA%E9%97%B4%E7%9A%84%E9%95%BF%E6%9C%9F%E4%BF%A1%E4%BB%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvalds3500linux-20260707204008747-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Linus&amp;#43;Torvalds%EF%BC%9A%E5%9C%A83500%E4%B8%87%E8%A1%8C%E4%BB%A3%E7%A0%81%E7%9A%84%E2%80%9C%E5%9B%B4%E7%82%89%E2%80%9D%E8%BE%B9%E7%BC%98%EF%BC%8C%E5%AE%88%E6%8A%A4Linux%E7%9A%84%E7%81%B5%E9%AD%82%20-%20Linus&amp;#43;Torvalds%E4%BD%9C%E4%B8%BALinux%E5%86%85%E6%A0%B8%E7%9A%84%E7%81%B5%E9%AD%82%E4%BA%BA%E7%89%A9%EF%BC%8C%E5%9C%A8%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88%E4%B8%AD%E5%B1%95%E7%8E%B0%E4%BA%86%E6%9E%81%E8%87%B4%E7%9A%84%E5%BC%80%E6%BA%90%E5%AE%9E%E7%94%A8%E4%B8%BB%E4%B9%89%E4%B8%8E%E4%BA%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E3%80%82%E4%BB%96%E5%86%B7%E9%9D%99%E5%89%96%E6%9E%90%E4%BA%86AI%E4%B8%8ERust%E5%9C%A8%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%AE%A4%E4%B8%BA%E6%8A%80%E6%9C%AF%E5%B7%A5%E5%85%B7%E8%99%BD%E4%B8%8D%E6%96%AD%E8%BF%AD%E4%BB%A3%EF%BC%8C%E4%BD%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BE%9D%E7%84%B6%E4%BE%9D%E8%B5%96%E4%BA%8E%E8%B5%84%E6%B7%B1%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%85%A8%E5%B1%80%E5%AE%A1%E7%BE%8E%E4%B8%8E%E7%A4%BE%E5%8C%BA%E9%97%B4%E7%9A%84%E9%95%BF%E6%9C%9F%E4%BF%A1%E4%BB%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvalds3500linux-20260707204008747-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Linus Torvalds：在3500万行代码的“围炉”边缘，守护Linux的灵魂</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>作为Linux内核的终身守门人，Linus Torvalds以极致的理性主义和“大局观”维护着庞大的开源帝国。他警惕AI带来的逻辑空洞，视Rust为工具而非魔法，坚持用“信任”而非代码来重塑复杂的人际与技术博弈。</p></blockquote>
+<p>在孟买的围炉对话中，Linus Torvalds看起来与三十年前那个在芬兰赫尔辛基深夜敲下第一行内核代码的年轻人并无二致——随意、直率，甚至带着一种近乎固执的坦诚。当他在台上毫不避讳地表示“我极其讨厌公开演讲”时，台下的听众并没有感到被冒犯，反而发出会心的笑声。这种真实感，正是他构建开源世界最底层的燃料。</p>
+<h3 id="告别代码回归开发主导者">告别代码，回归“开发主导者”</h3>
+<p>三十余年的演进，将Linux内核堆砌成了一个拥有3500万行代码的庞然大物。面对这个复杂系统，Linus给出了一个令许多程序员感到释然却又略显沮丧的真相：“没有人能够真正理解全部代码，包括我。”</p>
+<p>如今的Linus，早已不再是一线沉浸于逻辑细节的编码者。他将自己的身份定义为“开发主导者”。在两周一次的合并窗口期内，他如同一个精密的过滤器，通过阅读提交说明、处理代码冲突来审视整个项目的“脉络”。在他眼中，代码编写是技术性的，但维护却是人性的。“代码很容易修复，但人的性格和相处问题并不总是那么容易解决。”<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 这位开源界的绝对权威，早已从技术的“控制者”进化为复杂社区关系的“疏导者”。</p>
+<h3 id="技术实用主义别指望rust是魔法">技术实用主义：别指望Rust是魔法</h3>
+<p>面对Rust在内核中的引入，Linus展现了他一贯的实用主义哲学。他承认Rust在内存安全上的优势，但同时尖锐地提醒世人：不要将某种语言神话为“魔法”。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>“Rust不会替你思考。”他直言，当前内核中许多棘手的Bug依然是逻辑错误，而非简单的内存安全问题。对他而言，C语言的原始力量依然拥有无可替代的简洁与直接。当他被问及是否期待某种工具能自动终结Bug时，Linus流露出一丝工程师的傲气与务实——他更愿意将精力投入到那些能让更多“眼睛”参与检查的自动化测试流程中，而不是寄希望于某种单点技术方案。</p>
+<h3 id="ai时代缺乏品位的助手">AI时代：缺乏“品位”的助手</h3>
+<p>Linus对AI的态度同样保持着审慎的“人间清醒”。他虽不排斥将AI作为原型开发工具来使用，但对AI在生产环境中的表现持保留意见。他认为，当前的LLM产出往往缺乏全局思考，只能提供“创可贴式补丁”。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>“AI依然缺少一种‘工程品位’。”<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 在他看来，那些真正能解决问题的代码，必须出自深谙架构、具备系统性理解的开发者之手。他甚至坦言，近期内核维护者面临的最大困扰，正是那些由AI生成、看似合理实则空洞的Bug报告——这不仅是技术层面的噪点，更是对人类核心开发者精力的一种资源掠夺。</p>
+<h3 id="信任开源的基石">信任：开源的基石</h3>
+<p>在长达三十年的Linux维护生涯中，Linus构建了一套独特的权力结构——“信任网”。他强调，自己合并的每一行代码，都源于对那些长期合作的维护者判断力的深厚信任。<sup id="fnref4:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>这种信任跨越了国界、公司背景和技术代差。即便面对像英伟达这样曾经傲慢的厂商，Linus也乐于看到开源浪潮倒逼他们成为“好公民”。<sup id="fnref5:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 他不在乎开发者效力于哪家硅谷巨头，也不在乎他们使用的工具是现代的Rust还是古老的C，他只在乎那个人是否拥有持续输出高质量工程方案的能力。</p>
+<h3 id="尾声哥斯拉的陪伴">尾声：哥斯拉的陪伴</h3>
+<p>采访结束时，谈及旅途中的一点消遣——用AI给家人发送带有“哥斯拉”的照片，Linus脸上露出了难得的轻松。这种将前沿科技玩出“童趣”的态度，恰恰折射了他看待世界的方式：复杂的技术浪潮终究需要人为的掌控与玩味。</p>
+<p>他依然站在Linux内核的最高点，用那种略带粗粝、却始终坚定的视角，俯瞰着一个由数千名开发者共同编织的数字宇宙。对于Linus Torvalds而言，Linux 7.1只是一个平稳的刻度，而真正的艺术，是在这3500万行代码的迷宫中，始终保持那份对架构大局的敏锐洞察，以及对“人”的绝对尊重。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>没人能彻底搞懂Linux内核的3500万行代码，Linus谈未来演进：掌控“大局”、别指望Rust能修复所有Bug、486时代该结束了 · 36氪 · 屠敏（2026/7/7）· 检索日期2026/7/7&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref5:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/linus-torvalds/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linus Torvalds</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/linux%E5%86%85%E6%A0%B8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linux内核</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E9%A2%86%E8%A2%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源领袖</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%93%B2%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程哲学</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%B8%8E%E7%BC%96%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI与编程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%94%A8%E4%B8%BB%E4%B9%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术实用主义</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">社区治理</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/linus-torvaldsai-20251120174004927-0/">代码深处的守望者：Linus Torvalds论AI、无聊与内核的变迁</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/neel-sundaresanai-20260525204003377-2/">Neel Sundaresan：在AI编码的“法拉利时代”，做一名冷静的修理工</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-agi--20260304084005206-5/">吴恩达：在 AGI 的狂热迷雾中，做一个清醒的布道者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/linuxvibe-codingai-20260112161005124-0/">那个用中指怼英伟达的男人“叛变”了！Linux祖师爷自曝Vibe Coding：AI写代码是真的香</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/linus-torvaldskpiai-20251203184004904-1/">Linus Torvalds：代码行数KPI的审判者，AI泡沫的清醒观察者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/linusai-20251201101005175-3/">人间清醒Linus：从代码守护者到AI时代的哲思者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/githubai-20250731121005914-0/">托马斯·多姆克：GitHub的AI交响乐指挥家，重塑程序员的未来角色</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

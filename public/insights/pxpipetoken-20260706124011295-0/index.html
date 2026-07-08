@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>当“微缩摄影”重构大模型经济学：pxpipe背后的token套利与算力范式转移 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="pxpipe通过将文本上下文视觉化为图像，有效规避了大模型的Token计费成本，展现了技术生态中“压缩即智能”的底层逻辑。该现象揭示了Agent经济中高额算力成本与工程化落地之间的矛盾，并预示着未来多模态感知将推动模型输入编码方式的根本性范式转移。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/pxpipetoken-20260706124011295-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/pxpipetoken-20260706124011295-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="当“微缩摄影”重构大模型经济学：pxpipe背后的token套利与算力范式转移">
+  <meta property="og:description" content="pxpipe通过将文本上下文视觉化为图像，有效规避了大模型的Token计费成本，展现了技术生态中“压缩即智能”的底层逻辑。该现象揭示了Agent经济中高额算力成本与工程化落地之间的矛盾，并预示着未来多模态感知将推动模型输入编码方式的根本性范式转移。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-06T12:40:11+08:00">
+    <meta property="article:modified_time" content="2026-07-06T12:40:11+08:00">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="Token成本">
+    <meta property="article:tag" content="视觉压缩">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="算力经济">
+
+  <meta itemprop="name" content="当“微缩摄影”重构大模型经济学：pxpipe背后的token套利与算力范式转移">
+  <meta itemprop="description" content="pxpipe通过将文本上下文视觉化为图像，有效规避了大模型的Token计费成本，展现了技术生态中“压缩即智能”的底层逻辑。该现象揭示了Agent经济中高额算力成本与工程化落地之间的矛盾，并预示着未来多模态感知将推动模型输入编码方式的根本性范式转移。">
+  <meta itemprop="datePublished" content="2026-07-06T12:40:11+08:00">
+  <meta itemprop="dateModified" content="2026-07-06T12:40:11+08:00">
+  <meta itemprop="wordCount" content="46">
+  <meta itemprop="keywords" content="大模型,Token成本,视觉压缩,AI Agent,算力经济">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="当“微缩摄影”重构大模型经济学：pxpipe背后的token套利与算力范式转移">
+  <meta name="twitter:description" content="pxpipe通过将文本上下文视觉化为图像，有效规避了大模型的Token计费成本，展现了技术生态中“压缩即智能”的底层逻辑。该现象揭示了Agent经济中高额算力成本与工程化落地之间的矛盾，并预示着未来多模态感知将推动模型输入编码方式的根本性范式转移。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%286%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-06 12:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E5%BD%93%E2%80%9C%E5%BE%AE%E7%BC%A9%E6%91%84%E5%BD%B1%E2%80%9D%E9%87%8D%E6%9E%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%8F%E6%B5%8E%E5%AD%A6%EF%BC%9Apxpipe%E8%83%8C%E5%90%8E%E7%9A%84token%E5%A5%97%E5%88%A9%E4%B8%8E%E7%AE%97%E5%8A%9B%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20pxpipe%E9%80%9A%E8%BF%87%E5%B0%86%E6%96%87%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A7%86%E8%A7%89%E5%8C%96%E4%B8%BA%E5%9B%BE%E5%83%8F%EF%BC%8C%E6%9C%89%E6%95%88%E8%A7%84%E9%81%BF%E4%BA%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84Token%E8%AE%A1%E8%B4%B9%E6%88%90%E6%9C%AC%EF%BC%8C%E5%B1%95%E7%8E%B0%E4%BA%86%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E4%B8%AD%E2%80%9C%E5%8E%8B%E7%BC%A9%E5%8D%B3%E6%99%BA%E8%83%BD%E2%80%9D%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E3%80%82%E8%AF%A5%E7%8E%B0%E8%B1%A1%E6%8F%AD%E7%A4%BA%E4%BA%86Agent%E7%BB%8F%E6%B5%8E%E4%B8%AD%E9%AB%98%E9%A2%9D%E7%AE%97%E5%8A%9B%E6%88%90%E6%9C%AC%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%8C%96%E8%90%BD%E5%9C%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9F%9B%E7%9B%BE%EF%BC%8C%E5%B9%B6%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5%E5%A4%9A%E6%A8%A1%E6%80%81%E6%84%9F%E7%9F%A5%E5%B0%86%E6%8E%A8%E5%8A%A8%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%85%A5%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F%E7%9A%84%E6%A0%B9%E6%9C%AC%E6%80%A7%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fpxpipetoken-20260706124011295-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E5%BD%93%E2%80%9C%E5%BE%AE%E7%BC%A9%E6%91%84%E5%BD%B1%E2%80%9D%E9%87%8D%E6%9E%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%BB%8F%E6%B5%8E%E5%AD%A6%EF%BC%9Apxpipe%E8%83%8C%E5%90%8E%E7%9A%84token%E5%A5%97%E5%88%A9%E4%B8%8E%E7%AE%97%E5%8A%9B%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20pxpipe%E9%80%9A%E8%BF%87%E5%B0%86%E6%96%87%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A7%86%E8%A7%89%E5%8C%96%E4%B8%BA%E5%9B%BE%E5%83%8F%EF%BC%8C%E6%9C%89%E6%95%88%E8%A7%84%E9%81%BF%E4%BA%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84Token%E8%AE%A1%E8%B4%B9%E6%88%90%E6%9C%AC%EF%BC%8C%E5%B1%95%E7%8E%B0%E4%BA%86%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E4%B8%AD%E2%80%9C%E5%8E%8B%E7%BC%A9%E5%8D%B3%E6%99%BA%E8%83%BD%E2%80%9D%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E3%80%82%E8%AF%A5%E7%8E%B0%E8%B1%A1%E6%8F%AD%E7%A4%BA%E4%BA%86Agent%E7%BB%8F%E6%B5%8E%E4%B8%AD%E9%AB%98%E9%A2%9D%E7%AE%97%E5%8A%9B%E6%88%90%E6%9C%AC%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%8C%96%E8%90%BD%E5%9C%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9F%9B%E7%9B%BE%EF%BC%8C%E5%B9%B6%E9%A2%84%E7%A4%BA%E7%9D%80%E6%9C%AA%E6%9D%A5%E5%A4%9A%E6%A8%A1%E6%80%81%E6%84%9F%E7%9F%A5%E5%B0%86%E6%8E%A8%E5%8A%A8%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%85%A5%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F%E7%9A%84%E6%A0%B9%E6%9C%AC%E6%80%A7%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fpxpipetoken-20260706124011295-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">当“微缩摄影”重构大模型经济学：pxpipe背后的token套利与算力范式转移</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>通过将文本上下文“视觉化”为像素矩阵，pxpipe揭示了大模型计费模式下的深刻矛盾；这种“视觉压缩”技术不仅是短期内的成本套利手段，更预示着多模态感知能力将从根本上重构AI的输入编码逻辑。</p></blockquote>
+<h3 id="技术原理与创新点从token序列到像素矩阵的跨越">技术原理与创新点：从Token序列到像素矩阵的跨越</h3>
+<p>近期引发开发者社区热议的开源工具 <code>pxpipe</code>，其本质并非对模型算法的改进，而是针对现有大模型计费逻辑的一次“降维打击”。通过将冗长的系统提示词、工具文档等高密度文本渲染为密集的PNG图片，利用模型视觉通道处理图像数据的特殊计费规则，实现了高达70%的成本削减<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>这一技术手段与早期的“微缩胶卷”异曲同工，却在数字时代撞击出了新的火花。其核心逻辑在于：当前大模型的文本Token计费是基于字符语义切分的，而视觉Token计费则主要锚定图像尺寸和像素密度。当一段冗长的代码或文档被压缩进一张图片时，原本需要消耗数万Token的文本流，被转化为了更经济的视觉输入，模型依然能够通过视觉Transformer架构还原其中的语义逻辑<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h3 id="产业生态影响ai代理经济的成本焦虑">产业生态影响：AI代理经济的成本焦虑</h3>
+<p>Fable 5作为Anthropic当前的旗舰模型，其出色的逻辑推理能力背后是高昂的API定价——每百万输入Token高达10美元，输出则为50美元<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。这种定价策略将“高智力”与“高账单”强绑定，迫使开发者在任务表现与预算之间寻找平衡。</p>
+<p><code>pxpipe</code>的出现，反映了Agent生态中一个尖锐的现实：开发者对“智能”的需求已从简单的对话交互转向了复杂的软件工程协同（如Claude Code的自动化任务）。在这个语境下，系统提示词和上下文窗口的巨大占用成为阻碍Agent规模化应用的“摩擦成本”。通过这种“邪修”式的压缩技术，开发者实际上在挑战模型厂商预设的计费边界，也映射出市场对高性能模型“平民化”访问的强烈诉求。</p>
+<h3 id="技术演进的深层启示视觉即语言的终局">技术演进的深层启示：视觉即语言的终局</h3>
+<p>谷歌2022年的CLIPPO论文早已论证了“文字即图片”的可行性<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，而 <code>pxpipe</code> 则是将这一实验室理论推向生产环境的实践。这不仅是一个省钱技巧，更预示着多模态大模型的未来演进路径：</p>
+<ul>
+<li><strong>感知的一致性</strong>：未来的模型架构可能不再需要繁琐的Tokenizer，而是统一将所有模态输入（文本、代码、图片）映射至统一的感知向量空间。</li>
+<li><strong>压缩即智能</strong>：这一趋势证明，优秀的模型应当具备极强的上下文还原能力，即从低比特率（或视觉压缩）的数据中提取高价值语义信息的能力。</li>
+<li><strong>边界的模糊</strong>：随着视觉读取精度的提升，纯文本作为唯一输入格式的时代可能终结。未来，我们或许会看到专门针对“高密度视觉信息”优化的训练任务。</li>
+</ul>
+<p>然而，这种技术并非没有隐患。由于图片压缩本质上属于“有损压缩”，在处理涉及精确字符串匹配、长数值推理等场景时，模型极易产生幻觉，甚至自信地输出错误结论。这种对逻辑精确度与成本效率的权衡，将成为未来AI系统架构设计中的关键博弈点。</p>
+<h3 id="未来发展预测">未来发展预测</h3>
+<p>在未来3-5年内，我们预计会看到以下趋势：</p>
+<ol>
+<li><strong>计费范式的重组</strong>：模型厂商将逐步修补视觉与文本的计费鸿沟，甚至针对“上下文视觉压缩”推出专门的输入处理协议。</li>
+<li><strong>硬件定义的语义压缩</strong>：硬件侧可能出现更高效的、自动化的上下文视觉渲染层，使得开发者无需手动配置代理即可享受低成本运行。</li>
+<li><strong>模型鲁棒性提升</strong>：为了应对类似 <code>pxpipe</code> 的输入扰动，模型将进一步强化对噪声视觉数据的抗性，从而提升多模态理解的深层上限。</li>
+</ol>
+<p>归根结底，AI的发展史就是一部不断降低单位智能成本的历史。无论这招“小抄”是会被厂商封堵，还是被吸纳进内核，它都清晰地指向了一个未来：智能的获取门槛正在被技术手段不断平抑，而真正的护城河将不仅在于模型的算力堆叠，更在于如何高效地管理、压缩并呈现人类文明的知识图谱。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>pxpipe: 通过上下文视觉压缩降低Fable 5成本·GitHub·teamchong（2026/7/6）·检索日期2026/7/6&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Claude Fable 5性能与效率评估·36氪·henry（2026/6/10）·检索日期2026/7/6&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Claude Fable 5 发布：性能爆炸，价格翻倍·新浪科技（2026/6/10）·检索日期2026/7/6&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>CLIPPO: Learning Robust Representations with Image-Text-Multi-Modal Models·arXiv·Google Research（2022/12/16）·检索日期2026/7/6&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/token%E6%88%90%E6%9C%AC/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Token成本</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%A7%86%E8%A7%89%E5%8E%8B%E7%BC%A9/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">视觉压缩</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E7%BB%8F%E6%B5%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力经济</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/kimi-20260629154005496-0/">技术底层的重构与组织品位的博弈：月之暗面Kimi的“反共识”生长路径</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20260624194005566-2/">豆包专业版深度评测：Agent驱动的国民级办公生产力演进</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/logan-kilpatrick-20260623201009289-4/">Logan Kilpatrick：在大模型吞噬一切的时代，寻找垂直领域的“非零和”博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aaitoken-20260608201006363-3/">智谱的“回A”困局：AI新贵的资本炼金术与“Token经济学”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitoken-20260601201003605-1/">AI“算力通胀”的终结：从烧钱游戏的虚荣泡沫到经营Token的精细时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260531154003291-0/">中国AI的“万亿赌局”：四位造物主与一场关于定义的战争</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260526201003496-2/">中途岛时刻：中国AI产业在“算力补给线”与“变现效率”间的生存突围</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511124004190-1/">AI商业化的“奥卡姆剃刀”：在产业铁链与技术双循环中寻找终局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260320124006581-0/">皮衣下的造风者：黄仁勋与他预言的“单人军队”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260225194011961-0/">机器中的幽灵：硅谷“收租者”面临一场AI驱魔</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251211184005964-0/">商汤方舟2.0：从感知到决策，重塑智慧城市的具身智能底座</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentagentai-20251204101004881-0/">Agent纪元：亚马逊云科技如何以“真能解决问题的Agent”重塑企业AI价值与未来工作</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiai-agent-20251203104004993-0/">亚马逊重塑AI战局：从自研硅片到智能体生态，云计算巨头如何定义“AI Agent”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgpt-20251201184006285-1/">ChatGPT三周年：从“无害对话”到“文明中枢”的智能涌现与前瞻思辨</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-haiku-45ai-20251117184005247-2/">卷王驾到！Claude Haiku 4.5：跑得更快、花钱更少，AI界“平替之王”横空出世？</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

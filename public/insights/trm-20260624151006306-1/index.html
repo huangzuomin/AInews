@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“凑答案”到“会思考”：TRM如何重塑大模型逻辑评估的深度范式 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="TRM引入ME²原则与DAG结构评估，成功将大模型的“推理质量”从模糊的主观判断转化为可度量的科学指标，这一范式转换不仅优化了模型的强化学习流程，更为通往高可信、透明化的推理智能铺平了道路。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/trm-20260624151006306-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/trm-20260624151006306-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“凑答案”到“会思考”：TRM如何重塑大模型逻辑评估的深度范式">
+  <meta property="og:description" content="TRM引入ME²原则与DAG结构评估，成功将大模型的“推理质量”从模糊的主观判断转化为可度量的科学指标，这一范式转换不仅优化了模型的强化学习流程，更为通往高可信、透明化的推理智能铺平了道路。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-24T15:10:06+08:00">
+    <meta property="article:modified_time" content="2026-06-24T15:10:06+08:00">
+    <meta property="article:tag" content="大模型评测">
+    <meta property="article:tag" content="推理链优化">
+    <meta property="article:tag" content="强化学习">
+    <meta property="article:tag" content="认知科学">
+    <meta property="article:tag" content="AI逻辑度量">
+
+  <meta itemprop="name" content="从“凑答案”到“会思考”：TRM如何重塑大模型逻辑评估的深度范式">
+  <meta itemprop="description" content="TRM引入ME²原则与DAG结构评估，成功将大模型的“推理质量”从模糊的主观判断转化为可度量的科学指标，这一范式转换不仅优化了模型的强化学习流程，更为通往高可信、透明化的推理智能铺平了道路。">
+  <meta itemprop="datePublished" content="2026-06-24T15:10:06+08:00">
+  <meta itemprop="dateModified" content="2026-06-24T15:10:06+08:00">
+  <meta itemprop="wordCount" content="41">
+  <meta itemprop="keywords" content="大模型评测,推理链优化,强化学习,认知科学,AI逻辑度量">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“凑答案”到“会思考”：TRM如何重塑大模型逻辑评估的深度范式">
+  <meta name="twitter:description" content="TRM引入ME²原则与DAG结构评估，成功将大模型的“推理质量”从模糊的主观判断转化为可度量的科学指标，这一范式转换不仅优化了模型的强化学习流程，更为通往高可信、透明化的推理智能铺平了道路。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2818%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-24 15:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E5%87%91%E7%AD%94%E6%A1%88%E2%80%9D%E5%88%B0%E2%80%9C%E4%BC%9A%E6%80%9D%E8%80%83%E2%80%9D%EF%BC%9ATRM%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%80%BB%E8%BE%91%E8%AF%84%E4%BC%B0%E7%9A%84%E6%B7%B1%E5%BA%A6%E8%8C%83%E5%BC%8F%20-%20TRM%E5%BC%95%E5%85%A5ME%C2%B2%E5%8E%9F%E5%88%99%E4%B8%8EDAG%E7%BB%93%E6%9E%84%E8%AF%84%E4%BC%B0%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E6%8E%A8%E7%90%86%E8%B4%A8%E9%87%8F%E2%80%9D%E4%BB%8E%E6%A8%A1%E7%B3%8A%E7%9A%84%E4%B8%BB%E8%A7%82%E5%88%A4%E6%96%AD%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%8F%AF%E5%BA%A6%E9%87%8F%E7%9A%84%E7%A7%91%E5%AD%A6%E6%8C%87%E6%A0%87%EF%BC%8C%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E6%8D%A2%E4%B8%8D%E4%BB%85%E4%BC%98%E5%8C%96%E4%BA%86%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B%EF%BC%8C%E6%9B%B4%E4%B8%BA%E9%80%9A%E5%BE%80%E9%AB%98%E5%8F%AF%E4%BF%A1%E3%80%81%E9%80%8F%E6%98%8E%E5%8C%96%E7%9A%84%E6%8E%A8%E7%90%86%E6%99%BA%E8%83%BD%E9%93%BA%E5%B9%B3%E4%BA%86%E9%81%93%E8%B7%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ftrm-20260624151006306-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E5%87%91%E7%AD%94%E6%A1%88%E2%80%9D%E5%88%B0%E2%80%9C%E4%BC%9A%E6%80%9D%E8%80%83%E2%80%9D%EF%BC%9ATRM%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%80%BB%E8%BE%91%E8%AF%84%E4%BC%B0%E7%9A%84%E6%B7%B1%E5%BA%A6%E8%8C%83%E5%BC%8F%20-%20TRM%E5%BC%95%E5%85%A5ME%C2%B2%E5%8E%9F%E5%88%99%E4%B8%8EDAG%E7%BB%93%E6%9E%84%E8%AF%84%E4%BC%B0%EF%BC%8C%E6%88%90%E5%8A%9F%E5%B0%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E6%8E%A8%E7%90%86%E8%B4%A8%E9%87%8F%E2%80%9D%E4%BB%8E%E6%A8%A1%E7%B3%8A%E7%9A%84%E4%B8%BB%E8%A7%82%E5%88%A4%E6%96%AD%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%8F%AF%E5%BA%A6%E9%87%8F%E7%9A%84%E7%A7%91%E5%AD%A6%E6%8C%87%E6%A0%87%EF%BC%8C%E8%BF%99%E4%B8%80%E8%8C%83%E5%BC%8F%E8%BD%AC%E6%8D%A2%E4%B8%8D%E4%BB%85%E4%BC%98%E5%8C%96%E4%BA%86%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B%EF%BC%8C%E6%9B%B4%E4%B8%BA%E9%80%9A%E5%BE%80%E9%AB%98%E5%8F%AF%E4%BF%A1%E3%80%81%E9%80%8F%E6%98%8E%E5%8C%96%E7%9A%84%E6%8E%A8%E7%90%86%E6%99%BA%E8%83%BD%E9%93%BA%E5%B9%B3%E4%BA%86%E9%81%93%E8%B7%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ftrm-20260624151006306-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“凑答案”到“会思考”：TRM如何重塑大模型逻辑评估的深度范式</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>TRM（Thinking Reward Model）通过ME²原则与DAG图谱技术，首次实现了大模型推理过程的结构化量化评估，将AI的逻辑能力从“黑盒结果”推向“可解释、可优化”的科学轨道。这一技术突破意味着AI从单纯的概率模拟正式迈向了逻辑验证的复杂演进阶段。</p></blockquote>
+<h3 id="技术原理将思维轨迹结构化">技术原理：将“思维轨迹”结构化</h3>
+<p>长期以来，大模型（LLM）的评测体系陷入了“结果论”的泥潭。正如教育界关注解题过程而非仅仅对照答案，TRM的出现标志着AI推理评测从离散的答案匹配转向了连续的逻辑审计。研究团队提出的 <strong>ME²原则</strong>（Macro-Efficiency/Effectiveness &amp; Micro-Efficiency/Effectiveness）是该工作的核心哲学基石<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>TRM不再将推理视为一段不可拆分的文本，而是利用 <strong>有向无环图（DAG）</strong> 将自然语言推理链转化为具有语义依赖的结构图。通过将推理拆解为“原子步骤”并定义其间的Progression（推进）、Branching（分支）和Merging（合并）关系，模型能够识别出哪些步骤是关键论证，哪些是无效的冗余打转。这种将“自由文本”抽象为“逻辑拓扑”的尝试，是AI从统计拟合走向深度推理的关键一步。</p>
+<h3 id="产业影响推理成本与质量的博弈">产业影响：推理成本与质量的博弈</h3>
+<p>在商业层面，TRM为强化学习（RL）提供了更精细的奖励信号。传统的奖励模型往往因为噪声干扰导致模型产生“伪证明”或死记硬背，而TRM通过对推理质量的严谨打分，能够有效过滤这些低质量的学习轨迹。</p>
+<ul>
+<li><strong>测试时扩展（Test-Time Scaling）</strong>：TRM使得“Best-of-N”采样在复杂推理任务中变得更加可靠，模型能够自动识别出最具备逻辑完备性的解题路径。</li>
+<li><strong>训练效率提升</strong>：将推理评估纳入RL循环，不仅提升了最终正确率，更关键的是提升了推理过程的“紧凑度”。对于企业应用而言，这意味着在推理阶段消耗更少的Token，实现更高质量的决策输出，从而直接降低长思维链推理带来的计算冗余成本。</li>
+</ul>
+<h3 id="哲学思辨ai认知透明度的回归">哲学思辨：AI“认知透明度”的回归</h3>
+<p>从未来主义视角看，TRM的深远意义在于它尝试解决AI的“认知透明度”问题。当我们要求AI不仅给出答案，还要给出高质量的思考过程，我们实际上是在迫使模型建立一套与人类逻辑认知对齐的表达范式。</p>
+<p>然而，这种技术路径也引发了新的伦理思考：如果AI被强制优化以符合我们定义的“高效逻辑”，它是否会丧失某种非线性的、创造性的探索能力？当推理过程被完全“度量化”，我们定义的高质量推理是否会成为一种新的认知偏见？这些问题将是AI演进过程中不可回避的哲学考题。</p>
+<h3 id="预测与未来3-5年的逻辑演进路径">预测与未来：3-5年的逻辑演进路径</h3>
+<p>展望未来，TRM这类模型将成为大模型基础设施的“质检中心”。预计在未来3-5年内，我们可以预见以下趋势：</p>
+<ol>
+<li><strong>推理的标准化审计</strong>：推理轨迹将像代码一样被版本控制和静态分析，以确保AI在金融、法律、医疗等高风险场景中的逻辑可追溯。</li>
+<li><strong>从RLVR到逻辑约束学习</strong>：模型学习的目标不再是简单的 reward maximization，而是遵循特定的逻辑约束准则，推理质量将成为衡量AGI能力的关键指标。</li>
+<li><strong>人类定义的解构</strong>：我们对“好思考”的定义将反过来通过算法固化，形成AI进化过程中的“数字理性标准”。</li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>TRM思考奖励模型上线，大模型推理质量终于能量化了 · 36氪（量子位）· TRM团队（2026/6/24）· 检索日期2026/6/24&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>ICML'26 Oral | TRM思考奖励模型上线，大模型推理质量终于能量化了 · 51CTO · 佚名（2026/6/24）· 检索日期2026/6/24&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型评测</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E9%93%BE%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理链优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">强化学习</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">认知科学</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E9%80%BB%E8%BE%91%E5%BA%A6%E9%87%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI逻辑度量</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260624101004909-1/">人形机器人的“仿真囚笼”：当设计开始向算法退化，我们失去了什么？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ppo-20260621174013252-0/">被拒稿的经典：从PPO看算法演进中“工程韧性”的胜利</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/physical-atari-20260621154046524-0/">走出仿真炼金术：强化学习如何通过“Physical Atari”跨越比特与原子的鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-grpo--20260621114004965-0/">超越“答题范式”：为什么长程智能体正在终结 GRPO 的统治地位？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-glm-52--20260618104006778-1/">编程领域的新晋挑战者：智谱 GLM-5.2 大模型深度评测</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260616074004862-0/">AI时代的意识觉醒：当“认知”被击穿，人类进化的“第三路径”何在？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260611184004818-1/">AI作文评测深度调研：当大模型化身“阅卷老师”，能力边界在哪？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260608204007984-1/">碳硅共生时代的“数字失乐园”：为何AI原住民正在重塑人类主体性？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/sutton-20260602181003501-1/">超越“数据喂养”：Sutton与“生成认知”如何重构智能的本质</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/google-20260528221003383-1/">当算法失语：从“谷歌拼不出Google”看大模型认知的深层边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen37-max--20260528124003999-0/">编程智能体新基座：Qwen3.7-Max 深度编程能力实测与评测</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rsagent-20260527161003474-3/">从感知到行动：RSAgent如何终结视觉分割的“单次预测”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mnemisai-20260527094008195-3/">从“存储”到“认知”：微软Mnemis如何以建构主义重塑AI长记忆机制</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260525094003508-1/">当机器人学会“心智”：具脑磐石与世界模型的认知博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/composer-25-ai--20260519194003608-3/">超越成本的“黑魔法”：Composer 2.5 预示 AI 编程进入“自主进化”的新范式</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

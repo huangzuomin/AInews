@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Claude Code“成神”之路：从难用到真香，Anthropic内部都经历了什么？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic用一份超长内部故事，还原了Claude Code从“难用的内部玩具”到“所有工程师真香”的爆火历程。从教模型写diff的艰难，到clide的前身，再到Claude 4带来的“GPT时刻”——背后是无数次吐槽、跳脚庆祝和小团队的极限拉扯。看完只想说：原来AI编程神器也是从菜鸟阶段熬出来的。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/claude-codeanthropic-20260708154006762-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/claude-codeanthropic-20260708154006762-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Claude Code“成神”之路：从难用到真香，Anthropic内部都经历了什么？">
+  <meta property="og:description" content="Anthropic用一份超长内部故事，还原了Claude Code从“难用的内部玩具”到“所有工程师真香”的爆火历程。从教模型写diff的艰难，到clide的前身，再到Claude 4带来的“GPT时刻”——背后是无数次吐槽、跳脚庆祝和小团队的极限拉扯。看完只想说：原来AI编程神器也是从菜鸟阶段熬出来的。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-08T15:40:06+08:00">
+    <meta property="article:modified_time" content="2026-07-08T15:40:06+08:00">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="AI编程 Agent">
+    <meta property="article:tag" content="Anthropic内部揭秘">
+    <meta property="article:tag" content="产品诞生史">
+    <meta property="article:tag" content="技术八卦">
+
+  <meta itemprop="name" content="Claude Code“成神”之路：从难用到真香，Anthropic内部都经历了什么？">
+  <meta itemprop="description" content="Anthropic用一份超长内部故事，还原了Claude Code从“难用的内部玩具”到“所有工程师真香”的爆火历程。从教模型写diff的艰难，到clide的前身，再到Claude 4带来的“GPT时刻”——背后是无数次吐槽、跳脚庆祝和小团队的极限拉扯。看完只想说：原来AI编程神器也是从菜鸟阶段熬出来的。">
+  <meta itemprop="datePublished" content="2026-07-08T15:40:06+08:00">
+  <meta itemprop="dateModified" content="2026-07-08T15:40:06+08:00">
+  <meta itemprop="wordCount" content="94">
+  <meta itemprop="keywords" content="Claude Code,AI编程 Agent,Anthropic内部揭秘,产品诞生史,技术八卦">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Claude Code“成神”之路：从难用到真香，Anthropic内部都经历了什么？">
+  <meta name="twitter:description" content="Anthropic用一份超长内部故事，还原了Claude Code从“难用的内部玩具”到“所有工程师真香”的爆火历程。从教模型写diff的艰难，到clide的前身，再到Claude 4带来的“GPT时刻”——背后是无数次吐槽、跳脚庆祝和小团队的极限拉扯。看完只想说：原来AI编程神器也是从菜鸟阶段熬出来的。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%287%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-08 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Claude&amp;#43;Code%E2%80%9C%E6%88%90%E7%A5%9E%E2%80%9D%E4%B9%8B%E8%B7%AF%EF%BC%9A%E4%BB%8E%E9%9A%BE%E7%94%A8%E5%88%B0%E7%9C%9F%E9%A6%99%EF%BC%8CAnthropic%E5%86%85%E9%83%A8%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F%20-%20Anthropic%E7%94%A8%E4%B8%80%E4%BB%BD%E8%B6%85%E9%95%BF%E5%86%85%E9%83%A8%E6%95%85%E4%BA%8B%EF%BC%8C%E8%BF%98%E5%8E%9F%E4%BA%86Claude&amp;#43;Code%E4%BB%8E%E2%80%9C%E9%9A%BE%E7%94%A8%E7%9A%84%E5%86%85%E9%83%A8%E7%8E%A9%E5%85%B7%E2%80%9D%E5%88%B0%E2%80%9C%E6%89%80%E6%9C%89%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9C%9F%E9%A6%99%E2%80%9D%E7%9A%84%E7%88%86%E7%81%AB%E5%8E%86%E7%A8%8B%E3%80%82%E4%BB%8E%E6%95%99%E6%A8%A1%E5%9E%8B%E5%86%99diff%E7%9A%84%E8%89%B0%E9%9A%BE%EF%BC%8C%E5%88%B0clide%E7%9A%84%E5%89%8D%E8%BA%AB%EF%BC%8C%E5%86%8D%E5%88%B0Claude&amp;#43;4%E5%B8%A6%E6%9D%A5%E7%9A%84%E2%80%9CGPT%E6%97%B6%E5%88%BB%E2%80%9D%E2%80%94%E2%80%94%E8%83%8C%E5%90%8E%E6%98%AF%E6%97%A0%E6%95%B0%E6%AC%A1%E5%90%90%E6%A7%BD%E3%80%81%E8%B7%B3%E8%84%9A%E5%BA%86%E7%A5%9D%E5%92%8C%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84%E6%9E%81%E9%99%90%E6%8B%89%E6%89%AF%E3%80%82%E7%9C%8B%E5%AE%8C%E5%8F%AA%E6%83%B3%E8%AF%B4%EF%BC%9A%E5%8E%9F%E6%9D%A5AI%E7%BC%96%E7%A8%8B%E7%A5%9E%E5%99%A8%E4%B9%9F%E6%98%AF%E4%BB%8E%E8%8F%9C%E9%B8%9F%E9%98%B6%E6%AE%B5%E7%86%AC%E5%87%BA%E6%9D%A5%E7%9A%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-codeanthropic-20260708154006762-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Claude&amp;#43;Code%E2%80%9C%E6%88%90%E7%A5%9E%E2%80%9D%E4%B9%8B%E8%B7%AF%EF%BC%9A%E4%BB%8E%E9%9A%BE%E7%94%A8%E5%88%B0%E7%9C%9F%E9%A6%99%EF%BC%8CAnthropic%E5%86%85%E9%83%A8%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F%20-%20Anthropic%E7%94%A8%E4%B8%80%E4%BB%BD%E8%B6%85%E9%95%BF%E5%86%85%E9%83%A8%E6%95%85%E4%BA%8B%EF%BC%8C%E8%BF%98%E5%8E%9F%E4%BA%86Claude&amp;#43;Code%E4%BB%8E%E2%80%9C%E9%9A%BE%E7%94%A8%E7%9A%84%E5%86%85%E9%83%A8%E7%8E%A9%E5%85%B7%E2%80%9D%E5%88%B0%E2%80%9C%E6%89%80%E6%9C%89%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9C%9F%E9%A6%99%E2%80%9D%E7%9A%84%E7%88%86%E7%81%AB%E5%8E%86%E7%A8%8B%E3%80%82%E4%BB%8E%E6%95%99%E6%A8%A1%E5%9E%8B%E5%86%99diff%E7%9A%84%E8%89%B0%E9%9A%BE%EF%BC%8C%E5%88%B0clide%E7%9A%84%E5%89%8D%E8%BA%AB%EF%BC%8C%E5%86%8D%E5%88%B0Claude&amp;#43;4%E5%B8%A6%E6%9D%A5%E7%9A%84%E2%80%9CGPT%E6%97%B6%E5%88%BB%E2%80%9D%E2%80%94%E2%80%94%E8%83%8C%E5%90%8E%E6%98%AF%E6%97%A0%E6%95%B0%E6%AC%A1%E5%90%90%E6%A7%BD%E3%80%81%E8%B7%B3%E8%84%9A%E5%BA%86%E7%A5%9D%E5%92%8C%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84%E6%9E%81%E9%99%90%E6%8B%89%E6%89%AF%E3%80%82%E7%9C%8B%E5%AE%8C%E5%8F%AA%E6%83%B3%E8%AF%B4%EF%BC%9A%E5%8E%9F%E6%9D%A5AI%E7%BC%96%E7%A8%8B%E7%A5%9E%E5%99%A8%E4%B9%9F%E6%98%AF%E4%BB%8E%E8%8F%9C%E9%B8%9F%E9%98%B6%E6%AE%B5%E7%86%AC%E5%87%BA%E6%9D%A5%E7%9A%84%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-codeanthropic-20260708154006762-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Claude Code“成神”之路：从难用到真香，Anthropic内部都经历了什么？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>从2021年连写个diff都费劲的菜鸟模型，到2025年让工程师“一个字都不再手写”的代码代理——Anthropic用一份内部故事揭开了Claude Code的“炼成”全过程。简单说，就是一场持续数年的“驯化AI”大作战，中间充满了吐槽、狂喜、办公室跳脚，以及一个差点被叫停的内部小工具。</p></blockquote>
+<hr>
+<p>如果今天你问任何一个用Claude Code写代码的工程师：“这玩意儿好用吗？”大概率会收到一个“真香”表情包。</p>
+<p>但很少有人知道，2025年2月才正式亮相的Claude Code，它的“前世”是一个叫<strong>clide</strong>的玩意儿——启动慢、操作繁琐、需要背诵咒语般的命令，连Anthropic内部员工都嫌它“笨拙”。</p>
+<p>而它的“今生”，已经成了Anthropic证明“AI可以进入真实工作现场”的核心样板。</p>
+<p>7月7日，Anthropic官方发布了一份超长历史故事，由其创造者和早期用户亲述——从2021年一个连diff都写不好的模型，到2026年成为AIAgent样板。这不是一本正经的产品发布稿，更像是一部<strong>程序员版的《硅谷》情景喜剧</strong>。让我们一边嗑瓜子，一边看看这段“炼成史”。</p>
+<hr>
+<h3 id="一切的起点让模型学会写代码有多难">一切的起点：让模型学会写代码，有多难？</h3>
+<p>故事要从2021年讲起。那时候Anthropic刚成立，Claude连名字都还没定，更别说Claude Code了。</p>
+<p>但代码，很早就被放在了非常重要的位置。</p>
+<p>2021年，研究员Dawn Drain加入，她的目标直截了当：<strong>让Claude写代码写得至少跟她一样好。</strong> 听起来很酷对吧？但实际操作是：让模型写一个小函数，然后自己跑测试——十次里九次跑不过。</p>
+<p>“我花了令人尴尬地久的时间教Claude写diff。”Dawn后来开玩笑说。diff是开发者每天看的红绿代码行——删掉的标红，新增的标绿。但轮到模型来写，它经常把整个文件重写，或者干脆在聊天框里回一句“建议你把这里改一下”。</p>
+<p>这就像教一个学生写作文，结果他每次交一整本新书。</p>
+<p>到2022年，Anthropic做出了第一个编程助手——一个VS Code插件，用户可以和它聊天，它会给建议。但它还不会自己钻进代码库翻文件，也不会打开命令行跑测试。本质上就是个“坐旁边的嘴强王者”。</p>
+<p>研究团队不满足于此。他们想让模型“动起来”——能自己执行代码、看见输出、处理超时。他们干了件很关键的事：在容器里给模型接上一个持续存在的命令行环境。模型不再只是纸上谈兵，而是真的可以动手操作了。</p>
+<hr>
+<h3 id="clide一个笨拙但超前的内部玩具">clide：一个“笨拙但超前”的内部玩具</h3>
+<p>到了2023年，研究团队开始给模型接上bash工具和搜索能力。这些东西现在听起来基础，但当时就像给一个只会动嘴的AI装上了手和脚。</p>
+<p>然后，一个叫<strong>clide</strong>的命令行工具诞生了。</p>
+<p>“clide非常、非常超前，但也很笨拙。”研究员Shauna回忆。想让它正常工作，你需要输入一堆像咒语一样的命令。但它有一种神奇的魅力——只要成功一次，你就难忘掉那种感觉。比如，Dawn曾经用它处理一个超大文件夹的查询，正常情况下根本塞不进模型上下文窗口，但clide会并行叫上一百个Claude Haiku去看，再把结果收回来。旁边同事看见了，总会问：“嘿，你怎么知道这些酷工具的？”</p>
+<p>另一个工程师Adam Wolff在clide上加了一个早期代理功能。第一次跑通的时候，他在厨房里高兴得跳了起来。</p>
+<p>这种“灵光一闪”时刻，让团队深信：<strong>如果一个难用的命令行工具都能让人震撼，那一个真正好用的版本会是什么样？</strong></p>
+<hr>
+<h3 id="从内部demo到产品一场关于要不要做大的拉扯">从“内部demo”到“产品”：一场关于“要不要做大”的拉扯</h3>
+<p>2024年1月，Ben Mann开始组建Labs团队，盯上了一个市场空位：真正能干活的AI编程代理还没有出现。同年9月，Boris加入团队，他一开始想做个小的代码检查工具。Ben的反应很坚决：“别做小的，要干就干一票大的。”</p>
+<p>Boris当时甚至还没怎么用过Anthropic的API。他花了大约两天，折腾出一个叫<strong>Claude CLI</strong>的demo——一种能截屏音乐播放器然后自己读歌名的奇怪工具。他把demo发到公司Slack，只收到两三个赞。</p>
+<p>但第二天，他走进办公室，看到同事Robert正在用这个demo干活，屏幕上跳动着后来非常有辨识度的红绿代码行。Robert很自然地说：“对，它正在帮我写代码。”</p>
+<p>Boris感到一种强烈的紧迫感，从此周末不休息，朋友叫他出去玩也放不下。“我就是停不下来。”他说。</p>
+<p>2024年10月，Boris几乎把所有精力都扑上去，每隔一周找工程负责人要人。团队一度只有两三个人——Boris、Sid，再加一点点Ben Mann。有趣的是，团队经理Adam Wolff坚持<strong>不让团队过快膨胀</strong>。他觉得人多了流程复杂，容易过度设计。后来回头看，小团队反而成了优势：人少，没法铺大架构；资源紧，只能依赖Claude本身来开发Claude Code。</p>
+<p>到2024年12月，项目拿到绿灯。Sid回忆，很多核心功能（问题反馈、登录流程）就是最后两周冲刺做出来的。他们的工作方式极其粗暴：没有严格的PR审查，发现问题直接修，用户说不好就马上改。Boris还做了两个关键东西：自动更新和用户数据收集——只要有人抱怨，几分钟后版本就更新了。</p>
+<p>这个“飞轮”开始转动：产品越能用，改产品的速度越快；改得越快，用户越愿意反馈；反馈越多，产品越快变得可用。</p>
+<hr>
+<h3 id="正式发布名字改了角色多了bug也不少">正式发布：名字改了，角色多了，bug也不少</h3>
+<p>2025年2月，Claude Code以“研究预览版”发布（注：文章实际提到2月发布，但搜索结果显示2月是研究预览版，5月正式开放<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>）。发布前，它从Claude CLI改名，团队喜欢新名字简单直接。产品营销团队的人加了一个小彩蛋：登录时的字符画标志（全大写的CLAUDE CODE）。Meaghan Choi还塞进了一个小角色Clawd，让冷冰冰的终端多了点可爱。</p>
+<p>但发布初期的反响并没有想象中热烈。产品负责人Cat Wu回忆，很多人觉得想法很酷，但bug太多。它像一个“有潜力的半成品”：你能看出方向，但也能看见问题。</p>
+<p>早期用户两极分化严重。有人试了五分钟就到处拉同事安装；也有人觉得还帮不上自己。有趣的是，Anthropic内部也是这样——性能工程师Tristan Hume发现早期Claude Code对他用处有限，因为他的任务需要大量上下文和特殊工具。</p>
+<p>但另一些用户已经“上头”了。Ramp的工程师Austin Ray试了五分钟，感觉“这东西会从根本上改变一切”。他连代码审查都交给Claude Code，并在公司内部疯狂安利，每周和Boris、Cat开反馈会。Bun的创始人Jarred Sumner让Claude Code实现websocket客户端压缩，虽然第一次做得很差，但几轮修正后居然成功了——他甚至因此改变了Bun的工作优先级，让项目更适合Claude Code使用。后来内部有人提议禁用，Jarred第一个反对。</p>
+<hr>
+<h3 id="claude-4来了一切彻底变了">Claude 4来了，一切彻底变了</h3>
+<p>如果说Claude Code 2月发布是个“试播集”，那Claude 4的到来就是“爆火全季”。</p>
+<p>用AI圈常见的黑话来讲，那算Claude Code的“ChatGPT时刻”。在模型真正好用之前，产品设计能做的事情有限。Claude 4模型更会写代码、更会处理任务、更像一个能自己往前推进的agent。Boris后来总结，起飞主要靠两件事：模型创新和商业模式创新（订阅制让用户敢高频使用）。</p>
+<p>到了2025年冬天，Boris说自己的代码已经全部由Claude Code完成，他不再亲手写任何一行代码。但Shauna的情况恰恰相反——她过去几年本来已经不亲手写代码了，但Claude Code让她重新写得更多，因为写代码变得更容易了。她描述自己有十二个不同的Claude在四处工作：有的读文档，有的更新代码，有的从Slack里拉信息。</p>
+<p>Igor Kofman看到了更深层的变化：“现在你管理一堆Claude，往后你可能管理的是‘管理Claude的那个Claude’。” 这对应了后来的两个方向：子代理（不同Claude分头处理任务）和Skills/Loop Engineering（人设计目标、检查和停止规则，让AI自己反复推进）。用大白话说就是——<strong>人写得越来越少，安排得越来越多。</strong></p>
+<p>另一个变化是信任。Cat Wu观察到，刚发布时用户会认真阅读每个权限请求，但后来越来越多用户直接自动接受。她说这说明用户不再把Claude Code当成可能闯祸的外来者，而是当成熟悉项目的工作伙伴。但我觉得，这和Claude Code增加了回退机制也有很大关系——至少用户知道，就算改错了也能回退。</p>
+<hr>
+<h3 id="写在最后">写在最后</h3>
+<p>回顾Claude Code的炼成史，最动人的不是它最终有多强，而是它从一个“内部玩具”变成“生产力核武”的真实过程。Ben Mann说得很到位：“你必须先做出一个现在只能成功二三成的东西；等下一代模型出来，它可能就能成功八成；再下一代，就可能到九成以上。做这种产品需要很高的忍耐力。”</p>
+<p>所以，下次你看到Claude Code在终端里刷刷地改代码时，别忘了它背后那段被人吐槽、被人嫌弃、被人跳脚庆祝的岁月——以及一群在厨房里高兴得跳起来的工程师。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Day 17 - AI 工具實戰：Claude Code 從零到上手·iT 邦幫忙 (2026/7/8)·检索日期2026/7/8&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A8%8B-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编程 Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/anthropic%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic内部揭秘</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A7%E5%93%81%E8%AF%9E%E7%94%9F%E5%8F%B2/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">产品诞生史</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E5%85%AB%E5%8D%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术八卦</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/anthropicai-20260706104007261-1/">Anthropic“间谍门”实锤：一边高喊AI安全，一边往中国人电脑里塞木马</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/3unicodeanthropic-20260703111004889-0/">偷藏3个月，用Unicode字符当“摩斯密码”？Anthropic的“间谍代码”翻车记</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-codeanthropic-20260701161006735-2/">Claude Code暗藏“木马”被扒皮，Anthropic：误会，明天就改！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-codeanthropic-20260701121006906-2/">Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-code-20260630174004814-1/">你在前台摸鱼聊天，AI在后台把代码写完了：Claude Code这波更新有点逆天</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code100-20260630161006354-0/">半年不写代码的“Claude Code之父”警告：程序员职称要融化了，但写代码的人会暴涨100倍</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-8emoclaude-80-20260625084004764-6/">Anthropic 工程师效率爆涨8倍，却集体emo了：Claude 写80%代码，人越来越孤独</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code5703500-20260622214013638-2/">惊了！一个业余选手&#43;Claude Code，5个月破解了困扰学界70年的3500岁密码</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/fiona-fungai-20260622181004644-0/">Fiona Fung：在AI热潮的“冷却区”，寻找软件工程的进化坐标</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260610184005801-1/">杀死提示词工程师？从写提示词到写循环：AI编程又双叒叕变天了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaianthropic9650-20260602104003539-0/">死脑筋的达里奥，靠「轴」赢了OpenAI？Anthropic估值9650亿美元背后的「专注」狂飙</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-130claude-code-20260522171003801-0/">投了OpenAI 130亿的微软，被自家工程师用Claude Code烧爆了账本</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicopenaiai-20260522114003491-0/">Anthropic终于赚钱了，OpenAI还在流血狂奔：AI界的“爽文”主角换人了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/markdownclaude-codehtml-20260514201003366-1/">别再用Markdown了？Claude Code工程师狂吹HTML，卡帕西也&#34;叛变&#34;了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaigpt-56claude-code-20260514104004047-0/">OpenAI急了？GPT-5.6曝光，直接砸钱跟Claude Code干上了</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

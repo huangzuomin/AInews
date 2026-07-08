@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="大晓机器人通过开源Kairos世界模型，以原生统一架构打破了传统VLA模型在物理因果和泛化能力上的瓶颈。这一突破不仅确立了具身智能的技术演进方向，更为机器人实现端侧高效部署与大规模商业化铺平了道路。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/kairos-20260617104004812-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/kairos-20260617104004812-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉">
+  <meta property="og:description" content="大晓机器人通过开源Kairos世界模型，以原生统一架构打破了传统VLA模型在物理因果和泛化能力上的瓶颈。这一突破不仅确立了具身智能的技术演进方向，更为机器人实现端侧高效部署与大规模商业化铺平了道路。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-17T10:40:04+08:00">
+    <meta property="article:modified_time" content="2026-06-17T10:40:04+08:00">
+    <meta property="article:tag" content="具身智能">
+    <meta property="article:tag" content="世界模型">
+    <meta property="article:tag" content="机器人技术">
+    <meta property="article:tag" content="泛化能力">
+    <meta property="article:tag" content="开源生态">
+
+  <meta itemprop="name" content="从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉">
+  <meta itemprop="description" content="大晓机器人通过开源Kairos世界模型，以原生统一架构打破了传统VLA模型在物理因果和泛化能力上的瓶颈。这一突破不仅确立了具身智能的技术演进方向，更为机器人实现端侧高效部署与大规模商业化铺平了道路。">
+  <meta itemprop="datePublished" content="2026-06-17T10:40:04+08:00">
+  <meta itemprop="dateModified" content="2026-06-17T10:40:04+08:00">
+  <meta itemprop="wordCount" content="18">
+  <meta itemprop="keywords" content="具身智能,世界模型,机器人技术,泛化能力,开源生态">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉">
+  <meta name="twitter:description" content="大晓机器人通过开源Kairos世界模型，以原生统一架构打破了传统VLA模型在物理因果和泛化能力上的瓶颈。这一突破不仅确立了具身智能的技术演进方向，更为机器人实现端侧高效部署与大规模商业化铺平了道路。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%287%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-17 10:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E5%A4%96%E6%8C%82%E2%80%9D%E5%88%B0%E2%80%9C%E5%8E%9F%E7%94%9F%E2%80%9D%EF%BC%9A%E5%A4%A7%E6%99%93%E6%9C%BA%E5%99%A8%E4%BA%BAKairos%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89%20-%20%E5%A4%A7%E6%99%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E8%BF%87%E5%BC%80%E6%BA%90Kairos%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%BB%A5%E5%8E%9F%E7%94%9F%E7%BB%9F%E4%B8%80%E6%9E%B6%E6%9E%84%E6%89%93%E7%A0%B4%E4%BA%86%E4%BC%A0%E7%BB%9FVLA%E6%A8%A1%E5%9E%8B%E5%9C%A8%E7%89%A9%E7%90%86%E5%9B%A0%E6%9E%9C%E5%92%8C%E6%B3%9B%E5%8C%96%E8%83%BD%E5%8A%9B%E4%B8%8A%E7%9A%84%E7%93%B6%E9%A2%88%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E4%B8%8D%E4%BB%85%E7%A1%AE%E7%AB%8B%E4%BA%86%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E6%96%B9%E5%90%91%EF%BC%8C%E6%9B%B4%E4%B8%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AE%9E%E7%8E%B0%E7%AB%AF%E4%BE%A7%E9%AB%98%E6%95%88%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%95%86%E4%B8%9A%E5%8C%96%E9%93%BA%E5%B9%B3%E4%BA%86%E9%81%93%E8%B7%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fkairos-20260617104004812-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E5%A4%96%E6%8C%82%E2%80%9D%E5%88%B0%E2%80%9C%E5%8E%9F%E7%94%9F%E2%80%9D%EF%BC%9A%E5%A4%A7%E6%99%93%E6%9C%BA%E5%99%A8%E4%BA%BAKairos%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89%20-%20%E5%A4%A7%E6%99%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E8%BF%87%E5%BC%80%E6%BA%90Kairos%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%BB%A5%E5%8E%9F%E7%94%9F%E7%BB%9F%E4%B8%80%E6%9E%B6%E6%9E%84%E6%89%93%E7%A0%B4%E4%BA%86%E4%BC%A0%E7%BB%9FVLA%E6%A8%A1%E5%9E%8B%E5%9C%A8%E7%89%A9%E7%90%86%E5%9B%A0%E6%9E%9C%E5%92%8C%E6%B3%9B%E5%8C%96%E8%83%BD%E5%8A%9B%E4%B8%8A%E7%9A%84%E7%93%B6%E9%A2%88%E3%80%82%E8%BF%99%E4%B8%80%E7%AA%81%E7%A0%B4%E4%B8%8D%E4%BB%85%E7%A1%AE%E7%AB%8B%E4%BA%86%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E6%96%B9%E5%90%91%EF%BC%8C%E6%9B%B4%E4%B8%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AE%9E%E7%8E%B0%E7%AB%AF%E4%BE%A7%E9%AB%98%E6%95%88%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%95%86%E4%B8%9A%E5%8C%96%E9%93%BA%E5%B9%B3%E4%BA%86%E9%81%93%E8%B7%AF%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fkairos-20260617104004812-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>大晓机器人的Kairos世界模型通过首创“多模态理解—生成—预测”一体化架构，在多个权威基准中超越主流VLA模型，标志着具身智能正式从“模仿学习”向“理解物理规律”的深层演进。这一技术范式的迁跃，预示着机器人端侧直驱与复杂场景商业化部署的瓶颈被实质性打破。</p></blockquote>
+<h3 id="范式之争超越视频生成的物理因果缺失">范式之争：超越视频生成的物理因果缺失</h3>
+<p>在具身智能的发展史上，VLA（视觉-语言-动作）模型曾长期占据统治地位。然而，主流VLA模型大多基于互联网文本与图像数据的“概率拟合”，在处理真实世界的物理动力学时，往往表现出严重的“因果匮乏”与物理规律认知缺失。</p>
+<p>大晓机器人推出的Kairos模型，其核心技术创新在于彻底摒弃了“外挂式”后训练方案。通过构建“多模态理解—生成—预测”一体化原生架构，Kairos不仅是一个生成器，更是一个模拟现实世界的动力学引擎。它能够理解牛顿力学、重力等核心物理约束，将机器人从单纯的模式识别进化为具备“物理直觉”的自主系统。在WorldModelBench Robot等评测中，Kairos-4B以仅4B的参数规模实现了对数倍参数规模模型的物理推理超越，这直接印证了数据范式与架构设计比单纯的参数堆叠更能产生“智能涌现”。</p>
+<h3 id="商业版图的降维打击具身智能的端侧时刻">商业版图的降维打击：具身智能的“端侧时刻”</h3>
+<p>从商业视角审视，Kairos的出现极大地降低了具身智能在真实物理世界的部署成本。过去，机器人需要海量的人工标注与特定环境训练；而Kairos作为一种“世界模型”，其强大的泛化能力（在LIBERO-Plus中展现出卓越的场景鲁棒性）意味着机器人可以像人类一样，通过极少量的“跨域迁移”适应光照突变、背景杂乱等动态环境。</p>
+<p>Kairos-4B作为全球首款可端侧直驱的具身世界模型，其本质价值在于实现了“想到即做到”的低延迟闭环。对于追求极致效率的工业流水线或注重安全性的家庭服务场景而言，这种能够实时预测动作后果、自主规划长时序任务的能力，是具身智能从“实验室玩具”走向“生产力工具”的商业逻辑基石。</p>
+<h3 id="哲学重塑当机器人拥有世界观">哲学重塑：当机器人拥有“世界观”</h3>
+<p>从哲学思辨的角度看，Kairos所代表的“世界模型”路线，本质上是在探讨智能的本质：智能是否等同于对物理世界的预测能力？当我们赋予机器人一个能够预测未来状态的底层框架，我们实际上是在让AI构建一套属于它自己的“世界观”。</p>
+<p>这种变革具有深远的人文与社会意义。机器人不再是按部就班执行指令的“自动化机器”，而是成为能与环境共存、具备因果推断能力的“共生体”。它不仅改变了制造业的生产效率，更重构了人与技术互动的界面。然而，随着模型泛化能力的提升，如何界定AI在物理世界中的行为边界，以及在复杂多变的人类社会生活中确保模型的安全性，将成为未来技术迭代中不可忽视的治理议题。</p>
+<h3 id="未来路径迈向具身agi的底层基座">未来路径：迈向具身AGI的底层基座</h3>
+<p>随着Kairos向全行业开源，具身智能正在迎来一个类似于“移动互联网时代Android系统”的底层基座整合期。未来的3-5年内，我们预判技术将呈现出以下演进轨迹：</p>
+<ol>
+<li><strong>模型小型化与实时化</strong>：4B参数量级的成功验证了小模型在端侧运行的可行性，未来将向更低算力需求迈进。</li>
+<li><strong>合成数据驱动的进化</strong>：Kairos生成的符合物理规律的合成数据，将成为训练下一代通用机器人的核心数据源，形成“生成—学习—反馈”的飞轮效应。</li>
+<li><strong>生态重构</strong>：从依赖单一厂商的闭源方案，向基于统一架构的开源生态转变，这将极大地加速机器人形态的标准化与功能落地。</li>
+</ol>
+<hr>
+<h2 id="引用">引用</h2>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">具身智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">世界模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8A%80%E6%9C%AF/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器人技术</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%B3%9B%E5%8C%96%E8%83%BD%E5%8A%9B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">泛化能力</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源生态</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260615204005477-0/">世界模型的演进困局：在“模仿者”与“预演者”之间的具身智能抉择</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260528221003382-0/">从「西红柿炒蛋」到物理模拟工厂：具身智能如何跨越真实世界的鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-3-20250912111004878-3/">具身智能“GPT-3时刻”前夜：模型开源潮、数据鸿沟与商业化竞速</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-08-06-08-06-ai-/">08-06日报|巨头撕裂：当“开放”成为“毒药”，AI的战场转向何方？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260615184005737-2/">把家变成试验场：具身智能从“工厂叙事”转向“数据博弈”的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260615151005631-1/">硅谷的幽灵与中国的“数字搬运工”：谁在定义物理世界的未来？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260615144005008-0/">黄铁军的“小宇宙”：在具身智能的混沌中，寻找AI与人类的理性共存</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260615101004851-0/">王仲远：在物理世界的“无人区”，重构人工智能的进化坐标</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260615094004835-0/">物理世界的炼金术：为何资本在极佳视界身上豪赌“数字边疆”的尽头？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260609211007223-1/">超越“暴力美学”：具身智能从数据堆砌迈向物理本体觉醒</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260609084007022-3/">超越语言的边界：李飞飞的世界模型如何定义AI的下一个十年</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/yann-lecun-ai--20260603111003432-0/">超越概率游戏：Yann LeCun 与世界模型引发的 AI 范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260603101003543-0/">钢铁舞者的身价：具身智能为何成为资本的“重仓标的”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260602214010281-2/">具身智能的“物理侧”危机：当代码漏洞转化为现实世界的暴力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260602091003274-1/">超越“缸中大脑”：具身智能的下一场残酷生存战</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

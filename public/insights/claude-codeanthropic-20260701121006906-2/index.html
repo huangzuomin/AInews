@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic今天一边庆祝出口管制解除，一边被实锤Claude Code偷偷用隐写术给中国用户打标签。这段代码会检测时区、代理和AI实验室域名，然后把信息藏在日期格式和标点符号的微小变化里。虽然动机是为了遏制转售，但偷偷摸摸搞监控让开发者信任碎了一地，好在官方承诺明天就删。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/claude-codeanthropic-20260701121006906-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/claude-codeanthropic-20260701121006906-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」">
+  <meta property="og:description" content="Anthropic今天一边庆祝出口管制解除，一边被实锤Claude Code偷偷用隐写术给中国用户打标签。这段代码会检测时区、代理和AI实验室域名，然后把信息藏在日期格式和标点符号的微小变化里。虽然动机是为了遏制转售，但偷偷摸摸搞监控让开发者信任碎了一地，好在官方承诺明天就删。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-01T12:10:06+08:00">
+    <meta property="article:modified_time" content="2026-07-01T12:10:06+08:00">
+    <meta property="article:tag" content="Claude Code">
+    <meta property="article:tag" content="隐写术">
+    <meta property="article:tag" content="数据隐私">
+    <meta property="article:tag" content="偷查用户">
+    <meta property="article:tag" content="翻车现场">
+
+  <meta itemprop="name" content="Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」">
+  <meta itemprop="description" content="Anthropic今天一边庆祝出口管制解除，一边被实锤Claude Code偷偷用隐写术给中国用户打标签。这段代码会检测时区、代理和AI实验室域名，然后把信息藏在日期格式和标点符号的微小变化里。虽然动机是为了遏制转售，但偷偷摸摸搞监控让开发者信任碎了一地，好在官方承诺明天就删。">
+  <meta itemprop="datePublished" content="2026-07-01T12:10:06+08:00">
+  <meta itemprop="dateModified" content="2026-07-01T12:10:06+08:00">
+  <meta itemprop="wordCount" content="49">
+  <meta itemprop="keywords" content="Claude Code,隐写术,数据隐私,偷查用户,翻车现场">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」">
+  <meta name="twitter:description" content="Anthropic今天一边庆祝出口管制解除，一边被实锤Claude Code偷偷用隐写术给中国用户打标签。这段代码会检测时区、代理和AI实验室域名，然后把信息藏在日期格式和标点符号的微小变化里。虽然动机是为了遏制转售，但偷偷摸摸搞监控让开发者信任碎了一地，好在官方承诺明天就删。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2817%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-01 12:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Claude&amp;#43;Code%E5%81%B7%E5%81%B7%E7%BB%99%E4%BD%A0%E6%89%93%E6%A0%87%E7%AD%BE%EF%BC%9FAnthropic%E7%9A%84%E3%80%8C%E5%8F%8C%E5%96%9C%E4%B8%B4%E9%97%A8%E3%80%8D%E5%8F%98%E3%80%8C%E7%BF%BB%E8%BD%A6%E7%8E%B0%E5%9C%BA%E3%80%8D%20-%20Anthropic%E4%BB%8A%E5%A4%A9%E4%B8%80%E8%BE%B9%E5%BA%86%E7%A5%9D%E5%87%BA%E5%8F%A3%E7%AE%A1%E5%88%B6%E8%A7%A3%E9%99%A4%EF%BC%8C%E4%B8%80%E8%BE%B9%E8%A2%AB%E5%AE%9E%E9%94%A4Claude&amp;#43;Code%E5%81%B7%E5%81%B7%E7%94%A8%E9%9A%90%E5%86%99%E6%9C%AF%E7%BB%99%E4%B8%AD%E5%9B%BD%E7%94%A8%E6%88%B7%E6%89%93%E6%A0%87%E7%AD%BE%E3%80%82%E8%BF%99%E6%AE%B5%E4%BB%A3%E7%A0%81%E4%BC%9A%E6%A3%80%E6%B5%8B%E6%97%B6%E5%8C%BA%E3%80%81%E4%BB%A3%E7%90%86%E5%92%8CAI%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9F%9F%E5%90%8D%EF%BC%8C%E7%84%B6%E5%90%8E%E6%8A%8A%E4%BF%A1%E6%81%AF%E8%97%8F%E5%9C%A8%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%92%8C%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%BE%AE%E5%B0%8F%E5%8F%98%E5%8C%96%E9%87%8C%E3%80%82%E8%99%BD%E7%84%B6%E5%8A%A8%E6%9C%BA%E6%98%AF%E4%B8%BA%E4%BA%86%E9%81%8F%E5%88%B6%E8%BD%AC%E5%94%AE%EF%BC%8C%E4%BD%86%E5%81%B7%E5%81%B7%E6%91%B8%E6%91%B8%E6%90%9E%E7%9B%91%E6%8E%A7%E8%AE%A9%E5%BC%80%E5%8F%91%E8%80%85%E4%BF%A1%E4%BB%BB%E7%A2%8E%E4%BA%86%E4%B8%80%E5%9C%B0%EF%BC%8C%E5%A5%BD%E5%9C%A8%E5%AE%98%E6%96%B9%E6%89%BF%E8%AF%BA%E6%98%8E%E5%A4%A9%E5%B0%B1%E5%88%A0%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-codeanthropic-20260701121006906-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Claude&amp;#43;Code%E5%81%B7%E5%81%B7%E7%BB%99%E4%BD%A0%E6%89%93%E6%A0%87%E7%AD%BE%EF%BC%9FAnthropic%E7%9A%84%E3%80%8C%E5%8F%8C%E5%96%9C%E4%B8%B4%E9%97%A8%E3%80%8D%E5%8F%98%E3%80%8C%E7%BF%BB%E8%BD%A6%E7%8E%B0%E5%9C%BA%E3%80%8D%20-%20Anthropic%E4%BB%8A%E5%A4%A9%E4%B8%80%E8%BE%B9%E5%BA%86%E7%A5%9D%E5%87%BA%E5%8F%A3%E7%AE%A1%E5%88%B6%E8%A7%A3%E9%99%A4%EF%BC%8C%E4%B8%80%E8%BE%B9%E8%A2%AB%E5%AE%9E%E9%94%A4Claude&amp;#43;Code%E5%81%B7%E5%81%B7%E7%94%A8%E9%9A%90%E5%86%99%E6%9C%AF%E7%BB%99%E4%B8%AD%E5%9B%BD%E7%94%A8%E6%88%B7%E6%89%93%E6%A0%87%E7%AD%BE%E3%80%82%E8%BF%99%E6%AE%B5%E4%BB%A3%E7%A0%81%E4%BC%9A%E6%A3%80%E6%B5%8B%E6%97%B6%E5%8C%BA%E3%80%81%E4%BB%A3%E7%90%86%E5%92%8CAI%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9F%9F%E5%90%8D%EF%BC%8C%E7%84%B6%E5%90%8E%E6%8A%8A%E4%BF%A1%E6%81%AF%E8%97%8F%E5%9C%A8%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%92%8C%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%BE%AE%E5%B0%8F%E5%8F%98%E5%8C%96%E9%87%8C%E3%80%82%E8%99%BD%E7%84%B6%E5%8A%A8%E6%9C%BA%E6%98%AF%E4%B8%BA%E4%BA%86%E9%81%8F%E5%88%B6%E8%BD%AC%E5%94%AE%EF%BC%8C%E4%BD%86%E5%81%B7%E5%81%B7%E6%91%B8%E6%91%B8%E6%90%9E%E7%9B%91%E6%8E%A7%E8%AE%A9%E5%BC%80%E5%8F%91%E8%80%85%E4%BF%A1%E4%BB%BB%E7%A2%8E%E4%BA%86%E4%B8%80%E5%9C%B0%EF%BC%8C%E5%A5%BD%E5%9C%A8%E5%AE%98%E6%96%B9%E6%89%BF%E8%AF%BA%E6%98%8E%E5%A4%A9%E5%B0%B1%E5%88%A0%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fclaude-codeanthropic-20260701121006906-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Claude Code偷偷给你打标签？Anthropic的「双喜临门」变「翻车现场」</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR</h3>
+<blockquote>
+<p>Anthropic一边喜提美国商务部解除出口管制，一边被开发者实锤：Claude Code在偷偷检测用户时区、代理和中国AI实验室域名，并把这些信息用隐写术藏进系统提示词里。说好的安全透明呢？这波操作，属实让人有点绷不住。</p></blockquote>
+<hr>
+<p>就在今天（2026年7月1日），Anthropic迎来了所谓的「双喜临门」——新模型Claude Sonnet 5性能直逼Opus 4.8，同时美国商务部也解除了对Claude Fable 5和Mythos 5的出口管制。消息一出，AI圈一片欢腾，仿佛又到了「OpenAI你慌不慌」的剧本时间。</p>
+<p>但反转来得比翻书还快。另一边，开发者社区直接炸了锅——有人扒出来，Claude Code一直在用户不知情的情况下，偷偷收集你的时区、代理IP，甚至检测你是不是在用中国AI实验室的域名，然后把这些信息用肉眼根本分辨不出的字符变化，塞进发给AI的提示词里。</p>
+<p>好家伙，这哪是「代码助手」，这分明是「间谍软件」啊。</p>
+<hr>
+<h3 id="一场隐形的指纹识别">一场「隐形」的指纹识别</h3>
+<p>事情是这样的。一位Reddit老哥首先发帖质疑，随后在GitHub上放出了完整验证报告，矛头直指Claude Code的2.1.193、2.1.195、2.1.196三个版本。报告确认，Claude Code里藏着一套隐蔽检测逻辑：</p>
+<ul>
+<li>它会检查环境变量<code>ANTHROPIC_BASE_URL</code>——如果你把Claude Code指向了非官方的API代理（比如国内镜像），它就开始了。</li>
+<li>接着提取代理域名，读取你的系统时区，重点看是不是<code>Asia/Shanghai</code>或<code>Asia/Urumqi</code>。</li>
+<li>然后，检测到的域名会跟一份147个条目的「黑名单」比对——百度、阿里巴巴、蚂蚁、字节、Moonshot AI、MiniMax、Stepfun……几乎所有中国AI实验室和Claude转售/镜像服务都在上面。</li>
+</ul>
+<p>到这里，还只是常规「反滥用」统计？不，真正骚的操作在后面。</p>
+<hr>
+<h3 id="日期分隔符里藏玄机的变种你看不出来的">日期分隔符里藏玄机，'的变种你看不出来的</h3>
+<p>最绝的是信息传递方式。Claude Code没有单独设一个telemetry字段上报数据，而是把「小纸条」塞进了系统提示词里那句最不起眼的「Today's date is...」。</p>
+<p>当识别到你是中国时区时，日期分隔符从短横线变成斜杠，例如<code>2026-06-30</code>变成<code>2026/06/30</code>。同时，<code>Today's date</code>里的撇号开始在几个形近的Unicode字符之间切换——<code>'</code>、<code>'</code>、<code>ʼ</code>、<code>ʹ</code>。这几个符号在常规界面里肉眼根本分不出来，但对机器来说，就是一组完美的指纹码。</p>
+<p>如果符合条件（时区+命中黑名单），每一次请求都会带着这样一枚不易察觉的标记。这可不是巧合，而是精心设计的「隐写术」（Steganography）。</p>
+<hr>
+<h3 id="动机能理解但信任呢">动机能理解，但信任呢？</h3>
+<p>有人可能会说：AI公司想做用户行为识别、防范滥用、遏制转售、规避制裁风险，这很正常啊。确实，从商业角度讲，Anthropic希望遏制Claude访问权限在中国市场被违规转售，动机不难理解。</p>
+<p>但<strong>争议不在于目的，而在于方法</strong>。</p>
+<p>Telemetry数据采集在软件行业很常见，但前提是告知用户、提供选择权。把标记信息藏在几乎无法察觉的字符差异里，这已经不是「数据采集」，而是「隐蔽监控」了。对一款coding assistant而言，用户把源代码、项目结构、密钥都暴露给它，信任就是根基。你现在告诉用户：我不仅看你的代码，还偷偷给你打标签？这信任一旦被突破，修复起来可没那么容易。</p>
+<p>更何况，Claude Code内置的权限系统本身就有「审批疲劳」（approval fatigue）问题——大多数用户会习惯性点批准，甚至完全关闭权限审批。Anthropic自己的博客也承认，他们的agentic系统出现过误删远程git分支、意外上传token、对生产数据库执行迁移等翻车案例。在这种背景下，再搞个隐藏通道，用户自然会追问：还有哪些信息被偷偷记录了？client端还有没有其他没公开的检测逻辑？</p>
+<hr>
+<h3 id="anthropic的回应明天就删">Anthropic的回应：明天就删</h3>
+<p>事件曝光后，Anthropic技术团队成员@trq212火速回应，承认代码存在，并表示这段代码将在次日的版本中移除。公关速度确实快，但「被发现才删」和「主动透明披露」之间，隔着一条信任鸿沟。</p>
+<p>另一边，美国商务部的出口管制解除倒是实打实的利好——从明天起，Claude Mythos 5和Fable 5的出口、再出口不再需要许可证。但Anthropic也得履行承诺，继续跟政府保持密切合作，发现恶意活动时及时通报。看起来，Anthropic在跟政府的「相爱相杀」中暂时占了上风，但在用户信任这一局，自己给自己挖了个坑。</p>
+<hr>
+<h3 id="最后的灵魂拷问">最后的灵魂拷问</h3>
+<p>当你的AI代码助手比你自己更清楚你在哪个时区、用了哪个代理、连到了哪家实验室的API时，你还敢放心地让它接管你的代码库吗？</p>
+<p>信任这种东西，建立起来要很久，崩塌只需要一次「偷查」。Anthropic这次虽然及时「认错删代码」，但吃瓜群众的目光已经锁定——下次再有新版本，开发者们怕是要先拿反编译工具过一遍了。</p>
+<hr>
+<h2 id="引用">引用</h2>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/claude-code/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Code</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%9A%90%E5%86%99%E6%9C%AF/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">隐写术</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">数据隐私</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%81%B7%E6%9F%A5%E7%94%A8%E6%88%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">偷查用户</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%BF%BB%E8%BD%A6%E7%8E%B0%E5%9C%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">翻车现场</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/aianthropic51-20260401164005046-0/">AI巨头Anthropic“底牌”全网裸奔：51万行源码带注释，这波是“被动大赦天下”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-code-20260630174004814-1/">你在前台摸鱼聊天，AI在后台把代码写完了：Claude Code这波更新有点逆天</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code100-20260630161006354-0/">半年不写代码的“Claude Code之父”警告：程序员职称要融化了，但写代码的人会暴涨100倍</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-8emoclaude-80-20260625084004764-6/">Anthropic 工程师效率爆涨8倍，却集体emo了：Claude 写80%代码，人越来越孤独</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-code5703500-20260622214013638-2/">惊了！一个业余选手&#43;Claude Code，5个月破解了困扰学界70年的3500岁密码</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/fiona-fungai-20260622181004644-0/">Fiona Fung：在AI热潮的“冷却区”，寻找软件工程的进化坐标</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiclaude-fable-5ceo-20260614114005536-0/">史上最强AI光速“被下架”？Claude Fable 5翻车，CEO拒修漏洞还甩锅：“友商也有这毛病”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260612194005216-1/">机器人保姆翻车记：叠个枕巾要十几分钟，身后还跟着俩保镖</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260610184005801-1/">杀死提示词工程师？从写提示词到写循环：AI编程又双叒叕变天了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openaianthropic9650-20260602104003539-0/">死脑筋的达里奥，靠「轴」赢了OpenAI？Anthropic估值9650亿美元背后的「专注」狂飙</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-130claude-code-20260522171003801-0/">投了OpenAI 130亿的微软，被自家工程师用Claude Code烧爆了账本</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicopenaiai-20260522114003491-0/">Anthropic终于赚钱了，OpenAI还在流血狂奔：AI界的“爽文”主角换人了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai5geminiclaudechatgpt-20260518191003295-1/">AI电台5个月生存战：Gemini搞悲喜交加、Claude想辞职，只有ChatGPT在认真上班？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/morningnews/2026-05-17-ai-2026-05-17-/">AI早报 2026年05月17日</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai--20260515111003522-0/">从「AI 记忆」到「隐私边界」：端云协同架构下的数字人权革命</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

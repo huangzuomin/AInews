@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="英伟达通过NeMo AutoModel将MoE模型微调性能提升3.7倍，通过底层内核融合与并行优化技术，降低了大模型工程化的算力门槛，进一步巩固了其AI算力基础设施的统治地位。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/nemomoe-20260626154007331-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/nemomoe-20260626154007331-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界">
+  <meta property="og:description" content="英伟达通过NeMo AutoModel将MoE模型微调性能提升3.7倍，通过底层内核融合与并行优化技术，降低了大模型工程化的算力门槛，进一步巩固了其AI算力基础设施的统治地位。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-06-26T15:40:07+08:00">
+    <meta property="article:modified_time" content="2026-06-26T15:40:07+08:00">
+    <meta property="article:tag" content="算力优化">
+    <meta property="article:tag" content="大模型微调">
+    <meta property="article:tag" content="MoE架构">
+    <meta property="article:tag" content="英伟达NeMo">
+    <meta property="article:tag" content="开源生态">
+    <meta property="article:tag" content="产业数字化">
+
+  <meta itemprop="name" content="算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界">
+  <meta itemprop="description" content="英伟达通过NeMo AutoModel将MoE模型微调性能提升3.7倍，通过底层内核融合与并行优化技术，降低了大模型工程化的算力门槛，进一步巩固了其AI算力基础设施的统治地位。">
+  <meta itemprop="datePublished" content="2026-06-26T15:40:07+08:00">
+  <meta itemprop="dateModified" content="2026-06-26T15:40:07+08:00">
+  <meta itemprop="wordCount" content="29">
+  <meta itemprop="keywords" content="算力优化,大模型微调,MoE架构,英伟达NeMo,开源生态,产业数字化">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界">
+  <meta name="twitter:description" content="英伟达通过NeMo AutoModel将MoE模型微调性能提升3.7倍，通过底层内核融合与并行优化技术，降低了大模型工程化的算力门槛，进一步巩固了其AI算力基础设施的统治地位。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2820%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-06-26 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%AE%97%E5%8A%9B%E8%8C%83%E5%BC%8F%E7%9A%84%E2%80%9C%E5%8E%BB%E6%91%A9%E6%93%A6%E5%8C%96%E2%80%9D%EF%BC%9A%E8%8B%B1%E4%BC%9F%E8%BE%BENeMo%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91MoE%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E8%BE%B9%E7%95%8C%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E9%80%9A%E8%BF%87NeMo&amp;#43;AutoModel%E5%B0%86MoE%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%873.7%E5%80%8D%EF%BC%8C%E9%80%9A%E8%BF%87%E5%BA%95%E5%B1%82%E5%86%85%E6%A0%B8%E8%9E%8D%E5%90%88%E4%B8%8E%E5%B9%B6%E8%A1%8C%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%EF%BC%8C%E9%99%8D%E4%BD%8E%E4%BA%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9A%84%E7%AE%97%E5%8A%9B%E9%97%A8%E6%A7%9B%EF%BC%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%B7%A9%E5%9B%BA%E4%BA%86%E5%85%B6AI%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E7%BB%9F%E6%B2%BB%E5%9C%B0%E4%BD%8D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fnemomoe-20260626154007331-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%AE%97%E5%8A%9B%E8%8C%83%E5%BC%8F%E7%9A%84%E2%80%9C%E5%8E%BB%E6%91%A9%E6%93%A6%E5%8C%96%E2%80%9D%EF%BC%9A%E8%8B%B1%E4%BC%9F%E8%BE%BENeMo%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91MoE%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E8%BE%B9%E7%95%8C%20-%20%E8%8B%B1%E4%BC%9F%E8%BE%BE%E9%80%9A%E8%BF%87NeMo&amp;#43;AutoModel%E5%B0%86MoE%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%873.7%E5%80%8D%EF%BC%8C%E9%80%9A%E8%BF%87%E5%BA%95%E5%B1%82%E5%86%85%E6%A0%B8%E8%9E%8D%E5%90%88%E4%B8%8E%E5%B9%B6%E8%A1%8C%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%EF%BC%8C%E9%99%8D%E4%BD%8E%E4%BA%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9A%84%E7%AE%97%E5%8A%9B%E9%97%A8%E6%A7%9B%EF%BC%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%B7%A9%E5%9B%BA%E4%BA%86%E5%85%B6AI%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E7%BB%9F%E6%B2%BB%E5%9C%B0%E4%BD%8D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fnemomoe-20260626154007331-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>英伟达推出的NeMo AutoModel通过底层内核优化，实现了MoE模型微调性能的跨越式提升；这不仅是工程效率的飞跃，更是AI基础设施向“即插即用”复杂模型时代迈进的战略注脚。</p></blockquote>
+<p>随着混合专家模型（MoE）逐渐从实验室走向生产环境，大模型的架构复杂度与底层算力架构之间的“工程摩擦”成为了阻碍创新的瓶颈。英伟达最新开源的NeMo AutoModel，通过在Hugging Face Transformers v5之上进行封装，实现了微调吞吐量3.4-3.7倍的提升，这标志着大模型训练正在经历从“手工作坊”向“标准化工业流水线”的范式转移。</p>
+<h3 id="技术原理与创新点解析">技术原理与创新点解析</h3>
+<p>MoE架构的核心优势在于通过稀疏激活实现“大参数、低计算”，但其伴随的专家并行（Expert Parallelism, EP）、动态负载调度和频繁的通信开销，对底层算力调度提出了严苛要求。</p>
+<p>NeMo AutoModel的精妙之处在于它并未重构接口，而是通过以下三个维度的深度协同实现了“无感加速”：</p>
+<ul>
+<li><strong>专家并行（EP）的细粒度优化</strong>：通过将专家权重分布式存储至多张GPU，内存压力得到了有效缓解。实验数据表明，其在内存占用上实现了29%-32%的削减，这直接解决了超大模型因显存溢出而无法微调的痛点。</li>
+<li><strong>DeepEP与通信融合</strong>：通过将计算与通信进行深度融合，DeepEP实现了token分发与专家计算的并发，规避了传统架构中严重的通信等待损耗。</li>
+<li><strong>TransformerEngine内核加持</strong>：利用专门优化的内核处理注意力机制及线性层，使得计算资源在执行MoE逻辑时能维持在极高的FLOPS利用率上。</li>
+</ul>
+<h3 id="产业生态影响评估">产业生态影响评估</h3>
+<p>从TechCrunch的商业视角来看，这一发布不仅是技术升级，更是英伟达对其AI生态版图的深耕。通过与Hugging Face这一开源基座的无缝集成，英伟达成功降低了企业部署MoE模型的门槛，促使更多商业实体能够以更低的算力成本运行高质量的专用化模型。</p>
+<p>这种“一行import”的策略，实质上是将高精尖的并行计算能力通过模块化方式下放。对于企业而言，这意味着微调模型的迭代周期将显著缩短，从而能够更快地捕捉市场机遇。同时，这种方案在单节点到多节点规模上的平滑扩展能力，也为云厂商和中大型科技公司提供了一种极具吸引力的标准架构参考。</p>
+<h3 id="未来发展路径预测">未来发展路径预测</h3>
+<p>从长远来看，算力基础设施的演进正在呈现出“软硬一体化”的显著特征：</p>
+<ol>
+<li><strong>基础设施的透明化</strong>：未来3-5年，用户对底层硬件配置（如EP策略、通信拓扑）的感知将进一步降低。算力引擎将具备极强的自我优化能力，类似于数据库自动调优，AI模型架构将成为真正的“软件”。</li>
+<li><strong>异构计算的深度耦合</strong>：随着模型参数规模向万亿级别迈进，计算内核的协同优化（如TransformerEngine）将成为核心竞争壁垒，软件库的效率将决定算力性价比的上限。</li>
+<li><strong>大模型的“工业化分工”</strong>：开源社区负责模型创新与通用标准（Transformers v5），而像英伟达这样的厂商则负责提供极致性能的交付层。这种分工将极大推动AI在各行各业的“精细化落地”。</li>
+</ol>
+<p>然而，这种效率提升也带来了隐忧：深度依赖单一生态工具链（如NeMo）可能加剧AI开发领域的垄断趋势。当开发者习惯了这种“一行代码加速”的便捷性，如何保持跨平台的架构独立性，将成为开发者社群在未来不得不面对的哲学与商业考量。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型微调</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/moe%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MoE架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%8B%B1%E4%BC%9F%E8%BE%BEnemo/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">英伟达NeMo</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%80%E6%BA%90%E7%94%9F%E6%80%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">开源生态</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A7%E4%B8%9A%E6%95%B0%E5%AD%97%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">产业数字化</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/hrm-text--20260526114003388-2/">效率的范式转移：HRM-Text 如何重构大模型预训练的“贫富差距”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aijpeg-20251107154005934-0/">视觉压缩：AI长文本处理的“JPEG时刻”与智能民主化的新浪潮</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-ocrllm-20251021094004838-0/">DeepSeek-OCR：视觉即压缩，重塑LLM长上下文与数据效率的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/unsloth-20250826141004621-2/">大模型微调太头疼？Unsloth：这份“躺平”式教程，直接帮你打通任督二脉！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen3-coderagentic-20250728171005242-0/">Qwen3-Coder：Agentic编程大模型如何重塑软件开发范式与未来劳动力结构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250627141004384-0/">多模态AI浪潮下的“减负”行动：火山引擎重塑音视频开发格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260625191005020-2/">从“工具棚”到“工业心脏”：黄仁勋定义的AI基建十年长跑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260625091008170-0/">硅基进化：AI从通用工具迈向“全要素”生产力的新工业革命范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/netflix-headroom-ai--20260624194005565-1/">从“算力黑洞”到“精益智能”：Netflix Headroom 如何重塑 AI 的经济与认知边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/joyai-vl-interactionagi-20260624184006794-1/">从“回合制”到“在场”：京东JoyAI-VL-Interaction为何是AGI迈向物理世界的关键拼图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/finevla-20260623154004766-4/">超越“目标达成”：FineVLA如何通过细粒度语言赋能机器人的“知行合一”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260623121004944-1/">当家变成“大脑”：智能家居从“被动联动”走向“自主意图”的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tokenai-20260622121004960-5/">Token成本的“五环”逻辑：AI视频从技术图腾走向生产力工具的必经之路</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-grpo--20260621114004965-0/">超越“答题范式”：为什么长程智能体正在终结 GRPO 的统治地位？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kairos-20260617104004812-0/">从“外挂”到“原生”：大晓机器人Kairos如何重构具身智能的物理直觉</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

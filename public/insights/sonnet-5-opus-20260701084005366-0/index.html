@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Sonnet 5 来了：性能“蹭”上Opus，钱包却“抖”了三抖？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic 发布 Claude Sonnet 5，性能接近 Opus 4.8，但换了 tokenizer 导致实际使用成本不降反升。虽然 Agent 能力增强且更安全，但高昂的运行成本让它成了“最贵的 Sonnet”，性价比争议巨大。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/sonnet-5-opus-20260701084005366-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/sonnet-5-opus-20260701084005366-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Sonnet 5 来了：性能“蹭”上Opus，钱包却“抖”了三抖？">
+  <meta property="og:description" content="Anthropic 发布 Claude Sonnet 5，性能接近 Opus 4.8，但换了 tokenizer 导致实际使用成本不降反升。虽然 Agent 能力增强且更安全，但高昂的运行成本让它成了“最贵的 Sonnet”，性价比争议巨大。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-01T08:40:05+08:00">
+    <meta property="article:modified_time" content="2026-07-01T08:40:05+08:00">
+    <meta property="article:tag" content="AI模型">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="成本分析">
+    <meta property="article:tag" content="Agent">
+    <meta property="article:tag" content="Claude Sonnet 5">
+
+  <meta itemprop="name" content="Sonnet 5 来了：性能“蹭”上Opus，钱包却“抖”了三抖？">
+  <meta itemprop="description" content="Anthropic 发布 Claude Sonnet 5，性能接近 Opus 4.8，但换了 tokenizer 导致实际使用成本不降反升。虽然 Agent 能力增强且更安全，但高昂的运行成本让它成了“最贵的 Sonnet”，性价比争议巨大。">
+  <meta itemprop="datePublished" content="2026-07-01T08:40:05+08:00">
+  <meta itemprop="dateModified" content="2026-07-01T08:40:05+08:00">
+  <meta itemprop="wordCount" content="110">
+  <meta itemprop="keywords" content="AI模型,Anthropic,成本分析,Agent,Claude Sonnet 5">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sonnet 5 来了：性能“蹭”上Opus，钱包却“抖”了三抖？">
+  <meta name="twitter:description" content="Anthropic 发布 Claude Sonnet 5，性能接近 Opus 4.8，但换了 tokenizer 导致实际使用成本不降反升。虽然 Agent 能力增强且更安全，但高昂的运行成本让它成了“最贵的 Sonnet”，性价比争议巨大。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%282%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-01 08:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Sonnet&amp;#43;5&amp;#43;%E6%9D%A5%E4%BA%86%EF%BC%9A%E6%80%A7%E8%83%BD%E2%80%9C%E8%B9%AD%E2%80%9D%E4%B8%8AOpus%EF%BC%8C%E9%92%B1%E5%8C%85%E5%8D%B4%E2%80%9C%E6%8A%96%E2%80%9D%E4%BA%86%E4%B8%89%E6%8A%96%EF%BC%9F%20-%20Anthropic&amp;#43;%E5%8F%91%E5%B8%83&amp;#43;Claude&amp;#43;Sonnet&amp;#43;5%EF%BC%8C%E6%80%A7%E8%83%BD%E6%8E%A5%E8%BF%91&amp;#43;Opus&amp;#43;4.8%EF%BC%8C%E4%BD%86%E6%8D%A2%E4%BA%86&amp;#43;tokenizer&amp;#43;%E5%AF%BC%E8%87%B4%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8%E6%88%90%E6%9C%AC%E4%B8%8D%E9%99%8D%E5%8F%8D%E5%8D%87%E3%80%82%E8%99%BD%E7%84%B6&amp;#43;Agent&amp;#43;%E8%83%BD%E5%8A%9B%E5%A2%9E%E5%BC%BA%E4%B8%94%E6%9B%B4%E5%AE%89%E5%85%A8%EF%BC%8C%E4%BD%86%E9%AB%98%E6%98%82%E7%9A%84%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC%E8%AE%A9%E5%AE%83%E6%88%90%E4%BA%86%E2%80%9C%E6%9C%80%E8%B4%B5%E7%9A%84&amp;#43;Sonnet%E2%80%9D%EF%BC%8C%E6%80%A7%E4%BB%B7%E6%AF%94%E4%BA%89%E8%AE%AE%E5%B7%A8%E5%A4%A7%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fsonnet-5-opus-20260701084005366-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Sonnet&amp;#43;5&amp;#43;%E6%9D%A5%E4%BA%86%EF%BC%9A%E6%80%A7%E8%83%BD%E2%80%9C%E8%B9%AD%E2%80%9D%E4%B8%8AOpus%EF%BC%8C%E9%92%B1%E5%8C%85%E5%8D%B4%E2%80%9C%E6%8A%96%E2%80%9D%E4%BA%86%E4%B8%89%E6%8A%96%EF%BC%9F%20-%20Anthropic&amp;#43;%E5%8F%91%E5%B8%83&amp;#43;Claude&amp;#43;Sonnet&amp;#43;5%EF%BC%8C%E6%80%A7%E8%83%BD%E6%8E%A5%E8%BF%91&amp;#43;Opus&amp;#43;4.8%EF%BC%8C%E4%BD%86%E6%8D%A2%E4%BA%86&amp;#43;tokenizer&amp;#43;%E5%AF%BC%E8%87%B4%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8%E6%88%90%E6%9C%AC%E4%B8%8D%E9%99%8D%E5%8F%8D%E5%8D%87%E3%80%82%E8%99%BD%E7%84%B6&amp;#43;Agent&amp;#43;%E8%83%BD%E5%8A%9B%E5%A2%9E%E5%BC%BA%E4%B8%94%E6%9B%B4%E5%AE%89%E5%85%A8%EF%BC%8C%E4%BD%86%E9%AB%98%E6%98%82%E7%9A%84%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC%E8%AE%A9%E5%AE%83%E6%88%90%E4%BA%86%E2%80%9C%E6%9C%80%E8%B4%B5%E7%9A%84&amp;#43;Sonnet%E2%80%9D%EF%BC%8C%E6%80%A7%E4%BB%B7%E6%AF%94%E4%BA%89%E8%AE%AE%E5%B7%A8%E5%A4%A7%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fsonnet-5-opus-20260701084005366-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Sonnet 5 来了：性能“蹭”上Opus，钱包却“抖”了三抖？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="tldr">TL;DR：</h3>
+<blockquote>
+<p>Anthropic 发布了 Claude Sonnet 5，号称“最有 Agent 味”的 Sonnet，性能直逼老大哥 Opus 4.8。但别高兴太早，它的算账方式悄悄变了，“性价比”这杆秤，得重新掂量掂量。</p></blockquote>
+<hr>
+<h3 id="家人们anthropic-又整活了">家人们，Anthropic 又“整活”了。</h3>
+<p>就在大家以为大模型竞赛稍微喘口气的时候，Anthropic 冷不丁甩出一张新牌——<strong>Claude Sonnet 5</strong>。这次官方的口号喊得震天响：“迄今为止最具 Agent 属性的 Sonnet 模型”。</p>
+<p>翻译成人话就是：这小老弟现在能自己制定计划、操作浏览器、调用终端，像个刚拿到驾照就敢上高速的新手司机，虽然有点莽，但技术还行。[^1]</p>
+<h3 id="小弟的身板大哥的活">“小弟”的身板，“大哥”的活？</h3>
+<p>这次 Sonnet 5 最大的亮点，就是它跟老大哥 <strong>Opus 4.8</strong> 的差距肉眼可见地缩小了。</p>
+<p>从官方数据看，在推理、编程、工具使用这些 Agent 的“硬核指标”上，Sonnet 5 比上一代 Sonnet 4.6 猛了一大截。在某些“努力”模式下，它的能力甚至能跟 Opus 4.8 掰掰手腕。[^2]</p>
+<p><strong>你可能会想：这不就是“买Sonnet送Opus体验卡”吗？</strong> 先别急着冲。</p>
+<h3 id="算账时刻你以为的便宜可能并不便宜">算账时刻：你以为的“便宜”，可能并不便宜</h3>
+<p>Anthropic 很会做人，搞了个“限时尝鲜价”（输入$2/M，输出$10/M），[^1] 看起来比 Opus 4.8 的定价（输入$5/M，输出$25/M）香多了。</p>
+<p>但是！<strong>这里面有个“大坑”</strong>——Sonnet 5 换了新的 <strong>tokenizer</strong>。</p>
+<p>简单说，以前你说句“Hello”，可能算1个令牌；现在说同样的“Hello”，可能要算1.3个令牌。[^1] 这不就是“薯片袋子变大了，里面的空气也变多了”的把戏吗？</p>
+<p>结果是啥？第三方评测机构 <strong>Artificial Analysis</strong> 一算，发现 <strong>Sonnet 5 跑一个任务的实际成本（2.29美元），竟然比 Opus 4.8 还贵了15%！</strong>[^3]</p>
+<p>网友看完直接破防：“太贵了！”[^1] 这波啊，这波叫“性能的甜头，还是被成本的镰刀收割了”。</p>
+<h3 id="agent-安全能打架但带了紧箍咒">Agent 安全：能打架，但带了“紧箍咒”</h3>
+<p>能力变强是一回事，安不安全是另一回事。Anthropic 显然也怕这位“新司机”飙车出事故。</p>
+<p>数据还挺亮眼：在防止“提示注入攻击”（就是坏人忽悠AI干坏事）方面，Sonnet 5 仅0.93%的攻击成功率，吊打 Opus 4.8 的31.5%和 Sonnet 4.6 的50.7%。[^1] 这波防御，堪称“铁壁铜墙”。</p>
+<p>不过，对于写病毒、搞黑客这种“危险技能”，Sonnet 5 表现得很“菜”，完全不如 Opus 4.8 和神秘模型 Mythos 5。[^1] 官方表示：不是它不会，是没教它，还给戴了“网络安全护栏”。</p>
+<h3 id="总结一下sonnet-5-到底香不香">总结一下：Sonnet 5 到底香不香？</h3>
+<p>如果你是<strong>开发者</strong>，想要一个能干活、跑得又快又安全的 Agent 模型，Sonnet 5 绝对是一把好手，堪称“性价比刺客”——看着便宜，用起来费钱。</p>
+<p>如果你是<strong>普通玩家</strong>，在 Claude 聊天框里用用，那它确实比 Sonnet 4.6 更聪明、更能帮你搞定复杂任务。但记得，<strong>算账的时候别只看每百万 token 的价格，多看看你实际花了多少钱</strong>。</p>
+<p>AI 的世界里，从来就没有“免费的午餐”，只有“更贵的幻觉”。这次，Anthropic 给了你更强的能力，顺便教你做了个算术题。</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/anthropic/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Anthropic</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%88%90%E6%9C%AC%E5%88%86%E6%9E%90/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">成本分析</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/claude-sonnet-5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Claude Sonnet 5</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/claude-sonnet-5-anthropic--20260204154007742-1/">Claude Sonnet 5 偷跑！代码能力炸裂、价格腰斩，Anthropic 的服务器却先“崩”为敬？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropichaiku-45openai-20251016091004756-0/">卷王Anthropic又来“搞事情”：Haiku 4.5性能起飞价格“香爆”，OpenAI这下坐不住了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-20260701084005368-2/">刚封完号就发新模型？Claude这波操作，是“打一巴掌给颗糖”还是另有算盘？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cursoropenclawai-20260630194005484-1/">Cursor和OpenClaw同一天上手机，AI编程的“入口战”打响，马斯克亲自带货但评论区翻车了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/jack-clarkai-20260630104004697-0/">亲手打造怪兽的人：Jack Clark与AI时代的“诡异繁荣”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicai450arr-20260629184006105-0/">Anthropic登顶AI新王，450亿ARR背后藏着致命死穴？中国“白菜价”大招已在路上</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai170anthropic-20260629174004961-0/">AI账单「刺客」曝光：多收170万美金，Anthropic你退钱不认账是几个意思？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ai-5-6--20260629164005880-3/">Anthropic 把几百万人的 AI 对话扒了个底朝天：凌晨 5 点问失眠，下午 6 点问菜谱，高薪打工人没有下班时间</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/fable-5626anthropic-20260626101004848-1/">Fable 5偷偷复活？6·26大限前，Anthropic的「极限试探」你看懂了吗</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/fable-5anthropicceo-20260625201007077-3/">Fable 5回归，先改代码再换人：Anthropic的「谈判筹码」连CEO都被撤了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicaiclaude-20260625114004878-0/">Anthropic炸了：说中国AI用“假账号”偷师Claude，这波操作是“正义维权”还是“贼喊捉贼”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260625081005722-1/">亚马逊的AI逆袭：以“算力垂直整合”重构云端秩序</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260624191005548-0/">AI世纪撕逼：我创立公司不是为了救人类，纯粹是看他不爽</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-20260624191005550-2/">Anthropic猛砸经济学核弹：刚薅完诺奖得主，又把斯坦福“账房先生”锁进研究院</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/fiona-fungai-20260622181004644-0/">Fiona Fung：在AI热潮的“冷却区”，寻找软件工程的进化坐标</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
