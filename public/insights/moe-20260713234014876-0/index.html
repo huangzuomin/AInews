@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>超越算力堆叠：混合专家模型（MoE）如何重塑人工智能的效能边界 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="混合专家模型（MoE）通过稀疏激活的架构设计，实现了模型规模与推理效率的解耦。这种范式革命不仅大幅降低了企业部署大规模AI的成本，也标志着AI从单一通用模型向高度专业化的协作生态演进。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/moe-20260713234014876-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/moe-20260713234014876-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="超越算力堆叠：混合专家模型（MoE）如何重塑人工智能的效能边界">
+  <meta property="og:description" content="混合专家模型（MoE）通过稀疏激活的架构设计，实现了模型规模与推理效率的解耦。这种范式革命不仅大幅降低了企业部署大规模AI的成本，也标志着AI从单一通用模型向高度专业化的协作生态演进。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-13T23:40:14+08:00">
+    <meta property="article:modified_time" content="2026-07-13T23:40:14+08:00">
+    <meta property="article:tag" content="混合专家模型">
+    <meta property="article:tag" content="MoE架构">
+    <meta property="article:tag" content="AI推理效率">
+    <meta property="article:tag" content="稀疏激活">
+    <meta property="article:tag" content="大模型范式">
+
+  <meta itemprop="name" content="超越算力堆叠：混合专家模型（MoE）如何重塑人工智能的效能边界">
+  <meta itemprop="description" content="混合专家模型（MoE）通过稀疏激活的架构设计，实现了模型规模与推理效率的解耦。这种范式革命不仅大幅降低了企业部署大规模AI的成本，也标志着AI从单一通用模型向高度专业化的协作生态演进。">
+  <meta itemprop="datePublished" content="2026-07-13T23:40:14+08:00">
+  <meta itemprop="dateModified" content="2026-07-13T23:40:14+08:00">
+  <meta itemprop="wordCount" content="52">
+  <meta itemprop="keywords" content="混合专家模型,MoE架构,AI推理效率,稀疏激活,大模型范式">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="超越算力堆叠：混合专家模型（MoE）如何重塑人工智能的效能边界">
+  <meta name="twitter:description" content="混合专家模型（MoE）通过稀疏激活的架构设计，实现了模型规模与推理效率的解耦。这种范式革命不仅大幅降低了企业部署大规模AI的成本，也标志着AI从单一通用模型向高度专业化的协作生态演进。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%282%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-13 23:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B6%85%E8%B6%8A%E7%AE%97%E5%8A%9B%E5%A0%86%E5%8F%A0%EF%BC%9A%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B%EF%BC%88MoE%EF%BC%89%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E6%95%88%E8%83%BD%E8%BE%B9%E7%95%8C%20-%20%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B%EF%BC%88MoE%EF%BC%89%E9%80%9A%E8%BF%87%E7%A8%80%E7%96%8F%E6%BF%80%E6%B4%BB%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E4%B8%8E%E6%8E%A8%E7%90%86%E6%95%88%E7%8E%87%E7%9A%84%E8%A7%A3%E8%80%A6%E3%80%82%E8%BF%99%E7%A7%8D%E8%8C%83%E5%BC%8F%E9%9D%A9%E5%91%BD%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%A4%A7%E8%A7%84%E6%A8%A1AI%E7%9A%84%E6%88%90%E6%9C%AC%EF%BC%8C%E4%B9%9F%E6%A0%87%E5%BF%97%E7%9D%80AI%E4%BB%8E%E5%8D%95%E4%B8%80%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E5%90%91%E9%AB%98%E5%BA%A6%E4%B8%93%E4%B8%9A%E5%8C%96%E7%9A%84%E5%8D%8F%E4%BD%9C%E7%94%9F%E6%80%81%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmoe-20260713234014876-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B6%85%E8%B6%8A%E7%AE%97%E5%8A%9B%E5%A0%86%E5%8F%A0%EF%BC%9A%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B%EF%BC%88MoE%EF%BC%89%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E6%95%88%E8%83%BD%E8%BE%B9%E7%95%8C%20-%20%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B%EF%BC%88MoE%EF%BC%89%E9%80%9A%E8%BF%87%E7%A8%80%E7%96%8F%E6%BF%80%E6%B4%BB%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E4%B8%8E%E6%8E%A8%E7%90%86%E6%95%88%E7%8E%87%E7%9A%84%E8%A7%A3%E8%80%A6%E3%80%82%E8%BF%99%E7%A7%8D%E8%8C%83%E5%BC%8F%E9%9D%A9%E5%91%BD%E4%B8%8D%E4%BB%85%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%A4%A7%E8%A7%84%E6%A8%A1AI%E7%9A%84%E6%88%90%E6%9C%AC%EF%BC%8C%E4%B9%9F%E6%A0%87%E5%BF%97%E7%9D%80AI%E4%BB%8E%E5%8D%95%E4%B8%80%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B%E5%90%91%E9%AB%98%E5%BA%A6%E4%B8%93%E4%B8%9A%E5%8C%96%E7%9A%84%E5%8D%8F%E4%BD%9C%E7%94%9F%E6%80%81%E6%BC%94%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fmoe-20260713234014876-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">超越算力堆叠：混合专家模型（MoE）如何重塑人工智能的效能边界</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>混合专家模型（MoE）通过“稀疏激活”机制打破了模型规模与计算成本之间的线性增长限制，从根本上改变了AI架构的资源分配方式。这一范式转移不仅是工程上的降本增效，更预示着一个模块化、专业化AI生态系统的兴起。</p></blockquote>
+<h3 id="技术逻辑的范式转移从全能型到专家化">技术逻辑的范式转移：从“全能型”到“专家化”</h3>
+<p>传统深度神经网络遵循“稠密（Dense）”计算路径，无论任务难度如何，每一次推理都会调用全量参数。这种架构在参数量激增至万亿级时，不仅面临严重的算力瓶颈，更导致了边际效益递减。</p>
+<p>混合专家模型（MoE）的本质，是将复杂的神经网络分解为多个专门处理特定特征的子模块，即“专家（Expert）”。核心机制在于：</p>
+<ul>
+<li><strong>门控网络（Router/Gating Network）</strong>：通过动态路由，在推理时根据输入数据的特征，仅激活少部分专家，实现“按需计算”。</li>
+<li><strong>稀疏激活（Sparse Activation）</strong>：这种设计允许模型在保持巨大总参数量的同时，将计算开销控制在极低水平，解决了大型语言模型（LLM）长期以来的“内存-算力”权衡难题<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ul>
+<p>这种分而治之的架构哲学，实际上是对人类认知模式的模拟——面对不同问题时，大脑会调动不同的功能区域，而非将整个神经系统过载运行。</p>
+<h3 id="商业敏锐度规模效应的经济学重构">商业敏锐度：规模效应的经济学重构</h3>
+<p>在商业领域，MoE 架构直接改写了AI基础设施的成本构成。对于云服务商和企业而言，MoE 提供了更优的“推理性价比”。</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">维度</th>
+          <th style="text-align: left">传统稠密模型 (Dense)</th>
+          <th style="text-align: left">混合专家模型 (MoE)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>计算复杂度</strong></td>
+          <td style="text-align: left">随参数量线性增长</td>
+          <td style="text-align: left">随激活专家数缓慢增长</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>推理延迟</strong></td>
+          <td style="text-align: left">高（全量激活）</td>
+          <td style="text-align: left">低（稀疏激活，实时响应）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>部署成本</strong></td>
+          <td style="text-align: left">极高，硬件要求严苛</td>
+          <td style="text-align: left">优化存储，计算资源利用率高</td>
+      </tr>
+  </tbody>
+</table>
+<p>通过在不显著增加计算资源前提下扩大模型容量，MoE 使得企业能够部署参数规模数倍于以往的模型，而无需采购同等比例的额外GPU。这对于推荐系统、实时智能客服以及复杂的工业自动化场景具有显著的市场吸引力。</p>
+<h3 id="哲学思辨人工智能的分工论与社会演进">哲学思辨：人工智能的“分工论”与社会演进</h3>
+<p>从更广阔的视角看，MoE 象征着AI发展进入了“工业化分工”阶段。正如亚当·斯密在《国富论》中强调分工提升生产力，MoE 架构通过算法层面的“专业化”实现了智力的社会化生产。</p>
+<p>然而，这一进程也带来深层的哲学挑战：<strong>决策透明度与责任归属</strong>。当路由器将任务分配给不同的专家时，模型的可解释性变得愈发复杂。如果“专家”的分配产生偏差，导致模型输出特定的偏见或错误，如何追溯是哪一个专家、或是路由逻辑的缺陷？这种黑箱内的“部门协作”不仅是技术问题，更是治理层面的巨大难题。</p>
+<h3 id="未来发展趋势通往agi的模块化路径">未来发展趋势：通往AGI的模块化路径</h3>
+<p>展望未来3-5年，MoE 架构可能在以下方向实现突破：</p>
+<ol>
+<li><strong>动态扩容与专家自演化</strong>：未来的模型不再是固化的，而是能够根据任务需求，在训练过程中自动孵化或合并专家，实现持续学习。</li>
+<li><strong>多模态融合的专家生态</strong>：MoE 将不仅仅局限于文本处理，更将作为“总控平台”，协同视觉、听觉、数学推理等不同领域的高级专家模型。</li>
+<li><strong>边缘侧的轻量化适配</strong>：通过精简路由逻辑，MoE 将进一步下沉至端侧设备，使个人终端具备处理高复杂任务的能力，打破云端算力依赖。</li>
+</ol>
+<p>尽管面临训练稳定性、负载均衡及通信开销等工程挑战<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，MoE 已经成为现代大模型架构的核心范式。这不仅仅是技术的演进，更是AI迈向更复杂、更高效、更具韧性的智能生命形态的必然选择。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>小白也能懂的混合专家模型（MoE）深度解析·UML软件工程组织·（2025/02/13）·检索日期2026/07/13&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>深度解读混合专家模型（MoE）：算法、演变与原理·Zilliz·（2026/07/13）·检索日期2026/07/13&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>什么是混合专家模型（MoE）？·Red Hat·（2026/07/13）·检索日期2026/07/13&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>混合专家模型（MoE）详解·Hugging Face·（2026/07/13）·检索日期2026/07/13&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">混合专家模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/moe%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">MoE架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A8%80%E7%96%8F%E6%BF%80%E6%B4%BB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">稀疏激活</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型范式</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/icml-2026-ai--20260706211009132-2/">超越“幻觉”与“对齐”：ICML 2026 揭示 AI 迈向深度理性化的新拐点</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260702121004764-3/">后免费时代：AI进入“精算”驱动的效率与平权分水岭</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260629164005881-4/">超越“预测下一帧”：视频作为世界模型的物理隐喻与商业终局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/nemomoe-20260626154007331-0/">算力范式的“去摩擦化”：英伟达NeMo如何重塑MoE模型的工程边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/mobilemoe-ai--20260601141003362-1/">从“云端算力”到“边缘智能”：MobileMoE 如何重构端侧 AI 的帕累托前沿</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511091003882-1/">从“模拟人类”到“机器思维”：自适应并行推理如何重构AI的进化版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260304154005972-0/">阶跃星辰“杀疯了”：连训练框架都全掏出来，这波开源诚意直接拉满</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260227121004942-0/">数字燃油的“页岩气革命”：为什么中国正在淹没全球AI市场？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260221181004891-0/">极大化的博弈：中国AI新贵如何重塑财富版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k2agent-20251121124005105-3/">Kimi K2：超越规模的智能，重塑开源生态与Agent范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gemini-3agentai-20251119074004901-1/">谷歌Gemini 3：百万上下文与Agent封神，重塑AI原生软件工程的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekkimiai-20251110121004993-1/">算力护城河的消解：DeepSeek与Kimi如何以架构创新重塑AI未来格局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k2-thinkingai-sota-20251108114005038-0/">Kimi K2 Thinking：开源智能体引擎的跃迁，重塑AI SOTA的成本与边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aicursor-20composer-20251030114004594-0/">AI原生开发新纪元：Cursor 2.0携自研Composer模型与多智能体重构软件工程</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250927101004752-0/">文心4.5开源揭示大模型竞争新范式：效率、开放与多模态融合的未来</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
