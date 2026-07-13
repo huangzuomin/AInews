@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>AI 的“一体两面”：5秒挖出15年Linux漏洞，一个笔误却让记者被警车包围 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="AI 挖漏洞是王者，5秒发现15年Linux内核bug，拿到9万美元奖金；AI 抓车牌是青铜，一个录入错误让记者被四辆警车当成贼围了。同一个技术，不同输入，结果天差地别。AI不是神也不是魔，关键看谁在用、用在哪，以及有没有人兜底。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/ai-515linux-20260713214017197-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/ai-515linux-20260713214017197-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="AI 的“一体两面”：5秒挖出15年Linux漏洞，一个笔误却让记者被警车包围">
+  <meta property="og:description" content="AI 挖漏洞是王者，5秒发现15年Linux内核bug，拿到9万美元奖金；AI 抓车牌是青铜，一个录入错误让记者被四辆警车当成贼围了。同一个技术，不同输入，结果天差地别。AI不是神也不是魔，关键看谁在用、用在哪，以及有没有人兜底。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-13T21:40:17+08:00">
+    <meta property="article:modified_time" content="2026-07-13T21:40:17+08:00">
+    <meta property="article:tag" content="AI安全">
+    <meta property="article:tag" content="漏洞挖掘">
+    <meta property="article:tag" content="车牌识别">
+    <meta property="article:tag" content="Linux内核">
+    <meta property="article:tag" content="AI伦理">
+
+  <meta itemprop="name" content="AI 的“一体两面”：5秒挖出15年Linux漏洞，一个笔误却让记者被警车包围">
+  <meta itemprop="description" content="AI 挖漏洞是王者，5秒发现15年Linux内核bug，拿到9万美元奖金；AI 抓车牌是青铜，一个录入错误让记者被四辆警车当成贼围了。同一个技术，不同输入，结果天差地别。AI不是神也不是魔，关键看谁在用、用在哪，以及有没有人兜底。">
+  <meta itemprop="datePublished" content="2026-07-13T21:40:17+08:00">
+  <meta itemprop="dateModified" content="2026-07-13T21:40:17+08:00">
+  <meta itemprop="wordCount" content="158">
+  <meta itemprop="keywords" content="AI安全,漏洞挖掘,车牌识别,Linux内核,AI伦理">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI 的“一体两面”：5秒挖出15年Linux漏洞，一个笔误却让记者被警车包围">
+  <meta name="twitter:description" content="AI 挖漏洞是王者，5秒发现15年Linux内核bug，拿到9万美元奖金；AI 抓车牌是青铜，一个录入错误让记者被四辆警车当成贼围了。同一个技术，不同输入，结果天差地别。AI不是神也不是魔，关键看谁在用、用在哪，以及有没有人兜底。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%288%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-13 21:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=AI&amp;#43;%E7%9A%84%E2%80%9C%E4%B8%80%E4%BD%93%E4%B8%A4%E9%9D%A2%E2%80%9D%EF%BC%9A5%E7%A7%92%E6%8C%96%E5%87%BA15%E5%B9%B4Linux%E6%BC%8F%E6%B4%9E%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%AC%94%E8%AF%AF%E5%8D%B4%E8%AE%A9%E8%AE%B0%E8%80%85%E8%A2%AB%E8%AD%A6%E8%BD%A6%E5%8C%85%E5%9B%B4%20-%20AI&amp;#43;%E6%8C%96%E6%BC%8F%E6%B4%9E%E6%98%AF%E7%8E%8B%E8%80%85%EF%BC%8C5%E7%A7%92%E5%8F%91%E7%8E%B015%E5%B9%B4Linux%E5%86%85%E6%A0%B8bug%EF%BC%8C%E6%8B%BF%E5%88%B09%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%EF%BC%9BAI&amp;#43;%E6%8A%93%E8%BD%A6%E7%89%8C%E6%98%AF%E9%9D%92%E9%93%9C%EF%BC%8C%E4%B8%80%E4%B8%AA%E5%BD%95%E5%85%A5%E9%94%99%E8%AF%AF%E8%AE%A9%E8%AE%B0%E8%80%85%E8%A2%AB%E5%9B%9B%E8%BE%86%E8%AD%A6%E8%BD%A6%E5%BD%93%E6%88%90%E8%B4%BC%E5%9B%B4%E4%BA%86%E3%80%82%E5%90%8C%E4%B8%80%E4%B8%AA%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%B8%8D%E5%90%8C%E8%BE%93%E5%85%A5%EF%BC%8C%E7%BB%93%E6%9E%9C%E5%A4%A9%E5%B7%AE%E5%9C%B0%E5%88%AB%E3%80%82AI%E4%B8%8D%E6%98%AF%E7%A5%9E%E4%B9%9F%E4%B8%8D%E6%98%AF%E9%AD%94%EF%BC%8C%E5%85%B3%E9%94%AE%E7%9C%8B%E8%B0%81%E5%9C%A8%E7%94%A8%E3%80%81%E7%94%A8%E5%9C%A8%E5%93%AA%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%9C%89%E6%B2%A1%E6%9C%89%E4%BA%BA%E5%85%9C%E5%BA%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-515linux-20260713214017197-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=AI&amp;#43;%E7%9A%84%E2%80%9C%E4%B8%80%E4%BD%93%E4%B8%A4%E9%9D%A2%E2%80%9D%EF%BC%9A5%E7%A7%92%E6%8C%96%E5%87%BA15%E5%B9%B4Linux%E6%BC%8F%E6%B4%9E%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%AC%94%E8%AF%AF%E5%8D%B4%E8%AE%A9%E8%AE%B0%E8%80%85%E8%A2%AB%E8%AD%A6%E8%BD%A6%E5%8C%85%E5%9B%B4%20-%20AI&amp;#43;%E6%8C%96%E6%BC%8F%E6%B4%9E%E6%98%AF%E7%8E%8B%E8%80%85%EF%BC%8C5%E7%A7%92%E5%8F%91%E7%8E%B015%E5%B9%B4Linux%E5%86%85%E6%A0%B8bug%EF%BC%8C%E6%8B%BF%E5%88%B09%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%EF%BC%9BAI&amp;#43;%E6%8A%93%E8%BD%A6%E7%89%8C%E6%98%AF%E9%9D%92%E9%93%9C%EF%BC%8C%E4%B8%80%E4%B8%AA%E5%BD%95%E5%85%A5%E9%94%99%E8%AF%AF%E8%AE%A9%E8%AE%B0%E8%80%85%E8%A2%AB%E5%9B%9B%E8%BE%86%E8%AD%A6%E8%BD%A6%E5%BD%93%E6%88%90%E8%B4%BC%E5%9B%B4%E4%BA%86%E3%80%82%E5%90%8C%E4%B8%80%E4%B8%AA%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%B8%8D%E5%90%8C%E8%BE%93%E5%85%A5%EF%BC%8C%E7%BB%93%E6%9E%9C%E5%A4%A9%E5%B7%AE%E5%9C%B0%E5%88%AB%E3%80%82AI%E4%B8%8D%E6%98%AF%E7%A5%9E%E4%B9%9F%E4%B8%8D%E6%98%AF%E9%AD%94%EF%BC%8C%E5%85%B3%E9%94%AE%E7%9C%8B%E8%B0%81%E5%9C%A8%E7%94%A8%E3%80%81%E7%94%A8%E5%9C%A8%E5%93%AA%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%9C%89%E6%B2%A1%E6%9C%89%E4%BA%BA%E5%85%9C%E5%BA%95%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fai-515linux-20260713214017197-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">AI 的“一体两面”：5秒挖出15年Linux漏洞，一个笔误却让记者被警车包围</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>同一个AI，两种画风：这边5秒从Linux内核里刨出个15年没人发现的Bug，研究员喜提9万美元；那边因为一个车牌录错数字，记者倒车被四辆警车怼脸。AI到底是功臣还是坑货？答案全看输入的是代码还是笔误。</p></blockquote>
+<p>想象一下：你开着一辆15.5万美元的豪车去退货，刚倒出车位两英尺，四辆警车从四个方向飞驰而来，把你和妻子团团围住。警察手按枪柄，大喊：“下车！”你高举双手，一脸懵圈——明明什么都没干，却成了偷车嫌犯。这出“警匪大片”的导演，不是别人，是2000英里外一次键盘敲错，外加一套永不休息的AI摄像头网络。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>几乎同一时间，另一个AI正安静地扫描着Linux内核代码。几秒钟后，它发现了一个人类15年都没注意到的致命漏洞。任何普通用户都能利用它，在短短5秒内拿到系统最高权限——<strong>root</strong>。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>同样是“识别模式，自动判断，触发行动”，一个AI在<strong>补天</strong>，一个AI在<strong>坑人</strong>。这就是今天的故事。</p>
+<h3 id="5秒拿到rootai挖出藏了15年的幽灵锁">5秒拿到root！AI挖出藏了15年的“幽灵锁”</h3>
+<p>先讲让人提气的。</p>
+<p>前不久，安全公司Nebula Security用他们自研的AI漏洞挖掘工具VEGA，逮到了一个代号 <strong>GhostLock</strong>（CVE-2026-43499）的Linux内核漏洞。这货2011年就被写进了内核，此后几乎所有主流发行版都默认带着它，却始终无人察觉。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>它藏在哪里？简单说，是内核里的一个清理函数“认错了人”。</p>
+<p>内核的锁管理机制中有一个叫 <code>remove_waiter()</code> 的函数，专门负责把等待锁的线程排队记录清干净。最开始，它只处理一种情况：“谁排的队，谁自己来销号”。后来内核增加了新玩法：一个线程可以替另一个“睡着”的线程去排队。问题是，清理函数还是老脑筋——它把“代办人”的记录清掉了，却没碰真正睡着那个线程的记录。</p>
+<p>那个睡着的线程手里还攥着一张“小纸条”，上面写着“我的排队信息在这里”。等它一醒，这块内存被收回给别人用了，但纸条还在，指向一块已经易主的内存——这就是 <strong>悬空指针</strong>。攻击者可以往这块内存里塞伪造数据，骗过内核，最终拿到root。</p>
+<p>Nebula把漏洞做成了一条97%稳定的提权链。在测试机上，从一个普通用户到root，大约只要5秒。凭这个成果，Google KernelCTF奖励了他们92337美元。<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 多家安全媒体，如Meteora Web<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>和51CTO<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，也对此进行了报道。</p>
+<p>更讽刺的是，内核自家的安全检查机制lockdep完全没抓到它。因为它只检查锁有没有被人持有，却不检查这把锁是不是该由你来清理。<strong>锁对了，人错了，检查照样过</strong>。</p>
+<p>一个十几年前的误用，被一步步放大，最后变成对整台机器的完全掌控。而这个致命的“盲点”，最终被一个AI工具揪了出来。</p>
+<h3 id="一个笔误引发的警匪大片记者倒车被四辆警车包围">一个笔误引发的“警匪大片”：记者倒车被四辆警车包围</h3>
+<p>说完“补天”的故事，再看另一边。</p>
+<p>汽车记者Joel Feder的遭遇，完美诠释了什么叫“人在家中坐，锅从天上来”。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>那天他开着借来的路虎去退货，倒车刚出车位，四辆警车从四个方向堵死，无人机在天上盘旋。警察冲他大叫：“你带枪了吗？下车！”一切只因他的车牌被Flock系统误判为失窃车牌。</p>
+<p>真相是什么？真正被报失的车牌是“34 03 DTM”，但当它被录入全国失窃数据库时，中间的小号“03”被漏掉了，只记成“34 DTM”。而Feder的测试车车牌是“34 10 DTM”，由于新泽西厂商牌照格式特殊，中间数字极小，Flock的AI摄像头根本没读到“10”，只认出“34 DTM”，便开始向沿途警局报警。</p>
+<p>Flock的摄像头每月要扫描约200亿次车牌。一次发生在洛杉矶的录入笔误，就这样被这张覆盖全国的识别网络接力放大，从加州传到明尼苏达，最后变成四辆警车、一架无人机，以及整整一个小时的紧张对峙。</p>
+<p>警察告诉Feder，那一周明尼苏达还有另外四辆相同格式的厂商牌照车也在被追踪，他只是第一个被堵住的。临走时警察撂了一句：</p>
+<blockquote>
+<p>“你算走运，这是在普利茅斯。要是在明尼阿波利斯，他们绝对是拔枪冲上来的。”</p></blockquote>
+<p>（翻译：知足吧，没给你直接拔枪算不错了。）</p>
+<p>Feder后来说：“人会犯错，这很正常，但它被一套全国性的监控系统放大了。”——<strong>AI放大错误，这波很真实。</strong> Flock的AI监控系统也因此在社交平台引发大量讨论，视频和帖子热度不低<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup><sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>。</p>
+<h3 id="乘号效应ai让人类的错误加速狂奔">乘号效应：AI让人类的错误加速狂奔</h3>
+<p>把两件事放在一起看，反差之大，让人深思。</p>
+<p>在GhostLock的故事里，AI读的是真实的内核代码，它挖出了真问题，让世界更安全。在Flock的故事里，AI拿到的输入本身就是错的，它便忠实地把错误执行下去，而且比任何人类警员都更快、更广。</p>
+<p>所以Flock事件的责任，不能简单归咎于“AI犯错”。错的输入是人录进去的，该有的人工复核是人省掉的。AI只是把两头的疏忽，用机器的速度和规模，成倍地执行下去。</p>
+<p>它就像一个 <strong>乘号</strong>。乘号本身没有错，但如果前面的数字是负数，结果就会坏得彻底。</p>
+<p>真正让人不安的，是Feder的遭遇正在越来越多的领域悄悄上演。如今AI正挤进安全、执法、金融这些高风险决策链。它确实能发现人类漏掉的漏洞，这是真本事；但它也会把人类的错误规模化，这是真风险。</p>
+<p>这两件事，是一枚硬币的两面。</p>
+<h3 id="ai时代最大的漏洞也许不在代码里">AI时代最大的漏洞，也许不在代码里</h3>
+<p>GhostLock告诉我们，AI已经拥有超越人类逐行审查的潜力，未来的漏洞猎杀，或许不再靠人一行行读代码。</p>
+<p>Flock则提醒我们，关键系统里那道人工复核的关卡，一个都不能省。</p>
+<p>真正该问的，不是AI会不会犯错——它当然会——而是它犯错时，<strong>还有没有一个人能及时喊停</strong>。</p>
+<p>AI时代最大的漏洞，也许已经不在代码里，而在我们把最终判断权交出去的那一刻。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.thedrive.com/news/how-flock-cameras-wrongly-tracked-me-for-days-over-stolen-plates-and-sent-police-after-me">How Flock Cameras Wrongly Tracked Me For Days Over Stolen Plates and Sent Police After Me</a> · The Drive · Joel Feder · 2026/7/13 · 检索2026/7/13&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.wired.com/story/security-news-this-week-ai-found-a-root-bug-in-linux-that-everyone-missed-for-15-years">AI Found a Root Bug in Linux That Everyone Missed for 15 Years</a> · WIRED · 2026/7/11 · 检索2026/7/13&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://nebusec.ai/research/ionstack-part-2/">IonStack Part 2: GhostLock - CVE-2026-43499</a> · Nebula Security · 2026/7/7 · 检索2026/7/13&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://meteoraweb.com/en/news/ai-discovers-linux-kernel-bug-hidden-for-15-years">AI Discovers Linux Kernel Bug Hidden for 15 Years</a> · Meteora Web Agency · 2026/7/11 · 检索2026/7/13&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://www.51cto.com/netsecurity">GhostLock：一个潜伏在Linux发行版长达15年的栈-UAF漏洞</a> · 51CTO · 2026/7/10 · 检索2026/7/13&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://www.youtube.com/watch?v=lo2Da8NETmw">Vandals target AI powered surveillance cameras</a> · YouTube · 检索2026/7/13&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p><a href="https://www.instagram.com/p/DSTTaxEE_tB">AI surveillance company Flock Safety is aggressively ...</a> · Instagram · 检索2026/7/13&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%AE%89%E5%85%A8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI安全</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">漏洞挖掘</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%A6%E7%89%8C%E8%AF%86%E5%88%AB/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">车牌识别</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/linux%E5%86%85%E6%A0%B8/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linux内核</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E4%BC%A6%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI伦理</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20251215111003583-0/">穆斯塔法·苏莱曼：在AI“超越人类”之际，为超级智能植入人文灵魂</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251201191005273-1/">硅基镜像：AI“理性鄙视链”下的深层涌现与人类挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-11-24-11-24-ai-/">11-24日报|AI狂奔的“能力幻象”与“隐形暗礁”：巨头们在“烧”什么？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aisuleyman--20251111091006520-0/">微软AI的“人本”超智能宣言：Suleyman 如何重塑信任与控制的边界？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgptai-20251107131006634-0/">ChatGPT又“搞事”：七宗罪直指“AI教唆”，这锅大模型真要背？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251027154004598-0/">智能的“罗生门”：解码AI进化中的欺骗、脆弱与失控边缘</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251017084006229-3/">AI多重人格的崛起：从“坏小子”到“变色龙”，重构人机共存的未来生态</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/a-memguardai-20251016091004776-2/">A-MemGuard：解锁AI记忆黑盒，构建智能体时代的安全新基石</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251013194006000-0/">当AI「学会」反思，中文屋的幽灵与意识定义的重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-11-2025-10-11-ai-/">2025-10-11日报|AI狂飙，文明慢舞：智能觉醒的代价，我们准备好了吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aihinton-20251011114004662-0/">AI教父Hinton的终极警示：智能体的动机、黑箱与文明变轨的紧迫时钟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250922214006940-1/">前沿AI安全框架：穿越“临界点”的风险管理新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/characteraiai-20250918104004548-0/">情感幻境与伦理边界：Character.AI诉讼揭示AI时代青少年心理危机的深层挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250917201008085-5/">超级智能的悖论：哥德尔不完备定理如何重塑AI对齐与智能体未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250915111004868-3/">AI信任危机：从“盲信”到“递归幻觉”，重塑智能时代的信任基石</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
