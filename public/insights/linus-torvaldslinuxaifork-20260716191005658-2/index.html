@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Linus Torvalds一声吼：Linux不反AI，不服Fork或滚！ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Linus Torvalds在邮件列表炮轰反AI开发者，直言Linux不反AI，不服就fork离开。他讽刺反AI者“把头埋沙子”，并坦言人类天然智能也没多优秀。文章还介绍了内核社区新出台的AI代码规范——AI可以用，但开发者要为自己的代码负全责。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/linus-torvaldslinuxaifork-20260716191005658-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/linus-torvaldslinuxaifork-20260716191005658-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Linus Torvalds一声吼：Linux不反AI，不服Fork或滚！">
+  <meta property="og:description" content="Linus Torvalds在邮件列表炮轰反AI开发者，直言Linux不反AI，不服就fork离开。他讽刺反AI者“把头埋沙子”，并坦言人类天然智能也没多优秀。文章还介绍了内核社区新出台的AI代码规范——AI可以用，但开发者要为自己的代码负全责。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-16T19:10:05+08:00">
+    <meta property="article:modified_time" content="2026-07-16T19:10:05+08:00">
+    <meta property="article:tag" content="Linus Torvalds， 开源社区AI争议， Linux内核， AI工具， 开发者责任， Fork走人">
+
+  <meta itemprop="name" content="Linus Torvalds一声吼：Linux不反AI，不服Fork或滚！">
+  <meta itemprop="description" content="Linus Torvalds在邮件列表炮轰反AI开发者，直言Linux不反AI，不服就fork离开。他讽刺反AI者“把头埋沙子”，并坦言人类天然智能也没多优秀。文章还介绍了内核社区新出台的AI代码规范——AI可以用，但开发者要为自己的代码负全责。">
+  <meta itemprop="datePublished" content="2026-07-16T19:10:05+08:00">
+  <meta itemprop="dateModified" content="2026-07-16T19:10:05+08:00">
+  <meta itemprop="wordCount" content="94">
+  <meta itemprop="keywords" content="Linus Torvalds， 开源社区AI争议， Linux内核， AI工具， 开发者责任， Fork走人">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linus Torvalds一声吼：Linux不反AI，不服Fork或滚！">
+  <meta name="twitter:description" content="Linus Torvalds在邮件列表炮轰反AI开发者，直言Linux不反AI，不服就fork离开。他讽刺反AI者“把头埋沙子”，并坦言人类天然智能也没多优秀。文章还介绍了内核社区新出台的AI代码规范——AI可以用，但开发者要为自己的代码负全责。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2810%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-16 19:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Linus&amp;#43;Torvalds%E4%B8%80%E5%A3%B0%E5%90%BC%EF%BC%9ALinux%E4%B8%8D%E5%8F%8DAI%EF%BC%8C%E4%B8%8D%E6%9C%8DFork%E6%88%96%E6%BB%9A%EF%BC%81%20-%20Linus&amp;#43;Torvalds%E5%9C%A8%E9%82%AE%E4%BB%B6%E5%88%97%E8%A1%A8%E7%82%AE%E8%BD%B0%E5%8F%8DAI%E5%BC%80%E5%8F%91%E8%80%85%EF%BC%8C%E7%9B%B4%E8%A8%80Linux%E4%B8%8D%E5%8F%8DAI%EF%BC%8C%E4%B8%8D%E6%9C%8D%E5%B0%B1fork%E7%A6%BB%E5%BC%80%E3%80%82%E4%BB%96%E8%AE%BD%E5%88%BA%E5%8F%8DAI%E8%80%85%E2%80%9C%E6%8A%8A%E5%A4%B4%E5%9F%8B%E6%B2%99%E5%AD%90%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%9D%A6%E8%A8%80%E4%BA%BA%E7%B1%BB%E5%A4%A9%E7%84%B6%E6%99%BA%E8%83%BD%E4%B9%9F%E6%B2%A1%E5%A4%9A%E4%BC%98%E7%A7%80%E3%80%82%E6%96%87%E7%AB%A0%E8%BF%98%E4%BB%8B%E7%BB%8D%E4%BA%86%E5%86%85%E6%A0%B8%E7%A4%BE%E5%8C%BA%E6%96%B0%E5%87%BA%E5%8F%B0%E7%9A%84AI%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94AI%E5%8F%AF%E4%BB%A5%E7%94%A8%EF%BC%8C%E4%BD%86%E5%BC%80%E5%8F%91%E8%80%85%E8%A6%81%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BB%A3%E7%A0%81%E8%B4%9F%E5%85%A8%E8%B4%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvaldslinuxaifork-20260716191005658-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Linus&amp;#43;Torvalds%E4%B8%80%E5%A3%B0%E5%90%BC%EF%BC%9ALinux%E4%B8%8D%E5%8F%8DAI%EF%BC%8C%E4%B8%8D%E6%9C%8DFork%E6%88%96%E6%BB%9A%EF%BC%81%20-%20Linus&amp;#43;Torvalds%E5%9C%A8%E9%82%AE%E4%BB%B6%E5%88%97%E8%A1%A8%E7%82%AE%E8%BD%B0%E5%8F%8DAI%E5%BC%80%E5%8F%91%E8%80%85%EF%BC%8C%E7%9B%B4%E8%A8%80Linux%E4%B8%8D%E5%8F%8DAI%EF%BC%8C%E4%B8%8D%E6%9C%8D%E5%B0%B1fork%E7%A6%BB%E5%BC%80%E3%80%82%E4%BB%96%E8%AE%BD%E5%88%BA%E5%8F%8DAI%E8%80%85%E2%80%9C%E6%8A%8A%E5%A4%B4%E5%9F%8B%E6%B2%99%E5%AD%90%E2%80%9D%EF%BC%8C%E5%B9%B6%E5%9D%A6%E8%A8%80%E4%BA%BA%E7%B1%BB%E5%A4%A9%E7%84%B6%E6%99%BA%E8%83%BD%E4%B9%9F%E6%B2%A1%E5%A4%9A%E4%BC%98%E7%A7%80%E3%80%82%E6%96%87%E7%AB%A0%E8%BF%98%E4%BB%8B%E7%BB%8D%E4%BA%86%E5%86%85%E6%A0%B8%E7%A4%BE%E5%8C%BA%E6%96%B0%E5%87%BA%E5%8F%B0%E7%9A%84AI%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94AI%E5%8F%AF%E4%BB%A5%E7%94%A8%EF%BC%8C%E4%BD%86%E5%BC%80%E5%8F%91%E8%80%85%E8%A6%81%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BB%A3%E7%A0%81%E8%B4%9F%E5%85%A8%E8%B4%A3%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Flinus-torvaldslinuxaifork-20260716191005658-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Linus Torvalds一声吼：Linux不反AI，不服Fork或滚！</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Linus Torvalds又怒了：Linux绝不反AI，谁再反对直接fork滚蛋。他还补刀说“反AI前先照照镜子，人类天然智能也没多强”。这一波操作算是给AI进入内核定了调，但开发者们注意了——AI可以用，出了事还得自己扛。</p></blockquote>
+<p>最近Linux内核邮件列表的“瓜”有点大。向来心直口快的Linus Torvalds，这次把矛头直接对准了那些抵制AI的开发者。</p>
+<p>他撂下一句狠话：<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <strong>“Linux不是反AI的项目。如果有人对此有意见，大可遵循开源精神——Fork一个属于自己的版本，或者直接离开。”</strong></p>
+<p>这还没完，他又补了一句被广泛传播的“金句”：<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <strong>“AI并不完美，但任何批评AI有问题的人，最好先照照镜子——人类的天然智能也没优秀到哪儿去。”</strong></p>
+<p>好家伙，这地图炮一开，反AI党瞬间破防。</p>
+<p>但熟悉Linus的人都知道，他并非天生的AI支持者。仅仅21个月前，他还对媒体表示 <strong>“90%的AI都是营销炒作”</strong>，甚至说自己“不想参与AI讨论”。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 如今态度180度大转弯，连他自己都承认：<strong>AI已经证明了自己的实用价值。</strong></p>
+<p>Linus指出，现在只有那些从来没真正用过AI的人，才会怀疑它有没有用。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 对于社区担忧的AI生成低质量代码、Bug报告泛滥、Vibe Coding等问题，他倒也没回避。但他的应对方式简单粗暴：<strong>不是拒绝AI，而是让AI更好地为维护者服务，而不是增加负担。</strong></p>
+<p>他甚至讽刺那些反AI者是“把头埋进沙子的鸵鸟”，大喊“啦啦啦我听不见”，这解决不了任何问题。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="社区吵翻天除了价值还有伦理">社区吵翻天：除了价值，还有伦理</h3>
+<p>Linus的强硬表态并没有让争议平息。相反，社区里反对和支持的声音吵得更凶了。</p>
+<ul>
+<li><strong>支持者</strong>认为，AI帮助开发者大幅提升了效率，未来就像今天的Git和编译器一样基础。如果现在还否认AI的价值，很快就会被时代抛下。</li>
+<li><strong>反对者</strong>则担心更深层的问题：大模型用盗版数据训练，是否符合GPL等开源许可证精神？AI数据中心消耗天文数字的能源，会不会进一步加剧环境压力？未来开发者会不会因为AI失业？</li>
+</ul>
+<p>Linus对这些争议的回应是：Linux内核从来不是一个“社会斗士”项目，一切决定基于技术价值，而不是意识形态。<sup id="fnref3:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <strong>他不会因为少数人的反对就放弃一种已经被证明有效的工具。</strong></p>
+<h3 id="规则落地ai可以用责任不能甩">规则落地：AI可以用，责任不能甩</h3>
+<p>如果说表态是“说”，那么内核社区最近出台的AI代码规范就是“做”。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 这套规则很务实，核心就是：<strong>AI工具可以用，但所有责任由人类开发者承担。</strong></p>
+<p>具体来说，有三条硬规矩：</p>
+<ul>
+<li>只有人类可以添加Signed-off-by标签，AI代理不行。这是确保代码许可合规的法律机制。</li>
+<li>必须添加Assisted-by标签，注明使用了什么AI工具、什么模型版本、搭配了什么分析工具。例如：<code>Assisted-by: Claude:claude-3-opus coccinelle sparse</code></li>
+<li>无论代码是不是AI写的，只要出了Bug或安全漏洞，最终责任都在提交代码的人身上。</li>
+</ul>
+<p>这个Assisted-by标签的选用很有意思。社区讨论过用Generated-by、Co-developed-by，最终选择了Assisted-by， <strong>“辅助来源”</strong>，更准确地体现AI只是工具，而不是共同作者。<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 你品，你细品——这背后是Linus一贯的务实哲学：<strong>AI可以帮你写代码，但锅还是得你背。</strong></p>
+<h3 id="另一面linus对ai垃圾报告也很火大">另一面：Linus对AI垃圾报告也很火大</h3>
+<p>你可能要问了：既然Linus这么支持AI，为啥前段时间还听说他对AI生成报告大发雷霆？<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 没错，就在上个版本周期，Linus公开吐槽大量AI生成的安全错误报告像“混乱洪流”，重复且低质量，让维护团队濒临崩溃。<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>其实这不矛盾。他支持的是负责任、有质量的AI使用，但极度反感那些不经人工审查就甩AI结果的行为。所以他的态度很明确：<strong>AI是工具，不是甩锅对象，更不是偷懒借口。</strong></p>
+<h3 id="结语先照镜子再谈ai">结语：先照镜子，再谈AI</h3>
+<p>Linus这次“Fork or Leave”的表态，算是给Linux内核社区的AI争论暂时画了个逗号。虽然围绕AI的版权、能源、伦理等深层问题远未解决，但至少Linux内核已经确立了基调：<strong>不排斥，不盲从，用技术价值说话。</strong></p>
+<p>至于开发者们，或许可以先听听Linus那句“照照镜子”的建议。在批评AI之前，先看看自己有没有做到负责任地开发。毕竟，工具无罪，用的人才是关键。</p>
+<p>你，准备好让AI帮你写代码，然后自己负责了吗？</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.phoronix.com/news/Linux-Is-Not-Anti-AI">Linux Is Not Anti-AI, Linus Torvalds Tells AI Haters To Fork Off</a> · Phoronix · 2026/7/15 · 检索日期2026/7/16&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.theregister.com/ai-and-ml/2026/07/15/linus-torvalds-tells-ai-haters-to-fork-off">Linus Torvalds tells AI haters to fork off</a> · The Register · 2026/7/15 · 检索日期2026/7/16&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://m.36kr.com/p/3766159271117570">世界变了、Linus妥协了？AI代码可以进Linux内核，但出了事人来背</a> · 36氪 · 2026/7/16 · 检索日期2026/7/16&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://m.sohu.com/a/1050894818_114760">Linux之父托瓦兹回应AI争议：不同意使用者可Fork或离开</a> · 搜狐 · 2026/7/16 · 检索日期2026/7/16&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/linus-torvalds-%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BAai%E4%BA%89%E8%AE%AE-linux%E5%86%85%E6%A0%B8-ai%E5%B7%A5%E5%85%B7-%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A3%E4%BB%BB-fork%E8%B5%B0%E4%BA%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Linus Torvalds， 开源社区AI争议， Linux内核， AI工具， 开发者责任， Fork走人</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

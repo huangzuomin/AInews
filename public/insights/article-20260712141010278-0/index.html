@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“模型竞赛”到“调度艺术”：AI智能体时代的配置哲学与生产力重构 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Anthropic揭示了Claude Code中Model与Effort参数的本质区别，指出AI性能下降往往源于任务调度设置而非模型智力。这一洞察标志着AI生产力正在从简单的模型竞赛向精细化的智能体工程演进，调度手艺将成为未来的核心竞争力。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260712141010278-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260712141010278-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“模型竞赛”到“调度艺术”：AI智能体时代的配置哲学与生产力重构">
+  <meta property="og:description" content="Anthropic揭示了Claude Code中Model与Effort参数的本质区别，指出AI性能下降往往源于任务调度设置而非模型智力。这一洞察标志着AI生产力正在从简单的模型竞赛向精细化的智能体工程演进，调度手艺将成为未来的核心竞争力。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-12T14:10:10+08:00">
+    <meta property="article:modified_time" content="2026-07-12T14:10:10+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="生产力重构">
+    <meta property="article:tag" content="智能体工程">
+    <meta property="article:tag" content="模型调度">
+    <meta property="article:tag" content="软件工程">
+
+  <meta itemprop="name" content="从“模型竞赛”到“调度艺术”：AI智能体时代的配置哲学与生产力重构">
+  <meta itemprop="description" content="Anthropic揭示了Claude Code中Model与Effort参数的本质区别，指出AI性能下降往往源于任务调度设置而非模型智力。这一洞察标志着AI生产力正在从简单的模型竞赛向精细化的智能体工程演进，调度手艺将成为未来的核心竞争力。">
+  <meta itemprop="datePublished" content="2026-07-12T14:10:10+08:00">
+  <meta itemprop="dateModified" content="2026-07-12T14:10:10+08:00">
+  <meta itemprop="wordCount" content="22">
+  <meta itemprop="keywords" content="AI Agent,生产力重构,智能体工程,模型调度,软件工程">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“模型竞赛”到“调度艺术”：AI智能体时代的配置哲学与生产力重构">
+  <meta name="twitter:description" content="Anthropic揭示了Claude Code中Model与Effort参数的本质区别，指出AI性能下降往往源于任务调度设置而非模型智力。这一洞察标志着AI生产力正在从简单的模型竞赛向精细化的智能体工程演进，调度手艺将成为未来的核心竞争力。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2814%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-12 14:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E2%80%9D%E5%88%B0%E2%80%9C%E8%B0%83%E5%BA%A6%E8%89%BA%E6%9C%AF%E2%80%9D%EF%BC%9AAI%E6%99%BA%E8%83%BD%E4%BD%93%E6%97%B6%E4%BB%A3%E7%9A%84%E9%85%8D%E7%BD%AE%E5%93%B2%E5%AD%A6%E4%B8%8E%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%87%8D%E6%9E%84%20-%20Anthropic%E6%8F%AD%E7%A4%BA%E4%BA%86Claude&amp;#43;Code%E4%B8%ADModel%E4%B8%8EEffort%E5%8F%82%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB%EF%BC%8C%E6%8C%87%E5%87%BAAI%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E5%BE%80%E5%BE%80%E6%BA%90%E4%BA%8E%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E8%AE%BE%E7%BD%AE%E8%80%8C%E9%9D%9E%E6%A8%A1%E5%9E%8B%E6%99%BA%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%B4%9E%E5%AF%9F%E6%A0%87%E5%BF%97%E7%9D%80AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E6%AD%A3%E5%9C%A8%E4%BB%8E%E7%AE%80%E5%8D%95%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E5%90%91%E7%B2%BE%E7%BB%86%E5%8C%96%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E5%B7%A5%E7%A8%8B%E6%BC%94%E8%BF%9B%EF%BC%8C%E8%B0%83%E5%BA%A6%E6%89%8B%E8%89%BA%E5%B0%86%E6%88%90%E4%B8%BA%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260712141010278-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E2%80%9D%E5%88%B0%E2%80%9C%E8%B0%83%E5%BA%A6%E8%89%BA%E6%9C%AF%E2%80%9D%EF%BC%9AAI%E6%99%BA%E8%83%BD%E4%BD%93%E6%97%B6%E4%BB%A3%E7%9A%84%E9%85%8D%E7%BD%AE%E5%93%B2%E5%AD%A6%E4%B8%8E%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%87%8D%E6%9E%84%20-%20Anthropic%E6%8F%AD%E7%A4%BA%E4%BA%86Claude&amp;#43;Code%E4%B8%ADModel%E4%B8%8EEffort%E5%8F%82%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB%EF%BC%8C%E6%8C%87%E5%87%BAAI%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E5%BE%80%E5%BE%80%E6%BA%90%E4%BA%8E%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E8%AE%BE%E7%BD%AE%E8%80%8C%E9%9D%9E%E6%A8%A1%E5%9E%8B%E6%99%BA%E5%8A%9B%E3%80%82%E8%BF%99%E4%B8%80%E6%B4%9E%E5%AF%9F%E6%A0%87%E5%BF%97%E7%9D%80AI%E7%94%9F%E4%BA%A7%E5%8A%9B%E6%AD%A3%E5%9C%A8%E4%BB%8E%E7%AE%80%E5%8D%95%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E5%90%91%E7%B2%BE%E7%BB%86%E5%8C%96%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E5%B7%A5%E7%A8%8B%E6%BC%94%E8%BF%9B%EF%BC%8C%E8%B0%83%E5%BA%A6%E6%89%8B%E8%89%BA%E5%B0%86%E6%88%90%E4%B8%BA%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260712141010278-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“模型竞赛”到“调度艺术”：AI智能体时代的配置哲学与生产力重构</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>Anthropic对于Claude Code配置误区的澄清揭示了行业底层逻辑的演变：AI效能不仅取决于模型的参数规模（脑力），更取决于通过Effort（态度）参数进行的指令调度。在智能体时代，学会像项目经理一样精细化管理AI的资源投入，将成为衡量开发者生产力的核心手艺。</p></blockquote>
+<h3 id="生产力悖论的幕后真相">生产力悖论的幕后真相</h3>
+<p>近日，开发者社区对于Claude Code“变笨”的质疑演变成了一场技术认知层面的集体反思。当GitHub上充斥着关于模型退化的抱怨时，Anthropic发布的一纸长文不仅是一次公关澄清，更是一份深刻的<strong>智能体调度指南</strong>。</p>
+<p>这种“变笨”的错觉，源于对大模型生产方式的过时理解。长期以来，我们将大模型视作“即插即用的黑盒”，简单认为“换模型=换脑子=更高智力”。然而，Anthropic的解释撕开了这一层迷雾：在现代AI编程体系中，<strong>模型（Model）定义的是认知边界，而努力度（Effort）定义的是行为深度。</strong></p>
+<h3 id="技术原理与调度逻辑的解构">技术原理与调度逻辑的解构</h3>
+<p>从技术维度看，模型权重在训练完成后已处于“冻结”状态，换模型确实能带来推理能力的质变，但这是以高昂的Token成本为代价的。相反，Effort参数并非简单的“时间延迟”，它是决定Agent行为逻辑的<strong>资源分配器</strong>：</p>
+<ul>
+<li><strong>低Effort模式</strong>：倾向于启发式、快速反馈，优先利用预训练直觉，这在简单任务中表现为“高效率”，但在复杂重构任务中会触发严重的“任务回避”机制。</li>
+<li><strong>高Effort模式</strong>：触发深度上下文调用、多步骤验证与自动化测试循环，本质上是将任务链（Chain-of-Thought）执行得更加彻底。</li>
+</ul>
+<p>这种差异暗示了未来AI系统的一个核心特征：<strong>算力的动态弹性配置将是提升性价比的关键</strong>。当开发者能够根据任务复杂度精细化调度Effort参数时，一个中等规模模型（如Sonnet）的综合产出完全可能超越单纯堆砌参数的旗舰模型。</p>
+<h3 id="产业格局的深刻转向">产业格局的深刻转向</h3>
+<p>这一事件标志着AI编程正在经历从“模型比拼”到“智能体工程”的范式转移。正如在云计算时代，通过Terraform管理基础设施是一门手艺；在AI Agent时代，如何通过CLAUDE.md、Hooks以及合理的Effort配置来定义工作流，正在成为<strong>新兴的“AI项目管理学”</strong>。</p>
+<p>在商业层面，这对于企业IT投入具有深远启示。盲目追求最贵的模型往往导致产出效率的边际递减。未来的竞争壁垒不再仅仅是模型本身的参数规模，而是<strong>谁能构建出更高效的任务拆解与调度系统</strong>。那些能够通过工具链、MCP（Model Context Protocol）以及精准的参数控制，将复杂任务拆解并分配给不同档位模型的开发者或团队，将在算力消耗成本上获得显著的经济优势。</p>
+<h3 id="走向未来人机协作的本质回归">走向未来：人机协作的本质回归</h3>
+<p>从哲学维度看，这反映了我们与机器关系的一种重塑。我们不再是简单地向机器索取答案，而是在构建一个<strong>协作式的智能生态</strong>。所谓的“Claude变笨”，本质上是我们作为“指挥官”在设定目标时缺乏精细度的投射。</p>
+<p>未来3-5年，随着智能体（Agent）能力的进一步演进，手动调参将逐步被自动化的工作流优化所取代。但这并不意味着人类的指挥权丧失，相反，<strong>定义“什么叫作努力”、“什么是任务的关键路径”</strong>，将成为人类工程师不可替代的创造性核心。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%87%8D%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生产力重构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">智能体工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">模型调度</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件工程</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/codex-20260710161015207-0/">从代码生成到生产力闭环：Codex如何重塑人类工作台的“灰度空间”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-56-ai--20260710091013819-1/">从“极客玩具”到“流水线工人”：GPT-5.6 如何重构 AI 的商业实用主义</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/harness-engineering-ai--20260708184009241-0/">超越模型参数的进化：Harness Engineering 为何是 AI 自我提升的“脚手架”革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/solvita-20260708124010682-0/">超越模型规模：Solvita如何通过“代码进化闭环”重构软件开发逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-fable-5-ai--20260708091008787-2/">从“提示工程”到“认知重构”：Claude Fable 5 揭示了 AI 时代的终极生产力瓶颈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260630174004813-0/">编码即盐：AI Agent 如何重塑软件工程的生态位与组织哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260629121005037-3/">从“像素拼接”到“逻辑编程”：多模态代码智能的下一场范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/promptloopai-20260625231008973-1/">从Prompt到Loop：AI工程范式的下一次深层进化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/promptloopai-20260625224007362-1/">从Prompt到Loop：AI工程范式的下一次深层进化</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/denovoswe-20260625171005690-1/">从补丁匠到架构师：DeNovoSWE如何开启代码智能体的「深层重构」时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260625124005838-0/">软件工程的“虚无主义”时刻：AI Agent 如何重构代码的价值体系与边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-ai--20260625111004951-2/">从辅助到主导：Claude 内部数据揭示 AI 自我构建的“奇点”前奏</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent--20260625111004950-0/">逃离聊天框：从“指令式交付”到“空间化协作”，AI Agent 的交互范式革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/codexagent-20260623214007937-6/">从“辅助编程”到“硅基劳动力”：Codex的翻身仗与Agent时代的管理学重构</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/dropbox-nova-ai--20260623101004976-0/">超越代码生成：Dropbox Nova 如何定义 AI 原生工程的“基础设施时刻”</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

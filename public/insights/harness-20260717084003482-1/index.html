@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>重构硅基工厂：黄仁勋提出的“Harness”哲学与软件开发的范式转移 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="黄仁勋强调通过构建“Harness”系统工程来优化AI Agent的运行，这标志着软件开发范式从单纯的模型迭代转向“设计高效协作工作台”的工程驱动时代。这种模式不仅显著降低了AI落地成本，更定义了未来企业以可追溯、可审计的Agent基础设施为核心的新商业竞争力。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/harness-20260717084003482-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/harness-20260717084003482-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="重构硅基工厂：黄仁勋提出的“Harness”哲学与软件开发的范式转移">
+  <meta property="og:description" content="黄仁勋强调通过构建“Harness”系统工程来优化AI Agent的运行，这标志着软件开发范式从单纯的模型迭代转向“设计高效协作工作台”的工程驱动时代。这种模式不仅显著降低了AI落地成本，更定义了未来企业以可追溯、可审计的Agent基础设施为核心的新商业竞争力。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-17T08:40:03+08:00">
+    <meta property="article:modified_time" content="2026-07-17T08:40:03+08:00">
+    <meta property="article:tag" content="Agent工程">
+    <meta property="article:tag" content="软件开发范式">
+    <meta property="article:tag" content="黄仁勋">
+    <meta property="article:tag" content="企业智能化">
+    <meta property="article:tag" content="系统架构">
+
+  <meta itemprop="name" content="重构硅基工厂：黄仁勋提出的“Harness”哲学与软件开发的范式转移">
+  <meta itemprop="description" content="黄仁勋强调通过构建“Harness”系统工程来优化AI Agent的运行，这标志着软件开发范式从单纯的模型迭代转向“设计高效协作工作台”的工程驱动时代。这种模式不仅显著降低了AI落地成本，更定义了未来企业以可追溯、可审计的Agent基础设施为核心的新商业竞争力。">
+  <meta itemprop="datePublished" content="2026-07-17T08:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-07-17T08:40:03+08:00">
+  <meta itemprop="wordCount" content="24">
+  <meta itemprop="keywords" content="Agent工程,软件开发范式,黄仁勋,企业智能化,系统架构">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="重构硅基工厂：黄仁勋提出的“Harness”哲学与软件开发的范式转移">
+  <meta name="twitter:description" content="黄仁勋强调通过构建“Harness”系统工程来优化AI Agent的运行，这标志着软件开发范式从单纯的模型迭代转向“设计高效协作工作台”的工程驱动时代。这种模式不仅显著降低了AI落地成本，更定义了未来企业以可追溯、可审计的Agent基础设施为核心的新商业竞争力。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2819%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-17 08:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E9%87%8D%E6%9E%84%E7%A1%85%E5%9F%BA%E5%B7%A5%E5%8E%82%EF%BC%9A%E9%BB%84%E4%BB%81%E5%8B%8B%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9CHarness%E2%80%9D%E5%93%B2%E5%AD%A6%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20%E9%BB%84%E4%BB%81%E5%8B%8B%E5%BC%BA%E8%B0%83%E9%80%9A%E8%BF%87%E6%9E%84%E5%BB%BA%E2%80%9CHarness%E2%80%9D%E7%B3%BB%E7%BB%9F%E5%B7%A5%E7%A8%8B%E6%9D%A5%E4%BC%98%E5%8C%96AI&amp;#43;Agent%E7%9A%84%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%BF%99%E6%A0%87%E5%BF%97%E7%9D%80%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%BF%AD%E4%BB%A3%E8%BD%AC%E5%90%91%E2%80%9C%E8%AE%BE%E8%AE%A1%E9%AB%98%E6%95%88%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E5%8F%B0%E2%80%9D%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%A9%B1%E5%8A%A8%E6%97%B6%E4%BB%A3%E3%80%82%E8%BF%99%E7%A7%8D%E6%A8%A1%E5%BC%8F%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E9%99%8D%E4%BD%8E%E4%BA%86AI%E8%90%BD%E5%9C%B0%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E5%AE%9A%E4%B9%89%E4%BA%86%E6%9C%AA%E6%9D%A5%E4%BC%81%E4%B8%9A%E4%BB%A5%E5%8F%AF%E8%BF%BD%E6%BA%AF%E3%80%81%E5%8F%AF%E5%AE%A1%E8%AE%A1%E7%9A%84Agent%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E6%96%B0%E5%95%86%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fharness-20260717084003482-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E9%87%8D%E6%9E%84%E7%A1%85%E5%9F%BA%E5%B7%A5%E5%8E%82%EF%BC%9A%E9%BB%84%E4%BB%81%E5%8B%8B%E6%8F%90%E5%87%BA%E7%9A%84%E2%80%9CHarness%E2%80%9D%E5%93%B2%E5%AD%A6%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB%20-%20%E9%BB%84%E4%BB%81%E5%8B%8B%E5%BC%BA%E8%B0%83%E9%80%9A%E8%BF%87%E6%9E%84%E5%BB%BA%E2%80%9CHarness%E2%80%9D%E7%B3%BB%E7%BB%9F%E5%B7%A5%E7%A8%8B%E6%9D%A5%E4%BC%98%E5%8C%96AI&amp;#43;Agent%E7%9A%84%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%BF%99%E6%A0%87%E5%BF%97%E7%9D%80%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%BF%AD%E4%BB%A3%E8%BD%AC%E5%90%91%E2%80%9C%E8%AE%BE%E8%AE%A1%E9%AB%98%E6%95%88%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E5%8F%B0%E2%80%9D%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%A9%B1%E5%8A%A8%E6%97%B6%E4%BB%A3%E3%80%82%E8%BF%99%E7%A7%8D%E6%A8%A1%E5%BC%8F%E4%B8%8D%E4%BB%85%E6%98%BE%E8%91%97%E9%99%8D%E4%BD%8E%E4%BA%86AI%E8%90%BD%E5%9C%B0%E6%88%90%E6%9C%AC%EF%BC%8C%E6%9B%B4%E5%AE%9A%E4%B9%89%E4%BA%86%E6%9C%AA%E6%9D%A5%E4%BC%81%E4%B8%9A%E4%BB%A5%E5%8F%AF%E8%BF%BD%E6%BA%AF%E3%80%81%E5%8F%AF%E5%AE%A1%E8%AE%A1%E7%9A%84Agent%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E6%96%B0%E5%95%86%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fharness-20260717084003482-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">重构硅基工厂：黄仁勋提出的“Harness”哲学与软件开发的范式转移</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>黄仁勋近期提出以“Harness”为核心的Agent工程范式，强调通过系统工程而非单纯的模型迭代来释放AI生产力。这一转变标志着软件开发从“编写代码”向“设计Agent协作工作台”的深度转型，企业未来的核心资产将从模型本身转向可追溯、可验证的Agent执行环境。</p></blockquote>
+<h3 id="算力的终点系统的起点">算力的终点，系统的起点</h3>
+<p>在与LangChain创始人Harrison Chase的深度对谈中，黄仁勋极少见地将视线从GPU算力与模型参数迁移至“Agent工程”这一更宏观的领域。这一转变揭示了一个行业真相：在AI基础设施日益成熟的今天，模型的“智商”已不再是制约业务落地的唯一瓶颈，如何将这种智商有机地嵌入业务流（Workflow）之中，成为了下一阶段竞争的焦点。</p>
+<p>黄仁勋所定义的“Harness”（工作台/脚手架），涵盖了从系统提示词（Prompt）、工具说明、记忆管理到权限控制的完整生态架构。这种架构的核心逻辑在于：模型负责推理（Thinking），而Harness负责组织（Orchestrating）。正如LangChain在Nemotron 3 Ultra上的实验所证实的，通过优化Harness，不仅能将评测成绩拉平至顶级闭源模型水平，更能实现近10倍的成本压缩。</p>
+<h3 id="技术突破的深层价值从写代码到造agent">技术突破的深层价值：从“写代码”到“造Agent”</h3>
+<p>如果将传统的软件开发比作打字，那么Agent工程则是在构建一套自动化写作系统。这种范式转移对程序员的工作清单进行了重排：</p>
+<ul>
+<li><strong>从命令式到声明式</strong>：程序员不再需要事无巨细地通过代码定义每一步逻辑，而是通过构建Harness，明确Agent的权限边界、工具调用逻辑及验收标准。</li>
+<li><strong>评测即资产</strong>：执行轨迹（Execution Trace）不再仅仅是调试日志，而是企业的核心知识产权。每一次失败的重试、每一个成功的纠偏，最终都沉淀为可复用的回归用例。</li>
+<li><strong>成本触发的变革</strong>：当Agent推理的单位成本降低10倍，企业的开发策略会从“保守试错”转向“常态化测试”，这极大地拓展了AI的应用边界，让高价值任务的规模化部署成为可能。</li>
+</ul>
+<h3 id="产业生态与治理挑战">产业生态与治理挑战</h3>
+<p>未来的公司结构将越来越多地建立在Harness之上。这意味着企业需构建一套能够安全运行“自主软件进程”的运行时环境——例如NemoClaw所体现的，通过沙箱技术将计算与企业敏感数据隔离，确保Agent在执行动作时遵循最小权限原则。</p>
+<p>然而，这种技术演进伴随着深刻的哲学拷问：当Agent表现得越像“人”，我们该如何规避管理上的认知偏差？黄仁勋的观点冷峻且务实：不要将Agent视为同事，而应将其视为一套受控的、可量化评估的软件栈。在这种去人格化的管理视角下，<strong>责任边界的清晰化（即“谁负责验收”、“权限如何临时注入”）比Agent的语言交互能力更为关键。</strong></p>
+<h3 id="未来演进路径预测">未来演进路径预测</h3>
+<p>在未来3-5年内，企业竞争的核心将不再是“谁拥有最强模型”，而是“谁能最快构建起适配自身业务逻辑的工程化Harness”。</p>
+<ol>
+<li><strong>基础设施化</strong>：Harness将从临时性的胶水代码演变为标准化的企业基础设施，承载企业的业务知识、权限模型与合规逻辑。</li>
+<li><strong>治理架构升级</strong>：围绕“轨迹审查”与“人工接管”的辅助系统将成为AI企业的标准配置。</li>
+<li><strong>开发角色重塑</strong>：未来的核心人才画像将是“Agent架构师”，他们不仅精通LLM，更擅长构建让模型稳定输出业务价值的“数字流水线”。</li>
+</ol>
+<p>归根结底，黄仁勋此举意在告诫产业界：模型是引擎，但Harness才是工厂。当软件开发转向以Agent为中心的逻辑时，那些能够稳定交付、可追溯且具备自我纠错能力的“系统容器”，将定义下一代企业的生命线。</p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/agent%E5%B7%A5%E7%A8%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Agent工程</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件开发范式</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E9%BB%84%E4%BB%81%E5%8B%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">黄仁勋</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BC%81%E4%B8%9A%E6%99%BA%E8%83%BD%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">企业智能化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">系统架构</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/deepseek-dspark-ai--20260627171006363-0/">超越自回归的终局：DeepSeek DSpark 如何重构 AI 推理的工程经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitokenvera-rubin-20260625084004762-2/">黄仁勋：AI工厂开张了，每个token都是钱！Vera Rubin全面量产，英伟达要造印钞机？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai--20260618001007117-0/">硅谷的三重奏：黄仁勋、皮查伊与克拉克的“AI 进化论”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-ceo-1-20260611221018932-1/">Anthropic CEO 只带1个兵？这管理「反卷」操作，我给满分</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/amdaicpu-20260601184003843-0/">黄仁勋在台北“抄家”英特尔和AMD：AI时代的CPU革命来了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cpupcamd-20260601174003815-1/">黄仁勋台北“炸场”：英伟达造CPU、做PC，英特尔AMD还坐得住吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rubin4cpuai-20260601171003707-2/">黄仁勋甩出王炸：Rubin平台全面投产，4万工程师肝出&#34;史上最强CPU&#34;，AI要开始赚钱了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260601164003576-2/">英伟达这波操作，是要把「显卡」变成你的新一代「大脑」？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260529201003556-0/">老黄入职清华，不是来教“显卡涨价”的</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260528094003448-1/">黄仁勋和刘强东，成了“兄弟”？AI裁员背后的人性选择题</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/qwen37-max-ai--20260521101003152-0/">从聊天机器人到“虚拟工程师”：Qwen3.7-Max 开启 AI 深度执行时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260518214004398-2/">算力帝国的“投资图谱”：黄仁勋如何重塑华尔街的赚钱逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitoken-20260512084003106-3/">个人AI革命：从“Token节省者”到“时间指挥官”的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260511151003388-4/">黄仁勋：在AI的暴风眼中，做一个“不走寻常路”的造物者</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/-vs-2026pua-20260511104003896-1/">皮衣刀客 vs 焦虑制造机：黄仁勋给2026届毕业生的“反PUA”指南</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

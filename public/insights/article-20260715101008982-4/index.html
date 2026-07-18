@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>摆脱像素的束缚：隐式世界模型如何成为通用人形机器人的“物理直觉” | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文分析了Being-M0.7作为全球首个全身移动操作隐式世界动作模型的突破意义，探讨了其如何通过潜空间推理和多模态预训练解决人形机器人“数据稀缺”与“物理理解不足”的核心矛盾，并对其在具身智能产业的生态位演进与未来自进化路径给出了前瞻性判断。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260715101008982-4/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260715101008982-4/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="摆脱像素的束缚：隐式世界模型如何成为通用人形机器人的“物理直觉”">
+  <meta property="og:description" content="本文分析了Being-M0.7作为全球首个全身移动操作隐式世界动作模型的突破意义，探讨了其如何通过潜空间推理和多模态预训练解决人形机器人“数据稀缺”与“物理理解不足”的核心矛盾，并对其在具身智能产业的生态位演进与未来自进化路径给出了前瞻性判断。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-15T10:10:08+08:00">
+    <meta property="article:modified_time" content="2026-07-15T10:10:08+08:00">
+    <meta property="article:tag" content="具身智能">
+    <meta property="article:tag" content="人形机器人">
+    <meta property="article:tag" content="世界模型">
+    <meta property="article:tag" content="潜空间推理">
+    <meta property="article:tag" content="机器人控制">
+    <meta property="article:tag" content="AI底层架构">
+
+  <meta itemprop="name" content="摆脱像素的束缚：隐式世界模型如何成为通用人形机器人的“物理直觉”">
+  <meta itemprop="description" content="本文分析了Being-M0.7作为全球首个全身移动操作隐式世界动作模型的突破意义，探讨了其如何通过潜空间推理和多模态预训练解决人形机器人“数据稀缺”与“物理理解不足”的核心矛盾，并对其在具身智能产业的生态位演进与未来自进化路径给出了前瞻性判断。">
+  <meta itemprop="datePublished" content="2026-07-15T10:10:08+08:00">
+  <meta itemprop="dateModified" content="2026-07-15T10:10:08+08:00">
+  <meta itemprop="wordCount" content="69">
+  <meta itemprop="keywords" content="具身智能,人形机器人,世界模型,潜空间推理,机器人控制,AI底层架构">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="摆脱像素的束缚：隐式世界模型如何成为通用人形机器人的“物理直觉”">
+  <meta name="twitter:description" content="本文分析了Being-M0.7作为全球首个全身移动操作隐式世界动作模型的突破意义，探讨了其如何通过潜空间推理和多模态预训练解决人形机器人“数据稀缺”与“物理理解不足”的核心矛盾，并对其在具身智能产业的生态位演进与未来自进化路径给出了前瞻性判断。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%289%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-15 10:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E6%91%86%E8%84%B1%E5%83%8F%E7%B4%A0%E7%9A%84%E6%9D%9F%E7%BC%9A%EF%BC%9A%E9%9A%90%E5%BC%8F%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E9%80%9A%E7%94%A8%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E2%80%9C%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89%E2%80%9D%20-%20%E6%9C%AC%E6%96%87%E5%88%86%E6%9E%90%E4%BA%86Being-M0.7%E4%BD%9C%E4%B8%BA%E5%85%A8%E7%90%83%E9%A6%96%E4%B8%AA%E5%85%A8%E8%BA%AB%E7%A7%BB%E5%8A%A8%E6%93%8D%E4%BD%9C%E9%9A%90%E5%BC%8F%E4%B8%96%E7%95%8C%E5%8A%A8%E4%BD%9C%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AA%81%E7%A0%B4%E6%84%8F%E4%B9%89%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86%E5%85%B6%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%BD%9C%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E5%92%8C%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A2%84%E8%AE%AD%E7%BB%83%E8%A7%A3%E5%86%B3%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E2%80%9C%E6%95%B0%E6%8D%AE%E7%A8%80%E7%BC%BA%E2%80%9D%E4%B8%8E%E2%80%9C%E7%89%A9%E7%90%86%E7%90%86%E8%A7%A3%E4%B8%8D%E8%B6%B3%E2%80%9D%E7%9A%84%E6%A0%B8%E5%BF%83%E7%9F%9B%E7%9B%BE%EF%BC%8C%E5%B9%B6%E5%AF%B9%E5%85%B6%E5%9C%A8%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BA%A7%E4%B8%9A%E7%9A%84%E7%94%9F%E6%80%81%E4%BD%8D%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5%E8%87%AA%E8%BF%9B%E5%8C%96%E8%B7%AF%E5%BE%84%E7%BB%99%E5%87%BA%E4%BA%86%E5%89%8D%E7%9E%BB%E6%80%A7%E5%88%A4%E6%96%AD%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260715101008982-4%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E6%91%86%E8%84%B1%E5%83%8F%E7%B4%A0%E7%9A%84%E6%9D%9F%E7%BC%9A%EF%BC%9A%E9%9A%90%E5%BC%8F%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E9%80%9A%E7%94%A8%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E2%80%9C%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89%E2%80%9D%20-%20%E6%9C%AC%E6%96%87%E5%88%86%E6%9E%90%E4%BA%86Being-M0.7%E4%BD%9C%E4%B8%BA%E5%85%A8%E7%90%83%E9%A6%96%E4%B8%AA%E5%85%A8%E8%BA%AB%E7%A7%BB%E5%8A%A8%E6%93%8D%E4%BD%9C%E9%9A%90%E5%BC%8F%E4%B8%96%E7%95%8C%E5%8A%A8%E4%BD%9C%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AA%81%E7%A0%B4%E6%84%8F%E4%B9%89%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86%E5%85%B6%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%BD%9C%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E5%92%8C%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A2%84%E8%AE%AD%E7%BB%83%E8%A7%A3%E5%86%B3%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E2%80%9C%E6%95%B0%E6%8D%AE%E7%A8%80%E7%BC%BA%E2%80%9D%E4%B8%8E%E2%80%9C%E7%89%A9%E7%90%86%E7%90%86%E8%A7%A3%E4%B8%8D%E8%B6%B3%E2%80%9D%E7%9A%84%E6%A0%B8%E5%BF%83%E7%9F%9B%E7%9B%BE%EF%BC%8C%E5%B9%B6%E5%AF%B9%E5%85%B6%E5%9C%A8%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E4%BA%A7%E4%B8%9A%E7%9A%84%E7%94%9F%E6%80%81%E4%BD%8D%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5%E8%87%AA%E8%BF%9B%E5%8C%96%E8%B7%AF%E5%BE%84%E7%BB%99%E5%87%BA%E4%BA%86%E5%89%8D%E7%9E%BB%E6%80%A7%E5%88%A4%E6%96%AD%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260715101008982-4%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">摆脱像素的束缚：隐式世界模型如何成为通用人形机器人的“物理直觉”</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>智在无界发布的 Being-M0.7 标志着具身智能从“模仿动作”向“理解世界”的范式转移，通过隐式世界动作模型（Latent WAM）在潜空间内构建物理直觉，有效打破了数据稀缺与算力消耗的行业僵局。</p></blockquote>
+<h3 id="技术突破的深层价值告别像素级预言">技术突破的深层价值：告别像素级预言</h3>
+<p>长期以来，人形机器人领域陷入了一个误区：为了让机器理解世界，必须赋予其生成未来高清视频的能力。然而，这种“像素级预测”路线不仅计算开销巨大，更被大量无关的视觉噪声所干扰。Being-M0.7 的核心创新在于它揭示了一个本质——机器人不需要成为“画家”，它需要的是“物理直觉”。</p>
+<p>通过采用混合 Transformer 架构（Vision-Motion MoT），该模型在隐空间（Latent Space）中直接处理语义状态与动力学轨迹，将视觉信息与动作指令高度解耦。这种架构的深层意义在于，它让模型从对视觉统计分布的拟合，转向了对世界演化规律的内化。在 10000 小时人类行为数据的滋养下，机器人不再是简单地“复刻”轨迹，而是建立起了一套能够应对遮挡、液体交互和长程规划的“世界表征”。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="从数据瓶颈到知识迁移的闭环">从数据瓶颈到知识迁移的闭环</h3>
+<p>具身智能的核心痛点在于：真实世界的数据太难获取，而互联网上的海量数据又大多脱离了物理语境。智在无界提出的“人类行为数据先验 + 少量真机后训练”的范式，确立了一套可持续扩展的数据飞轮。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这种范式通过引入“统一运动表征”，成功将异构的人类视频、运动捕捉数据与机器人本体指令整合在同一个认知框架内。对于企业而言，这意味着研发成本的边际递减效应开始显现。当模型在预训练阶段已经掌握了人类肢体协调的“通用先验”，真机适配便从漫长的“从头训练”简化为轻量级的“动作专家”微调，这极大降低了人形机器人从实验室走向复杂工业场景的门槛。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="产业格局的震荡与哲学反思">产业格局的震荡与哲学反思</h3>
+<p>在商业视角下，人形机器人正在经历从“运动能力”到“认知能力”的重心转移。过去行业过度追求整机硬件的翻跟头、跑跳等视觉刺激，而 Being-M0.7 标志着行业竞争逻辑回归本质：<strong>模型能否理解物理因果关系？</strong><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>这不仅是技术的比拼，更是对“具身智能”本质的哲学拷问：如果智能的本质在于通过行动修正对世界的认知，那么一个不能在潜空间内进行反事实推理（即如果我做了动作 A，结果会怎样）的机器人，永远只能是受控的执行者。智在无界的路线图预示了一个趋势，即未来的具身模型将不再仅仅是控制算法，而是具备自主评估、纠错与长期决策能力的“数字小脑”。</p>
+<h3 id="未来三至五年的演进预测">未来三至五年的演进预测</h3>
+<p>随着 Latent WAM 路线的成熟，我们预见未来 3-5 年行业将呈现以下三个趋势：</p>
+<ol>
+<li><strong>具身原生模型崛起</strong>：现有的 VLA（视觉-语言-动作）模型将逐步被更具物理一致性的世界动作模型取代，触觉、本体感知等更多感官模态将深度融入统一的潜空间。</li>
+<li><strong>算力与推理效率的双向优化</strong>：为了支撑高频动作响应，低频规划与高频动作控制的解耦设计将成为行业标准，这将推动专用具身计算芯片的迭代。</li>
+<li><strong>从“自动化”到“自进化”</strong>：机器人将通过现场部署产生的“失败数据”与“干预数据”实时更新其世界模型，物理世界的硬件系统将初步具备类似数字软件的迭代进化能力。</li>
+</ol>
+<p>尽管如此，我们也必须警惕：目前的模型在应对极端扰动和复杂长尾任务时，仍极度依赖高质量的预训练数据。如何建立更具鲁棒性的常识推理机制，避免模型在面对从未见过的物理场景时出现幻觉，将是通往通用具身智能的下一座高峰。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://i.ifeng.com/c/8ulziAchVnC">10000小时人类数据，练出全球首个全身移动操作隐式世界动作模型</a> · 机器之心 · 杨文 · (2026/7/15) · 检索日期2026/7/15&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://finance.sina.com.cn/roll/2026-04-14/doc-inhummyn4234739.shtml">直面LeCun愿景，智在无界发布最强具身世界模型，20万小时人类视频屠榜6大榜单</a> · 智在无界 · (2026/4/14) · 检索日期2026/7/15&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://m.zhidx.com/p/548518.html">北京具身智能黑马造的大模型，屠榜多项国际测评！</a> · 智东西 · (2026/4/16) · 检索日期2026/7/15&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://hub.baai.ac.cn/view/55796">从模型性能、数据瓶颈突破，到真机部署：智源大会具身智能与人形机器人论坛</a> · 智源社区 · (2026/6/24) · 检索日期2026/7/15&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">具身智能</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">人形机器人</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">世界模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%BD%9C%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">潜空间推理</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8E%A7%E5%88%B6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">机器人控制</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%BA%95%E5%B1%82%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI底层架构</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260714181013364-0/">钢铁的慰藉：优必选“情感伴侣”的昂贵赌局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260714174006514-0/">物理AI：自动驾驶的“第二春”与具身智能的终极进阶</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiagi-20260714134009773-1/">具身智能的“大哥大时刻”：当AI走出屏幕，为何物理世界才是AGI的终局？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260714101011217-0/">深圳的金属躯体：当人形机器人从实验室走向资本的“梦境”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260714094011533-0/">逐际动力的“深圳速度”：人形机器人竞赛，从实验室迈向资本的围城</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260713124014222-1/">机械关节的“去减速器”革命：本末动力的港股野望与亦庄的造物逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/1x-neo--20260710211014705-1/">当“具身智能”学会洗手：1X NEO 背后的人机共生悖论与进化逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260710184021295-1/">具身原生的“去互联网化”：当机器人模型告别大语言模型的“迁移幻觉”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260710094007056-1/">无限演化的数字疆域：世界模型如何跨越“模拟”与“现实”的边界</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260709141010486-2/">跨越“恐怖谷”与“死亡谷”：具身智能的资本狂奔与演进逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260708121012111-1/">世界模型的迷局：当AI试图跨越从“比特”到“原子”的物理鸿沟</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260707191008932-0/">宇树的“机器狗”与人形梦：当资本狂热遇见具身智能的现实引力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/token-20260707174007689-1/">从“预测Token”到“预测物理状态”：世界模型如何重构人工智能的进化范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260706211009135-5/">宇树科技的狂飙：当“机器狗”开始进化，科创板迎来了人形机器人第一股</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260706211009136-7/">当人形机器人渴望“情感”：优必选的百万豪赌与具身智能的现实重力</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
