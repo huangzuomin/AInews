@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>谷歌的“Agent侧翼战”：从追求模型参数之巅到重构智能体运行经济学 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌通过Gemini Flash系列轻量化模型的策略转型，将竞争重心从模型基准分切换至Agent运行成本与效率，旨在通过重构AI基础设施的经济学，在通往AGI的产业路径中建立生态壁垒。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/agent-20260722154005215-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/agent-20260722154005215-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="谷歌的“Agent侧翼战”：从追求模型参数之巅到重构智能体运行经济学">
+  <meta property="og:description" content="谷歌通过Gemini Flash系列轻量化模型的策略转型，将竞争重心从模型基准分切换至Agent运行成本与效率，旨在通过重构AI基础设施的经济学，在通往AGI的产业路径中建立生态壁垒。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-22T15:40:05+08:00">
+    <meta property="article:modified_time" content="2026-07-22T15:40:05+08:00">
+    <meta property="article:tag" content="大模型">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="商业策略">
+    <meta property="article:tag" content="运行成本">
+    <meta property="article:tag" content="技术范式">
+    <meta property="article:tag" content="生产力工具">
+
+  <meta itemprop="name" content="谷歌的“Agent侧翼战”：从追求模型参数之巅到重构智能体运行经济学">
+  <meta itemprop="description" content="谷歌通过Gemini Flash系列轻量化模型的策略转型，将竞争重心从模型基准分切换至Agent运行成本与效率，旨在通过重构AI基础设施的经济学，在通往AGI的产业路径中建立生态壁垒。">
+  <meta itemprop="datePublished" content="2026-07-22T15:40:05+08:00">
+  <meta itemprop="dateModified" content="2026-07-22T15:40:05+08:00">
+  <meta itemprop="wordCount" content="50">
+  <meta itemprop="keywords" content="大模型,AI Agent,商业策略,运行成本,技术范式,生产力工具">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="谷歌的“Agent侧翼战”：从追求模型参数之巅到重构智能体运行经济学">
+  <meta name="twitter:description" content="谷歌通过Gemini Flash系列轻量化模型的策略转型，将竞争重心从模型基准分切换至Agent运行成本与效率，旨在通过重构AI基础设施的经济学，在通往AGI的产业路径中建立生态壁垒。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2812%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-22 15:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E8%B0%B7%E6%AD%8C%E7%9A%84%E2%80%9CAgent%E4%BE%A7%E7%BF%BC%E6%88%98%E2%80%9D%EF%BC%9A%E4%BB%8E%E8%BF%BD%E6%B1%82%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E4%B9%8B%E5%B7%85%E5%88%B0%E9%87%8D%E6%9E%84%E6%99%BA%E8%83%BD%E4%BD%93%E8%BF%90%E8%A1%8C%E7%BB%8F%E6%B5%8E%E5%AD%A6%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87Gemini&amp;#43;Flash%E7%B3%BB%E5%88%97%E8%BD%BB%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AD%96%E7%95%A5%E8%BD%AC%E5%9E%8B%EF%BC%8C%E5%B0%86%E7%AB%9E%E4%BA%89%E9%87%8D%E5%BF%83%E4%BB%8E%E6%A8%A1%E5%9E%8B%E5%9F%BA%E5%87%86%E5%88%86%E5%88%87%E6%8D%A2%E8%87%B3Agent%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC%E4%B8%8E%E6%95%88%E7%8E%87%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E9%87%8D%E6%9E%84AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E7%BB%8F%E6%B5%8E%E5%AD%A6%EF%BC%8C%E5%9C%A8%E9%80%9A%E5%BE%80AGI%E7%9A%84%E4%BA%A7%E4%B8%9A%E8%B7%AF%E5%BE%84%E4%B8%AD%E5%BB%BA%E7%AB%8B%E7%94%9F%E6%80%81%E5%A3%81%E5%9E%92%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent-20260722154005215-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E8%B0%B7%E6%AD%8C%E7%9A%84%E2%80%9CAgent%E4%BE%A7%E7%BF%BC%E6%88%98%E2%80%9D%EF%BC%9A%E4%BB%8E%E8%BF%BD%E6%B1%82%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E4%B9%8B%E5%B7%85%E5%88%B0%E9%87%8D%E6%9E%84%E6%99%BA%E8%83%BD%E4%BD%93%E8%BF%90%E8%A1%8C%E7%BB%8F%E6%B5%8E%E5%AD%A6%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87Gemini&amp;#43;Flash%E7%B3%BB%E5%88%97%E8%BD%BB%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AD%96%E7%95%A5%E8%BD%AC%E5%9E%8B%EF%BC%8C%E5%B0%86%E7%AB%9E%E4%BA%89%E9%87%8D%E5%BF%83%E4%BB%8E%E6%A8%A1%E5%9E%8B%E5%9F%BA%E5%87%86%E5%88%86%E5%88%87%E6%8D%A2%E8%87%B3Agent%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC%E4%B8%8E%E6%95%88%E7%8E%87%EF%BC%8C%E6%97%A8%E5%9C%A8%E9%80%9A%E8%BF%87%E9%87%8D%E6%9E%84AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E7%BB%8F%E6%B5%8E%E5%AD%A6%EF%BC%8C%E5%9C%A8%E9%80%9A%E5%BE%80AGI%E7%9A%84%E4%BA%A7%E4%B8%9A%E8%B7%AF%E5%BE%84%E4%B8%AD%E5%BB%BA%E7%AB%8B%E7%94%9F%E6%80%81%E5%A3%81%E5%9E%92%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent-20260722154005215-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">谷歌的“Agent侧翼战”：从追求模型参数之巅到重构智能体运行经济学</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌通过发布Gemini 3.6 Flash等轻量化模型，标志着大模型竞争重心从单纯的基准测试分数转向Agent工作流的“单位成本效能”。这一战略转型不仅是技术迭代，更是谷歌试图在AGI通往生产力的征途中，通过重塑运行经济学来确立产业生态话语权。</p></blockquote>
+<h3 id="模型演进的灰度地带速度与成本的博弈">模型演进的“灰度地带”：速度与成本的博弈</h3>
+<p>谷歌近期发布的三款Gemini模型，揭示了其在大模型迭代逻辑上的深层修正。当市场普遍期待更强、更智能的Gemini 3.5 Pro时，谷歌却选择将“Flash”系列作为先锋。从技术原理上看，Gemini 3.6 Flash的突破点不在于参数量的跃迁，而在于<strong>Token效率的精进</strong>——通过减少推理步骤和工具调用冗余，其任务Token消耗量最高下降了65%<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>这种“向下兼容”的策略并非技术能力的倒退，而是对商业现实的妥协与洞察。在AI Agent日益成为生产力核心的背景下，模型的“智力”已不再是唯一的决策指标，响应延迟和运行成本成为了制约大规模部署的“最后1公里”阻碍。</p>
+<h3 id="重构agent运行经济学">重构Agent运行经济学</h3>
+<p>当前的AI产业竞争正从“模型能力比拼”向“Agent落地效率”转型。Gemini 3.5 Flash-Lite实现的每秒350个Token的输出速度，以及其在终端编程和文档处理中的高吞吐表现，反映了谷歌对企业级AI工作流的深刻判断：<strong>AI的商业价值将取决于其能多快、多省地完成具体的指令任务</strong>。</p>
+<p>此外，Gemini 3.5 Flash Cyber在代码安全领域的尝试，展示了模型专有化（Specialization）的必然路径。通过与CodeMender等专门的Agent架构协同，模型不再需要面面俱到，而是在特定垂直领域内达到“可用甚至卓越”的性能。这种“模型+Agent工作流”的解耦架构，正是谷歌试图打造的新一代AI产业基础设施。</p>
+<h3 id="迷失的御三家与更广阔的竞争格局">迷失的“御三家”与更广阔的竞争格局</h3>
+<p>然而，这种从性能导向转向成本导向的策略，也暴露了谷歌在面对OpenAI、Anthropic，以及以DeepSeek、Kimi为代表的国产模型竞争时的压力。第三方评测机构Artificial Analysis的数据直观显示，Gemini Flash系列在纯粹的Intelligence得分上已呈现疲态<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>谷歌之所以延期Gemini 3.5 Pro并转而启动“公司史上最大炼模任务”——Gemini 4，核心逻辑在于：在模型智能水平进入平台期后，通过Flash系列维持业务线的现金流和生态连接度，同时将技术赌注押在Gemini 4带来的架构质变上。这不仅是一场算力竞赛，更是一场关于如何从“聊天式AI”转向“自主执行式AI”的范式之争。</p>
+<h3 id="结语迈向自主智能的阵痛期">结语：迈向“自主智能”的阵痛期</h3>
+<p>从宏观维度观察，谷歌的此次发布折射出全球大模型产业的某种“官僚化指标崇拜”与“真实效用诉求”之间的冲突。对于开发者而言，技术的价值不再是排行榜上的分数，而是集成到业务流程中的稳健性。</p>
+<p>随着AI Agent成为生产力变革的核心引擎，未来的技术竞争将不再单纯取决于谁的模型参数更多，而在于谁能构建出最廉价、最可靠且最易于集成的“智能运行时环境”。谷歌能否凭此在Gemini 4中找回往日的统治力，将取决于它是否能够真正放下对“模型之巅”的执念，回归到服务于人类工作流的本质逻辑中。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://finance.sina.com.cn/wm/2026-07-22/doc-iniisawh7982934.shtml">新模靠边站，谷歌Gemini 4要来了，公司史上最大炼模启动</a> · 智东西 · 杨京丽（2026/7/22）· 检索日期2026/7/22&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="http://www.36kr.com/p/3906060964353160">谷歌「史上最差」AI模型发布，Gemini 3.5 Pro延期</a> · 36氪 · ASI启示录（2026/7/22）· 检索日期2026/7/22&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">商业策略</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">运行成本</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%8C%83%E5%BC%8F/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术范式</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">生产力工具</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/gpt-56-ai--20260710091013819-1/">从“极客玩具”到“流水线工人”：GPT-5.6 如何重构 AI 的商业实用主义</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/token-20260707181008734-0/">Token争霸背后的算力主权：从匿名测试到万亿模型的国产化突围</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agent-20260624194005566-2/">豆包专业版深度评测：Agent驱动的国民级办公生产力演进</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/markdownhtmlai-agent-20260511181003988-4/">Markdown的黄昏与HTML的复兴：当AI Agent成为信息交互的终极接口</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/chatgpt-agent-20250719101004806-1/">ChatGPT Agent：从工具缝合到端到端智能体的范式跃迁与未来图景</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260716091008317-0/">中国大模型的“寒武纪”：当生存成为唯一的算法</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropicai-20260715174012388-2/">终端之战的隐形赢家：Anthropic为何选择成为AI时代的“智能层”而非“硬件制造商”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-ai--20260710184021294-0/">从代码到协作：OpenAI 如何通过“工作流重构”将 AI 从聊天框解放为数字员工</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20260710174009428-2/">从聊天框到数字合伙人：国产AI Agent如何填补“硅基协同”的最后鸿沟？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/codex-20260710161015207-0/">从代码生成到生产力闭环：Codex如何重塑人类工作台的“灰度空间”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/agentchatgpt-workcodex-20260710134008800-2/">深度评测：从编程助手到全能Agent——ChatGPT Work（原Codex）全功能解析与使用指南</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-gpt-56-codex-claude--20260710084009217-1/">OpenAI 深夜放大招：GPT-5.6 三兄弟闪亮登场，Codex “阵亡”，Claude 被按在地上摩擦</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/project-solara-ai--20260708201013174-3/">从屏幕到场域：Project Solara 如何定义 AI 硬件的“后手机时代”逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/memslides--20260707094012025-0/">超越“一键生成”：MemSlides 如何重构人机协作的记忆底座</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/30aiagent-20260706204013339-0/">腾讯混元3.0的“实用主义”哲学：当AI告别跑分，迈向Agent底座的范式转移</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
