@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>算力“深水区”破局：软件定义架构如何重构AI基础设施的性能逻辑 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="文章深度解析了AI算力领域从“先进制程堆叠”向“架构深度创新”的转型逻辑，通过分析东方算芯的软件定义近存计算路径，探讨了如何通过系统协同提升数据效率，并指出全栈软件生态是决定国产算力能否突围的核心变量。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/article-20260724121003448-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/article-20260724121003448-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="算力“深水区”破局：软件定义架构如何重构AI基础设施的性能逻辑">
+  <meta property="og:description" content="文章深度解析了AI算力领域从“先进制程堆叠”向“架构深度创新”的转型逻辑，通过分析东方算芯的软件定义近存计算路径，探讨了如何通过系统协同提升数据效率，并指出全栈软件生态是决定国产算力能否突围的核心变量。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-24T12:10:03+08:00">
+    <meta property="article:modified_time" content="2026-07-24T12:10:03+08:00">
+    <meta property="article:tag" content="算力芯片">
+    <meta property="article:tag" content="近存计算">
+    <meta property="article:tag" content="软件定义硬件">
+    <meta property="article:tag" content="产业自主可控">
+    <meta property="article:tag" content="AI基础设施">
+
+  <meta itemprop="name" content="算力“深水区”破局：软件定义架构如何重构AI基础设施的性能逻辑">
+  <meta itemprop="description" content="文章深度解析了AI算力领域从“先进制程堆叠”向“架构深度创新”的转型逻辑，通过分析东方算芯的软件定义近存计算路径，探讨了如何通过系统协同提升数据效率，并指出全栈软件生态是决定国产算力能否突围的核心变量。">
+  <meta itemprop="datePublished" content="2026-07-24T12:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-07-24T12:10:03+08:00">
+  <meta itemprop="wordCount" content="16">
+  <meta itemprop="keywords" content="算力芯片,近存计算,软件定义硬件,产业自主可控,AI基础设施">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="算力“深水区”破局：软件定义架构如何重构AI基础设施的性能逻辑">
+  <meta name="twitter:description" content="文章深度解析了AI算力领域从“先进制程堆叠”向“架构深度创新”的转型逻辑，通过分析东方算芯的软件定义近存计算路径，探讨了如何通过系统协同提升数据效率，并指出全栈软件生态是决定国产算力能否突围的核心变量。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2815%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-24 12:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%AE%97%E5%8A%9B%E2%80%9C%E6%B7%B1%E6%B0%B4%E5%8C%BA%E2%80%9D%E7%A0%B4%E5%B1%80%EF%BC%9A%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%80%A7%E8%83%BD%E9%80%BB%E8%BE%91%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86AI%E7%AE%97%E5%8A%9B%E9%A2%86%E5%9F%9F%E4%BB%8E%E2%80%9C%E5%85%88%E8%BF%9B%E5%88%B6%E7%A8%8B%E5%A0%86%E5%8F%A0%E2%80%9D%E5%90%91%E2%80%9C%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E5%88%9B%E6%96%B0%E2%80%9D%E7%9A%84%E8%BD%AC%E5%9E%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%86%E6%9E%90%E4%B8%9C%E6%96%B9%E7%AE%97%E8%8A%AF%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E8%BF%91%E5%AD%98%E8%AE%A1%E7%AE%97%E8%B7%AF%E5%BE%84%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%8D%8F%E5%90%8C%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E6%95%88%E7%8E%87%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%87%BA%E5%85%A8%E6%A0%88%E8%BD%AF%E4%BB%B6%E7%94%9F%E6%80%81%E6%98%AF%E5%86%B3%E5%AE%9A%E5%9B%BD%E4%BA%A7%E7%AE%97%E5%8A%9B%E8%83%BD%E5%90%A6%E7%AA%81%E5%9B%B4%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8F%98%E9%87%8F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260724121003448-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%AE%97%E5%8A%9B%E2%80%9C%E6%B7%B1%E6%B0%B4%E5%8C%BA%E2%80%9D%E7%A0%B4%E5%B1%80%EF%BC%9A%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%9E%B6%E6%9E%84%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E6%80%A7%E8%83%BD%E9%80%BB%E8%BE%91%20-%20%E6%96%87%E7%AB%A0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BA%86AI%E7%AE%97%E5%8A%9B%E9%A2%86%E5%9F%9F%E4%BB%8E%E2%80%9C%E5%85%88%E8%BF%9B%E5%88%B6%E7%A8%8B%E5%A0%86%E5%8F%A0%E2%80%9D%E5%90%91%E2%80%9C%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E5%88%9B%E6%96%B0%E2%80%9D%E7%9A%84%E8%BD%AC%E5%9E%8B%E9%80%BB%E8%BE%91%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%86%E6%9E%90%E4%B8%9C%E6%96%B9%E7%AE%97%E8%8A%AF%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E8%BF%91%E5%AD%98%E8%AE%A1%E7%AE%97%E8%B7%AF%E5%BE%84%EF%BC%8C%E6%8E%A2%E8%AE%A8%E4%BA%86%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%8D%8F%E5%90%8C%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E6%95%88%E7%8E%87%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%87%BA%E5%85%A8%E6%A0%88%E8%BD%AF%E4%BB%B6%E7%94%9F%E6%80%81%E6%98%AF%E5%86%B3%E5%AE%9A%E5%9B%BD%E4%BA%A7%E7%AE%97%E5%8A%9B%E8%83%BD%E5%90%A6%E7%AA%81%E5%9B%B4%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8F%98%E9%87%8F%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Farticle-20260724121003448-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">算力“深水区”破局：软件定义架构如何重构AI基础设施的性能逻辑</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>AI算力竞争正从单纯的“堆GPU”转向架构层面的深层创新，东方算芯提出的“软件定义近存计算”通过解决数据搬运瓶颈，在成熟工艺下实现了对先进制程依赖的突围，标志着AI芯片产业进入了追求“系统效率”的新阶段。</p></blockquote>
+<h3 id="算力博弈的范式转换">算力博弈的“范式转换”</h3>
+<p>在2026年世界人工智能大会（WAIC）的聚光灯下，AI产业界展现出了明显的焦虑与转型信号。当千亿参数的大模型成为常态，GPU不再仅仅是“运算引擎”，反而因频繁的存储访问而陷入了数据供给不足的泥潭。长期以来，算力提升被狭隘地定义为“先进制程+HBM显存”的军备竞赛，但地缘政治下的供应限制与成本激增，迫使行业开始在底层架构上寻找“第三条路线”。</p>
+<p>东方算芯推出的DF1000芯片，本质上是对冯·诺依曼架构瓶颈的一次深刻回应。通过软件定义芯片（Software-Defined Chips）与近存计算（Near-Memory Computing）的结合，它打破了传统GPU将数据在存储与逻辑单元间反复迁移的低效逻辑。这种范式转换的意义在于：在先进制程受限的现状下，通过架构级的“计算靠近存储”，实现了算力密度的跨代跃升。</p>
+<h3 id="架构创新从计算速度到数据效率">架构创新：从“计算速度”到“数据效率”</h3>
+<p>计算单元的堆叠已接近物理极限，而数据搬运的“存储墙”问题愈发凸显。东方算芯采用的晶圆级混合键合技术，将计算逻辑层与存储层垂直堆叠，将互连距离压缩至亚微米级别。这种物理空间上的极简设计，直接降低了数据传输的延迟与能耗。</p>
+<p>更具哲学意味的是“软件定义”的引入。传统的ASIC芯片往往随着算法的迭代而迅速过时，而软件定义架构赋予了硬件某种程度的“可塑性”。它通过硬件资源的动态映射与时分复用，让同一套物理算力能适应不断演进的大模型算法。这不仅是一种工程创新，更是对“算法与硬件如何协同演化”这一核心命题的商业回答：<em>未来的AI芯片竞争，核心护城河将是编译器与软件栈对硬件资源的极致调度能力。</em></p>
+<h3 id="产业生态不仅是芯片更是系统级博弈">产业生态：不仅是芯片，更是系统级博弈</h3>
+<p>正如技术史所昭示的，没有任何一种架构能孤立存在。DF1000的成功与否，并不取决于单芯片的FLOPS数值，而在于能否构建一个从编译器、运行时系统到集群调度的全栈生态。</p>
+<p>对于国产AI芯片产业而言，CUDA的生态堡垒不可逾越，但架构创新打开了“弯道超车”的窗口期。通过提供包括超节点（Super-node）和集群级别的整体解决方案，东方算芯实际上是在定义一种“国产AI基础设施的标准范式”。这种从芯片到集群的一体化协同，不仅规避了对海外零部件的依赖，还降低了终端用户的代码迁移成本。这种“系统级工程化能力”，正是目前国产算力产业亟需补齐的短板。</p>
+<h3 id="未来图景回归技术本质的多元主义">未来图景：回归技术本质的多元主义</h3>
+<p>展望未来3-5年，AI芯片的发展将进入“多元化竞合”时期。一方面，先进制程的摩尔定律延续依然重要；另一方面，以存内计算、近存计算、Chiplet为代表的架构创新，将成为提升算力效率的决定性变量。</p>
+<p>东方算芯的尝试，证明了在成熟工艺节点下，通过架构创新依然能实现极高的性能对标。这种回归技术本质、强调数据效率与系统级创新的路线，或将改变全球AI基础设施的市场格局。我们正在见证一段科技历史：算力供给将不再仅仅受制于光刻机的产能，而更多取决于谁能从架构层面重新定义“计算”与“存储”的关系。</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E8%8A%AF%E7%89%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力芯片</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BF%91%E5%AD%98%E8%AE%A1%E7%AE%97/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">近存计算</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%A1%AC%E4%BB%B6/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件定义硬件</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E4%BA%A7%E4%B8%9A%E8%87%AA%E4%B8%BB%E5%8F%AF%E6%8E%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">产业自主可控</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI基础设施</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260626214014149-0/">硅基淘金热：当“算力巨头”沦为“芯片苦力”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseek-20260724081003420-0/">DeepSeek的“反脆弱”哲学：当算法克制成为商业的最高效能</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aikimi-20260722081003330-4/">当AI触碰算力“熔断”：Kimi与算法效率的生存哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260714221008661-1/">万亿美金的算力狂欢：AI基建背后的“阶级”分化与周期真相</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitoken-20260714191012635-0/">卖水人的新变体：AI算力市场的“Token工厂”生意</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-token-20260713124014223-2/">算力的炼金术：AI Token工厂如何重新定义商业价值</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/waic-2026aiminimax-m3-20260713121007420-0/">WAIC 2026世博攻略｜AI含量爆表，华为超节点、MiniMax M3、人形机器人都来了，这份“躺逛”指南请收好</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260713114009556-1/">当智能成为“水电煤”：AI推理工厂的炼金术</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260712101011764-0/">泡沫之上的算力赌局：沐曦股份的千亿估值迷局</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260711131009566-0/">算力过剩论的陷阱：当“物理基础设施”遭遇“动态增长曲线”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/waic-2026ai-20260708201013171-0/">WAIC 2026提前泄密：AI不再“嘴炮”，开始抢手机、进工厂、当牛马了！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260707194010874-0/">算力“卖水人”的黄昏：服务器厂商如何在AI基础设施的生死局中求变？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260707091012519-0/">答案的代理人：当品牌在“黑箱”中竞逐心智席位</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260707081007016-0/">AI的“光纤时刻”：为什么赢家还没出生？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/meta-20260706211009131-1/">当算力成为新货币：Meta的“黄牛”生意经</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
