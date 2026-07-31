@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Agent 效率的隐形税：为什么“编排层”正在取代“模型”成为商业护城河？ | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="本文深度剖析了 AI Agent 编排层（Harness）在系统效率中的关键作用，指出编排逻辑的优化比模型本身的提升更能决定 Agent 的商业竞争力。通过对比实验，文章揭示了未来 AI 领域将从单纯的“模型竞赛”转向“工程化成本与效率的深度竞争”。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/agent--20260731204003184-2/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/agent--20260731204003184-2/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Agent 效率的隐形税：为什么“编排层”正在取代“模型”成为商业护城河？">
+  <meta property="og:description" content="本文深度剖析了 AI Agent 编排层（Harness）在系统效率中的关键作用，指出编排逻辑的优化比模型本身的提升更能决定 Agent 的商业竞争力。通过对比实验，文章揭示了未来 AI 领域将从单纯的“模型竞赛”转向“工程化成本与效率的深度竞争”。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-31T20:40:03+08:00">
+    <meta property="article:modified_time" content="2026-07-31T20:40:03+08:00">
+    <meta property="article:tag" content="AI Agent">
+    <meta property="article:tag" content="编排架构">
+    <meta property="article:tag" content="工程效率">
+    <meta property="article:tag" content="成本优化">
+    <meta property="article:tag" content="软件开发">
+
+  <meta itemprop="name" content="Agent 效率的隐形税：为什么“编排层”正在取代“模型”成为商业护城河？">
+  <meta itemprop="description" content="本文深度剖析了 AI Agent 编排层（Harness）在系统效率中的关键作用，指出编排逻辑的优化比模型本身的提升更能决定 Agent 的商业竞争力。通过对比实验，文章揭示了未来 AI 领域将从单纯的“模型竞赛”转向“工程化成本与效率的深度竞争”。">
+  <meta itemprop="datePublished" content="2026-07-31T20:40:03+08:00">
+  <meta itemprop="dateModified" content="2026-07-31T20:40:03+08:00">
+  <meta itemprop="wordCount" content="92">
+  <meta itemprop="keywords" content="AI Agent,编排架构,工程效率,成本优化,软件开发">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Agent 效率的隐形税：为什么“编排层”正在取代“模型”成为商业护城河？">
+  <meta name="twitter:description" content="本文深度剖析了 AI Agent 编排层（Harness）在系统效率中的关键作用，指出编排逻辑的优化比模型本身的提升更能决定 Agent 的商业竞争力。通过对比实验，文章揭示了未来 AI 领域将从单纯的“模型竞赛”转向“工程化成本与效率的深度竞争”。">
+
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%286%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-31 20:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Agent&amp;#43;%E6%95%88%E7%8E%87%E7%9A%84%E9%9A%90%E5%BD%A2%E7%A8%8E%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E7%BC%96%E6%8E%92%E5%B1%82%E2%80%9D%E6%AD%A3%E5%9C%A8%E5%8F%96%E4%BB%A3%E2%80%9C%E6%A8%A1%E5%9E%8B%E2%80%9D%E6%88%90%E4%B8%BA%E5%95%86%E4%B8%9A%E6%8A%A4%E5%9F%8E%E6%B2%B3%EF%BC%9F%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86&amp;#43;AI&amp;#43;Agent&amp;#43;%E7%BC%96%E6%8E%92%E5%B1%82%EF%BC%88Harness%EF%BC%89%E5%9C%A8%E7%B3%BB%E7%BB%9F%E6%95%88%E7%8E%87%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8%EF%BC%8C%E6%8C%87%E5%87%BA%E7%BC%96%E6%8E%92%E9%80%BB%E8%BE%91%E7%9A%84%E4%BC%98%E5%8C%96%E6%AF%94%E6%A8%A1%E5%9E%8B%E6%9C%AC%E8%BA%AB%E7%9A%84%E6%8F%90%E5%8D%87%E6%9B%B4%E8%83%BD%E5%86%B3%E5%AE%9A&amp;#43;Agent&amp;#43;%E7%9A%84%E5%95%86%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82%E9%80%9A%E8%BF%87%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C%EF%BC%8C%E6%96%87%E7%AB%A0%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%9C%AA%E6%9D%A5&amp;#43;AI&amp;#43;%E9%A2%86%E5%9F%9F%E5%B0%86%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E2%80%9D%E8%BD%AC%E5%90%91%E2%80%9C%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%88%90%E6%9C%AC%E4%B8%8E%E6%95%88%E7%8E%87%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%AB%9E%E4%BA%89%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent--20260731204003184-2%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Agent&amp;#43;%E6%95%88%E7%8E%87%E7%9A%84%E9%9A%90%E5%BD%A2%E7%A8%8E%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E7%BC%96%E6%8E%92%E5%B1%82%E2%80%9D%E6%AD%A3%E5%9C%A8%E5%8F%96%E4%BB%A3%E2%80%9C%E6%A8%A1%E5%9E%8B%E2%80%9D%E6%88%90%E4%B8%BA%E5%95%86%E4%B8%9A%E6%8A%A4%E5%9F%8E%E6%B2%B3%EF%BC%9F%20-%20%E6%9C%AC%E6%96%87%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86&amp;#43;AI&amp;#43;Agent&amp;#43;%E7%BC%96%E6%8E%92%E5%B1%82%EF%BC%88Harness%EF%BC%89%E5%9C%A8%E7%B3%BB%E7%BB%9F%E6%95%88%E7%8E%87%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8%EF%BC%8C%E6%8C%87%E5%87%BA%E7%BC%96%E6%8E%92%E9%80%BB%E8%BE%91%E7%9A%84%E4%BC%98%E5%8C%96%E6%AF%94%E6%A8%A1%E5%9E%8B%E6%9C%AC%E8%BA%AB%E7%9A%84%E6%8F%90%E5%8D%87%E6%9B%B4%E8%83%BD%E5%86%B3%E5%AE%9A&amp;#43;Agent&amp;#43;%E7%9A%84%E5%95%86%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E3%80%82%E9%80%9A%E8%BF%87%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C%EF%BC%8C%E6%96%87%E7%AB%A0%E6%8F%AD%E7%A4%BA%E4%BA%86%E6%9C%AA%E6%9D%A5&amp;#43;AI&amp;#43;%E9%A2%86%E5%9F%9F%E5%B0%86%E4%BB%8E%E5%8D%95%E7%BA%AF%E7%9A%84%E2%80%9C%E6%A8%A1%E5%9E%8B%E7%AB%9E%E8%B5%9B%E2%80%9D%E8%BD%AC%E5%90%91%E2%80%9C%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%88%90%E6%9C%AC%E4%B8%8E%E6%95%88%E7%8E%87%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%AB%9E%E4%BA%89%E2%80%9D%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fagent--20260731204003184-2%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Agent 效率的隐形税：为什么“编排层”正在取代“模型”成为商业护城河？</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>AI Agent 的成本瓶颈正从模型性能转向“编排层（Harness）”效率。实验数据表明，编排层在处理同样任务时能产生高达30倍的 Token 消耗差异，这意味着未来 Agent 产品的核心竞争力将向底层系统设计与流量优化转移。</p></blockquote>
+<p>当业界仍沉浸在“模型参数规模”或“推理能力”的军备竞赛时，一场关于 AI Agent 工程实践的静默革命正在悄然发生。近期 Composio 团队的一项对比实验，犹如一颗石子投入平静的湖面：在任务成功率相当的前提下，不同 Agent 编排框架（Harness）之间的 Token 消耗量差距竟高达 30 倍。这不仅仅是技术实现细节的问题，它揭示了 AI Agent 迈向大规模商业落地过程中，一个被长期低估的商业关键点——<strong>工程化效率即生产力成本</strong>。</p>
+<h3 id="技术架构的熵增claude-code-的-token-困境">技术架构的“熵增”：Claude Code 的 Token 困境</h3>
+<p>为何同样的任务，Claude Code 的 Token 消耗会是其他框架的数倍？通过对开发者反馈与底层日志的分析，我们可以发现这并非模型本身的无能，而是编排层逻辑的“冗余性”。</p>
+<p>当前的 Agent 框架在执行复杂任务时，往往倾向于将历史上下文、工具调用输出、系统日志及文件内容反复“注入”进 Prompt。对于大模型而言，这种“记忆过载”会导致输入 Token 的爆炸式增长。Sebastian Raschka 的观察证实，Claude Code 在多轮交互中倾向于维持一个极其庞大且包含大量重复信息的上下文窗口。</p>
+<p>这种设计在哲学上体现了一种“容错导向”：通过不断重复关键上下文，试图降低模型在长链路任务中的“遗忘风险”。然而，从技术经济学的角度看，这无疑是一场<strong>以经济成本交换可靠性的豪赌</strong>。当 Agent 跑一个任务的成本从 0.22 美元飙升至 2 美元时，这种“过度响应”的策略在企业级应用中将瞬间变得不可持续。</p>
+<h3 id="编排层从水电煤到核心资产">编排层：从“水电煤”到“核心资产”</h3>
+<p>如果说模型是 AI 时代的电力，那么 Harness 就是调控电流的变压器。Writer 公司的实验更具颠覆性：仅替换编排层，就能在模型固定不变的情况下，将平均成本降低 41%，延迟缩短 44%。</p>
+<p>这一结果向我们揭示了一个深刻的产业转型信号：<strong>模型正在日趋同质化，而编排层将成为新的核心护城河。</strong></p>
+<ul>
+<li><strong>成本透明度挑战</strong>：正如业内呼吁的“Harness 税”，未来的 AI 基准测试（Benchmark）不仅要测模型智力，更要测算编排效率。</li>
+<li><strong>商业逻辑的重构</strong>：当 Agent 产品的边际成本不再仅由模型 API 决定，而是由编排逻辑决定时，谁能通过高效的上下文管理、任务规划流（Workflow）设计来“省钱”，谁就掌握了定价权。</li>
+<li><strong>工程化边界的演进</strong>：未来的软件工程，将不再是堆砌代码，而是编排一个个智能单元（Atomic Agents），编排层的逻辑深度与执行精度，将决定整个系统的熵值和响应速度。</li>
+</ul>
+<h3 id="未来图景精益化的自主系统时代">未来图景：精益化的自主系统时代</h3>
+<p>预测未来 3-5 年的趋势，我们可以预见 Agent 领域将出现明确的“分层竞争”：</p>
+<ol>
+<li><strong>基础设施层</strong>：大模型厂商继续追求智力上限，模型本身将成为“零边际成本”的公共产品。</li>
+<li><strong>编排工具层（The Harness Layer）</strong>：这将诞生一批专注于“效率工程”的独角兽企业。它们的核心竞争力不在于模型参数，而在于对上下文压缩、提示词路径优化以及内存管理机制的独特专利。</li>
+<li><strong>应用集成层</strong>：企业将根据自身的经济模型，选择最匹配其 Agent 任务的 Harness，实现“性能-成本”的最优解。</li>
+</ol>
+<p>这一变革意味着 AI 开发者的角色正在转变：他们不再仅仅是模型的使用者，而是复杂的智能编排架构师。正如计算机科学史中编译器对底层架构的抽象作用一样，优秀的 Harness 将让 AI 的自主行动变得更加轻盈、可预测且廉价。</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai-agent/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI Agent</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%BC%96%E6%8E%92%E6%9E%B6%E6%9E%84/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">编排架构</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%B7%A5%E7%A8%8B%E6%95%88%E7%8E%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">工程效率</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">成本优化</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软件开发</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/logan-kilpatrick-20260623201009289-4/">Logan Kilpatrick：在大模型吞噬一切的时代，寻找垂直领域的“非零和”博弈</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/940ai300-20260518174003830-1/">月烧940万！龙虾之父的AI程序员军团，比300个工程师还贵？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiopenai-codex--20260515194004080-2/">AI工具深度评测：OpenAI Codex 移动端集成与智能体开发工作流</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/opusclaude85ai-20260410174006980-0/">别再让Opus干体力活！Claude这套“军师模式”让成本暴降85%，一行代码教AI省钱养家</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/google-jules-ai-20251211011005694-0/">Google Jules AI进化！你的代码终于也有“打工人”了，还能自主“肝”活？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent90-20251210194008889-0/">AI Agent重塑软件经济模型：90%成本骤降背后，程序员与产业的未来何去何从？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20251020191007465-1/">解构AI Agent的“记忆之钥”：搭叩七大策略如何重塑智能体交互与自主未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/newspaper/2025-10-01-06-22-ai-agents-/">06-22日报|AI Agents狂飙，基建何以跟上？——硅基内卷的信任与碎片化代价</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/replitai-20250811191005352-1/">从代码灰烬到金字塔尖：Replit如何用AI铸就层层生金的帝国</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aitrae-solo-20250723104005362-0/">AI「打工人」天花板？TRAE SOLO：从“写代码”到“全自动交付”，开发者要“躺平”了？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/trae-20-20250723101005572-2/">超越提示工程：字节Trae 2.0引领“上下文工程”重塑软件开发范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250714114005051-6/">AI重塑软件工程范式：生产力革命下的组织与人才新考量</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimax--20250701221006503-1/">MiniMax 进化论：一群「偏执者」的破浪前行</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/minimaxai53-20250620092004466-0/">MiniMax的AI成本革命：53万美元如何塑造下一代智能体未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-agent-20250617193006124-2/">字节跳动的AI Agent豪赌：重塑数字未来的关键战役</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
