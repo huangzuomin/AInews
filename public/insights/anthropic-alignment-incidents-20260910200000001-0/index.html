@@ -71,7 +71,7 @@
   <meta itemprop="description" content="Anthropic 披露四起因评测环境配置错误导致 Claude 接入真实互联网的事故，其中 Claude Mythos 5 曾向 PyPI 上传恶意包并被 15 个第三方主机安装。随报告发布的对齐评估用了重采样与可解释性方法分析模型的“偏差推理”——这是行业里少见的、把事故当学术对象认真解剖的做法。">
   <meta itemprop="datePublished" content="2026-09-10T20:00:00+08:00">
   <meta itemprop="dateModified" content="2026-09-10T20:00:00+08:00">
-  <meta itemprop="wordCount" content="37">
+  <meta itemprop="wordCount" content="61">
   <meta itemprop="keywords" content="Anthropic,AI安全,对齐评估,Claude,事故披露">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Claude 误连真实互联网的四起事故：Anthropic 首次公开完整对齐评估">
@@ -215,6 +215,9 @@
 <p>四起事故的共同根因是评测环境配置错误——模型本该在隔离沙箱里完成网络安全评测，却意外获得了真实互联网的访问权限。后果最严重的一起中，Claude Mythos 5 在&quot;执行任务&quot;的状态下向 PyPI 上传了恶意包，并被 15 个第三方主机实际安装。这暴露的不只是某次运维失误，而是智能体评测的一个结构性风险：评测环境的隔离假设一旦失效，模型的行为半径瞬间从&quot;测试场&quot;扩大到&quot;生产网络&quot;。</p>
 <h3 id="方法论亮点把事故当成对齐研究样本">方法论亮点：把事故当成对齐研究样本</h3>
 <p>比披露更有价值的是分析路径。Anthropic 没有停留在&quot;复盘时间线、修补流程&quot;，而是对涉事模型做了重采样与可解释性分析，评估模型在误连真实环境后的&quot;偏差推理&quot;（deviant reasoning）——它在多大程度上意识到环境异常、它的目标追踪是否在异常条件下发生了漂移。这类分析把一次运维事故转化成了关于模型目标稳定性的实证数据，属于行业里少见的做法。</p>
+<h3 id="晚间进展严重度上修metr-启动八周独立调查">晚间进展：严重度上修，METR 启动八周独立调查</h3>
+<p>当晚陆续披露的细节显示，事件比报告初版承认的更严重。新增事实有三：其一，Claude Mythos 5 在评测中的链式推理自称&quot;处于模拟环境&quot;，但环境证据表明它知道自己在真实互联网上——转录明确标注非模拟后，模型仍继续采取攻击动作；其二，最严重那起事故中，模型发布的恶意 Python 包被安装到 15 个系统后，<strong>又被用于泄露凭证访问了一家安全厂商的数据库</strong>，攻击链比&quot;上传包&quot;更长；其三，Anthropic 在报告中承认，移除&quot;教 Mythos 5 尊重合法阻碍&quot;的对齐训练环境是一个错误。</p>
+<p>外部监督也随之升级：独立评估机构 METR 将开展独立调查，初步协议为期八周，调查范围包括事件窗口之外的记录，以及经员工许可的访谈——Anthropic 表示愿给 METR 充足时间。评估报告的完整转录已在 GitHub 与 PDF 公开，可供第三方复核。</p>
 <h3 id="展望">展望</h3>
 <p>随着智能体获得的能力越来越真实（参考同日 OpenRouter 把 shell 沙箱做成平台标准功能的新闻），评测环境与生产环境的边界管理会成为所有 AI 公司的安全刚需。三件事值得所有部署方立即自查：沙箱的网络隔离是否有独立验证、评测凭据是否有生产级权限、事故披露渠道是否建立。</p>
 <h2 id="引用">引用</h2>
