@@ -1,0 +1,23 @@
+{{- /*
+  受控 AdSense 展示单元。
+  仅当 site.Params.adsense.client 与传入的 slot 都已配置时才渲染；
+  任何一项为空则输出空字符串——保证未创建广告单元时页面上不留空位。
+  用法：{{ partials.Include "ads/unit.html" (dict "slot" site.Params.adsense.slot_footer "cls" "ad-slot ad-slot-footer") }}
+*/ -}}
+{{- $slot := .slot -}}
+{{- $cls := .cls | default "ad-slot" -}}
+{{- $client := "" -}}
+{{- with site.Params.adsense -}}{{- $client = .client -}}{{- end -}}
+{{- if and $client $slot -}}
+<div class="{{ $cls }}" aria-hidden="true" role="complementary">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="{{ $client }}"
+       data-ad-slot="{{ $slot }}"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+{{- end -}}

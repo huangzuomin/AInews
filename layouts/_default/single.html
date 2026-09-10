@@ -50,8 +50,20 @@
       {{ end }}
     </header>
     <div class="nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
-      {{- .Content -}}
-      
+      {{- /* 正文广告注入：优先插在第一个 blockquote（TL;DR）之后，退化到第一段之后 */ -}}
+      {{- $content := .Content -}}
+      {{- $adTop := partials.Include "ads/unit.html" (dict "slot" site.Params.adsense.slot_after_tldr "cls" "ad-slot ad-slot-top") -}}
+      {{- if $adTop -}}
+        {{- $head := index (findRE "(?s).*?</blockquote>" $content 1) 0 -}}
+        {{- if not $head -}}{{- $head = index (findRE "(?s).*?</p>" $content 1) 0 -}}{{- end -}}
+        {{- if $head -}}
+          {{- $content = printf "%s%s%s" $head $adTop (strings.TrimPrefix $head $content) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $content -}}
+      {{- /* 文末广告位 */ -}}
+      {{- partials.Include "ads/unit.html" (dict "slot" site.Params.adsense.slot_footer "cls" "ad-slot ad-slot-footer") -}}
+
       {{- partials.IncludeCached "social/share.html" . . -}}
 
       {{- partials.Include "tags.html" . -}}
