@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>DeepSeek自研芯片：从算法模仿者到架构定义者的跨越 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="DeepSeek布局自研推理芯片，本质上是试图通过实现软硬垂直一体化，打破通用GPU架构对算法演进的束缚。这一战略旨在降低推理成本并掌握未来计算架构的定义权，标志着中国AI产业正在向底层核心技术架构的深水区迈进。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.24c923965c9921eb27a13105f3906cf402ce8f8dc52c35ba207cdfd250aeb503.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/deepseek-20260721214004850-0/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/deepseek-20260721214004850-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="DeepSeek自研芯片：从算法模仿者到架构定义者的跨越">
+  <meta property="og:description" content="DeepSeek布局自研推理芯片，本质上是试图通过实现软硬垂直一体化，打破通用GPU架构对算法演进的束缚。这一战略旨在降低推理成本并掌握未来计算架构的定义权，标志着中国AI产业正在向底层核心技术架构的深水区迈进。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-21T21:40:04+08:00">
+    <meta property="article:modified_time" content="2026-07-21T21:40:04+08:00">
+    <meta property="article:tag" content="AI推理芯片">
+    <meta property="article:tag" content="软硬协同">
+    <meta property="article:tag" content="DeepSeek">
+    <meta property="article:tag" content="算力经济">
+    <meta property="article:tag" content="技术自主权">
+
+  <meta itemprop="name" content="DeepSeek自研芯片：从算法模仿者到架构定义者的跨越">
+  <meta itemprop="description" content="DeepSeek布局自研推理芯片，本质上是试图通过实现软硬垂直一体化，打破通用GPU架构对算法演进的束缚。这一战略旨在降低推理成本并掌握未来计算架构的定义权，标志着中国AI产业正在向底层核心技术架构的深水区迈进。">
+  <meta itemprop="datePublished" content="2026-07-21T21:40:04+08:00">
+  <meta itemprop="dateModified" content="2026-07-21T21:40:04+08:00">
+  <meta itemprop="wordCount" content="24">
+  <meta itemprop="keywords" content="AI推理芯片,软硬协同,DeepSeek,算力经济,技术自主权">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DeepSeek自研芯片：从算法模仿者到架构定义者的跨越">
+  <meta name="twitter:description" content="DeepSeek布局自研推理芯片，本质上是试图通过实现软硬垂直一体化，打破通用GPU架构对算法演进的束缚。这一战略旨在降低推理成本并掌握未来计算架构的定义权，标志着中国AI产业正在向底层核心技术架构的深水区迈进。">
+
+      
+    
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2819%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-21 21:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=DeepSeek%E8%87%AA%E7%A0%94%E8%8A%AF%E7%89%87%EF%BC%9A%E4%BB%8E%E7%AE%97%E6%B3%95%E6%A8%A1%E4%BB%BF%E8%80%85%E5%88%B0%E6%9E%B6%E6%9E%84%E5%AE%9A%E4%B9%89%E8%80%85%E7%9A%84%E8%B7%A8%E8%B6%8A%20-%20DeepSeek%E5%B8%83%E5%B1%80%E8%87%AA%E7%A0%94%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%EF%BC%8C%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E8%AF%95%E5%9B%BE%E9%80%9A%E8%BF%87%E5%AE%9E%E7%8E%B0%E8%BD%AF%E7%A1%AC%E5%9E%82%E7%9B%B4%E4%B8%80%E4%BD%93%E5%8C%96%EF%BC%8C%E6%89%93%E7%A0%B4%E9%80%9A%E7%94%A8GPU%E6%9E%B6%E6%9E%84%E5%AF%B9%E7%AE%97%E6%B3%95%E6%BC%94%E8%BF%9B%E7%9A%84%E6%9D%9F%E7%BC%9A%E3%80%82%E8%BF%99%E4%B8%80%E6%88%98%E7%95%A5%E6%97%A8%E5%9C%A8%E9%99%8D%E4%BD%8E%E6%8E%A8%E7%90%86%E6%88%90%E6%9C%AC%E5%B9%B6%E6%8E%8C%E6%8F%A1%E6%9C%AA%E6%9D%A5%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9A%E4%B9%89%E6%9D%83%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80%E4%B8%AD%E5%9B%BDAI%E4%BA%A7%E4%B8%9A%E6%AD%A3%E5%9C%A8%E5%90%91%E5%BA%95%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E6%B0%B4%E5%8C%BA%E8%BF%88%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseek-20260721214004850-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=DeepSeek%E8%87%AA%E7%A0%94%E8%8A%AF%E7%89%87%EF%BC%9A%E4%BB%8E%E7%AE%97%E6%B3%95%E6%A8%A1%E4%BB%BF%E8%80%85%E5%88%B0%E6%9E%B6%E6%9E%84%E5%AE%9A%E4%B9%89%E8%80%85%E7%9A%84%E8%B7%A8%E8%B6%8A%20-%20DeepSeek%E5%B8%83%E5%B1%80%E8%87%AA%E7%A0%94%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%EF%BC%8C%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E8%AF%95%E5%9B%BE%E9%80%9A%E8%BF%87%E5%AE%9E%E7%8E%B0%E8%BD%AF%E7%A1%AC%E5%9E%82%E7%9B%B4%E4%B8%80%E4%BD%93%E5%8C%96%EF%BC%8C%E6%89%93%E7%A0%B4%E9%80%9A%E7%94%A8GPU%E6%9E%B6%E6%9E%84%E5%AF%B9%E7%AE%97%E6%B3%95%E6%BC%94%E8%BF%9B%E7%9A%84%E6%9D%9F%E7%BC%9A%E3%80%82%E8%BF%99%E4%B8%80%E6%88%98%E7%95%A5%E6%97%A8%E5%9C%A8%E9%99%8D%E4%BD%8E%E6%8E%A8%E7%90%86%E6%88%90%E6%9C%AC%E5%B9%B6%E6%8E%8C%E6%8F%A1%E6%9C%AA%E6%9D%A5%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9A%E4%B9%89%E6%9D%83%EF%BC%8C%E6%A0%87%E5%BF%97%E7%9D%80%E4%B8%AD%E5%9B%BDAI%E4%BA%A7%E4%B8%9A%E6%AD%A3%E5%9C%A8%E5%90%91%E5%BA%95%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E6%B0%B4%E5%8C%BA%E8%BF%88%E8%BF%9B%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fdeepseek-20260721214004850-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">DeepSeek自研芯片：从算法模仿者到架构定义者的跨越</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>DeepSeek布局自研推理芯片，本质上是从软件算法适配转向软硬件垂直一体化，旨在通过消除通用GPU带来的性能冗余与接口限制，重塑模型计算逻辑。这一尝试不仅是缓解高昂推理成本的商业抉择，更是中国AI产业试图掌握底层计算定义权的关键战略。</p></blockquote>
+<h3 id="算力困局摩尔定律之后的推理税">算力困局：摩尔定律之后的“推理税”</h3>
+<p>当硅谷巨头们在GPT-5.6与Fable5的智能竞赛中不断刷新参数纪录时，开发者们却被日益高昂的“推理税”困在墙角。模型愈发强大，但单位Token的消耗却成为制约AI应用爆发的阿喀琉斯之踵。以英伟达GPU为代表的通用计算平台，在追求极致兼容性的同时，因保留了大量冗余电路，导致在处理特定Transformer架构时表现出极低的能效比<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。对于DeepSeek而言，这不仅是成本控制的问题，更是一个核心痛点：现有的硬件架构正在限制算法的上限。</p>
+<h3 id="战略转向让硬件适应模型">战略转向：让硬件适应模型</h3>
+<p>DeepSeek秘密推进的自研芯片计划，并非单纯是对标英伟达的性能竞赛，而是其在实现AGI路径上的“软硬协同”重构。目前的MoE（混合专家模型）架构在通用GPU上运行，本质上是在做某种“妥协”：软件需要通过复杂的门控机制在硬件上调度任务，这种软硬件的不对称导致了严重的算力浪费。</p>
+<p>如果DeepSeek成功将专家路由机制硬化进硅电路，其带来的转变是颠覆性的：</p>
+<ul>
+<li><strong>硬件原生化</strong>：将MoE路由策略直接烧录为硬件逻辑，实现从“软件模拟判断”到“硬件原生寻址”的跃升。</li>
+<li><strong>架构自主权</strong>：不再被动遵循通用计算逻辑，而是根据模型进化调整电路设计，从而支持更激进的专家配置和动态稀疏策略。</li>
+<li><strong>成本降维打击</strong>：通过舍弃通用算力中的冗余单元，DeepSeek有望在相对成熟的7nm制程下，实现比通用GPU低一个数量级的单位Token推理成本<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</li>
+</ul>
+<h3 id="生态突围从模仿到定义">生态突围：从模仿到定义</h3>
+<p>虽然英伟达依靠CUDA构筑了难以逾越的生态壁垒，但“专用芯片+专用架构”的垂直整合路径，正为后来者开辟出一道侧门。Groq和Etched等公司的失败教训在于，他们将身家性命押注在单一的架构假设上，一旦模型范式迁移（如从Dense转向MoE），硬件即刻报废<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>然而，DeepSeek的独特之处在于它既是模型架构的定义者，又是潜在的硬件定义者。这种“端到端”的垂直整合能力，使其能够实时根据模型演进反馈硬件设计。正如特斯拉通过完全掌握FSD软件与自研芯片实现自动驾驶的迭代效率提升，DeepSeek正试图将这种逻辑应用到推理基础设施中。这标志着中国AI产业正从“亦趋亦步的跟随者”，向“参与定义下一代计算平台”的角色转变<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<h3 id="产业启示未来的计算逻辑">产业启示：未来的计算逻辑</h3>
+<p>随着长上下文场景的激增与AI Agent的普及，推理将成为计算的主流模式。未来3-5年，算力竞争的焦点将不再是单纯的FLOPS（浮点运算能力），而是数据流动的效率、KV Cache的管理能力以及专家调度的低延迟性。</p>
+<p>DeepSeek的芯片之路虽然面临良率、产能与制造限制等现实重压，但它揭示了一个深层趋势：在AGI时代，算法与芯片的边界正在消解。谁能率先完成软硬件的深度耦合，谁就掌握了通往下一代计算范式的钥匙。这不仅是中国AI产业链在制裁压力下的突围手段，更是人类科技文明在探索AGI进程中，对计算效率极限的又一次重大尝试。</p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>算力：算力基建景气度高，国产AI芯片发展势头良好·平安证券研究所·陈福栋、闫磊（2025/6/12）·检索日期2026/7/21&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Deepseek，这回够硬·ZAKER新闻（2026/7/7）·检索日期2026/7/21&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>传DeepSeek要自研AI芯片，且立项已一年·观察者网（2026/7/8）·检索日期2026/7/21&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>DeepSeek：助力中国芯突围·Supplyframe 四方维（2026/7/7）·检索日期2026/7/21&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI推理芯片</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%BD%AF%E7%A1%AC%E5%8D%8F%E5%90%8C/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">软硬协同</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/deepseek/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">DeepSeek</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E7%BB%8F%E6%B5%8E/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力经济</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8A%80%E6%9C%AF%E8%87%AA%E4%B8%BB%E6%9D%83/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">技术自主权</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/article-20260708161009163-2/">硅片上的军备竞赛：为什么大模型公司正在从“买算力”转向“造算力”？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260528184003717-5/">算力的炼金术与大模型的黄昏：当“烧钱”不再是护城河</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-20260526084003433-6/">DeepSeek的“被动霸权”：从算力降价到AI编程的生态范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250827214005188-2/">AI的“夺嫡”：当巨头沉溺“包子”之争，一位“幕后架构师”已在重塑地基</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/deepseekue8m0-fp8ai-20250822204005223-2/">DeepSeek“一语千金”：UE8M0 FP8如何重塑国产AI芯片生态与全球算力版图</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/google-frozen-v2-ai--20260721204004166-1/">当模型被“刻”进硅片：Google Frozen v2 如何重构 AI 的物理底层</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260721161005583-1/">从屏幕到感官：语音交互如何重塑AI的物理形态与商业逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/together-ai-20260721104003436-1/">算力的炼金术：Together AI与开源时代的“卖水人”狂想曲</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/token-20260720204002960-1/">炼金术的黄昏：当“Token收费”撞上企业生存的铁律</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k3-20260720174005252-0/">当算法不再是护城河：Kimi K3掀起的算力与生态“算账”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/risc-v-20260720144003981-0/">算力工厂的“操作系统”：RISC-V如何重塑万卡智算时代的物理底层</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260716081003768-0/">深度求索的“拼多多”式算力围城：一场押注科创板的AI豪赌</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-56-sol-ai--20260715114008898-2/">智能的“拧螺丝”时代：GPT-5.6 Sol 的降智争议与 AI 工业化进程的必然妥协</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260715101008980-1/">阶跃星辰的“终端突围”：当AI模型不再是商品，而是一个生态囚徒</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ai-token-20260713124014223-2/">算力的炼金术：AI Token工厂如何重新定义商业价值</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

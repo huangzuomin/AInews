@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>硅基上的思维定式：谷歌“Frozen v2”芯片与AI架构的硬核转型 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="谷歌通过“Frozen v2”芯片项目，将Gemini架构固化于硅片，试图通过深度垂直集成打破通用计算的能效极限。这一举措标志着AI算力战略正从灵活的通用架构转向追求极致成本与性能的模型原生架构，将深刻重塑云基础设施的市场格局。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.24c923965c9921eb27a13105f3906cf402ce8f8dc52c35ba207cdfd250aeb503.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/frozen-v2ai-20260721094004546-9/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/frozen-v2ai-20260721094004546-9/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="硅基上的思维定式：谷歌“Frozen v2”芯片与AI架构的硬核转型">
+  <meta property="og:description" content="谷歌通过“Frozen v2”芯片项目，将Gemini架构固化于硅片，试图通过深度垂直集成打破通用计算的能效极限。这一举措标志着AI算力战略正从灵活的通用架构转向追求极致成本与性能的模型原生架构，将深刻重塑云基础设施的市场格局。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-21T09:40:04+08:00">
+    <meta property="article:modified_time" content="2026-07-21T09:40:04+08:00">
+    <meta property="article:tag" content="AI芯片">
+    <meta property="article:tag" content="推理能效">
+    <meta property="article:tag" content="谷歌Gemini">
+    <meta property="article:tag" content="算力基础设施">
+    <meta property="article:tag" content="硬件固化">
+
+  <meta itemprop="name" content="硅基上的思维定式：谷歌“Frozen v2”芯片与AI架构的硬核转型">
+  <meta itemprop="description" content="谷歌通过“Frozen v2”芯片项目，将Gemini架构固化于硅片，试图通过深度垂直集成打破通用计算的能效极限。这一举措标志着AI算力战略正从灵活的通用架构转向追求极致成本与性能的模型原生架构，将深刻重塑云基础设施的市场格局。">
+  <meta itemprop="datePublished" content="2026-07-21T09:40:04+08:00">
+  <meta itemprop="dateModified" content="2026-07-21T09:40:04+08:00">
+  <meta itemprop="wordCount" content="53">
+  <meta itemprop="keywords" content="AI芯片,推理能效,谷歌Gemini,算力基础设施,硬件固化">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="硅基上的思维定式：谷歌“Frozen v2”芯片与AI架构的硬核转型">
+  <meta name="twitter:description" content="谷歌通过“Frozen v2”芯片项目，将Gemini架构固化于硅片，试图通过深度垂直集成打破通用计算的能效极限。这一举措标志着AI算力战略正从灵活的通用架构转向追求极致成本与性能的模型原生架构，将深刻重塑云基础设施的市场格局。">
+
+      
+    
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%2816%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-21 09:40</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E7%A1%85%E5%9F%BA%E4%B8%8A%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AE%9A%E5%BC%8F%EF%BC%9A%E8%B0%B7%E6%AD%8C%E2%80%9CFrozen&amp;#43;v2%E2%80%9D%E8%8A%AF%E7%89%87%E4%B8%8EAI%E6%9E%B6%E6%9E%84%E7%9A%84%E7%A1%AC%E6%A0%B8%E8%BD%AC%E5%9E%8B%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87%E2%80%9CFrozen&amp;#43;v2%E2%80%9D%E8%8A%AF%E7%89%87%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B0%86Gemini%E6%9E%B6%E6%9E%84%E5%9B%BA%E5%8C%96%E4%BA%8E%E7%A1%85%E7%89%87%EF%BC%8C%E8%AF%95%E5%9B%BE%E9%80%9A%E8%BF%87%E6%B7%B1%E5%BA%A6%E5%9E%82%E7%9B%B4%E9%9B%86%E6%88%90%E6%89%93%E7%A0%B4%E9%80%9A%E7%94%A8%E8%AE%A1%E7%AE%97%E7%9A%84%E8%83%BD%E6%95%88%E6%9E%81%E9%99%90%E3%80%82%E8%BF%99%E4%B8%80%E4%B8%BE%E6%8E%AA%E6%A0%87%E5%BF%97%E7%9D%80AI%E7%AE%97%E5%8A%9B%E6%88%98%E7%95%A5%E6%AD%A3%E4%BB%8E%E7%81%B5%E6%B4%BB%E7%9A%84%E9%80%9A%E7%94%A8%E6%9E%B6%E6%9E%84%E8%BD%AC%E5%90%91%E8%BF%BD%E6%B1%82%E6%9E%81%E8%87%B4%E6%88%90%E6%9C%AC%E4%B8%8E%E6%80%A7%E8%83%BD%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%EF%BC%8C%E5%B0%86%E6%B7%B1%E5%88%BB%E9%87%8D%E5%A1%91%E4%BA%91%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E5%B8%82%E5%9C%BA%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffrozen-v2ai-20260721094004546-9%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E7%A1%85%E5%9F%BA%E4%B8%8A%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AE%9A%E5%BC%8F%EF%BC%9A%E8%B0%B7%E6%AD%8C%E2%80%9CFrozen&amp;#43;v2%E2%80%9D%E8%8A%AF%E7%89%87%E4%B8%8EAI%E6%9E%B6%E6%9E%84%E7%9A%84%E7%A1%AC%E6%A0%B8%E8%BD%AC%E5%9E%8B%20-%20%E8%B0%B7%E6%AD%8C%E9%80%9A%E8%BF%87%E2%80%9CFrozen&amp;#43;v2%E2%80%9D%E8%8A%AF%E7%89%87%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B0%86Gemini%E6%9E%B6%E6%9E%84%E5%9B%BA%E5%8C%96%E4%BA%8E%E7%A1%85%E7%89%87%EF%BC%8C%E8%AF%95%E5%9B%BE%E9%80%9A%E8%BF%87%E6%B7%B1%E5%BA%A6%E5%9E%82%E7%9B%B4%E9%9B%86%E6%88%90%E6%89%93%E7%A0%B4%E9%80%9A%E7%94%A8%E8%AE%A1%E7%AE%97%E7%9A%84%E8%83%BD%E6%95%88%E6%9E%81%E9%99%90%E3%80%82%E8%BF%99%E4%B8%80%E4%B8%BE%E6%8E%AA%E6%A0%87%E5%BF%97%E7%9D%80AI%E7%AE%97%E5%8A%9B%E6%88%98%E7%95%A5%E6%AD%A3%E4%BB%8E%E7%81%B5%E6%B4%BB%E7%9A%84%E9%80%9A%E7%94%A8%E6%9E%B6%E6%9E%84%E8%BD%AC%E5%90%91%E8%BF%BD%E6%B1%82%E6%9E%81%E8%87%B4%E6%88%90%E6%9C%AC%E4%B8%8E%E6%80%A7%E8%83%BD%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%EF%BC%8C%E5%B0%86%E6%B7%B1%E5%88%BB%E9%87%8D%E5%A1%91%E4%BA%91%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E7%9A%84%E5%B8%82%E5%9C%BA%E6%A0%BC%E5%B1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Ffrozen-v2ai-20260721094004546-9%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">硅基上的思维定式：谷歌“Frozen v2”芯片与AI架构的硬核转型</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>谷歌正在研发的“Frozen v2”芯片通过将Gemini架构固化至硅片，标志着AI算力从“通用计算”向“模型原生”的深层转型。这一策略虽以牺牲通用性为代价，却通过硬件级优化解决了算力短缺瓶颈，预示着AI基础设施正加速迈向深度垂直集成的后GPU时代。</p></blockquote>
+<h3 id="从软件抽象到硬件固化架构的归位">从软件抽象到硬件固化：架构的归位</h3>
+<p>长期以来，AI算力的核心逻辑被英伟达式的通用GPU（GPGPU）所统治。这种模式的核心在于通过极高的灵活性，兼容各类变幻莫测的神经网络架构。然而，随着Gemini等前沿大模型的架构趋于成熟，这种“为了通用性而牺牲效率”的冗余设计，正成为算力提升的最大阻碍。</p>
+<p>谷歌的“Frozen v2”项目，本质上是一场对计算效率的“激进赌注”。其核心逻辑在于，当一个模型的底层逻辑（如Transformer架构的运作方式）已经足够稳定，将其固化进硅片中，将大幅减少实时指令调度带来的开销。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 这不仅仅是算力的简单提升，而是计算范式的重构——让芯片不再仅仅是“算力引擎”，而是模型逻辑的“物理载体”。</p>
+<h3 id="技术突破与产业效应效率的量化博弈">技术突破与产业效应：效率的量化博弈</h3>
+<p>根据内部估测，Frozen v2的能效比将比现有TPU提升6至10倍。<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 这种量级的提升，对于正面临严峻算力短缺的谷歌云而言，具有重大的商业战略价值：</p>
+<ul>
+<li><strong>计算经济学的重塑</strong>：通过将决策逻辑预先嵌入硬件，极大降低了推理过程中的数据搬运（Data Movement）成本——在AI推理中，频繁的数据移动往往比计算本身消耗更多能耗。<sup id="fnref2:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li><strong>差异化竞争壁垒</strong>：与依赖英伟达生态的竞争对手不同，谷歌正在构建一套“模型-芯片-云服务”的垂直整合体系。通过深度定制，谷歌能够以更低成本运行Gemini，这在算力成本极其高昂的当下，是核心的定价权来源。<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+<li><strong>战略灵活性与弹性固化</strong>：汲取了初代Frozen方案由于过于僵化而流产的教训，v2版本引入了“模型权重可更新”的弹性机制，这意味着它并非一次性产品，而是在特定的架构周期内，能够持续进化的专用芯片。<sup id="fnref2:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<h3 id="未来展望ai基础设施的巴别塔分化">未来展望：AI基础设施的“巴别塔”分化</h3>
+<p>从深层次看，Frozen v2预示着AI硬件生态将走向分化：</p>
+<p>一方面，通用GPU仍将占据科学计算、模型训练等对灵活性要求极高的领域；另一方面，随着特定架构（如Transformer及后续变体）在推理场景的统治地位确立，专用推理芯片（ASIC）将成为云厂商建立成本护城河的必备武器。<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>这种趋势对行业的影响深远：</p>
+<ol>
+<li><strong>AI模型架构的“锁定效应”</strong>：如果算力成本的降低必须依赖硬件固化，那么未来大模型厂商在架构选择上将更加谨慎。某种程度上，这会阻碍非主流架构的演进，因为它们在硬件层面缺乏“物理支持”。</li>
+<li><strong>云服务商的军备竞赛</strong>：Meta、微软、亚马逊等巨头势必会加快类似路径的探索。算力之争，已不再是单纯的芯片购买量，而是对底层计算逻辑的物理控制力。</li>
+<li><strong>社会与伦理视角</strong>：随着推理效率的大幅提升，AI服务的边际成本将趋近于零。这意味着AI将从现阶段的“奢侈品”转化为如同电力般的“通用基础设施”，从而加速AI在全社会层面的渗透，也对AI治理和算力公平提出了新的挑战。</li>
+</ol>
+<h3 id="结论">结论</h3>
+<p>谷歌的“Frozen v2”证明了一个哲学意义上的判断：当技术演进到一个节点，人类为了应对日益增长的智慧需求，必须打破通用计算的“舒适圈”，将文明中最精密的大脑架构——AI模型，熔铸进人类文明最坚硬的底座——硅基芯片中。这不仅是算力的战争，更是对未来数字经济架构的深刻重塑。<sup id="fnref3:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h2 id="引用">引用</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://finance.sina.com.cn/stock/usstock/c/2026-07-20/doc-iniinmvw9673499.shtml">谷歌研发全新“固化（Frozen）芯片”，大幅提升 AI 模型运行能效</a> · 新浪财经 · 卜淑情 (2026/7/20) · 检索日期2026/7/21&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.163.com/dy/article/L2AEIA9E05568W0A.html">谷歌研发全新“Frozen”专用芯片</a> · 网易号 · 2026/7/20 · 检索日期2026/7/21&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.163.com/dy/article/L2AJ3VJ00511B8LM.html">曝谷歌正研发全新Frozen v2芯片，可大幅提升Gemini模型运行效率</a> · 网易科技 · 2026/7/20 · 检索日期2026/7/21&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/ai%E8%8A%AF%E7%89%87/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI芯片</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E6%8E%A8%E7%90%86%E8%83%BD%E6%95%88/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">推理能效</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%B0%B7%E6%AD%8Cgemini/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">谷歌Gemini</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">算力基础设施</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E7%A1%AC%E4%BB%B6%E5%9B%BA%E5%8C%96/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">硬件固化</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/deepseekai-20260715121006968-1/">DeepSeek的豪赌：当AI初创公司开始扮演“全栈巨头”</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260710134008798-0/">炼金术的黄昏：天数智芯、黎辉与AI算力的“囤货”游戏</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260703184012043-0/">从“买算力”到“定义算力”：AI巨头下场造芯的深层生存哲学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260703181009578-0/">从租客到地主：AI巨头开启“定制算力”的硅基革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/etchedtransformer-20260701121006904-0/">超越通用计算的边界：Etched与“Transformer专用芯片”的硅片叙事</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260630091006620-1/">从规则博弈到算力炼金术：自动驾驶的“AI原生”范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ramageddonai-20260626111010102-1/">RAMageddon：AI算力饥渴下的硬件“通胀”与被重构的数字平权</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gptgptopenai-20260626081004729-1/">当GPT开始设计GPT：OpenAI的“辣椒”芯片与智能工厂的权力意志</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cerebrasopenaiai-20260518194008682-1/">算力“赎身契”：Cerebras与OpenAI的晶圆赌局如何重塑AI推理经济学</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/transformertpuai-20260512144003934-1/">后Transformer时代的算力重构：谷歌第八代TPU如何通过“训推解耦”定义AI代理基建</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpuironwoodai-20251127161004806-0/">GPU帝国边缘的地震：谷歌Ironwood如何重塑AI算力基础设施的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/cloudmatrix-384ai-20251027221010922-1/">华为CloudMatrix 384：重构AI算力范式，国产替代加速下的系统级效率革命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/openai-20250922194008945-2/">硅基雄心：OpenAI的“星际之门”与数字算力的新帝国主义</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250916164005033-4/">中国AI淘金热：从“寒王”到算力巨擘，谁能将硅片铸成真金？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aai-20250905114005509-2/">硅谷的幽灵与橡胶软管：中国A股的AI炼金术</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>

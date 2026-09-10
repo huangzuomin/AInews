@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>从“凭感觉”到“拿证据”：IQA-T1如何终结多模态大模型的视觉感知幻觉 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="IQA-T1通过将多模态大模型的推理过程与底层物理检测工具解耦，成功解决了AI在图像质量评估中的语义偏见问题，开创了“证据驱动推理”的视觉感知新范式，为AIGC质量治理与具身智能感知提供了核心技术基础。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.24c923965c9921eb27a13105f3906cf402ce8f8dc52c35ba207cdfd250aeb503.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://192.168.50.247:1313/insights/iqa-t1-20260720161003964-1/">
+    
+
+    <meta property="og:url" content="http://192.168.50.247:1313/insights/iqa-t1-20260720161003964-1/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="从“凭感觉”到“拿证据”：IQA-T1如何终结多模态大模型的视觉感知幻觉">
+  <meta property="og:description" content="IQA-T1通过将多模态大模型的推理过程与底层物理检测工具解耦，成功解决了AI在图像质量评估中的语义偏见问题，开创了“证据驱动推理”的视觉感知新范式，为AIGC质量治理与具身智能感知提供了核心技术基础。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-07-20T16:10:03+08:00">
+    <meta property="article:modified_time" content="2026-07-20T16:10:03+08:00">
+    <meta property="article:tag" content="多模态大模型">
+    <meta property="article:tag" content="计算机视觉">
+    <meta property="article:tag" content="AI可解释性">
+    <meta property="article:tag" content="视觉评估">
+    <meta property="article:tag" content="AIGC">
+    <meta property="article:tag" content="强化学习">
+
+  <meta itemprop="name" content="从“凭感觉”到“拿证据”：IQA-T1如何终结多模态大模型的视觉感知幻觉">
+  <meta itemprop="description" content="IQA-T1通过将多模态大模型的推理过程与底层物理检测工具解耦，成功解决了AI在图像质量评估中的语义偏见问题，开创了“证据驱动推理”的视觉感知新范式，为AIGC质量治理与具身智能感知提供了核心技术基础。">
+  <meta itemprop="datePublished" content="2026-07-20T16:10:03+08:00">
+  <meta itemprop="dateModified" content="2026-07-20T16:10:03+08:00">
+  <meta itemprop="wordCount" content="33">
+  <meta itemprop="keywords" content="多模态大模型,计算机视觉,AI可解释性,视觉评估,AIGC,强化学习">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从“凭感觉”到“拿证据”：IQA-T1如何终结多模态大模型的视觉感知幻觉">
+  <meta name="twitter:description" content="IQA-T1通过将多模态大模型的推理过程与底层物理检测工具解耦，成功解决了AI在图像质量评估中的语义偏见问题，开创了“证据驱动推理”的视觉感知新范式，为AIGC质量治理与具身智能感知提供了核心技术基础。">
+
+      
+    
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://192.168.50.247:1313/images/default%20%289%29.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-07-20 16:10</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=%E4%BB%8E%E2%80%9C%E5%87%AD%E6%84%9F%E8%A7%89%E2%80%9D%E5%88%B0%E2%80%9C%E6%8B%BF%E8%AF%81%E6%8D%AE%E2%80%9D%EF%BC%9AIQA-T1%E5%A6%82%E4%BD%95%E7%BB%88%E7%BB%93%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E5%B9%BB%E8%A7%89%20-%20IQA-T1%E9%80%9A%E8%BF%87%E5%B0%86%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%BA%95%E5%B1%82%E7%89%A9%E7%90%86%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E8%A7%A3%E8%80%A6%EF%BC%8C%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E4%BA%86AI%E5%9C%A8%E5%9B%BE%E5%83%8F%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%81%8F%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%8C%E5%BC%80%E5%88%9B%E4%BA%86%E2%80%9C%E8%AF%81%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%8E%A8%E7%90%86%E2%80%9D%E7%9A%84%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E6%96%B0%E8%8C%83%E5%BC%8F%EF%BC%8C%E4%B8%BAAIGC%E8%B4%A8%E9%87%8F%E6%B2%BB%E7%90%86%E4%B8%8E%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E6%84%9F%E7%9F%A5%E6%8F%90%E4%BE%9B%E4%BA%86%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fiqa-t1-20260720161003964-1%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=%E4%BB%8E%E2%80%9C%E5%87%AD%E6%84%9F%E8%A7%89%E2%80%9D%E5%88%B0%E2%80%9C%E6%8B%BF%E8%AF%81%E6%8D%AE%E2%80%9D%EF%BC%9AIQA-T1%E5%A6%82%E4%BD%95%E7%BB%88%E7%BB%93%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E5%B9%BB%E8%A7%89%20-%20IQA-T1%E9%80%9A%E8%BF%87%E5%B0%86%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%BA%95%E5%B1%82%E7%89%A9%E7%90%86%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E8%A7%A3%E8%80%A6%EF%BC%8C%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E4%BA%86AI%E5%9C%A8%E5%9B%BE%E5%83%8F%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%81%8F%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%8C%E5%BC%80%E5%88%9B%E4%BA%86%E2%80%9C%E8%AF%81%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%8E%A8%E7%90%86%E2%80%9D%E7%9A%84%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E6%96%B0%E8%8C%83%E5%BC%8F%EF%BC%8C%E4%B8%BAAIGC%E8%B4%A8%E9%87%8F%E6%B2%BB%E7%90%86%E4%B8%8E%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E6%84%9F%E7%9F%A5%E6%8F%90%E4%BE%9B%E4%BA%86%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E3%80%82&amp;amp;url=http%3A%2F%2F192.168.50.247%3A1313%2Finsights%2Fiqa-t1-20260720161003964-1%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">从“凭感觉”到“拿证据”：IQA-T1如何终结多模态大模型的视觉感知幻觉</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>IQA-T1通过引入外部化视觉检测工具链与证据驱动推理，破解了多模态大模型在图像质量评估中“语义偏见”导致的感知失效，实现了从模糊猜测到可追溯、可量化的技术范式转变。</p></blockquote>
+<h3 id="从玄学打分到科学诊断">从“玄学打分”到“科学诊断”</h3>
+<p>长期以来，人工智能对图像质量的评估一直处于一种“玄学”状态。尽管多模态大模型（MLLM）在语义理解上表现卓越，但在处理底层物理退化（如噪声、压缩伪影、边缘模糊）时，它们往往陷入一种致命的“语义偏见”。模型能精准识别图像中的物体，却无法感知图像的物理受损，这导致了分数评估严重依赖于内部概率分布的“猜测”，缺乏客观的物理支撑。</p>
+<p>IQA-T1（Image Quality Assessment via Tool-augmented inference）的出现，标志着多模态视觉任务从“直觉推理”向“证据驱动推理”的系统性进化。该研究团队提出的框架，不再要求模型强行依靠预训练得到的语义表征去“脑补”画质，而是赋予了模型调用傅里叶频谱、梯度方向图等专业物理分析工具的能力。</p>
+<h3 id="技术原理视觉认知的工具化外延">技术原理：视觉认知的工具化外延</h3>
+<p>IQA-T1的核心创新在于将人类医学影像诊断的逻辑引入计算机视觉：</p>
+<ul>
+<li><strong>证据解耦</strong>：通过噪声残差图、傅里叶幅度谱及梯度一致性图，将肉眼难以察觉的底层退化可视化，从而为模型推理提供了“可解释性物证”。</li>
+<li><strong>工具调用策略（Tool-augmented Inference）</strong>：利用GRPO（Group Relative Policy Optimization）强化学习机制，模型被训练为能够根据图像特征自主决策：是否需要调用工具？需要调用哪种工具？这种动态调用机制确保了推理的经济性与高准确度，实验显示模型平均仅需2.34个工具即可完成最优评估。</li>
+<li><strong>证据链锚定</strong>：通过构建Q-Tool数据集，研究团队将视觉证据与推理文字深度绑定，迫使模型在打分前必须经历“观察证据-逻辑推理-得出结论”的过程，从根本上杜绝了推理幻觉。</li>
+</ul>
+<h3 id="商业价值与产业生态重构">商业价值与产业生态重构</h3>
+<p>这一突破不仅是学术指标的提升，更触及了AIGC商业化落地的核心痛点。在当前AI生成内容（AIGC）爆炸的时代，无论是视频创作、自动驾驶传感系统还是移动端影像处理，图像质量评估都是全链路的“质量裁判”。</p>
+<ul>
+<li><strong>自动化流水线优化</strong>：IQA-T1的证据链推理能力，能够为图像增强、修复算法提供精准的反馈信号，极大地降低了模型微调的试错成本。</li>
+<li><strong>可溯源的视觉治理</strong>：在数字媒体资产管理中，AI系统不仅能“打分”，还能解释“为什么该图不合格”，这为企业级视觉内容合规与质量保障提供了可追溯的审计底稿。</li>
+</ul>
+<h3 id="趋势预测感知系统的进化路径">趋势预测：感知系统的进化路径</h3>
+<p>展望未来3-5年，视觉评估技术将向着以下两个维度演进：</p>
+<ol>
+<li><strong>具身智能的底层感知</strong>：随着具身智能（Embodied AI）的发展，机器人需要像人类一样具备对物理环境的精细感知能力。IQA-T1所展示的“工具调用推理”，未来将被集成到机器人的传感器驱动架构中，赋予机器“感知-检查-决策”的闭环认知能力。</li>
+<li><strong>认知框架的工具化重构</strong>：IQA-T1证明了增加推理时工具调用的成本，远低于盲目堆叠模型参数的收益。未来的 frontier models 将不再是单体的大脑，而是一个通过API连接物理检测工具、科学模拟器的“智慧中枢”。</li>
+</ol>
+<p>这种从“内部表征”到“外部工具协同”的范式转变，揭示了AI发展的一个深刻哲学真理：<strong>真正的智能，往往在于能够高效地利用客观规律（物理工具），而非试图凭借内部逻辑去模拟整个物理世界。</strong></p>
+<h3 id="引用">引用</h3>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">多模态大模型</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">计算机视觉</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI可解释性</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E8%A7%86%E8%A7%89%E8%AF%84%E4%BC%B0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">视觉评估</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/aigc/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AIGC</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">强化学习</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/q-insightvq-insightaiaigc-20251013191010436-3/">超越评分：火山引擎Q-Insight与VQ-Insight如何以强化学习重塑AI的“画质感知”与AIGC未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260529094003669-1/">从“样片竞技”到“工业化生产”：AI视频赛道的真实战役才刚刚打响</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/rsagent-20260527161003474-3/">从感知到行动：RSAgent如何终结视觉分割的“单次预测”时代</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/neurips-2025ai-20251127154005125-1/">NeurIPS 2025：前沿AI突破重塑认知边界，解码“人工蜂群思维”与智能涌现的深层逻辑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20251118094005305-1/">解密RL的“黑箱”：田渊栋团队三门理论重塑大模型优化范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/tempsamp-r1-20251017204008774-1/">TempSamp-R1：强化学习重塑视频理解范式，开启智能内容生产新纪元</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/2025-chinajoy-aigcaidream-worldreal-world-20250802024005197-0/">2025 ChinaJoy AIGC大会：AI“王炸”齐聚，从“Dream World”杀入“Real World”！</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250617193006116-1/">游戏之智：小模型如何通过像素世界解锁通用推理能力</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260720154003493-0/">理查德·萨顿：在“经验时代”的荒原上重构智能</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/kimi-k3-20260720121003511-0/">Kimi K3的破圈时刻：一场关乎算力、哲学与“智能工业化”的范式转移</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260720101003128-3/">困在算法里的“造梦者”：文科生在AI浪潮中的生存与焦虑</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260716191005657-1/">中专生逆袭好莱坞？AI导演的“诺亚方舟”正在载着草根们悄悄改命</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20260716174006170-2/">AI短剧爆款井喷？别急，这张“网红脸”我快看吐了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aiugc-20260715191005843-2/">从“辅助创作”到“一人公司”：AI如何重构UGC的底层操作系统</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/richard-sutton20-20260714211018269-0/">走出“苦涩的教训”：Richard Sutton与20瓦智能体的终极实验</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://192.168.50.247:1313/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
