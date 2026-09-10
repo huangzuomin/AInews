@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Shopify 弃 React Native 迁回原生：AI 编码智能体改写的第一张技术选型多米诺 | AI内参</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Shopify 宣布将全部移动应用从 React Native 迁回 Swift 和 Kotlin 原生开发，核心理由是 LLM 智能体大幅降低了跨平台重复开发的成本——跨平台框架赖以存在的经济学假设正在被 AI 推翻。当事方完整披露了迁移理由、开源库去向与 Helix 工作流。">
+    <meta name="generator" content="Hugo 0.147.8">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    <meta name="author" content="温故智新AIGC实验室">
+    
+
+    
+
+
+<link rel="stylesheet" href="/ananke/css/main.min.24c923965c9921eb27a13105f3906cf402ce8f8dc52c35ba207cdfd250aeb503.css" >
+
+
+
+<link rel="stylesheet" href="/css/social-share.css">
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/article-enhancements.css">
+  
+
+    
+
+<script src="/js/social-share.js"></script>
+
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://www.neican.ai/insights/shopify-back-to-native-20260910223500001-0/">
+    
+
+    <meta property="og:url" content="https://www.neican.ai/insights/shopify-back-to-native-20260910223500001-0/">
+  <meta property="og:site_name" content="AI内参">
+  <meta property="og:title" content="Shopify 弃 React Native 迁回原生：AI 编码智能体改写的第一张技术选型多米诺">
+  <meta property="og:description" content="Shopify 宣布将全部移动应用从 React Native 迁回 Swift 和 Kotlin 原生开发，核心理由是 LLM 智能体大幅降低了跨平台重复开发的成本——跨平台框架赖以存在的经济学假设正在被 AI 推翻。当事方完整披露了迁移理由、开源库去向与 Helix 工作流。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="insights">
+    <meta property="article:published_time" content="2026-09-10T22:35:00+08:00">
+    <meta property="article:modified_time" content="2026-09-10T22:35:00+08:00">
+    <meta property="article:tag" content="Shopify">
+    <meta property="article:tag" content="React Native">
+    <meta property="article:tag" content="IOS">
+    <meta property="article:tag" content="Android">
+    <meta property="article:tag" content="AI编码">
+
+  <meta itemprop="name" content="Shopify 弃 React Native 迁回原生：AI 编码智能体改写的第一张技术选型多米诺">
+  <meta itemprop="description" content="Shopify 宣布将全部移动应用从 React Native 迁回 Swift 和 Kotlin 原生开发，核心理由是 LLM 智能体大幅降低了跨平台重复开发的成本——跨平台框架赖以存在的经济学假设正在被 AI 推翻。当事方完整披露了迁移理由、开源库去向与 Helix 工作流。">
+  <meta itemprop="datePublished" content="2026-09-10T22:35:00+08:00">
+  <meta itemprop="dateModified" content="2026-09-10T22:35:00+08:00">
+  <meta itemprop="wordCount" content="42">
+  <meta itemprop="keywords" content="Shopify,React Native,IOS,Android,AI编码">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shopify 弃 React Native 迁回原生：AI 编码智能体改写的第一张技术选型多米诺">
+  <meta name="twitter:description" content="Shopify 宣布将全部移动应用从 React Native 迁回 Swift 和 Kotlin 原生开发，核心理由是 LLM 智能体大幅降低了跨平台重复开发的成本——跨平台框架赖以存在的经济学假设正在被 AI 推翻。当事方完整披露了迁移理由、开源库去向与 Helix 工作流。">
+
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGKMBM9RCT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-VGKMBM9RCT');
+        }
+      </script>
+    
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003902406262708" 
+     crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account" content="ca-pub-8003902406262708">
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+  
+  
+
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('https://www.neican.ai/images/ai-report-default.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        <img src="/logo/logo.png" class="w100 mw5-ns" alt="AI内参" />
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/" title="">
+              首页
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/insights/" title="">
+              洞察
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/morningnews/" title="">
+              早报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/newspaper/" title="">
+              日报
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/explore/" title="">
+              主题探索
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/about/" title="">
+              关于
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref helvetica tracked">
+        <span style="color: #999;">2026-09-10 22:35</span>
+      </aside><div id="sharing" class="mt3 ananke-socials"><a href="https://twitter.com/intent/tweet/?text=Shopify&amp;#43;%E5%BC%83&amp;#43;React&amp;#43;Native&amp;#43;%E8%BF%81%E5%9B%9E%E5%8E%9F%E7%94%9F%EF%BC%9AAI&amp;#43;%E7%BC%96%E7%A0%81%E6%99%BA%E8%83%BD%E4%BD%93%E6%94%B9%E5%86%99%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E5%A4%9A%E7%B1%B3%E8%AF%BA%20-%20Shopify&amp;#43;%E5%AE%A3%E5%B8%83%E5%B0%86%E5%85%A8%E9%83%A8%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E4%BB%8E&amp;#43;React&amp;#43;Native&amp;#43;%E8%BF%81%E5%9B%9E&amp;#43;Swift&amp;#43;%E5%92%8C&amp;#43;Kotlin&amp;#43;%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%EF%BC%8C%E6%A0%B8%E5%BF%83%E7%90%86%E7%94%B1%E6%98%AF&amp;#43;LLM&amp;#43;%E6%99%BA%E8%83%BD%E4%BD%93%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E8%B7%A8%E5%B9%B3%E5%8F%B0%E9%87%8D%E5%A4%8D%E5%BC%80%E5%8F%91%E7%9A%84%E6%88%90%E6%9C%AC%E2%80%94%E2%80%94%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%A1%86%E6%9E%B6%E8%B5%96%E4%BB%A5%E5%AD%98%E5%9C%A8%E7%9A%84%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%81%87%E8%AE%BE%E6%AD%A3%E5%9C%A8%E8%A2%AB&amp;#43;AI&amp;#43;%E6%8E%A8%E7%BF%BB%E3%80%82%E5%BD%93%E4%BA%8B%E6%96%B9%E5%AE%8C%E6%95%B4%E6%8A%AB%E9%9C%B2%E4%BA%86%E8%BF%81%E7%A7%BB%E7%90%86%E7%94%B1%E3%80%81%E5%BC%80%E6%BA%90%E5%BA%93%E5%8E%BB%E5%90%91%E4%B8%8E&amp;#43;Helix&amp;#43;%E5%B7%A5%E4%BD%9C%E6%B5%81%E3%80%82&amp;amp;url=https%3A%2F%2Fwww.neican.ai%2Finsights%2Fshopify-back-to-native-20260910223500001-0%2F"
+          class="ananke-social-link x-twitter no-underline"
+          title="Share on X" aria-label="Share on X"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                
+              </span></a><a href="http://service.weibo.com/share/share.php?title=Shopify&amp;#43;%E5%BC%83&amp;#43;React&amp;#43;Native&amp;#43;%E8%BF%81%E5%9B%9E%E5%8E%9F%E7%94%9F%EF%BC%9AAI&amp;#43;%E7%BC%96%E7%A0%81%E6%99%BA%E8%83%BD%E4%BD%93%E6%94%B9%E5%86%99%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E5%A4%9A%E7%B1%B3%E8%AF%BA%20-%20Shopify&amp;#43;%E5%AE%A3%E5%B8%83%E5%B0%86%E5%85%A8%E9%83%A8%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E4%BB%8E&amp;#43;React&amp;#43;Native&amp;#43;%E8%BF%81%E5%9B%9E&amp;#43;Swift&amp;#43;%E5%92%8C&amp;#43;Kotlin&amp;#43;%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%EF%BC%8C%E6%A0%B8%E5%BF%83%E7%90%86%E7%94%B1%E6%98%AF&amp;#43;LLM&amp;#43;%E6%99%BA%E8%83%BD%E4%BD%93%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E4%BA%86%E8%B7%A8%E5%B9%B3%E5%8F%B0%E9%87%8D%E5%A4%8D%E5%BC%80%E5%8F%91%E7%9A%84%E6%88%90%E6%9C%AC%E2%80%94%E2%80%94%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%A1%86%E6%9E%B6%E8%B5%96%E4%BB%A5%E5%AD%98%E5%9C%A8%E7%9A%84%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%81%87%E8%AE%BE%E6%AD%A3%E5%9C%A8%E8%A2%AB&amp;#43;AI&amp;#43;%E6%8E%A8%E7%BF%BB%E3%80%82%E5%BD%93%E4%BA%8B%E6%96%B9%E5%AE%8C%E6%95%B4%E6%8A%AB%E9%9C%B2%E4%BA%86%E8%BF%81%E7%A7%BB%E7%90%86%E7%94%B1%E3%80%81%E5%BC%80%E6%BA%90%E5%BA%93%E5%8E%BB%E5%90%91%E4%B8%8E&amp;#43;Helix&amp;#43;%E5%B7%A5%E4%BD%9C%E6%B5%81%E3%80%82&amp;amp;url=https%3A%2F%2Fwww.neican.ai%2Finsights%2Fshopify-back-to-native-20260910223500001-0%2F"
+          class="ananke-social-link weibo no-underline"
+          title="Share on Weibo" aria-label="Share on Weibo"
+          target="_blank" rel="nofollow noopener noreferrer"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+                
+              </span></a><a href="javascript:void(0)" onclick="showWeixinQR()"
+          class="ananke-social-link weixin no-underline"
+          title="Share on Weixin" aria-label="Share on Weixin"><span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+                
+              </span></a></div><h1 class="f1 athelas mt3 mb1">Shopify 弃 React Native 迁回原生：AI 编码智能体改写的第一张技术选型多米诺</h1>
+      
+      <p class="tracked"><strong>温故智新AIGC实验室</strong>
+      </p>
+      
+      
+    </header>
+    <div class="article-content nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>TL;DR：</p>
+<blockquote>
+<p>跨平台框架存在的理由是&quot;一套代码省两份钱&quot;。Shopify 判断：LLM 编码智能体把&quot;维护两套原生代码&quot;的成本打到足够低，这笔账第一次算不平了——于是全面迁回 Swift 和 Kotlin。这不是一次普通的框架更换，而是 AI 第一次公开改写大型工程的基础选型假设。</p></blockquote>
+<h3 id="迁移的经济学被-ai-拆掉的立项前提">迁移的经济学：被 AI 拆掉的立项前提</h3>
+<p>React Native 们的价值公式从来不是技术性的，而是财务性的：移动端双平台的重复开发成本太高，所以用一套 JS 代码换 70%-80% 的复用、接受性能与体验的折价。Shopify 在工程博客中给出的判断是，这个公式里&quot;重复开发成本&quot;这一项被 LLM 智能体大幅压缩——当智能体能高效产出并维护两套各自地道的原生代码时，跨平台框架省下的钱不再足以覆盖它引入的复杂度。假设变了，结论自然反转。</p>
+<h3 id="值得肯定的做法把决策过程全部摊开">值得肯定的做法：把决策过程全部摊开</h3>
+<p>这次迁移的公开披露质量值得行业学习：迁移理由、自家开源库的去向、以及内部 Helix 工作流的处理方式都完整交代——对数千家依赖其开源 React Native 库的团队来说，这是负责任的退出姿态。大型工程的框架迁移失败率高，败因通常不是技术而是&quot;只给结论不给路径&quot;；Shopify 提供了一份可对照的施工图。</p>
+<h3 id="展望">展望</h3>
+<p>这条新闻的辐射面超出移动开发本身：<strong>所有&quot;为了省人力成本而做的技术折价&quot;决策，都需要在 AI 编码时代重新算一遍</strong>。单体架构 vs 微服务、类型宽松 vs 严格、自建 vs 采购——凡是建立在&quot;工程师时间昂贵&quot;前提上的选型，前提都在松动。未来一年，预计会有更多公司跟进&quot;迁回原生&quot;或类似的重构；而跨平台阵营的应对，大概率是把自己的卖点从&quot;省成本&quot;转向&quot;AI 工具链生态&quot;。</p>
+<h2 id="引用">引用</h2>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/shopify/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Shopify</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/react-native/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">React Native</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ios/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">IOS</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/android/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Android</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/ai%E7%BC%96%E7%A0%81/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI编码</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3" style="color: #666;">相关阅读</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/insights/claude-code100-20260630161006354-0/">半年不写代码的“Claude Code之父”警告：程序员职称要融化了，但写代码的人会暴涨100倍</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/claude-opus-480ai-20260529081003475-3/">深夜放炸弹！Claude Opus 4.8上线即封神，两个“0%”让AI终于学会说实话了</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/ctrlcvshopifyaiclaude-20260512121003125-1/">别Ctrl&#43;C/V了！Shopify给AI开了个“后门”，一句话就能让Claude替你打工</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aigoogle-gemini--20260226021005834-2/">迈向AI智能体时代：Google Gemini 多步骤任务处理能力深度评测</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/androidchromeosfuchsia-20251125201007614-0/">谷歌又&#34;搞事&#34;了！Android和ChromeOS要&#34;奉旨成婚&#34;，Fuchsia的&#34;前车之鉴&#34;这次能避开吗？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aianthropicai-agent-20251120121004839-2/">AI编码的“安全港”：Anthropic沙箱技术如何解锁自主AI Agent的无限潜能</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/10poolside-20251031181004775-1/">英伟达10亿美元押注Poolside：代码智能体将如何重构软件开发与人类创造力？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250919154004926-2/">AI与跨端革命：大前端的“无银弹”时代，通向性能极致与智能协作的未来</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/gpt-5-prokarpathy10ko-claude-20250908124005406-2/">GPT-5 Pro杀疯了！Karpathy吹爆：10分钟K.O. Claude一小时，奥特曼狂点赞，谁不用谁亏？</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/aimailchimp-20250801061006101-1/">AI编码的加速与代价：Mailchimp经验揭示企业级治理的新范式</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250717101004777-2/">深度审视：AI代码辅助的盲点与资深开发者的生产力悖论</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/article-20250630171004503-6/">从辅助编码到自主智能体：阿里巴巴在AI软件开发范式转型中的探索与挑战</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/insights/anthropic-vscode-ai--20250623121004675-3/">代码协作者的范式重塑：Anthropic 如何通过 VSCode 深度集成重塑 AI 编程版图</a>
+        </li>
+	    
+    </ul>
+</div>
+
+
+
+<div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links mt3">
+  <p class="f5 b mb3" style="color: #666;">AI写作声明</p>
+  <div class="f6 lh-copy" style="color: #777;">
+    <p>本文由AI系统全流程生成，涵盖选题、资料整合与撰写。文章发布后由人工编辑进行核查。文末附有详细的[引用信息索引]，供您查证溯源。</p>
+  </div>
+</div></aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://www.neican.ai/" >
+    &copy;  AI内参 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+    <script src="/js/relative-time.js"></script>
+  </body>
+</html>
