@@ -97,13 +97,34 @@ def _summary_of(events: list[dict], kind: str) -> str:
     return f"{label}：{'；'.join(parts)}。"
 
 
-def _source_line(event: dict) -> str:
-    """署名 + 原文链接。取信源层级最高的一条。"""
+def _top_source(event: dict) -> dict:
+    """层级最高的来源（仅作兜底）。"""
     rank = {"first_party": 3, "media": 2, "aggregator": 1}
     srcs = sorted(event.get("sources", []), key=lambda s: -rank.get(s.get("tier", "media"), 2))
-    if not srcs:
+    return srcs[0] if srcs else {}
+
+
+def _rep_source(event: dict) -> dict:
+    """**显示标题所来自的那条来源**（cluster 已把 `rep_fingerprint` 记在事件上）。
+
+    署名必须指向这条，而不是"层级最高的那条"：
+    标题和署名来自不同来源时，读者会以为中文标题是一手源写的 ——
+    那是把"转引"伪装成官方表述。所以二者绑定，一起从同一条记录取。
+    兜底（老数据没有 rep_fingerprint）才退回层级最高的一条。
+    """
+    fp = event.get("rep_fingerprint")
+    if fp:
+        for s in event.get("sources", []):
+            if s.get("fingerprint") == fp:
+                return s
+    return _top_source(event)
+
+
+def _source_line(event: dict) -> str:
+    """署名 + 原文链接。指向显示标题的来源。"""
+    s = _rep_source(event)
+    if not s:
         return ""
-    s = srcs[0]
     name = s.get("source_name") or s.get("source_id") or "来源"
     url = s.get("url") or ""
     extra = ""
@@ -112,21 +133,60 @@ def _source_line(event: dict) -> str:
     return f"（[{name}]({url}){extra}）" if url else f"（{name}{extra}）"
 
 
-def _best_summary(event: dict, title: str, limit: int) -> str:
-    """取"层级最高且清洗后最长"的摘要。
+def _best_summary(event: dict, title: str, limit: int,
+                  prefer: dict | None = None) -> tuple[str, str]:
+    """取摘要。返回 (摘要, 出处标记)。
 
-    为什么要挑而不是直接取第一条：实测多数 feed 的 description 是正文开头，
-    不同源的片段长短差别很大；而早报的契约是"零创作"，只能从原文片段里**删**，
-    所以清洗质量直接决定产物质量（首跑实测：不清洗会带进"文｜王欣逸 编辑｜张雨忻"）。
+    取用顺序：
+      1. **优先取显示标题那条来源的摘要** —— 标题与摘要同源，读者看到的是完整一致的一段。
+         （跨语言归并后，中文标题配英文摘要是最典型的坏产物。）
+      2. 该来源没有可用摘要时，回退到"层级最高且清洗后最长"的一条。
+
+    **出处标记区分两类素材**（随 aihot 接入新增）：
+      · `feed`  —— RSS description，是**原文片段**（只做过删除式清洗）
+      · `aihot` —— AIHOT 的**中文改写**，不是原文摘录
+    不区分，就等于把别人的改写冒充成我们的原文素材，
+    而"零创作、摘要只从原文删"正是早报的契约。
     """
     rank = {"first_party": 3, "media": 2, "aggregator": 1}
-    best = ""
+    if prefer:
+        cand = T.clean_summary(prefer.get("summary") or "", title, limit)
+        if len(cand) >= 40:                      # 太短就不要了，宁可回退找更完整的
+            return cand, (prefer.get("summary_origin") or "feed")
+    best, origin = "", ""
     for s in sorted(event.get("sources", []),
                     key=lambda x: (-rank.get(x.get("tier", "media"), 2), len(x.get("summary") or ""))):
         cand = T.clean_summary(s.get("summary") or "", title, limit)
         if len(cand) > len(best):
-            best = cand
-    return best
+            best, origin = cand, (s.get("summary_origin") or "feed")
+    return best, origin
+
+
+def _aihot_mark(event: dict, text: str, origin: str, cnt: list) -> str:
+    """需要时给条目挂"经 AIHOT"标记。
+
+    `cnt = [中转条数, 加标条数]`。只在**署名行看不出 AIHOT** 时才加标记：
+    若署名本身已经是 `AIHOT·公众号：xxx`，再加一次只是噪声（重复披露不增加诚实度），
+    但这类条目仍计入 `cnt[0]` —— 页脚的"其中 N 条经 AIHOT 中转"要说的是事实，不是标记数。
+    """
+    if origin != "aihot":
+        return text
+    cnt[0] += 1
+    if _rep_source(event).get("via") == "aihot":
+        return text
+    cnt[1] += 1
+    return text + "（经 AIHOT）"
+
+
+def _disclosure(cnt: list) -> str:
+    """页脚声明：把"哪些内容不是我们的原文素材"讲清楚。"""
+    if not cnt[0]:
+        return ""
+    tail = (f"*其中 {cnt[0]} 条的中文标题或摘要经 AIHOT 中转"
+            f"（AIHOT 的改写版本，原文链接均已保留）")
+    if cnt[1]:
+        tail += f"；其中 {cnt[1]} 条为混合来源，已在条目内以「经 AIHOT」标注"
+    return tail + "。*"
 
 
 def render_morning(events: list[dict], day: str, dt_iso: str) -> str:
@@ -146,19 +206,23 @@ def render_morning(events: list[dict], day: str, dt_iso: str) -> str:
     ]
     body = [f"今天是{y}年{m:02d}月{d:02d}日。以下 {len(events)} 条为过去 24 小时值得关注的 AI 动态，"
             f"每条附原始来源，不做二次加工。", ""]
+    cnt = [0, 0]
     for i, e in enumerate(events, 1):
         title = T.display_title(e.get("title", ""))
-        summary = _best_summary(e, title, 110)
+        summary, origin = _best_summary(e, title, 110, prefer=_rep_source(e))
         line = f"{i}.  **{title}**"
         if summary:
             line += f"，{summary}"
         if not line.rstrip().endswith(("。", "！", "？", ".")):
             line += "。"
+        line = _aihot_mark(e, line, origin, cnt)
         line += _source_line(e)
         body.append(line)
     body += ["", "---", "",
              f"*本期由 neican.ai 自动编排（模板轨，无人工创作）。共聚合 {len(events)} 个事件，"
              f"来源 {sum(e.get('distinct_sources', 1) for e in events)} 个信源条目。*"]
+    if cnt[0]:
+        body.append(_disclosure(cnt))
     return "\n".join(fm) + "\n\n" + "\n".join(body) + "\n"
 
 
@@ -179,22 +243,26 @@ def render_daily(events: list[dict], day: str, dt_iso: str) -> str:
     ]
     body = [f"**今天是{y}年{m:02d}月{d:02d}日。** 以下是当日最重要的 {len(events)} 件事。", "",
             "### 今日速览", ""]
+    cnt = [0, 0]
     for e in events:
         title = T.display_title(e.get("title", ""))
-        summary = _best_summary(e, title, 160)
+        summary, origin = _best_summary(e, title, 160, prefer=_rep_source(e))
         item = f"* **{title}**"
         if summary:
             item += f"：{summary}"
+        item = _aihot_mark(e, item, origin, cnt)
         item += _source_line(e)
         body.append(item)
     body += ["", "### 信源分布", ""]
     from collections import Counter
     tier_cn = {"first_party": "一手源", "media": "专业媒体", "aggregator": "聚合源"}
-    cnt = Counter(e.get("primary_tier", "media") for e in events)
-    body.append("　·　".join(f"{tier_cn.get(k, k)} {v} 条" for k, v in cnt.most_common()))
+    cnt_t = Counter(e.get("primary_tier", "media") for e in events)
+    body.append("　·　".join(f"{tier_cn.get(k, k)} {v} 条" for k, v in cnt_t.most_common()))
     body += ["", "---", "",
              f"*本期由 neican.ai 自动编排（模板轨）。{len(events)} 条均为不同事件"
              f"（Event 归并已保证去重）。主编综述需生成层启用后补入。*"]
+    if cnt[0]:
+        body.append(_disclosure(cnt))
     return "\n".join(fm) + "\n\n" + "\n".join(body) + "\n"
 
 

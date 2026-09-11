@@ -73,6 +73,9 @@ class Gate:
         self.exclude = _compile(r.get("exclude_patterns", []))
         self.topics = [(t["topic"], _compile(t.get("patterns", [])))
                        for t in (cfg.get("topics") or [])]
+        # 外部线索（AIHOT）的分类 → 本地闭集主题。放在本层而不是评分层：
+        # 主题归属是分类层的职责。见 classify.yaml 的 aihot_category_topics。
+        self.aihot_topics = dict(cfg.get("aihot_category_topics") or {})
 
     def relevance(self, text: str, title: str = "") -> tuple[float, list[str], str | None]:
         """返回 (相关度, 命中的强信号, 硬排除原因)。
@@ -106,15 +109,36 @@ class Gate:
             return 0.0, [], f"硬排除（标题含「{excl}」且无足够 AI 信号）"
         return score, s_hits, None
 
-    def topics_of(self, text: str, limit: int = 3) -> list[str]:
+    def topics_of(self, text: str, limit: int = 3, extra: list[str] | None = None) -> list[str]:
         text = _normalize(text)
         scored = []
         for name, pats in self.topics:
             n = sum(1 for p in pats if p.search(text))
             if n:
                 scored.append((n, name))
+        # 外部线索的分类只做**补充**：本地词表命中优先，外部映射填空（n=0 排最后）。
+        # 这样它不会覆盖本地判断，只在本地词表对不上时补一个主题。
+        if extra:
+            have = {n for _, n in scored}
+            for t in extra:
+                if t and t not in have:
+                    scored.append((0, t))
         scored.sort(key=lambda x: (-x[0], x[1]))
         return [n for _, n in scored[:limit]]
+
+    def topics_from_aihot(self, category: str) -> list[str]:
+        """AIHOT 分类 → 本地主题。无映射的分类返回空（**不做模糊归属**）。"""
+        t = self.aihot_topics.get(category or "")
+        return [t] if t else []
+
+
+def _aihot_meta(event: dict) -> dict:
+    """取事件里的 AIHOT 线索元数据（有则返回，无则空 dict）。"""
+    for s in event.get("sources", []):
+        a = s.get("aihot")
+        if a:
+            return a
+    return {}
 
 
 def run(day: str | None = None) -> dict:
@@ -130,12 +154,14 @@ def run(day: str | None = None) -> dict:
         return {"kept": 0}
 
     kept, dropped, borderline = [], [], []
+    disagree = []
     for e in events:
         blob = " ".join([e.get("title", "")] + [s.get("summary", "") for s in e.get("sources", [])])
         score, hits, excl = gate.relevance(blob, e.get("title", ""))
         e["relevance"] = round(score, 4)
         e["relevance_hits"] = hits[:6]
-        e["topics"] = gate.topics_of(blob)
+        am = _aihot_meta(e)
+        e["topics"] = gate.topics_of(blob, extra=gate.topics_from_aihot(am.get("category", "")))
         if excl:
             e["gate"] = "excluded"
             e["gate_reason"] = excl
@@ -153,21 +179,35 @@ def run(day: str | None = None) -> dict:
             e["gate"] = "excluded"
             e["gate_reason"] = f"相关性 {score:.2f} 低于阈值 {gate.min_score}"
             dropped.append(e)
+        # ── 分歧留痕：AIHOT 选中 ≠ 本地规则认可 ──
+        # 两套独立判断的分歧是**规则改进的燃料**（AIHOT 说这是 AI 新闻，我们的词表说不是
+        # ——要么它错了，要么我们的强信号词表漏了词）。但 v1 **不改变入选行为**：
+        # 只记录，不动结果。让外部源能改变入选，等于把发布权部分交给了不可审计的第三方。
+        if am and e["gate"] != "pass":
+            e["disagreement"] = (f"AIHOT 选中（分类 {am.get('category') or '—'}，"
+                                 f"分 {am.get('score')}）但本地闸判 {e['gate']}")
+            disagree.append(e)
 
     # 未通过的事件不删除 —— 保留在独立文件里，"为什么被拒"是改进规则的燃料
     C.write_jsonl(C.STATE_DIR / f"classified-{day}.jsonl", kept)
     C.write_jsonl(C.STATE_DIR / f"rejected-{day}.jsonl", dropped)
+    if disagree:
+        C.write_jsonl(C.STATE_DIR / f"disagreement-{day}.jsonl", disagree)
 
     run_rec.set(events=len(events), kept=len(kept), dropped=len(dropped),
-                borderline=len(borderline), day=day,
+                borderline=len(borderline), disagreement=len(disagree), day=day,
                 keep_rate=round(len(kept) / max(1, len(events)), 3))
     run_rec.finish()
     C.log(f"分类闸：{len(events)} → 保留 {len(kept)}，剔除 {len(dropped)}"
           f"（其中临界 {len(borderline)}），保留率 {len(kept) / max(1, len(events)) * 100:.0f}%")
+    if disagree:
+        C.log(f"  ⚠️ 与 AIHOT 判断分歧 {len(disagree)} 条（已记录，不改变入选）")
+        for e in disagree[:4]:
+            C.log(f"    ? {T.clip(e['title'], 50)}  ← {e['gate_reason'][:30]}")
     C.log("  被剔除样例：")
     for e in dropped[:6]:
         C.log(f"    ✗ [{e['relevance']:.2f}] {T.clip(e['title'], 52)}  ← {e['gate_reason'][:34]}")
-    return {"kept": len(kept), "dropped": len(dropped)}
+    return {"kept": len(kept), "dropped": len(dropped), "disagreement": len(disagree)}
 
 
 def main() -> int:

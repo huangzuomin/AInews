@@ -4,17 +4,50 @@
 
 ## 信源
 
-主信源（选题雷达）：aihot.news 精选 API，匿名无需 key：
+### 发现层（选题雷达）：aihot.news
+
+**已在生产线里落地**（`newsroom/config/sources.yaml` 的 `id: aihot`，`kind: aihot`），
+不需要人工 curl。它在链路里的位置是**线索层**，不是内容源：
 
 ```
-curl -s "https://aihot.news/api/v1/items?mode=selected&window=24h&limit=30"
+kind: aihot
+url:  https://aihot.news/api/v1/items
+mode: selected        # 已筛选（24h 约 13 条）；mode=all 为未筛选，上限 100
+window: "24h"         # 实测 24h / 7d 可用；48h / 72h / 168h 一律 HTTP 400
 ```
 
-返回 JSON：`items[]`，字段含 `score`（质量分）、`title`、`summary`（事实摘要）、
-`links.original`（原文链接）、`category`（ai-models/ai-products/industry/paper/tip）、`reason`。
+返回 `items[]`，每条的字段：`title`（**中文改写标题**）、`originalTitle`、`summary`（中文改写摘要）、
+`links.original`（**原文链接**）、`links.aihot`、`source.name`（出处，如 `公众号：卡尔的AI沃茨`）、
+`category`（ai-models / ai-products / industry / paper / tip）、`score`（0–100）、`selected`、`reason`。
 
-合规红线：aihot 仅作发现与排序信号；**成稿一律基于 `links.original` 指向的原始信源**
-撰写，文末引用原文链接。禁止照抄 aihot 摘要成文。
+**它补的是什么**（2026-09-11 实测）：24h 的 13 条线索与本站 RSS 条目 **URL 零重叠** ——
+是**纯增量覆盖**，带来了公众号、X、Cursor Blog、The Decoder、Hacker News 中文等
+我们没有可用 RSS 的源；同时给英文一手源（OpenAI News 等）**配上了中文标题**。
+
+**三条边界（已写进代码，不是口头约定）**
+
+| # | 边界 | 落地位置 |
+|---|---|---|
+| 1 | `url` 一律取 `links.original`，**永不**指向 aihot | `fetch.py::_aihot_records` |
+| 2 | 摘要带 `summary_origin="aihot"` 标记，产物页脚声明"其中 N 条经 AIHOT 中转" | `digest.py::_disclosure` |
+| 3 | 署名行恒为 `AIHOT·<出处>`（即 AIHOT 的 attribution 要求），层级记为 `aggregator`、权重 0.55 | `fetch.py` / `sources.yaml` |
+
+**红线（分产品形态说清楚，避免自相矛盾）**
+
+- **索引型产品（早报 / 日报，模板轨）** —— 可以用 AIHOT 的中文标题与摘要，因为它们是**清单**，
+  不是我们的成稿。但必须署名 + 页脚声明，**不得**把它的改写当作"原文摘要"呈现。
+- **成稿型产品（洞察 insights，生成层）** —— **禁止照抄 AIHOT 摘要**。
+  必须基于 `links.original` 指向的原始信源撰写，文末引用原文链接。
+  AIHOT 在成稿链路里只提供"线索"与"排序信号"，不提供可引用的内容。
+
+**外部先验**：AIHOT 的 `score` 会以 0.30 权重混合进 `impact` 子分
+（`scoring.yaml` 的 `aihot_prior`）—— 只对带分数的条目生效，其余条目走纯规则，行为不变。
+
+### 其他信源
+
+RSS / RSSHub 的注册表同样是 `newsroom/config/sources.yaml`（该文件是采集层的唯一事实源，
+`status` 字段记录的是实测结果，不是猜测）。
+
 
 ## 去重规则
 

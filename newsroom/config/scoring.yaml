@@ -40,6 +40,22 @@ impact:
     person: 0.6               # 人物
     other: 0.4
 
+# ───────── 外部先验：AIHOT 线索分 ─────────
+# 为什么是**混合**（blend）而不是加权相加：
+#   加权相加会给"不带 AIHOT 分数的条目"凭空扣分 —— 所有 RSS 源都没有这个分数，
+#   等于用缺测值惩罚多数派。混合只作用于带分数的条目：
+#       impact ← (1-w)·规则值 + w·AIHOT 归一值      （仅当条目带 aihot.score）
+#   不带分数的条目走原路，行为完全不变。
+# AIHOT 的分数量程实测约 40–85（24h 样本落在 62–81），故设 floor 与 max 做线性归一，
+# 而不是简单除 100 —— 后者会把"最高分 81"压成 0.81，先验几乎不起作用。
+aihot_prior:
+  enabled: true
+  weight: 0.30              # 融合权重。0 = 忽略外部判断；1 = 完全交给 AIHOT
+  score_floor: 40           # ≤ 此分归一为 0（"低分也是加分"是错的）
+  score_max: 90             # ≥ 此分归一为 1
+  selected_bonus: 0.05      # 被 AIHOT 标为 selected 的额外加成（归一到 1.0 后叠加）
+  # 分类 → 主题的映射放在 classify.yaml（主题是分类层的职责，不是评分的）
+
 clarity:
   ideal_min: 8                # 标题理想长度下限（字符）
   ideal_max: 48               # 上限；超出视为冗长
@@ -101,8 +117,13 @@ thresholds:
 cluster:
   title_similarity: 0.72      # difflib 比值阈值
   title_jaccard: 0.55         # 词元 Jaccard 阈值（二者之一命中即归并）
-  url_exact_always_merge: true
+  url_exact_always_merge: true   # URL 判等前会做归一化（尾斜杠 / www / 跟踪参数）
   window_hours: 72            # 只在 72 小时窗口内归并（防止把历史同名事件并进来）
+  # 代表标题/署名的语言偏好。面向中文读者 → 中文条目优先，
+  # 否则英文一手源（OpenAI News 等）会长期霸占标题位，
+  # 而 AIHOT 提供的同一条线索的中文标题永远上不来。
+  # 置空字符串 "" 即退回"纯层级优先"（一手源英文标题胜出）的旧行为。
+  prefer_lang: zh
 
 # ───────── 信源多样性（首跑实测后新增）─────────
 # 为什么必须有：首跑早报 10 条里 7 条来自同一个 feed（36氪），

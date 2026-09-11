@@ -18,10 +18,12 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+import re
 import ssl
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -39,7 +41,110 @@ else:
 def _url_for(src: dict, cfg: dict) -> str:
     if src.get("kind") == "rsshub":
         return cfg["rsshub_base"].rstrip("/") + "/" + src["route"].lstrip("/")
+    if src.get("kind") == "aihot":
+        return _aihot_url(src)
     return src.get("url", "")
+
+
+# ─────────────────────── aihot 发现层 ───────────────────────
+# aihot.news 在链路里的位置是**线索层（discovery）**，不是内容源。三条理由：
+#
+#  1. 它的 `title` / `summary` 是 AIHOT 自己的**中文改写**（`originalTitle` 才是原文标题）。
+#     把它当原文摘录用，等于把别人的改写当成了原始素材 —— 早报"零创作、只从原文删"
+#     的契约会当场失效。所以摘要必须带 `summary_origin` 标记，产物层据此署名。
+#  2. 但它补上了两个我们自己的真实缺口：① 我们没有 RSS 的源（公众号 / X / 各家 Blog）
+#     ② **英文一手源没有中文标题**（首跑早报第 7–10 条是原样英文标题）。
+#  3. 它自带一个外部质量分（`score` 0–100）+ 分类 + 入选理由 —— 这是现成的**先验**，
+#     正好喂给 score.py 的 impact 维做融合（见 scoring.yaml 的 `aihot_prior`）。
+#
+# 红线落地：`url` 一律取 `links.original`，且 `source_name` 带 `AIHOT·` 前缀 ——
+# 后者同时满足 AIHOT 的 attribution 要求（它的 `attribution` 字段即为此设）。
+#
+# `source_id` 固定为注册表里的 id（= "aihot"）而不是按 origin 拆分：
+# 这样 scoring.yaml 的 `diversity` 配额会把全部线索当作**一个源**去限额，
+# 13 条线索不可能淹没 10 条早报。origin 保留在 `source_name` 与 `aihot.origin` 里。
+
+_ORIGIN_TAIL_RE = re.compile(r"\s*[（(][^（()）]{0,40}[）)]\s*$")
+
+
+def _clean_origin(name: str) -> str:
+    """去掉出处名尾部的括号限定语。
+
+    实测 AIHOT 的出处名常见：
+        `OpenAI：官网动态（RSS · 排除企业/客户案例）`
+        `Anthropic：Research（发表成果 · 网页）`
+    署名行是 `AIHOT·<出处>` 且整体再包一层括号，不清理的话
+    Markdown 链接里的括号会看起来像嵌套错误，且显示名过长挤占列表。
+    """
+    raw = (name or "").strip()
+    s, prev = raw, None
+    while s and s != prev:
+        prev = s
+        s = _ORIGIN_TAIL_RE.sub("", s).strip()
+    return s or raw
+
+
+def _aihot_url(src: dict) -> str:
+    base = src.get("url") or "https://aihot.news/api/v1/items"
+    params = {
+        "mode": src.get("mode", "selected"),
+        "window": src.get("window", "24h"),
+        "limit": int(src.get("limit", 100)),
+    }
+    sep = "&" if "?" in base else "?"
+    return base + sep + urllib.parse.urlencode(params)
+
+
+def _aihot_records(items: list[dict], src: dict, now, max_age_h: float) -> tuple[list[dict], int]:
+    """aihot item → Source 记录。返回 (records, skipped)。"""
+    sid = src.get("id", "aihot")
+    label = src.get("name", "AIHOT")
+    out: list[dict] = []
+    skipped = 0
+    for it in items:
+        links = it.get("links") or {}
+        original = (links.get("original") or "").strip()
+        title = (it.get("title") or it.get("originalTitle") or "").strip()
+        if not original or not title:
+            skipped += 1                      # 没有原文链接的线索不能用（红线）
+            continue
+        pub = C.parse_iso(it.get("publishedAt", ""))
+        if pub and C.hours_between(now, pub) > max_age_h:
+            skipped += 1
+            continue
+        origin = _clean_origin((it.get("source") or {}).get("name") or "") or "未知出处"
+        fp = C.short_hash(f"{sid}|{it.get('id') or original}")
+        out.append({
+            "source_id": sid,
+            "source_name": f"{label}·{origin}",
+            "tier": src.get("tier", "aggregator"),
+            "lang": src.get("lang", "zh"),     # title/summary 都是 AIHOT 的中文版本
+            "weight": float(src.get("weight", 0.5)),
+            "title": title,
+            "original_title": (it.get("originalTitle") or "").strip(),
+            "url": original,
+            "summary": (it.get("summary") or "").strip(),
+            "summary_origin": "aihot",
+            "image": "",
+            "guid": it.get("id", ""),
+            "published_at": it.get("publishedAt", ""),
+            "fetched_at": C.iso(now),
+            "fingerprint": fp,
+            "norm_title": T.norm_title(title),
+            "via": "aihot",
+            "aihot": {
+                "id": it.get("id", ""),
+                "url": links.get("aihot", ""),
+                "score": it.get("score"),
+                "category": it.get("category", ""),
+                "selected": bool(it.get("selected")),
+                "reason": (it.get("reason") or "").strip(),
+                "origin": origin,
+                "discovered_at": it.get("discoveredAt", ""),
+            },
+        })
+    return out, skipped
+
 
 
 def _fetch(url: str, ua: str, timeout: int) -> tuple[int, bytes, str]:
@@ -119,12 +224,41 @@ def run(day: str | None = None, only: list[str] | None = None) -> dict:
 
         # 原文原样落盘（可重放的凭证）
         fp_blob = C.sha256_bytes(body)
-        with gzip.open(blob_dir / f"{fp_blob[:16]}.xml.gz", "wb") as f:
+        ext = "json" if src.get("kind") == "aihot" else "xml"
+        with gzip.open(blob_dir / f"{fp_blob[:16]}.{ext}.gz", "wb") as f:
             f.write(body)
+        entry["sha256"] = fp_blob
+
+        # ── aihot：JSON 线索层（与 RSS 的差别大于共性，单独一条支路更清楚）──
+        if src.get("kind") == "aihot":
+            try:
+                payload = json.loads(body.decode("utf-8", "replace"))
+                items = payload.get("items") or []
+            except (ValueError, UnicodeDecodeError) as e:
+                entry["ok"] = False
+                entry["error"] = f"JSON {type(e).__name__}"
+                run_rec.error(f"线索源解析失败 {sid}: {type(e).__name__}: {e}")
+                manifest.append(entry)
+                continue
+            entry["items_total"] = len(items)
+            recs, skipped = _aihot_records(items, src, now, max_age_h)
+            entry["items_fresh"] = len(recs)
+            entry["items_skipped"] = skipped
+            for rec in recs:
+                if rec["fingerprint"] in seen_fp:
+                    continue
+                seen_fp.add(rec["fingerprint"])
+                entry["items_new"] += 1
+                records.append(rec)
+            # 线索单独留一份：便于"AIHOT 今天报了哪些、我们漏了哪些"逐日对照
+            C.write_jsonl(day_dir / "aihot.jsonl", recs)
+            manifest.append(entry)
+            C.log(f"  {sid:<20} http={status} {len(body):>7}B "
+                  f"{entry['items_new']:>3}新/{len(items):>3}线索 {elapsed}s")
+            continue
 
         items = R.parse_feed(body)
         entry["items_total"] = len(items)
-        entry["sha256"] = fp_blob
 
         for it in items:
             pub = C.parse_iso(it.get("published", ""))
@@ -146,6 +280,7 @@ def run(day: str | None = None, only: list[str] | None = None) -> dict:
                 "title": it.get("title", ""),
                 "url": it.get("link", ""),
                 "summary": it.get("summary", ""),
+                "summary_origin": "feed",     # 原文片段（可能仍需清洗，但至少是原文）
                 "image": it.get("image", ""),
                 "guid": it.get("guid", ""),
                 "published_at": it.get("published", ""),
@@ -161,18 +296,19 @@ def run(day: str | None = None, only: list[str] | None = None) -> dict:
 
     # 落盘
     n = C.write_jsonl(day_dir / "sources.jsonl", records)
+    clues = sum(1 for r in records if r.get("via") == "aihot")
     C.write_json_atomic(day_dir / "manifest.json", {
         "day": day, "fetched_at": C.iso(now), "sources": len(sources),
-        "records": n, "entries": manifest,
+        "records": n, "clues": clues, "entries": manifest,
     })
 
     run_rec.set(sources_ok=sum(1 for m in manifest if m["ok"]),
-                sources_total=len(sources), records=n, day=day)
+                sources_total=len(sources), records=n, clues=clues, day=day)
     if len(sources) - sum(1 for m in manifest if m["ok"]) > 0:
         run_rec.set(sources_failed=len(sources) - sum(1 for m in manifest if m["ok"]))
     run_rec.finish()
-    C.log(f"采集完成：{n} 条新条目 → {day_dir/'sources.jsonl'}")
-    return {"records": n, "manifest": manifest}
+    C.log(f"采集完成：{n} 条新条目（其中 aihot 线索 {clues} 条）→ {day_dir/'sources.jsonl'}")
+    return {"records": n, "clues": clues, "manifest": manifest}
 
 
 def main() -> int:

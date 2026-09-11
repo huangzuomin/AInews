@@ -115,6 +115,13 @@ ssh openclaw224 '/mnt/SSD_Apps/apps/neican-ai/newsroom/run/emit.sh morning'
 # 运行态快照
 ssh openclaw224 'cat /mnt/SSD_Apps/apps/neican-run/logs/{pipeline,pipeline.cron,watchdog,health}.log'
 ssh openclaw224 'ls /mnt/SSD_Apps/apps/neican-run/state/'
+
+# 今日 aihot 线索（`aihot.jsonl` 是线索层单独留的一份，便于"它报了哪些、我们漏了哪些"逐日对照）
+ssh openclaw224 'cat /mnt/SSD_Apps/apps/neican-run/raw/2026-09-11/aihot.jsonl' \
+  | python3 -c 'import sys,json;[print(json.loads(l)["source_name"],"|",json.loads(l)["title"][:40]) for l in sys.stdin if l.strip()]'
+
+# 本地闸与 aihot 的判断分歧（有则说明两套独立判断不一致，是规则改进的燃料）
+ssh openclaw224 'cat /mnt/SSD_Apps/apps/neican-run/state/disagreement-2026-09-11.jsonl 2>/dev/null | wc -l'
 ```
 
 **生产线为什么是脚本不是工作流引擎**

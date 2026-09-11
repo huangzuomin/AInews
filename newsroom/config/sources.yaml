@@ -6,9 +6,10 @@
 # 字段：
 #   id          稳定标识（用作 raw 落盘文件名，不可随意改）
 #   name        显示名
-#   kind        direct（直连 RSS/Atom） | rsshub（经本机 RSSHub 路由）
-#   url         kind=direct 时的完整地址
+#   kind        direct（直连 RSS/Atom） | rsshub（经本机 RSSHub 路由） | aihot（JSON 线索层）
+#   url         kind=direct 时的完整地址；kind=aihot 时为 API 端点
 #   route       kind=rsshub 时的路由（拼在 rsshub_base 之后）
+#   mode/window/limit  kind=aihot 的查询参数
 #   lang        zh | en
 #   tier        first_party（厂商/机构官方） | media（专业媒体） | aggregator（聚合/转载）
 #   weight      信源权重（进 impact 子分；一手源天然更高）
@@ -196,6 +197,28 @@ sources:
     weight: 0.80
     status: ok
     note: "实测 200 / 30 entries（Atom；个人博客，但为 LLM 领域高信度一手观察）"
+
+  # ─────────── 发现层：线索源（不是内容源） ───────────
+  # aihot.news 提供**已筛选 + 中文改写 + 打分**的 AI 线索。它在链路里的用法是"雷达"：
+  #   · 我们补不上的覆盖：公众号 / X / 各家 Blog（这些没有可用的 RSS）
+  #   · 我们补不上的中文：英文一手源（OpenAI News 等）在这里已有中文标题
+  #   · 一个外部质量分（score 0–100）+ 分类 + 入选理由 → 喂给 score.py 的 impact 先验
+  # ⚠️ 边界：它的 title/summary 是 AIHOT 的**改写**，不是原文摘录。
+  #    所以 `url` 一律落 links.original，摘要带 `summary_origin="aihot"` 标记，
+  #    产物层据此署名 —— 不把别人的改写当我们的原文素材。
+  # ⚠️ `source_id` 固定为 aihot（不按 origin 拆）：diversity 配额才会把它当**一个源**限额。
+  - id: aihot
+    name: AIHOT
+    kind: aihot
+    url: "https://aihot.news/api/v1/items"
+    mode: selected              # selected = 已筛选（24h 约 13 条）；all = 未筛选（上限 100）
+    window: "24h"               # 实测：24h / 7d 可用；48h / 72h / 168h 一律 400
+    limit: 100
+    lang: zh
+    tier: aggregator
+    weight: 0.55                # 低于 media：它是线索，不是可引用的一手事实
+    status: ok
+    note: "实测 200 / 13 条线索（24h）/ 未知出处时回退；'all' 模式 100 条。详见 PLAN-truenas 的 F9"
 
   # ─────────── 实测不可用（保留记录，避免后人重复踩坑） ───────────
   - id: venturebeat-ai

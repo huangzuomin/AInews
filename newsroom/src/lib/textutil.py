@@ -12,6 +12,7 @@ import difflib
 import html
 import re
 import unicodedata
+import urllib.parse
 
 _TAG_RE = re.compile(r"<[^>]+>")
 _WS_RE = re.compile(r"\s+")
@@ -55,6 +56,40 @@ def norm_title(s: str) -> str:
     s = norm_width(s).lower()
     s = _STRIP_RE.sub("", s)
     return s.strip()
+
+
+# URL 归一：**只用于判等**，绝不用于展示或落盘（展示必须保留原链接）。
+# 实测踩到（2026-09-11 接入 AIHOT 时）：同一条 OpenAI 新闻，RSSHub 给的地址带尾斜杠
+# （`https://openai.com/index/introducing-the-agents-api/`），AIHOT 给的不带
+# —— 一个斜杠之差让同一件事变成两个 Event，早报里就会出现中英两条重复条目。
+_TRACKING_PARAMS = ("utm_", "fbclid", "gclid", "spm", "ref_src", "wxshare", "share_token")
+
+
+def norm_url(u: str) -> str:
+    """URL 归一化，用于跨源判等。
+
+    做四件事：去 scheme、去 www、路径去尾斜杠与重复斜杠、丢弃跟踪参数。
+    **保留**其余查询参数 —— 公众号的正文标识全在 query 里（`__biz`/`mid`/`idx`/`sn`），
+    把它们当噪声丢掉，所有公众号链接会归一到同一个 URL，那是灾难性的过并。
+    """
+    if not u:
+        return ""
+    s = u.strip()
+    try:
+        p = urllib.parse.urlsplit(s)
+    except ValueError:
+        return s.lower().rstrip("/")
+    if not p.netloc:
+        return s.lower().rstrip("/")
+    host = p.netloc.lower()
+    if host.startswith("www."):
+        host = host[4:]
+    path = re.sub(r"/{2,}", "/", p.path or "").rstrip("/")
+    pairs = [(k, v) for k, v in urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+             if not any(k.lower().startswith(t) for t in _TRACKING_PARAMS)]
+    pairs.sort()
+    q = urllib.parse.urlencode(pairs)
+    return f"{host}{path}" + (f"?{q}" if q else "")
 
 
 def bigrams(s: str) -> set[str]:
@@ -216,6 +251,42 @@ def _trim_dangling_bracket(s: str) -> str:
     return s
 
 
+_CREDIT_HEAD_RE = re.compile(
+    r"^\s*(?:图片来源|图源|图片说明|题图|视觉中国|图片|"
+    r"Image[s]?\s*(?:by|credit|from)|Illustration\s+by|Photo[s]?\s*(?:by|credit))",
+    re.I,
+)
+
+
+def _strip_credit_head(s: str) -> str:
+    """去掉正文片段开头的**配图致谢块**。
+
+    实测（36氪）：description 以
+      `图片来源：ILLUSTRATION BY FERNANDO CAPETO FOR FORBES; IMAGES FROM LEFT:
+       ERMAN GUNES / GETTYIMAGES; ROBERT WAY/GETTY IMAGES`
+    开头，真正的中文正文在它后面。致谢块的可靠特征是**几乎不含中日韩字符**，
+    所以规则是"从首位找到第一个汉字，砍掉它之前的部分"——
+    比试图用正则描述致谢语法稳得多（致谢的写法无穷无尽）。
+
+    只在开头确实出现致谢标记时才动手；且整条摘要里没有汉字（纯英文稿）时不动，
+    避免误伤以英文开头的正常摘要。
+    """
+    if not _CREDIT_HEAD_RE.match(s):
+        return s
+    m = _CREDIT_HEAD_RE.match(s)
+    start = m.end()                       # 标记本身是中文（"图片来源"），必须从它之后开始找
+    for i in range(start, len(s)):
+        if "\u4e00" <= s[i] <= "\u9fff":
+            # 回退到当前"词"的开头：中文正文前常紧跟一个拉丁词
+            # （`… GETTY IMAGES Fluidstack虽名不见经传…`），
+            # 直接切在汉字处会把主语一起砍掉，读起来像缺了半句。
+            j = i
+            while j > start and (s[j - 1].isascii() and s[j - 1].isalnum()):
+                j -= 1
+            return s[j:] if j - start >= 4 else s
+    return s
+
+
 def is_junk_summary(s: str) -> bool:
     if not s:
         return True
@@ -238,6 +309,7 @@ def clean_summary(s: str, title: str = "", max_len: int = 200) -> str:
     if not s or is_junk_summary(s):
         return ""
     s = strip_html(s)
+    s = _strip_credit_head(s)
     s = _BYLINE_HEAD_RE.sub("", s)
     s = _PROMO_HEAD_RE.sub("", s)
     s = _PROMO_INLINE_RE.sub("", s)

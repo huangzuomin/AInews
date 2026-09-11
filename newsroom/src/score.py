@@ -95,6 +95,36 @@ def _prior_similarity(event: dict, prior_events: list[dict], ccfg: dict) -> int:
     return n
 
 
+def _aihot_prior(event: dict, ap: dict) -> dict | None:
+    """取事件里最强的 AIHOT 线索分并归一。事件里没有 AIHOT 来源时返回 None（不参与融合）。
+
+    为什么取"最强"而不是"平均"：同一件事可能被 AIHOT 报了不止一次（不同 origin），
+    只要有一次被认定为高价值，这件事就值得看 —— 平均会把它稀释掉。
+
+    归一为什么不用 score/100：AIHOT 的实际分数量程约 40–85，
+    直接除 100 会把"该窗口最高分 81"压成 0.81，先验几乎不起作用。
+    用 floor/ceil 做线性拉伸，先验才有分辨力。端点可在 config 里调，不写死在代码里。
+    """
+    best = None
+    for s in event.get("sources", []):
+        a = s.get("aihot") or {}
+        sc = a.get("score")
+        if sc is None:
+            continue
+        if best is None or float(sc) > float(best.get("score", -1)):
+            best = {"score": sc, "category": a.get("category", ""),
+                    "selected": bool(a.get("selected"))}
+    if best is None:
+        return None
+    lo = float(ap.get("score_floor", 0))
+    hi = float(ap.get("score_max", 100))
+    norm = _clamp((float(best["score"]) - lo) / (hi - lo)) if hi > lo else 0.0
+    if best.get("selected"):
+        norm = _clamp(norm + float(ap.get("selected_bonus", 0.0)))
+    return {"norm": round(norm, 4), "score": best["score"],
+            "category": best["category"], "selected": best["selected"]}
+
+
 def score_event(event: dict, scfg: dict, entities: list[dict],
                 prior_events: list[dict], now) -> dict:
     w = scfg["weights"]
@@ -137,9 +167,24 @@ def score_event(event: dict, scfg: dict, entities: list[dict],
     imp = (cfg_i["source_weight_share"] * best_w
            + cfg_i["entity_share"] * ent_score
            + cfg_i["signal_share"] * sig)
+
+    # 外部先验融合（AIHOT 线索分）。只对带分数的条目生效 —— 见 scoring.yaml 里的长注释：
+    # 用"混合"而不是"相加"，是为了不给缺测的条目凭空扣分。
+    ap = scfg.get("aihot_prior") or {}
+    ext = _aihot_prior(event, ap) if ap.get("enabled", False) else None
+    if ext is not None:
+        w_ext = _clamp(float(ap.get("weight", 0.0)), 0.0, 1.0)
+        rule_imp = imp
+        imp = (1.0 - w_ext) * rule_imp + w_ext * ext["norm"]
+    else:
+        rule_imp = imp
+
     reasons["impact"] = (f"最高信源权重 {best_w:.2f}；命中实体 {len(hits)} 个"
                          f"（{', '.join(h['canonical'] for h in hits[:4]) or '无'}）；"
-                         f"影响面信号 {'有' if sig else '无'}")
+                         f"影响面信号 {'有' if sig else '无'}"
+                         + (f"；AIHOT 线索分 {ext['score']}（{ext['category'] or '—'}）"
+                            f"→ 规则值 {rule_imp:.2f} 混合为 {imp:.2f}"
+                            if ext is not None else ""))
 
     # ── clarity ──────────────────────────────────────────────
     cla = 0.6
@@ -198,6 +243,9 @@ def score_event(event: dict, scfg: dict, entities: list[dict],
         "total": round(total, 4),
         "reasons": reasons,
         "entities": [h["canonical"] for h in hits],
+        # 留痕：外部先验与"没有它时是多少"要能分离开，否则日后调权重无从归因
+        "aihot_prior": ext,
+        "impact_rule": round(rule_imp, 4),
     }
 
 
@@ -243,10 +291,15 @@ def run(day: str | None = None) -> dict:
     C.write_jsonl(C.STATE_DIR / f"scored-{day}.jsonl", scored)
     thr = scfg["thresholds"]
     passed = [e for e in scored if e["total"] >= thr["publish_min_total"]]
+    ext_n = sum(1 for e in scored if e.get("aihot_prior"))
+    ext_w = float((scfg.get("aihot_prior") or {}).get("weight", 0))
     run_rec.set(events=len(scored), above_floor=len(passed), entities_loaded=len(entities),
-                priors=len(priors), day=day)
+                priors=len(priors), external_prior=ext_n, day=day)
     run_rec.finish()
     C.log(f"评分完成：{len(scored)} 个事件，{len(passed)} 个过底线（{thr['publish_min_total']}）")
+    if ext_n:
+        C.log(f"  其中 {ext_n} 个带 AIHOT 线索分 → impact 按 {ext_w} 权重混合"
+              f"（其余 {len(scored) - ext_n} 个走纯规则，行为不变）")
     for e in scored[:10]:
         C.log(f"  {e['rank']:>2}. {e['total']:.3f}  {T.clip(e['title'], 58)}")
     return {"scored": len(scored)}

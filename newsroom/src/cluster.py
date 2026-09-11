@@ -34,9 +34,12 @@ _TIER_RANK = {"first_party": 3, "media": 2, "aggregator": 1}
 
 def _same_event(a: dict, b: dict, cfg: dict) -> tuple[bool, str]:
     """判定两条 Source 是否属于同一事件。返回 (是否, 依据)。"""
-    url_a, url_b = (a.get("url") or "").strip(), (b.get("url") or "").strip()
-    if cfg.get("url_exact_always_merge", True) and url_a and url_a == url_b:
-        return True, "url_exact"
+    # URL 判等必须走归一化：尾斜杠 / www / 跟踪参数的差异会让同一条新闻分裂成两个 Event
+    # （实测：RSSHub 的 OpenAI 条目带尾斜杠，AIHOT 的不带 → 早报出现中英重复两条）
+    if cfg.get("url_exact_always_merge", True):
+        na, nb = T.norm_url(a.get("url", "")), T.norm_url(b.get("url", ""))
+        if na and na == nb:
+            return True, "url_exact"
 
     ta, tb = a.get("norm_title", ""), b.get("norm_title", "")
     if not ta or not tb:
@@ -56,11 +59,27 @@ def _same_event(a: dict, b: dict, cfg: dict) -> tuple[bool, str]:
     return False, ""
 
 
-def _rep_title(sources: list[dict]) -> str:
-    """代表标题 = 最高信源层级里最长的那条（长标题通常信息量更大）。"""
+def _rep_source(sources: list[dict], cfg: dict) -> dict:
+    """代表信源 = **显示标题与署名必须来自同一条来源**。
+
+    为什么两者必须绑定：标题和署名若来自不同来源，读者会以为中文标题是
+    一手源写的 —— 那是把"转引"伪装成"官方表述"。所以标题与署名一起选。
+    （署名由 digest 的 `_top_source` 取"层级最高"，而这里选出的代表可能不是它，
+    所以事件里额外记下 `rep_fingerprint`，让产物层能按同一条记录取标题与摘要。）
+
+    排序键（第一项可在 scoring.yaml 的 `cluster.prefer_lang` 关掉）：
+      1. 语言优先 —— 面向中文读者，中文条目的标题优先，让英文一手源的中文线索能顶上来
+         （这正是接入 AIHOT 要买的东西：它给英文一手源提供了中文标题）
+      2. 信源层级 —— 一手源 > 专业媒体 > 聚合
+      3. 标题长度 —— 长标题通常信息量更大
+    """
+    prefer = (cfg.get("prefer_lang") or "").strip()
+
     def key(s):
-        return (_TIER_RANK.get(s.get("tier", "media"), 2), len(s.get("title", "")))
-    return sorted(sources, key=key, reverse=True)[0].get("title", "")
+        lang_rank = 1 if (prefer and s.get("lang") == prefer) else 0
+        return (lang_rank, _TIER_RANK.get(s.get("tier", "media"), 2), len(s.get("title", "")))
+
+    return sorted(sources, key=key, reverse=True)[0] if sources else {}
 
 
 def build_events(records: list[dict], cfg: dict, day: str) -> list[dict]:
@@ -89,7 +108,8 @@ def build_events(records: list[dict], cfg: dict, day: str) -> list[dict]:
         srcs = cl["sources"]
         pubs = [C.parse_iso(s.get("published_at", "")) for s in srcs]
         pubs = [p for p in pubs if p]
-        title = _rep_title(srcs)
+        rep = _rep_source(srcs, cfg)
+        title = rep.get("title", "")
         tiers = [s.get("tier", "media") for s in srcs]
         primary = max(tiers, key=lambda t: _TIER_RANK.get(t, 1))
         events.append({
@@ -98,6 +118,7 @@ def build_events(records: list[dict], cfg: dict, day: str) -> list[dict]:
             "cluster_key": C.short_hash(T.norm_title(title), 20),
             "title": title,
             "norm_title": T.norm_title(title),
+            "rep_fingerprint": rep.get("fingerprint", ""),   # 标题/摘要的取用依据
             "sources": srcs,
             "source_count": len(srcs),
             "distinct_sources": len({s["source_id"] for s in srcs}),
