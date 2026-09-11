@@ -1,1 +1,45 @@
 newsroom/
+
+# ── 构建产物：由 CI 生成，不入库 ────────────────────────────
+# public/ 曾入库 51,940 个文件，导致：仓库 .git 膨胀到 3.6 GB、
+# 每次 git 操作都是 O(5万) 次 stat、构建 5 分钟、index.lock 冲突。
+public/
+public-test/
+
+# ── 根级幽灵产物（Hugo 0.161.1 生成，线上全 404）────────────
+# 归档至 newsroom/legacy/ghost-site/ 后由 git rm --cached 清理（P0.7）
+/entities/
+/topics/
+/briefs/
+/concepts/
+/timeline/
+/categories/
+/tags/
+/index.html
+/index.xml
+/sitemap.xml
+/404.html
+/insights/
+/newspaper/
+/morningnews/
+/about/
+/explore/
+/all-categories/
+/main_topics/
+/authors/
+
+# ── 系统 / 编辑器 ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+@eaDir/
+@SynoEAStream/
+.#*
+*.swp
+.hugo_build.lock
+.obsidian/
+
+# ── 本地验证脚手架（见 newsroom/_tplverify.sh）──────────────
+# 全量构建的瓶颈是 static/ 的磁盘拷贝（实测 CPU 仅 9.1s，IO 占 40+ 分钟），
+# 模板验证时会把 static/ 临时改名为 _static_off/ 以获得 4 秒级构建。
+_tpltest/
+_static_off/
