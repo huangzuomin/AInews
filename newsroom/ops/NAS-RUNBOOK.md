@@ -96,7 +96,50 @@ ssh openclaw224 'export PATH=/mnt/SSD_Apps/apps/tools/bin:$PATH; \
 # 产物抽检（阻断性门禁）
 ssh openclaw224 'cd /mnt/SSD_Apps/apps/neican-ai && \
   python3 newsroom/gates/validate.py --gates g3b --built public --json'
+
+# ── 内容生产线（L0→L1，约 21 秒）────────────────────────────
+ssh openclaw224 '/mnt/SSD_Apps/apps/neican-ai/newsroom/run/pipeline.sh'
+#   采集 → 归并 → 相关性闸 → 评分 → 排产
+#   结果：raw/<day>/sources.jsonl、state/{events,scored,plan}-<day>
+
+# 只渲染不落盘（看产物长什么样）
+ssh openclaw224 'cd /mnt/SSD_Apps/apps/neican-ai/newsroom && \
+  NEICAN_RUN_HOME=/mnt/SSD_Apps/apps/neican-run \
+  python3 -m src.digest --kind morning --dry-run'
+
+# 出完整一期（落盘 + 提交 + 尝试推送）
+ssh openclaw224 '/mnt/SSD_Apps/apps/neican-ai/newsroom/run/emit.sh morning'
+#   --dry-run     只渲染
+#   --no-publish  落盘但不提交
+
+# 运行态快照
+ssh openclaw224 'cat /mnt/SSD_Apps/apps/neican-run/logs/{pipeline,pipeline.cron,watchdog,health}.log'
+ssh openclaw224 'ls /mnt/SSD_Apps/apps/neican-run/state/'
 ```
+
+**生产线为什么是脚本不是工作流引擎**
+
+链路需要的性质（确定性、可重放、便宜、可并发）与工作流引擎 / agent 的性质
+（会话式、非线性、有状态）在数学上不兼容。把判断放进 cron，等于把不确定性放到
+唯一有发布权的通道上。**纯 stdlib**（NAS 无 pip3），全部路径可重放。
+
+**红线：写入 ≠ 发布**
+
+```
+NAS（写入）                           CI（发布）
+pipeline → digest → git commit  ──▶  门禁校验 →（部署）
+                    ↓
+            只推送，不碰托管平台
+```
+
+`emit.sh` 只 commit + push；CI 保留校验与部署这层审计关卡。
+**补跑不许说谎**：距名义时点 >3 小时则 `date` 记实际时间，不写 07:30。
+
+**产物质量的唯一判据是读产物**
+
+构建 rc=0、文件存在、字节数不为 0 —— 这三件事**都不代表产物是好的**。
+实测踩过：摘要在 ASCII 小数点处被切断（「全网渗透率52.」）、frontmatter 结尾多一个逗号
+（「…400 系列，。」）。两者都不报错、都不为空。所以改完清洗/截断逻辑必须**肉眼看 dry-run 输出**。
 
 **性能基线（NAS 本地 SSD）**
 
@@ -108,16 +151,28 @@ ssh openclaw224 'cd /mnt/SSD_Apps/apps/neican-ai && \
 | JSON-LD / og:image 覆盖 | 27,671 / 27,671 |
 | `<time datetime>` | 9,983 |
 | `public/` 体积 | 3.0G |
+| **生产线全链（L0→L1）** | **20.9 秒**（fetch 20.07 / cluster 0.68 / score 0.08 / select 0.00） |
 
 ---
 
 ## 5. 未完成（按阻塞强度）
 
+> 更新于 2026-09-11 20:55。**阶段 1–3 已全绿**；下表已剔除已消项。
+
 | # | 事项 | 为什么阻塞 |
 |---|---|---|
-| 1 | `resources/_gen/` 被追踪 → **每次构建都弄脏工作区** | 自动化的"干净工作区"前提不成立；应 `.gitignore` + `git rm -r --cached` |
-| 2 | `origin` 仍指本地裸仓库，**未指 GitHub** | 决定 NAS 是否成为 GitHub 的写入前端 |
-| 3 | **P1.8 `public/` 出史**（`.git` 仍 2.96 GiB） | GitHub 推荐上限 1GB，不重写历史 push 很可能直接失败 |
-| 4 | 常驻运行层（systemd timer/service）**未建立** | "跑起来"的实体还没有 |
-| 5 | 群晖 n8n **仍在写 `W:\hugo`**（2,851 项脏） | 双写未解除，与"单一写入者"红线冲突 |
-| 6 | `W:\hugo` 与 `D:\Work\neican-ai` **未退役** | 三副本并存 |
+| 1 | 群晖 n8n **仍在写 `W:\hugo`** | 双写未解除，与"单一写入者"红线冲突。**唯一硬阻塞，需人做（无群晖 247 入口）** |
+| 2 | 生产线**未挂 cron** | 阶段 5 的 07:30 / 19:00 硬承诺还没有实体。前置：英文条目标题策略 + D29 token |
+| 3 | **D29 细粒度 token 未到位** | NAS 能 commit 但**不能 push** → 产物堆在本地，"是否真发布"不可观测 |
+| 4 | **钉钉 webhook 未填** | 看门狗只记录不发告警，阶段 2.4 验收无法完成 |
+| 5 | **P1.8 `public/` 出史**（`.git` 仍 2.96 GiB） | GitHub 推荐上限 1GB；属优化项（增量 push 只有几百 KB），非当前阻塞 |
+| 6 | `W:\hugo` 与 `D:\Work\neican-ai` **未退役** | 三副本并存（退役依赖 #1） |
+| 7 | **P8 CF 边缘缓存 24h** | 部署成功 ≠ 新内容可见；AI 爬虫 24h 内抓旧版，对 GEO 致命 |
+
+**已消项**（此前列在本表，现已完成）
+
+| 事项 | 解除方式 |
+|---|---|
+| ~~`resources/_gen/` 被追踪，每次构建弄脏工作区~~ | 提交 `6c7e051aae`；重跑构建后脏项 = 0 |
+| ~~`origin` 未指 GitHub~~ | 改指 `github.com/huangzuomin/AInews`，本地裸仓库降为 `nas-local` |
+| ~~常驻运行层未建立~~ | `midclt cronjob` id=1 `*/15`（看门狗）、id=2 `5,20,35,50`（体检），D30 |
