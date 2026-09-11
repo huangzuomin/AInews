@@ -16,7 +16,24 @@
 | P0.3 | **NAS 细粒度 token**（`Contents: Read and write`，仅此一库） | 写入 `git-credentials` 后，`emit.sh` 的 `pushed` 变为 `1`，且 `commits_ahead_of_origin` 为具体数字（不再是 `-1`） | P0.1（顺序不可颠倒） |
 | P0.4 | **门禁前移**：`emit.sh` commit 前跑 `validate.py` | 构造一篇违规内容，`emit.sh` **拒绝提交**并留下 `rc≠0` 记录；正常内容不受影响 | 无（可立即做） |
 | P0.5 | **钉钉 webhook** 填进 `watchdog.conf` | `watchdog.py --force-alert` 的告警体能真实送达群；阶段 2.4 验收完成 | 你 |
-| P0.6 | **修 P8（CF 缓存）** | `curl -sI https://www.neican.ai/index.xml` 的 `cf-cache-status` 不再长时间 `HIT`；部署后 1h 内线上可见新条目 | 你（CF 控制台）或 CF API Token |
+| P0.6 | **修 P8（CF 缓存 + 负缓存）** | `/llms.txt` 经 CDN 返回 200（不再 404）；`/sitemap.xml`、`/index.xml` 的 `Age` 不再长期停留在小时级 | 你（CF 控制台）或 CF API Token |
+| P0.7 | **线上抽检（served-state probe）** | 见下方说明 | 无（可立即做） |
+
+**P0.7 的原理 —— 本轮第 4 个"静默失效"变种**
+
+`/llms.txt` 在仓库里、在源站上是 200，**但通过 CDN 拿到的是被负缓存的 404**
+（`GET /llms.txt?cb=<ts>` → 200 MISS；`GET /llms.txt` → 404 HIT）。见复盘 §3.5。
+
+G3-b 抽检的是 **CI 构建产物**，而问题出在"产物 → 边缘"这一段，所以它永远发现不了。
+
+**验收标准**：新增 `run/servecheck.sh`，对关键路径各发两次请求
+（一次绕缓存 `?cb=<ts>`、一次不绕），断言二者**状态码与内容一致**；
+不一致即报"边缘与源站不一致"。纳入 `watchdog.py` 的频道表或作为独立 cron。
+覆盖路径至少：`/llms.txt`、`/robots.txt`、`/sitemap.xml`、`/index.xml`、当日早报/日报 URL。
+
+**通用教训（已两次命中）**：凡"构建/部署成功"的判定，都必须补一次 served-state 抽检。
+第一次是 `_internal/schema.html` 在 Hugo 0.147 被清空 → 全站 JSON-LD 为 0；
+这一次是负缓存 → 产物存在但不被服务。**都是"不报错的失败"。**
 
 **P0.4 的原理**：现在门禁挂在 CI 上，而发布路径是 push → Vercel（见复盘 §1.2）。
 把校验搬到 NAS 的 commit 之前，门禁才真正长在链上。
@@ -50,11 +67,16 @@
 
 ## 建议的下一个动作
 
-**P0.1（停群晖）+ P0.4（门禁前移）**。
+**P0.1（停群晖）+ P0.4（门禁前移）+ P0.7（线上抽检）**。
 
-前者只能你做，且卡着 P0.3；后者我现在就能做，且**不等任何人**。
-两者合起来的收益是：链路从"三段通、一段断、一段滞后"变成
-**"写入侧自带门禁、发布侧只差一个凭据"**。
+P0.1 只能你做，且卡着 P0.3；**P0.4 与 P0.7 我现在就能做，且不等任何人** ——
+两者是同一件事的两面：把"通过"的判定从"构建成功"改成"构建成功 **且** 被服务"。
+
+另有三个**你可以立刻手动做掉**的（比等排期更快）：
+
+1. **CF 控制台 purge 一次 `/llms.txt`** —— 立刻解除负缓存，GEO 入口当天恢复
+2. 同页把 `text/html`、`*/index.xml`、`/*.txt` 设为 **Bypass**（一劳永逸，见 P0.6）
+3. 撤销旧 PAT `ghp_****Jj8W`（P0.2）
 
 ---
 
