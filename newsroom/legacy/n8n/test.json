@@ -1,0 +1,227 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "id": "c138f6d2-6466-4e56-b08e-8a2b53580459",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "values": [
+          {
+            "name": "queue",
+            "value": "[\n  {\n    \"id\": \"post-a\",\n    \"depth\": 0\n  }\n]"
+          },
+          {
+            "name": "visited",
+            "value": "[]"
+          },
+          {
+            "name": "processed_results",
+            "value": "[]"
+          }
+        ],
+        "options": {}
+      },
+      "name": "Initialize Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "id": "e93297a7-fc30-4e78-ae2c-b51ffac1df18",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "mode": "json",
+        "values": [
+          {
+            "name": "queue",
+            "value": "={{ $json.queue }}"
+          },
+          {
+            "name": "visited",
+            "value": "={{ $json.visited }}"
+          },
+          {
+            "name": "processed_results",
+            "value": "={{ $json.processed_results }}"
+          }
+        ],
+        "options": {}
+      },
+      "name": "Update Global State",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "id": "7662c114-1e0e-436f-b649-6f81e35ff101",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.queue.length > 0 }}",
+        "loopType": "while"
+      },
+      "name": "Process Queue",
+      "type": "n8n-nodes-base.loop",
+      "typeVersion": 1,
+      "id": "d0e1329c-a130-40e9-b2c6-3d231945f340",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "functionCode": "const queue = this.getInputData(0).json.queue;\nconst visited = this.getInputData(0).json.visited;\nconst processedResults = this.getInputData(0).json.processed_results;\n\nlet nextItem = null;\nlet originalQueue = [...queue]; // 复制一份，以便稍后更新\n\nif (queue.length > 0) {\n  nextItem = originalQueue.shift(); // 取出第一个\n}\n\nif (nextItem && !visited.includes(nextItem.id)) {\n  // 如果未访问过，则加入已访问列表，并准备处理\n  visited.push(nextItem.id);\n  return [\n    {\n      json: {\n        current_item: nextItem,\n        queue: originalQueue,\n        visited: visited,\n        processed_results: processedResults,\n        should_process: true // 标记为需要处理\n      }\n    }\n  ];\n} else {\n  // 如果已访问或队列为空，则不进行处理，只更新队列和访问列表\n  return [\n    {\n      json: {\n        current_item: null, // 没有要处理的项\n        queue: originalQueue,\n        visited: visited,\n        processed_results: processedResults,\n        should_process: false // 标记为不需要处理\n      }\n    }\n  ];\n}"
+      },
+      "name": "Dequeue & Check Visited",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "id": "fbf1e028-2b81-42e8-89c0-6296b107e0c4",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "conditions": [
+          {
+            "value1": "={{ $json.should_process }}",
+            "operator": "==",
+            "value2": "true"
+          }
+        ]
+      },
+      "name": "Should Process Link?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "id": "f5127271-e94d-44aa-9c4c-3e3e2303c734",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "functionCode": "const inputData = this.getInputData(0);\nconst currentItem = inputData.json.current_item;\nconst queue = inputData.json.queue;\nconst visited = inputData.json.visited;\nconst processedResults = inputData.json.processed_results;\n\nconst allData = [\n  {\n    \"id\": \"post-a\",\n    \"title\": \"文章 A\",\n    \"links\": [\"post-b\", \"post-c\"]\n  },\n  {\n    \"id\": \"post-b\",\n    \"title\": \"文章 B\",\n    \"links\": [\"post-d\"]\n  },\n  {\n    \"id\": \"post-c\",\n    \"title\": \"文章 C\",\n    \"links\": [\"post-a\", \"post-e\"]\n  },\n  {\n    \"id\": \"post-d\",\n    \"title\": \"文章 D\",\n    \"links\": []\n  },\n  {\n    \"id\": \"post-e\",\n    \"title\": \"文章 E\",\n    \"links\": []\n  }\n];\n\nconst foundItem = allData.find(item => item.id === currentItem.id);\n\nif (foundItem) {\n  // 添加深度信息并返回所有必要数据\n  foundItem.depth = currentItem.depth;\n  return [\n    {\n      json: {\n        current_item_data: foundItem,\n        queue: queue,\n        visited: visited,\n        processed_results: processedResults\n      }\n    }\n  ];\n} else {\n  // 如果找不到，返回空数据但保留状态\n  return [\n    {\n      json: {\n        current_item_data: null,\n        queue: queue,\n        visited: visited,\n        processed_results: processedResults\n      }\n    }\n  ];\n}"
+      },
+      "name": "Fetch Link Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "id": "e931441b-4f9e-4e78-8316-2432a133d596",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "functionCode": "// 获取输入数据\nconst inputData = this.getInputData(0);\nconst currentItemData = inputData.json.current_item_data;\nconst queue = [...inputData.json.queue]; // 创建副本以避免修改原数组\nconst visited = [...inputData.json.visited];\nconst processedResults = [...inputData.json.processed_results];\n\nconst MAX_DEPTH = 2; // 设置最大深度以避免无限递归\n\nif (currentItemData) {\n  // 将当前处理的项加入结果列表\n  processedResults.push({\n    id: currentItemData.id,\n    title: currentItemData.title,\n    depth: currentItemData.depth\n  });\n\n  // 如果未达到最大深度，则处理其子链接\n  if (currentItemData.depth < MAX_DEPTH && currentItemData.links && currentItemData.links.length > 0) {\n    currentItemData.links.forEach(linkId => {\n      // 只有当子链接未被访问过时才加入队列\n      if (!visited.includes(linkId)) {\n        queue.push({\n          id: linkId,\n          depth: currentItemData.depth + 1\n        });\n      }\n    });\n  }\n}\n\n// 返回更新后的所有状态\nreturn [\n  {\n    json: {\n      queue: queue,\n      visited: visited,\n      processed_results: processedResults\n    }\n  }\n];"
+      },
+      "name": "Process Child Links & Update",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "id": "90e63f53-2900-4b0d-b152-4467d1b3260d",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "functionCode": "// 当不需要处理时，直接传递状态数据\nconst inputData = this.getInputData(0);\nreturn [\n  {\n    json: {\n      queue: inputData.json.queue,\n      visited: inputData.json.visited,\n      processed_results: inputData.json.processed_results\n    }\n  }\n];"
+      },
+      "name": "Skip Processing",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "id": "319ffcf0-f166-410e-a611-37f5b1c55c06",
+      "json": {}
+    },
+    {
+      "parameters": {
+        "mode": "json",
+        "values": [
+          {
+            "name": "final_processed_links",
+            "value": "={{ $json.processed_results }}"
+          },
+          {
+            "name": "final_visited_links",
+            "value": "={{ $json.visited }}"
+          }
+        ],
+        "options": {}
+      },
+      "name": "Final Results",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "id": "a576c669-e0e6-4258-a400-366a504c5e31",
+      "json": {}
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          "Initialize Data"
+        ]
+      ]
+    },
+    "Initialize Data": {
+      "main": [
+        [
+          "Process Queue"
+        ]
+      ]
+    },
+    "Update Global State": {
+      "main": [
+        [
+          "Process Queue"
+        ]
+      ]
+    },
+    "Process Queue": {
+      "main": [
+        [
+          "Dequeue & Check Visited"
+        ]
+      ],
+      "output": [
+        [
+          "Final Results"
+        ]
+      ]
+    },
+    "Dequeue & Check Visited": {
+      "main": [
+        [
+          "Should Process Link?"
+        ]
+      ]
+    },
+    "Should Process Link?": {
+      "main": [
+        [
+          "Fetch Link Data"
+        ],
+        [
+          "Skip Processing"
+        ]
+      ]
+    },
+    "Fetch Link Data": {
+      "main": [
+        [
+          "Process Child Links & Update"
+        ]
+      ]
+    },
+    "Process Child Links & Update": {
+      "main": [
+        [
+          "Update Global State"
+        ]
+      ]
+    },
+    "Skip Processing": {
+      "main": [
+        [
+          "Update Global State"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "id": "cyclic-nested-links-demo",
+  "name": "Cyclic Nested Links Demo",
+  "timezone": "America/New_York",
+  "version": "1.0.0"
+}

@@ -1,0 +1,397 @@
+{
+  "name": "AI内参-自动化AI日报生成工作流",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "triggerAtTime": "20:05"
+        }
+      },
+      "id": "e43a9f0f-62e9-4674-9c86-1e9d038ba986",
+      "name": "FR-01: 每日20:05触发",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        420,
+        360
+      ],
+      "notes": "根据SRD FR-01: 工作流定时触发\n\n- 触发器设置为每日晚上20:05自动启动。"
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "table": "ai_articles",
+        "filters": {
+          "filters": [
+            {
+              "field": "created_at",
+              "operator": "gte",
+              "value": "{{ $now.minus({ days: 1 }) }}"
+            }
+          ]
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "2ed1ac7d-b65f-40e8-8b2b-40283b9c9e88",
+      "name": "FR-02: 提取过去24小时文章",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        360
+      ],
+      "credentials": {
+        "supabase": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      },
+      "notes": "根据SRD FR-02: 数据提取\n\n- 从 `ai_articles` 表中提取过去24小时内创建的文章。\n- 提取字段包含 `id`, `content`, `word_count` 等用于后续处理。"
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "f85888ed-e137-410a-810e-0d1796191b93",
+      "name": "开始循环处理每篇文章",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        820,
+        360
+      ],
+      "notes": "将获取到的文章列表进行拆分，以每篇为单位，逐一进行评分处理。"
+    },
+    {
+      "parameters": {
+        "model": "gemini-1.5-pro",
+        "prompt": "你是一位顶级的AI行业分析师，以严谨和深刻的洞察力著称。你的任务是对下面这篇文章进行评估并返回JSON格式的评分。\n\n**文章内容:**\n\"\"\"\n{{ $json.content }}\n\"\"\"\n\n请从以下四个维度对文章进行评分(1.0-10.0)：\n- **创新性(novelty_score):** 文章内容的新颖性和原创性\n- **影响力(impact_score):** 文章可能产生的行业影响\n- **清晰度(clarity_score):** 文章的表达清晰度和结构性\n- **深度(depth_score):** 文章分析的深度和专业性\n\n请直接返回JSON格式的评分结果：\n{\n  \"novelty_score\": 数值,\n  \"impact_score\": 数值,\n  \"clarity_score\": 数值,\n  \"depth_score\": 数值\n}",
+        "options": {}
+      },
+      "id": "f03108c9-04d4-4a5f-9d33-d86016e788cd",
+      "name": "FR-03: (1/2) LLM评分",
+      "type": "n8n-nodes-base.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        360
+      ],
+      "credentials": {
+        "googleGeminiApi": {
+          "id": "YOUR_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini account"
+        }
+      },
+      "notes": "根据SRD FR-03: 文章评分\n\n- 使用“思维链”版提示词，让LLM对文章内容进行分析并返回JSON格式的评分。"
+    },
+    {
+      "parameters": {
+        "jsCode": "// SRD FR-03: (2/2) 计算最终得分\n\n// 1. 从上一节点获取文章原始数据和Gemini的响应\nconst article = $input.item.json; // splitInBatches的输出\nconst geminiResponse = $('FR-03: (1/2) LLM评分').item.json.text; // Gemini的响应文本\n\n// 2. 从Gemini响应中提取纯净的JSON字符串\nconst jsonRegex = /{[\\s\\S]*?}/;\nconst match = geminiResponse.match(jsonRegex);\n\nif (!match) {\n  throw new Error('在Gemini响应中未找到有效的JSON评分对象。');\n}\n\nconst scores = JSON.parse(match[0]);\n\n// 3. 计算加权分\nconst weighted_score = (scores.novelty_score * 0.3) + \n                       (scores.impact_score * 0.4) + \n                       (scores.clarity_score * 0.1) + \n                       (scores.depth_score * 0.2);\n\n// 4. 计算平局决胜值\nconst word_count = article.word_count || 0; // 如果word_count不存在则默认为0\nconst tie_breaker_value = word_count * 0.00001;\n\n// 5. 计算最终得分并保留两位小数\nconst final_score = (weighted_score + tie_breaker_value).toFixed(2);\n\n// 6. 返回文章ID和最终得分，用于下一步数据库更新\nreturn {\n  id: article.id,\n  ai_score: parseFloat(final_score)\n};"
+      },
+      "id": "5ec22108-7dfd-451e-b83e-d6706e22f28b",
+      "name": "FR-03: (2/2) 计算最终得分",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        360
+      ],
+      "notes": "根据SRD FR-03: 文章评分\n\n- 从LLM响应中提取JSON。\n- 根据SRD中的公式计算加权分。\n- 加入 word_count 作为平局决胜值。\n- 计算出最终的 `ai_score` 并保留两位小数。"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "ai_articles",
+        "id": "={{ $json.id }}",
+        "columns": {
+          "columns": [
+            {
+              "column": "ai_score",
+              "value": "={{ $json.ai_score }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e4f35836-8c9a-4f51-a9f4-b25c34599fd8",
+      "name": "FR-04: 更新分数到数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 2.1,
+      "position": [
+        1420,
+        360
+      ],
+      "credentials": {
+        "supabase": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      },
+      "notes": "根据SRD FR-04: 更新文章评分到数据库\n\n- 将上一步计算出的 `ai_score` 更新到 `ai_articles` 表中对应的文章记录。"
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "table": "ai_articles",
+        "filters": {
+          "filters": [
+            {
+              "field": "created_at",
+              "operator": "gte",
+              "value": "{{ $now.minus({ days: 1 }) }}"
+            },
+            {
+              "field": "ai_score",
+              "operator": "neq",
+              "value": null
+            }
+          ]
+        },
+        "returnAll": true,
+        "otherParameters": {
+          "parameters": [
+            {
+              "name": "order",
+              "value": "ai_score.desc"
+            },
+            {
+              "name": "limit",
+              "value": 5
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0d54a2a1-e565-4f4c-9f8d-4a11f2a33604",
+      "name": "FR-05: 筛选评分最高的5篇文章",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 2.1,
+      "position": [
+        820,
+        600
+      ],
+      "credentials": {
+        "supabase": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      },
+      "notes": "根据SRD FR-05: 文章筛选\n\n- 在所有文章评分更新完毕后，重新从数据库中查询。\n- 按 `ai_score` 降序排列，并限定返回数量为5。"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 将Top 5文章聚合成一个字符串，注入到最终的Prompt中\n\nconst topArticles = $input.all();\n\nlet aggregatedContent = '';\n\ntopArticles.forEach((item, index) => {\n  const article = item.json;\n  aggregatedContent += `\n---\n文章${index + 1}:\n标题: ${article.title}\n作者: ${article.author || '未知'}\n来源URL: ${article.source_url || '无'}\n内容: ${article.content.substring(0, 3000)}...\n---\n`;\n});\n\nreturn { aggregatedContent };\n"
+      },
+      "id": "761c5722-c322-4a0b-932f-48e02d45362a",
+      "name": "聚合Top 5文章信息",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gemini-1.5-pro",
+        "prompt": "你是一位顶级的科技媒体主编，你的任务是将今天最重要的5篇AI文章整合成一篇高质量的“AI日报”。请严格按照指定的Markdown格式输出。\n\n今天是 {{ $now.toFormat('yyyy年MM月dd日') }}。\n\n以下是5篇精选文章的核心信息：\n{{ $json.aggregatedContent }}\n\n请生成日报，包含以下部分：\n1.  一个吸引人的日报大标题。格式为: `AI内参日报 | yyyy年MM月dd日: <当日最重要新闻简短概括>`\n2.  一段150字左右的开篇导语。\n3.  为每篇文章生成一个包含“### 标题”、“核心看点”、“内容摘要”和“原文信息”的摘要模块。\n4.  一段100字左右的结尾总结。\n\n请确保语言专业、流畅、精炼。直接输出Markdown格式的全文。",
+        "options": {}
+      },
+      "id": "4b6848e4-b778-4394-a1e6-b9b5f4588236",
+      "name": "FR-06: 生成日报综述文章",
+      "type": "n8n-nodes-base.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        600
+      ],
+      "credentials": {
+        "googleGeminiApi": {
+          "id": "YOUR_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini account"
+        }
+      },
+      "notes": "根据SRD FR-06: 生成综述文章\n\n- 使用“主编”角色提示词。\n- 将聚合后的Top 5文章信息注入Prompt。\n- 指示LLM生成结构化的Markdown日报。"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 从Markdown全文中提取标题和导语\n\nconst markdown = $json.text;\n\n// 提取标题 (第一行)\nconst title = markdown.split('\\n')[0].replace(/^#+\\s*/, '');\n\n// 提取导语 (第一个'###'之前的内容，去掉标题)\nconst summaryEndIndex = markdown.indexOf('###');\nconst summary = markdown.substring(markdown.indexOf('\\n') + 1, summaryEndIndex).trim();\n\n// 返回用于数据库插入的对象\nreturn {\n  title: title,\n  content: markdown,\n  summary: summary,\n  status: 'draft',\n  is_selected: true\n};"
+      },
+      "id": "7662c80c-e1f1-4328-984e-e14b2d499edb",
+      "name": "准备综述文章数据",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_articles",
+        "columns": {
+          "columns": [
+            {
+              "column": "title",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "column": "content",
+              "value": "={{ $json.content }}"
+            },
+            {
+              "column": "summary",
+              "value": "={{ $json.summary }}"
+            },
+            {
+              "column": "status",
+              "value": "={{ $json.status }}"
+            },
+            {
+              "column": "is_selected",
+              "value": "={{ $json.is_selected }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "75bbd9b3-4679-4447-b844-3d9fc2174c8b",
+      "name": "FR-07: 存储日报到数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 2.1,
+      "position": [
+        1620,
+        600
+      ],
+      "credentials": {
+        "supabase": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      },
+      "notes": "根据SRD FR-07: 结果存储\n\n- 将LLM生成的日报作为一篇新文章插入到 `ai_articles` 表中。\n- ai_score 字段留空，因为它本身不参与评分。"
+    }
+  ],
+  "connections": {
+    "FR-01: 每日20:05触发": {
+      "main": [
+        [
+          {
+            "node": "FR-02: 提取过去24小时文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-02: 提取过去24小时文章": {
+      "main": [
+        [
+          {
+            "node": "开始循环处理每篇文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-03: (1/2) LLM评分": {
+      "main": [
+        [
+          {
+            "node": "FR-03: (2/2) 计算最终得分",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-03: (2/2) 计算最终得分": {
+      "main": [
+        [
+          {
+            "node": "FR-04: 更新分数到数据库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-04: 更新分数到数据库": {
+      "main": [
+        [
+          {
+            "node": "开始循环处理每篇文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "开始循环处理每篇文章": {
+      "main": [
+        [
+          {
+            "node": "FR-03: (1/2) LLM评分",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "FR-05: 筛选评分最高的5篇文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-05: 筛选评分最高的5篇文章": {
+      "main": [
+        [
+          {
+            "node": "聚合Top 5文章信息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "聚合Top 5文章信息": {
+      "main": [
+        [
+          {
+            "node": "FR-06: 生成日报综述文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FR-06: 生成日报综述文章": {
+      "main": [
+        [
+          {
+            "node": "准备综述文章数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "准备综述文章数据": {
+      "main": [
+        [
+          {
+            "node": "FR-07: 存储日报到数据库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,385 @@
+{
+  "name": "每日AI新闻综述生成器",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 20 * * *"
+            }
+          ]
+        }
+      },
+      "id": "bed45009-2ac5-4027-8730-d27c3b01d4a2",
+      "name": "Daily 8PM Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -140,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "created_at",
+              "keyValue": "gte.{{ $('Set Dates').item.json.lastweekDate }}"
+            },
+            {
+              "keyName": "created_at",
+              "keyValue": "lt.{{ $moment($('Set Dates').item.json.currentDate).add(1, 'day').format('YYYY-MM-DD') }}"
+            }
+          ]
+        }
+      },
+      "id": "1b5a2f61-79ab-419e-8017-86f462c079a0",
+      "name": "Get Today's AI Articles",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        240,
+        40
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "check-articles-exist",
+              "leftValue": "={{ $json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b651d8e9-2e11-4973-8ca0-ad35cd466c2f",
+      "name": "Check Articles Available",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        440,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个专业的新闻编辑，需要从以下AI新闻文章中评估新闻价值并选择最重要的5篇。\n\n评估标准：\n1. 新闻的重要性和影响力\n2. 技术创新程度\n3. 行业影响范围\n4. 时效性和热度\n5. 对读者的价值\n\n请分析以下文章列表，为每篇文章打分（1-10分），并选择得分最高的5篇文章。\n\n文章列表：\n{{ JSON.stringify($json, null, 2) }}\n\n请按以下JSON格式返回结果：\n{\n  \"selected_articles\": [\n    {\n      \"id\": \"文章ID\",\n      \"title\": \"文章标题\",\n      \"score\": 评分,\n      \"reason\": \"选择理由\"\n    }\n  ]\n}\n\n只返回JSON格式，不要其他内容。",
+        "hasOutputParser": true
+      },
+      "id": "04929849-d35c-473d-b520-11c6134a6e14",
+      "name": "Evaluate News Value",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        640,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0889b038-c06c-4498-9187-a0472e810012",
+      "name": "OpenAI Evaluator",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        680,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "P5bLdiURYlpp7QED",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 解析AI评估结果并获取选中的文章详细信息\n * @returns {Array} 包含选中文章详细信息的数组\n */\nfunction processSelectedArticles() {\n  const evaluationResult = JSON.parse($json.text);\n  const selectedArticles = evaluationResult.selected_articles;\n  const allArticles = $('Get Today\\'s AI Articles').all();\n  \n  // 根据选中的ID获取完整的文章信息\n  const detailedArticles = selectedArticles.map(selected => {\n    const fullArticle = allArticles.find(article => \n      article.json.id === selected.id\n    );\n    \n    return {\n      ...fullArticle.json,\n      evaluation_score: selected.score,\n      selection_reason: selected.reason\n    };\n  });\n  \n  return detailedArticles;\n}\n\nreturn processSelectedArticles();"
+      },
+      "id": "c2bfcd87-fa68-4088-8753-48f863eceb8e",
+      "name": "Process Selected Articles",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。\n\n文章要求：\n1. 使用Markdown格式\n2. 包含引人入胜的标题\n3. 开头提供今日AI新闻要点总结（TL;DR）\n4. 按主题或重要性组织内容\n5. 每个新闻都要有简洁的分析和见解\n6. 结尾提供趋势分析和未来展望\n7. 保持客观、专业的新闻写作风格\n8. 字数控制在1500-2000字\n\n今日精选的5篇AI新闻：\n{{ JSON.stringify($json, null, 2) }}\n\n请撰写一篇高质量的AI新闻综述文章。文章应该：\n- 以## 开头作为主标题\n- 使用### 作为各个部分的小标题\n- 在文章开头包含**TL;DR**部分\n- 为每篇新闻提供深度分析\n- 在结尾提供行业趋势洞察\n\n开始撰写文章：",
+        "hasOutputParser": true
+      },
+      "id": "5bdf490e-d4de-4586-83e0-ee4eac819dc5",
+      "name": "Generate Summary Article",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        1160,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8d839048-8eef-445a-a646-06971018d3ab",
+      "name": "OpenAI Writer",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        260
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "P5bLdiURYlpp7QED",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "daily_ai_summaries",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "date",
+              "fieldValue": "={{ new Date().toISOString().split('T')[0] }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ new Date().toLocaleDateString('zh-CN') }} AI新闻综述"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.text }}"
+            },
+            {
+              "fieldId": "article_count",
+              "fieldValue": "5"
+            },
+            {
+              "fieldId": "selected_article_ids",
+              "fieldValue": "={{ JSON.stringify($('Process Selected Articles').all().map(item => item.json.id)) }}"
+            }
+          ]
+        }
+      },
+      "id": "74398de1-0935-4740-9003-44edf7301232",
+      "name": "Save Daily Summary",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        20
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# 每日AI新闻综述生成器\n\n此工作流每天晚上8点自动运行：\n1. 获取当天所有AI新闻\n2. 使用AI评估新闻价值\n3. 选择最重要的5篇新闻\n4. 生成综述风格文章\n5. 保存到数据库",
+        "height": 380,
+        "color": 4
+      },
+      "id": "4d901a08-db13-42c0-acac-b5194c6a86e0",
+      "name": "工作流说明",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "如果今天没有AI新闻，\n工作流将在此处停止",
+        "height": 100,
+        "color": 6
+      },
+      "id": "8a360434-afd2-4cf6-8e14-9387818648ed",
+      "name": "无文章提示",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        380,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f397bd4-d9c8-45d6-a4c4-aefc9ed55a08",
+              "name": "currentDate",
+              "value": "={{ $now.format('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "e4304954-16d0-46c4-8e00-463146724fc4",
+              "name": "lastweekDate",
+              "value": "={{ $now.minus({days: 7}).format('yyyy-MM-dd') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        40,
+        0
+      ],
+      "id": "9339403e-3f9a-4209-af2f-69e316338ac8",
+      "name": "Set Dates"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily 8PM Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Dates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Today's AI Articles": {
+      "main": [
+        [
+          {
+            "node": "Check Articles Available",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Articles Available": {
+      "main": [
+        [
+          {
+            "node": "Evaluate News Value",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate News Value": {
+      "main": [
+        [
+          {
+            "node": "Process Selected Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Evaluator": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate News Value",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Selected Articles": {
+      "main": [
+        [
+          {
+            "node": "Generate Summary Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Summary Article": {
+      "main": [
+        [
+          {
+            "node": "Save Daily Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Writer": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Summary Article",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Dates": {
+      "main": [
+        [
+          {
+            "node": "Get Today's AI Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "feef1586-6aa0-49f7-9c5e-3d2cacdb64d5",
+  "meta": {
+    "instanceId": "c9d82f2f367eefb1e52f3a01d2d66dea63879a38fa8edcdb4d1ccc32fd355f68"
+  },
+  "id": "GUOMUfbJ5g4g3rh5",
+  "tags": []
+}

@@ -1,0 +1,140 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "id": "start"
+    },
+    {
+      "parameters": {
+        "values": {
+          "json": [
+            {
+              "name": "outerData",
+              "value": "[{\"outerId\": 1, \"outerName\": \"Alpha\"}, {\"outerId\": 2, \"outerName\": \"Beta\"}]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set Outer Loop Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "id": "setOuterLoopData",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {
+          "mainProperty": "outerData"
+        }
+      },
+      "name": "Split Outer Loop",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "id": "splitOuterLoop",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "functionCode": "const outerItem = $json; // This is an item from the outer loop (e.g., { outerId: 1, outerName: \"Alpha\" })\n\nconst innerItems = [\n  { \"innerId\": \"a\", \"innerDesc\": \"First\" },\n  { \"innerId\": \"b\", \"innerDesc\": \"Second\" },\n  { \"innerId\": \"c\", \"innerDesc\": \"Third\" }\n]; // Simulate inner loop data\n\nconst results = [];\n\n// This loop simulates the 'nested' part, processing each inner item\n// and linking it with the current outer item's data.\nfor (const innerItem of innerItems) {\n  results.push({\n    json: {\n      combinedResult: `Outer ID: ${outerItem.outerId}, Outer Name: ${outerItem.outerName} | Inner ID: ${innerItem.innerId}, Inner Desc: ${innerItem.innerDesc}`\n    }\n  });\n}\n\nreturn results;"
+      },
+      "name": "Nested Logic Function",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "id": "nestedLogicFunction",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "options": {}
+      },
+      "name": "Merge All Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 1,
+      "id": "mergeAllResults",
+      "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "name": "Final Output",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "id": "finalOutput",
+      "executeOnce": false
+    }
+  ],
+  "connections": {
+    "start": {
+      "main": [
+        [
+          {
+            "node": "Set Outer Loop Data",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "setOuterLoopData": {
+      "main": [
+        [
+          {
+            "node": "Split Outer Loop",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "splitOuterLoop": {
+      "main": [
+        [
+          {
+            "node": "Nested Logic Function",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "nestedLogicFunction": {
+      "main": [
+        [
+          {
+            "node": "Merge All Results",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "mergeAllResults": {
+      "main": [
+        [
+          {
+            "node": "Final Output",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "id": "nestedLoopWorkflowExample",
+  "name": "Nested Loop Linked Methods Example",
+  "staticData": null,
+  "settings": {
+    "executionOrder": "nodes",
+    "timezone": "Asia/Shanghai",
+    "saveDataSuccess": true,
+    "saveDataError": true,
+    "saveManualExecutions": false,
+    "errorWorkflow": null,
+    "callerPolicy": "workflows",
+    "webhookErrorFlow": false
+  },
+  "nodesResources": {},
+  "pinData": {},
+  "versionId": "1"
+}

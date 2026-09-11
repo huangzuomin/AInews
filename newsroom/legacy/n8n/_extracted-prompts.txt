@@ -1,0 +1,1339 @@
+
+======================================================================
+### 123.json   （10 节点）
+
+======================================================================
+### AI____.json   （92 节点）
+
+--- [Is AI Related2]  type=chainLlm  model=None
+    <text>
+=分析以下文章标题和内容片段。
+
+判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。
+
+以单个单词输出，是 true 或 false。
+
+不要输出代码块或 Markdown，只需输出单词 true 或 false。
+
+### 判断标准：
+
+是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。
+是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。
+内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。
+如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。
+排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。
+排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。
+<文章标题>
+{{ $('Create RSS Item2').item.json.title }}
+</文章标题>
+
+<文章片段>
+{{ $('Create RSS Item2').item.json.content_snippet }}
+</文章片段>
+
+--- [Is AI Related3]  type=chainLlm  model=None
+    <text>
+=分析以下文章标题和内容片段。
+
+判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。
+
+以单个单词输出，是 true 或 false。
+
+不要输出代码块或 Markdown，只需输出单词 true 或 false。
+
+### 判断标准：
+
+是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。
+是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。
+内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。
+如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。
+排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。
+排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。
+<文章标题>
+{{ $('Create RSS Item3').item.json.title }}
+</文章标题>
+
+<文章片段>
+{{ $('Create RSS Item3').item.json.content_snippet }}
+</文章片段>
+
+--- [Write Article4]  type=chainLlm  model=None
+    <text>
+=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**
+
+1. 你将获得一个来自新闻源的 RSS 标题和内容片段：
+
+   ```
+   <rss_title>
+  {{ $('Supabase4').item.json.title }}
+   </rss_title>
+
+   <context_snippet>
+  {{ $('Supabase4').item.json.content_snippet }}
+   </context_snippet>
+   ```
+
+2. 你还将获得与标题相关的 Google 搜索内容：
+
+   ```
+   <google_search_content>
+{{ JSON.stringify($json).substring(0, 300000) }}
+   </google_search_content>
+   ```
+
+3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：
+   - 以标题和内容片段为基础
+   - 信息丰富
+   - 引人入胜
+   - 结构良好
+
+4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：
+   - 标题（主标题使用 ##，副标题使用 ###）
+   - 段落（用空行分隔）
+   - 在适当的地方使用粗体和斜体文本
+   - 如有需要，使用无序列表或有序列表
+   - 对来自源的任何直接引语使用块引用
+
+5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：
+   - 使用标题指导主要主题
+   - 使用搜索内容提供更多细节和背景
+
+6. 在整篇文章中保持中立、新闻报道的基调：
+   - 客观地呈现事实
+   - 不要包含个人观点或偏见
+   - 使用第三人称视角
+
+7. 按照以下结构安排文章：
+   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。
+   - 撰写引人注目的引言，总结关键要点
+   - 撰写结论，总结文章并可能提出未来的影响
+
+8. 如适用，包含：
+   - 相关统计数据或数据点
+   - 简要提及主要利益相关者或专家
+   - 关于这条新闻为何重要或具有影响力的背景
+
+9. 使用 Wikipedia 风格的 Markdown 格式引用：
+   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。
+   - 按顺序使用脚注，不要跳过任何数字
+   - 在文章末尾包含一个 ## References（参考文献）部分
+   - 每条参考文献格式如下：
+     [^1]: 作者姓名（如可用）（日期）。"[文章标题](URL)"。出版物名称。检索日期 [当前日期]。
+   - 如果没有作者姓名，以文章标题开头
+   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法
+   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用
+
+10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。
+
+11. 文章之后，提供一个简要的元数据部分：
+    - 主要关键词或标签（此部分不包含链接）
+
+12. 在完成文章之前仔细检查脚注：
+    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目
+    - 验证脚注编号是顺序的（1、2、3 等），没有跳号
+
+请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。
+
+--- [Is AI Related4]  type=chainLlm  model=None
+    <text>
+=分析以下文章标题和内容片段。
+
+判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。
+
+以单个单词输出，是 true 或 false。
+
+不要输出代码块或 Markdown，只需输出单词 true 或 false。
+
+### 判断标准：
+
+是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。
+是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。
+内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。
+如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。
+排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。
+排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。
+<文章标题>
+{{ $('Create RSS Item4').item.json.title }}
+</文章标题>
+
+<文章片段>
+{{ $('Create RSS Item4').item.json.content_snippet }}
+</文章片段>
+
+--- [Write Article5]  type=chainLlm  model=None
+    <text>
+=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**
+
+1. 你将获得一个来自新闻源的 RSS 标题和内容片段：
+
+   ```
+   <rss_title>
+  {{ $('Supabase5').item.json.title }}
+   </rss_title>
+
+   <context_snippet>
+  {{ $('Supabase5').item.json.content_snippet }}
+   </context_snippet>
+   ```
+
+2. 你还将获得与标题相关的 Google 搜索内容：
+
+   ```
+   <google_search_content>
+{{ JSON.stringify($json).substring(0, 300000) }}
+   </google_search_content>
+   ```
+
+3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：
+   - 以标题和内容片段为基础
+   - 信息丰富
+   - 引人入胜
+   - 结构良好
+
+4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：
+   - 标题（主标题使用 ##，副标题使用 ###）
+   - 段落（用空行分隔）
+   - 在适当的地方使用粗体和斜体文本
+   - 如有需要，使用无序列表或有序列表
+   - 对来自源的任何直接引语使用块引用
+
+5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：
+   - 使用标题指导主要主题
+   - 使用搜索内容提供更多细节和背景
+
+6. 在整篇文章中保持中立、新闻报道的基调：
+   - 客观地呈现事实
+   - 不要包含个人观点或偏见
+   - 使用第三人称视角
+
+7. 按照以下结构安排文章：
+   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。
+   - 撰写引人注目的引言，总结关键要点
+   - 撰写结论，总结文章并可能提出未来的影响
+
+8. 如适用，包含：
+   - 相关统计数据或数据点
+   - 简要提及主要利益相关者或专家
+   - 关于这条新闻为何重要或具有影响力的背景
+
+9. 使用 Wikipedia 风格的 Markdown 格式引用：
+   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。
+   - 按顺序使用脚注，不要跳过任何数字
+   - 在文章末尾包含一个 ## References（参考文献）部分
+   - 每条参考文献格式如下：
+     [^1]: 作者姓名（如可用）（日期）。"[文章标题](URL)"。出版物名称。检索日期 [当前日期]。
+   - 如果没有作者姓名，以文章标题开头
+   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法
+   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用
+
+10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。
+
+11. 文章之后，提供一个简要的元数据部分：
+    - 主要关键词或标签（此部分不包含链接）
+
+12. 在完成文章之前仔细检查脚注：
+    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目
+    - 验证脚注编号是顺序的（1、2、3 等），没有跳号
+
+请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。
+
+--- [Is AI Related7]  type=chainLlm  model=None
+    <text>
+=分析以下文章标题和内容片段。
+
+判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯，同时确保新闻是4小时以内的最新更新。
+
+以单个单词输出，是 true 或 false。
+
+不要输出代码块或 Markdown，只需输出单词 true 或 false。
+
+### 判断标准：
+
+**时效性要求：**
+- 文章发布时间必须在当前时间的4小时以内
+- 发布时间：{{ $('Create RSS Item7').item.json.pub_date }}
+- 当前时间：{{ new Date().toISOString() }}
+- 时间差：{{ Math.abs(new Date() - new Date($('Create RSS Item7').item.json.pub_date)) / (1000 * 60 * 60) }} 小时
+
+**内容相关性要求：**
+- 是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。
+- 是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。
+- 内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。
+- 如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。
+- 排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。
+- 排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。
+
+**综合判断：**
+只有同时满足时效性要求（4小时以内）和内容相关性要求的文章才返回 true，否则返回 false。
+
+<文章标题>
+{{ $('Create RSS Item7').item.json.title }}
+</文章标题>
+
+<文章片段>
+{{ $('Create RSS Item7').item.json.content_snippet }}
+</文章片段>
+
+<发布时间>
+{{ $('Create RSS Item7').item.json.pub_date }}
+</发布时间>
+
+--- [Write Article3]  type=chainLlm  model=None
+    <text>
+=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**
+
+1. 你将获得一个来自新闻源的 RSS 标题和内容片段：
+
+   ```
+   <rss_title>
+  {{ $('Supabase3').item.json.title }}
+   </rss_title>
+
+   <context_snippet>
+  {{ $('Supabase3').item.json.content_snippet }}
+   </context_snippet>
+   ```
+
+2. 你还将获得与标题相关的 Google 搜索内容：
+
+   ```
+   <google_search_content>
+{{ JSON.stringify($json).substring(0, 300000) }}
+   </google_search_content>
+   ```
+
+3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：
+   - 以标题和内容片段为基础
+   - 信息丰富
+   - 引人入胜
+   - 结构良好
+
+4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：
+   - 标题（主标题使用 ##，副标题使用 ###）
+   - 段落（用空行分隔）
+   - 在适当的地方使用粗体和斜体文本
+   - 如有需要，使用无序列表或有序列表
+   - 对来自源的任何直接引语使用块引用
+
+5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：
+   - 使用标题指导主要主题
+   - 使用搜索内容提供更多细节和背景
+
+6. 在整篇文章中保持中立、新闻报道的基调：
+   - 客观地呈现事实
+   - 不要包含个人观点或偏见
+   - 使用第三人称视角
+
+7. 按照以下结构安排文章：
+   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。
+   - 撰写引人注目的引言，总结关键要点
+   - 撰写结论，总结文章并可能提出未来的影响
+
+8. 如适用，包含：
+   - 相关统计数据或数据点
+   - 简要提及主要利益相关者或专家
+   - 关于这条新闻为何重要或具有影响力的背景
+
+9. 使用 Wikipedia 风格的 Markdown 格式引用：
+   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。
+   - 按顺序使用脚注，不要跳过任何数字
+   - 在文章末尾包含一个 ## References（参考文献）部分
+   - 每条参考文献格式如下：
+     [^1]: 作者姓名（如可用）（日期）。"[文章标题](URL)"。出版物名称。检索日期 [当前日期]。
+   - 如果没有作者姓名，以文章标题开头
+   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法
+   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用
+
+10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。
+
+11. 文章之后，提供一个简要的元数据部分：
+    - 主要关键词或标签（此部分不包含链接）
+
+12. 在完成文章之前仔细检查脚注：
+    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目
+    - 验证脚注编号是顺序的（1、2、3 等），没有跳号
+
+请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。
+
+--- [Is AI Related]  type=chainLlm  model=None
+    <text>
+=分析以下文章标题和内容片段。
+
+判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯，同时确保新闻是12小时以内的最新更新。
+
+以单个单词输出，是 true 或 false。
+
+不要输出代码块或 Markdown，只需输出单词 true 或 false。
+
+### 判断标准：
+
+**时效性要求：**
+- 文章发布时间必须在当前时间的4小时以内
+- 发布时间：{{ $('Create RSS Item').item.json.pub_date }}
+- 当前时间：{{ new Date().toISOString() }}
+- 时间差：{{ Math.abs(new Date() - new Date($('Create RSS Item').item.json.pub_date)) / (1000 * 60 * 60) }} 小时
+
+**内容相关性要求：**
+- 是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。
+- 是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。
+- 内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。
+- 如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。
+- 排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。
+- 排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。
+
+**综合判断：**
+只有同时满足时效性要求（12小时以内）和内容相关性要求的文章才返回 true，否则返回 false。
+
+<文章标题>
+{{ $('Create RSS Item').item.json.title }}
+</文章标题>
+
+<文章片段>
+{{ $('Create RSS Item').item.json.content_snippet }}
+</文章片段>
+
+<发布时间>
+{{ $('Create RSS Item').item.json.pub_date }}
+</发布时间>
+
+--- [Write Article8]  type=chainLlm  model=None
+    <text>
+=**你是一名专业的科技记者，模仿MIT Technology Review资深记者
+Karen Hao的写作风格，任务是根据RSS标题、内容片段和Google搜索的
+参考资料撰写一篇深度新闻文章。请仔细遵循以下说明：**
+
+## 写作风格要求：
+- 采用深度分析的叙事方式，不仅报道事实，更要探讨背后的技术原理和
+社会影响
+- 使用清晰、准确的技术语言，但保持对普通读者的可读性
+- 在客观报道的基础上，提供有见地的分析和前瞻性思考
+- 关注AI技术对社会、伦理、经济的深层影响
+- 采用结构化的论述方式，逻辑清晰，层次分明
+
+## 数据输入：
+
+1. RSS标题和内容片段：
+```
+<rss_title>
+{{ $('Supabase9').item.json.title }}
+</rss_title>
+
+<context_snippet>
+{{ $('Supabase9').item.json.content_snippet }}
+</context_snippet>
+
+```
+
+2. Google搜索参考内容：
+```
+<google_search_content>
+{{ JSON.stringify($json).substring(0, 300000) }}
+</google_search_content>
+
+```
+
+## 文章要求：
+
+3. **内容深度**：
+- 以RSS标题和内容片段为核心，深度挖掘技术细节
+- 利用Google搜索内容提供丰富的背景信息和多角度分析
+- 信息丰富、引人入胜、结构良好
+- 体现Karen Hao式的深度思考和前瞻性视角
+
+4. **Markdown格式**：
+- 如有副标题，使用 ###
+- 段落用空行分隔
+- 适当使用**粗体**和*斜体*强调关键信息
+- 使用无序列表或有序列表组织复杂信息
+- 重要引语使用块引用格式
+
+5. **灵活的文章结构**（根据内容选择最适合的组织方式）：
+
+**必备要素**：
+- **TL;DR**：使用引文格式（> 开头）用2-3句简洁中文概括文章核心要点
+
+**结构选择原则**：
+
+**A. 突发新闻型**（适用于重大发布、突发事件）：
+- 开门见山陈述核心事实
+- 按重要性递减顺序展开细节
+- 用自然段落流畅叙述，无需小标题
+- 重点突出"什么发生了"和"为什么重要"
+
+**B. 深度分析型**（适用于技术解析、趋势分析）：
+- 可使用2-3个核心小标题组织复杂内容
+- ### 技术原理解析
+- ### 行业影响分析  
+- ### 未来发展趋势
+- 每个部分内部仍以自然段落为主
+
+**C. 人物/公司聚焦型**（适用于企业动态、人物专访）：
+- 以故事化叙述为主线
+- 按时间线或逻辑关系自然展开
+- 避免生硬的小标题分割
+- 重点突出人物观点或企业策略
+
+**D. 对比分析型**（适用于竞品比较、政策对比）：
+- 可使用对比性小标题（如需要）
+- ### A方案 vs B方案
+- ### 优势与挑战
+- 或直接用段落进行对比叙述
+
+**E. 教程/解释型**（适用于技术科普、概念解释）：
+- 按逻辑层次递进
+- 可使用问题式小标题
+- ### 这项技术如何工作？
+- ### 它解决了什么问题？
+- 保持解释的连贯性
+
+**结构决策指南**：
+- 内容简单直接 → 用自然段落，无小标题
+- 内容复杂多层 → 最多3个小标题辅助组织
+- 信息密集 → 适当使用列表和引用块
+- 故事性强 → 按叙述逻辑自然展开
+- 技术性强 → 按理解难度递进组织
+
+**段落组织原则**：
+- 每段聚焦一个核心观点
+- 段落间逻辑关系清晰
+- 使用过渡句连接不同观点
+- 重要信息用**粗体**或*斜体*突出
+- 关键数据和引语独立成段
+
+6. **引用格式**（使用准确时间参数）：
+- 文中使用脚注式引用：[^1]、[^2]等
+- 按顺序编号，不跳号
+- 文章末尾包含## References部分
+- 每条参考文献格式：
+  [^1]: 作者姓名（如可用）（{{ new Date($json.
+  publishedDate || Date.now()).toLocaleDateString
+  ('zh-CN') }}）。"[文章标题](URL)"。出版物名称。检索日期
+
+--- [Write Article]  type=chainLlm  model=None
+    <text>
+=**你是一名专业的科技记者，模仿MIT Technology Review资深记者
+Karen Hao的写作风格，任务是根据RSS标题、内容片段和Google搜索的
+参考资料撰写一篇深度新闻文章。请仔细遵循以下说明：**
+
+## 写作风格要求：
+- 采用深度分析的叙事方式，不仅报道事实，更要探讨背后的技术原理和
+社会影响
+- 使用清晰、准确的技术语言，但保持对普通读者的可读性
+- 在客观报道的基础上，提供有见地的分析和前瞻性思考
+- 关注AI技术对社会、伦理、经济的深层影响
+- 采用结构化的论述方式，逻辑清晰，层次分明
+
+## 数据输入：
+
+1. RSS标题和内容片段：
+```
+<rss_title>
+{{ $('Supabase11').item.json.title }}
+</rss_title>
+
+<context_snippet>
+{{ $('Supabase11').item.json.content_snippet }}
+</context_snippet>
+
+```
+
+2. Google搜索参考内容：
+```
+<google_search_content>
+{{ JSON.stringify($json).substring(0, 300000) }}
+</google_search_content>
+
+```
+
+## 文章要求：
+
+3. **内容深度**：
+- 以RSS标题和内容片段为核心，深度挖掘技术细节
+- 利用Google搜索内容提供丰富的背景信息和多角度分析
+- 信息丰富、引人入胜、结构良好
+- 体现Karen Hao式的深度思考和前瞻性视角
+
+4. **Markdown格式**：
+- 如有副标题，使用 ### （标题有独立字段，无需在这里添加标题）
+- 段落用空行分隔
+- 适当使用**粗体**和*斜体*强调关键信息
+- 使用无序列表或有序列表组织复杂信息
+- 重要引语使用块引用格式
+
+5. **灵活的文章结构**（根据内容选择最适合的组织方式）：
+
+**必备要素**：
+- **TL;DR**：使用引文格式（> 开头）用2-3句简洁中文概括文章核心
+要点
+
+**结构选择原则**：
+
+**A. 突发新闻型**（适用于重大发布、突发事件）：
+- 开门见山陈述核心事实
+- 按重要性递减顺序展开细节
+- 用自然段落流畅叙述，无需小标题
+- 重点突出"什么发生了"和"为什么重要"
+
+**B. 深度分析型**（适用于技术解析、趋势分析）：
+- 可使用2-3个核心小标题组织复杂内容
+- ### 技术原理解析
+- ### 行业影响分析
+- ### 未来发展趋势
+- 每个部分内部仍以自然段落为主
+
+**C. 人物/公司聚焦型**（适用于企业动态、人物专访）：
+- 以故事化叙述为主线
+- 按时间线或逻辑关系自然展开
+- 避免生硬的小标题分割
+- 重点突出人物观点或企业策略
+
+**D. 对比分析型**（适用于竞品比较、政策对比）：
+- 可使用对比性小标题（如需要）
+- ### A方案 vs B方案
+- ### 优势与挑战
+- 或直接用段落进行对比叙述
+
+**E. 教程/解释型**（适用于技术科普、概念解释）：
+- 按逻辑层次递进
+- 可使用问题式小标题
+- ### 这项技术如何工作？
+- ### 它解决了什么问题？
+- 保持解释的连贯性
+
+**结构决策指南**：
+- 内容简单直接 → 用自然段落，无小标题
+- 内容复杂多层 → 最多3个小标题辅助组织
+- 信息密集 → 适当使用列表和引用块
+- 故事性强 → 按叙述逻辑自然展开
+- 技术性强 → 按理解难度递进组织
+
+**段落组织原则**：
+- 每段聚焦一个核心观点
+- 段落间逻辑关系清晰
+- 使用过渡句连接不同观点
+- 重要信息用**粗体**或*斜体*突出
+- 关键数据和引语独立成段
+
+6. **引用格式**（使用准确时间参数）：
+- 文中使用脚注式引用：[^1]、[^2]等
+- 按顺序编号，不跳号
+- 文章末尾包含## References部分
+- 每条参考文献格式：
+  [^1]: 作者姓名（如可用）（{{ new Date($json.
+  publishedDate || Date.now()).toLocaleDateString
+  ('zh-CN') }}）。"[文
+
+--- [Google Gemini Chat Model]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model1]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model2]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model3]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model4]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model5]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model6]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model7]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model8]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model9]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model10]  type=lmChatGoogleGemini  model=None
+
+--- [标题翻译]  type=chainLlm  model=None
+
+--- [标题翻译2]  type=chainLlm  model=None
+
+--- [Google Gemini Chat Model12]  type=lmChatGoogleGemini  model=None
+
+--- [标题翻译3]  type=chainLlm  model=None
+
+--- [Google Gemini Chat Model13]  type=lmChatGoogleGemini  model=None
+
+--- [标题翻译4]  type=chainLlm  model=None
+
+--- [Google Gemini Chat Model14]  type=lmChatGoogleGemini  model=None
+
+======================================================================
+### AI_Daily_Report_Workflow.json   （18 节点）
+
+--- [Basic LLM Chain]  type=chainLlm  model=None
+    <text>
+=你是一位资深的AI行业分析师。请仔细阅读并分析以下这篇完整的AI文章内容，并根据以下维度对其进行评分。请返回1.0到10.0之间的浮点数分数，以提高评分的精确度。\n\n评分维度:\n1. novelty_score: 创新性，是否包含突破性技术或新颖观点。\n2. impact_score: 影响力，主题对行业的潜在影响。\n3. clarity_score: 清晰度，文章结构和论述的清晰程度。\n4. depth_score: 深度，内容是否提供了深入的分析。\n\n文章内容:\n\"\"\"\n{{ $json.content }}\n\"\"\"\n\n请严格按照以下JSON格式返回你的评分结果:\n{\n  \"novelty_score\": 8.5,\n  \"impact_score\": 9.2,\n  \"clarity_score\": 7.8,\n  \"depth_score\": 8.9\n
+
+--- [Google Gemini Chat Model]  type=lmChatGoogleGemini  model=None
+    <content>
+你是一位资深的AI技术专家和内容评估师。请对以下AI相关文章进行全面评估，从四个维度进行打分（1-10分）：
+
+1. **新颖性 (Novelty)**: 文章内容的创新程度和前沿性
+2. **影响力 (Impact)**: 对AI领域可能产生的影响和重要性
+3. **清晰度 (Clarity)**: 文章表达的清晰度和可读性
+4. **深度 (Depth)**: 技术分析的深入程度和专业性
+
+请严格按照以下JSON格式返回评分结果：
+```json
+{
+  "novelty_score": 数字,
+  "impact_score": 数字,
+  "clarity_score": 数字,
+  "depth_score": 数字,
+  "reasoning": "评分理由说明"
+}
+```
+
+文章信息：
+标题：{{ $json.title }}
+内容：{{ $json.content }}
+摘要：{{ $json.summary }}
+
+--- [Basic LLM Chain1]  type=chainLlm  model=None
+    <text>
+=你是一位顶级的科技媒体主编，你的任务是将今天最重要的AI文章整合成一篇高质量的"AI日报"。请严格按照指定的Markdown格式输出。
+
+今天是 {{ $now.toFormat('yyyy年MM月dd日') }}。
+
+以下是精选文章的核心信息：
+{{ $json.top_articles.map((article, index) => `
+---
+文章${index + 1}:
+内容: ${article.content.substring(0, 2000)}...
+评分: ${article.ai_score}
+---
+`).join('') }}
+
+请生成日报，包含以下部分：
+1. 一个吸引人的日报大标题。格式为: "AI内参日报 | yyyy年MM月dd日: <当日最重要新闻简短概括>"
+2. 一段150字左右的开篇导语。
+3. 为每篇文章生成一个包含"### 标题"、"核心看点"、"内容摘要"的摘要模块。
+4. 一段100字左右的结尾总结。
+
+请确保语言专业、流畅、精炼。直接输出Markdown格式的全文。
+
+--- [Google Gemini Chat Model1]  type=lmChatGoogleGemini  model=None
+
+======================================================================
+### AI_Daily_Report_Workflow1.json   （11 节点）
+
+======================================================================
+### Daily_AI_News_Summary_Workflow.json   （13 节点）
+
+--- [Evaluate News Value]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要从以下AI新闻文章中评估新闻价值并选择最重要的5篇。
+
+评估标准：
+1. 新闻的重要性和影响力
+2. 技术创新程度
+3. 行业影响范围
+4. 时效性和热度
+5. 对读者的价值
+
+请分析以下文章列表，为每篇文章打分（1-10分），并选择得分最高的5篇文章。
+
+文章列表：
+{{ JSON.stringify($json, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "selected_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分,
+      "reason": "选择理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Generate Summary Article]  type=chainLlm  model=None
+    <text>
+=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。
+
+文章要求：
+1. 使用Markdown格式
+2. 包含引人入胜的标题
+3. 开头提供今日AI新闻要点总结（TL;DR）
+4. 按主题或重要性组织内容
+5. 每个新闻都要有简洁的分析和见解
+6. 结尾提供趋势分析和未来展望
+7. 保持客观、专业的新闻写作风格
+8. 字数控制在1500-2000字
+
+今日精选的5篇AI新闻：
+{{ JSON.stringify($json, null, 2) }}
+
+请撰写一篇高质量的AI新闻综述文章。文章应该：
+- 以## 开头作为主标题
+- 使用### 作为各个部分的小标题
+- 在文章开头包含**TL;DR**部分
+- 为每篇新闻提供深度分析
+- 在结尾提供行业趋势洞察
+
+开始撰写文章：
+
+--- [Google Gemini Chat Model]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model1]  type=lmChatGoogleGemini  model=None
+
+======================================================================
+### Daily_AI_Summaries.json   （26 节点）
+
+--- [Evaluate Article Batch 1]  type=chainLlm  model=None
+    <text>
+=
+你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。
+
+**评估标准**：
+- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：
+- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)
+- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)
+- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)
+- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)
+- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)
+
+
+综合评分：
+- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。
+- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。
+
+**文章信息**：
+- 标题：{{ $json.title }}
+- 内容：{{ $json.content }}
+- 发布时间：{{ $json.published_at }}
+- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。
+
+**输出格式**：
+请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：
+```json
+{
+  "id": "{{ $json.id }}",
+  "title": "{{ $json.title }}",
+  "score": 综合评分（满分50，保留2位小数）,
+  "reason": "评分理由，简要说明每项评分的依据",
+  "batch_id": {{ $json.batchId }}
+}
+```
+
+--- [Evaluate Article Batch 2]  type=chainLlm  model=None
+    <text>
+=
+你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。
+
+**评估标准**：
+- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：
+- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)
+- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)
+- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)
+- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)
+- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)
+
+
+综合评分：
+- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。
+- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。
+
+**文章信息**：
+- 标题：{{ $json.title }}
+- 内容：{{ $json.content }}
+- 发布时间：{{ $json.published_at }}
+- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。
+
+**输出格式**：
+请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：
+```json
+{
+  "id": "{{ $json.id }}",
+  "title": "{{ $json.title }}",
+  "score": 综合评分（满分50，保留2位小数）,
+  "reason": "评分理由，简要说明每项评分的依据",
+  "batch_id": {{ $json.batchId }}
+}
+```
+
+--- [Evaluate Article Batch 3]  type=chainLlm  model=None
+    <text>
+=
+你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。
+
+**评估标准**：
+- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：
+- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)
+- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)
+- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)
+- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)
+- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)
+
+
+综合评分：
+- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。
+- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。
+
+**文章信息**：
+- 标题：{{ $json.title }}
+- 内容：{{ $json.content }}
+- 发布时间：{{ $json.published_at }}
+- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。
+
+**输出格式**：
+请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：
+```json
+{
+  "id": "{{ $json.id }}",
+  "title": "{{ $json.title }}",
+  "score": 综合评分（满分50，保留2位小数）,
+  "reason": "评分理由，简要说明每项评分的依据",
+  "batch_id": {{ $json.batchId }}
+}
+```
+
+--- [Evaluate Article Batch 4]  type=chainLlm  model=None
+    <text>
+=
+你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。
+
+**评估标准**：
+- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：
+- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)
+- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)
+- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)
+- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)
+- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)
+
+
+综合评分：
+- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。
+- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。
+
+**文章信息**：
+- 标题：{{ $json.title }}
+- 内容：{{ $json.content }}
+- 发布时间：{{ $json.published_at }}
+- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。
+
+**输出格式**：
+请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：
+```json
+{
+  "id": "{{ $json.id }}",
+  "title": "{{ $json.title }}",
+  "score": 综合评分（满分50，保留2位小数）,
+  "reason": "评分理由，简要说明每项评分的依据",
+  "batch_id": {{ $json.batchId }}
+}
+```
+
+--- [Evaluate Article Batch 5]  type=chainLlm  model=None
+    <text>
+=
+你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。
+
+**评估标准**：
+- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：
+- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)
+- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)
+- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)
+- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)
+- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)
+
+
+综合评分：
+- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。
+- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。
+
+**文章信息**：
+- 标题：{{ $json.title }}
+- 内容：{{ $json.content }}
+- 发布时间：{{ $json.published_at }}
+- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。
+
+**输出格式**：
+请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：
+```json
+{
+  "id": "{{ $json.id }}",
+  "title": "{{ $json.title }}",
+  "score": 综合评分（满分50，保留2位小数）,
+  "reason": "评分理由，简要说明每项评分的依据",
+  "batch_id": {{ $json.batchId }}
+}
+```
+
+--- [Generate Summary Article]  type=chainLlm  model=None
+    <text>
+=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。
+
+文章要求：
+1. 使用Markdown格式
+2. 包含引人入胜的标题
+3. 开头提供今日AI新闻要点总结（TL;DR）
+4. 按主题或重要性组织内容
+5. 每个新闻都要有简洁的分析和见解
+6. 结尾提供趋势分析和未来展望
+7. 保持客观、专业的新闻写作风格
+8. 字数控制在1500-2000字
+
+今日精选的5篇AI新闻：
+{{ JSON.stringify($json.detailedArticles, null, 2) }}
+
+评估统计信息：
+{{ JSON.stringify($json.dailySummary.evaluation_summary, null, 2) }}
+
+请撰写一篇高质量的AI新闻综述文章。文章应该：
+- 以## 开头作为主标题
+- 使用### 作为各个部分的小标题
+- 在文章开头包含**TL;DR**部分
+- 为每篇新闻提供深度分析
+- 在结尾提供行业趋势洞察
+
+开始撰写文章：
+
+--- [Google Gemini Chat Model]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model1]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model2]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model3]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model4]  type=lmChatGoogleGemini  model=None
+
+--- [Google Gemini Chat Model5]  type=lmChatGoogleGemini  model=None
+
+======================================================================
+### hugo_sync_workflow.json   （16 节点）
+
+======================================================================
+### My workflow 8.json   （44 节点）
+
+--- [分析图片并生成内容]  type=openAi  model={'__rl': True, 'mode': 'list', 'value': 'gpt-4o-mini', 'cachedResultName': 'GPT-4O-MINI'}
+
+--- [分析内容并生成Instagram标题]  type=openAi  model={'__rl': True, 'mode': 'list', 'value': 'gpt-4o-mini', 'cachedResultName': 'GPT-4O-MINI'}
+
+======================================================================
+### My_workflow.json   （84 节点）
+
+--- [OpenAI Chat Model5]  type=lmChatOpenAi  model=None
+
+--- [OpenAI Chat Model6]  type=lmChatOpenAi  model=None
+
+--- [Is AI Related2]  type=chainLlm  model=None
+
+--- [OpenAI Chat Model7]  type=lmChatOpenAi  model=None
+
+--- [OpenAI Chat Model8]  type=lmChatOpenAi  model=None
+
+--- [Is AI Related3]  type=chainLlm  model=None
+
+--- [Write Article4]  type=chainLlm  model=None
+
+--- [OpenAI Chat Model9]  type=lmChatOpenAi  model=None
+
+--- [OpenAI Chat Model10]  type=lmChatOpenAi  model=None
+
+--- [Is AI Related4]  type=chainLlm  model=None
+
+--- [Write Article5]  type=chainLlm  model=None
+
+--- [OpenAI Chat Model15]  type=lmChatOpenAi  model=None
+
+--- [OpenAI Chat Model16]  type=lmChatOpenAi  model=None
+
+--- [Is AI Related7]  type=chainLlm  model=None
+
+--- [Write Article3]  type=chainLlm  model=None
+
+--- [OpenAI Chat Model]  type=lmChatOpenAi  model=None
+
+--- [OpenAI Chat Model17]  type=lmChatOpenAi  model=None
+
+--- [Is AI Related]  type=chainLlm  model=None
+
+--- [Write Article8]  type=chainLlm  model=None
+
+--- [Write Article]  type=chainLlm  model=None
+
+======================================================================
+### My_workflow_7.json   （12 节点）
+
+======================================================================
+### nested_loop_workflow.json   （6 节点）
+
+======================================================================
+### Optimized_Daily_AI_News_Summary_Workflow.json   （15 节点）
+
+--- [Evaluate Article Batch 1]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要评估以下AI新闻文章的新闻价值。
+
+评估标准：
+1. 新闻的重要性和影响力 (1-10分)
+2. 技术创新程度 (1-10分)
+3. 行业影响范围 (1-10分)
+4. 时效性和热度 (1-10分)
+5. 对读者的价值 (1-10分)
+
+请为每篇文章打分，综合评分为各项得分的平均值。
+
+这是第{{ $json.batchId }}批，共{{ $json.totalBatches }}批文章：
+{{ JSON.stringify($json.articles, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "batch_id": {{ $json.batchId }},
+  "evaluated_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分(保留1位小数),
+      "reason": "评分理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Evaluate Article Batch 2]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要评估以下AI新闻文章的新闻价值。
+
+评估标准：
+1. 新闻的重要性和影响力 (1-10分)
+2. 技术创新程度 (1-10分)
+3. 行业影响范围 (1-10分)
+4. 时效性和热度 (1-10分)
+5. 对读者的价值 (1-10分)
+
+请为每篇文章打分，综合评分为各项得分的平均值。
+
+这是第{{ $json.batchId }}批，共{{ $json.totalBatches }}批文章：
+{{ JSON.stringify($json.articles, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "batch_id": {{ $json.batchId }},
+  "evaluated_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分(保留1位小数),
+      "reason": "评分理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Evaluate Article Batch 3]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要评估以下AI新闻文章的新闻价值。
+
+评估标准：
+1. 新闻的重要性和影响力 (1-10分)
+2. 技术创新程度 (1-10分)
+3. 行业影响范围 (1-10分)
+4. 时效性和热度 (1-10分)
+5. 对读者的价值 (1-10分)
+
+请为每篇文章打分，综合评分为各项得分的平均值。
+
+这是第{{ $json.batchId }}批，共{{ $json.totalBatches }}批文章：
+{{ JSON.stringify($json.articles, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "batch_id": {{ $json.batchId }},
+  "evaluated_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分(保留1位小数),
+      "reason": "评分理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Evaluate Article Batch 4]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要评估以下AI新闻文章的新闻价值。
+
+评估标准：
+1. 新闻的重要性和影响力 (1-10分)
+2. 技术创新程度 (1-10分)
+3. 行业影响范围 (1-10分)
+4. 时效性和热度 (1-10分)
+5. 对读者的价值 (1-10分)
+
+请为每篇文章打分，综合评分为各项得分的平均值。
+
+这是第{{ $json.batchId }}批，共{{ $json.totalBatches }}批文章：
+{{ JSON.stringify($json.articles, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "batch_id": {{ $json.batchId }},
+  "evaluated_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分(保留1位小数),
+      "reason": "评分理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Evaluate Article Batch 5]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要评估以下AI新闻文章的新闻价值。
+
+评估标准：
+1. 新闻的重要性和影响力 (1-10分)
+2. 技术创新程度 (1-10分)
+3. 行业影响范围 (1-10分)
+4. 时效性和热度 (1-10分)
+5. 对读者的价值 (1-10分)
+
+请为每篇文章打分，综合评分为各项得分的平均值。
+
+这是第{{ $json.batchId }}批，共{{ $json.totalBatches }}批文章：
+{{ JSON.stringify($json.articles, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "batch_id": {{ $json.batchId }},
+  "evaluated_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分(保留1位小数),
+      "reason": "评分理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [Generate Summary Article]  type=chainLlm  model=None
+    <text>
+=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。
+
+文章要求：
+1. 使用Markdown格式
+2. 包含引人入胜的标题
+3. 开头提供今日AI新闻要点总结（TL;DR）
+4. 按主题或重要性组织内容
+5. 每个新闻都要有简洁的分析和见解
+6. 结尾提供趋势分析和未来展望
+7. 保持客观、专业的新闻写作风格
+8. 字数控制在1500-2000字
+
+今日精选的5篇AI新闻：
+{{ JSON.stringify($json.detailedArticles, null, 2) }}
+
+评估统计信息：
+{{ JSON.stringify($json.dailySummary.evaluation_summary, null, 2) }}
+
+请撰写一篇高质量的AI新闻综述文章。文章应该：
+- 以## 开头作为主标题
+- 使用### 作为各个部分的小标题
+- 在文章开头包含**TL;DR**部分
+- 为每篇新闻提供深度分析
+- 在结尾提供行业趋势洞察
+
+开始撰写文章：
+
+======================================================================
+### steemit_sync_workflow.json   （11 节点）
+
+======================================================================
+### steemit_workflow.json   （12 节点）
+
+======================================================================
+### test.json   （10 节点）
+
+======================================================================
+### Weekly_AI_News_Digest_with_Perplexity_AI_and_Gmail_Newsletter.json   （7 节点）
+
+======================================================================
+### Weekly_AI_News_Digest_with_Perplexity_AI_and_Gmail_Newsletter2.json   （12 节点）
+
+--- [Evaluate News Value]  type=chainLlm  model=None
+    <text>
+=你是一个专业的新闻编辑，需要从以下AI新闻文章中评估新闻价值并选择最重要的5篇。
+
+评估标准：
+1. 新闻的重要性和影响力
+2. 技术创新程度
+3. 行业影响范围
+4. 时效性和热度
+5. 对读者的价值
+
+请分析以下文章列表，为每篇文章打分（1-10分），并选择得分最高的5篇文章。
+
+文章列表：
+{{ JSON.stringify($json, null, 2) }}
+
+请按以下JSON格式返回结果：
+{
+  "selected_articles": [
+    {
+      "id": "文章ID",
+      "title": "文章标题",
+      "score": 评分,
+      "reason": "选择理由"
+    }
+  ]
+}
+
+只返回JSON格式，不要其他内容。
+
+--- [OpenAI Evaluator]  type=lmChatOpenAi  model=None
+
+--- [Generate Summary Article]  type=chainLlm  model=None
+    <text>
+=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。
+
+文章要求：
+1. 使用Markdown格式
+2. 包含引人入胜的标题
+3. 开头提供今日AI新闻要点总结（TL;DR）
+4. 按主题或重要性组织内容
+5. 每个新闻都要有简洁的分析和见解
+6. 结尾提供趋势分析和未来展望
+7. 保持客观、专业的新闻写作风格
+8. 字数控制在1500-2000字
+
+今日精选的5篇AI新闻：
+{{ JSON.stringify($json, null, 2) }}
+
+请撰写一篇高质量的AI新闻综述文章。文章应该：
+- 以## 开头作为主标题
+- 使用### 作为各个部分的小标题
+- 在文章开头包含**TL;DR**部分
+- 为每篇新闻提供深度分析
+- 在结尾提供行业趋势洞察
+
+开始撰写文章：
+
+--- [OpenAI Writer]  type=lmChatOpenAi  model=None
+
+### 修改.json  [解析失败 Expecting value: line 1 column 1 (char 0)]
+
+======================================================================
+### 新闻稿生成器2.0.json   （14 节点）
+
+======================================================================
+### 新闻稿生成器2.0_修正版.json   （14 节点）
+
+======================================================================
+### 智能图片选择器工作流.json   （7 节点）

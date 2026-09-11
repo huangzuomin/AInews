@@ -1,0 +1,570 @@
+{
+  "name": "AI内参日报生成工作流",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 20 * * *"
+            }
+          ]
+        }
+      },
+      "id": "61c0ec94-9bf2-46fa-8280-82d433111423",
+      "name": "定时触发器",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -580,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "created_at",
+              "condition": "gte",
+              "keyValue": "={{ $now.minus({ days: 1 }) }}"
+            }
+          ]
+        }
+      },
+      "id": "0a53c23b-5ef9-47ea-8ecd-c986d01974e5",
+      "name": "提取文章数据",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        300
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "4af42433-36a0-45c8-bfbb-ddbc8110284e",
+      "name": "拆分文章列表",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        340,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 计算文章的最终AI评分\n * @param {Object} llmResponse - 来自Basic LLM Chain的Gemini评分结果\n * @param {Object} originalArticle - 来自拆分文章列表的原始文章数据\n * @returns {Object} - 包含计算出的ai_score的文章对象\n */\nconst llmResponse = $input.item(0).json;\nconst originalArticle = $('拆分文章列表').item.json;\n\n// 解析Gemini返回的评分JSON\nlet scores;\ntry {\n  // Gemini API返回格式为 {text: '...'}\n  const responseText = llmResponse.text || llmResponse.response || '';\n  // 尝试提取JSON部分\n  const jsonMatch = responseText.match(/\\{[\\s\\S]*?\\}/);\n  if (jsonMatch) {\n    scores = JSON.parse(jsonMatch[0]);\n  } else {\n    throw new Error('No JSON found in Gemini response');\n  }\n} catch (error) {\n  // 如果解析失败，使用默认分数\n  scores = {\n    novelty_score: 5.0,\n    impact_score: 5.0,\n    clarity_score: 5.0,\n    depth_score: 5.0\n  };\n}\n\n// 计算加权分数\nconst weighted_score = \n  (scores.novelty_score * 0.3) +\n  (scores.impact_score * 0.4) +\n  (scores.clarity_score * 0.1) +\n  (scores.depth_score * 0.2);\n\n// 计算最终得分并四舍五入到小数点后两位\nconst ai_score = Math.round(weighted_score * 100) / 100;\n\n// 返回包含所有原始数据和计算出的ai_score的对象\nreturn {\n  id: originalArticle.id,\n  content: originalArticle.content,\n  created_at: originalArticle.created_at,\n  ai_score: ai_score,\n  novelty_score: scores.novelty_score,\n  impact_score: scores.impact_score,\n  clarity_score: scores.clarity_score,\n  depth_score: scores.depth_score\n};"
+      },
+      "id": "816ba67b-99ca-4685-abb3-1820bec00e58",
+      "name": "计算最终评分",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filterType": "manual",
+        "matchingColumns": [
+          "id"
+        ],
+        "additionalFields": {
+          "ai_score": "={{ $json.ai_score }}",
+          "novelty_score": "={{ $json.novelty_score }}",
+          "impact_score": "={{ $json.impact_score }}",
+          "clarity_score": "={{ $json.clarity_score }}",
+          "depth_score": "={{ $json.depth_score }}"
+        }
+      },
+      "id": "a9a88842-dfc7-4aa1-9ac7-59784c03ccb6",
+      "name": "更新评分到数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -340
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "2423fffe-4c16-4cc6-90ea-0fc6da04439b",
+      "name": "合并评分结果",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        220,
+        -580
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 筛选Top 5文章并标记is_selected字段\n * @param {Array} items - 所有已评分的文章数组\n * @returns {Array} - 按ai_score降序排列的前5篇文章\n */\nconst items = $input.all();\nconst articles = items.map(item => item.json);\n\n// 按ai_score降序排序\narticles.sort((a, b) => b.ai_score - a.ai_score);\n\n// 选取前5篇文章\nconst top5Articles = articles.slice(0, 5);\n\n// 为每篇文章添加is_selected标记\nconst articlesWithSelection = articles.map(article => ({\n  ...article,\n  is_selected: top5Articles.some(top => top.id === article.id)\n}));\n\n// 返回包含top5文章的对象\nreturn {\n  top_articles: top5Articles,\n  all_articles_with_selection: articlesWithSelection,\n  total_articles: articles.length,\n  selection_date: new Date().toISOString()\n};"
+      },
+      "id": "372c9e4b-84f6-48b1-843a-37ef9e985f10",
+      "name": "筛选Top5文章",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {},
+        "jsCode": "/**\n * 处理筛选Top5文章节点返回的数据\n * @param {Object} selectionData - 来自筛选Top5文章节点的数据\n * @returns {Array} - 包含is_selected标记的所有文章数组\n */\nconst selectionData = $input.item(0).json;\nreturn selectionData.all_articles_with_selection;"
+      },
+      "id": "f6207857-c8dc-40ac-8437-a0852fd1048c",
+      "name": "拆分选择更新",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        600,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filterType": "manual",
+        "matchingColumns": [
+          "id"
+        ],
+        "additionalFields": {
+          "is_selected": "={{ $json.is_selected }}"
+        }
+      },
+      "id": "7831befc-9ac3-42ac-a55f-4de555584f94",
+      "name": "更新选择标记",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        816,
+        -280
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "b622937f-5679-4efc-834f-7a24f3ee8ef3",
+      "name": "合并选择更新",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1036,
+        -280
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 格式化日报数据\n * @param {Object} summaryData - 来自Gemini的综述文章\n * @param {Object} selectionData - 来自筛选节点的数据\n * @returns {Object} - 格式化后的日报数据\n */\nconst summaryResponse = $input.first().json;\nconst selectionData = $input.last().json;\n\n// 提取Gemini返回的文本内容\nconst reportContent = summaryResponse.text || summaryResponse.content || '';\n\n// 构建完整的日报数据\nconst dailyReport = {\n  id: `daily_report_${new Date().toISOString().split('T')[0]}`,\n  title: `AI内参日报 - ${new Date().toLocaleDateString('zh-CN')}`,\n  content: reportContent,\n  summary: `今日精选${selectionData.top_articles.length}篇AI领域重要文章`,\n  created_at: new Date().toISOString(),\n  article_count: selectionData.total_articles,\n  selected_articles: selectionData.top_articles.map(article => ({\n    id: article.id,\n    content: article.content,\n    ai_score: article.ai_score\n  })),\n  generation_metadata: {\n    model_used: 'gemini-1.5-pro',\n    selection_date: selectionData.selection_date,\n    total_processed: selectionData.total_articles\n  }\n};\n\nreturn dailyReport;"
+      },
+      "id": "fc405c05-373c-44b1-8c17-eedb15b9c338",
+      "name": "格式化日报数据",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1632,
+        -280
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "daily_reports",
+        "additionalFields": {
+          "title": "={{ $json.title }}",
+          "content": "={{ $json.content }}",
+          "summary": "={{ $json.summary }}",
+          "article_count": "={{ $json.article_count }}",
+          "selected_articles": "={{ JSON.stringify($json.selected_articles) }}",
+          "generation_metadata": "={{ JSON.stringify($json.generation_metadata) }}",
+          "created_at": "={{ $json.created_at }}"
+        }
+      },
+      "id": "1f330bd1-461c-4a72-b92d-5aa98143f13b",
+      "name": "存储日报到数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1852,
+        -280
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -660,
+        -280
+      ],
+      "id": "c386fe1d-9fbd-4ca7-950f-24e186ada30a",
+      "name": "When chat message received",
+      "webhookId": "d25cf424-c432-4ef2-865a-d191d8fded31"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位资深的AI行业分析师。请仔细阅读并分析以下这篇完整的AI文章内容，并根据以下维度对其进行评分。请返回1.0到10.0之间的浮点数分数，以提高评分的精确度。\\n\\n评分维度:\\n1. novelty_score: 创新性，是否包含突破性技术或新颖观点。\\n2. impact_score: 影响力，主题对行业的潜在影响。\\n3. clarity_score: 清晰度，文章结构和论述的清晰程度。\\n4. depth_score: 深度，内容是否提供了深入的分析。\\n\\n文章内容:\\n\\\"\\\"\\\"\\n{{ $json.content }}\\n\\\"\\\"\\\"\\n\\n请严格按照以下JSON格式返回你的评分结果:\\n{\\n  \\\"novelty_score\\\": 8.5,\\n  \\\"impact_score\\\": 9.2,\\n  \\\"clarity_score\\\": 7.8,\\n  \\\"depth_score\\\": 8.9\\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -440,
+        -380
+      ],
+      "id": "ef9abd0e-e508-441a-ac98-2b190a48b152",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {},
+        "prompt": {
+          "messages": [
+            {
+              "content": "你是一位资深的AI技术专家和内容评估师。请对以下AI相关文章进行全面评估，从四个维度进行打分（1-10分）：\n\n1. **新颖性 (Novelty)**: 文章内容的创新程度和前沿性\n2. **影响力 (Impact)**: 对AI领域可能产生的影响和重要性\n3. **清晰度 (Clarity)**: 文章表达的清晰度和可读性\n4. **深度 (Depth)**: 技术分析的深入程度和专业性\n\n请严格按照以下JSON格式返回评分结果：\n```json\n{\n  \"novelty_score\": 数字,\n  \"impact_score\": 数字,\n  \"clarity_score\": 数字,\n  \"depth_score\": 数字,\n  \"reasoning\": \"评分理由说明\"\n}\n```\n\n文章信息：\n标题：{{ $json.title }}\n内容：{{ $json.content }}\n摘要：{{ $json.summary }}",
+              "role": "user"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        -160
+      ],
+      "id": "e0faaa9c-6422-48ed-9ec3-fb9af7d00d43",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位顶级的科技媒体主编，你的任务是将今天最重要的AI文章整合成一篇高质量的\"AI日报\"。请严格按照指定的Markdown格式输出。\n\n今天是 {{ $now.toFormat('yyyy年MM月dd日') }}。\n\n以下是精选文章的核心信息：\n{{ $json.top_articles.map((article, index) => `\n---\n文章${index + 1}:\n内容: ${article.content.substring(0, 2000)}...\n评分: ${article.ai_score}\n---\n`).join('') }}\n\n请生成日报，包含以下部分：\n1. 一个吸引人的日报大标题。格式为: \"AI内参日报 | yyyy年MM月dd日: <当日最重要新闻简短概括>\"\n2. 一段150字左右的开篇导语。\n3. 为每篇文章生成一个包含\"### 标题\"、\"核心看点\"、\"内容摘要\"的摘要模块。\n4. 一段100字左右的结尾总结。\n\n请确保语言专业、流畅、精炼。直接输出Markdown格式的全文。",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1256,
+        -280
+      ],
+      "id": "b38b5535-3a61-4fdd-9e77-d48620b9338d",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        -60
+      ],
+      "id": "6f4ff8f8-d1ae-4a6b-bfc5-0c4fb8160151",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "has-articles",
+              "leftValue": "={{ $json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "33e2ebae-c3b7-4512-8e45-76109f068af0",
+      "name": "检查文章数量1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        240
+      ],
+      "notes": "确保有文章可处理"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "定时触发器": {
+      "main": [
+        [
+          {
+            "node": "提取文章数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提取文章数据": {
+      "main": [
+        [
+          {
+            "node": "检查文章数量1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "计算最终评分": {
+      "main": [
+        [
+          {
+            "node": "更新评分到数据库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "更新评分到数据库": {
+      "main": [
+        [
+          {
+            "node": "拆分文章列表",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合并评分结果": {
+      "main": [
+        [
+          {
+            "node": "筛选Top5文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "筛选Top5文章": {
+      "main": [
+        [
+          {
+            "node": "拆分选择更新",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "拆分选择更新": {
+      "main": [
+        [
+          {
+            "node": "更新选择标记",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "更新选择标记": {
+      "main": [
+        [
+          {
+            "node": "拆分选择更新",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "合并选择更新",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化日报数据": {
+      "main": [
+        [
+          {
+            "node": "存储日报到数据库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "拆分文章列表": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "筛选Top5文章",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "计算最终评分",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合并选择更新": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain1": {
+      "main": [
+        [
+          {
+            "node": "格式化日报数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "检查文章数量1": {
+      "main": [
+        [
+          {
+            "node": "拆分文章列表",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "42d52d53-dd05-445c-8f6e-223676be4b93",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1d9744cf6e7667f661656fbb55956efb4179b2d5077ef4fe022558be36a78b7e"
+  },
+  "id": "JvbFQ9Wt5nOnaZzU",
+  "tags": []
+}

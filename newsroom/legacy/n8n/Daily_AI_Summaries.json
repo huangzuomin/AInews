@@ -1,0 +1,911 @@
+{
+  "name": "Daily AI Summaries  Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 20 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cca7e0db-b728-43e4-ae1d-1d53c1f3a6bb",
+      "name": "Daily 8PM Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1000,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 设置今天和明天的日期范围\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\nconst tomorrow = new Date(today);\ntomorrow.setDate(tomorrow.getDate() + 1);\n\nreturn {\n  todayStart: today.toISOString(),\n  tomorrowStart: tomorrow.toISOString(),\n  todayFormatted: today.toLocaleDateString('zh-CN')\n};"
+      },
+      "id": "106b6518-00b1-443e-8f16-05d14b047d95",
+      "name": "Set Dates",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -780,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ai_articles",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "=created_at",
+              "condition": "gte",
+              "keyValue": "={{ $items('Set Dates')[0].json.todayStart }}"
+            },
+            {
+              "keyName": "created_at",
+              "condition": "lt",
+              "keyValue": "={{ $items('Set Dates')[0].json.tomorrowStart }}"
+            }
+          ]
+        }
+      },
+      "id": "b141a8cb-b7cd-43c4-82de-f8388ffac93d",
+      "name": "Get Today's AI Articles",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        900
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "check-articles-exist",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "4acf2d05-9ab0-4e26-b7ca-fdfbf404f3eb",
+      "name": "Check Articles Available",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 将文章分批处理，每批10篇文章\n * 输出包含所有批次的数组，每个批次都有批次ID标识\n */\nfunction splitArticlesIntoBatches() {\n  const articles = $input.all();\n  const batchSize = 10;\n  const allBatches = [];\n  \n  // 创建所有批次的数据\n  const totalBatches = Math.ceil(articles.length / batchSize);\n  \n  for (let i = 0; i < totalBatches; i++) {\n    const startIndex = i * batchSize;\n    const endIndex = Math.min(startIndex + batchSize, articles.length);\n    \n    const batch = articles.slice(startIndex, endIndex);\n    \n    // 为每个批次中的每篇文章添加批次信息\n    batch.forEach(article => {\n      allBatches.push({\n        ...article.json,\n        batchId: i + 1,\n        totalBatches: totalBatches,\n        batchSize: batch.length\n      });\n    });\n  }\n  \n  return allBatches;\n}\n\nreturn splitArticlesIntoBatches();"
+      },
+      "id": "eb376edc-871a-4ab6-9e35-dd942cb271a1",
+      "name": "Split Articles",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。\n\n**评估标准**：\n- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：\n- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)\n- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)\n- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)\n- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)\n- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)\n\n\n综合评分：\n- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。\n- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。\n\n**文章信息**：\n- 标题：{{ $json.title }}\n- 内容：{{ $json.content }}\n- 发布时间：{{ $json.published_at }}\n- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。\n\n**输出格式**：\n请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：\n```json\n{\n  \"id\": \"{{ $json.id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"score\": 综合评分（满分50，保留2位小数）,\n  \"reason\": \"评分理由，简要说明每项评分的依据\",\n  \"batch_id\": {{ $json.batchId }}\n}\n```",
+        "hasOutputParser": true
+      },
+      "id": "4b18ad7d-d082-4de2-b3ca-d674600ef607",
+      "name": "Evaluate Article Batch 1",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。\n\n**评估标准**：\n- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：\n- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)\n- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)\n- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)\n- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)\n- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)\n\n\n综合评分：\n- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。\n- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。\n\n**文章信息**：\n- 标题：{{ $json.title }}\n- 内容：{{ $json.content }}\n- 发布时间：{{ $json.published_at }}\n- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。\n\n**输出格式**：\n请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：\n```json\n{\n  \"id\": \"{{ $json.id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"score\": 综合评分（满分50，保留2位小数）,\n  \"reason\": \"评分理由，简要说明每项评分的依据\",\n  \"batch_id\": {{ $json.batchId }}\n}\n```",
+        "hasOutputParser": true
+      },
+      "id": "5a83b80a-02d2-497c-ac5e-c3abdff1dc7a",
+      "name": "Evaluate Article Batch 2",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。\n\n**评估标准**：\n- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：\n- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)\n- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)\n- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)\n- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)\n- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)\n\n\n综合评分：\n- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。\n- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。\n\n**文章信息**：\n- 标题：{{ $json.title }}\n- 内容：{{ $json.content }}\n- 发布时间：{{ $json.published_at }}\n- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。\n\n**输出格式**：\n请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：\n```json\n{\n  \"id\": \"{{ $json.id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"score\": 综合评分（满分50，保留2位小数）,\n  \"reason\": \"评分理由，简要说明每项评分的依据\",\n  \"batch_id\": {{ $json.batchId }}\n}\n```",
+        "hasOutputParser": true
+      },
+      "id": "7c16549d-e3ef-49e0-908e-42df577c82d8",
+      "name": "Evaluate Article Batch 3",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。\n\n**评估标准**：\n- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：\n- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)\n- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)\n- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)\n- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)\n- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)\n\n\n综合评分：\n- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。\n- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。\n\n**文章信息**：\n- 标题：{{ $json.title }}\n- 内容：{{ $json.content }}\n- 发布时间：{{ $json.published_at }}\n- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。\n\n**输出格式**：\n请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：\n```json\n{\n  \"id\": \"{{ $json.id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"score\": 综合评分（满分50，保留2位小数）,\n  \"reason\": \"评分理由，简要说明每项评分的依据\",\n  \"batch_id\": {{ $json.batchId }}\n}\n```",
+        "hasOutputParser": true
+      },
+      "id": "37a7441b-6a0e-4921-80ef-f69457d3b177",
+      "name": "Evaluate Article Batch 4",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n你是一名资深的AI行业新闻编辑，拥有丰富的新闻敏感度和技术理解能力。你需要基于以下标准为AI行业新闻打分，每项1-10分，综合评分为各项得分的总和（满分50分，保留2位小数）。\n\n**评估标准**：\n- 请为文章的以下方面进行1-10分的评分，并提供简要的评估理由：\n- 新闻价值和潜在影响力： 文章报道的AI技术、事件或发现的重要性程度如何？它对AI领域或更广泛社会可能产生多大影响？(1-10分)\n- 技术创新性和深度： 文章是否涉及了新的、前沿的AI技术或突破？技术描述是否准确、深入？(1-10分)\n- 行业影响和关联性： 文章内容与当前AI行业发展趋势的契合度如何？它对AI产业、企业或研究机构有何潜在影响？(1-10分)\n- 时效性和热点程度： 文章报道的内容是否是近期发生或当下备受关注的热点话题？信息是否最新？(1-10分)\n- 对目标读者的价值和可读性： 文章内容对于关注AI领域的专业人士或普通读者是否有价值？信息是否清晰易懂，结构合理？(1-10分)\n\n\n综合评分：\n- 综合评分为以上五项得分的总和，总分最高50分。请将综合评分保留两位小数。\n- 如果缺少关键信息（如内容为空），返回默认评分0.00，并说明原因。\n\n**文章信息**：\n- 标题：{{ $json.title }}\n- 内容：{{ $json.content }}\n- 发布时间：{{ $json.published_at }}\n- 批次信息：第{{ $json.batchId }}批，共{{ $json.totalBatches }}批。\n\n**输出格式**：\n请严格按照以下JSON格式返回评估结果，不要包含任何其他额外内容：\n```json\n{\n  \"id\": \"{{ $json.id }}\",\n  \"title\": \"{{ $json.title }}\",\n  \"score\": 综合评分（满分50，保留2位小数）,\n  \"reason\": \"评分理由，简要说明每项评分的依据\",\n  \"batch_id\": {{ $json.batchId }}\n}\n```",
+        "hasOutputParser": true
+      },
+      "id": "1a7cf92e-b903-48e6-8bc4-91426351628d",
+      "name": "Evaluate Article Batch 5",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        1700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 聚合所有批次的评估结果并选出得分最高的5篇文章\n * 确保最终选择的文章质量最高\n */\nfunction aggregateAndRankArticles() {\n  const allBatchResults = $input.all();\n  const allEvaluatedArticles = [];\n  \n  // 收集所有批次的评估结果\n  allBatchResults.forEach(batchResult => {\n    let jsonText = batchResult.json.text.trim();\n    // 移除代码围栏\n    if (jsonText.startsWith('```')) {\n      jsonText = jsonText.replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();\n    }\n    \n    try {\n      const batchData = JSON.parse(jsonText);\n      if (batchData.evaluated_articles && Array.isArray(batchData.evaluated_articles)) {\n        allEvaluatedArticles.push(...batchData.evaluated_articles);\n      }\n    } catch (error) {\n      console.error('解析批次结果失败:', error);\n    }\n  });\n  \n  // 按评分降序排序\n  allEvaluatedArticles.sort((a, b) => b.score - a.score);\n  \n  // 选择得分最高的5篇文章\n  const top5Articles = allEvaluatedArticles.slice(0, 5);\n  \n  // 获取原始文章数据\n  const originalArticles = $('Get Today\\'s AI Articles').all();\n  \n  // 为所有文章准备更新数据\n  const articleUpdates = originalArticles.map(article => {\n    const evaluated = allEvaluatedArticles.find(e => e.id === article.json.id);\n    const isSelected = top5Articles.some(t => t.id === article.json.id);\n    \n    return {\n      id: article.json.id,\n      ai_score: evaluated ? evaluated.score : 0,\n      selection_reason: evaluated ? evaluated.reason : '未被评估',\n      evaluated_at: new Date().toISOString(),\n      is_selected: isSelected\n    };\n  });\n  \n  // 获取选中文章的完整信息\n  const selectedArticlesWithDetails = top5Articles.map(selected => {\n    const fullArticle = originalArticles.find(article => \n      article.json.id === selected.id\n    );\n    \n    return {\n      ...fullArticle.json,\n      evaluation_score: selected.score,\n      selection_reason: selected.reason\n    };\n  });\n  \n  return {\n    selectedArticles: selectedArticlesWithDetails,\n    articleUpdates: articleUpdates,\n    evaluationSummary: {\n      total_articles: originalArticles.length,\n      evaluated_articles: allEvaluatedArticles.length,\n      selected_articles: top5Articles.length,\n      average_score: allEvaluatedArticles.reduce((sum, a) => sum + a.score, 0) / allEvaluatedArticles.length\n    }\n  };\n}\n\nreturn aggregateAndRankArticles();"
+      },
+      "id": "b588503f-1547-4160-8457-1712c57e16a6",
+      "name": "Aggregate and Rank",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        696,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 处理选中的文章数据，准备用于后续的摘要生成\n */\nfunction processSelectedArticles() {\n  const aggregatedData = $json;\n  \n  return {\n    detailedArticles: aggregatedData.selectedArticles,\n    dailySummary: {\n      selected_article_ids: aggregatedData.selectedArticles.map(a => a.id),\n      evaluation_summary: aggregatedData.evaluationSummary\n    },\n    articleUpdates: aggregatedData.articleUpdates\n  };\n}\n\nreturn processSelectedArticles();"
+      },
+      "id": "d0b76367-52cb-4949-9899-2bf863c7a85e",
+      "name": "Process Selected Articles",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        916,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "ai_score",
+              "fieldValue": "={{ $json.ai_score }}"
+            },
+            {
+              "fieldId": "selection_reason",
+              "fieldValue": "={{ $json.selection_reason }}"
+            },
+            {
+              "fieldId": "evaluated_at",
+              "fieldValue": "={{ $json.evaluated_at }}"
+            },
+            {
+              "fieldId": "is_selected",
+              "fieldValue": "={{ $json.is_selected }}"
+            }
+          ]
+        }
+      },
+      "id": "cf8c9c18-4e6b-4e21-a44e-0a532cdbbf64",
+      "name": "Update Article Scores",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1214,
+        1050
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位专业的科技新闻编辑，需要基于今天最重要的5篇AI新闻撰写一篇综述风格的文章。\n\n文章要求：\n1. 使用Markdown格式\n2. 包含引人入胜的标题\n3. 开头提供今日AI新闻要点总结（TL;DR）\n4. 按主题或重要性组织内容\n5. 每个新闻都要有简洁的分析和见解\n6. 结尾提供趋势分析和未来展望\n7. 保持客观、专业的新闻写作风格\n8. 字数控制在1500-2000字\n\n今日精选的5篇AI新闻：\n{{ JSON.stringify($json.detailedArticles, null, 2) }}\n\n评估统计信息：\n{{ JSON.stringify($json.dailySummary.evaluation_summary, null, 2) }}\n\n请撰写一篇高质量的AI新闻综述文章。文章应该：\n- 以## 开头作为主标题\n- 使用### 作为各个部分的小标题\n- 在文章开头包含**TL;DR**部分\n- 为每篇新闻提供深度分析\n- 在结尾提供行业趋势洞察\n\n开始撰写文章：",
+        "hasOutputParser": true
+      },
+      "id": "6ca34fe0-f283-4c9f-b859-a0e40a0d3499",
+      "name": "Generate Summary Article",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        1136,
+        650
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "daily_ai_summaries",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "date",
+              "fieldValue": "={{ new Date().toISOString().split('T')[0] }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ new Date().toLocaleDateString('zh-CN') }} AI新闻综述"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.text }}"
+            },
+            {
+              "fieldId": "article_count",
+              "fieldValue": "5"
+            },
+            {
+              "fieldId": "selected_article_ids",
+              "fieldValue": "={{ JSON.stringify($('Process Selected Articles').first().json.dailySummary.selected_article_ids) }}"
+            },
+            {
+              "fieldId": "created_at",
+              "fieldValue": "={{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "2676d2b1-f510-4b1b-b9c6-0e355c4518c0",
+      "name": "Save Daily Summary",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1512,
+        750
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        220
+      ],
+      "id": "03505952-13cc-4110-b3e3-8ca98a67bff9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "mtXrVTdWFDofY3gc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        620
+      ],
+      "id": "de25414e-7466-44f6-b2d3-e5c12c10c55d",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xyl8aGrhivQGYsRx",
+          "name": "Google Gemini(PaLM) Api account 2019"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        1020
+      ],
+      "id": "dc8a78d3-c9db-4cc1-b70b-9a681f210738",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        1420
+      ],
+      "id": "8240f0e5-e642-4204-81fd-038fe2c92e81",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "S9V9NSOeK6ha3Qys",
+          "name": "Google Gemini(PaLM) Api account 767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        1920
+      ],
+      "id": "c324d418-a5d2-49d1-8c09-0af2e5ae9108",
+      "name": "Google Gemini Chat Model4",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "S9V9NSOeK6ha3Qys",
+          "name": "Google Gemini(PaLM) Api account 767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro-preview-05-06",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1224,
+        870
+      ],
+      "id": "b68147c1-021a-444f-ba0c-6cd703118b9f",
+      "name": "Google Gemini Chat Model5",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "mtXrVTdWFDofY3gc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67c9f78a-2819-47a3-9b60-2fa6cf6ed050",
+              "leftValue": "={{ $json.batchId }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        100
+      ],
+      "id": "24b7f4c4-74a6-4efc-8753-8b6c71bec32b",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67c9f78a-2819-47a3-9b60-2fa6cf6ed050",
+              "leftValue": "={{ $json.batchId }}",
+              "rightValue": 2,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        500
+      ],
+      "id": "75f6dc00-574e-45bd-8150-d0a682d32852",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67c9f78a-2819-47a3-9b60-2fa6cf6ed050",
+              "leftValue": "={{ $json.batchId }}",
+              "rightValue": 3,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        900
+      ],
+      "id": "1dfd2a57-86be-4b86-8610-1596bb85b60c",
+      "name": "Filter2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67c9f78a-2819-47a3-9b60-2fa6cf6ed050",
+              "leftValue": "={{ $json.batchId }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        1300
+      ],
+      "id": "5c1f59dc-055a-4572-89bc-3d4a2103888c",
+      "name": "Filter3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67c9f78a-2819-47a3-9b60-2fa6cf6ed050",
+              "leftValue": "={{ $json.batchId }}",
+              "rightValue": 5,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        1700
+      ],
+      "id": "86bab2e6-6ecb-4cfd-87e8-0e556c953524",
+      "name": "Filter4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily 8PM Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Dates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Dates": {
+      "main": [
+        [
+          {
+            "node": "Get Today's AI Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Today's AI Articles": {
+      "main": [
+        [
+          {
+            "node": "Check Articles Available",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Articles Available": {
+      "main": [
+        [
+          {
+            "node": "Split Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Articles": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate Article Batch 1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate and Rank",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate Article Batch 2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate and Rank",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate Article Batch 3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate and Rank",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate Article Batch 4": {
+      "main": [
+        [
+          {
+            "node": "Aggregate and Rank",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate Article Batch 5": {
+      "main": [
+        [
+          {
+            "node": "Aggregate and Rank",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate and Rank": {
+      "main": [
+        [
+          {
+            "node": "Process Selected Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Selected Articles": {
+      "main": [
+        [
+          {
+            "node": "Update Article Scores",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Summary Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Summary Article": {
+      "main": [
+        [
+          {
+            "node": "Save Daily Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate Article Batch 1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate Article Batch 2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate Article Batch 3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate Article Batch 4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate Article Batch 5",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Summary Article",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Evaluate Article Batch 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Evaluate Article Batch 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Evaluate Article Batch 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter3": {
+      "main": [
+        [
+          {
+            "node": "Evaluate Article Batch 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter4": {
+      "main": [
+        [
+          {
+            "node": "Evaluate Article Batch 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e30aae04-72bd-4a94-90ad-c0ce9534adff",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c9d82f2f367eefb1e52f3a01d2d66dea63879a38fa8edcdb4d1ccc32fd355f68"
+  },
+  "id": "jqSZELV6Yg5gmAx0",
+  "tags": []
+}

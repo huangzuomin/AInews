@@ -1,0 +1,468 @@
+{
+  "name": "Daily AI Summaries to Steemit Sync Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "tableName": "daily_ai_summaries",
+        "watchForColumns": "id,date,title,content,article_count",
+        "additionalFields": {
+          "schema": "public"
+        }
+      },
+      "id": "steemit-sync-trigger-id",
+      "name": "New Summary Trigger",
+      "type": "n8n-nodes-base.supabaseTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        0
+      ],
+      "webhookId": "steemit-sync-webhook",
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 处理新增的摘要数据\n * 检查是否需要发布到Steemit\n */\nfunction processNewSummary() {\n  const triggerData = $json;\n  \n  // 检查触发类型是否为INSERT\n  if (triggerData.type !== 'INSERT') {\n    return null;\n  }\n  \n  const newRecord = triggerData.record;\n  \n  // 检查是否已经发布到Steemit\n  if (newRecord.steemit_posted === true) {\n    return null;\n  }\n  \n  // 检查必要字段是否存在\n  if (!newRecord.content || !newRecord.title || !newRecord.date) {\n    return null;\n  }\n  \n  return {\n    shouldProcess: true,\n    summaryData: newRecord\n  };\n}\n\nreturn processNewSummary();",
+        "outputsCount": 1
+      },
+      "id": "process-trigger-data-id",
+      "name": "Process Trigger Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "check-should-process",
+              "leftValue": "={{ $json.shouldProcess }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-should-process-id",
+      "name": "Check Should Process",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        700,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 为新摘要格式化Steemit发布内容\n * 添加适当的标签、格式化markdown、生成永久链接\n */\nfunction formatSteemitContent() {\n  const data = $json.summaryData;\n  \n  // 生成Steemit友好的标题\n  const steemitTitle = `${data.date} AI新闻日报 | 今日科技前沿速递`;\n  \n  // 格式化内容，添加Steemit特有的元素\n  const steemitContent = `\n${data.content}\n\n---\n\n## 📊 本期统计\n\n- 📅 **发布日期**: ${data.date}\n- 📰 **精选文章**: ${data.article_count}篇\n- 🤖 **AI智能筛选**: 基于多维度评估算法\n- 🔗 **数据来源**: 权威科技媒体聚合\n\n## 🏷️ 相关标签\n\n#ai #technology #news #blockchain #steemit #中文 #科技 #人工智能 #新闻\n\n---\n\n> 🤖 **关于本文**\n> \n> 本文由AI自动生成和发布，内容来源于公开的科技新闻报道。我们致力于为中文用户提供最新、最有价值的AI科技资讯。\n> \n> 💡 **互动邀请**: 欢迎在评论区分享您对这些AI新闻的看法和见解！\n\n---\n\n*本文首发于 [Steemit](https://steemit.com) | 数据驱动，智能筛选*\n    `;\n\n    // 生成唯一的永久链接\n    const permlink = `ai-news-${data.date.replace(/-/g, '')}-${Date.now()}`;\n\n    return {\n      summaryId: data.id,\n      title: steemitTitle,\n      body: steemitContent,\n      tags: ['ai', 'technology', 'news', 'blockchain', 'steemit', '中文', '科技', '人工智能', '新闻'],\n      category: 'technology',\n      permlink: permlink,\n      originalDate: data.date,\n      originalTitle: data.title\n    };\n}\n\nreturn formatSteemitContent();",
+        "outputsCount": 1
+      },
+      "id": "format-steemit-content-id",
+      "name": "Format Steemit Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 准备Steemit API调用参数\n * 生成发布操作的完整参数\n */\nfunction prepareSteemitApiCall() {\n  const postData = $json;\n  \n  // Steemit发布操作参数\n  const commentOp = [\n    'comment',\n    {\n      parent_author: '',\n      parent_permlink: postData.category,\n      author: '{{ $credentials.steemitAccount.username }}',\n      permlink: postData.permlink,\n      title: postData.title,\n      body: postData.body,\n      json_metadata: JSON.stringify({\n        tags: postData.tags,\n        app: 'n8n-auto-poster/1.0',\n        format: 'markdown',\n        canonical_url: `https://steemit.com/@{{ $credentials.steemitAccount.username }}/${postData.permlink}`,\n        description: `${postData.originalDate} AI新闻综述 - 精选${postData.tags.length}个热门话题`\n      })\n    }\n  ];\n\n  return {\n    operation: commentOp,\n    postData: postData,\n    timestamp: new Date().toISOString()\n  };\n}\n\nreturn prepareSteemitApiCall();"
+      },
+      "id": "prepare-steemit-api-id",
+      "name": "Prepare Steemit API Call",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.steemit.com/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "headers": {
+          "Content-Type": "application/json",
+          "User-Agent": "n8n-steemit-poster/1.0"
+        },
+        "body": {
+          "jsonrpc": "2.0",
+          "method": "condenser_api.broadcast_transaction",
+          "params": [
+            {
+              "operations": [
+                "={{ $json.operation }}"
+              ],
+              "signatures": [
+                "{{ $credentials.steemitAccount.signature }}"
+              ]
+            }
+          ],
+          "id": "={{ Date.now() }}"
+        },
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "enabled": true,
+            "maxAttempts": 3,
+            "waitBetween": 2000
+          }
+        }
+      },
+      "id": "post-to-steemit-id",
+      "name": "Post to Steemit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        0
+      ],
+      "credentials": {
+        "steemitAccount": {
+          "id": "steemit-credentials-id",
+          "name": "Steemit Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 处理Steemit API响应并准备数据库更新\n * 检查发布状态并生成相应的更新数据\n */\nfunction processSteemitResponse() {\n  const apiResponse = $json;\n  const postData = $('Prepare Steemit API Call').first().json.postData;\n  \n  let updateData = {\n    id: postData.summaryId,\n    steemit_posted_at: new Date().toISOString()\n  };\n\n  if (apiResponse.result && apiResponse.result.id) {\n    // 发布成功\n    updateData.steemit_posted = true;\n    updateData.steemit_url = `https://steemit.com/@{{ $credentials.steemitAccount.username }}/${postData.permlink}`;\n    updateData.steemit_transaction_id = apiResponse.result.id;\n    updateData.steemit_block_num = apiResponse.result.block_num;\n    updateData.steemit_status = 'published';\n  } else {\n    // 发布失败\n    updateData.steemit_posted = false;\n    updateData.steemit_error = JSON.stringify(apiResponse.error || 'Unknown error');\n    updateData.steemit_status = 'failed';\n    updateData.retry_count = (postData.retry_count || 0) + 1;\n  }\n\n  return updateData;\n}\n\nreturn processSteemitResponse();"
+      },
+      "id": "process-steemit-response-id",
+      "name": "Process Steemit Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1500,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "daily_ai_summaries",
+        "updateKey": "id",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "steemit_posted",
+              "fieldValue": "={{ $json.steemit_posted }}"
+            },
+            {
+              "fieldId": "steemit_url",
+              "fieldValue": "={{ $json.steemit_url }}"
+            },
+            {
+              "fieldId": "steemit_posted_at",
+              "fieldValue": "={{ $json.steemit_posted_at }}"
+            },
+            {
+              "fieldId": "steemit_transaction_id",
+              "fieldValue": "={{ $json.steemit_transaction_id }}"
+            },
+            {
+              "fieldId": "steemit_block_num",
+              "fieldValue": "={{ $json.steemit_block_num }}"
+            },
+            {
+              "fieldId": "steemit_status",
+              "fieldValue": "={{ $json.steemit_status }}"
+            },
+            {
+              "fieldId": "steemit_error",
+              "fieldValue": "={{ $json.steemit_error }}"
+            },
+            {
+              "fieldId": "retry_count",
+              "fieldValue": "={{ $json.retry_count }}"
+            }
+          ]
+        },
+        "options": {
+          "queryName": "id",
+          "queryValue": "={{ $json.id }}"
+        }
+      },
+      "id": "update-summary-status-id",
+      "name": "Update Summary Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        0
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 生成同步操作的详细日志\n * 记录成功和失败的详细信息\n */\nfunction generateSyncLog() {\n  const updateResult = $json;\n  const originalPost = $('Format Steemit Content').first().json;\n  \n  const logEntry = {\n    timestamp: new Date().toISOString(),\n    operation: 'steemit_sync_realtime',\n    summary_id: updateResult.id || originalPost.summaryId,\n    status: updateResult.steemit_posted ? 'success' : 'failed',\n    steemit_url: updateResult.steemit_url,\n    transaction_id: updateResult.steemit_transaction_id,\n    block_num: updateResult.steemit_block_num,\n    error: updateResult.steemit_error,\n    retry_count: updateResult.retry_count || 0,\n    post_title: originalPost.title,\n    post_date: originalPost.originalDate,\n    trigger_type: 'database_insert'\n  };\n\n  return logEntry;\n}\n\nreturn generateSyncLog();"
+      },
+      "id": "generate-sync-log-id",
+      "name": "Generate Sync Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1900,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "check-sync-failed",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "failed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-sync-failed-id",
+      "name": "Check Sync Failed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "POST",
+        "url": "{{ $credentials.slackWebhook.url }}",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "text": "🚨 Steemit实时同步失败通知",
+          "attachments": [
+            {
+              "color": "danger",
+              "fields": [
+                {
+                  "title": "摘要ID",
+                  "value": "={{ $json.summary_id }}",
+                  "short": true
+                },
+                {
+                  "title": "文章标题",
+                  "value": "={{ $json.post_title }}",
+                  "short": true
+                },
+                {
+                  "title": "发布日期",
+                  "value": "={{ $json.post_date }}",
+                  "short": true
+                },
+                {
+                  "title": "触发类型",
+                  "value": "数据库新增触发",
+                  "short": true
+                },
+                {
+                  "title": "重试次数",
+                  "value": "={{ $json.retry_count }}",
+                  "short": true
+                },
+                {
+                  "title": "错误信息",
+                  "value": "={{ $json.error }}",
+                  "short": false
+                }
+              ],
+              "footer": "n8n Steemit实时同步工作流",
+              "ts": "={{ Math.floor(Date.now() / 1000) }}"
+            }
+          ]
+        }
+      },
+      "id": "send-failure-notification-id",
+      "name": "Send Failure Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2100,
+        200
+      ],
+      "credentials": {
+        "slackWebhook": {
+          "id": "slack-webhook-id",
+          "name": "Slack Webhook"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "New Summary Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Trigger Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Trigger Data": {
+      "main": [
+        [
+          {
+            "node": "Check Should Process",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Should Process": {
+      "main": [
+        [
+          {
+            "node": "Format Steemit Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Steemit Content": {
+      "main": [
+        [
+          {
+            "node": "Prepare Steemit API Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Steemit API Call": {
+      "main": [
+        [
+          {
+            "node": "Post to Steemit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Steemit": {
+      "main": [
+        [
+          {
+            "node": "Process Steemit Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Steemit Response": {
+      "main": [
+        [
+          {
+            "node": "Update Summary Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Summary Status": {
+      "main": [
+        [
+          {
+            "node": "Generate Sync Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Sync Log": {
+      "main": [
+        [
+          {
+            "node": "Check Sync Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Sync Failed": {
+      "main": [
+        [
+          {
+            "node": "Send Failure Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "steemit-sync-realtime-v1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "SteemitRealtimeSyncWorkflow",
+  "tags": [
+    "Steemit",
+    "Sync",
+    "AI",
+    "News",
+    "Realtime"
+  ]
+}

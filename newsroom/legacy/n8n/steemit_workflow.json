@@ -1,0 +1,332 @@
+{
+  "name": "Hugo文章自动发布到Steemit工作流",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAt": "09:00",
+              "type": "everyDay"
+            }
+          ]
+        }
+      },
+      "id": "node-1",
+      "name": "Daily Trigger (09:00 AM)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        280,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.neican.ai/newspaper/index.xml",
+        "options": {}
+      },
+      "id": "node-2",
+      "name": "Get RSS Feed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        500,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getItem",
+        "key": "last_published_permlink",
+        "valueFormat": "string"
+      },
+      "id": "node-3",
+      "name": "Get Last Published Permlink",
+      "type": "n8n-nodes-base.keyValueStore",
+      "typeVersion": 1,
+      "position": [
+        720,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析RSS Feed并提取最新文章\nconst xml2js = require('xml2js');\nconst he = require('he'); // HTML实体解码\n\n// 解析XML数据\nconst parser = new xml2js.Parser();\nlet rssData;\n\ntry {\n  rssData = await new Promise((resolve, reject) => {\n    parser.parseString($input.first().json.data, (err, result) => {\n      if (err) reject(err);\n      else resolve(result);\n    });\n  });\n} catch (error) {\n  throw new Error('RSS解析失败: ' + error.message);\n}\n\nconst items = rssData.rss?.channel?.[0]?.item || [];\nlet latestArticle = null;\nlet latestPubDate = 0;\n\n// 根据发布日期找到最新文章\nfor (const item of items) {\n  const pubDate = new Date(item.pubDate[0]).getTime();\n  if (pubDate > latestPubDate) {\n    latestPubDate = pubDate;\n    latestArticle = item;\n  }\n}\n\nif (latestArticle) {\n  const link = latestArticle.link[0];\n  const title = latestArticle.title[0];\n  \n  // 从链接中提取slug\n  // 例如: https://neican.huangzuomin.com/newspaper/2025-06-23-06-23-ai-/ -> 2025-06-23-06-23-ai-\n  const parts = link.split('/').filter(p => p);\n  const slug = parts[parts.length - 1];\n  \n  // 构建GitHub raw URL\n  const githubRawUrl = `https://raw.githubusercontent.com/huangzuomin/AInews/main/content/newspaper/${slug}.md`;\n\n  return [{\n    json: {\n      rss_title: he.decode(title),\n      rss_link: link,\n      rss_pubDate: latestPubDate,\n      rss_slug: slug,\n      github_raw_url: githubRawUrl\n    }\n  }];\n} else {\n  return []; // 没有找到文章\n}"
+      },
+      "id": "node-4",
+      "name": "Parse RSS & Extract Latest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        350
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.rss_slug }}",
+              "rightValue": "={{ $node[\"Get Last Published Permlink\"].json[\"value\"] }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node-5",
+      "name": "Is New Article?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        940,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.github_raw_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "string"
+            }
+          }
+        }
+      },
+      "id": "node-6",
+      "name": "Get Markdown Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1160,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析Markdown文件并准备Steemit发布数据\nconst yaml = require('js-yaml');\n\nconst markdownContent = $input.first().json.data;\nconst frontMatterRegex = /^---\\n([\\s\\S]*?)\\n---\\n([\\s\\S]*)$/;\nconst match = markdownContent.match(frontMatterRegex);\n\nlet frontMatter = {};\nlet body = markdownContent;\n\nif (match) {\n  try {\n    frontMatter = yaml.load(match[1]);\n    body = match[2];\n  } catch (e) {\n    console.error('YAML Front Matter解析错误:', e);\n    // 回退：当作没有front matter或格式错误\n  }\n}\n\n// Steemit需要parent_permlink用于顶级帖子，通常是根标签如'test'或'cn'\n// 对于此工作流，我们使用文章的第一个标签作为parent_permlink\n// 如果没有标签或第一个标签无效，使用默认值如'hive'或'cn'\nlet parentPermlink = 'cn'; // 没有有效标签时的默认值\n\n// 处理标签\nlet tags = [];\nif (frontMatter.tags) {\n  if (Array.isArray(frontMatter.tags)) {\n    tags = frontMatter.tags.map(tag => String(tag).toLowerCase().replace(/[^a-z0-9-]/g, '')).filter(tag => tag);\n  } else if (typeof frontMatter.tags === 'string') {\n    tags = frontMatter.tags.split(/[,\\s]+/).map(tag => String(tag).toLowerCase().replace(/[^a-z0-9-]/g, '')).filter(tag => tag);\n  }\n  if (tags.length > 5) {\n    tags = tags.slice(0, 5); // Steemit最多5个标签\n  }\n  if (tags.length > 0) {\n    parentPermlink = tags[0]; // 使用第一个标签作为parent_permlink\n  }\n}\n\n// 生成Steemit Permlink\nlet steemitPermlink = frontMatter.slug || frontMatter.permlink; // 优先级：使用现有的slug/permlink\nif (!steemitPermlink) {\n  // 回退：从标题生成\n  steemitPermlink = frontMatter.title\n    ? frontMatter.title.toLowerCase()\n        .replace(/[^a-z0-9\\s-]/g, '') // 移除非字母数字字符，除了空格和连字符\n        .replace(/\\s+/g, '-')       // 将空格替换为连字符\n        .replace(/^-+|-+$/g, '')    // 去除开头和结尾的连字符\n    : `post-${Date.now()}`; // 最后的回退方案\n}\n\n// 确保permlink安全且足够唯一\n// 对于生产环境，考虑检查与Steemit的唯一性或在不够唯一时添加时间戳\n// 对于此工作流，我们依赖slug/生成的标题结合发布频率足够唯一\n\nreturn [{\n  json: {\n    title: frontMatter.title,\n    body: body.trim(), // 去除正文的前后空白\n    tags: tags,\n    permlink: steemitPermlink,\n    parent_permlink: parentPermlink,\n    // 传递原始RSS slug用于更新最后发布记录\n    rss_slug: $input.first().json.rss_slug\n  }\n}];"
+      },
+      "id": "node-7",
+      "name": "Parse Markdown & Prepare Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://your-steemit-publish-service-ip-or-domain:3000/publish-steemit",
+        "method": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"author\": \"your-steemit-username\",\n  \"title\": \"{{ $json.title }}\",\n  \"body\": \"{{ $json.body }}\",\n  \"permlink\": \"{{ $json.permlink }}\",\n  \"parent_permlink\": \"{{ $json.parent_permlink }}\",\n  \"tags\": {{ $json.tags }},\n  \"posting_key\": \"{{ $credentials.SteemitPostingKey.postingKey }}\"\n}",
+        "options": {}
+      },
+      "id": "node-8",
+      "name": "Publish to Steemit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1600,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "setItem",
+        "key": "last_published_permlink",
+        "value": "={{ $json.rss_slug }}"
+      },
+      "id": "node-9",
+      "name": "Update Last Published Permlink",
+      "type": "n8n-nodes-base.keyValueStore",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// RSS Feed错误处理\nconsole.error('RSS Feed获取失败:', $input.first().error.message);\nreturn [{\n  json: {\n    error: 'RSS Feed获取失败',\n    message: $input.first().error.message,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-10",
+      "name": "Error Notification (RSS)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Markdown内容获取错误处理\nconsole.error('Markdown内容获取失败:', $input.first().error.message);\nreturn [{\n  json: {\n    error: 'Markdown内容获取失败',\n    message: $input.first().error.message,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-11",
+      "name": "Error Notification (Markdown)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Steemit发布错误处理\nconsole.error('Steemit发布失败:', $input.first().error.message);\nreturn [{\n  json: {\n    error: 'Steemit发布失败',\n    message: $input.first().error.message,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-12",
+      "name": "Error Notification (Steemit)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        60
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Trigger (09:00 AM)": {
+      "main": [
+        [
+          {
+            "node": "Get RSS Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get RSS Feed": {
+      "main": [
+        [
+          {
+            "node": "Parse RSS & Extract Latest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Error Notification (RSS)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Last Published Permlink": {
+      "main": [
+        [
+          {
+            "node": "Is New Article?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse RSS & Extract Latest": {
+      "main": [
+        [
+          {
+            "node": "Get Last Published Permlink",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is New Article?": {
+      "main": [
+        [
+          {
+            "node": "Get Markdown Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Markdown Content": {
+      "main": [
+        [
+          {
+            "node": "Parse Markdown & Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Error Notification (Markdown)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Markdown & Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Publish to Steemit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish to Steemit": {
+      "main": [
+        [
+          {
+            "node": "Update Last Published Permlink",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Error Notification (Steemit)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1",
+  "triggerCount": 0,
+  "tags": []
+}

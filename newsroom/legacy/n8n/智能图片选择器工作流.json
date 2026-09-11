@@ -1,0 +1,242 @@
+{
+  "name": "智能图片选择器子工作流 v2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f6b4c5d0-8e2a-4b3c-9d1e-2f3a4b5c6d7e",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.pexels.com/v1/search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "pexelsApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.body.keywords }}"
+            },
+            {
+              "name": "per_page",
+              "value": "8"
+            },
+            {
+              "name": "orientation",
+              "value": "landscape"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $credentials.pexelsApi.apiKey }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-5e6f-7g8h-9i0j-k1l2m3n4o5p6",
+      "name": "Pexels API Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        460,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 候选图片预处理节点 (v2.0)\n * 根据FR-03要求对Pexels API返回的图片进行预处理\n */\n\n// 可配置参数\nconst MIN_WIDTH = 1200; // 最小宽度要求\nconst PER_PAGE = 8; // 每页结果数\n\n/**\n * 筛选符合条件的图片并提取URL列表\n * @param {Array} photos - Pexels API返回的图片数组\n * @returns {Object} 包含筛选后的图片数组和URL列表\n */\nfunction preprocessPhotos(photos) {\n  // FR-03.1: 过滤掉宽度小于1200px的图片\n  const filteredPhotos = photos.filter(photo => {\n    return photo.width >= MIN_WIDTH && photo.src && photo.src.original;\n  });\n  \n  // FR-03.2: 提取候选图片URL列表\n  const candidateUrls = filteredPhotos.map(photo => photo.src.original);\n  \n  return {\n    filteredPhotos,\n    candidateUrls,\n    originalPhotos: photos\n  };\n}\n\n// 主处理逻辑\ntry {\n  const inputData = $input.all();\n  \n  // 检查是否有输入数据\n  if (!inputData || inputData.length === 0) {\n    return [{\n      json: {\n        error: \"No input data received.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: [],\n        originalInput: null\n      }\n    }];\n  }\n  \n  const firstInput = inputData[0];\n  const apiResponse = firstInput.json;\n  \n  // 保存原始输入数据（包含articleTitle）\n  const originalInput = $('Start').first().json;\n  \n  // 检查API响应格式\n  if (!apiResponse || !apiResponse.photos) {\n    return [{\n      json: {\n        error: \"Invalid API response format.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: [],\n        originalInput\n      }\n    }];\n  }\n  \n  const photos = apiResponse.photos;\n  \n  // 执行图片预处理\n  const result = preprocessPhotos(photos);\n  \n  // FR-03.3: 检查是否有候选图片\n  if (result.candidateUrls.length === 0) {\n    return [{\n      json: {\n        error: \"No suitable images found after filtering.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: photos,\n        originalInput\n      }\n    }];\n  }\n  \n  // 返回预处理结果\n  return [{\n    json: {\n      error: null,\n      candidateUrls: result.candidateUrls,\n      filteredPhotos: result.filteredPhotos,\n      originalPhotos: result.originalPhotos,\n      originalInput\n    }\n  }];\n  \n} catch (error) {\n  // 处理意外错误\n  return [{\n    json: {\n      error: `Processing error: ${error.message}`,\n      candidateUrls: [],\n      filteredPhotos: [],\n      originalPhotos: [],\n      originalInput: null\n    }\n  }];\n}"
+      },
+      "id": "b2c3d4e5-6f7g-8h9i-0j1k-l2m3n4o5p6q7",
+      "name": "候选图片预处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleAiApi",
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ {\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": `你是一位专业的资深图片编辑。你的任务是为下面的文章标题，从提供的候选图片列表中，选择一张最合适的配图。\n\n请基于以下三个维度进行评估：\n1. **主题相关性** (图片内容是否紧扣文章主题)\n2. **视觉吸引力** (图片构图、色彩和美感)\n3. **专业性** (图片是否看起来像专业摄影作品，而非随手拍或截图)\n\n文章标题: \"${$json.originalInput?.body?.articleTitle || '未提供标题'}\"\n\n候选图片URL列表:\n${$json.candidateUrls.map((url, index) => `${index}: ${url}`).join('\\n')}\n\n请不要进行任何解释。仅返回一个符合以下格式的JSON对象，其中bestImageIndex是你选择的图片在列表中的索引（从0开始），reasoning是你选择的简短理由：\n{\"bestImageIndex\": <number>, \"reasoning\": \"<string>\"}`\n    }]\n  }]\n} }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $credentials.googleAiApi.apiKey }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "d4e5f6g7-8h9i-0j1k-2l3m-n4o5p6q7r8s9",
+      "name": "多模态AI图片甄选",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        900,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 最终选择与格式化节点 (v2.0)\n * 根据AI选择结果或备用逻辑选择最终图片并格式化输出\n */\n\n/**\n * 格式化最终输出结果\n * @param {Object|null} selectedPhoto - 选中的图片对象\n * @param {string|null} errorMessage - 错误信息\n * @returns {Object} 格式化的输出对象\n */\nfunction formatOutput(selectedPhoto, errorMessage = null) {\n  if (errorMessage) {\n    return {\n      imageUrl: null,\n      altText: null,\n      photographer: null,\n      photographerUrl: null,\n      error: errorMessage\n    };\n  }\n  \n  if (!selectedPhoto) {\n    return {\n      imageUrl: null,\n      altText: null,\n      photographer: null,\n      photographerUrl: null,\n      error: \"No images found for the given keywords.\"\n    };\n  }\n  \n  return {\n    imageUrl: selectedPhoto.src.original,\n    altText: selectedPhoto.alt || \"\",\n    photographer: selectedPhoto.photographer || \"\",\n    photographerUrl: selectedPhoto.photographer_url || \"\",\n    error: null\n  };\n}\n\n/**\n * 解析AI响应并提取bestImageIndex\n * @param {Object} aiResponse - AI API响应\n * @returns {number|null} 图片索引或null\n */\nfunction parseAiResponse(aiResponse) {\n  try {\n    // 尝试从不同可能的响应格式中提取文本\n    let responseText = '';\n    \n    if (aiResponse.candidates && aiResponse.candidates[0] && aiResponse.candidates[0].content) {\n      responseText = aiResponse.candidates[0].content.parts[0].text;\n    } else if (aiResponse.text) {\n      responseText = aiResponse.text;\n    } else if (typeof aiResponse === 'string') {\n      responseText = aiResponse;\n    }\n    \n    // 尝试解析JSON\n    const jsonMatch = responseText.match(/\\{[^}]*\\}/);\n    if (jsonMatch) {\n      const parsed = JSON.parse(jsonMatch[0]);\n      return parsed.bestImageIndex;\n    }\n    \n    return null;\n  } catch (error) {\n    return null;\n  }\n}\n\n// 主处理逻辑\ntry {\n  const inputData = $input.all();\n  \n  if (!inputData || inputData.length === 0) {\n    return [formatOutput(null, \"No input data received.\")];\n  }\n  \n  const preprocessData = inputData[0].json;\n  const aiData = inputData[1] ? inputData[1].json : null;\n  \n  // 检查预处理是否有错误\n  if (preprocessData.error) {\n    return [formatOutput(null, preprocessData.error)];\n  }\n  \n  const filteredPhotos = preprocessData.filteredPhotos;\n  const originalPhotos = preprocessData.originalPhotos;\n  \n  if (!filteredPhotos || filteredPhotos.length === 0) {\n    return [formatOutput(null, \"No suitable images found after filtering.\")];\n  }\n  \n  let selectedPhoto = null;\n  \n  // FR-05.1: 尝试使用AI选择结果\n  if (aiData && !aiData.error) {\n    const bestIndex = parseAiResponse(aiData);\n    if (bestIndex !== null && bestIndex >= 0 && bestIndex < filteredPhotos.length) {\n      selectedPhoto = filteredPhotos[bestIndex];\n    }\n  }\n  \n  // FR-05.2: 备用逻辑 - 选择第一张筛选后的图片\n  if (!selectedPhoto) {\n    selectedPhoto = filteredPhotos[0];\n  }\n  \n  return [formatOutput(selectedPhoto)];\n  \n} catch (error) {\n  return [formatOutput(null, `Processing error: ${error.message}`)];\n}"
+      },
+      "id": "e5f6g7h8-9i0j-1k2l-3m4n-o5p6q7r8s9t0",
+      "name": "最终选择与格式化",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Pexels API错误处理节点\n * 处理Pexels API请求失败的情况\n */\n\n// 获取错误信息\nconst errorData = $input.all()[0];\nconst error = errorData.error;\n\nlet errorMessage = \"Unknown error occurred.\";\n\n// 根据HTTP状态码确定错误类型\nif (error && error.httpCode) {\n  switch (error.httpCode) {\n    case 401:\n      // EH-01: API认证失败\n      errorMessage = \"API authentication failed. Please check your Pexels API credentials.\";\n      break;\n    case 429:\n      errorMessage = \"API rate limit exceeded. Please try again later.\";\n      break;\n    case 500:\n    case 502:\n    case 503:\n    case 504:\n      // EH-03: API服务不可用\n      errorMessage = \"Pexels API service is currently unavailable. Please try again later.\";\n      break;\n    default:\n      errorMessage = `API request failed with status ${error.httpCode}: ${error.message || 'Unknown error'}`;\n  }\n} else if (error && error.message) {\n  errorMessage = error.message;\n}\n\n// 返回错误格式的输出\nreturn [{\n  json: {\n    imageUrl: null,\n    altText: null,\n    photographer: null,\n    photographerUrl: null,\n    error: errorMessage\n  }\n}];"
+      },
+      "id": "c3d4e5f6-7g8h-9i0j-1k2l-m3n4o5p6q7r8",
+      "name": "Pexels错误处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * AI错误处理节点\n * 处理多模态AI API调用失败的情况\n */\n\n// 获取预处理数据和错误信息\nconst inputData = $input.all();\nconst preprocessData = inputData[0].json;\nconst errorData = inputData[1];\nconst error = errorData.error;\n\nlet errorMessage = \"AI API call failed.\";\n\n// 根据HTTP状态码确定错误类型\nif (error && error.httpCode) {\n  switch (error.httpCode) {\n    case 401:\n      // EH-04: AI API认证失败\n      errorMessage = \"AI API authentication failed. Please check your Google AI API credentials.\";\n      break;\n    case 429:\n      errorMessage = \"AI API rate limit exceeded. Please try again later.\";\n      break;\n    case 500:\n    case 502:\n    case 503:\n    case 504:\n      // EH-04: AI API服务不可用\n      errorMessage = \"AI API service is currently unavailable. Using fallback logic.\";\n      break;\n    default:\n      errorMessage = `AI API request failed with status ${error.httpCode}: ${error.message || 'Unknown error'}. Using fallback logic.`;\n  }\n} else if (error && error.message) {\n  errorMessage = `AI API error: ${error.message}. Using fallback logic.`;\n}\n\n// FR-05.2: 触发备用逻辑 - 选择第一张筛选后的图片\nif (preprocessData && preprocessData.filteredPhotos && preprocessData.filteredPhotos.length > 0) {\n  const selectedPhoto = preprocessData.filteredPhotos[0];\n  return [{\n    json: {\n      imageUrl: selectedPhoto.src.original,\n      altText: selectedPhoto.alt || \"\",\n      photographer: selectedPhoto.photographer || \"\",\n      photographerUrl: selectedPhoto.photographer_url || \"\",\n      error: null\n    }\n  }];\n} else {\n  // 如果连预处理都失败了\n  return [{\n    json: {\n      imageUrl: null,\n      altText: null,\n      photographer: null,\n      photographerUrl: null,\n      error: errorMessage\n    }\n  }];\n}"
+      },
+      "id": "f6g7h8i9-0j1k-2l3m-4n5o-p6q7r8s9t0u1",
+      "name": "AI错误处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        480
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Pexels API Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pexels API Request": {
+      "main": [
+        [
+          {
+            "node": "候选图片预处理",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Pexels错误处理",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "候选图片预处理": {
+      "main": [
+        [
+          {
+            "node": "多模态AI图片甄选",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "多模态AI图片甄选": {
+      "main": [
+        [
+          {
+            "node": "最终选择与格式化",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "AI错误处理",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-20T10:00:00.000Z",
+  "id": "智能图片选择器子工作流v2",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-20T10:00:00.000Z",
+      "updatedAt": "2025-01-20T10:00:00.000Z",
+      "id": "图片搜索v2",
+      "name": "图片搜索v2"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-20T10:00:00.000Z",
+  "versionId": "2"
+}

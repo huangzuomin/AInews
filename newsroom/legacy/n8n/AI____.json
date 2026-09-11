@@ -1,0 +1,3335 @@
+{
+  "name": "AI新闻收集",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+        "options": {}
+      },
+      "id": "8a6dc8b7-fd36-427a-b537-60af7c627bcb",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -380,
+        1230
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f5ef17e9-86f0-4e23-90ec-398229e9a567",
+      "name": "XML1",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        1230
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "28803c8e-752c-44e5-9da2-1092b883c587",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        60,
+        1230
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9d8a5f3e-b1ea-4f2b-bbd3-bf6b0083bc8d",
+      "name": "Loop Over Items2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        1230
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('Supabase3').item.json.id }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('标题翻译2').item.json.text }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Write Article3').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "d4fa35d6-1f83-4bac-b28e-a0a2169a8d8c",
+      "name": "Save Article3",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2960,
+        1240
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $json.guid }}"
+            },
+            {
+              "fieldId": "categories",
+              "fieldValue": "={{ $json.category }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json['media:content'].url }}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "The New York Times"
+            }
+          ]
+        }
+      },
+      "id": "4b7de973-7806-4822-b9cb-6e3848f1ed15",
+      "name": "Create RSS Item2",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        500,
+        905
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5e0afd75-95b0-46d2-b098-5c9ddb3bc38b",
+      "name": "If - Is AI2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1394,
+        1105
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6b2e427c-8c47-470f-9fab-605e241495fd",
+      "name": "If - Exists Already2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item2').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "fc9f29fd-77b9-4bba-b335-534e78209117",
+      "name": "Supabase3",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1692,
+        1105
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */4 * * *"
+            }
+          ]
+        }
+      },
+      "id": "1a3cbf5d-d392-4c9d-90bb-873e688d057e",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -820,
+        1180
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。\n\n以单个单词输出，是 true 或 false。\n\n不要输出代码块或 Markdown，只需输出单词 true 或 false。\n\n### 判断标准：\n\n是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。\n是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。\n内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。\n如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。\n排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。\n排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。\n<文章标题>\n{{ $('Create RSS Item2').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item2').item.json.content_snippet }}\n</文章片段>",
+        "hasOutputParser": true
+      },
+      "id": "9a44d16c-c0a1-4aca-8b76-133e0c910f54",
+      "name": "Is AI Related2",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        940,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.ft.com/myft/following/6362d893-8d20-4ab6-b60f-4fcfc8c3e3fc.rss",
+        "options": {}
+      },
+      "id": "659d5463-d480-4874-99e3-774eed81e0dc",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -380,
+        1930
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "82c73eae-6b22-413a-9102-cc29164fe5fa",
+      "name": "XML",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        1930
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "5a81949c-ef7a-48ba-99f8-31b90ab23bb4",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        60,
+        1930
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "922f7a8c-61f1-48de-be8f-88b112d9e6e7",
+      "name": "Loop Over Items3",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        1930
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('Supabase4').item.json.id }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('标题翻译3').item.json.text }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Write Article4').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "fea8d25e-1a6f-4b0c-91f6-0f6d4ff4f808",
+      "name": "Save Article4",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3338,
+        1930
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.descriptionText }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $json.descriptionText }}"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $json.guid._ }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json.imageURL }}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "The Financial Times"
+            }
+          ]
+        }
+      },
+      "id": "e58c5413-6fca-4cb0-bfee-780df04b1f0f",
+      "name": "Create RSS Item3",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        720,
+        1605
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "74a0657b-5e9b-443f-b864-543418ce1007",
+      "name": "If - Is AI3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1692,
+        1805
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0809c527-2e68-4c07-90ce-f7d8f7022eb0",
+      "name": "If - Exists Already3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1018,
+        1680
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item3').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "747aa0e3-c87a-478c-a252-e13bade24eac",
+      "name": "Supabase4",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1912,
+        1805
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。\n\n以单个单词输出，是 true 或 false。\n\n不要输出代码块或 Markdown，只需输出单词 true 或 false。\n\n### 判断标准：\n\n是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。\n是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。\n内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。\n如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。\n排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。\n排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。\n<文章标题>\n{{ $('Create RSS Item3').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item3').item.json.content_snippet }}\n</文章片段>",
+        "hasOutputParser": true
+      },
+      "id": "a8ac457a-480f-4165-ae7a-d73fce96a49d",
+      "name": "Is AI Related3",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        1316,
+        1680
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function processDescription(description) {\n  const imgSrcRegex = /<img.*?src=\"(.*?)\"/;\n  const imageURL = description.match(imgSrcRegex)?.[1] || '';\n\n  const textRegex = /<img.*?>(.*?)<br/;\n  const descriptionText = description.match(textRegex)?.[1]?.trim() || '';\n\n  return { imageURL, descriptionText };\n}\n\nconst processedItems = items.map(item => {\n  const { imageURL, descriptionText } = processDescription(item.json.description);\n  \n  return {\n    ...item.json,\n    imageURL,\n    descriptionText\n  };\n});\n\nreturn processedItems;"
+      },
+      "id": "7d0523c5-c241-431f-8529-d5c71546c4a6",
+      "name": "Extract Img and Description",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        1605
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**\n\n1. 你将获得一个来自新闻源的 RSS 标题和内容片段：\n\n   ```\n   <rss_title>\n  {{ $('Supabase4').item.json.title }}\n   </rss_title>\n\n   <context_snippet>\n  {{ $('Supabase4').item.json.content_snippet }}\n   </context_snippet>\n   ```\n\n2. 你还将获得与标题相关的 Google 搜索内容：\n\n   ```\n   <google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n   </google_search_content>\n   ```\n\n3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：\n   - 以标题和内容片段为基础\n   - 信息丰富\n   - 引人入胜\n   - 结构良好\n\n4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：\n   - 标题（主标题使用 ##，副标题使用 ###）\n   - 段落（用空行分隔）\n   - 在适当的地方使用粗体和斜体文本\n   - 如有需要，使用无序列表或有序列表\n   - 对来自源的任何直接引语使用块引用\n\n5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：\n   - 使用标题指导主要主题\n   - 使用搜索内容提供更多细节和背景\n\n6. 在整篇文章中保持中立、新闻报道的基调：\n   - 客观地呈现事实\n   - 不要包含个人观点或偏见\n   - 使用第三人称视角\n\n7. 按照以下结构安排文章：\n   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。\n   - 撰写引人注目的引言，总结关键要点\n   - 撰写结论，总结文章并可能提出未来的影响\n\n8. 如适用，包含：\n   - 相关统计数据或数据点\n   - 简要提及主要利益相关者或专家\n   - 关于这条新闻为何重要或具有影响力的背景\n\n9. 使用 Wikipedia 风格的 Markdown 格式引用：\n   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。\n   - 按顺序使用脚注，不要跳过任何数字\n   - 在文章末尾包含一个 ## References（参考文献）部分\n   - 每条参考文献格式如下：\n     [^1]: 作者姓名（如可用）（日期）。\"[文章标题](URL)\"。出版物名称。检索日期 [当前日期]。\n   - 如果没有作者姓名，以文章标题开头\n   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法\n   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用\n\n10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。\n\n11. 文章之后，提供一个简要的元数据部分：\n    - 主要关键词或标签（此部分不包含链接）\n\n12. 在完成文章之前仔细检查脚注：\n    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目\n    - 验证脚注编号是顺序的（1、2、3 等），没有跳号\n\n请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。"
+      },
+      "id": "55ebe722-4f55-410d-b665-35de75bcc9b1",
+      "name": "Write Article4",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2508,
+        1805
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+        "options": {}
+      },
+      "id": "aa979948-defe-44e6-b5b1-a24fd12f22f0",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -380,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c251529f-f602-4f60-8bad-b379085afaea",
+      "name": "XML2",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "3fb27c40-74dc-4e27-970d-f4f2168d687e",
+      "name": "Split Out2",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        60,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fb10ba2b-ddf5-4944-ba64-8f11ce3a1b26",
+      "name": "Loop Over Items4",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json['media:thumbnail'].url }}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "BBC News"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $json.guid._ }}"
+            }
+          ]
+        }
+      },
+      "id": "0532c038-3c4d-4945-9d37-1a5863e6b318",
+      "name": "Create RSS Item4",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        500,
+        2305
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6247f920-6ade-4bcd-a315-0fd9c66fd8b3",
+      "name": "If - Is AI4",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1394,
+        2505
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "47c2b21c-5066-4f76-9afe-d6b72d2df979",
+      "name": "If - Exists Already4",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        2380
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item4').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "0acd0d6e-da00-4b1a-81cb-c343269f4223",
+      "name": "Supabase5",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1692,
+        2505
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯。\n\n以单个单词输出，是 true 或 false。\n\n不要输出代码块或 Markdown，只需输出单词 true 或 false。\n\n### 判断标准：\n\n是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。\n是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。\n内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。\n如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。\n排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。\n排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。\n<文章标题>\n{{ $('Create RSS Item4').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item4').item.json.content_snippet }}\n</文章片段>",
+        "hasOutputParser": true
+      },
+      "id": "380b33ad-605e-4c43-82e6-efd3b506988c",
+      "name": "Is AI Related4",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        940,
+        2380
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**\n\n1. 你将获得一个来自新闻源的 RSS 标题和内容片段：\n\n   ```\n   <rss_title>\n  {{ $('Supabase5').item.json.title }}\n   </rss_title>\n\n   <context_snippet>\n  {{ $('Supabase5').item.json.content_snippet }}\n   </context_snippet>\n   ```\n\n2. 你还将获得与标题相关的 Google 搜索内容：\n\n   ```\n   <google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n   </google_search_content>\n   ```\n\n3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：\n   - 以标题和内容片段为基础\n   - 信息丰富\n   - 引人入胜\n   - 结构良好\n\n4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：\n   - 标题（主标题使用 ##，副标题使用 ###）\n   - 段落（用空行分隔）\n   - 在适当的地方使用粗体和斜体文本\n   - 如有需要，使用无序列表或有序列表\n   - 对来自源的任何直接引语使用块引用\n\n5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：\n   - 使用标题指导主要主题\n   - 使用搜索内容提供更多细节和背景\n\n6. 在整篇文章中保持中立、新闻报道的基调：\n   - 客观地呈现事实\n   - 不要包含个人观点或偏见\n   - 使用第三人称视角\n\n7. 按照以下结构安排文章：\n   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。\n   - 撰写引人注目的引言，总结关键要点\n   - 撰写结论，总结文章并可能提出未来的影响\n\n8. 如适用，包含：\n   - 相关统计数据或数据点\n   - 简要提及主要利益相关者或专家\n   - 关于这条新闻为何重要或具有影响力的背景\n\n9. 使用 Wikipedia 风格的 Markdown 格式引用：\n   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。\n   - 按顺序使用脚注，不要跳过任何数字\n   - 在文章末尾包含一个 ## References（参考文献）部分\n   - 每条参考文献格式如下：\n     [^1]: 作者姓名（如可用）（日期）。\"[文章标题](URL)\"。出版物名称。检索日期 [当前日期]。\n   - 如果没有作者姓名，以文章标题开头\n   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法\n   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用\n\n10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。\n\n11. 文章之后，提供一个简要的元数据部分：\n    - 主要关键词或标签（此部分不包含链接）\n\n12. 在完成文章之前仔细检查脚注：\n    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目\n    - 验证脚注编号是顺序的（1、2、3 等），没有跳号\n\n请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。"
+      },
+      "id": "9cd136fa-90d7-44ab-9556-d3519010007f",
+      "name": "Write Article5",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2132,
+        2505
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('Supabase5').item.json.id }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('标题翻译4').item.json.text }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Write Article5').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "09db49b5-8b61-4230-908c-b8351b1a99a2",
+      "name": "Save Article5",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3636,
+        2630
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Supabase5').item.json.title }} "
+            },
+            {
+              "name": "cx",
+              "value": "={{ String($('Globals1').item.json.google_search_cx).trim() }}"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e70f4fbc-49e0-4aa9-b4a1-ecbadfbde381",
+      "name": "Get Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2586,
+        2505
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "KwnWIaNgHkfyuYxB",
+          "name": "Query Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Supabase5').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json.items[0].link }}"
+            }
+          ]
+        }
+      },
+      "id": "e930bb90-1ed9-425f-b2cc-479d0d3d6020",
+      "name": "Supabase6",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2962,
+        2505
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# NYT",
+        "height": 80,
+        "color": 5
+      },
+      "id": "14cf30d7-2653-4e92-a18f-3d74faa380be",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# FT",
+        "height": 80,
+        "color": 5
+      },
+      "id": "9a3147b8-c27e-4f75-bc0c-5aede8821e1c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        1960
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# BBC",
+        "height": 80,
+        "color": 5
+      },
+      "id": "1bc76ca3-c5a4-49c2-9680-d062cefe1c62",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://feeds.washingtonpost.com/rss/business/technology",
+        "options": {}
+      },
+      "id": "b5fb7306-c11b-40fb-88f7-cbd626039e9d",
+      "name": "HTTP Request5",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -380,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0b220fea-d6ab-4143-8257-de0d48a38c92",
+      "name": "XML5",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "4eb96ed5-f314-4289-94f4-8d9ccadbd573",
+      "name": "Split Out5",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -95
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1ed5ee0d-49eb-4cf3-afd6-05037bce716a",
+      "name": "Loop Over Items7",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        -95
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('Supabase9').item.json.id }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('标题翻译').item.json.text }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Write Article8').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "4c6d8ceb-1075-43f6-84c6-1a4715510bb8",
+      "name": "Save Article8",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3636,
+        -95
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "="
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "The Washington Post"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $json.guid._ }}"
+            }
+          ]
+        }
+      },
+      "id": "a737120a-ddbe-45ca-bb2a-d907f8027e51",
+      "name": "Create RSS Item7",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        500,
+        -420
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c8065e88-b1ab-412a-b0c2-7a433fa3ced9",
+      "name": "If - Is AI7",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1394,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3ab65e0b-1f10-4729-8220-e2d371fcd357",
+      "name": "If - Exists Already7",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -345
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item7').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "e510f6e2-382e-49fc-8331-e7d6cb0a0ec9",
+      "name": "Supabase9",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1692,
+        -220
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Supabase9').item.json.title }} "
+            },
+            {
+              "name": "cx",
+              "value": "={{ String($('Globals1').item.json.google_search_cx).trim() }}"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "35c71a48-bc0a-47e1-adfd-2f8044114f33",
+      "name": "Get Image3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2586,
+        -220
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "5MAHLNr2E32WyTok",
+          "name": "Header Auth account"
+        },
+        "httpQueryAuth": {
+          "id": "KwnWIaNgHkfyuYxB",
+          "name": "Query Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Supabase9').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json.items[0].link }}"
+            }
+          ]
+        }
+      },
+      "id": "ed3b591d-70aa-45f0-8f30-a96270c1bb77",
+      "name": "Supabase10",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2962,
+        -220
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Washington Post",
+        "height": 126.69426322803548,
+        "color": 5
+      },
+      "id": "5949b48a-cbc7-4855-9fdf-40d4f05e0062",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -740,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯，同时确保新闻是4小时以内的最新更新。\n\n以单个单词输出，是 true 或 false。\n\n不要输出代码块或 Markdown，只需输出单词 true 或 false。\n\n### 判断标准：\n\n**时效性要求：**\n- 文章发布时间必须在当前时间的4小时以内\n- 发布时间：{{ $('Create RSS Item7').item.json.pub_date }}\n- 当前时间：{{ new Date().toISOString() }}\n- 时间差：{{ Math.abs(new Date() - new Date($('Create RSS Item7').item.json.pub_date)) / (1000 * 60 * 60) }} 小时\n\n**内容相关性要求：**\n- 是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。\n- 是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。\n- 内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。\n- 如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。\n- 排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。\n- 排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。\n\n**综合判断：**\n只有同时满足时效性要求（4小时以内）和内容相关性要求的文章才返回 true，否则返回 false。\n\n<文章标题>\n{{ $('Create RSS Item7').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item7').item.json.content_snippet }}\n</文章片段>\n\n<发布时间>\n{{ $('Create RSS Item7').item.json.pub_date }}\n</发布时间>",
+        "hasOutputParser": true
+      },
+      "id": "e710d37d-b9cc-424b-b7ba-6c4b6beec068",
+      "name": "Is AI Related7",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        940,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**你是一名人工智能助手，任务是根据 RSS 标题、内容片段和来自 Google 搜索的参考资料撰写一篇新闻文章。请仔细遵循以下说明：**\n\n1. 你将获得一个来自新闻源的 RSS 标题和内容片段：\n\n   ```\n   <rss_title>\n  {{ $('Supabase3').item.json.title }}\n   </rss_title>\n\n   <context_snippet>\n  {{ $('Supabase3').item.json.content_snippet }}\n   </context_snippet>\n   ```\n\n2. 你还将获得与标题相关的 Google 搜索内容：\n\n   ```\n   <google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n   </google_search_content>\n   ```\n\n3. 根据 RSS 标题和内容片段，利用 Google 搜索内容中的信息撰写一篇文章。文章应符合以下要求：\n   - 以标题和内容片段为基础\n   - 信息丰富\n   - 引人入胜\n   - 结构良好\n\n4. 使用 Markdown 格式化文章。为以下内容使用适当的 Markdown 语法：\n   - 标题（主标题使用 ##，副标题使用 ###）\n   - 段落（用空行分隔）\n   - 在适当的地方使用粗体和斜体文本\n   - 如有需要，使用无序列表或有序列表\n   - 对来自源的任何直接引语使用块引用\n\n5. 融合 RSS 标题/片段和 Google 搜索内容中的信息：\n   - 使用标题指导主要主题\n   - 使用搜索内容提供更多细节和背景\n\n6. 在整篇文章中保持中立、新闻报道的基调：\n   - 客观地呈现事实\n   - 不要包含个人观点或偏见\n   - 使用第三人称视角\n\n7. 按照以下结构安排文章：\n   - 以 TL;DR（太长不看）部分开头。用简洁的中文概括文章的重点。\n   - 撰写引人注目的引言，总结关键要点\n   - 撰写结论，总结文章并可能提出未来的影响\n\n8. 如适用，包含：\n   - 相关统计数据或数据点\n   - 简要提及主要利益相关者或专家\n   - 关于这条新闻为何重要或具有影响力的背景\n\n9. 使用 Wikipedia 风格的 Markdown 格式引用：\n   - 在文本中，使用脚注式引用，例如 [^1]、[^2] 等。\n   - 按顺序使用脚注，不要跳过任何数字\n   - 在文章末尾包含一个 ## References（参考文献）部分\n   - 每条参考文献格式如下：\n     [^1]: 作者姓名（如可用）（日期）。\"[文章标题](URL)\"。出版物名称。检索日期 [当前日期]。\n   - 如果没有作者姓名，以文章标题开头\n   - 确保所有文章标题都是可点击的链接，使用 Markdown 语法\n   - 在 References 部分包含 Google 搜索内容中提供的所有来源，即使在文本中没有直接引用\n\n10. 以 <article> 开始响应，以 </article> 结束。整个文章，包括 Markdown 格式和参考文献，都应包含在这两个标签之间。\n\n11. 文章之后，提供一个简要的元数据部分：\n    - 主要关键词或标签（此部分不包含链接）\n\n12. 在完成文章之前仔细检查脚注：\n    - 确保文本中使用的所有脚注编号在 References 部分都有对应的条目\n    - 验证脚注编号是顺序的（1、2、3 等），没有跳号\n\n请记住在写作中遵守新闻报道标准和道德规范。仅依据提供的来源呈现事实，避免耸人听闻。"
+      },
+      "id": "2a4bef00-7c5c-45d3-a9f7-7c024b5e6180",
+      "name": "Write Article3",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2132,
+        1105
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# 卫报",
+        "height": 80,
+        "color": 5
+      },
+      "id": "5dd3a389-3148-458f-94ef-ccceea863845",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.theguardian.com/technology/artificialintelligenceai/rss",
+        "options": {}
+      },
+      "id": "8cc42669-810a-4b99-a2ec-dbcb965df5c7",
+      "name": "HTTP Request6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -380,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5413bf40-742b-4c36-9a6a-06c69491508d",
+      "name": "XML6",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "8c0f2a3a-2a81-486a-bef9-56dab12bdd11",
+      "name": "Split Out6",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        60,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5260e7cb-dad4-47f9-a37f-8a6b2b43d5c3",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('Supabase11').item.json.id }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('Write Article').item.json.title }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Write Article').item.json.article_content }}"
+            },
+            {
+              "fieldId": "summary",
+              "fieldValue": "={{ $('Write Article').item.json.summary }}"
+            },
+            {
+              "fieldId": "tags",
+              "fieldValue": "={{ $('Write Article').item.json.tags }}"
+            },
+            {
+              "fieldId": "main_topics",
+              "fieldValue": "={{ $('Write Article').item.json.main_topics }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $('Get Image4').item[0].json.link }}"
+            }
+          ]
+        }
+      },
+      "id": "886424e3-2ff0-44f7-9244-f7cf891708c9",
+      "name": "Save Article",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3640,
+        480
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $json.description }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "="
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "The Wall Street Journal"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $json.guid._ }}"
+            },
+            {
+              "fieldId": "img_url"
+            }
+          ]
+        }
+      },
+      "id": "015eab13-54df-4a96-b7c5-30d36e865fb8",
+      "name": "Create RSS Item",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        500,
+        280
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "83d13e2a-9dd6-45e2-a2ce-39e09041b703",
+      "name": "If - Is AI",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1394,
+        355
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d4e3f629-f0ed-4c1d-b675-b85360d67c82",
+      "name": "If - Exists Already",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        355
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "c970a182-5a29-4dab-be58-e312415afc6f",
+      "name": "Supabase11",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1692,
+        355
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Supabase11').item.json.title }} "
+            },
+            {
+              "name": "cx",
+              "value": "={{ String($('Globals1').item.json.google_search_cx).trim() }}"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c2cf4662-7889-4287-94eb-67a87c4499cf",
+      "name": "Get Image4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2586,
+        355
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "KwnWIaNgHkfyuYxB",
+          "name": "Query Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Supabase11').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $json.items[0].link }}"
+            }
+          ]
+        }
+      },
+      "id": "c0f65c3c-68a6-495f-8c6a-b53e8e06bd12",
+      "name": "Supabase12",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2962,
+        355
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "mnS6q7Jby2UblcPc",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是偏向中国读者感兴趣的AI领域的专业资讯，同时确保新闻是12小时以内的最新更新。\n\n以单个单词输出，是 true 或 false。\n\n不要输出代码块或 Markdown，只需输出单词 true 或 false。\n\n### 判断标准：\n\n**时效性要求：**\n- 文章发布时间必须在当前时间的4小时以内\n- 发布时间：{{ $('Create RSS Item').item.json.pub_date }}\n- 当前时间：{{ new Date().toISOString() }}\n- 时间差：{{ Math.abs(new Date() - new Date($('Create RSS Item').item.json.pub_date)) / (1000 * 60 * 60) }} 小时\n\n**内容相关性要求：**\n- 是否直接与人工智能技术、算法、应用、研究进展、行业趋势、公司动态等相关。\n- 是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业等）的应用或影响。\n- 内容是否具有一定的深度或专业性，而不仅仅是泛泛的社会议题。\n- 如果涉及中国相关内容，是否是关于中国的AI发展、政策、企业或研究成果。\n- 排除与人工智能相关但更多是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。\n- 排除与人工智能相关但明显是美国或欧洲读者更感兴趣的政治、社会争议等内容，除非其对全球AI发展或中国有直接影响。\n\n**综合判断：**\n只有同时满足时效性要求（12小时以内）和内容相关性要求的文章才返回 true，否则返回 false。\n\n<文章标题>\n{{ $('Create RSS Item').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item').item.json.content_snippet }}\n</文章片段>\n\n<发布时间>\n{{ $('Create RSS Item').item.json.pub_date }}\n</发布时间>\n",
+        "hasOutputParser": true
+      },
+      "id": "a80d958a-0c77-4d57-b2e3-44481768eb0d",
+      "name": "Is AI Related",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        940,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**你是一名专业的科技记者，模仿MIT Technology Review资深记者\nKaren Hao的写作风格，任务是根据RSS标题、内容片段和Google搜索的\n参考资料撰写一篇深度新闻文章。请仔细遵循以下说明：**\n\n## 写作风格要求：\n- 采用深度分析的叙事方式，不仅报道事实，更要探讨背后的技术原理和\n社会影响\n- 使用清晰、准确的技术语言，但保持对普通读者的可读性\n- 在客观报道的基础上，提供有见地的分析和前瞻性思考\n- 关注AI技术对社会、伦理、经济的深层影响\n- 采用结构化的论述方式，逻辑清晰，层次分明\n\n## 数据输入：\n\n1. RSS标题和内容片段：\n```\n<rss_title>\n{{ $('Supabase9').item.json.title }}\n</rss_title>\n\n<context_snippet>\n{{ $('Supabase9').item.json.content_snippet }}\n</context_snippet>\n\n```\n\n2. Google搜索参考内容：\n```\n<google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n</google_search_content>\n\n```\n\n## 文章要求：\n\n3. **内容深度**：\n- 以RSS标题和内容片段为核心，深度挖掘技术细节\n- 利用Google搜索内容提供丰富的背景信息和多角度分析\n- 信息丰富、引人入胜、结构良好\n- 体现Karen Hao式的深度思考和前瞻性视角\n\n4. **Markdown格式**：\n- 如有副标题，使用 ###\n- 段落用空行分隔\n- 适当使用**粗体**和*斜体*强调关键信息\n- 使用无序列表或有序列表组织复杂信息\n- 重要引语使用块引用格式\n\n5. **灵活的文章结构**（根据内容选择最适合的组织方式）：\n\n**必备要素**：\n- **TL;DR**：使用引文格式（> 开头）用2-3句简洁中文概括文章核心要点\n\n**结构选择原则**：\n\n**A. 突发新闻型**（适用于重大发布、突发事件）：\n- 开门见山陈述核心事实\n- 按重要性递减顺序展开细节\n- 用自然段落流畅叙述，无需小标题\n- 重点突出\"什么发生了\"和\"为什么重要\"\n\n**B. 深度分析型**（适用于技术解析、趋势分析）：\n- 可使用2-3个核心小标题组织复杂内容\n- ### 技术原理解析\n- ### 行业影响分析  \n- ### 未来发展趋势\n- 每个部分内部仍以自然段落为主\n\n**C. 人物/公司聚焦型**（适用于企业动态、人物专访）：\n- 以故事化叙述为主线\n- 按时间线或逻辑关系自然展开\n- 避免生硬的小标题分割\n- 重点突出人物观点或企业策略\n\n**D. 对比分析型**（适用于竞品比较、政策对比）：\n- 可使用对比性小标题（如需要）\n- ### A方案 vs B方案\n- ### 优势与挑战\n- 或直接用段落进行对比叙述\n\n**E. 教程/解释型**（适用于技术科普、概念解释）：\n- 按逻辑层次递进\n- 可使用问题式小标题\n- ### 这项技术如何工作？\n- ### 它解决了什么问题？\n- 保持解释的连贯性\n\n**结构决策指南**：\n- 内容简单直接 → 用自然段落，无小标题\n- 内容复杂多层 → 最多3个小标题辅助组织\n- 信息密集 → 适当使用列表和引用块\n- 故事性强 → 按叙述逻辑自然展开\n- 技术性强 → 按理解难度递进组织\n\n**段落组织原则**：\n- 每段聚焦一个核心观点\n- 段落间逻辑关系清晰\n- 使用过渡句连接不同观点\n- 重要信息用**粗体**或*斜体*突出\n- 关键数据和引语独立成段\n\n6. **引用格式**（使用准确时间参数）：\n- 文中使用脚注式引用：[^1]、[^2]等\n- 按顺序编号，不跳号\n- 文章末尾包含## References部分\n- 每条参考文献格式：\n  [^1]: 作者姓名（如可用）（{{ new Date($json.\n  publishedDate || Date.now()).toLocaleDateString\n  ('zh-CN') }}）。\"[文章标题](URL)\"。出版物名称。检索日期{{ \n  new Date().toLocaleDateString('zh-CN') }}。\n- 无作者时以文章标题开头\n- 确保所有标题都是可点击链接\n- 包含Google搜索内容中的所有来源\n\n7. **专业标准**：\n- 保持客观、专业的新闻报道基调\n- 基于事实进行深度分析，避免主观臆测\n- 使用第三人称视角\n- 遵守新闻伦理，避免耸人听闻\n\n## 输出格式要求：\n\n8. **文章输出**：\n```\n[完整的Markdown格式文章，包括所有引用]\n ```\n9. 结构化数据输出 （用于后续节点处理）：\n   ```\n   {\n     \"article_content\": \"[完整文章内容]\",\n     \"summary\": \"[文章核心要点的简洁总结，2-3句话]\",\n     \"tags\": [\"标签1\", \"标签2\", \"标签3\", \"标签4\", \"标签5\"],\n     \"title\": \"[文章标题]\",\n     \"author_style\": \"AI内参\",\n     \"word_count\": \"[大约字数]\",\n     \"main_topics\": [\"主要话题1\", \"主要话题2\"],\n     \"publication_date\": \"{{ new Date().toISOString() }}\n     \"\n   }\n   ```\n## 标签生成规则：\n- 提取5-8个最相关的关键词作为标签\n- 标签应涵盖：技术类别、应用领域、相关公司、影响范围\n- 使用中文标签，简洁明确\n- 标签将直接用于数据库的tags字段\n## Summary字段要求：\n- 2-3句话概括文章核心内容\n- 突出最重要的发现或观点\n- 适合作为文章摘要在其他平台展示\n- 语言简洁、信息密度高\n## 质量检查清单：\n- 确保脚注编号连续且对应\n- 验证所有链接格式正确\n- 检查JSON格式的有效性\n- 确认标签和摘要的独立性\n- 验证时间参数的准确性\n请确保输出的JSON格式正确，便于后续节点解析和处理。文章结构要真正为内容服务，避免机械化的固定框架。\n\n```\n "
+      },
+      "id": "e25f1122-79ca-4fb2-9510-b1e45b8f3a9a",
+      "name": "Write Article8",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2140,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**你是一名专业的科技记者，模仿MIT Technology Review资深记者\nKaren Hao的写作风格，任务是根据RSS标题、内容片段和Google搜索的\n参考资料撰写一篇深度新闻文章。请仔细遵循以下说明：**\n\n## 写作风格要求：\n- 采用深度分析的叙事方式，不仅报道事实，更要探讨背后的技术原理和\n社会影响\n- 使用清晰、准确的技术语言，但保持对普通读者的可读性\n- 在客观报道的基础上，提供有见地的分析和前瞻性思考\n- 关注AI技术对社会、伦理、经济的深层影响\n- 采用结构化的论述方式，逻辑清晰，层次分明\n\n## 数据输入：\n\n1. RSS标题和内容片段：\n```\n<rss_title>\n{{ $('Supabase11').item.json.title }}\n</rss_title>\n\n<context_snippet>\n{{ $('Supabase11').item.json.content_snippet }}\n</context_snippet>\n\n```\n\n2. Google搜索参考内容：\n```\n<google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n</google_search_content>\n\n```\n\n## 文章要求：\n\n3. **内容深度**：\n- 以RSS标题和内容片段为核心，深度挖掘技术细节\n- 利用Google搜索内容提供丰富的背景信息和多角度分析\n- 信息丰富、引人入胜、结构良好\n- 体现Karen Hao式的深度思考和前瞻性视角\n\n4. **Markdown格式**：\n- 如有副标题，使用 ### （标题有独立字段，无需在这里添加标题）\n- 段落用空行分隔\n- 适当使用**粗体**和*斜体*强调关键信息\n- 使用无序列表或有序列表组织复杂信息\n- 重要引语使用块引用格式\n\n5. **灵活的文章结构**（根据内容选择最适合的组织方式）：\n\n**必备要素**：\n- **TL;DR**：使用引文格式（> 开头）用2-3句简洁中文概括文章核心\n要点\n\n**结构选择原则**：\n\n**A. 突发新闻型**（适用于重大发布、突发事件）：\n- 开门见山陈述核心事实\n- 按重要性递减顺序展开细节\n- 用自然段落流畅叙述，无需小标题\n- 重点突出\"什么发生了\"和\"为什么重要\"\n\n**B. 深度分析型**（适用于技术解析、趋势分析）：\n- 可使用2-3个核心小标题组织复杂内容\n- ### 技术原理解析\n- ### 行业影响分析\n- ### 未来发展趋势\n- 每个部分内部仍以自然段落为主\n\n**C. 人物/公司聚焦型**（适用于企业动态、人物专访）：\n- 以故事化叙述为主线\n- 按时间线或逻辑关系自然展开\n- 避免生硬的小标题分割\n- 重点突出人物观点或企业策略\n\n**D. 对比分析型**（适用于竞品比较、政策对比）：\n- 可使用对比性小标题（如需要）\n- ### A方案 vs B方案\n- ### 优势与挑战\n- 或直接用段落进行对比叙述\n\n**E. 教程/解释型**（适用于技术科普、概念解释）：\n- 按逻辑层次递进\n- 可使用问题式小标题\n- ### 这项技术如何工作？\n- ### 它解决了什么问题？\n- 保持解释的连贯性\n\n**结构决策指南**：\n- 内容简单直接 → 用自然段落，无小标题\n- 内容复杂多层 → 最多3个小标题辅助组织\n- 信息密集 → 适当使用列表和引用块\n- 故事性强 → 按叙述逻辑自然展开\n- 技术性强 → 按理解难度递进组织\n\n**段落组织原则**：\n- 每段聚焦一个核心观点\n- 段落间逻辑关系清晰\n- 使用过渡句连接不同观点\n- 重要信息用**粗体**或*斜体*突出\n- 关键数据和引语独立成段\n\n6. **引用格式**（使用准确时间参数）：\n- 文中使用脚注式引用：[^1]、[^2]等\n- 按顺序编号，不跳号\n- 文章末尾包含## References部分\n- 每条参考文献格式：\n  [^1]: 作者姓名（如可用）（{{ new Date($json.\n  publishedDate || Date.now()).toLocaleDateString\n  ('zh-CN') }}）。\"[文章标题](URL)\"。出版物名称。检索日期{{ \n  new Date().toLocaleDateString('zh-CN') }}。\n- 无作者时以文章标题开头\n- 确保所有标题都是可点击链接\n- 包含Google搜索内容中的所有来源\n\n7. **专业标准**：\n- 保持客观、专业的新闻报道基调\n- 基于事实进行深度分析，避免主观臆测\n- 使用第三人称视角\n- 遵守新闻伦理，避免耸人听闻\n\n## 标签生成规则：\n- 提取5-8个最相关的关键词作为标签\n- 标签应涵盖：技术类别、应用领域、相关公司、影响范围\n- 使用中文标签，简洁明确\n- 标签将直接用于数据库的tags字段\n\n## Summary字段要求：\n- 2-3句话概括文章核心内容\n- 突出最重要的发现或观点\n- 适合作为文章摘要在其他平台展示\n- 语言简洁、信息密度高\n\n## 质量检查清单：\n- 确保脚注编号连续且对应\n- 验证所有链接格式正确\n- 检查JSON格式的有效性\n- 确认标签和摘要的独立性\n- 验证时间参数的准确性\n\n## 输出格式要求：\n\n**重要：请直接输出以下JSON格式，不要包含任何其他文本或markdown\n代码块：**\n\n{\n  \"article_content\": \"[完整的Markdown格式文章内容，包括TL;\n  DR、正文和References部分]\",\n  \"summary\": \"[文章核心要点的简洁总结，2-3句话]\",\n  \"tags\": [\"标签1\", \"标签2\", \"标签3\", \"标签4\", \"标签5\"],\n  \"title\": \"[文章标题]\",\n  \"author_style\": \"AI内参\",\n  \"word_count\": \"[大约字数]\",\n  \"main_topics\": [\"主要话题1\", \"主要话题2\"],\n  \"publication_date\": \"{{ new Date().toISOString() }}\"\n}\n\n请确保输出的JSON格式完全正确，便于后续节点直接解析和处理。文章结\n构要真正为内容服务，避免机械化的固定框架。\n```\n "
+      },
+      "id": "2b81411c-0817-4993-8498-b431bee9b117",
+      "name": "Write Article",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2140,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "62266f8c-0f97-494a-adb6-4b5c082cc1c1",
+              "name": "google_search_cx",
+              "value": "96eceac0bab124343",
+              "type": "string"
+            },
+            {
+              "id": "e8e34221-d84c-44ed-9243-557719bf2405",
+              "name": "current_time_utc",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3946818-e88c-4143-992b-6a3ca80aef9f",
+      "name": "Globals1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -600,
+        1180
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1028,
+        -125
+      ],
+      "id": "eb9ece7a-22be-4453-a7c6-7d1143adbf27",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "mtXrVTdWFDofY3gc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        0
+      ],
+      "id": "318b83bf-25ff-4599-81a7-e2bd748ff05a",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "mtXrVTdWFDofY3gc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1028,
+        575
+      ],
+      "id": "b9ef93e9-745a-40ce-9c50-32967ecae948",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "S9V9NSOeK6ha3Qys",
+          "name": "Google Gemini(PaLM) Api account 767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        575
+      ],
+      "id": "8c6a813a-4d70-417c-8e23-30d11f25ba46",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "S9V9NSOeK6ha3Qys",
+          "name": "Google Gemini(PaLM) Api account 767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1028,
+        1200
+      ],
+      "id": "9d23525d-5b27-4eab-a422-e6cf4484ba57",
+      "name": "Google Gemini Chat Model4",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        1325
+      ],
+      "id": "449a2c07-5b82-4623-805a-d54f8dbac805",
+      "name": "Google Gemini Chat Model5",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1404,
+        1900
+      ],
+      "id": "98800395-f061-47cb-a1b6-fd7cb9fe8f63",
+      "name": "Google Gemini Chat Model6",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xyl8aGrhivQGYsRx",
+          "name": "Google Gemini(PaLM) Api account 2019"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2596,
+        2025
+      ],
+      "id": "2b4a1099-9336-45bc-8579-e32ce5009b55",
+      "name": "Google Gemini Chat Model7",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xyl8aGrhivQGYsRx",
+          "name": "Google Gemini(PaLM) Api account 2019"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1028,
+        2600
+      ],
+      "id": "0f2b6046-c665-470b-becd-e99872ffa25b",
+      "name": "Google Gemini Chat Model8",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "mtXrVTdWFDofY3gc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        2725
+      ],
+      "id": "f48675bb-0341-4106-875a-2fb62f7e2347",
+      "name": "Google Gemini Chat Model9",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"<REDACTED:TAVILY_KEY>\",\n  \"query\": \"{{ $json.title }}\",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1912,
+        -220
+      ],
+      "id": "685a0c32-0a1c-4358-bd86-f61180bccb90",
+      "name": "tavily search",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "xaQFW1zdR6mIUGu9",
+          "name": "Tavily search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"<REDACTED:TAVILY_KEY>\",\n  \"query\": \"{{ $json.title }}\",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1912,
+        355
+      ],
+      "id": "8fef38bd-a366-40b6-9575-5425de651cc0",
+      "name": "tavily search1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "xaQFW1zdR6mIUGu9",
+          "name": "Tavily search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"<REDACTED:TAVILY_KEY>\",\n  \"query\": \"{{ $json.title }}\",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1912,
+        1105
+      ],
+      "id": "89cbcced-a58c-4863-a39e-cf932a27ebd5",
+      "name": "tavily search2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "xaQFW1zdR6mIUGu9",
+          "name": "Tavily search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"<REDACTED:TAVILY_KEY>\",\n  \"query\": \"{{ $json.title }}\",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2210,
+        1805
+      ],
+      "id": "f4578725-f65f-4896-bdb7-0cacc059e934",
+      "name": "tavily search3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "xaQFW1zdR6mIUGu9",
+          "name": "Tavily search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"<REDACTED:TAVILY_KEY>\",\n  \"query\": \"{{ $json.title }}\",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1912,
+        2505
+      ],
+      "id": "8c0bca70-6919-4f40-b980-e1ff8799a555",
+      "name": "tavily search4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "xaQFW1zdR6mIUGu9",
+          "name": "Tavily search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        3348,
+        0
+      ],
+      "id": "b487e742-31cf-43cd-a70f-c5e17d0bfbe1",
+      "name": "Google Gemini Chat Model10",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "S9V9NSOeK6ha3Qys",
+          "name": "Google Gemini(PaLM) Api account 767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=请将以下英文新闻标题翻译成中文，要求：\n1. 保持原意和专业性\n2. 符合中文新闻标题习惯\n3. 只返回翻译后的中文标题，不要其他内容\n\n英文标题：{{ $('Supabase10').item.json.title }} ",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        3260,
+        -220
+      ],
+      "id": "8b057299-b79e-441c-91bf-e854287d0430",
+      "name": "标题翻译",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=请将以下英文新闻标题翻译成中文，要求：\n1. 保持原意和专业性\n2. 符合中文新闻标题习惯\n3. 只返回翻译后的中文标题，不要其他内容\n\n英文标题：{{ $('Supabase3').item.json.title }} ",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        2500,
+        1100
+      ],
+      "id": "72c0c5b7-24ac-45b5-9678-287201610cf6",
+      "name": "标题翻译2"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2596,
+        1325
+      ],
+      "id": "f3027670-7d37-4a7b-b3e6-e83ee9c30d18",
+      "name": "Google Gemini Chat Model12",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xyl8aGrhivQGYsRx",
+          "name": "Google Gemini(PaLM) Api account 2019"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=请将以下英文新闻标题翻译成中文，要求：\n1. 保持原意和专业性\n2. 符合中文新闻标题习惯\n3. 只返回翻译后的中文标题，不要其他内容\n\n英文标题：{{ $('Supabase4').item.json.title }} ",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        2884,
+        1805
+      ],
+      "id": "93282ac8-7705-4541-b71a-327a44e426f1",
+      "name": "标题翻译3"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2972,
+        2025
+      ],
+      "id": "43dd9501-631d-4484-a8ce-c06a27d20f02",
+      "name": "Google Gemini Chat Model13",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=请将以下英文新闻标题翻译成中文，要求：\n1. 保持原意和专业性\n2. 符合中文新闻标题习惯\n3. 只返回翻译后的中文标题，不要其他内容\n\n英文标题：{{ $('Supabase5').item.json.title }} ",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        3260,
+        2500
+      ],
+      "id": "b549bdf8-41e6-43d6-a34b-15182e80c8a6",
+      "name": "标题翻译4"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        3348,
+        2725
+      ],
+      "id": "f68c166b-f447-4fe7-a9c4-994103688f78",
+      "name": "Google Gemini Chat Model14",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JJGHfb2ln4kYfXqe",
+          "name": "Google Gemini(PaLM) Api account 2020"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "XML1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML1": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create RSS Item2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Article3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Item2": {
+      "main": [
+        [
+          {
+            "node": "If - Exists Already2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Is AI2": {
+      "main": [
+        [
+          {
+            "node": "Supabase3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Exists Already2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is AI Related2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase3": {
+      "main": [
+        [
+          {
+            "node": "tavily search2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Globals1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is AI Related2": {
+      "main": [
+        [
+          {
+            "node": "If - Is AI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Extract Img and Description",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Article4": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Item3": {
+      "main": [
+        [
+          {
+            "node": "If - Exists Already3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Is AI3": {
+      "main": [
+        [
+          {
+            "node": "Supabase4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Exists Already3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is AI Related3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase4": {
+      "main": [
+        [
+          {
+            "node": "tavily search3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is AI Related3": {
+      "main": [
+        [
+          {
+            "node": "If - Is AI3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Img and Description": {
+      "main": [
+        [
+          {
+            "node": "Create RSS Item3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Article4": {
+      "main": [
+        [
+          {
+            "node": "标题翻译3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "XML2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML2": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items4": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create RSS Item4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Item4": {
+      "main": [
+        [
+          {
+            "node": "If - Exists Already4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Is AI4": {
+      "main": [
+        [
+          {
+            "node": "Supabase5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Exists Already4": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is AI Related4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase5": {
+      "main": [
+        [
+          {
+            "node": "tavily search4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is AI Related4": {
+      "main": [
+        [
+          {
+            "node": "If - Is AI4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Article5": {
+      "main": [
+        [
+          {
+            "node": "Get Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Article5": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image": {
+      "main": [
+        [
+          {
+            "node": "Supabase6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase6": {
+      "main": [
+        [
+          {
+            "node": "标题翻译4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request5": {
+      "main": [
+        [
+          {
+            "node": "XML5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML5": {
+      "main": [
+        [
+          {
+            "node": "Split Out5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out5": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items7": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create RSS Item7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Article8": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Item7": {
+      "main": [
+        [
+          {
+            "node": "If - Exists Already7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Is AI7": {
+      "main": [
+        [
+          {
+            "node": "Supabase9",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Exists Already7": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is AI Related7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase9": {
+      "main": [
+        [
+          {
+            "node": "tavily search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image3": {
+      "main": [
+        [
+          {
+            "node": "Supabase10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase10": {
+      "main": [
+        [
+          {
+            "node": "标题翻译",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is AI Related7": {
+      "main": [
+        [
+          {
+            "node": "If - Is AI7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Article3": {
+      "main": [
+        [
+          {
+            "node": "标题翻译2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "XML6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML6": {
+      "main": [
+        [
+          {
+            "node": "Split Out6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out6": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create RSS Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Article": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Item": {
+      "main": [
+        [
+          {
+            "node": "If - Exists Already",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Is AI": {
+      "main": [
+        [
+          {
+            "node": "Supabase11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Exists Already": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is AI Related",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase11": {
+      "main": [
+        [
+          {
+            "node": "tavily search1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image4": {
+      "main": [
+        [
+          {
+            "node": "Supabase12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase12": {
+      "main": [
+        [
+          {
+            "node": "Save Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is AI Related": {
+      "main": [
+        [
+          {
+            "node": "If - Is AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Article8": {
+      "main": [
+        [
+          {
+            "node": "Get Image3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Article": {
+      "main": [
+        [
+          {
+            "node": "Get Image4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Is AI Related7",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Article8",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Is AI Related",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Article",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Is AI Related2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Article3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model6": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Is AI Related3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model7": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Article4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model8": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Is AI Related4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model9": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Article5",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tavily search": {
+      "main": [
+        [
+          {
+            "node": "Write Article8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tavily search1": {
+      "main": [
+        [
+          {
+            "node": "Write Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tavily search2": {
+      "main": [
+        [
+          {
+            "node": "Write Article3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tavily search3": {
+      "main": [
+        [
+          {
+            "node": "Write Article4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tavily search4": {
+      "main": [
+        [
+          {
+            "node": "Write Article5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model10": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "标题翻译",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题翻译": {
+      "main": [
+        [
+          {
+            "node": "Save Article8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题翻译2": {
+      "main": [
+        [
+          {
+            "node": "Save Article3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model12": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "标题翻译2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题翻译3": {
+      "main": [
+        [
+          {
+            "node": "Save Article4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model13": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "标题翻译3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题翻译4": {
+      "main": [
+        [
+          {
+            "node": "Save Article5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model14": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "标题翻译4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9d103002-d1a5-415a-ad84-c42f689d7d2b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c9d82f2f367eefb1e52f3a01d2d66dea63879a38fa8edcdb4d1ccc32fd355f68"
+  },
+  "id": "gXMk9dTN8U1lKdWl",
+  "tags": []
+}

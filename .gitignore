@@ -1,4 +1,12 @@
-newsroom/
+# ── newsroom/：规范与存档入库，运行时文件排除 ──────────────
+# 整目录曾被忽略（因 config.json 含凭据），副作用是 SPEC / PLAN / 决策记录
+# 与 n8n 考古存档都无法版本化——规范不进版本控制，等于规范不存在。
+# 现改为按文件精确排除：
+newsroom/config.json
+newsroom/deploy.py
+newsroom/.env
+newsroom/*.log
+newsroom/_*
 
 # ── 构建产物：由 CI 生成，不入库 ────────────────────────────
 # public/ 曾入库 51,940 个文件，导致：仓库 .git 膨胀到 3.6 GB、

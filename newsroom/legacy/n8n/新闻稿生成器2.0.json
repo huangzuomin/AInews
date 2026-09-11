@@ -1,0 +1,468 @@
+{
+  "name": "新闻稿生成器2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -848,
+        -2848
+      ],
+      "id": "be71150d-82ee-4f4b-99fd-9f3234d06e2e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "rss_sources",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "is_active",
+              "condition": "eq",
+              "keyValue": "true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        -2848
+      ],
+      "id": "4273a4e7-4b74-4fe9-aab7-6a1b5dbbd6da",
+      "name": "获取rss源",
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "feed.entry",
+        "options": {}
+      },
+      "id": "55c19a9d-9fa0-4634-b4c4-d2184d102b0d",
+      "name": "Split Out - Atom",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -3520
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "afc383eb-35c4-46c2-a8c5-60b3e5758932",
+      "name": "Split Out RSS 2.0 Feed",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        176,
+        -3280
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "unghSD0LQlreFzwc",
+          "mode": "list",
+          "cachedResultName": "Process_Single_RSS_Article"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        800,
+        -2784
+      ],
+      "id": "e182f505-89b6-428f-a835-c1d1e3d989a4",
+      "name": "根据RSS信息写作子工作流"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        608,
+        -2912
+      ],
+      "id": "be685fd5-9ef5-4b44-9069-897bef890d41",
+      "name": "循环调用"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "985f4b7d-9937-4d97-a5d6-2994a0bcc686",
+              "leftValue": "={{ $json.feed.entry }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -16,
+        -3488
+      ],
+      "id": "b99113c8-29c5-42c3-94ac-47194749151c",
+      "name": "判断RSS节点类型"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        -2848
+      ],
+      "id": "0de80e63-8aa8-4f07-b480-1f487b7447c8",
+      "name": "处理全部信息源"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7ba0920-c5bf-4dbf-b2f5-7bd93f8bb9c8",
+              "leftValue": "={{ new Date($json.pubDate || $json.isoDate || $json.published || $json.updated || $json['dc:date'] || 0) }}",
+              "rightValue": "={{ new Date(Date.now() - 0.5 * 60 * 60 * 1000) }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "afterOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        752,
+        -3344
+      ],
+      "id": "4d73490d-5fb1-41fe-ae3b-916a0123ed59",
+      "name": "If - Within 0.5 Hours"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -448,
+        -3376
+      ],
+      "id": "f30bfba9-5175-49bb-b070-3bf340dcb2d9",
+      "name": "获取RSS内容",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "cce58618-e12c-4bc7-8c03-a269fdd0f435",
+      "name": "格式化RSS内容",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -3520
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## 调用写稿工作流，和激活发布工作流\n",
+        "height": 980,
+        "width": 660,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -3504
+      ],
+      "id": "c7cdffcf-40f6-4e37-ae16-eade6315ea54",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## 读取和处理RSS源\n",
+        "height": 560,
+        "width": 980,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -3504
+      ],
+      "id": "ea6dcc47-7c56-445d-84c2-e67015088bbc",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b3894a32-b82f-41eb-8478-28d40e584a6a",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -384,
+        -3504
+      ],
+      "id": "bfd88399-4ced-4a59-b8fe-15fc6d71f188",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "获取rss源",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取rss源": {
+      "main": [
+        [
+          {
+            "node": "处理全部信息源",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out - Atom": {
+      "main": [
+        [
+          {
+            "node": "处理全部信息源",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If - Within 0.5 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out RSS 2.0 Feed": {
+      "main": [
+        [
+          {
+            "node": "处理全部信息源",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If - Within 0.5 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "根据RSS信息写作子工作流": {
+      "main": [
+        [
+          {
+            "node": "循环调用",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "循环调用": {
+      "main": [
+        [],
+        [
+          {
+            "node": "根据RSS信息写作子工作流",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "判断RSS节点类型": {
+      "main": [
+        [
+          {
+            "node": "Split Out - Atom",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Split Out RSS 2.0 Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "处理全部信息源": {
+      "main": [
+        [],
+        [
+          {
+            "node": "获取RSS内容",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - Within 0.5 Hours": {
+      "main": [
+        [
+          {
+            "node": "循环调用",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "获取RSS内容": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化RSS内容": {
+      "main": [
+        [
+          {
+            "node": "判断RSS节点类型",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "格式化RSS内容",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5e1b8ee8-3ece-44d5-9231-8bbe5aa35042",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1d9744cf6e7667f661656fbb55956efb4179b2d5077ef4fe022558be36a78b7e"
+  },
+  "id": "QViAfoQHnyX96yqG",
+  "tags": []
+}
