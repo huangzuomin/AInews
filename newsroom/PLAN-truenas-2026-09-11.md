@@ -51,6 +51,28 @@
 **F6 · CI 首次运行的产物数字（GitHub 侧，与 NAS 本地一致）。**
 `期望 0.147.8，实际 0.147.8` · 构建 **87.2 s**（NAS 本地 58.7 s）· HTML 27,674 · sitemap 11,582 · JSON-LD 27,671 · og:image 27,671 · G3-b 抽检 **60 篇 verdict=pass**。
 
+**F7 · ⚠️ 部署成功 ≠ 新内容可见：Cloudflare 边缘缓存 24 小时。**
+实测（`/llms.txt` 与 `/robots.txt` 同一时刻、同一 URL，仅差一个 query 参数）：
+
+| URL | 不带 cache-buster | 带 cache-buster |
+|---|---|---|
+| `/llms.txt` | **404**（`cf-cache-status: HIT`，`age: 384`） | **200 / 1,812 B**（内容正确） |
+| `/robots.txt` | 67 B（`age: 10103` ≈ 2.8h 旧缓存） | **200 / 1,058 B**（AI 爬虫分段齐全） |
+
+响应头是 `cache-control: public, max-age=86400, must-revalidate` → **CF 边缘缓存 24 小时**。
+**对 GEO 尤其致命**：AI 爬虫在此期间抓到的是旧版（无 JSON-LD、无 llms.txt、旧 robots）。
+这也解释了历史上一连串 `chore: vercel redeploy nudge` 提交 —— 有人在跟这个现象搏斗，
+但**重新部署并不会清 CF 缓存**，所以那些 nudge 是无效动作。
+
+**P0.8 模板层线上生效的正面证据**（用 cache-buster 取 origin 实测）：
+文章页 JSON-LD **1 块**（@graph）、`og:image` = `https://www.neican.ai/images/ai-report-default.png`（站内兜底图）、
+`<time datetime="2026-09-11T10:05:00+08:00">` 存在、`/llms.txt` 1,812 B、`/robots.txt` 1,058 B。
+
+→ 新增待办 **P8（CF 缓存治理，优先级高）**：三选一
+  1. CF Cache Rule：对 `text/html`、`*/index.xml`、`/*.txt` 设为 **Bypass**（最彻底）
+  2. Vercel 部署成功后触发 CF `purge_cache`（需 CF API Token + Deploy Hook）
+  3. 降低 CF 的 Browser/Edge Cache TTL（治标，仍有窗口期）
+
 ---
 
 ## 0. 三条新证据（2026-09-11 实测，直接决定实施方式）
@@ -219,7 +241,18 @@ sudo midclt call cronjob.create '{"command":"/mnt/SSD_Apps/apps/neican-ai/newsro
 
 ## 附：需要人来做的事（AI 无法代办）
 
-1. **群晖侧停容器**（`n8nio-n8n-1-2`）—— 或提供群晖 SSH 通道。
-2. **撤销 GitHub PAT `ghp_****Jj8W`**。
-3. **钉钉群机器人 webhook**（告警通道用）。
-4. **确认 D29 架构选型**（NAS 持写凭据）—— 这条推翻了两项原红线，需明确背书。
+> 更新于 2026-09-11 19:00。前 2 项是当前唯一的硬阻塞。
+
+1. **群晖侧停容器**（`n8nio-n8n-1-2`）—— DSM → Container Manager → 停止。
+   或给我群晖 SSH / DSM 账号，我来做。安全性来自 compose 定义：`restart: "no"`，
+   **停掉不会自启，`start` 即完全恢复**，不删卷不删容器。
+2. **撤销 GitHub PAT `ghp_****Jj8W`**（GitHub 网页 → Settings → Developer settings → Personal access tokens → Revoke）。
+   **唯一能立即生效的 kill switch**，同时清掉"明文口令进仓库"的历史遗留。
+   注意：GitHub **没有 API 可以撤销 classic PAT**，所以这一步只能你来。
+3. **钉钉群机器人 webhook** —— 接进 `/mnt/SSD_Apps/apps/neican-run/watchdog.conf`，
+   填完告警通道即从"只记录"变为"真告警"，阶段 2.4 验收随之可完成。
+4. **细粒度 token（单仓库 `contents:write`）** —— 让 NAS 能直接 push，D29 架构才算落地。
+   通道已铺好（`credential.helper` 指向仓库外 600 文件），拿到 token 后一条命令即可写入。
+5. **Cloudflare API Token（Zone → Cache Purge 权限）** —— 用于 P8。或你直接在 CF 控制台
+   建一条 Cache Rule 把 `text/html`、`*/index.xml`、`/*.txt` 设为 Bypass（更彻底，一劳永逸）。
+6. **确认 D29 架构选型**（NAS 持写凭据）—— 这条推翻了两项原红线，需明确背书。
