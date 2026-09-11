@@ -138,6 +138,14 @@ jobs:
           echo "JSON-LD 覆盖: $(grep -rl 'application/ld+json' public --include='*.html' | wc -l)"
           echo "og:image 覆盖: $(grep -rl 'property="og:image"' public --include='*.html' | wc -l)"
 
+      - name: 心跳上报（成功才报，缺席即告警）
+        # 心跳倒挂：由发布方主动上报，第三方在约定时间内没收到就告警。
+        # 与传统轮询相反——检查器自己死掉时不会静默失效。
+        # 未配置 vars.HEARTBEAT_URL 时跳过（见 watchdog.yml 说明）。
+        if: vars.HEARTBEAT_URL != ''
+        continue-on-error: true
+        run: curl -fsS -m 15 "${{ vars.HEARTBEAT_URL }}" > /dev/null && echo "心跳已上报"
+
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:

@@ -1,0 +1,161 @@
+name: watchdog
+
+# 心跳倒挂看门狗（P0.6）
+#
+# 设计命题：**在能观测之前做自动化，等于自动化一个黑箱。**
+# 37 天停更的成因不是「没有监控」，是「失败没有声音」——
+# 系统一直在跑，每天失败 30–50%，没有任何一环会告诉你它断了。
+#
+# 方向必须反过来：不是「我去问站点更新了没有」（轮询，检查器自己死了会静默），
+# 而是「没按时交货我就知道」（心跳倒挂，缺席本身即是信号）。
+#
+# ⚠️ 一个必须知道的 GitHub 陷阱：
+#   scheduled workflow 在仓库 **60 天无提交**后会被**自动禁用**。
+#   而「管线死了 60 天」正是本看门狗最该报警的场景——
+#   也就是说，纯靠 schedule 的看门狗会在最需要它的那一刻自己消失。
+#
+# 正确形态（两层）：
+#   1. 由**外部 cron**（cron-job.org / healthchecks.io / NAS）定时打本 workflow
+#      的 workflow_dispatch 入口——dispatch 触发的 workflow 不会被自动禁用。
+#   2. 若外部 cron 用一个「反向心跳」服务（healthchecks.io），
+#      它 ping 不到 GitHub 时会告警 → 这才是真正的第三方心跳。
+#   schedule 保留为兜底，不承担主要职责。
+#
+# 判定逻辑：取线上 RSS 最新条目的 pubDate，超过阈值即告警。
+# 用**线上产物**而非 content/ 目录——这样同时覆盖「内容没生成」与「部署失败」
+# 两种故障；只看仓库会漏掉后者。
+
+on:
+  schedule:
+    # 兜底：每 2 小时（UTC）。主路径是 workflow_dispatch。
+    - cron: "17 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      stale_hours:
+        description: "判定停更的小时数（默认读仓库变量 STALE_HOURS）"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE: "https://www.neican.ai"
+  # 作息：早报 07:00 / 日报 19:00（北京）→ 最大自然间隔 12h。
+  # 阈值取 14h 以容纳发布延迟，同时远小于「一天没货」。
+  DEFAULT_STALE_HOURS: "14"
+
+jobs:
+  check:
+    name: 站点新鲜度
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取线上 RSS
+        id: rss
+        run: |
+          set -euo pipefail
+          for i in 1 2 3; do
+            if curl -fsS -m 30 "$SITE/index.xml" -o /tmp/feed.xml; then
+              break
+            fi
+            echo "第 $i 次拉取失败，重试…"
+            sleep 10
+          done
+          if [ ! -s /tmp/feed.xml ]; then
+            echo "::error::RSS 完全不可达（连续 3 次）——站点或域名层面故障"
+            echo "unreachable=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "unreachable=false" >> "$GITHUB_OUTPUT"
+          # 取第一个 pubDate（Hugo RSS 按时间倒序）
+          PUB=$(grep -oE '<pubDate>[^<]+</pubDate>' /tmp/feed.xml | head -1 \
+                | sed -e 's|<pubDate>||' -e 's|</pubDate>||')
+          echo "线上最新条目时间: $PUB"
+          echo "pub=$PUB" >> "$GITHUB_OUTPUT"
+          echo "items=$(grep -c '<item>' /tmp/feed.xml || echo 0)" >> "$GITHUB_OUTPUT"
+
+      - name: 计算停更时长
+        id: age
+        run: |
+          set -euo pipefail
+          TH="${STALE_INPUT:-}"
+          if [ -z "$TH" ]; then TH="${{ vars.STALE_HOURS }}"; fi
+          if [ -z "$TH" ]; then TH="$DEFAULT_STALE_HOURS"; fi
+
+          PUB="${{ steps.rss.outputs.pub }}"
+          if [ -z "$PUB" ]; then
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+            echo "hours=-1" >> "$GITHUB_OUTPUT"
+            echo "threshold=$TH" >> "$GITHUB_OUTPUT"
+            echo "reason=RSS 可访问但解析不到任何条目" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          PUB_TS=$(date -d "$PUB" +%s)
+          NOW_TS=$(date -u +%s)
+          HOURS=$(( (NOW_TS - PUB_TS) / 3600 ))
+          echo "停更 $HOURS 小时（阈值 ${TH}h）"
+
+          if [ "$HOURS" -ge "$TH" ]; then
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "hours=$HOURS" >> "$GITHUB_OUTPUT"
+          echo "threshold=$TH" >> "$GITHUB_OUTPUT"
+          echo "reason=线上最新条目已是 $HOURS 小时前" >> "$GITHUB_OUTPUT"
+        env:
+          STALE_INPUT: ${{ github.event.inputs.stale_hours }}
+
+      - name: 告警（幂等：已有未关闭告警则追加评论）
+        if: steps.rss.outputs.unreachable == 'true' || steps.age.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: "[watchdog] 站点停止更新"
+          HOURS: ${{ steps.age.outputs.hours }}
+          TH: ${{ steps.age.outputs.threshold }}
+          REASON: ${{ steps.age.outputs.reason }}
+          UNREACH: ${{ steps.rss.outputs.unreachable }}
+          ITEMS: ${{ steps.rss.outputs.items }}
+        run: |
+          set -euo pipefail
+          BODY=$(cat <<EOF
+          ## 检测时间
+          $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+
+          ## 事实
+          - 线上 RSS 可达：$([ "$UNREACH" = "true" ] && echo "否" || echo "是")
+          - RSS 条目数：${ITEMS:-?}
+          - 停更时长：${HOURS:-?} 小时（阈值 ${TH}h）
+          - 判定依据：${REASON:-RSS 不可达}
+
+          ## 排查顺序（按最可能命中排序）
+          1. 最近一次 \`build\` workflow 是否失败/被跳过 → Actions 页
+          2. 内容是否真的没生成（\`content/insights|newspaper|morningnews\` 最新 mtime）
+          3. 部署环节（托管平台状态 / DEPLOY_TARGET 配置）
+          4. 域名与 DNS
+
+          _本告警由 \`watchdog.yml\` 自动维护；恢复更新后请手动关闭。_
+          EOF
+          )
+
+          EXISTING=$(gh issue list --state open --label watchdog --limit 20 \
+                     --json number,title \
+                     --jq ".[] | select(.title==\"$TITLE\") | .number" | head -1 || true)
+
+          if [ -n "$EXISTING" ]; then
+            echo "已有未关闭告警 #$EXISTING，追加评论"
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            echo "创建新告警"
+            gh label create watchdog --color B60205 \
+              --description "自动看门狗告警（watchdog.yml 维护）" 2>/dev/null || true
+            gh issue create --title "$TITLE" --label watchdog --body "$BODY"
+          fi
+
+      - name: 外部心跳（可选）
+        # 若配置了 vars.HEARTBEAT_URL（healthchecks.io 等），成功即上报。
+        # 缺席即告警——检查方在第三方，它自己死掉也不会让我们静默。
+        if: steps.rss.outputs.unreachable != 'true' && steps.age.outputs.stale != 'true' && vars.HEARTBEAT_URL != ''
+        run: curl -fsS -m 15 "${{ vars.HEARTBEAT_URL }}" > /dev/null && echo "心跳已上报"
