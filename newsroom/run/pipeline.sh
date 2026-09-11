@@ -24,6 +24,20 @@ mkdir -p "$RUN_HOME/logs" "$RUN_HOME/state" "$RUN_HOME/raw"
 LOG="$RUN_HOME/logs/pipeline.log"
 STAMP="$(date '+%Y-%m-%d %H:%M:%S')"
 
+# ── 日志轮转 ─────────────────────────────────────────────────────────
+# 常驻进程的日志必须自己封顶。不封顶的后果不是"日志很大"，而是
+# **磁盘写满之后的静默失败**：写日志失败、写 state 失败、git 提交失败，
+# 全都不报错——正是本项目要治的那个病。
+# 保留策略：超过 4000 行就截到最近 1200 行（约 1 天多的量，够定位最近故障）。
+rotate() {
+  f="$1"; max="$2"; keep="$3"
+  [ -f "$f" ] || return 0
+  n=$(wc -l < "$f" 2>/dev/null || echo 0)
+  if [ "$n" -gt "$max" ]; then
+    tail -n "$keep" "$f" > "$f.tmp" 2>/dev/null && mv "$f.tmp" "$f"
+  fi
+}
+
 # ── 并发锁：用 mkdir 原子性，不依赖 flock（TrueNAS 上未必有）
 LOCK="$RUN_HOME/state/.pipeline.lock"
 if ! mkdir "$LOCK" 2>/dev/null; then
@@ -46,4 +60,5 @@ echo "[$STAMP] ─── pipeline.sh 开始（args: $*）───" >> "$LOG"
 "$PY" -m src.pipeline "$@" >> "$LOG" 2>&1
 RC=$?
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] ─── pipeline.sh 结束 rc=$RC ───" >> "$LOG"
+rotate "$LOG" 4000 1200
 exit $RC

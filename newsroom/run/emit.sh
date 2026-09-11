@@ -41,9 +41,63 @@ export PYTHONUNBUFFERED=1
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
-mkdir -p "$RUN_HOME/logs"
+STATE="$RUN_HOME/state"
+mkdir -p "$RUN_HOME/logs" "$STATE"
 stamp() { date '+%Y-%m-%d %H:%M:%S'; }
 say() { echo "[$(stamp)] $*" | tee -a "$LOG"; }
+
+# 日志轮转（与 pipeline.sh 同一策略，理由见该文件注释）
+rotate() {
+  f="$1"; max="$2"; keep="$3"
+  [ -f "$f" ] || return 0
+  n=$(wc -l < "$f" 2>/dev/null || echo 0)
+  if [ "$n" -gt "$max" ]; then
+    tail -n "$keep" "$f" > "$f.tmp" 2>/dev/null && mv "$f.tmp" "$f"
+  fi
+}
+
+# ── 产出结果落盘（机器可读）─────────────────────────────────────────
+# 为什么必须有这个文件：只要 push 凭据缺失、或 CI 的发布闸没开，
+# **线上日期就不会推进**，于是 watchdog 看到的永远是"停更"，
+# 分不清是「根本没产出」还是「产出了但没发布」。
+# 这个文件把"本期到底产出没有"变成可判定的本地事实，由 watchdog 直接消费。
+KIND_DAY="$(date '+%Y-%m-%d')"
+DAY="$KIND_DAY"
+TARGET_REL="content/morningnews/$DAY.md"
+[ "$KIND" = "daily" ] && TARGET_REL="content/newspaper/$DAY.md"
+STARTED="$(date -Iseconds)"
+ARTIFACT_REL="$TARGET_REL"
+COMMITTED=0
+PUSHED=0
+finish() {
+  rc=$?
+  # 只对发布目标（GitHub origin/main）算差距；未 fetch 时记为 -1（= 未知），
+  # 不要拿 nas-local 顶替 —— 那是传输中转，不代表"已发布"。
+  if git -C "$REPO" rev-parse --verify --quiet refs/remotes/origin/main >/dev/null 2>&1; then
+    AHEAD=$(git -C "$REPO" rev-list --count origin/main..HEAD 2>/dev/null || echo -1)
+  else
+    AHEAD=-1
+  fi
+  cat > "$STATE/emit-last.json.tmp" <<EOF
+{
+  "kind": "$KIND",
+  "day": "$DAY",
+  "started_at": "$STARTED",
+  "finished_at": "$(date -Iseconds)",
+  "rc": $rc,
+  "dry_run": $DRY,
+  "no_publish": $NOPUB,
+  "artifact": "$ARTIFACT_REL",
+  "committed": $COMMITTED,
+  "pushed": $PUSHED,
+  "commits_ahead_of_origin": $AHEAD
+}
+EOF
+  mv "$STATE/emit-last.json.tmp" "$STATE/emit-last.json"
+  rotate "$LOG" 4000 1200
+  exit "$rc"
+}
+trap finish EXIT HUP INT TERM
 
 cd "$REPO/newsroom" || exit 2
 
@@ -73,9 +127,7 @@ if [ "$NOPUB" -eq 1 ]; then
   exit 0
 fi
 
-DAY="$(date '+%Y-%m-%d')"
-TARGET="content/morningnews/$DAY.md"
-[ "$KIND" = "daily" ] && TARGET="content/newspaper/$DAY.md"
+TARGET="$TARGET_REL"
 
 if [ ! -f "$REPO/$TARGET" ]; then
   say "ERROR 预期产物不存在：$REPO/$TARGET"
@@ -94,12 +146,14 @@ git -C "$REPO" -c user.name='neican-bot' -c user.email='bot@neican.ai' commit -q
 由 NAS 生产线生成（newsroom/src/digest.py 模板轨）。
 每个入选条目均为独立 Event（归并去重），并附原始来源链接。" \
   -- "$TARGET" || { say "ERROR 提交失败"; exit 1; }
+COMMITTED=1
 
 say "已提交：$(git -C "$REPO" log --oneline -1)"
 
 # ── 4. 推送（凭据缺失时明确降级，不静默失败）
 if [ -f "$RUN_HOME/git-credentials" ] && [ -s "$RUN_HOME/git-credentials" ]; then
   if git -C "$REPO" push --quiet origin main >> "$LOG" 2>&1; then
+    PUSHED=1
     say "已推送 origin/main"
   else
     say "WARN 推送失败（提交已留在本地，不会丢失）"

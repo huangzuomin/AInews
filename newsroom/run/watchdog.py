@@ -43,6 +43,9 @@ from email.utils import parsedate_to_datetime
 # ── 路径 ────────────────────────────────────────────────────────────
 RUN_DIR = os.environ.get("NEICAN_RUN_DIR", "/mnt/SSD_Apps/apps/neican-run")
 STATE_FILE = os.path.join(RUN_DIR, "state", "watchdog.json")
+# 生产线自产信号（由 run/emit.sh 的 EXIT trap 写入，仓库外）
+EMIT_STATE_FILE = os.path.join(RUN_DIR, "state", "emit-last.json")
+EMIT_MAX_AGE_H = 14
 LOG_FILE = os.path.join(RUN_DIR, "logs", "watchdog.log")
 CONF_FILE = os.environ.get("NEICAN_WATCHDOG_CONF", os.path.join(RUN_DIR, "watchdog.conf"))
 
@@ -185,14 +188,79 @@ def heartbeat(url):
         return False, str(exc)
 
 
+def check_local_emit(max_age_h):
+    """生产线自产信号（本地事实，不需要网络）。
+
+    为什么必须单列一条：站点的对外信号与它互为盲区 ——
+      · push 凭据缺失 / CI 发布闸未开时，站点日期**根本不会推进**，
+        对外信号恒为"停更"，无法区分「没产出」与「产出没发布」；
+      · 反过来，本地产出正常但站点没更新，也只有对外信号能看出来。
+    所以两个方向都要看，且告警体里要能一眼分清是哪种。
+
+    判定：`rc != 0` 直接算故障（产出失败是硬故障，与"多久没产出"无关）；
+    否则看距 `finished_at` 的时长是否超阈。
+    """
+    row = {"key": "emit", "label": "生产线产出", "url": EMIT_STATE_FILE,
+           "max_age_h": max_age_h, "hours": None, "latest": None,
+           "latest_local": None, "items": 0, "error": None, "stale": False,
+           "rc": None, "committed": None, "pushed": None, "ahead": None}
+    try:
+        with open(EMIT_STATE_FILE, encoding="utf-8") as fh:
+            d = json.load(fh)
+    except OSError:
+        row["error"] = "无记录（emit 从未运行过 → 生产线没跑起来）"
+        row["stale"] = True
+        return row
+    except ValueError as exc:
+        row["error"] = "状态文件损坏：%s" % exc
+        row["stale"] = True
+        return row
+
+    row["rc"] = d.get("rc")
+    row["committed"] = d.get("committed")
+    row["pushed"] = d.get("pushed")
+    row["ahead"] = d.get("commits_ahead_of_origin")
+
+    fin = d.get("finished_at") or ""
+    try:
+        dt = datetime.fromisoformat(fin)
+        row["hours"] = round((datetime.now(dt.tzinfo) - dt).total_seconds() / 3600.0, 2)
+        row["latest"] = dt.isoformat()
+        row["latest_local"] = dt.astimezone().strftime("%m-%d %H:%M")
+    except ValueError:
+        row["error"] = "finished_at 不可解析：%r" % fin
+
+    tail = "%s rc=%s" % (d.get("kind") or "?", row["rc"])
+    if row["committed"] and not row["pushed"]:
+        # 提交在本地 = 发布链断了。这不是"停更"，是"产出了但出不去"，
+        # 必须与停更区分开，否则排查会走错方向。
+        tail += "，已提交未推送(ahead=%s)" % row["ahead"]
+
+    if row["rc"] not in (0, None):
+        row["stale"] = True
+        row["error"] = "上一次运行失败 rc=%s" % row["rc"]
+    elif row["error"]:
+        row["stale"] = True
+    elif row["hours"] is not None and row["hours"] >= max_age_h:
+        row["stale"] = True
+
+    row["latest_local"] = "%s %s" % (row["latest_local"] or "?", tail)
+    if row["error"]:
+        row["latest_local"] += " ← %s" % row["error"]
+    return row
+
+
 def build_alert(site_result, stale):
     now_local = datetime.now().astimezone()
     lines = [
-        "## neican.ai 停更告警",
+        "## neican.ai 产出异常告警",
         "",
         "**检测时间**：%s" % now_local.strftime("%Y-%m-%d %H:%M:%S %Z"),
         "",
-        "| 频道 | 线上最新条目 | 停更 | 阈值 |",
+        "对外频道（线上站点）与本地频道（生产线自产）**互为盲区**，",
+        "两者不一致时按下面第 1–2 步定位：",
+        "",
+        "| 频道 | 最新产出 | 距今 | 阈值 |",
         "|---|---|---|---|",
     ]
     for c in site_result:
@@ -207,11 +275,13 @@ def build_alert(site_result, stale):
             lines[-1] = lines[-1][:-1] + mark
     lines += [
         "",
-        "**排查顺序**（按最可能命中排序）",
-        "1. NAS 内容生成轨是否产出（`content/insights|newspaper|morningnews` 最新文件时间）",
-        "2. 是否已 push 到 GitHub（`git log` 与 origin/main 是否一致）",
-        "3. Vercel 部署状态（提交上的 Vercel commit status）",
-        "4. 域名与 DNS",
+        "**排查顺序**（先分清是产出问题还是发布问题）",
+        "1. 本地是否产出成功：`state/emit-last.json` 的 `rc` 与 `finished_at`"
+        "（`rc≠0` = 产出失败；`rc=0` 但「已提交未推送」= 发布链断了）",
+        "2. 已提交未推送的提交数：`git rev-list --count origin/main..HEAD`",
+        "3. Vercel 部署状态（提交上的 Vercel commit status；CI 的发布闸 `DEPLOY_TARGET` 是否已配）",
+        "4. 上游信源是否整体不可达（`logs/pipeline.log` 的 `sources_failed`）",
+        "5. 域名与 DNS",
         "",
         "_由 NAS `newsroom/run/watchdog.py` 自动维护（心跳倒挂）。_",
     ]
@@ -269,8 +339,20 @@ def main():
             "N/A" if row["hours"] is None else "%.1f" % row["hours"],
             max_age, "STALE" if row["stale"] else "ok"))
 
+    # ── 生产线自产信号（本地事实）──────────────────────────────────
+    # 放在对外信号之后：先给出"站点怎么了"，再给出"本地到底产出了没有"。
+    # 两者不一致时，答案自然浮现（例：站点停更 + 本地 rc=0 未推送 = 发布链断了）。
+    row = check_local_emit(override if override is not None else EMIT_MAX_AGE_H)
+    results.append(row)
+    log("%-11s latest=%s age=%s h thr=%sh %s%s" % (
+        row["label"], row["latest_local"] or "-",
+        "N/A" if row["hours"] is None else "%.1f" % row["hours"],
+        row["max_age_h"], "STALE" if row["stale"] else "ok",
+        "" if not row["error"] else "  ← %s" % row["error"]))
+
     stale_any = any(r["stale"] for r in results)
-    unreachable_all = all(r["error"] for r in results)
+    # 只统计对外频道：本地信号不可达不算"网络层全挂"，否则 exit code 会撒谎
+    unreachable_all = all(r["error"] for r in results if r["key"] != "emit")
 
     # ── 决定是否发告警（幂等）──────────────────────────────────────
     state = load_state()
