@@ -1,9 +1,13 @@
-;ZqxJB`1
+{{- /* 广告位单元。
+       设计约定：slot 或 client 任一为空时整块不渲染，不会留白。
+       安全约定：本文件不得出现任何凭据。
+       变更记录：第 1 行曾残留一段 sed 片段（含明文口令），已于 2026-09-11
+       移除（P0.3）。该口令在 git 历史中仍可检索，须按 P0.1 轮换。
+       同次移除了 <!--ADDEBUG ...--> 调试注释，它会泄漏到生产产物。 */ -}}
 {{- $slot := .slot -}}
 {{- $cls := .cls | default "ad-slot" -}}
 {{- $client := "" -}}
 {{- with site.Params.adsense -}}{{- $client = .client -}}{{- end -}}
-<!--ADDEBUG client=[{{ $client }}] slot=[{{ $slot }}]-->
 {{- if and $client $slot -}}
 <div class="{{ $cls }}" aria-hidden="true" role="complementary">
   <ins class="adsbygoogle"
