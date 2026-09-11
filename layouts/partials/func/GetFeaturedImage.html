@@ -13,13 +13,45 @@
 
 	@return RelPermalink to featured image, or an empty string if not found.
 
+	── 2026-09-11 修正 ────────────────────────────────────────────
+	原实现把 `.Params.featured_image` 直接当字符串用（`strings.Trim . "/"`），
+	而老文章里该字段可能是字典 `{image, alt}`（Ananke 写法），会抛
+	`unable to cast maps.Params to string`。
+	本 partial 只在列表页被调用、而列表页通常没有该字段，所以从未触发；
+	但这是同一类隐患，与 `seo/image.html` 一并做形态归一。
+
+	同时补上：frontmatter 的 `cover`（字符串或字典）也作为回退来源——
+	此前该字段被完全忽略，导致大量老文章列表页无缩略图。
+	优先级：featured_image → cover → 页面资源中名含 cover/feature 的图。
 */}}
 
-{{/* Declare a new string variable, $linkToCover */}}
 {{ $linkToCover := "" }}
 {{ $matches := "feature,cover" }}
-{{/* Use the value from front matter if present */}}
+
+{{/* ── 形态归一：字符串原样；字典取 .image；其余置空 ── */}}
+{{ $feat := "" }}
 {{ with .Params.featured_image }}
+  {{ if reflect.IsMap . }}
+    {{ with index . "image" }}{{ $feat = . }}{{ end }}
+  {{ else }}
+    {{ $feat = . }}
+  {{ end }}
+{{ end }}
+{{ if ne (printf "%T" $feat) "string" }}{{ $feat = "" }}{{ end }}
+
+{{ $cover := "" }}
+{{ with .Params.cover }}
+  {{ if reflect.IsMap . }}
+    {{ with index . "image" }}{{ $cover = . }}{{ end }}
+  {{ else }}
+    {{ $cover = . }}
+  {{ end }}
+{{ end }}
+{{ if ne (printf "%T" $cover) "string" }}{{ $cover = "" }}{{ end }}
+
+{{/* Use the value from front matter if present */}}
+{{ $pick := $feat }}{{ if not $pick }}{{ $pick = $cover }}{{ end }}
+{{ with $pick }}
   {{/* This is the default case, the image lives in the static directory.
     In which case we'll use the static dir */}}
   {{ $linkToCover = strings.Trim . "/" | urls.AbsURL }}

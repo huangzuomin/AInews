@@ -6,7 +6,7 @@
 
   解析链：featured_image → cover → 站级 og_default_image → 内置默认图
 
-  ── 两条硬规则 ──────────────────────────────────────────────
+  ── 三条硬规则 ──────────────────────────────────────────────
 
   1. **只接受站内路径，外部 URL 一律丢弃并回退。**
 
@@ -22,12 +22,47 @@
 
   2. **空格与括号必须编码。** 本站图片文件名形如 `default (1).png`
      （static/images/ 下有 20 个）。未编码的空格会让部分爬虫与 CDN 取不到图。
+
+  3. **`featured_image` / `cover` 有两种形态，必须都吃下。**
+     老文章里存在 Ananke 主题沿用的**字典**写法：
+
+         cover:
+           image: ""
+           alt: "某篇文章标题"
+
+     旧实现直接把这个字典当字符串传给 `hasPrefix`，抛出
+     `unable to cast maps.Params to string` → **整个站点构建失败**。
+
+     这个 bug 在模板写好后一直没暴露，因为验证只跑了少量新文章；
+     首次全量构建（2026-09-11，于 TrueNAS SSD 工作区）才把它炸出来。
+     **教训与 G3-b 同源：只验抽样的模板改动等于没验。**
 */}}
 {{- $default := site.Params.og_default_image | default "/images/ai-report-default.png" -}}
 
 {{- $src := "" -}}
-{{- with .Params.featured_image }}{{ $src = . }}{{ end -}}
-{{- if not $src }}{{ with .Params.cover }}{{ $src = . }}{{ end }}{{ end -}}
+
+{{- /* featured_image：多为字符串，但也可能是字典 */ -}}
+{{- with .Params.featured_image -}}
+  {{- if reflect.IsMap . -}}
+    {{- with index . "image" }}{{ $src = . }}{{ end -}}
+  {{- else -}}
+    {{- $src = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* cover：同上，字典形态取 .image */ -}}
+{{- if not $src -}}
+  {{- with .Params.cover -}}
+    {{- if reflect.IsMap . -}}
+      {{- with index . "image" }}{{ $src = . }}{{ end -}}
+    {{- else -}}
+      {{- $src = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 类型护栏：任何非字符串残留（嵌套字典等）都退回空，走默认图 */ -}}
+{{- if ne (printf "%T" $src) "string" }}{{ $src = "" }}{{ end -}}
 
 {{- /* 外部 URL → 丢弃，走默认图 */ -}}
 {{- if or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") }}{{ $src = "" }}{{ end -}}
