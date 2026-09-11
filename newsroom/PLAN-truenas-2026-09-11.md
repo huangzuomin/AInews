@@ -1,8 +1,55 @@
 # TrueNAS 实施计划
 
-> 日期：2026-09-11 · 状态：**待执行**
+> 日期：2026-09-11 · 状态：**执行中**（阶段 1 已完成，阶段 2 已上线待接告警通道）
 > 定位：`PLAN-master-2026-09-11.md` 是**总口径**（做什么、为什么）；本文件是**执行册**（在哪做、怎么落、怎么验）。
 > 冲突时以本文件为准，并把变更回写 master。
+
+---
+
+## 执行状态（2026-09-11 19:00 更新）
+
+| # | 任务 | 状态 | 证据 |
+|---|---|---|---|
+| 1.1 | `resources/_gen/` 出仓 | ✅ | 提交 `6c7e051aae`；**重跑构建后 `git status` 脏项 = 0** |
+| 1.2 | `origin` 指向 GitHub | ✅ | `origin`=github.com/huangzuomin/AInews；本地裸仓库降为 `nas-local` |
+| 1.3 | 首次 push | ✅ | `dd49f6fe33..6c7e051aae`，174 对象 / 717 KiB |
+| 1.4 | CI 首跑 | ✅ | run `34591260495`：门禁 success / 构建 success / 发布 skipped |
+| 1.4 | 仓库 Variables | ✅ | `GATES_ENFORCE=false`、`STALE_HOURS=14`（Secrets 为空） |
+| 2.1 | 调度器走 `midclt` | ✅ | cronjob id=1 `*/15`、id=2 `5,20,35,50`，enabled；`/etc/cron.d/middlewared` 已装载，cron 服务 active |
+| 2.2 | 心跳倒挂看门狗 | ✅ | `newsroom/run/watchdog.py`（提交 `4d47b013f3`）；**生产路径 `cronjob.run 1` 首跑通过**，4 频道全部解析 |
+| 2.3 | 告警通道（钉钉） | ⏳ | 代码就绪；缺 `DINGTALK_WEBHOOK`（**需人提供**） |
+| 2.4 | 验收：停更 15 分钟内告警 | ⏳ | 检测逻辑已验（`--threshold 0` 正确触发、告警体渲染正确）；**投递未验**（通道未接） |
+| 0.2 | 停 n8n 容器 | ⛔ | 无群晖 247 入口 |
+| 0.3 | 撤销 GitHub PAT | ⛔ | 需网页操作（GitHub 无 API 可撤 classic PAT） |
+| 0.4 | 凭据轮换（21 组） | ⛔ | 依赖 0.2 / 0.3 |
+| 1.5 | 旧副本退役 | ⏸ | 等 0.2（否则双写未解除，退役会丢东西） |
+| D29 | NAS 持写凭据 | ⏳ | 通道已铺：`credential.helper` → 仓库外 600 文件 `/mnt/SSD_Apps/apps/neican-run/git-credentials`；**缺细粒度 token** |
+
+### 执行中新增的硬事实（回写 master）
+
+**F1 · Vercel 是连着的，`push → 部署`自动发生。**
+提交上有 `Vercel | pending | "Vercel is deploying your app"`；历史 Production deployments 与每次 push 一一对应（`dd49f6fe33`、`f46b09b666`…）。
+→ 含义有两面：**部署不是需要新接的环节**；但**部署会独立失败**（它有自己的构建队列，且比 CI 慢得多）。看门狗取「线上产物」而非「仓库内容」，正是为了覆盖这一层。
+
+**F2 · 线上 `/index.xml` = 7.2 MB 且 Cloudflare 不支持 Range。**
+实测 `HTTP/2 200`、无 `Content-Range`，请求 `0-3000` 字节仍回全量。
+→ 看门狗必须用 `read(N)` 截断流取头部（Hugo RSS 时间倒序，最新条目必在头部）。**不要改成"先下载全文再解析"。**
+
+**F3 · `/index.xml` 有 9,984 条 —— feed 自身需要治理。**
+7.2 MB 单文件对爬虫与读者都不友好（`rssLimit` 疑似未设）。
+→ 新增待办 **P7**：`rssLimit` 收敛到 50–100（与 sitemap 收敛属同源问题：默认值即"全量"，而全量对本站从来不是正确值）。
+
+**F4 · 部署完成前不能判定模板失效。**
+截至 18:58，`/llms.txt` 仍 404、`/robots.txt` 仍 67 B —— 但那是**部署尚未完成**，不是模板写错。
+→ 判定纪律：`/llms.txt`、新版 robots、JSON-LD 的线上验证**必须等 Vercel 部署结束**再做，否则会把"还没部署"误判成"模板没写对"。
+
+**F5 · `fetch-depth: 0` 的代价可接受，但 Actions 版本已过时。**
+门禁 job 约 3 分钟完成（含全史 checkout）。
+但出现弃用警告：`actions/checkout@v4`、`actions/setup-python@v5` 已被强制运行在 Node 24。
+→ 待办：升 `actions/checkout@v5` / `actions/setup-python@v6`。
+
+**F6 · CI 首次运行的产物数字（GitHub 侧，与 NAS 本地一致）。**
+`期望 0.147.8，实际 0.147.8` · 构建 **87.2 s**（NAS 本地 58.7 s）· HTML 27,674 · sitemap 11,582 · JSON-LD 27,671 · og:image 27,671 · G3-b 抽检 **60 篇 verdict=pass**。
 
 ---
 
