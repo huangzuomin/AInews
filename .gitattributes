@@ -1,0 +1,38 @@
+# 行尾归一化
+#
+# 背景：工作树在 Windows（D:\Work\neican-ai），CI 在 Linux。
+# 若不做声明，Windows 侧编辑会写入 CRLF，Linux 侧 git 会把整文件判为改动
+# （diff 爆炸），Hugo 模板与 YAML 也可能因 \r 解析异常。
+#
+# 策略：仓库统一存 LF；工作树按平台自动转换。
+# 例外：*.jpg / *.png / *.db 等二进制不做任何转换，避免损坏。
+* text=auto eol=lf
+
+# ── 二进制：禁止行尾转换与 diff ────────────────────────────
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.db   binary
+*.woff binary
+*.woff2 binary
+
+# ── 文本：显式声明 LF ──────────────────────────────────────
+*.md   text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.xml  text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.py   text eol=lf
+*.sh   text eol=lf
+
+# ── 禁止 git 对产物做语言统计（9,983 篇内容会让 linguist 卡死）──
+newsroom/legacy/** -linguist-documentation
+public/**            linguist-generated
+public-test/**       linguist-generated

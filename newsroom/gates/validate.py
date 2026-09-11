@@ -335,20 +335,46 @@ def gate_g3(text: str, path: Path, entities: set[str]) -> list[str]:
     return v
 
 
-def gate_g3b(built: Path) -> tuple[list[str], int]:
-    """在构建产物上抽检 JSON-LD 与 og:image"""
+def _is_article(rel: Path) -> bool:
+    """判断产物路径是否为「文章页」。
+
+    产物结构区分三类，只有第一类是文章：
+      insights/<slug>/index.html          ← 文章
+      insights/index.html                 ← 栏目列表页
+      insights/page/2/index.html          ← 分页
+
+    第一版门禁把栏目页与分页也当文章页校验，产生大量假阳性——
+    假阳性会训练出「门禁可以忽略」的习惯，比没有门禁更糟。
+    """
+    parts = rel.parts
+    if len(parts) != 3:
+        return False
+    if parts[0] not in ("insights", "newspaper", "morningnews"):
+        return False
+    return parts[1] not in ("page", "index.html")
+
+
+def gate_g3b(built: Path, sample: int = 60) -> tuple[list[str], int]:
+    """在构建产物上抽检 JSON-LD 与 og:image（阻断性门禁）
+
+    为什么必须在**构建后**做：schema 是模板的产物，构建时无法自证。
+    Hugo 0.147 把 _internal/schema.html 静默清空为「存在但无输出」的空操作，
+    全站 JSON-LD 归零而构建永远成功。只有把产物里的 JSON-LD 抠出来解析，
+    才能发现这类「失败没有声音」的故障。
+    """
     v: list[str] = []
-    checked = 0
-    htmls = list(built.rglob("index.html"))
+    htmls = [p for p in built.rglob("index.html") if _is_article(p.relative_to(built))]
+    htmls.sort()
+
+    # 均匀抽样而非取前 N 个：模板回归可能只影响某一类老内容，
+    # 取前 N 个（通常是首页最新内容）会系统性漏检。
+    if len(htmls) > sample:
+        step = len(htmls) / sample
+        htmls = [htmls[int(i * step)] for i in range(sample)]
+
+    checked = len(htmls)
     for f in htmls:
         rel = f.relative_to(built)
-        # 只抽检文章页
-        parts = rel.parts
-        if not parts or parts[0] not in ("insights", "newspaper", "morningnews"):
-            continue
-        checked += 1
-        if checked > 50:
-            break
         try:
             html = f.read_text(encoding="utf-8", errors="ignore")
         except Exception as e:
@@ -396,6 +422,15 @@ def main() -> int:
     ap.add_argument("--gates", default="all", help="g1,g2,g3,g3b 或 all")
     ap.add_argument("--json", action="store_true", help="输出 JSON 报告")
     ap.add_argument("--root", default=None, help="仓库根（默认自动推断）")
+    ap.add_argument("--files", default=None,
+                    help="只校验指定文件（空格分隔的仓库相对路径）。"
+                         "用于 CI 中仅对本次变更做门禁——存量病害走 P6 治理，"
+                         "全量门禁会让每次构建都失败，等于没有门禁。")
+    ap.add_argument("--warn-only", action="store_true",
+                    help="只报告不阻断（退出码恒为 0）。"
+                         "过渡期用：实测 20 篇最新文章 100%% 不达标（缺 sources、"
+                         "h2<2、标题超长），此刻硬阻断等于让现役产线停摆。"
+                         "P4 生成轨修好后翻转为阻断。")
     args = ap.parse_args()
 
     root = Path(args.root).resolve() if args.root else Path(__file__).resolve().parents[2]
@@ -411,7 +446,20 @@ def main() -> int:
     }
 
     if args.content and (gates & {"g1", "g2", "g3"}):
-        files = sorted(Path(args.content).rglob("*.md"))
+        if args.files:
+            # 显式文件清单：只校验这些（CI 变更集模式）
+            files = []
+            for p in args.files.split():
+                fp = Path(p)
+                if not fp.is_absolute():
+                    fp = root / fp
+                if fp.is_file() and fp.suffix == ".md":
+                    files.append(fp)
+            files.sort()
+            report["mode"] = "changed-files"
+        else:
+            files = sorted(Path(args.content).rglob("*.md"))
+            report["mode"] = "full-scan"
         report["files_checked"] = len(files)
         for f in files:
             try:
@@ -436,7 +484,7 @@ def main() -> int:
             report["violations"].append({"file": str(args.built), "issues": issues})
 
     n = len(report["violations"])
-    report["verdict"] = "pass" if n == 0 else "fail"
+    report["verdict"] = "pass" if n == 0 else ("warn" if args.warn_only else "fail")
 
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
@@ -454,7 +502,11 @@ def main() -> int:
         if n > 40:
             print(f"\n  … 另有 {n - 40} 个文件未显示")
         print(f"\n结论: {report['verdict'].upper()}")
+        if args.warn_only:
+            print("（warn-only 模式：不阻断构建）")
 
+    if args.warn_only:
+        return 0
     return 0 if n == 0 else 1
 
 

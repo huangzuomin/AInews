@@ -150,6 +150,25 @@ ignoreLogs = ['warning-goldmark-raw-html']
   tag = "tags"
   author = "authors"
 
+# 相关文章索引（P1.3）
+# 未配置时 Hugo 使用默认策略：对每个页面做全站扫描。本站在 9,983 篇内容、
+# 16,237 个标签规模下，这是「相关阅读」模块成为构建耗时主因之一的原因，
+# 且结果不可预测（同一篇文章的相关列表会随全站内容漂移）。
+# 显式声明把索引收敛到 main_topics 与 tags 两个字段，并用 weight 表达优先级：
+# 同主题（100）优先于同标签（60）。
+[related]
+  threshold = 60
+  includeNewer = true
+  toLower = false
+
+  [[related.indices]]
+    name = "main_topics"
+    weight = 100
+
+  [[related.indices]]
+    name = "tags"
+    weight = 60
+
 # 输出格式
 [outputs]
   home = ["HTML", "RSS", "JSON"]

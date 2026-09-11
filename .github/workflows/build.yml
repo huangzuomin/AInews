@@ -1,0 +1,157 @@
+name: build
+
+# neican.ai 构建与发布门禁
+#
+# 本工作流是**唯一**的构建入口（P1.4）。设计要点：
+#
+# 1. 锁定 Hugo 0.147.8 extended —— 与线上产物 generator 一致。
+#    不锁版本会发生什么：0.147 曾把 _internal/schema.html 静默清空为一个
+#    「存在但无输出」的空操作模板，全站 JSON-LD 覆盖率归零且构建永不报错。
+#    版本漂移是那类故障的入口。
+# 2. G3-b（构建后抽检）是**阻断性**的：schema 是模板产物，构建时无法自证，
+#    只能在产物里把 JSON-LD 抠出来解析。否则下一次静默失效无人察觉。
+# 3. G1/G2/G3（内容门禁）只作用于**本次变更的文件**：
+#    存量 9,983 篇里有 4,904 处占位符、616 个分类碎片、931 篇坏配图，
+#    全量门禁会让每一次构建都失败——那等于没有门禁。存量治理走 P6。
+# 4. 发布（deploy）默认不执行，需先在仓库 Settings → Variables 配置
+#    DEPLOY_TARGET（见 P1.7 对托管平台的实测结论）。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "触发原因（外部 cron 打本入口用）"
+        required: false
+        default: "manual"
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  HUGO_VERSION: "0.147.8"
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  # ── 门禁：仅校验本次变更的内容文件 ────────────────────────────
+  gates:
+    name: 内容门禁（仅变更文件）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 计算变更的内容文件
+        id: changed
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          # 首次推送或 force-push 时 before 可能全为 0
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            echo "files=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          FILES=$(git diff --name-only --diff-filter=AM "$BASE" "${{ github.sha }}" -- 'content/**/*.md' | head -200 | tr '\n' ' ')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "本次变更内容文件：${FILES:-（无）}"
+
+      - name: 运行 G1 / G2 / G3
+        if: steps.changed.outputs.files != ''
+        run: |
+          set -euo pipefail
+          # 过渡期默认 warn-only：实测 20 篇最新文章 100% 不达标
+          # （100% 缺 sources、100% h2<2、标题普遍超 30 字），
+          # 此刻硬阻断等于让现役产线立刻停摆。P4 生成轨修好后，
+          # 在仓库 Settings → Variables 设置 GATES_ENFORCE=true 翻转为阻断。
+          ENFORCE=""
+          if [ "${{ vars.GATES_ENFORCE }}" != "true" ]; then
+            ENFORCE="--warn-only"
+          fi
+          python newsroom/gates/validate.py \
+            --gates g1,g2,g3 \
+            --content content \
+            --files ${{ steps.changed.outputs.files }} \
+            $ENFORCE | tee /tmp/gates.txt
+
+  # ── 构建 + 产物抽检 ───────────────────────────────────────────
+  build:
+    name: 构建与产物抽检
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 安装 Hugo ${{ env.HUGO_VERSION }} (extended)
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: 缓存 Hugo 资源
+        uses: actions/cache@v4
+        with:
+          path: |
+            resources/_gen
+            /tmp/hugo_cache
+          key: hugo-${{ runner.os }}-${{ env.HUGO_VERSION }}-${{ hashFiles('hugo.toml', 'layouts/**', 'data/**') }}
+          restore-keys: |
+            hugo-${{ runner.os }}-${{ env.HUGO_VERSION }}-
+
+      - name: 版本自检（必须是锁定的版本）
+        run: |
+          set -euo pipefail
+          ACTUAL=$(hugo version | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | tr -d v)
+          echo "期望 $HUGO_VERSION，实际 $ACTUAL"
+          test "$ACTUAL" = "$HUGO_VERSION"
+
+      - name: 构建
+        run: hugo --gc --cleanDestinationDir --logLevel warn
+
+      - name: G3-b 产物抽检（阻断性）
+        run: |
+          set -euo pipefail
+          python newsroom/gates/validate.py --gates g3b --built public --json | tee /tmp/g3b.json
+
+      - name: 产物规模摘要
+        run: |
+          echo "HTML 页面数: $(find public -name '*.html' | wc -l)"
+          echo "sitemap 条目: $(grep -c '<loc>' public/sitemap.xml || echo 0)"
+          echo "JSON-LD 覆盖: $(grep -rl 'application/ld+json' public --include='*.html' | wc -l)"
+          echo "og:image 覆盖: $(grep -rl 'property="og:image"' public --include='*.html' | wc -l)"
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-${{ github.sha }}
+          path: public
+          retention-days: 7
+
+  # ── 发布（默认不执行，待 P1.7 结论后配置）─────────────────────
+  deploy:
+    name: 发布
+    needs: [build]
+    if: github.event_name == 'push' && vars.DEPLOY_TARGET != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: 发布目标未配置
+        if: vars.DEPLOY_TARGET == ''
+        run: echo "DEPLOY_TARGET 未配置，跳过发布"
