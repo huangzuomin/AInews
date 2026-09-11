@@ -1,0 +1,91 @@
+{
+  "id": "vxur00wt3tnPUKTd",
+  "name": "My workflow 10",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-content-generation",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -100
+      ],
+      "id": "35e98b07-95fa-4118-80dc-7926be31a3d2",
+      "webhookId": "38592092-8247-4130-9084-c2eb5cdc032d"
+    },
+    {
+      "parameters": {
+        "functionCode": "// 验证输入参数\nconst { query, platforms, userId } = $json.body;\n\nif (!query || !platforms || platforms.length === 0) {\n  throw new Error('缺少必要参数: query 和 platforms');\n}\n\n$items[0].json.processedInput = {\n  query: query.trim(),\n  platforms: platforms,\n  userId: userId || 'anonymous',\n  timestamp: new Date().toISOString()\n};\n\nreturn $items;"
+      },
+      "name": "输入验证",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -100
+      ],
+      "id": "b6de2d3d-502f-440c-a22a-5ae87f9eac50"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "AI内容生成",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        360,
+        -100
+      ],
+      "id": "08bfeb83-6976-4583-a335-6138d19bb252"
+    },
+    {
+      "parameters": {
+        "functionCode": "// 处理AI生成结果\nconst aiResponse = $json.choices[0].message.content;\n// 从“输入验证”节点获取平台信息\nconst platforms = $('输入验证').item.json.processedInput.platforms;\n\n// 解析AI响应并按平台分类\nconst results = {};\nplatforms.forEach(platform => {\n  switch(platform) {\n    case 'deep':\n      results.deep = extractContent(aiResponse, ['深度', '报道', '角度']);\n      break;\n    case 'video':\n      results.video = extractContent(aiResponse, ['视频', '脚本', '镜头']);\n      break;\n    case 'social':\n      results.social = extractContent(aiResponse, ['社交', '文案', '#']);\n      break;\n    case 'radio':\n      results.radio = extractContent(aiResponse, ['广播', '稿件', '播音']);\n      break;\n  }\n});\n\n// 通用的内容提取函数\nfunction extractContent(text, keywords) {\n  const lines = text.split('\\n').filter(line => \n    keywords.some(keyword => line.includes(keyword))\n  );\n  // 如果找不到特定关键词的内容，则返回一个通用提示，而不是硬编码的示例\n  return lines.length > 0 ? lines : [`未能在AI响应中找到关于[${keywords.join('/')}]的明确内容。`];\n}\n\n// 返回最终结果\nreturn {\n  executionId: $execution.id,\n  status: 'completed',\n  results: results,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "结果处理",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -100
+      ],
+      "id": "171d488f-8e1e-413e-83fa-3c848d5f3bbc"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "响应",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        760,
+        -100
+      ],
+      "id": "adc1a16a-7c98-4e64-b79f-98d200293cbd"
+    }
+  ],
+  "connections": "{\"Webhook\":{\"main\":[[{\"node\":\"输入验证\",\"type\":\"main\",\"index\":0}]]},\"输入验证\":{\"main\":[[{\"node\":\"AI内容生成\",\"type\":\"main\",\"index\":0}]]},\"AI内容生成\":{\"main\":[[{\"node\":\"结果处理\",\"type\":\"main\",\"index\":0}]]},\"结果处理\":{\"main\":[[{\"node\":\"响应\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "a53471c2-c8f0-49ef-967d-61bd3bfbfcee",
+  "triggerCount": 0,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2025-07-30 17:08:50.310",
+  "updatedAt": "2025-07-30 17:08:50.310",
+  "isArchived": 0,
+  "versionCounter": 1,
+  "description": null,
+  "activeVersionId": null
+}

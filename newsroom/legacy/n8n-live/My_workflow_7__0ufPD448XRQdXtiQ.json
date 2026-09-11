@@ -1,0 +1,239 @@
+{
+  "id": "0ufPD448XRQdXtiQ",
+  "name": "My workflow 7",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -620,
+        -60
+      ],
+      "id": "b9d1e904-ce82-4851-9ccc-9162299f6474",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -20,
+        -440
+      ],
+      "id": "e1d279e2-2a5b-44ba-966f-e1aca6adec13",
+      "name": "Loop Over Items3"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "rss_sources",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "is_active",
+              "condition": "eq",
+              "keyValue": "true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        -120
+      ],
+      "id": "cbd23e6a-e49c-4394-9321-664f4e972615",
+      "name": "获取rss源1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        -320
+      ],
+      "id": "87101e81-bc0b-4e2a-b70c-b3bc7da9e1de",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "788be261-09c6-42c6-8a84-b945356fe232",
+      "name": "XML",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": true
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1240,
+        -660
+      ],
+      "id": "72c25713-1bae-45e3-b169-6fbb56818061",
+      "name": "Loop Over Items4",
+      "notesInFlow": true,
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "retryOnFail": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "985f4b7d-9937-4d97-a5d6-2994a0bcc686",
+              "leftValue": "={{ $json.feed.entry }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        620,
+        -280
+      ],
+      "id": "26b5e5e1-cabf-4fc2-bc9c-6963a8967306",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "559e2dc4-d186-4cb0-b14b-245d0be5f3b9",
+      "name": "Split Out RSS 2.0 Feed1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        820,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7ba0920-c5bf-4dbf-b2f5-7bd93f8bb9c8",
+              "leftValue": "={{ $json.pubDate }}",
+              "rightValue": "={{ new Date(new Date().getTime() - 4 * 60 * 60 * 1000) }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "afterOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        -660
+      ],
+      "id": "b6a85703-bd72-4f94-8997-8abb6618a3ca",
+      "name": "If - Within 1 Hours3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -480
+      ],
+      "id": "98d52914-de62-446a-9746-a5be5809dca6",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "feed.entry",
+        "options": {}
+      },
+      "id": "3dbda0b4-f6f9-48e2-8742-6861713d56dd",
+      "name": "Split Out - Atom",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        860,
+        -360
+      ]
+    }
+  ],
+  "connections": "{\"Schedule Trigger1\":{\"main\":[[{\"node\":\"获取rss源1\",\"type\":\"main\",\"index\":0}]]},\"Loop Over Items3\":{\"main\":[[{\"node\":\"If - Within 1 Hours3\",\"type\":\"main\",\"index\":0}],[{\"node\":\"HTTP Request1\",\"type\":\"main\",\"index\":0}]]},\"获取rss源1\":{\"main\":[[{\"node\":\"Loop Over Items3\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request1\":{\"main\":[[{\"node\":\"XML\",\"type\":\"main\",\"index\":0}]]},\"XML\":{\"main\":[[{\"node\":\"If1\",\"type\":\"main\",\"index\":0}]]},\"Loop Over Items4\":{\"main\":[[],[{\"node\":\"No Operation, do nothing\",\"type\":\"main\",\"index\":0}]]},\"If1\":{\"main\":[[{\"node\":\"Split Out - Atom\",\"type\":\"main\",\"index\":0}],[{\"node\":\"Split Out RSS 2.0 Feed1\",\"type\":\"main\",\"index\":0}]]},\"Split Out RSS 2.0 Feed1\":{\"main\":[[{\"node\":\"Loop Over Items3\",\"type\":\"main\",\"index\":0}]]},\"If - Within 1 Hours3\":{\"main\":[[{\"node\":\"Loop Over Items4\",\"type\":\"main\",\"index\":0}],[]]},\"No Operation, do nothing\":{\"main\":[[{\"node\":\"Loop Over Items4\",\"type\":\"main\",\"index\":0}]]},\"Split Out - Atom\":{\"main\":[[{\"node\":\"Loop Over Items3\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "84005fbe-e188-4fa0-b607-697a8cc4affa",
+  "triggerCount": 0,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-07-01 13:47:17.154",
+  "updatedAt": "2025-07-01 15:25:53",
+  "isArchived": 0,
+  "versionCounter": 1,
+  "description": null,
+  "activeVersionId": null
+}

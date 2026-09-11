@@ -1,0 +1,302 @@
+{
+  "id": "3A5ziNO7IUnR5fkJ",
+  "name": "My workflow 6",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "db44767a-a478-42ac-bc48-5dab4995ccbd",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 候选图片预处理节点 (v3.0 - Google Search)\n * 对 Google Custom Search API 返回的图片进行预处理和格式标准化\n */\n\n// 可配置参数\nconst MIN_WIDTH = 680; // 最小宽度要求\n\n/**\n * 筛选并标准化Google图片搜索结果\n * @param {Array} items - Google Custom Search API返回的items数组\n * @returns {Object} 包含筛选和标准化后的图片数组及URL列表\n */\nfunction preprocessGoogleImages(items) {\n  // 检查输入是否有效\n  if (!items || !Array.isArray(items)) {\n    return { filteredPhotos: [], candidateUrls: [] };\n  }\n\n  // 1. 筛选出有效的、符合宽度要求的图片\n  // 必须确保 item.image 存在，否则 item.image.width 会报错\n  const validImageItems = items.filter(item =>\n    item.image &&\n    item.image.width >= MIN_WIDTH &&\n    item.link\n  );\n\n  // 2. 将筛选后的Google图片数据，【标准化】成我们通用的图片对象格式\n  // 这一步是关键，它确保了后续节点（如AI甄选）无需修改\n  const normalizedPhotos = validImageItems.map(item => ({\n    // 这个新结构模仿了Pexels的结构，以保证下游兼容性\n    width: item.image.width,\n    height: item.image.height,\n    src: {\n      original: item.link // Google的图片URL在顶层的'link'字段\n    },\n    alt: item.title, // 使用图片所在页面的标题作为alt文本\n    photographer: item.displayLink, // 使用来源域名作为'摄影师'信息\n    originalGoogleItem: item // 保留原始Google数据以备不时之需\n  }));\n\n  // 3. 从标准化后的图片对象中，提取URL列表\n  const candidateUrls = normalizedPhotos.map(photo => photo.src.original);\n\n  return {\n    filteredPhotos: normalizedPhotos,\n    candidateUrls,\n  };\n}\n\n// --- 主处理逻辑 ---\ntry {\n  const inputData = $input.all();\n\n  // 检查是否有输入数据\n  if (!inputData || inputData.length === 0) {\n    throw new Error(\"No input data received.\");\n  }\n\n  const firstInput = inputData[0];\n  const apiResponse = firstInput.json;\n\n  // 为了数据流的完整性，我们从Start节点获取原始输入（如articleTitle）并传递下去\n  const originalInput = $('Start').first().json;\n\n  // 检查Google API的响应格式是否正确\n  if (!apiResponse || !apiResponse.items) {\n    throw new Error(\"Invalid Google API response format. Missing 'items' array.\");\n  }\n\n  const searchItems = apiResponse.items;\n\n  // 执行图片预处理和标准化\n  const result = preprocessGoogleImages(searchItems);\n\n  // 检查是否有符合条件的候选图片\n  if (result.candidateUrls.length === 0) {\n    // 即使没有符合条件的，也返回一个标准错误结构，而不是中断流程\n    return [{\n      json: {\n        error: \"No suitable images found after filtering.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: searchItems,\n        originalInput\n      }\n    }];\n  }\n\n  // 返回成功的预处理结果\n  return [{\n    json: {\n      error: null,\n      candidateUrls: result.candidateUrls,\n      filteredPhotos: result.filteredPhotos,\n      originalPhotos: searchItems, // 注意：这里现在是原始的Google items\n      originalInput\n    }\n  }];\n\n} catch (error) {\n  // 处理意外错误，返回一个标准的错误对象\n  return [{\n    json: {\n      error: `Processing error: ${error.message}`,\n      candidateUrls: [],\n      filteredPhotos: [],\n      originalPhotos: [],\n      originalInput: $('Start').first().json || null\n    }\n  }];\n}"
+      },
+      "id": "0cc4bc1f-3975-45e2-9e79-effba548c4ab",
+      "name": "候选图片预处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.candidateUrls }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -40,
+        -240
+      ],
+      "id": "d4b36f6a-a7f3-4edb-8639-07fef2d0d5f5",
+      "name": "下载图片"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/app/hugo/hugo/static/newsimages/selected_image_{{ $now.format('YYYY-MM-DD_HH-mm-ss-SSS') }}.jpg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -240
+      ],
+      "id": "a1eb3df8-6f18-455d-96b1-8ef4e824fbeb",
+      "name": "保存到本地"
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "cx",
+              "value": "96eceac0bab124343"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "05a967ce-c8ef-4fd7-944b-a79751052ac6",
+      "name": "Get Image6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -440,
+        -160
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "7xKH9XEuuC0OcAU8",
+          "name": "Query Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        -220
+      ],
+      "id": "994e67bd-c2c4-4831-bc71-f207d318cacc",
+      "name": "输出图片信息"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -380
+      ],
+      "id": "6b9ebfc7-f1e6-4150-9425-f2ef601c85f2",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "WEellCxC8F5VkH5K",
+          "name": "Google Gemini(PaLM) Api zooman55"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. 获取上一个AI节点返回的完整数据对象\nconst aiOutput = $input.item.json;\n\n// --- 智能路径判断 ---\n// 这个变量用来存放我们最终要解析的字符串\nlet markdownString;\n\n// 2. 检查是否存在复杂的 response.generations 路径\nif (aiOutput.response && aiOutput.response.generations && aiOutput.response.generations.length > 0) {\n  // 如果是复杂结构，就按复杂路径去取值\n  console.log(\"检测到复杂输出格式，正在按复杂路径解析...\");\n  markdownString = aiOutput.response.generations[0][0].text;\n} \n// 3. 如果复杂路径不存在，再检查是否存在简单的 .text 路径\nelse if (aiOutput.text) {\n  // 如果是简单结构，就直接从 .text 取值\n  console.log(\"检测到简单输出格式，正在按简单路径解析...\");\n  markdownString = aiOutput.text;\n} \n// 4. 如果两种格式都不是，就抛出错误，防止流程继续\nelse {\n  throw new Error(\"无法识别的AI输出格式，既没有找到 .text 也没有找到 .response.generations\");\n}\n\n// --- 后续处理代码保持不变 ---\n\n// 5. 清理 AI 返回的文本中可能包含的Markdown格式\nconst cleanJsonString = markdownString.replace(/```json\\n|```/g, '');\n\n// 6. 解析干净的JSON字符串\nconst aiDecision = JSON.parse(cleanJsonString);\n\n// 7. 提取我们需要的索引号\nconst bestImageIndex = aiDecision.bestImageIndex;\n\n// 8. 返回一个干净的、只包含索引号的输出\nreturn {\n  json: {\n    bestImageIndex: bestImageIndex\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        -540
+      ],
+      "id": "8a955928-223b-4eb2-9820-5a8050e66adb",
+      "name": "最终选择与格式化"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位专业的资深图片编辑。你的任务是为下面的文章标题，从提供的候选图片列表中，选择一张最合适的配图。\n\n请基于以下三个维度进行评估：\n1. 主题相关性 (图片内容是否紧扣文章主题)\n2. 视觉吸引力 (图片构图、色彩和美感)\n3. 专业性 (图片是否看起来像专业摄影作品，而非随手拍或截图)\n\n文章标题： \"{{ $('Start').item.json.title }}\"\n\n候选图片：\n{{ $json.candidateUrls }}\n\n\n\n请不要进行任何解释。仅返回一个符合以下格式的JSON对象，其中`bestImageIndex`是你选择的图片在列表中的索引（从0开始），`reasoning`是你选择的简短理由：`{\"bestImageIndex\": 0, \"reasoning\": \"这张图片最能体现科技感和创新精神。\"}`",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -60,
+        -540
+      ],
+      "id": "880a06c6-3218-47fe-9e1a-a89a373c31e7",
+      "name": "多模态选图"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 候选图片预处理节点 (v3.0 - Google Search)\n * 对 Google Custom Search API 返回的图片进行预处理和格式标准化\n */\n\n// 可配置参数\nconst MIN_WIDTH = 680; // 最小宽度要求\n\n/**\n * 筛选并标准化Google图片搜索结果\n * @param {Array} items - Google Custom Search API返回的items数组\n * @returns {Object} 包含筛选和标准化后的图片数组及URL列表\n */\nfunction preprocessGoogleImages(items) {\n  // 检查输入是否有效\n  if (!items || !Array.isArray(items)) {\n    return { filteredPhotos: [], candidateUrls: [] };\n  }\n\n  // 1. 筛选出有效的、符合宽度要求的图片\n  // 必须确保 item.image 存在，否则 item.image.width 会报错\n  const validImageItems = items.filter(item =>\n    item.image &&\n    item.image.width >= MIN_WIDTH &&\n    item.link\n  );\n\n  // 2. 将筛选后的Google图片数据，【标准化】成我们通用的图片对象格式\n  // 这一步是关键，它确保了后续节点（如AI甄选）无需修改\n  const normalizedPhotos = validImageItems.map(item => ({\n    // 这个新结构模仿了Pexels的结构，以保证下游兼容性\n    width: item.image.width,\n    height: item.image.height,\n    src: {\n      original: item.link // Google的图片URL在顶层的'link'字段\n    },\n    alt: item.title, // 使用图片所在页面的标题作为alt文本\n    photographer: item.displayLink, // 使用来源域名作为'摄影师'信息\n    originalGoogleItem: item // 保留原始Google数据以备不时之需\n  }));\n\n  // 3. 从标准化后的图片对象中，提取URL列表\n  const candidateUrls = normalizedPhotos.map(photo => photo.src.original);\n\n  return {\n    filteredPhotos: normalizedPhotos,\n    candidateUrls,\n  };\n}\n\n// --- 主处理逻辑 ---\ntry {\n  const inputData = $input.all();\n\n  // 检查是否有输入数据\n  if (!inputData || inputData.length === 0) {\n    throw new Error(\"No input data received.\");\n  }\n\n  const firstInput = inputData[0];\n  const apiResponse = firstInput.json;\n\n  // 为了数据流的完整性，我们从Start节点获取原始输入（如articleTitle）并传递下去\n  const originalInput = $('Start').first().json;\n\n  // 检查Google API的响应格式是否正确\n  if (!apiResponse || !apiResponse.items) {\n    throw new Error(\"Invalid Google API response format. Missing 'items' array.\");\n  }\n\n  const searchItems = apiResponse.items;\n\n  // 执行图片预处理和标准化\n  const result = preprocessGoogleImages(searchItems);\n\n  // 检查是否有符合条件的候选图片\n  if (result.candidateUrls.length === 0) {\n    // 即使没有符合条件的，也返回一个标准错误结构，而不是中断流程\n    return [{\n      json: {\n        error: \"No suitable images found after filtering.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: searchItems,\n        originalInput\n      }\n    }];\n  }\n\n  // 返回成功的预处理结果\n  return [{\n    json: {\n      error: null,\n      candidateUrls: result.candidateUrls,\n      filteredPhotos: result.filteredPhotos,\n      originalPhotos: searchItems, // 注意：这里现在是原始的Google items\n      originalInput\n    }\n  }];\n\n} catch (error) {\n  // 处理意外错误，返回一个标准的错误对象\n  return [{\n    json: {\n      error: `Processing error: ${error.message}`,\n      candidateUrls: [],\n      filteredPhotos: [],\n      originalPhotos: [],\n      originalInput: $('Start').first().json || null\n    }\n  }];\n}"
+      },
+      "id": "fe459ca1-2195-4f04-9647-23ea018cde0e",
+      "name": "候选图片预处理1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        -540
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "={{ $('候选图片预处理1').item.json.filteredPhotos[$json.bestImageIndex].src.original }}",
+              "type": "string"
+            },
+            {
+              "id": "f250ff31-01cc-4c08-891d-3e85378a6bf8",
+              "name": "finalImageAltText",
+              "value": "={{ $('候选图片预处理1').item.json.filteredPhotos[$json.bestImageIndex].alt }}",
+              "type": "string"
+            },
+            {
+              "id": "ec0dd66e-6397-4bb3-b758-af4bae8b3554",
+              "name": "finalPhotographer",
+              "value": "={{ $('候选图片预处理1').item.json.filteredPhotos[$json.bestImageIndex].photographer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        -540
+      ],
+      "id": "2dee5dce-c1cb-4b5c-94f1-9382e4cda329",
+      "name": "输出图片信息1"
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "cx",
+              "value": "96eceac0bab124343"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "38c2f1af-fd03-48ce-a894-ccc5cae54256",
+      "name": "Get Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -400,
+        -540
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "7xKH9XEuuC0OcAU8",
+          "name": "Query Auth account"
+        }
+      }
+    }
+  ],
+  "connections": "{\"Start\":{\"main\":[[{\"node\":\"Get Image6\",\"type\":\"main\",\"index\":0}]]},\"候选图片预处理\":{\"main\":[[{\"node\":\"下载图片\",\"type\":\"main\",\"index\":0}]]},\"下载图片\":{\"main\":[[{\"node\":\"保存到本地\",\"type\":\"main\",\"index\":0}]]},\"保存到本地\":{\"main\":[[{\"node\":\"输出图片信息\",\"type\":\"main\",\"index\":0}]]},\"Get Image6\":{\"main\":[[{\"node\":\"候选图片预处理\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"多模态选图\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"最终选择与格式化\":{\"main\":[[{\"node\":\"输出图片信息1\",\"type\":\"main\",\"index\":0}]]},\"多模态选图\":{\"main\":[[{\"node\":\"最终选择与格式化\",\"type\":\"main\",\"index\":0}]]},\"候选图片预处理1\":{\"main\":[[{\"node\":\"多模态选图\",\"type\":\"main\",\"index\":0}]]},\"Get Image\":{\"main\":[[{\"node\":\"候选图片预处理1\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{\"Start\":[{\"json\":{\"keywords\":\"科技创新\",\"title\":\"智能体站上AI新前沿：下一波计算范式与社会重塑的挑战\"}}]}",
+  "versionId": "bcdebc53-bfc2-46b0-8141-384f8c28a8b7",
+  "triggerCount": 0,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2025-06-23 08:55:00.596",
+  "updatedAt": "2025-06-23 15:03:10",
+  "isArchived": 0,
+  "versionCounter": 1,
+  "description": null,
+  "activeVersionId": null
+}

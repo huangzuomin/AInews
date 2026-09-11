@@ -1,0 +1,365 @@
+{
+  "id": "5qedRGwba67XcYqQ",
+  "name": "新闻发布",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git config user.email \"h.zuomin@gmail.com\" && git config user.name \"huangzuomin\""
+      },
+      "id": "4abc227b-33f3-47ff-aef2-097e5860216c",
+      "name": "Git配置",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -1820,
+        -200
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && if [ ! -d .git ]; then git init && git remote add origin https://github.com/huangzuomin/AI_news && git branch -M main; fi && git pull origin main"
+      },
+      "id": "c7c4d9aa-9e93-44d2-8686-92171fd81ba9",
+      "name": "Git Pull (Init if not exists)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -200
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ai_articles",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "published"
+            },
+            {
+              "keyName": "updated_at",
+              "condition": "gte",
+              "keyValue": "={{ new Date(Date.now() - 24*60*60*1000).toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "4f91f840-dfe3-432c-8676-3d0100552f0d",
+      "name": "获取待同步文章",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        -200
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "174IqHgMJvnqbIkQ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "/**\n * @description\n * 本脚本用于 n8n 的 \"Code\" 节点。\n * 功能：接收一个包含 XML/HTML 风格标签的文章内容，将其转换为 Hugo 静态网站生成器所需的 Markdown 文件格式。\n * 这个版本使用正则表达式解析标签，并增加了调试日志和改进的文件名生成机制。\n * 增加了对关键字段缺失的容错处理，遇到错误时不再中断工作流，而是返回一个带有错误标记的 Item。\n * v3: 增加了对 <img_url> 标签的处理，使用 featured_image 字段，如果为空则提供随机默认图片。\n * v4: (当前版本) 优化了图片处理逻辑，使其能够优先读取顶层的 `$json.img_url` 字段，如果该字段不存在，则回退到解析 <img_url> 标签。\n * v5: (新版本) 增加文件名生成健壮性检查，如果文件名不合法或为空，则跳过当前 Item 的文件生成，返回错误信息。\n *\n * 输入：上一个节点传递过来的数据项，其中应包含一个名为 `content` 的字段，或一个名为 `img_url` 的顶层字段。\n *\n * 输出：一个包含三部分的新对象（或包含错误信息的对象）：\n * 1. `title`: 提取出的文章标题。\n * 2. `hugo_article`: 格式化后的完整 Hugo 文章字符串。\n * 3. `fileName`: 根据文章标题、时间戳和项目索引生成的唯一文件名。\n * 或：\n * 1. `error`: 错误消息。\n * 2. `itemIndex`: 出错的 Item 索引。\n * 3. `originalId`: 原始数据的 ID (如果存在)。\n */\n\n// --- 1. 数据准备 ---\n\nconst rawContentString = $json.content;\nconst itemIndex = $itemIndex; // 方便在各处使用\n\n// 检查输入是否为空或非字符串 (主要针对基于标签的解析)\nif (!rawContentString || typeof rawContentString !== 'string') {\n  // 即使 content 为空，如果顶层有其他字段（如 title, img_url），可能仍需处理，因此这里仅作警告。\n  // 但是，如果后续依赖 rawContentString 的关键字段无法提取，仍然会跳过。\n  console.warn(`[Item Index: ${itemIndex}] 输入字段 'content' 为空或不是字符串。`);\n}\n\n// --- 2. 健壮的 Tag 解析 ---\n\nlet articleData = {}; // 初始化为空对象，确保总是有一个对象\nlet hasParsingError = false;\nlet parsingErrorMessage = '';\n\ntry {\n  const extractFromTag = (tagName, content) => {\n    // 检查 content 是否有效，防止在 null 或 undefined 上调用 match\n    if (!content || typeof content !== 'string') return '';\n    // 稍微改进正则，处理可能的属性和更宽松的空白\n    const regex = new RegExp(`<${tagName}[^>]*>\\\\s*([\\\\s\\\\S]*?)\\\\s*<\\\\/${tagName}>`, 'is');\n    const match = content.match(regex);\n    return match && match[1] ? match[1].trim() : '';\n  };\n\n  const title = extractFromTag('title', rawContentString);\n  const article_content = extractFromTag('article_content', rawContentString);\n  const summary = extractFromTag('summary', rawContentString);\n  const tagsString = extractFromTag('tags', rawContentString);\n  const mainTopicsString = extractFromTag('main_topics', rawContentString);\n  \n  const img_url = $json.img_url || extractFromTag('img_url', rawContentString);\n\n  console.log(`[Item Index: ${itemIndex}] 提取到的标题 (Title):`, title);\n\n  const tags = tagsString ? tagsString.split(',').map(tag => tag.trim()).filter(Boolean) : [];\n  const main_topics = mainTopicsString ? mainTopicsString.split(',').map(topic => topic.trim()).filter(Boolean) : [];\n\n  articleData = {\n    title,\n    summary,\n    tags,\n    main_topics,\n    article_content,\n    img_url, \n  };\n\n} catch (e) {\n  hasParsingError = true;\n  parsingErrorMessage = `Tag 解析失败: ${e.message}.`;\n  console.error(`[Item Index: ${itemIndex}] Tag 解析格式内容失败:`, e);\n}\n\n// 如果解析 Tag 时发生错误，直接返回错误 Item\nif (hasParsingError) {\n    return {\n        json: {\n            error: parsingErrorMessage,\n            itemIndex: itemIndex,\n            originalId: $json.id || $json.articleId || 'N/A',\n            // 标记此 Item 为跳过，以便下游节点可以过滤\n            skip: true \n        }\n    };\n}\n\n// --- 3. 提取并验证内容 ---\n\nconst {\n  title,\n  summary,\n  tags,\n  main_topics,\n  article_content,\n  img_url, \n} = articleData; \n\n// 检查关键字段 article_content 是否存在\nif (!article_content || article_content.trim() === '') { // 增加对空字符串的检查\n  console.error(`[Item Index: ${itemIndex}] 错误: 解析后的数据缺少必要的 <article_content> 内容或内容为空。跳过此 Item。`);\n  return {\n       json: {\n           error: `缺少 <article_content> 内容`,\n           itemIndex: itemIndex,\n           originalId: $json.id || $json.articleId || 'N/A',\n           skip: true\n       }\n  };\n}\n\n// 警告非关键字段缺失\nif (!title || title.trim() === '') { // 增加对空字符串的检查\n  console.warn(`[Item Index: ${itemIndex}] 警告: 提取到的文章标题为空。文件名将使用默认前缀。Front Matter 中的 title 也会为空。`);\n}\n\n// --- 4. 构建 Hugo Front Matter (YAML 格式) ---\n\nconst getISODateWithTimezone = (date) => {\n    const pad = (num) => (num < 10 ? '0' : '') + num;\n    const offset = -date.getTimezoneOffset();\n    const sign = offset >= 0 ? '+' : '-';\n    const hours = pad(Math.floor(Math.abs(offset) / 60));\n    const minutes = pad(Math.abs(offset) % 60);\n    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}${sign}${hours}:${minutes}`;\n};\nconst hugoDate = getISODateWithTimezone(new Date());\n\nconst toYamlString = (value) => {\n    if (value === undefined || value === null) return '\"\"';\n    if (typeof value === 'string') {\n      // 检查是否包含 YAML 特殊字符或以特殊字符开头\n      // 对于多行字符串，YAML 建议使用 | 或 >，这里简单处理，若包含换行符也进行字符串化\n      if (/[\":,\\-#{}[]|>]/g.test(value) || value.startsWith('---') || value.startsWith('#') || value.includes('\\n')) {\n           return JSON.stringify(value); // 使用 JSON.stringify 来安全地处理包含特殊字符的字符串\n      }\n      return value;\n    }\n    return JSON.stringify(value); // 其他类型直接 JSON.stringify\n};\n\nconst toYamlList = (arr) => {\n    if (!Array.isArray(arr) || arr.length === 0) return '[]';\n    // 确保每个列表项都是安全的 YAML 字符串\n    return '\\n' + arr.map(item => `  - ${toYamlString(item)}`).join('\\n');\n}\n\n// 决定最终使用的图片路径\nlet finalImage = img_url; // 使用一个新变量名以示清晰\nif (!finalImage || finalImage.trim() === '') { // 增加对空字符串的检查\n  // 如果 img_url 为空，则生成一个 1 到 20 之间的随机数\n  const randomNumber = Math.floor(Math.random() * 20) + 1;\n  finalImage = `images/default (${randomNumber}).png`;\n  console.log(`[Item Index: ${itemIndex}] 'img_url' is empty or blank. Using default image: ${finalImage}`);\n}\n\nconst frontMatter = `---\ntitle: ${toYamlString(title || 'Untitled Article')}\ndate: ${hugoDate}\ndraft: false\nfeatured_image: ${toYamlString(finalImage)}\nsummary: ${toYamlString(summary || '')}\ntags: ${toYamlList(tags)}\nmain_topics: ${toYamlList(main_topics)}\n---\n`;\n\n// --- 5. 组合并返回最终结果 ---\n\nconst hugoArticle = frontMatter + '\\n' + article_content;\n\nconst generateBasicSlug = (str) => {\n  if (!str || typeof str !== 'string') return '';\n  return str\n    .toString()\n    .normalize('NFD') // Normalization Form D (Canonical Decomposition)\n    .replace(/[\\u0300-\\u036f]/g, '') // Remove diacritics\n    .toLowerCase()\n    .trim()\n    .replace(/\\s+/g, '-') // Replace spaces with -\n    .replace(/[^\\w-]+/g, '') // Remove all non-word chars except hyphens\n    .replace(/--+/g, '-'); // Replace multiple - with single -\n}\n\nconst generateUniqueFilename = (originalTitle, itemIndex) => {\n  const now = new Date();\n  const year = now.getFullYear();\n  const month = (now.getMonth() + 1).toString().padStart(2, '0');\n  const day = now.getDate().toString().padStart(2, '0');\n  const hours = now.getHours().toString().padStart(2, '0');\n  const minutes = now.getMinutes().toString().padStart(2, '0');\n  const seconds = now.getSeconds().toString().padStart(2, '0');\n  const milliseconds = now.getMilliseconds().toString().padStart(3, '0');\n  const timestamp = `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;\n  let baseName = '';\n  // 确保 originalTitle 是有效字符串\n  if (originalTitle && typeof originalTitle === 'string' && originalTitle.trim() !== '') {\n    baseName = generateBasicSlug(originalTitle);\n  }\n  \n  // 增加更严格的 basename 检查，防止生成空或过短的 slug\n  const MIN_SLUG_LENGTH = 3;\n  if (!baseName || baseName.length < MIN_SLUG_LENGTH) {\n    baseName = 'article'; // 如果标题无法生成有效 slug，使用默认值\n  }\n\n  // 截断 basename 以避免文件名过长，并处理尾部连字符\n  const MAX_BASENAME_LENGTH = 50;\n  if (baseName.length > MAX_BASENAME_LENGTH) {\n    let truncatedBaseName = baseName.substring(0, MAX_BASENAME_LENGTH);\n    const lastHyphen = truncatedBaseName.lastIndexOf('-');\n    // 如果截断位置附近有连字符，优先截到连字符处\n    if (lastHyphen !== -1 && lastHyphen > MAX_BASENAME_LENGTH * 0.8) { // 例如，在 80% 到 100% 之间\n        baseName = truncatedBaseName.substring(0, lastHyphen);\n    } else {\n        baseName = truncatedBaseName;\n    }\n    // 移除可能存在的尾部连字符\n    baseName = baseName.replace(/-$/, '');\n  }\n  \n  // 最终文件名格式\n  return `${baseName}-${timestamp}-${itemIndex}.md`;\n};\n\nconst finalFileName = generateUniqueFilename(title, itemIndex);\n\n// --- *** 关键的健壮性检查部分 START *** ---\n// 检查生成的文件名是否为空或不符合基本文件命名规范\n// 一个有效的文件名至少应该包含一些字符和扩展名，这里简单检查非空和是否包含 \".md\"\nif (!finalFileName || typeof finalFileName !== 'string' || finalFileName.trim() === '' || !finalFileName.endsWith('.md')) {\n    const errorMsg = `文件名生成失败或不合法: '${finalFileName}'。跳过此 Item 的文件生成。`;\n    console.error(`[Item Index: ${itemIndex}] 错误: ${errorMsg}`);\n    return {\n        json: {\n            error: errorMsg,\n            itemIndex: itemIndex,\n            originalId: $json.id || $json.articleId || 'N/A',\n            // 明确标记此 Item 为跳过，以便下游节点可以过滤它\n            skip: true \n        }\n    };\n}\n// --- *** 关键的健壮性检查部分 END *** ---\n\nconsole.log(`[Item Index: ${itemIndex}] 生成的文件名: ${finalFileName}`);\n\n// 正常返回数据\nreturn {\n  json: {\n    title: title || 'Untitled Article', // 确保 title 至少有一个默认值\n    hugo_article: hugoArticle,\n    fileName: finalFileName,\n    articleId: $json.id || $json.articleId || 'N/A'\n  }\n};\n"
+      },
+      "id": "63b5c91b-baf3-4aca-aa05-4173ba6a3c91",
+      "name": "生成Hugo内容",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1160,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "21e11783-e783-43b4-ac21-363fc5733cec",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -940,
+        -200
+      ],
+      "id": "3b7bf201-24b1-4bfc-a31a-51f80f86a68b",
+      "name": "检查是否跳过"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=cat > \"/app/hugo/hugo/content/insights/{{ $('生成Hugo内容').item.json.fileName }}\" << 'EOF'\n{{ $('生成Hugo内容').item.json.hugo_article }}\nEOF"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        -100
+      ],
+      "id": "69a727f4-72b3-4f0f-8579-39c429652c15",
+      "name": "写入文件"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "/**\n * @description 检查文件写入是否成功\n * 通过检查Execute Command节点的执行结果判断\n * @returns {Object} 包含成功状态和相关信息的对象\n */\nfunction checkWriteSuccess() {\n  const writeResult = $json;\n  \n  // Execute Command节点成功时会返回执行信息\n  const success = writeResult && (writeResult.exitCode === 0 || writeResult.exitCode === undefined);\n  \n  return {\n    success: success,\n    fileName: $('生成Hugo内容').item.json.fileName,\n    articleId: $('生成Hugo内容').item.json.articleId,\n    title: $('生成Hugo内容').item.json.title,\n    filePath: `/app/hugo/hugo/content/articles/${$('生成Hugo内容').item.json.fileName}`,\n    error: success ? null : '文件写入失败',\n    exitCode: writeResult.exitCode || 0\n  };\n}\n\nreturn checkWriteSuccess();"
+      },
+      "id": "6fce83c2-598c-489e-9acb-efd907206f6f",
+      "name": "检查写入成功",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "write-success-check",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b77d6710-6cb5-4e5b-85e5-902a84a11bc3",
+      "name": "判断写入结果",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -280,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git add ."
+      },
+      "id": "e2461859-d639-4cdc-8595-bd78d2778faf",
+      "name": "Git Add",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git commit -m \"📈 Daily AI digest: {{ items.length }} articles ({{ $now.format('Jan 02') }})\""
+      },
+      "id": "8c4fb7ad-d7fe-4a32-baea-d4b796bfbcd1",
+      "name": "Git Commit",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git push https://«REDACTED-TOKEN-ghp_»@github.com/huangzuomin/AInews.git main"
+      },
+      "id": "c1e7e6d2-8630-4db2-8cc0-24bcbc421c5c",
+      "name": "Git Push",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        380,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * @description 记录同步失败的文章\n * 用于错误处理和日志记录\n * @returns {Object} 包含失败信息的对象\n */\nfunction logSyncFailure() {\n  const data = $json;\n  \n  return {\n    articleId: data.articleId || $('生成Hugo内容').item.json.articleId,\n    title: data.title || $('生成Hugo内容').item.json.title,\n    error: data.error || data.message || '未知错误',\n    timestamp: new Date().toISOString(),\n    status: 'sync_failed'\n  };\n}\n\nreturn logSyncFailure();"
+      },
+      "id": "17c78c46-13ed-4231-a1bc-2f64534f2d3c",
+      "name": "记录同步失败",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('记录同步失败').item.json.articleId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "sync_error",
+              "fieldValue": "={{ $('记录同步失败').item.json.error }}"
+            },
+            {
+              "fieldId": "last_sync_attempt",
+              "fieldValue": "={{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "dd43f8df-de05-47c4-b3ea-0ea402e7e132",
+      "name": "更新错误状态",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        160,
+        0
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "174IqHgMJvnqbIkQ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.articleId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "synced_to_hugo"
+            },
+            {
+              "fieldId": "hugo_sync_time",
+              "fieldValue": "={{ $json.syncTime }}"
+            },
+            {
+              "fieldId": "updated_at",
+              "fieldValue": "={{ $json.syncTime }}"
+            }
+          ]
+        }
+      },
+      "id": "222ea979-c903-4958-827d-97230a38217d",
+      "name": "更新同步状态",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        100,
+        -460
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "174IqHgMJvnqbIkQ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "/**\n * @description 更新单篇文章的同步状态\n * 为每篇成功同步的文章更新状态\n * @returns {Object} 包含文章同步状态信息的对象\n */\nfunction updateSyncStatus() {\n  const data = $json;\n  \n  return {\n    articleId: $('生成Hugo内容').item.json.articleId,\n    title: $('生成Hugo内容').item.json.title,\n    fileName: $('生成Hugo内容').item.json.fileName,\n    syncTime: new Date().toISOString(),\n    status: 'synced_to_hugo'\n  };\n}\n\nreturn updateSyncStatus();"
+      },
+      "id": "09b2b29c-68d5-4572-9b40-a07d8e3e32ae",
+      "name": "准备更新状态",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10,40 * * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2100,
+        -200
+      ],
+      "id": "a8103050-d71e-44f9-b79a-a1aa419672be",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "connections": "{\"Git配置\":{\"main\":[[{\"node\":\"Git Pull (Init if not exists)\",\"type\":\"main\",\"index\":0}]]},\"Git Pull (Init if not exists)\":{\"main\":[[{\"node\":\"获取待同步文章\",\"type\":\"main\",\"index\":0}]]},\"获取待同步文章\":{\"main\":[[{\"node\":\"生成Hugo内容\",\"type\":\"main\",\"index\":0}]]},\"生成Hugo内容\":{\"main\":[[{\"node\":\"检查是否跳过\",\"type\":\"main\",\"index\":0}]]},\"检查是否跳过\":{\"main\":[[],[{\"node\":\"写入文件\",\"type\":\"main\",\"index\":0}]]},\"写入文件\":{\"main\":[[{\"node\":\"检查写入成功\",\"type\":\"main\",\"index\":0}]]},\"检查写入成功\":{\"main\":[[{\"node\":\"判断写入结果\",\"type\":\"main\",\"index\":0}]]},\"判断写入结果\":{\"main\":[[{\"node\":\"Git Add\",\"type\":\"main\",\"index\":0},{\"node\":\"准备更新状态\",\"type\":\"main\",\"index\":0}],[{\"node\":\"记录同步失败\",\"type\":\"main\",\"index\":0}]]},\"Git Add\":{\"main\":[[{\"node\":\"Git Commit\",\"type\":\"main\",\"index\":0}]]},\"Git Commit\":{\"main\":[[{\"node\":\"Git Push\",\"type\":\"main\",\"index\":0}]]},\"Git Push\":{\"main\":[[]]},\"记录同步失败\":{\"main\":[[{\"node\":\"更新错误状态\",\"type\":\"main\",\"index\":0}]]},\"准备更新状态\":{\"main\":[[{\"node\":\"更新同步状态\",\"type\":\"main\",\"index\":0}]]},\"Schedule Trigger\":{\"main\":[[{\"node\":\"Git配置\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": "{\"node:定时触发器-4小时间间隔\":{\"recurrenceRules\":[]},\"node:Schedule Trigger\":{\"recurrenceRules\":[]}}",
+  "pinData": "{}",
+  "versionId": "c8b06438-d48c-4eb8-9968-623a74d727c0",
+  "triggerCount": 1,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2025-06-12 13:08:57.814",
+  "updatedAt": "2025-07-03 02:56:55",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "c8b06438-d48c-4eb8-9968-623a74d727c0"
+}

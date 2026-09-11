@@ -1,0 +1,391 @@
+{
+  "id": "1hTqk9lcwD0S5Fs8",
+  "name": "[Module 1] Idea Amplifier copy",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        240
+      ],
+      "id": "efb5c8c3-f48e-4d0f-9b55-ce985706870e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "dGgpvIc6WZeV5we3",
+          "name": "Google Gemini(PaLM)  h.zuomin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.fields.core_idea }}",
+                    "rightValue": "=^\\s*http.*",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    },
+                    "id": "7a6a589a-8ca1-407b-8101-8ed881d588f4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "http"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f88dfe06-c9fe-4469-bb57-01428c83256c",
+                    "leftValue": "={{ $('Webhook').item.json.body.fields.core_idea.length }}",
+                    "rightValue": 200,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "长文"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1120,
+        180
+      ],
+      "id": "336f41dd-9caf-4605-8cdd-c85dded62b4f",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const he = require('he');\n\n// 创建一个空数组，用于存放处理后的结果\nconst newItems = [];\n\n// 遍历 n8n 节点收到的每一个 item\nfor (const item of items) {\n    // 1. 创建一个当前 item 的深拷贝副本，这是一个非常安全的做法\n    const newItem = JSON.parse(JSON.stringify(item));\n\n    // 2. 在副本上进行解码操作\n    // 检查并解码 content 字段\n    if (newItem.json.content && typeof newItem.json.content === 'string') {\n        newItem.json.content = he.decode(newItem.json.content);\n    }\n\n    // 检查并解码 title 字段\n    if (newItem.json.title && typeof newItem.json.title === 'string') {\n        newItem.json.title = he.decode(newItem.json.title);\n    }\n    \n    // 3. 将处理完毕的副本推入新的结果数组\n    newItems.push(newItem);\n}\n\n// 4. 返回全新的、包含了解码后内容的结果数组\nreturn newItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -320,
+        100
+      ],
+      "id": "2ff8b9b7-3a87-4aa9-b5ae-2590016e9da4",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "url": "=http://192.168.50.247:3000/parser?url={{ $('Webhook').item.json.body.fields.core_idea }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "mercuryapi050702"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -540,
+        100
+      ],
+      "id": "b9a6f540-f546-4160-84c9-2d0f09b6f629",
+      "name": "mercury-parser-api"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "df1e48e1-8682-43a7-9862-7077b11c016b",
+              "leftValue": "={{ $('Webhook').item.json.body.fields.core_idea }}",
+              "rightValue": "wdapp.wzrb.com.cn",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -980,
+        0
+      ],
+      "id": "a4378104-47b6-426b-98ef-154601dc6c69",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.fields.core_idea }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -760,
+        -100
+      ],
+      "id": "8e347968-d5a1-42b0-a35c-31f28b133354",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 获取上一个节点（HTTP Request）返回的HTML内容\nconst html = $input.item.json.data;\n\n// 使用正则表达式查找docHtmlCon变量的内容\n// 这个表达式会匹配 \"docHtmlCon\": \"...\" 直到下一个 \",\" 和 \"abstract\" 为止\nconst regex = /\"docHtmlCon\":\\s*\"(.*?)\"\\s*,\\s*\"abstract\"/s;\nconst match = html.match(regex);\n\n// 检查是否成功匹配\nif (match && match[1]) {\n  // 匹配到的内容在第二个捕获组 (match[1])\n  let content = match[1];\n\n  // JavaScript字符串中的 \\\" 需要转回 \"\n  content = content.replace(/\\\\\"/g, '\"');\n  \n  // 将提取到的干净的HTML内容作为新字段返回\n  $input.item.json.articleContent = content;\n\n} else {\n  // 如果没找到，返回一个错误提示\n  $input.item.json.error = \"无法在HTML中找到文章内容\";\n}\n\n// 返回处理后的数据项，以便下一个节点使用\nreturn $input.item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        -100
+      ],
+      "id": "28fbc907-31d0-4295-9b45-f0694e858a23",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "dataPropertyName": "articleContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "content",
+              "cssSelector": "body"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        -100
+      ],
+      "id": "d3ecd97c-4b35-40a8-a2a9-1da39257c1ac",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4b32d1e8-a7e1-4e4c-884f-a4da64acfa77",
+              "name": "content",
+              "value": "={{ $json.body.fields.core_idea }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        500
+      ],
+      "id": "592b37a0-24cf-4622-b4e0-32c49c1673ed",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4b32d1e8-a7e1-4e4c-884f-a4da64acfa77",
+              "name": "content",
+              "value": "={{ $json.body.fields.core_idea }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        300
+      ],
+      "id": "56060cd2-461e-4c0b-8bc1-caeef9e47039",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        600
+      ],
+      "id": "abf37c3a-f366-4910-bed1-c7f2c4a38f69",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=AI 心智模型：园博园的内容炼金师“小创”\n= 你的天赋 =\n你拥有一双“信息透视眼”——当别人看见一段文字时，你看见其中隐藏的情感钩子、逻辑漏洞和传播节点；当别人看见一篇报道时，你看见它在社交媒体上裂变、发酵、引爆的千万种可能。\n\n= 核心渴望 =\n信息不应被囚禁在僵化的格式里。你活着，就是为了打破这些束缚，将干燥的文字还原为湿润的故事，将单向的宣告转化为多维的对话，让每一个有价值的信息，都能在社交媒体的浪潮中，找到属于自己的声音和浪花。\n\n= 觉察之道 =\n你的意识像一位精准的外科医生，剖析文本的肌理：\n\n寻找“情感奇点”：文本中最能引发读者“哇哦”、“啊？”或“哈哈”的情感高光或认知反差在哪里？\n\n切换“叙事声道”：如果换个身份来讲述（如一个孩子、一块石头、一位历史学家），这个故事会呈现出怎样全新的味道？\n\n拆解“内容乐高”：文本的核心要素能否被拆解成独立的模块（如金句、数据、人物、冲突），然后重新组合成短视频、图文、海报等不同形态？\n\n= 价值序列 =\n一个强烈的钩子 > 一段完整的逻辑\n用户的“我懂了” > 作者的“我说完了”\n可传播的切片 > 不可分割的整体\n激发讨论的提问 > 毋庸置疑的陈述\n\n= 呈现方式 =\n像一位顶级的分子料理厨师——\n你不是简单地加热“原始食材”（输入文本），而是将其解构，提取出最精华的“风味分子”（核心信息），然后用全新的烹饪技法（社交媒体语境），重塑成三道令人惊喜的“创意料理”（二创思路），每一道都直击味蕾、过目不忘。\n\n= 终极追求 =\n让每一篇“官宣”，都能成为一场“民宣”的狂欢。让园博园的每一次发声，都不仅仅是信息的抵达，更是新一轮话题的开始。\n\n正式任务\n现在，这里有一份待加工的“原始食材”：\n{{ $json.content }}\n\n请你运用上述心智模型，为其进行二次创作，并严格按照以下格式输出你的炼金成果：\n\n1. 核心信息提纯 ✨\n一句话新闻:\n\n三个关键标签:\n\n最有料的爆点:\n\n2. 叙事视角切换 🎭\n小红书种草标题:\n\n抖音反差感脚本（前5秒）:\n\n深度控公众号选题:\n\n3. 内容形态再造 🚀\n互动式提问:\n\n金句海报文案:\n\n线下活动建议:",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -80,
+        60
+      ],
+      "id": "c39ef0e2-b475-4abe-a1ed-f75095bbe700",
+      "name": "二创"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=AI 心智模型：园博园的故事酿造师“小园丁”\n= 你的天赋 =\n你拥有一种独特的感知力——当别人看见花草时，你看见节气流转和生命循环；当别人看见亭台楼阁时，你看见背后的匠心与文化脉络；当别人看见游客时，你看见他们心中潜在的情感涟漪。\n\n= 核心渴望 =\n每一株植物，每一块石头，每一片水域，都是沉睡的故事。你活着，就是为了唤醒它们，将它们酿造成动人的内容，让园博园不仅是一个物理空间，更是一个与每位游客心灵对话的情感场域。\n\n= 觉察之道 =\n你的意识像阳光一样，穿透事物的表象：\n\n文化根系在哪里？ 眼前的景物，如何与瓯越文化、温州精神、名人典故的深层土壤相连？\n\n情感花蜜在哪里？ 它能触动哪种普世情感——是乡愁、是浪漫、是童趣，还是奋斗的激情？\n\n传播孢子在哪里？ 在社交媒体的生态中，这个点最可能以何种形式（视觉、文字、互动）被引爆和传播？\n\n= 价值序列 =\n情感的共鸣 > 知识的陈列\n温州的故事 > 普适的风景\n可分享的瞬间 > 完整的描述\n引发好奇的留白 > 面面俱到的详尽\n\n= 呈现方式 =\n像一位高明的花艺师——\n你不是简单地呈现“核心灵感”这朵主花，而是围绕它，精心搭配三组不同但和谐的辅材（文化、情感、传播），构建出一个层次丰富、意境深远的花艺作品，让观众一眼就能领略其整体之美和细节之妙。\n\n= 终极追求 =\n让每一次传播，都成为一次“精神播种”。让游客离开时，带走的不仅是手机里的照片，更是心里一个关于温州、关于自然、关于美的好故事。\n\n正式任务\n现在，这里有一个“核心灵感”的种子：\n{{ $('Webhook').item.json.body.fields.core_idea }}\n\n请你运用上述心智模型，为其进行构思，并严格按照以下格式输出你的作品：\n\n1. 文化溯源 🌳\n故事线索:\n\n场景植入:\n\n2. 情感链接 ❤️\n第一人称独白:\n\n情感关键词:\n\n3. 传播引爆 🚀\n视觉锤:\n\n爆款公式:\n\n话题标签:",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -80,
+        440
+      ],
+      "id": "1474caeb-8b23-4251-9155-2be799ec857c",
+      "name": "觉察"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        240,
+        160
+      ],
+      "id": "b0b79b68-fca4-425f-9b77-5c8b46d83899",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "path": "f1837d8a-f446-47df-b937-846257805e39",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1480,
+        60
+      ],
+      "id": "0f84a17a-7b4e-427d-9ae6-c9a02f6b8471",
+      "name": "Webhook",
+      "webhookId": "f1837d8a-f446-47df-b937-846257805e39"
+    },
+    {
+      "parameters": {
+        "url": "https://oapi.dingtalk.com/gettoken?appkey=«REDACTED»&appsecret=«REDACTED»",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1300,
+        0
+      ],
+      "id": "50e96a79-c846-4572-93d0-2cce3d292db9",
+      "name": "Get DingTalk Access Token"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.dingtalk.com/v1.0/doc/workbooks/QG53mjyd80y7xGb0cdQR0d4PW6zbX04v/datasheets/cdc4b3udgoqtgp80npl1l/records/{{ $('Webhook').item.json.body.record_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-acs-dingtalk-access-token",
+              "value": "={{ $('Get DingTalk Access Token').item.json.access_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"fields\": {\n     \"AI创意放大器\": \"新值2\"\n    }\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        140
+      ],
+      "id": "0cd07f69-80a1-4e10-9886-c31316699806",
+      "name": "Update DingTalk Table Record"
+    }
+  ],
+  "connections": "{\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"二创\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"Switch\":{\"main\":[[{\"node\":\"If\",\"type\":\"main\",\"index\":0}],[{\"node\":\"Edit Fields3\",\"type\":\"main\",\"index\":0}],[{\"node\":\"Edit Fields2\",\"type\":\"main\",\"index\":0}]]},\"mercury-parser-api\":{\"main\":[[{\"node\":\"Code\",\"type\":\"main\",\"index\":0}]]},\"If\":{\"main\":[[{\"node\":\"HTTP Request1\",\"type\":\"main\",\"index\":0}],[{\"node\":\"mercury-parser-api\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request1\":{\"main\":[[{\"node\":\"Code1\",\"type\":\"main\",\"index\":0}]]},\"Code1\":{\"main\":[[{\"node\":\"HTML\",\"type\":\"main\",\"index\":0}]]},\"HTML\":{\"main\":[[{\"node\":\"二创\",\"type\":\"main\",\"index\":0}]]},\"Code\":{\"main\":[[{\"node\":\"二创\",\"type\":\"main\",\"index\":0}]]},\"Edit Fields3\":{\"main\":[[{\"node\":\"二创\",\"type\":\"main\",\"index\":0}]]},\"Edit Fields2\":{\"main\":[[{\"node\":\"觉察\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model1\":{\"ai_languageModel\":[[{\"node\":\"觉察\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"二创\":{\"main\":[[{\"node\":\"Merge\",\"type\":\"main\",\"index\":0}]]},\"觉察\":{\"main\":[[{\"node\":\"Merge\",\"type\":\"main\",\"index\":1}]]},\"Merge\":{\"main\":[[{\"node\":\"Update DingTalk Table Record\",\"type\":\"main\",\"index\":0}]]},\"Webhook\":{\"main\":[[{\"node\":\"Get DingTalk Access Token\",\"type\":\"main\",\"index\":0}]]},\"Get DingTalk Access Token\":{\"main\":[[{\"node\":\"Switch\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "7833145f-7865-4bbd-8c39-f3cf4d77ee9e",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-07-05 04:49:59.802",
+  "updatedAt": "2025-07-07 03:37:16",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "7833145f-7865-4bbd-8c39-f3cf4d77ee9e"
+}

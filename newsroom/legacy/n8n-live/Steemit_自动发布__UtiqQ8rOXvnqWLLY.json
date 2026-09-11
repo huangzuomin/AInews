@@ -1,0 +1,271 @@
+{
+  "id": "UtiqQ8rOXvnqWLLY",
+  "name": "Steemit 自动发布",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.neican.ai/newspaper/index.xml",
+        "responseFormat": "string",
+        "options": {}
+      },
+      "id": "fcc1cecb-ccf0-4d95-ae72-3ed117cd5033",
+      "name": "Get RSS Feed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rss.channel.item",
+        "options": {}
+      },
+      "id": "2cc795da-2477-4e91-a54f-650ba933a527",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "abaab506-0a15-43cc-80b7-3e42e021b406",
+      "name": "XML1",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5cb38542-4220-4295-b25a-162815ed809c",
+              "leftValue": "={{ new Date($json.pubDate).toDateString() }}",
+              "rightValue": "={{ new Date().toDateString() }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        -176
+      ],
+      "id": "6791bd82-579f-4b4b-9ddd-cfc3f90cd13a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5279f28-efb7-4f11-b99d-73180c75ea02",
+              "name": "filename",
+              "value": "={{ $json.link.split('/').filter(Boolean).pop() + '.md' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        544,
+        -176
+      ],
+      "id": "3a947e75-f758-4680-812d-ded1ba2baf3f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/app/hugo/hugo/content/newspaper/{{ $json.filename }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -176
+      ],
+      "id": "4218d81b-7444-41de-9e85-c7290bce3f0a",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        992,
+        -176
+      ],
+      "id": "58eb0b8e-24e8-4002-b13c-10a9df3d2161",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 获取上一个节点 (Extract from File) 的输入数据\nconst markdownContent = $node[\"Extract from File\"].json.data;\n\n// --- 配置部分 ---\nconst AUTHOR = \"huangzuomin\";\nconst PARENT_PERMLINK = \"cn\";\nconst DEFAULT_TAGS = [\"n8n\", \"steemit\", \"ai\"];\n\n// --- 提取逻辑 ---\nlet title = \"Untitled Article\";\nlet tags = [...DEFAULT_TAGS];\nlet imageUrls = [];\nlet bodyContent = markdownContent;\nlet frontMatter = {};\n\n// 简单的 YAML Front Matter 解析（无需外部库）\nconst frontMatterDelimiter = '---';\nconst lines = markdownContent.split('\\n');\n\nif (lines[0].trim() === frontMatterDelimiter) {\n    let inFrontMatter = true;\n    let frontMatterLines = [];\n    let bodyStartIndex = 1;\n\n    for (let i = 1; i < lines.length; i++) {\n        if (lines[i].trim() === frontMatterDelimiter) {\n            inFrontMatter = false;\n            bodyStartIndex = i + 1;\n            break;\n        }\n        frontMatterLines.push(lines[i]);\n    }\n\n    if (!inFrontMatter) {\n        // 简单解析 YAML（支持基本的 key: value 和数组格式）\n        const yamlString = frontMatterLines.join('\\n');\n        try {\n            frontMatter = parseSimpleYaml(yamlString);\n        } catch (e) {\n            console.error(\"Error parsing YAML Front Matter:\", e);\n        }\n        bodyContent = lines.slice(bodyStartIndex).join('\\n').trim();\n    } else {\n        bodyContent = markdownContent;\n    }\n} else {\n    bodyContent = markdownContent;\n}\n\n/**\n * 简单的 YAML 解析函数，支持基本的键值对和数组格式\n * @param {string} yamlString - 要解析的YAML字符串\n * @returns {object} 解析后的对象\n */\nfunction parseSimpleYaml(yamlString) {\n    const result = {};\n    const lines = yamlString.split('\\n');\n    let currentKey = null;\n    let currentArray = null;\n    \n    for (let i = 0; i < lines.length; i++) {\n        const line = lines[i];\n        const trimmedLine = line.trim();\n        \n        // 跳过空行和注释\n        if (!trimmedLine || trimmedLine.startsWith('#')) {\n            continue;\n        }\n        \n        // 检查是否是数组项（以 - 开头）\n        if (trimmedLine.startsWith('- ')) {\n            if (currentArray && currentKey) {\n                let value = trimmedLine.substring(2).trim();\n                // 移除引号\n                if ((value.startsWith('\"') && value.endsWith('\"')) || \n                    (value.startsWith(\"'\") && value.endsWith(\"'\"))) {\n                    value = value.slice(1, -1);\n                }\n                currentArray.push(value);\n            }\n            continue;\n        }\n        \n        // 检查是否是键值对\n        const colonIndex = trimmedLine.indexOf(':');\n        if (colonIndex === -1) continue;\n        \n        const key = trimmedLine.substring(0, colonIndex).trim();\n        let value = trimmedLine.substring(colonIndex + 1).trim();\n        \n        // 如果值为空，可能是数组的开始\n        if (!value) {\n            currentKey = key;\n            currentArray = [];\n            result[key] = currentArray;\n            continue;\n        }\n        \n        // 重置数组状态\n        currentKey = null;\n        currentArray = null;\n        \n        // 移除引号\n        if ((value.startsWith('\"') && value.endsWith('\"')) || \n            (value.startsWith(\"'\") && value.endsWith(\"'\"))) {\n            value = value.slice(1, -1);\n        }\n        \n        // 处理方括号格式的数组\n        if (value.startsWith('[') && value.endsWith(']')) {\n            const arrayContent = value.slice(1, -1);\n            if (arrayContent.trim()) {\n                result[key] = arrayContent.split(',').map(item => {\n                    let trimmed = item.trim();\n                    if ((trimmed.startsWith('\"') && trimmed.endsWith('\"')) || \n                        (trimmed.startsWith(\"'\") && trimmed.endsWith(\"'\"))) {\n                        trimmed = trimmed.slice(1, -1);\n                    }\n                    return trimmed;\n                });\n            } else {\n                result[key] = [];\n            }\n        } else {\n            result[key] = value;\n        }\n    }\n    \n    return result;\n}\n\n// 其余代码保持不变...\nif (frontMatter.title) {\n    title = frontMatter.title;\n}\n\nif (frontMatter.tags) {\n    let extractedTags = [];\n    if (Array.isArray(frontMatter.tags)) {\n        extractedTags = frontMatter.tags.map(tag => String(tag).toLowerCase());\n    } else if (typeof frontMatter.tags === 'string') {\n        extractedTags = frontMatter.tags.split(',').map(tag => tag.trim().toLowerCase());\n    }\n    // 使用提取的标签替换默认标签，而不是合并\n    tags = extractedTags.length > 0 ? extractedTags : DEFAULT_TAGS;\n}\n\nif (frontMatter.featured_image) {\n    imageUrls = [frontMatter.featured_image];\n}\n\nconst finalParentPermlink = tags.length > 0 ? tags[0] : PARENT_PERMLINK;\n\nlet permlink = title\n    .toLowerCase()\n    .replace(/[^\\w\\s-]/g, '')\n    .replace(/\\s+/g, '-')\n    .replace(/^-+|-+$/g, '');\n\npermlink = permlink + '-' + Date.now().toString(36).substring(0, 5);\n\nconst jsonMetadata = {\n    tags: tags,\n    app: \"n8n-steemit-publisher/1.0.0\",\n    format: \"markdown+html\"\n};\n\nif (imageUrls.length > 0) {\n    jsonMetadata.image = imageUrls;\n}\n\nif (frontMatter.summary) {\n    jsonMetadata.description = frontMatter.summary;\n}\nif (frontMatter.date) {\n    jsonMetadata.date = frontMatter.date;\n}\nif (frontMatter.main_topics) {\n    jsonMetadata.main_topics = frontMatter.main_topics;\n}\n\nconst outputData = {\n    author: AUTHOR,\n    permlink: permlink,\n    parent_permlink: finalParentPermlink,\n    title: title,\n    body: bodyContent,\n    tags: tags,\n    json_metadata: JSON.stringify(jsonMetadata)\n};\n\nreturn [{ json: outputData }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        -176
+      ],
+      "id": "87f80632-b3a2-48aa-b2d1-e9d028d8b519",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.50.247:8000/articles",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "x-api-key",
+              "value": "steem20251015009"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "body",
+              "value": "={{ $json.body }}"
+            },
+            {
+              "name": "tags",
+              "value": "={{ $json.tags }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1424,
+        -176
+      ],
+      "id": "8e282b73-c5a2-4d9e-8715-4f998a1c78f7",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "eGykWrMK9VLKQ500",
+          "name": "Header Authsteemit"
+        },
+        "httpBearerAuth": {
+          "id": "7G7rl6nBLPyde8jP",
+          "name": "Bearer Auth steemit"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 21
+            }
+          ]
+        }
+      },
+      "id": "63c6f7fd-136c-4430-b8d1-ad59182825e8",
+      "name": "Daily Trigger (09:00 PM)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "841f3f29-2683-4910-b09e-2564076d8c6d",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1632,
+        -176
+      ],
+      "id": "1f3c7e21-9810-4a3a-a62d-9cc2bb2e0583",
+      "name": "If1"
+    }
+  ],
+  "connections": "{\"Get RSS Feed\":{\"main\":[[{\"node\":\"XML1\",\"type\":\"main\",\"index\":0}]]},\"XML1\":{\"main\":[[{\"node\":\"Split Out1\",\"type\":\"main\",\"index\":0}]]},\"Split Out1\":{\"main\":[[{\"node\":\"If\",\"type\":\"main\",\"index\":0}]]},\"If\":{\"main\":[[{\"node\":\"Edit Fields\",\"type\":\"main\",\"index\":0}]]},\"Edit Fields\":{\"main\":[[{\"node\":\"Read/Write Files from Disk\",\"type\":\"main\",\"index\":0}]]},\"Read/Write Files from Disk\":{\"main\":[[{\"node\":\"Extract from File\",\"type\":\"main\",\"index\":0}]]},\"Extract from File\":{\"main\":[[{\"node\":\"Code1\",\"type\":\"main\",\"index\":0}]]},\"Code1\":{\"main\":[[{\"node\":\"HTTP Request\",\"type\":\"main\",\"index\":0}]]},\"Daily Trigger (09:00 PM)\":{\"main\":[[{\"node\":\"Get RSS Feed\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request\":{\"main\":[[{\"node\":\"If1\",\"type\":\"main\",\"index\":0}]]},\"If1\":{\"main\":[[],[]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "b32c4003-8f91-4594-bbf2-02dd86abc497",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-06-23 15:40:27.924",
+  "updatedAt": "2025-10-19 12:29:57",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "b32c4003-8f91-4594-bbf2-02dd86abc497"
+}

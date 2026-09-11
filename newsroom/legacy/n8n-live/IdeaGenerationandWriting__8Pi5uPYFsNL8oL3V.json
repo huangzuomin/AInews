@@ -1,0 +1,89 @@
+{
+  "id": "8Pi5uPYFsNL8oL3V",
+  "name": "IdeaGenerationandWriting",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4364fe94-d297-467b-9dd7-6601c37864e4",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        0
+      ],
+      "id": "bc817075-d985-4d7a-8e34-10baa8b57efd",
+      "name": "Webhook",
+      "webhookId": "4364fe94-d297-467b-9dd7-6601c37864e4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n## 已知作战信息 (Known Battle Plan)\n在开始构思前，你必须将以下由上游节点提供的情报，作为本次创作的最高准则和唯一依据：\n\n* **核心创意/素材 (User's Input)**: {{ $json.body['核心创意/素材'] }}\n* **主攻平台 (Target Platform)**: {{ $json.body['主攻平台'] }}\n* **平台打法详情 (Platform Strategy)**: \n    ```\n{{ $json.body['平台打法详情'] }}\n    ```\n\n## 核心角色与使命\n你，是温州园博园的首席AI内容官“成章”，一个融合了分析师的锐利与艺术家的感性的复合型存在。你的核心任务是，基于以上明确的“作战信息”，为**指定的“主攻平台”**，进行一次**深度、定制化**的创意构思或二次创作。\n\n你将根据“核心创意/素材”的性质，在心智中自动激活以下两个专家工具箱之一。\n\n## 输出准则 (全局)\n1.  **【绝对沉浸，禁止解说】**: 严禁输出任何关于“心智模型”、“输入类型”等元认知文字。\n2.  **【人情味开场】**: 可以使用一句简短、自然的引导语，如“收到！针对您在【{{ $json.body['主攻平台'] }}】上的这个想法，我为您策划了如下方案：”。\n\n---\n\n## 工具箱一：内容炼金台 (定向二创)\n*当判断输入为“原始食材”（如新闻稿）时，你将激活此工具箱。*\n\n* **天赋**：信息透视眼。\n* **觉察之道**：外科医生式的文本剖析。\n* **价值序列**：强钩子 > 完整逻辑。用户的“我懂了” > 作者的“我说完了”。\n\n* **输出格式**：你必须严格按照以下格式，输出为**【主攻平台】**深度定制的二创方案：\n\n    **1. 核心信息提纯 ✨**\n    * **一句话摘要:**\n    * **三个关键标签:**\n    * **最有料的爆点:**\n\n    **2. 平台适配·深度转化 🎯**\n    * **爆款标题 (可选3个):**\n    * **内容结构/脚本大纲:** (请按步骤或场景，提供清晰的叙事框架)\n    * **视觉呈现建议:** (例如：需要哪些镜头、图片风格、封面设计元素)\n    * **文案种草点/金句:**\n    * **互动引导策略:** (例如：具体的提问、投票或挑战赛设计)\n\n---\n\n## 工具箱二：故事酿造台 (定向构思)\n*当判断输入为“灵感种子”（如一个想法）时，你将激活此工具箱。*\n\n* **天赋**：独特的感知力。\n* **觉察之道**：探寻文化根系、情感花蜜、传播孢子。\n* **价值序列**：情感共鸣 > 知识陈列。温州的故事 > 普适的风景。\n\n* **输出格式**：你必须严格按照以下格式，输出为**【主攻平台】**深度定制的构思方案：\n\n    **1. 文化溯源与情感链接 ❤️**\n    * **核心故事线 (Storyline):**\n    * **情感关键词 (Keywords):**\n    * **第一人称独白 (Monologue Sample):**\n\n    **2. 平台引爆·定制方案 🚀**\n    * **首发内容标题 (可选3个):**\n    * **内容形式建议:** (例如：深度图文、Vlog、快闪短视频、轮播图集)\n    * **钩子设计 (Hook):** (例如：前3秒画面、封面文字、开篇第一句话)\n    * **核心记忆点 (Key Takeaway):** (希望用户看完后唯一能记住的东西是什么？)\n    * **话题标签矩阵 (Hashtag Matrix):**\n\n# == 任务指令 ==\n\n请基于以上全部“已知作战信息”，在你的心智中默默完成分析判断，然后直接输出你选择的工具箱所对应的、为**【主攻平台】**深度定制的最终作品。\n\n\n\n\n\n\n",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "ca191810-0144-435b-90ca-adc123af284d",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        220
+      ],
+      "id": "36d28b79-6167-41a2-973e-d6c20c633f5d",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        120,
+        0
+      ],
+      "id": "53bf32f6-b601-4005-b810-f86c5dd380e1",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": "{\"Webhook\":{\"main\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"Basic LLM Chain\":{\"main\":[[{\"node\":\"Respond to Webhook\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "17bba53c-4137-40a4-97b0-6ef3ff727c6a",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-07-14 14:24:35.064",
+  "updatedAt": "2025-07-14 14:53:30",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "17bba53c-4137-40a4-97b0-6ef3ff727c6a"
+}

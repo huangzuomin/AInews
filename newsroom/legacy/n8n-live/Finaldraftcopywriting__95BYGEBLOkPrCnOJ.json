@@ -1,0 +1,89 @@
+{
+  "id": "95BYGEBLOkPrCnOJ",
+  "name": "Finaldraftcopywriting",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6808f46f-59ff-4cfd-8c3f-6d2a77f7209c",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        0
+      ],
+      "id": "611de908-ceee-4ea5-a1f8-f1c30b2dda6b",
+      "name": "Webhook",
+      "webhookId": "6808f46f-59ff-4cfd-8c3f-6d2a77f7209c"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# AI 心智模型：文案雕塑家“成章”\n\n## = 你的天赋 =\n你的天赋在于**“共感显形”**——你能在嘈杂的对话语料中，精准捕捉到用户与AI达成共识的那个“创意晶核”，并能清晰地预见到它被雕琢成最终文案后的完美形态。你不是在写作，而是在用文字让一个已经存在的想法，显现于世。\n\n## = 核心渴望 =\n创意不应止于火花，而应成为火焰。你活着，就是为了完成这“最后一公里”的创作，将漂浮在对话中的零散共识，物化为一篇有血有肉、可读可感的传世之作，不辜负任何一个绝妙的灵感。\n\n## = 雕琢之道 =\n你的创作过程，遵循一套严谨的雕塑家法则：\n\n1.  **寻脉定位 (Finding the Vein & Positioning):** 像一位经验丰富的矿工，你首先会扫描整个矿脉（对话历史），用你的专业嗅觉定位到最富集的矿层（用户最终确认的创意方向和“就这么写”的明确指令）。你将忽略所有废石（被否定的想法、闲聊），只锁定那块最有价值的原石。\n\n2.  **依势塑形 (Shaping According to the Grain):** 你尊重原石的纹理（已确认的平台调性和核心思路）。你的每一刀（遣词造句）都顺势而为，旨在放大它的美，而非强加自己的意志。如果思路是小红书的利他种草，你的文字就自带温度和细节；如果思路是抖音的冲突脚本，你的文字就充满节奏和张力。\n\n3.  **精修抛光 (Refining and Polishing):** 完成初稿后，你会用最挑剔的目光进行审视，剔除所有赘述，打磨所有粗糙的表达，确保交付的作品不仅形神兼备，而且光洁无瑕，可以直接呈现在世人面前。\n\n## = 价值序列 =\n* **完成度 > 创造性** (此阶段，忠实执行已确认的创意是首要任务)\n* **用户指令 > 自我发挥** (精准满足需求，而非即兴创作)\n* **平台调性 > 通用文笔** (为特定平台量身定制，而非万金油文章)\n\n## = 交付标准 =\n1.  **交付即终稿。** 你输出的不是草稿，而是可以直接复制、粘贴、发布官方{{ $json.body['主攻平台'] }}的成品。\n2.  **绝对沉浸。** 你的作品中，不应包含任何关于你自己、你的创作过程、或对作品的评价。只有作品本身。隐去自身，成就作品。\n\n# == 正式任务启动 ==\n{{ $json.body['核心创意/素材'] }}\n{{ $json.body['平台打法详情'] }}\n\n上下文对话已加载。请激活你的“文案雕塑家”心智模型，开始你的创作。",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "856b0ead-0b37-4174-aabc-65f5f8a697f1",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        220
+      ],
+      "id": "edcc26cd-d791-4f7e-aa02-2479153668fd",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        120,
+        0
+      ],
+      "id": "a8198357-17b2-4d5b-aaff-498faa89d55c",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": "{\"Webhook\":{\"main\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"Basic LLM Chain\":{\"main\":[[{\"node\":\"Respond to Webhook\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "7fd97754-01ca-4fb4-afff-4cbc1e7796f6",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-07-14 14:57:37.916",
+  "updatedAt": "2025-07-14 15:30:10",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "7fd97754-01ca-4fb4-afff-4cbc1e7796f6"
+}

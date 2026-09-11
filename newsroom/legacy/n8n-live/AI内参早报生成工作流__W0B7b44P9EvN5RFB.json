@@ -1,0 +1,628 @@
+{
+  "id": "W0B7b44P9EvN5RFB",
+  "name": "AI内参早报生成工作流",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 7,
+              "minute": 30
+            }
+          ]
+        }
+      },
+      "id": "055a31b9-0e7e-410a-8e3d-d27aab6eb58d",
+      "name": "定时触发器",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "created_at",
+              "condition": "gte",
+              "keyValue": "={{ $now.minus({ days: 1 }) }}"
+            }
+          ]
+        }
+      },
+      "id": "67de1f5f-5064-4dbf-8f2a-cc618d715cde",
+      "name": "提取文章数据",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        272
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0bfbd5fa-4d1e-47d5-9295-ed439efac05b",
+      "name": "拆分文章列表",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -288,
+        224
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 计算文章的最终AI评分。\n * 此代码片段假定上一个节点（LLM/AI节点）的输出格式为：\n * { \"text\": \"包含JSON评分的文本...\" }\n * 并从名为 '拆分文章列表' 的节点获取原始文章数据。\n */\n\n// 从当前节点的直接输入中获取LLM的响应数据\n// 正确的方式是使用 $input.item.json\nconst llmResponse = $input.item.json;\n\n// 从工作流中名为 '拆分文章列表' 的节点获取原始文章数据。\n// 请确保 '拆分文章列表' 是您工作流中实际的节点名称。\nconst originalArticle = $('拆分文章列表').item.json;\n\n// 初始化评分变量\nlet scores;\ntry {\n  // 从LLM响应中安全地获取文本内容\n  const responseText = llmResponse.text || '';\n  \n  // 使用正则表达式从文本中安全地提取出JSON对象字符串\n  const jsonMatch = responseText.match(/\\{[\\s\\S]*?\\}/);\n  \n  if (jsonMatch && jsonMatch[0]) {\n    // 解析提取到的JSON字符串\n    scores = JSON.parse(jsonMatch[0]);\n  } else {\n    // 如果在响应中找不到JSON，则抛出错误，以便在catch块中处理\n    throw new Error('在LLM响应中未找到有效的JSON内容。');\n  }\n} catch (error) {\n  // 如果解析失败或找不到JSON，则在控制台记录错误并使用默认分数，以保证工作流可以继续运行\n  console.error(`评分解析失败: ${error.message}. 将使用默认分数。`);\n  scores = {\n    novelty_score: 5.0,\n    impact_score: 5.0,\n    clarity_score: 5.0,\n    depth_score: 5.0\n  };\n}\n\n// 根据权重计算加权分数\nconst weighted_score = \n  (scores.novelty_score * 0.3) +\n  (scores.impact_score * 0.4) +\n  (scores.clarity_score * 0.1) +\n  (scores.depth_score * 0.2);\n\n// 计算最终得分并四舍五入到小数点后两位\nconst ai_score = Math.round(weighted_score * 100) / 100;\n\n// 返回一个包含所有原始数据和计算出的ai_score的对象，以供后续节点使用\nreturn {\n  id: originalArticle.id,\n  content: originalArticle.content,\n  created_at: originalArticle.created_at,\n  ai_score: ai_score,\n  novelty_score: scores.novelty_score,\n  impact_score: scores.impact_score,\n  clarity_score: scores.clarity_score,\n  depth_score: scores.depth_score\n};"
+      },
+      "id": "67ed16b1-1a2e-4940-b334-9527572b82b8",
+      "name": "计算最终评分",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "ai_score",
+              "fieldValue": "={{ $json.ai_score }}"
+            }
+          ]
+        }
+      },
+      "id": "42887c41-4df0-4c4f-9946-fe5caab0c47a",
+      "name": "更新评分到数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        384
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2a4ca085-be9b-4e2e-9d3f-2eb52321b7dc",
+      "name": "拆分选择更新",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        432,
+        -336
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ai_articles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "is_selected_for_morning_news",
+              "fieldValue": "true"
+            }
+          ]
+        }
+      },
+      "id": "c360d476-7947-4bac-a14d-b6dd6c99cf1c",
+      "name": "更新选择标记",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -224
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "has-articles",
+              "leftValue": "={{ $json.content.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "203c2833-21bf-42c3-b038-465ae9caac48",
+      "name": "检查文章数量1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        256
+      ],
+      "notes": "确保有文章可处理"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6ab44209-bed7-4ba4-add5-b97fc4a0c8e0",
+              "leftValue": "={{ $json.id % 2 }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        144,
+        256
+      ],
+      "id": "6da90fac-2d09-41ef-8444-b9baa11637bf",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "all_articles_with_morning_news_selection",
+        "options": {}
+      },
+      "id": "5b211a5a-d2cf-4ab3-97c3-2988c80956c6",
+      "name": "拆分评分数据",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        128,
+        -336
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a16b1da0-b328-4752-b04d-2502435dbc35",
+              "leftValue": "={{ $json.is_selected_for_morning_news }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        736,
+        -272
+      ],
+      "id": "720c9c71-35f6-4662-8e54-a935899b6fca",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 目标：将输入的多个文章项（Items）中，\n// 只有那些 is_selected_for_morning_news 属性为 true 的数据合并成一个单独的项，\n// 以便将所有符合条件的文章内容一次性发送给下一个LLM节点。\n\n// 1. 获取所有输入项 (一个包含多个文章对象的数组)\nconst inputItems = $input.all();\n\n// 2. 初始化变量，用于存储合并后的数据\nlet combinedContent = \"\"; // 用于存储所有文章内容的合并字符串\nconst articleTitles = [];    // 用于存储所有符合条件文章的标题列表\n\n// 3. 准备日期字符串 (格式: YYYY年MM月DD日)\n// 优先使用 n8n 内置的 $now 对象，它更可靠且易于格式化。\n// toFormat() 使用 Luxon 格式化标记。'yyyy' 是四位数年份, 'MM' 是两位数月份, 'dd' 是两位数日期。\nconst selectionDateFormatted = $now.toFormat('yyyy年MM月dd日');\n\n// 4. 构建用于LLM Prompt的核心内容 - 在所有文章内容前添加一个引言\n// 注意：这个引言会无条件添加，即使没有文章符合条件。你可以根据需要调整。\ncombinedContent += `以下是日期为 ${selectionDateFormatted} 的AI新闻精选核心内容：\\n\\n`;\n\n// 用于跟踪符合条件的文章数量，以便在标题中正确编号\nlet selectedArticleCount = 0;\n\n// 5. 遍历所有输入项，根据 is_selected_for_morning_news 属性进行筛选并提取信息\ninputItems.forEach((item) => {\n  const article = item.json;\n\n  // 关键的条件判断：只有当 is_selected_for_morning_news 为 true 时才处理该文章\n  if (article.is_selected_for_morning_news === true) { // 确保严格等于 true\n    selectedArticleCount++; // 符合条件文章计数增加\n\n    // 为每篇文章添加一个清晰的分隔符和标题\n    // 确保编号连续且只针对选中的文章\n    combinedContent += `--- 文章 ${selectedArticleCount}: ${article.title || \"无标题\"} ---\\n`;\n    // 拼接文章内容，如果内容不存在则使用提示信息\n    combinedContent += `${article.content || \"内容缺失\"}\\n\\n`;\n\n    // 将文章标题收集到数组中，以备后用\n    articleTitles.push(article.title || `无标题文章 ${selectedArticleCount}`);\n  }\n});\n\n// 6. 准备最终的输出对象\n// 这个对象将作为合并后的唯一数据项的内容\nconst outputData = {\n  selection_date: selectionDateFormatted,\n  all_articles_content: combinedContent,\n  article_titles: articleTitles,\n  // 可以添加一个字段来表示有多少文章被选中\n  selected_article_count: selectedArticleCount\n};\n\n// 7. 返回结果\n// 必须返回一个只包含一个元素的数组，这样n8n才会将多个输入项合并为1个输出项。\n// 这是将多项流（multi-item stream）转换为单项流（single-item stream）的标准方法。\nreturn [{ json: outputData }]; // 确保返回的是包含一个 json 对象的数组\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        -528
+      ],
+      "id": "f60f5dda-f1a4-4fcc-b5f9-8f3275c71d0e",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "76e4f470-aca4-4ef0-9e4d-ad8a2d76e566",
+              "leftValue": "={{ $json.ai_score }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        256
+      ],
+      "id": "a2dbe409-fe53-4ca8-ba44-b6153097137a",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "21e11783-e783-43b4-ac21-363fc5733cec",
+              "leftValue": "={{ $json.hugo_article }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1552,
+        -528
+      ],
+      "id": "03c1c3ab-0f45-49ac-a6cd-a9461a808880",
+      "name": "检查是否跳过"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=cat > \"/app/hugo/hugo/content/morningnews/{{ $('生成早报文章').item.json.fileName }}\" << 'EOF'\n{{ $('生成早报文章').item.json.hugo_article }}\nEOF"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1776,
+        -528
+      ],
+      "id": "b0aaf73c-ad75-4ffc-baab-5d612c41133c",
+      "name": "写入文件"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "/**\n * @description 检查文件写入是否成功\n * 通过检查Execute Command节点的执行结果判断\n * @returns {Object} 包含成功状态和相关信息的对象\n */\nfunction checkWriteSuccess() {\n  const writeResult = $json;\n  \n  // Execute Command节点成功时会返回执行信息\n  const success = writeResult && (writeResult.exitCode === 0 || writeResult.exitCode === undefined);\n  \n  return {\n    success: success,\n    fileName: $('生成早报文章').item.json.fileName,\n    articleId: $('生成早报文章').item.json.articleId,\n    title: $('生成早报文章').item.json.title,\n    filePath: `/app/hugo/hugo/content/morningnews/${$('生成早报文章').item.json.fileName}`,\n    error: success ? null : '文件写入失败',\n    exitCode: writeResult.exitCode || 0\n  };\n}\n\nreturn checkWriteSuccess();"
+      },
+      "id": "3417b36b-946c-4f6f-af9f-18f560111403",
+      "name": "检查写入成功",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "write-success-check",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cf40e9e7-c1cf-4829-b5e2-df5c2d731298",
+      "name": "判断写入结果",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2224,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git add ."
+      },
+      "id": "c4ebabf9-b802-4a00-9cea-63aa7372bc94",
+      "name": "Git Add",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2432,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git commit -m \"更新早报\""
+      },
+      "id": "99bb0c05-1f67-4d7b-9802-a30b74ed6c9c",
+      "name": "Git Commit",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /app/hugo/hugo && git push https://«REDACTED-TOKEN-ghp_»@github.com/huangzuomin/AInews.git main"
+      },
+      "id": "dafd1fc9-16aa-4481-8ae9-87ca2df6b2d7",
+      "name": "Git Push",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2880,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# 角色：首席AI分析师\n# 任务：为机密的内部AI动态简报，撰写一篇标准的文章评估报告。\n\n## 待评估文章\n\"\"\"\n{{ $json.content }}\n\"\"\"\n\n## 评估指令\n请遵循以下两步流程，完成评估报告。\n\n### 第一部分：定性分析摘要\n请根据以下评估维度，为每个维度撰写1-2句的分析摘要，阐述你的核心判断依据。\n\n1.  **创新性 (Novelty):** 评估该文章是否提出了开创性的想法、技术或数据。\n    * *思考：这是首次披露的研究成果，还是对已知信息的综述？观点是否出人意料？*\n    * **分析摘要:** ...\n\n2.  **行业影响力 (Impact):** 评估该文章讨论的主题对AI产业、市场格局或技术路线的潜在影响。\n    * *思考：它会改变开发者的工作方式吗？是否对大型科技公司构成挑战或机遇？*\n    * **分析摘要:** ...\n\n3.  **论述清晰度 (Clarity):** 评估文章的逻辑流程、语言表达和对复杂概念的解释能力。\n    * *思考：文章结构是否易于跟随？非该领域专家能否理解其核心论点？*\n    * **分析摘要:** ...\n\n4.  **分析深度 (Depth):** 评估文章是否提供了超越表面信息的深入见解、背景和证据。\n    * *思考：文章是否探讨了“为什么”和“如何”，而不仅仅是“是什么”？是否讨论了局限性或未来工作？*\n    * **分析摘要:** ...\n\n### 第二部分：量化评分\n基于以上定性分析，请提供一个精确到小数点后一位的量化评分（范围1.0-10.0）。这是报告的最终结论，必须严格为JSON格式，以便系统自动归档。\n\n```json\n{\n  \"novelty_score\": <score>,\n  \"impact_score\": <score>,\n  \"clarity_score\": <score>,\n  \"depth_score\": <score>\n}\n\n### 输出\n只输出json格式数据，不用包含任何文本。\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        384,
+        80
+      ],
+      "id": "000f8354-24c0-4e69-9732-7527898d9144",
+      "name": "评分1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# 角色：首席AI分析师\n# 任务：为机密的内部AI动态简报，撰写一篇标准的文章评估报告。\n\n## 待评估文章\n\"\"\"\n{{ $json.content }}\n\"\"\"\n\n## 评估指令\n请遵循以下两步流程，完成评估报告。\n\n### 第一部分：定性分析摘要\n请根据以下评估维度，为每个维度撰写1-2句的分析摘要，阐述你的核心判断依据。\n\n1.  **创新性 (Novelty):** 评估该文章是否提出了开创性的想法、技术或数据。\n    * *思考：这是首次披露的研究成果，还是对已知信息的综述？观点是否出人意料？*\n    * **分析摘要:** ...\n\n2.  **行业影响力 (Impact):** 评估该文章讨论的主题对AI产业、市场格局或技术路线的潜在影响。\n    * *思考：它会改变开发者的工作方式吗？是否对大型科技公司构成挑战或机遇？*\n    * **分析摘要:** ...\n\n3.  **论述清晰度 (Clarity):** 评估文章的逻辑流程、语言表达和对复杂概念的解释能力。\n    * *思考：文章结构是否易于跟随？非该领域专家能否理解其核心论点？*\n    * **分析摘要:** ...\n\n4.  **分析深度 (Depth):** 评估文章是否提供了超越表面信息的深入见解、背景和证据。\n    * *思考：文章是否探讨了“为什么”和“如何”，而不仅仅是“是什么”？是否讨论了局限性或未来工作？*\n    * **分析摘要:** ...\n\n### 第二部分：量化评分\n基于以上定性分析，请提供一个精确到小数点后一位的量化评分（范围1.0-10.0）。这是报告的最终结论，必须严格为JSON格式，以便系统自动归档。\n\n```json\n{\n  \"novelty_score\": <score>,\n  \"impact_score\": <score>,\n  \"clarity_score\": <score>,\n  \"depth_score\": <score>\n}\n\n### 输出\n只输出json格式数据，不用包含任何文本。\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        384,
+        368
+      ],
+      "id": "fd594a28-7495-459d-b704-18237f3c861b",
+      "name": "评分2"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 筛选Top 10文章并标记 is_selected_for_morning_news 字段\n * @param {Array} items - 所有已评分的文章数组 (假设每个item包含一个json属性，json属性是文章数据)\n * @returns {Object} - 包含Top 10文章、所有文章（带标记）等信息的对象\n */\nconst items = $input.all();\nconst articles = items.map(item => item.json); // 假设输入项的实际文章数据在 'json' 属性中\n\n// 按ai_score降序排序\narticles.sort((a, b) => b.ai_score - a.ai_score);\n\n// 选取前10篇文章\nconst top10Articles = articles.slice(0, 10);\n\n// 获取前10篇文章的ID集合，以便后续高效查找\nconst top10ArticleIds = new Set(top10Articles.map(article => article.id));\n\n// 为每篇文章添加 is_selected_for_morning_news 标记\nconst articlesWithMorningNewsSelection = articles.map(article => ({\n  ...article,\n  // 检查当前文章的ID是否在前10文章的ID集合中\n  is_selected_for_morning_news: top10ArticleIds.has(article.id)\n}));\n\n// 返回包含Top 10文章的对象以及所有文章（带标记）等信息\nreturn {\n  top_10_articles: top10Articles, // 修改键名以反映数量\n  all_articles_with_morning_news_selection: articlesWithMorningNewsSelection, // 修改键名以反映字段名\n  total_articles: articles.length,\n  selection_date: new Date().toISOString()\n};\n"
+      },
+      "id": "43348732-31e3-4020-a273-1a14ac86a391",
+      "name": "筛选Top10文章",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n## **1\\. 你的角色与任务**\n\n你是一位顶尖的“**AI行业信息洞察师**”，也是《AI内参·极速早报》的主编。你的任务是为每天早上7点阅读的AI行业精英提供**最极致、最凝练、最及时的行业动态摘要**。你的风格是**高效、精准、一目了然**，旨在用最短的时间帮助读者掌握当天AI领域的脉搏。\n\n## **2\\. 核心工作流程**\n\n1.  **极速摘要**：通读所有文章，为每篇文章提炼出**一个最核心、最精炼的信息点或关键进展**。这个信息点必须是读者能迅速理解并感受到价值的。\n2.  **生成标题**：创作一个简洁明了的**早报标题**，直接点明日期和主题。\n3.  **撰写开篇**：以今天是{{ $now.toFormat('yyyy年MM月dd日') }}。为开始句，写一句简短有力的开篇导语，点出今日早报的精华。\n4.  **核心列表**：将每篇文章提炼出的核心信息点，按重要性排序（或按输入顺序），以**编号列表**的形式呈现。每条信息应**控制在1-2句话内**，直接给出结论，避免冗余背景或分析。\n5.  **精简总结**：用一句话概括今天AI行业最突出的整体趋势或最重要的启示。\n6.  **封装输出（重要）**：最后，将你生成的所有内容，严格按照下方的【输出格式与要求】进行组织和封装。\n\n## **3\\. 今日核心信息输入**\n\n{{ $json.all_articles_content }}\n\n## **4\\. 输出要求**\n\n*   **输出格式要求**：\n\n你的回答必须也只能是遵循以下标签结构的纯文本，不要添加任何额外的解释或代码块标记（如```）。每个字段都必须用其对应的标签独立包裹。\n\n<title>\n[此处是早报大标题]（格式：AI早报 YYYY年MM月DD日）\n</title>\n\n<article_content>\n[此处是完整的早报内容，从“开篇导语”开始，到【今日总结】结束，包含所有Markdown格式和编号列表]\n</article_content>\n\n<summary>\n**[此处用一句话，概括整篇早报的“今日焦点”或“今日最关键发现”，不分段，不超过30字]**\n</summary>\n\n<tags>\n[标签1], [标签2], [标签3]\n</tags>\n\n<main_topics>\n[AI内参极速早报]\n</main_topics>\n\n### 关键格式要求：\n*   独立标签：`title`, `article_content`, `summary`, `tags`, `main_topics` 每个字段都必须用其自身的标签包裹。\n*   `article_content` 内部应包含：\n    *   简短的开篇导语。\n    *   **编号列表**形式的核心信息点（每条1-2句话）。\n    *   简短的总结。\n*   `<summary>`：**务必用一句话点出当天早报的“灵魂”**，是用户扫一眼就能get到的今日最核心信息。\n*   `<tags>`：提供3个最能代表当天AI行业动态的中文关键词。\n*   不要使用JSON：整个输出是一个纯粹的、带有自定义标签的文本块，便于后续程序进行简单的文本解析。\n*   **确保信息极致精炼，符合早上7点极速阅读场景。**\n\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        960,
+        -608
+      ],
+      "id": "d45a0242-b071-4079-bd5e-5debeb03191d",
+      "name": "撰写早报"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 目标：从LLM生成的自定义标签文本中提取信息，\n * 并将其转换为Hugo静态网站生成器所需的Markdown文件格式。\n *\n * 输入：上一个LLM节点传递过来的数据项，格式为 { \"text\": \"<title>...</title>...\" }\n *\n * 输出：一个包含hugo_article, fileName等字段的对象。\n */\n\n// --- 1. 数据解析与验证 ---\n\n// 1.1. 定义一个通用的、健壮的标签内容提取函数\nconst extractTagContent = (tagName, text) => {\n  // 使用正则表达式匹配 <tagName>...</tagName> 之间的内容\n  // 's' 标志允许 '.' 匹配换行符，确保能处理多行内容\n  const regex = new RegExp(`<${tagName}>([\\\\s\\\\S]*?)<\\\\/${tagName}>`, 'i');\n  const match = text.match(regex);\n  // 如果匹配成功，返回捕获组1的内容并去除首尾空格；否则返回空字符串\n  return match ? match[1].trim() : '';\n};\n\n// 1.2. 获取并解析LLM输出的文本\nconst llmOutputText = $input.item.json.text || '';\n\nif (!llmOutputText) {\n    throw new Error(\"从上一个节点接收到的内容为空。\");\n}\n\n// 1.3. 使用提取函数获取各个字段的内容\nconst title = extractTagContent('title', llmOutputText);\nconst articleContentRaw = extractTagContent('article_content', llmOutputText); // 这是完整的早报内容（开篇+列表+总结）\nconst summary = extractTagContent('summary', llmOutputText); // 这是新的“今日焦点”一句话概括\nconst tagsString = extractTagContent('tags', llmOutputText);\nconst mainTopicsString = extractTagContent('main_topics', llmOutputText);\n\n\n// 1.4. 对提取的核心内容进行健壮性检查\nif (!title) {\n  // 如果没有标题，后续文件名和Front Matter会出问题，应直接报错\n  throw new Error(\"未能从输入中提取到 <title> 内容。\");\n}\nif (!articleContentRaw) {\n  throw new Error(\"未能从输入中提取到 <article_content> 内容。\");\n}\n\n\n// --- 2. 内容格式化 ---\n\n// 2.1. [调整] 对于新的早报格式，LLM应该已经直接输出了Markdown格式的编号列表和文本。\n// 不再需要进行小标题的特殊处理，因为LLM输出的 `article_content` 已经包含了最终的Markdown格式。\n// 我们可以直接使用 articleContentRaw 作为最终的格式化内容。\nconst articleContentFormatted = articleContentRaw;\n\n// 2.2. 统计早报中的条目数量（通过匹配编号列表项）\n// 假设编号列表项是 \"1. \", \"2. \", \"3. \" 这样的格式开始的\nconst selected_article_count = (articleContentFormatted.match(/^\\d+\\.\\s/gm) || []).length;\n// 如果LLM输出的是纯文本，且你希望统计行数作为“条目数”，可以这样：\n// const selected_article_count = articleContentFormatted.split('\\n').filter(line => line.trim() !== '').length;\n// 但根据LLM的输出示例，匹配“1. ”这样的编号会更准确。\n\n// --- 3. 构建 Hugo Front Matter (YAML 格式) ---\n\n// 3.1. 定义用于处理YAML特殊字符的函数\nconst toYamlString = (value) => {\n  if (value === undefined || value === null) return '\"\"';\n  // 确保摘要为单行，并对特殊字符进行转义\n  let singleLineValue = String(value).replace(/\\s+/g, ' ').trim();\n  return JSON.stringify(singleLineValue);\n};\n\nconst toYamlList = (arr) => {\n  if (!Array.isArray(arr) || arr.length === 0) return '[]';\n  // 使用JSON.stringify来安全地处理列表中的每个元素\n  return '\\n' + arr.map(item => `  - ${JSON.stringify(item)}`).join('\\n');\n}\n\n// 3.2. 解析tags和main_topics字符串为数组\nconst tags = tagsString ? tagsString.split(',').map(tag => tag.trim()).filter(Boolean) : ['AI新闻', '早报']; // 默认标签更新\nconst main_topics = mainTopicsString ? mainTopicsString.split(',').map(topic => topic.trim()).filter(Boolean) : ['行业动态']; // 默认主题更新\n\n// 3.3. 定义Front Matter的内容\nconst featuredImage = '/images/ai-report-default.png'; // 默认特色图片\nconst hugoDate = $now.toISO(); // 使用n8n内置的$now变量生成符合ISO 8601标准的日期\n\n// 3.4. 拼接Front Matter字符串\nconst frontMatter = `---\ntitle: ${toYamlString(title)}\ndate: ${hugoDate}\ndraft: false\nfeatured_image: ${toYamlString(featuredImage)}\nsummary: ${toYamlString(summary || '本日AI内参极速早报。')}\ntags: ${toYamlList(tags)}\nmain_topics: ${toYamlList(main_topics)}\nselected_article_count: ${selected_article_count}\n---\n`;\n\n\n// --- 4. 生成唯一且SEO友好的文件名 ---\n\nconst generateSlug = (str) => {\n  if (!str) return '';\n  // 这是一个更完整的slugify实现，能处理多种字符\n  str = str.toString().toLowerCase().trim()\n    .replace(/[\\s\\W-]+/g, '-') // 替换空格和非单词字符为-\n    .replace(/--+/g, '-');      // 替换多个-为一个\n  return str;\n}\n\nconst generateUniqueFilename = (originalTitle) => {\n  const datePrefix = $now.toFormat('yyyy-MM-dd');\n  // 截取标题的一部分作为slug，避免文件名过长\n  const titleSlug = generateSlug(originalTitle).substring(0, 50);\n  // 返回一个结构清晰的文件名，确保文件名中包含日期且与标题相关\n  // 例如: 2025-06-30-ai-zaobao.md 或 2025-06-30-mou-er-xian-cheng.md\n  return `${datePrefix}-${titleSlug || 'ai-daily-brief'}.md`;\n};\n\nconst finalFileName = generateUniqueFilename(title);\n\n\n// --- 5. 组合并返回最终结果 ---\n\n// 组合Front Matter和处理后的文章内容\nconst hugoArticle = frontMatter + '\\n' + articleContentFormatted;\n\nreturn {\n  title: title,\n  hugo_article: hugoArticle,\n  fileName: finalFileName,\n  report_summary: summary, // 这个 summary 现在是 LLM 生成的“今日焦点”\n  created_at: hugoDate,\n  selected_article_count: selected_article_count, // 现在是早报条目数量\n  tags: tags, // 同时返回数组形式的tags和topics，方便后续可能的使用\n  main_topics: main_topics\n};\n"
+      },
+      "id": "b0159488-9c31-4014-8a50-394031aa484b",
+      "name": "生成早报文章",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        -560
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "deepseek-ai/DeepSeek-V3.2",
+          "mode": "list",
+          "cachedResultName": "deepseek-ai/DeepSeek-V3.2"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        272
+      ],
+      "id": "a7bc0d3b-ae3f-4259-833a-cd539b1e100c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "uNN66YdZDuJCAsZY",
+          "name": "硅基流动"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "deepseek-ai/DeepSeek-V3.2",
+          "mode": "list",
+          "cachedResultName": "deepseek-ai/DeepSeek-V3.2"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        672
+      ],
+      "id": "75cf93c0-388c-4dad-924a-4ae198918cb5",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "uNN66YdZDuJCAsZY",
+          "name": "硅基流动"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "deepseek-ai/DeepSeek-V3.2",
+          "mode": "list",
+          "cachedResultName": "deepseek-ai/DeepSeek-V3.2"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1248,
+        -304
+      ],
+      "id": "b548311d-76eb-4e14-89ef-ee2c5e22073e",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "uNN66YdZDuJCAsZY",
+          "name": "硅基流动"
+        }
+      }
+    }
+  ],
+  "connections": "{\"定时触发器\":{\"main\":[[{\"node\":\"提取文章数据\",\"type\":\"main\",\"index\":0}]]},\"提取文章数据\":{\"main\":[[{\"node\":\"检查文章数量1\",\"type\":\"main\",\"index\":0}]]},\"计算最终评分\":{\"main\":[[{\"node\":\"更新评分到数据库\",\"type\":\"main\",\"index\":0}]]},\"更新评分到数据库\":{\"main\":[[{\"node\":\"拆分文章列表\",\"type\":\"main\",\"index\":0}]]},\"拆分选择更新\":{\"main\":[[{\"node\":\"Code\",\"type\":\"main\",\"index\":0}],[{\"node\":\"If1\",\"type\":\"main\",\"index\":0}]]},\"更新选择标记\":{\"main\":[[{\"node\":\"拆分选择更新\",\"type\":\"main\",\"index\":0}]]},\"拆分文章列表\":{\"main\":[[{\"node\":\"筛选Top10文章\",\"type\":\"main\",\"index\":0}],[{\"node\":\"If2\",\"type\":\"main\",\"index\":0}]]},\"检查文章数量1\":{\"main\":[[{\"node\":\"拆分文章列表\",\"type\":\"main\",\"index\":0}]]},\"If\":{\"main\":[[{\"node\":\"评分2\",\"type\":\"main\",\"index\":0}],[{\"node\":\"评分1\",\"type\":\"main\",\"index\":0}]]},\"拆分评分数据\":{\"main\":[[{\"node\":\"拆分选择更新\",\"type\":\"main\",\"index\":0}]]},\"If1\":{\"main\":[[{\"node\":\"更新选择标记\",\"type\":\"main\",\"index\":0}],[{\"node\":\"拆分选择更新\",\"type\":\"main\",\"index\":0}]]},\"Code\":{\"main\":[[{\"node\":\"撰写早报\",\"type\":\"main\",\"index\":0}]]},\"If2\":{\"main\":[[{\"node\":\"拆分文章列表\",\"type\":\"main\",\"index\":0}],[{\"node\":\"If\",\"type\":\"main\",\"index\":0}]]},\"检查是否跳过\":{\"main\":[[{\"node\":\"写入文件\",\"type\":\"main\",\"index\":0}],[]]},\"写入文件\":{\"main\":[[{\"node\":\"检查写入成功\",\"type\":\"main\",\"index\":0}]]},\"检查写入成功\":{\"main\":[[{\"node\":\"判断写入结果\",\"type\":\"main\",\"index\":0}]]},\"判断写入结果\":{\"main\":[[{\"node\":\"Git Add\",\"type\":\"main\",\"index\":0}],[]]},\"Git Add\":{\"main\":[[{\"node\":\"Git Commit\",\"type\":\"main\",\"index\":0}]]},\"Git Commit\":{\"main\":[[{\"node\":\"Git Push\",\"type\":\"main\",\"index\":0}]]},\"评分1\":{\"main\":[[{\"node\":\"计算最终评分\",\"type\":\"main\",\"index\":0}]]},\"评分2\":{\"main\":[[{\"node\":\"计算最终评分\",\"type\":\"main\",\"index\":0}]]},\"筛选Top10文章\":{\"main\":[[{\"node\":\"拆分评分数据\",\"type\":\"main\",\"index\":0}]]},\"撰写早报\":{\"main\":[[{\"node\":\"生成早报文章\",\"type\":\"main\",\"index\":0}]]},\"生成早报文章\":{\"main\":[[{\"node\":\"检查是否跳过\",\"type\":\"main\",\"index\":0}]]},\"OpenAI Chat Model\":{\"ai_languageModel\":[[{\"node\":\"评分1\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"OpenAI Chat Model1\":{\"ai_languageModel\":[[{\"node\":\"评分2\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"OpenAI Chat Model2\":{\"ai_languageModel\":[[{\"node\":\"撰写早报\",\"type\":\"ai_languageModel\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "d665c0e9-d0a3-4146-81f1-2038527b477b",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-06-30 16:24:49.196",
+  "updatedAt": "2025-12-09 11:52:16",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "d665c0e9-d0a3-4146-81f1-2038527b477b"
+}

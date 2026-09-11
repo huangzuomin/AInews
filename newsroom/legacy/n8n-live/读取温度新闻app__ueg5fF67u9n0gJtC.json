@@ -1,0 +1,246 @@
+{
+  "id": "ueg5fF67u9n0gJtC",
+  "name": "读取温度新闻app",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        -160
+      ],
+      "id": "ab96cd78-7917-49a4-849c-a4a496f527be",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a8ee557b99b71013\",\n    \"app_secret\": \"luC0sWUezRbmjny2CjwOfR1agVfUnDDy\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -700,
+        -160
+      ],
+      "id": "cf73e39d-445c-4970-a3e1-d0b81639ae58",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "url": "https://open.feishu.cn/open-apis/bitable/v1/apps/GO53b2ksiax3kbsglQBchVRencg/tables/tblSprV3ej4yDvV0/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.app_access_token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -540,
+        -160
+      ],
+      "id": "b350f2ff-caa8-4488-9594-f1f433eaa343",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -120,
+        -240
+      ],
+      "id": "47278e42-eabc-41f3-a3a6-9084f8c8b3c4",
+      "name": "处理全部信息源"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7ba0920-c5bf-4dbf-b2f5-7bd93f8bb9c8",
+              "leftValue": "={{ $json.pubTime }}",
+              "rightValue": "={{ new Date(new Date().getTime() - 12 * 60 * 60 * 1000) }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "afterOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        60,
+        -380
+      ],
+      "id": "2633c60a-a47a-464e-9417-d7e430adb941",
+      "name": "If - Within 0.5 Hours"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Split Out RSS 2.0 Feed').item.json.fields.url.link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        140,
+        -160
+      ],
+      "id": "9ea373fa-a940-4a52-bf1a-a25101ad4fae",
+      "name": "获取RSS内容",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.items",
+        "options": {}
+      },
+      "id": "cd4b660e-1e91-42b3-b983-6fd68a699d1a",
+      "name": "Split Out RSS 2.0 Feed",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2fa1fb8a-0aab-4d2c-91cb-269623905a65",
+      "name": "格式化RSS内容",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        160,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "faa64e8d-dbad-4317-a905-0b814cdc8789",
+              "leftValue": "={{ $json.fields[\"有效\"] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -280,
+        60
+      ],
+      "id": "a5395d12-84ac-45aa-8dfd-675785a5baac",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "docs.list",
+        "options": {}
+      },
+      "id": "9ddb3724-60c8-4697-a44b-7d49b64ee843",
+      "name": "内容格式化",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "url": "= {{ $json.docUrl }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "mercuryapi050702"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -460
+      ],
+      "id": "bb1dffb1-77c3-443d-b15c-2e256e2e09ba",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// ... （htmlContent 的获取部分保持不变）\n\n// 1. 使用正则表达式匹配 newsPage 函数中的 dataObj\n// 注意：这个正则表达式需要匹配 `dataObj: { ... }` 这一整个部分\n// 并捕获 `{ ... }` 内部的 JSON 字符串\nconst regex = /new newsPage\\(.*?,\\s*\\{[\\s\\S]*?dataObj:\\s*(\\{[\\s\\S]*?\\})\\s*\\}\\);/; // <--- 替换为这个新的正则表达式\n\nconst match = htmlContent.match(regex);\n\n// ... （后续的 console.log 和 JSON.parse 逻辑保持不变）\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        -460
+      ],
+      "id": "485ccede-fe41-4560-9a10-a3233f303fe1",
+      "name": "Code"
+    }
+  ],
+  "connections": "{\"When clicking ‘Execute workflow’\":{\"main\":[[{\"node\":\"HTTP Request\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request\":{\"main\":[[{\"node\":\"HTTP Request1\",\"type\":\"main\",\"index\":0}]]},\"处理全部信息源\":{\"main\":[[{\"node\":\"If - Within 0.5 Hours\",\"type\":\"main\",\"index\":0}],[{\"node\":\"获取RSS内容\",\"type\":\"main\",\"index\":0}]]},\"获取RSS内容\":{\"main\":[[{\"node\":\"内容格式化\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request1\":{\"main\":[[{\"node\":\"Split Out RSS 2.0 Feed\",\"type\":\"main\",\"index\":0}]]},\"Split Out RSS 2.0 Feed\":{\"main\":[[{\"node\":\"If\",\"type\":\"main\",\"index\":0}]]},\"格式化RSS内容\":{\"main\":[[]]},\"If\":{\"main\":[[{\"node\":\"处理全部信息源\",\"type\":\"main\",\"index\":0}]]},\"内容格式化\":{\"main\":[[{\"node\":\"处理全部信息源\",\"type\":\"main\",\"index\":0}]]},\"If - Within 0.5 Hours\":{\"main\":[[{\"node\":\"HTTP Request2\",\"type\":\"main\",\"index\":0}]]},\"HTTP Request2\":{\"main\":[[{\"node\":\"Code\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "ff7a9c01-03b2-4c48-9c77-f5e3517728c2",
+  "triggerCount": 0,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2025-07-02 08:41:24.849",
+  "updatedAt": "2025-07-04 02:53:09",
+  "isArchived": 0,
+  "versionCounter": 1,
+  "description": null,
+  "activeVersionId": null
+}

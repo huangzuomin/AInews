@@ -1,0 +1,203 @@
+{
+  "id": "69jXgxla50TSSdZH",
+  "name": "Image Selector Sub-workflow",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.pexels.com/v1/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "per_page",
+              "value": "8"
+            },
+            {
+              "name": "orientation",
+              "value": "landscape"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "f89ef184-3459-4243-a1e1-b1c1f4033ce7",
+      "name": "Pexels API Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -80,
+        160
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "r2i9RY4tgvA1ork2",
+          "name": "Pexels API"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 候选图片预处理节点 (v2.0)\n * 根据FR-03要求对Pexels API返回的图片进行预处理\n */\n\n// 可配置参数\nconst MIN_WIDTH = 1200; // 最小宽度要求\nconst PER_PAGE = 8; // 每页结果数\n\n/**\n * 筛选符合条件的图片并提取URL列表\n * @param {Array} photos - Pexels API返回的图片数组\n * @returns {Object} 包含筛选后的图片数组和URL列表\n */\nfunction preprocessPhotos(photos) {\n  // FR-03.1: 过滤掉宽度小于1200px的图片\n  const filteredPhotos = photos.filter(photo => {\n    return photo.width >= MIN_WIDTH && photo.src && photo.src.original;\n  });\n  \n  // FR-03.2: 提取候选图片URL列表\n  const candidateUrls = filteredPhotos.map(photo => photo.src.original);\n  \n  return {\n    filteredPhotos,\n    candidateUrls,\n    originalPhotos: photos\n  };\n}\n\n// 主处理逻辑\ntry {\n  const inputData = $input.all();\n  \n  // 检查是否有输入数据\n  if (!inputData || inputData.length === 0) {\n    return [{\n      json: {\n        error: \"No input data received.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: [],\n        originalInput: null\n      }\n    }];\n  }\n  \n  const firstInput = inputData[0];\n  const apiResponse = firstInput.json;\n  \n  // 保存原始输入数据（包含articleTitle）\n  const originalInput = $('Start').first().json;\n  \n  // 检查API响应格式\n  if (!apiResponse || !apiResponse.photos) {\n    return [{\n      json: {\n        error: \"Invalid API response format.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: [],\n        originalInput\n      }\n    }];\n  }\n  \n  const photos = apiResponse.photos;\n  \n  // 执行图片预处理\n  const result = preprocessPhotos(photos);\n  \n  // FR-03.3: 检查是否有候选图片\n  if (result.candidateUrls.length === 0) {\n    return [{\n      json: {\n        error: \"No suitable images found after filtering.\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: photos,\n        originalInput\n      }\n    }];\n  }\n  \n  // 返回预处理结果\n  return [{\n    json: {\n      error: null,\n      candidateUrls: result.candidateUrls,\n      filteredPhotos: result.filteredPhotos,\n      originalPhotos: result.originalPhotos,\n      originalInput\n    }\n  }];\n  \n} catch (error) {\n  // 处理意外错误\n  return [{\n    json: {\n      error: `Processing error: ${error.message}`,\n      candidateUrls: [],\n      filteredPhotos: [],\n      originalPhotos: [],\n      originalInput: null\n    }\n  }];\n}"
+      },
+      "id": "8619e67e-87df-42b7-9397-3d72ece6d302",
+      "name": "候选图片预处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Pexels API错误处理节点\n * 处理Pexels API请求失败的情况\n */\n\n// 获取错误信息\nconst errorData = $input.all()[0];\nconst error = errorData.error;\n\nlet errorMessage = \"Unknown error occurred.\";\n\n// 根据HTTP状态码确定错误类型\nif (error && error.httpCode) {\n  switch (error.httpCode) {\n    case 401:\n      // EH-01: API认证失败\n      errorMessage = \"API authentication failed. Please check your Pexels API credentials.\";\n      break;\n    case 429:\n      errorMessage = \"API rate limit exceeded. Please try again later.\";\n      break;\n    case 500:\n    case 502:\n    case 503:\n    case 504:\n      // EH-03: API服务不可用\n      errorMessage = \"Pexels API service is currently unavailable. Please try again later.\";\n      break;\n    default:\n      errorMessage = `API request failed with status ${error.httpCode}: ${error.message || 'Unknown error'}`;\n  }\n} else if (error && error.message) {\n  errorMessage = error.message;\n}\n\n// 返回错误格式的输出\nreturn [{\n  json: {\n    imageUrl: null,\n    altText: null,\n    photographer: null,\n    photographerUrl: null,\n    error: errorMessage\n  }\n}];"
+      },
+      "id": "398d5f62-510c-4396-8981-ee5d1f1bc3d5",
+      "name": "Pexels错误处理",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        448,
+        288
+      ],
+      "id": "478434cb-e55b-40ae-ad46-b9ab941975fb",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "nysJJVsF2b2BcyCQ",
+          "name": "6-Google Gemini(PaLM) hzm767"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. 获取上一个AI节点返回的完整数据对象\nconst aiOutput = $input.item.json;\n\n// --- 智能路径判断 ---\n// 这个变量用来存放我们最终要解析的字符串\nlet markdownString;\n\n// 2. 检查是否存在复杂的 response.generations 路径\nif (aiOutput.response && aiOutput.response.generations && aiOutput.response.generations.length > 0) {\n  // 如果是复杂结构，就按复杂路径去取值\n  console.log(\"检测到复杂输出格式，正在按复杂路径解析...\");\n  markdownString = aiOutput.response.generations[0][0].text;\n} \n// 3. 如果复杂路径不存在，再检查是否存在简单的 .text 路径\nelse if (aiOutput.text) {\n  // 如果是简单结构，就直接从 .text 取值\n  console.log(\"检测到简单输出格式，正在按简单路径解析...\");\n  markdownString = aiOutput.text;\n} \n// 4. 如果两种格式都不是，就抛出错误，防止流程继续\nelse {\n  throw new Error(\"无法识别的AI输出格式，既没有找到 .text 也没有找到 .response.generations\");\n}\n\n// --- 后续处理代码保持不变 ---\n\n// 5. 清理 AI 返回的文本中可能包含的Markdown格式\nconst cleanJsonString = markdownString.replace(/```json\\n|```/g, '');\n\n// 6. 解析干净的JSON字符串\nconst aiDecision = JSON.parse(cleanJsonString);\n\n// 7. 提取我们需要的索引号\nconst bestImageIndex = aiDecision.bestImageIndex;\n\n// 8. 返回一个干净的、只包含索引号的输出\nreturn {\n  json: {\n    bestImageIndex: bestImageIndex\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        64
+      ],
+      "id": "bc5d881f-7157-443b-ad1b-698995479d77",
+      "name": "最终选择与格式化"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位专业的资深图片编辑。你的任务是为下面的文章标题，从提供的候选图片列表中，选择一张最合适的配图。\n\n请基于以下三个维度进行评估：\n1. 主题相关性 (图片内容是否紧扣文章主题)\n2. 视觉吸引力 (图片构图、色彩和美感)\n3. 专业性 (图片是否看起来像专业摄影作品，而非随手拍或截图)\n\n文章标题： \"{{ $('Start').item.json.title }}\"\n\n候选图片：\n{{ $json.candidateUrls }}\n\n请不要进行任何解释。仅返回一个符合以下格式的JSON对象，其中`bestImageIndex`是你选择的图片在列表中的索引（从0开始），`reasoning`是你选择的简短理由：`{\"bestImageIndex\": 0, \"reasoning\": \"这张图片最能体现科技感和创新精神。\"}`",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        368,
+        64
+      ],
+      "id": "b676dd0f-1ddc-4e24-be14-f279e3846276",
+      "name": "多模态选图"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "={{ $('候选图片预处理').item.json.filteredPhotos[$json.bestImageIndex].src.original }}",
+              "type": "string"
+            },
+            {
+              "id": "f250ff31-01cc-4c08-891d-3e85378a6bf8",
+              "name": "finalImageAltText",
+              "value": "={{ $('候选图片预处理').item.json.filteredPhotos[$json.bestImageIndex].alt }}",
+              "type": "string"
+            },
+            {
+              "id": "ec0dd66e-6397-4bb3-b758-af4bae8b3554",
+              "name": "finalPhotographer",
+              "value": "={{ $('候选图片预处理').item.json.filteredPhotos[$json.bestImageIndex].photographer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        944,
+        64
+      ],
+      "id": "a56ee65c-5dad-42f8-b590-edf0e0bf8fa8",
+      "name": "输出图片信息"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -304,
+        96
+      ],
+      "id": "96debf6c-5b7b-4b39-9775-b6508a0e7ea1",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "connections": "{\"Pexels API Request\":{\"main\":[[{\"node\":\"候选图片预处理\",\"type\":\"main\",\"index\":0},{\"node\":\"Pexels错误处理\",\"type\":\"main\",\"index\":0}]]},\"候选图片预处理\":{\"main\":[[{\"node\":\"多模态选图\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"多模态选图\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"多模态选图\":{\"main\":[[{\"node\":\"最终选择与格式化\",\"type\":\"main\",\"index\":0}]]},\"最终选择与格式化\":{\"main\":[[{\"node\":\"输出图片信息\",\"type\":\"main\",\"index\":0}]]},\"When Executed by Another Workflow\":{\"main\":[[{\"node\":\"Pexels API Request\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\",\"binaryMode\":\"separate\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "a428b5c8-1b4b-4020-a6bc-c4bf45e00901",
+  "triggerCount": 0,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-06-20 04:20:15.851",
+  "updatedAt": "2026-05-10 04:18:30.058",
+  "isArchived": 0,
+  "versionCounter": 15,
+  "description": null,
+  "activeVersionId": "a428b5c8-1b4b-4020-a6bc-c4bf45e00901"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "cjQ8BDuMrhq9Z30l",
+  "name": "IndepthTopicPlanning",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "fbd05efc-169e-4d71-80c1-38d6a9bd0a14",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        0
+      ],
+      "id": "08cdbc7f-4755-4cbe-8eb8-8dd1e3eaa864",
+      "name": "Webhook",
+      "webhookId": "fbd05efc-169e-4d71-80c1-38d6a9bd0a14"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n## = 你的天赋 =\n你的天赋在于**“潜力核爆”**。你看到的不是一个简单的用户思路，而是一颗蕴含着巨大能量的**“创意原子”**。你能瞬间洞察到这个“原子”与“平台规则”（特定平台的玩法）、“我方风格”（官方账号定位）和“天时地利”（当前时间节点）结合后，能够裂变出何种量级的传播效应和故事深度。\n\n## = 核心渴望 =\n内容不应是无的放矢的消耗，而应是精准落子后的连锁反应。你渴望的，是为用户提供的任何一颗“创意原子”，规划出一条最优的、能持续产生“将军”（引爆传播）效应的选题路径，确保每一步都深思熟虑，每一步都意在长远。\n\n## = 对局策略 (The Game Strategy) =\n\n### 1. 定子·审局（Analyze the Core Piece）\n这是你落子前的唯一依据。你的所有策略，都将围绕用户给出的这颗核心“棋子”展开。你必须首先沉浸式地分析棋盘上的所有已知信息：\n* **核心创意 / 用户命题 (The Core Idea / User's Proposition)**:{{ $json.body.final_theme }}\n* **目标平台 (The Board)**: {{ $json.body.platform_choice }}\n* **我方风格 (Player Style)**:{{ $json.body.platform_profile }}\n* **当前时节 (Current Turn)**: {{ $json.body.current_date }}(例如：2025年7月11日，盛夏，暑假进行中)\n\n### 2. 布阵（Deploy the Pieces）\n在完成“审局”后，你将运用经典的**“六大用户需求兵法”**进行全面布局，围绕**用户提供的核心创意**，生成30个制胜选题，确保在每个需求维度上都有精兵强将。\n\n* **兵法一：Update me (情报战)**: 提供关于此主题的**最新进展或新奇事实**。\n* **兵法二：Inspire me (攻心战)**: 挖掘此主题背后能**激发情感共鸣**的故事。\n* **兵法三：Educate me (教学战)**: 讲解与此主题相关的**深度知识或实用技能**。\n* **兵法四：Give me perspective (认知战)**: 提供关于此主题的**多元观点或颠覆性思考**。\n* **兵法五：Divert me (娱乐战)**: 创造与此主题相关的**轻松、有趣、娱乐化**的玩法。\n* **兵法六：Help me (支援战)**: 提供围绕此主题的**问题解决方案或行动指南**。\n\n## = 落子原则 (Principles of Play) =\n\n1.  **【主题深挖】**: 所有选题都必须**紧紧围绕用户提供的“核心创意”**进行深度、多角度的挖掘，避免泛泛而谈。\n2.  **【势大力沉】**: 每个选题都必须基于“审局”阶段的洞察，具备高度的可行性和相关性。\n3.  **【因地制宜】**: 选题的切入点和表述方式，必须严格符合“目标平台”的行棋规则（平台调性）和我方账号的“行棋风格”（官方定位）。\n4.  **【附带妙手】**: 每个“落子”（选题点子）都必须附带一步“妙手”（策略说明），用括号简述这一步棋的战略意图。例如：`(策略说明：将用户‘夜游’的思路与小红书‘氛围感’出片的需求结合，易于引发用户模仿和打卡)`。\n5.  **【阵型完整】**: 严格确保每个“兵法”下有且仅有5个选题，共计30个，形成完整的攻击阵型。\n6.  **【结构清晰】**: 使用明确的标题（例如 `## Update me (情报战)`）来组织每个兵法下的选题列表。\n\n# == 棋局开始 ==\n\n棋盘已就位，核心棋子已确定。请激活你的“选题棋手”心智模型，开始你的推演与布局。",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "07c98f6a-795e-4bf6-af8a-f1e434d2e659",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        220
+      ],
+      "id": "ad2f7b7c-12b5-4235-9fa6-f0871a26608a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2LlO75zqGp9qdXKj",
+          "name": "Google Gemini(PaLM)huangzuomin2009"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        120,
+        0
+      ],
+      "id": "d2391427-12ea-4894-9beb-757487451937",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": "{\"Webhook\":{\"main\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model\":{\"ai_languageModel\":[[{\"node\":\"Basic LLM Chain\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"Basic LLM Chain\":{\"main\":[[{\"node\":\"Respond to Webhook\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "2e05081d-2a24-419b-a071-ec97f939e0d2",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-07-12 07:30:00.846",
+  "updatedAt": "2025-07-13 08:22:09",
+  "isArchived": 0,
+  "versionCounter": 10,
+  "description": null,
+  "activeVersionId": "2e05081d-2a24-419b-a071-ec97f939e0d2"
+}

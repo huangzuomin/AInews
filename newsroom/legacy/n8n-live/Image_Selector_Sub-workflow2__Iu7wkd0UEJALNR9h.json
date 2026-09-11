@@ -1,0 +1,315 @@
+{
+  "id": "Iu7wkd0UEJALNR9h",
+  "name": "Image Selector Sub-workflow2",
+  "active": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $('Split Out8').item.json.candidateUrls }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        992,
+        -560
+      ],
+      "id": "57ceb434-329d-45fa-88f9-01afa9ef7e43",
+      "name": "下载图片",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/app/hugo/hugo/static/newsimages/selected_image_{{ $now.format('yyyy-MM-dd_HH-mm-ss') }}.jpg\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        -480
+      ],
+      "id": "57353e2d-b013-4928-8f2a-b7aa34ffc7de",
+      "name": "保存到本地"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 候选图片预处理节点 (v3.0 - Google Search)\n * 对 Google Custom Search API 返回的图片进行预处理和格式标准化\n */\n\n// 可配置参数\nconst MIN_WIDTH = 680; // 最小宽度要求\nconst ASPECT_RATIO_THRESHOLD = 1.2; // 横版图片的长宽比阈值 (宽度/高度 > 1.2 视为横版)\n\n/**\n * 筛选并标准化Google图片搜索结果\n * @param {Array} items - Google Custom Search API返回的items数组\n * @returns {Object} 包含筛选和标准化后的图片数组及URL列表\n */\nfunction preprocessGoogleImages(items) {\n  // 检查输入是否有效\n  if (!items || !Array.isArray(items)) {\n    return { filteredPhotos: [], candidateUrls: [] };\n  }\n\n  // 1. 筛选出有效的、符合宽度要求且为横版图片\n  // 必须确保 item.image 存在，否则 item.image.width 会报错\n  const validImageItems = items.filter(item => {\n    if (item.image && item.link) {\n      const width = item.image.width;\n      const height = item.image.height;\n\n      // 检查宽度是否符合要求\n      const meetsMinWidth = width >= MIN_WIDTH;\n\n      // 检查是否为横版图片 (宽度/高度 > 阈值)\n      // 避免除以零的情况\n      const isLandscape = height > 0 && (width / height) >= ASPECT_RATIO_THRESHOLD;\n\n      return meetsMinWidth && isLandscape;\n    }\n    return false; // 不符合基本结构要求的直接过滤掉\n  });\n\n  // 2. 将筛选后的Google图片数据，【标准化】成我们通用的图片对象格式\n  // 这一步是关键，它确保了后续节点（如AI甄选）无需修改\n  const normalizedPhotos = validImageItems.map(item => ({\n    // 这个新结构模仿了Pexels的结构，以保证下游兼容性\n    width: item.image.width,\n    height: item.image.height,\n    src: {\n      original: item.link // Google的图片URL在顶层的'link'字段\n    },\n    alt: item.title, // 使用图片所在页面的标题作为alt文本\n    photographer: item.displayLink, // 使用来源域名作为'摄影师'信息\n    originalGoogleItem: item // 保留原始Google数据以备不时之需\n  }));\n\n  // 3. 从标准化后的图片对象中，提取URL列表\n  const candidateUrls = normalizedPhotos.map(photo => photo.src.original);\n\n  return {\n    filteredPhotos: normalizedPhotos,\n    candidateUrls,\n  };\n}\n\n// --- 主处理逻辑 ---\ntry {\n  const inputData = $input.all();\n\n  // 检查是否有输入数据\n  if (!inputData || inputData.length === 0) {\n    throw new Error(\"No input data received.\");\n  }\n\n  const firstInput = inputData[0];\n  const apiResponse = firstInput.json;\n\n  // 为了数据流的完整性，我们从Start节点获取原始输入（如articleTitle）并传递下去\n  const originalInput = $('Start').first().json;\n\n  // 检查Google API的响应格式是否正确\n  if (!apiResponse || !apiResponse.items) {\n    throw new Error(\"Invalid Google API response format. Missing 'items' array.\");\n  }\n\n  const searchItems = apiResponse.items;\n\n  // 执行图片预处理和标准化\n  const result = preprocessGoogleImages(searchItems);\n\n  // 检查是否有符合条件的候选图片\n  if (result.candidateUrls.length === 0) {\n    // 即使没有符合条件的，也返回一个标准错误结构，而不是中断流程\n    return [{\n      json: {\n        error: \"No suitable images found after filtering (min width, and landscape orientation).\",\n        candidateUrls: [],\n        filteredPhotos: [],\n        originalPhotos: searchItems, // 原始的 Google items\n        originalInput\n      }\n    }];\n  }\n\n  // 返回成功的预处理结果\n  return [{\n    json: {\n      error: null,\n      candidateUrls: result.candidateUrls,\n      filteredPhotos: result.filteredPhotos,\n      originalPhotos: searchItems, // 注意：这里现在是原始的Google items\n      originalInput\n    }\n  }];\n\n} catch (error) {\n  // 处理意外错误，返回一个标准的错误对象\n  return [{\n    json: {\n      error: `Processing error: ${error.message}`,\n      candidateUrls: [],\n      filteredPhotos: [],\n      originalPhotos: [],\n      originalInput: $('Start').first().json || null\n    }\n  }];\n}\n"
+      },
+      "id": "d9f4466c-2905-43a4-9263-652f3fdeb8c3",
+      "name": "候选图片预处理1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "cx",
+              "value": "96eceac0bab124343"
+            },
+            {
+              "name": "searchType",
+              "value": "image"
+            },
+            {
+              "name": "num",
+              "value": "5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5f01e4b-5ead-405f-b36b-8ae27c15dd27",
+      "name": "Get Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -128,
+        -384
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "7xKH9XEuuC0OcAU8",
+          "name": "Query Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "={{ $json.fileName.replace('/app/hugo/hugo/static', '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1648,
+        -480
+      ],
+      "id": "db59c95e-430f-4623-9e33-50638ab11b0b",
+      "name": "输出图片信息1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2b2af63a-eeaf-4249-9bcc-a4239c55be1b",
+              "leftValue": "={{ $json.candidateUrls }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        -384
+      ],
+      "id": "a4a78569-14d1-496d-9d8e-e715805757b6",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "=/images/default (1).png",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        544,
+        -288
+      ],
+      "id": "995c2348-7306-4279-a200-04eb2cb99e7f",
+      "name": "输出图片信息"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "candidateUrls",
+        "options": {}
+      },
+      "id": "7d93025a-22fe-4a23-87bc-58bf020d5300",
+      "name": "Split Out8",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3f6c0330-d6c2-4784-a196-3f04abe74bd3",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        768,
+        -480
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "69acb6c5-5d5c-4e39-a193-73293ef8c44a",
+              "leftValue": "={{ $binary.data.mimeType }}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        -480
+      ],
+      "id": "4735f013-44f7-4bd1-a58d-06fb458860ea",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "981aa6bc-f876-40cd-bc6f-a5336f6967b5",
+              "name": "finalArticleTitle",
+              "value": "={{ $('Start').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1a0e6732-b6ac-441a-aa19-bb269e786392",
+              "name": "finalImageUrl",
+              "value": "=/images/default (1).png",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1552,
+        -288
+      ],
+      "id": "f86de01b-f032-4b41-a7de-4268135cca4b",
+      "name": "输出图片信息2"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        -272
+      ],
+      "id": "15d5c265-c361-4136-a90d-fbdb4339510b",
+      "name": "Start"
+    }
+  ],
+  "connections": "{\"下载图片\":{\"main\":[[{\"node\":\"If1\",\"type\":\"main\",\"index\":0}]]},\"保存到本地\":{\"main\":[[{\"node\":\"输出图片信息1\",\"type\":\"main\",\"index\":0}]]},\"候选图片预处理1\":{\"main\":[[{\"node\":\"If\",\"type\":\"main\",\"index\":0}]]},\"Get Image\":{\"main\":[[{\"node\":\"候选图片预处理1\",\"type\":\"main\",\"index\":0}]]},\"If\":{\"main\":[[{\"node\":\"Split Out8\",\"type\":\"main\",\"index\":0}],[{\"node\":\"输出图片信息\",\"type\":\"main\",\"index\":0}]]},\"Split Out8\":{\"main\":[[{\"node\":\"Loop Over Items1\",\"type\":\"main\",\"index\":0}]]},\"Loop Over Items1\":{\"main\":[[],[{\"node\":\"下载图片\",\"type\":\"main\",\"index\":0}]]},\"If1\":{\"main\":[[{\"node\":\"保存到本地\",\"type\":\"main\",\"index\":0}],[{\"node\":\"Loop Over Items1\",\"type\":\"main\",\"index\":0},{\"node\":\"输出图片信息2\",\"type\":\"main\",\"index\":0}]]},\"Start\":{\"main\":[[{\"node\":\"Get Image\",\"type\":\"main\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\",\"binaryMode\":\"separate\"}",
+  "staticData": null,
+  "pinData": "{}",
+  "versionId": "37905e68-ca0d-43c8-8bec-aa1ab1c9ab56",
+  "triggerCount": 0,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-06-20 07:24:20.786",
+  "updatedAt": "2026-05-12 12:13:14.228",
+  "isArchived": 0,
+  "versionCounter": 29,
+  "description": null,
+  "activeVersionId": "37905e68-ca0d-43c8-8bec-aa1ab1c9ab56"
+}

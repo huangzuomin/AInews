@@ -1,0 +1,408 @@
+{
+  "id": "PyurYOul6FQzolNL",
+  "name": "Process_Single_RSS_Article2",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "tableId": "rss_feed",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('Start').item.json.title }}"
+            },
+            {
+              "fieldId": "link",
+              "fieldValue": "={{ $('Start').item.json.link }}"
+            },
+            {
+              "fieldId": "pub_date",
+              "fieldValue": "={{ $('Start').item.json.pubDate }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Start').item.json.description }}"
+            },
+            {
+              "fieldId": "content_snippet",
+              "fieldValue": "={{ $('Start').item.json.description }}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "={{ $json.source }}"
+            },
+            {
+              "fieldId": "guid",
+              "fieldValue": "={{ $('Start').item.json.guid && typeof $('Start').item.json.guid === 'object' && $('Start').item.json.guid._ ? $('Start').item.json.guid._ : $('Start').item.json.guid }}\n"
+            }
+          ]
+        }
+      },
+      "id": "507d9aaa-4bc5-4771-bc05-4ebef3c3338c",
+      "name": "Create RSS Item1",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -6475
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "8e8ff64b-e59c-415c-af8b-211d7a7d144c",
+              "leftValue": "={{ $json.output.is_ai_professional_content }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "9f895d3c-c278-4101-a5d7-2cfeeec7eb49",
+      "name": "If - Is AI1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        756,
+        -6475
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=请你分析以下文章标题和内容片段。\n\n判断它是否与人工智能相关，并且是具有深度和专业性，适合AI领域中文读者阅读的资讯。\n同时，判断该选题是否具有在社交媒体上引发讨论、传播或用户互动的潜力。\n\n以JSON格式输出，包含两个布尔值字段：\n- `is_ai_professional_content`: 表示是否是AI专业深度资讯。\n- `is_suitable_for_social_media`: 表示是否适合社交媒体讨论。\n\n不要输出代码块或 Markdown，只需输出JSON字符串。\n\n### 判断标准：\n**1. AI专业深度资讯判断 (`is_ai_professional_content` - true/false)：**\n- **直接与人工智能技术、算法、模型、算力、伦理、政策、应用、研究进展、行业趋势、公司动态、投融资等核心领域相关。**\n- **内容是否具有足够的深度或专业性，能够提供有价值的洞察，而不仅仅是泛泛的社会议题、娱乐新闻或浅层介绍。**\n- **是否涉及人工智能在特定专业领域（如医疗、金融、教育、工业、机器人、自动驾驶、内容生成等）的创新应用、解决方案或重要影响。**\n- **对于非中国地区的内容，需满足以下至少一项：**\n    - **该技术、应用或研究成果具有全球性的突破意义或影响力。**\n    - **该案例或趋势对中国AI产业发展、技术路径或市场竞争具有借鉴意义或潜在影响。**\n    - **涉及中国企业、研究机构、个人在国际AI领域的重要合作、贡献或竞争。**\n- **排除与人工智能相关但明显是社会、娱乐、政治、八卦等非专业性或泛话题性的内容。**\n- **排除明显只关注特定小众区域市场，且对中国或全球AI发展缺乏普遍借鉴意义的本地化资讯。**\n\n**2. 社交媒体适宜性判断 (`is_suitable_for_social_media` - true/false)：**\n- **话题性/热点性：** 是否触及当前AI领域的热点、争议、热门趋势或公众广泛关注的议题。\n- **可读性/易理解性：** 内容即使专业，但其核心观点、结论或案例是否能被更广泛的受众（即使是非AI专家）快速理解和抓住？（即是否“出圈”）\n- **讨论潜力：** 是否包含能引发用户评论、提问、分享、观点碰撞或启发思考的元素，如：\n    - 新颖、颠覆性的技术突破。\n    - 具有争议性、伦理挑战或社会影响的话题（如AI安全、就业影响）。\n    - 惊人、有趣或反常识的案例。\n    - 与日常生活或特定行业利益高度相关。\n    - 提供明确的观点、预测或趋势分析。\n- **视觉化潜力：** 内容是否暗示有可以用于社交媒体传播的图片、视频或图表等视觉元素？（例如：新的AI模型生成的图像，机器人视频等）\n- **排除过于枯燥、纯理论、高度技术细节、或仅面向极小圈子专业人士的内容，这些内容在社交媒体上互动性差。**\n\n只有满足“AI专业深度资讯判断”的所有标准，`is_ai_professional_content` 才为 true，否则为 false。\n同时，根据“社交媒体适宜性判断”的所有标准，`is_suitable_for_social_media` 才为 true，否则为 false。\n最终输出一个包含这两个布尔值的JSON对象。\n\n<文章标题>\n{{ $('Create RSS Item1').item.json.title }}\n</文章标题>\n\n<文章片段>\n{{ $('Create RSS Item1').item.json.content_snippet }}\n</文章片段>\n ",
+        "hasOutputParser": true
+      },
+      "id": "49a5d879-1668-46d8-8953-b85fe4433181",
+      "name": "Is AI Related1",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        380,
+        -6475
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        408,
+        -6255
+      ],
+      "id": "94c38a3e-247e-4836-8bbb-d7dd40a5432c",
+      "name": "Google Gemini Chat Model16",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7H8P9FIytdRKhkYd",
+          "name": "Google Gemini(PaLM) nguyenvanbinhggb85473"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1724,
+        -6380
+      ],
+      "id": "1bc73b60-86e7-48b6-b2e1-e4cd823d12ba",
+      "name": "Google Gemini Chat Model17",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "OA7C51WhZwmAPvVy",
+          "name": "Google Gemini(PaLM) huangjiehang2005"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2e79efab-8330-41e7-bea9-dae432b83c50",
+              "leftValue": "={{$json.isEmpty()}}",
+              "rightValue": 0,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -40,
+        -6200
+      ],
+      "id": "03fb5380-c171-445c-b5ae-fcd8a9455723",
+      "name": "If - Exists Already1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "guid",
+              "keyValue": "={{ $json.guid && typeof $json.guid === 'object' && $json.guid._ ? $json.guid._ : $json.guid }}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -6340
+      ],
+      "id": "76fa0bf5-c7fc-4f06-a0b4-45821f29bdc3",
+      "name": "Check Existence",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Iu7wkd0UEJALNR9h",
+          "mode": "list",
+          "cachedResultName": "Image Selector Sub-workflow2"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1196,
+        -6600
+      ],
+      "id": "5ff67f9b-b59f-457e-89a5-5bcf114a6134",
+      "name": "图片筛选器1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        -6580
+      ],
+      "id": "d51666b4-414b-47b9-9058-18e872fc585f",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"«REDACTED-TOKEN-tvly»-TlGij8kk17GECuUZSXlkBeuWPTE7Hhki\",\n  \"query\": \" {{ $('更新rss数据库').item.json.title }} \",\n  \"search_depth\": \"basic\",\n  \"include_answer\": true,\n  \"include_images\": false,\n  \"max_results\": 5\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1416,
+        -6600
+      ],
+      "id": "7c9f795d-1e6a-4646-ba28-3a4c12747f66",
+      "name": "tavily search",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "jbDrdJenxkPAA8By",
+          "name": "Header Auth account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "rss_feed",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create RSS Item1').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "should_draft_article",
+              "fieldValue": "True"
+            }
+          ]
+        }
+      },
+      "id": "7cbffca2-1e3e-42fe-84a8-b44a4ab51c09",
+      "name": "更新rss数据库",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -6600
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一名专业的科技记者，模仿MIT Technology Review资深记者\n\nKaren Hao的写作风格，任务是根据RSS标题、内容片段和Google搜索的\n\n参考资料撰写一篇深度新闻文章。请仔细遵循以下说明：\n\n## 写作风格要求：\n\n- 采用深度分析的叙事方式，不仅报道事实，更要探讨背后的技术原理和\n    \n    社会影响\n    \n- 使用清晰、准确的技术语言，但保持对普通读者的可读性\n    \n- 在客观报道的基础上，提供有见地的分析和前瞻性思考\n    \n- 关注AI技术对社会、伦理、经济的深层影响\n    \n- 采用结构化的论述方式，逻辑清晰，层次分明\n    \n\n## 数据输入：\n\n1. RSS标题和内容片段：\n    \n\n```\n<rss_title>\n{{ $('更新rss数据库').item.json.title }}\n</rss_title>\n\n<context_snippet>\n{{ $('更新rss数据库').item.json.content_snippet }}\n</context_snippet>\n```\n\n2. Google搜索参考内容：\n    \n\n```\n<google_search_content>\n{{ JSON.stringify($json).substring(0, 300000) }}\n</google_search_content>\n```\n\n## 文章要求：\n\n3. **内容深度**：\n    \n\n- 以RSS标题和内容片段为核心，深度挖掘技术细节\n    \n- 利用Google搜索内容提供丰富的背景信息和多角度分析\n    \n- 信息丰富、引人入胜、结构良好\n    \n- 体现Karen Hao式的深度思考和前瞻性视角\n    \n\n4. **Markdown格式**：\n    \n\n- **文章正文内不要包含主标题**（主标题有独立字段）。\n    \n- 如有副标题，使用 ###\n    \n- 段落用空行分隔\n    \n- 适当使用**粗体**和_斜体_强调关键信息\n    \n- 使用无序列表或有序列表组织复杂信息\n    \n- 重要引语使用块引用格式\n    \n\n5. **灵活的文章结构**（根据内容选择最适合的组织方式）：\n    \n\n**必备要素**：\n\n- TL;DR：使用引文格式（> 开头）用2-3句简洁中文概括文章核心\n    \n    要点\n    \n\n**结构选择原则**：\n\n**A. 突发新闻型**（适用于重大发布、突发事件）：\n\n- 开门见山陈述核心事实\n    \n- 按重要性递减顺序展开细节\n    \n- 用自然段落流畅叙述，无需小标题\n    \n- 重点突出\"什么发生了\"和\"为什么重要\"\n    \n\n**B. 深度分析型**（适用于技术解析、趋势分析）：\n\n- 可使用2-3个核心小标题组织复杂内容\n    \n- ### 技术原理解析\n    \n- ### 行业影响分析\n    \n- ### 未来发展趋势\n    \n- 每个部分内部仍以自然段落为主\n    \n\n**C. 人物/公司聚焦型**（适用于企业动态、人物专访）：\n\n- 以故事化叙述为主线\n    \n- 按时间线或逻辑关系自然展开\n    \n- 避免生硬的小标题分割\n    \n- 重点突出人物观点或企业策略\n    \n\n**D. 对比分析型**（适用于竞品比较、政策对比）：\n\n- 可使用对比性小标题（如需要）\n    \n- ### A方案 vs B方案\n    \n- ### 优势与挑战\n    \n- 或直接用段落进行对比叙述\n    \n\n**E. 教程/解释型**（适用于技术科普、概念解释）：\n\n- 按逻辑层次递进\n    \n- 可使用问题式小标题\n    \n- ### 这项技术如何工作？\n    \n- ### 它解决了什么问题？\n    \n- 保持解释的连贯性\n    \n\n**结构决策指南**：\n\n- 内容简单直接 → 用自然段落，无小标题\n    \n- 内容复杂多层 → 最多3个小标题辅助组织\n    \n- 信息密集 → 适当使用列表和引用块\n    \n- 故事性强 → 按叙述逻辑自然展开\n    \n- 技术性强 → 按理解难度递进组织\n    \n\n**段落组织原则**：\n\n- 每段聚焦一个核心观点\n    \n- 段落间逻辑关系清晰\n    \n- 使用过渡句连接不同观点\n    \n- 重要信息用**粗体**或_斜体_突出\n    \n- 关键数据和引语独立成段\n    \n\n6. **引用格式**（使用准确时间参数）：\n    \n\n- 文中使用脚注式引用：[^1]、[^2]等\n    \n- 按顺序编号，不跳号\n    \n- 文章末尾包含 ## 引用 部分\n    \n- 每条参考文献格式：\n    \n    [^1]: 文章标题（确保所有标题都是可点击链接）·出版物名称·作者姓名（如可用）（{{ new Date($json.\n    \n    publishedDate || Date.now()).toLocaleDateString\n    \n    ('zh-CN') }}）·检索日期{{\n    \n    new Date().toLocaleDateString('zh-CN') }}\n    \n- 无作者时以文章标题开头\n    \n- 确保所有标题都是可点击链接\n    \n- 包含Google搜索内容中的所有来源\n\n## 主题选择指南：\n\n从下方提供的 “官方主题列表” 中，为本文选择2-3个最相关的主题。你的选择必须严格来自于这个列表。\n\n### 官方主题列表 (Canonical Main Topics):\n\n- 前沿模型与算法 (Frontier Models & Algorithms): 追踪最新的模型架构创新、核心算法原理、性能突破与技术局限性。\n\n- AI Agent与自主系统 (AI Agents & Autonomous Systems): 研究具备自主规划、记忆、使用工具能力的智能体，及其通往AGI的路径探索。\n\n- 机器人与具身智能 (Robotics & Embodied AI): 关注AI与物理世界的交互，包括人形机器人、自动驾驶等的技术与商业化。\n\n- 算力与芯片 (Compute & Chips): 分析AI芯片的技术竞争、市场格局，以及云服务商的算力战略。\n\n- 数据与开源生态 (Data & Open-Source Ecosystems): 探讨高质量训练数据、合成数据技术，以及开源模型、框架和社区的影响。\n\n- AIGC与内容科技 (AIGC & Content Tech): 涵盖生成式AI在媒体、娱乐、营销等领域的应用，以及内容产业的变革。\n\n- AI与软件工程 (AI & Software Engineering): 关注AI在编码、测试、运维等软件开发全生命周期中的应用与影响。\n\n- AI与科学发现 (AI & Scientific Discovery): 追踪AI在生物医药、材料、气象等基础科学领域的突破性应用（AI for Science）。\n\n- 企业级AI与数字化 (Enterprise AI & Digitalization): 聚焦AI在ToB领域的应用、企业数字化转型、业务流程优化及相关SaaS/PaaS平台。\n\n- 产业生态与商业版图 (Industry Ecosystem & Business Landscape): 分析AI产业的宏观趋势、市场竞争格局、商业模式创新及科技巨头动态。\n\n- 投融资与市场洞察 (Funding, M&A & Market Insights): 追踪全球AI领域的投资风向、重大融资、并购案例及其背后的资本逻辑。\n\n- AI伦理与治理 (AI Ethics & Governance): 探讨AI带来的偏见、隐私、透明度等伦理挑战，以及相应的技术、企业自律和法规对策。\n\n- 社会影响与未来工作 (Societal Impact & Future of Work): 分析AI对就业市场、技能需求、教育体系及社会结构的深层影响。\n\n- 安全与地缘政治 (Security & Geopolitics): 关注AI自身的安全可控性（AI Safety），以及AI作为科技竞争和影响全球格局的关键变量。\n    \n\n##  **专业标准**：\n    \n\n- 保持客观、专业的新闻报道基调\n    \n- 基于事实进行深度分析，避免主观臆测\n    \n- 使用第三人称视角\n    \n- 遵守新闻伦理，避免耸人听闻\n    \n\n## 重要输出要求：\n\n你的回答**必须也只能**是遵循以下标签结构的**纯文本**，不要添加任何额外的解释或代码块标记。每个字段都必须用其对应的标签独立包裹。\n\n```\n<title>\n[文章标题]\n</title>\n\n<article_content>\n[这里是完整的文章内容，包括 TL;DR, ###副标题, 段落, 引用等所有部分，但不包含主标题]\n</article_content>\n\n<summary>\n[这里是2-3句话的文章摘要]\n</summary>\n\n<tags>\n[标签1], [标签2], [标签3], [标签4], [标签5]\n</tags>\n\n<main_topics>\n[主题1], [主题2], [主题3]\n</main_topics>\n```\n\n**关键格式要求：**\n\n1. **独立标签**：`title`, `article_content`, `summary`, `tags`, `main_topics` 每个字段都必须用其自身的标签包裹。\n    \n2. **`<tags>`**：必须提供5-8个**用逗号分隔**的中文关键词。\n    \n3. **`<main_topics>`**：必须从上方“官方主题列表”中选择2-3个最相关的主题，并用逗号分隔。严禁创造列表之外的新主题。。\n    \n4. **不要使用JSON**：整个输出是一个纯粹的、带有标签的文本块。\n\n\n\n"
+      },
+      "id": "f94ca94a-06f2-40c1-9e7c-2e22f0beb0bb",
+      "name": "写稿",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        1636,
+        -6600
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "ai_articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "rss_feed_id",
+              "fieldValue": "={{ $('更新rss数据库').item.json.id }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $json.text }}"
+            },
+            {
+              "fieldId": "img_url",
+              "fieldValue": "={{ $('图片筛选器1').item.json.finalImageUrl }}"
+            },
+            {
+              "fieldId": "is_suitable_for_social_media",
+              "fieldValue": "={{ $('Is AI Related1').item.json.output.is_suitable_for_social_media }}"
+            }
+          ]
+        }
+      },
+      "id": "76d96898-ff23-4979-8621-f95e4bed669c",
+      "name": "保存文章",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2012,
+        -6600
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "pUPDAkhUJvKEUSTc",
+          "name": "Supabase account 2"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "id": "78febeb0-c3ca-4ab2-a7b5-cb2924a1f030",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        -6350
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"is_ai_professional_content\": true,\n\t\"is_suitable_for_social_media\": true\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        -6255
+      ],
+      "id": "7f035c0b-e447-468f-a849-abfd9938ace7",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "connections": "{\"Create RSS Item1\":{\"main\":[[{\"node\":\"Is AI Related1\",\"type\":\"main\",\"index\":0}]]},\"If - Is AI1\":{\"main\":[[{\"node\":\"更新rss数据库\",\"type\":\"main\",\"index\":0}],[{\"node\":\"No Operation, do nothing\",\"type\":\"main\",\"index\":0}]]},\"Is AI Related1\":{\"main\":[[{\"node\":\"If - Is AI1\",\"type\":\"main\",\"index\":0}]]},\"Google Gemini Chat Model16\":{\"ai_languageModel\":[[{\"node\":\"Is AI Related1\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"Google Gemini Chat Model17\":{\"ai_languageModel\":[[{\"node\":\"写稿\",\"type\":\"ai_languageModel\",\"index\":0}]]},\"If - Exists Already1\":{\"main\":[[{\"node\":\"Create RSS Item1\",\"type\":\"main\",\"index\":0}],[{\"node\":\"No Operation, do nothing\",\"type\":\"main\",\"index\":0}]]},\"Check Existence\":{\"main\":[[{\"node\":\"If - Exists Already1\",\"type\":\"main\",\"index\":0}]]},\"图片筛选器1\":{\"main\":[[{\"node\":\"tavily search\",\"type\":\"main\",\"index\":0}]]},\"tavily search\":{\"main\":[[{\"node\":\"写稿\",\"type\":\"main\",\"index\":0}]]},\"更新rss数据库\":{\"main\":[[{\"node\":\"图片筛选器1\",\"type\":\"main\",\"index\":0}]]},\"写稿\":{\"main\":[[{\"node\":\"保存文章\",\"type\":\"main\",\"index\":0}]]},\"保存文章\":{\"main\":[[{\"node\":\"No Operation, do nothing\",\"type\":\"main\",\"index\":0}]]},\"Start\":{\"main\":[[{\"node\":\"Check Existence\",\"type\":\"main\",\"index\":0}]]},\"Structured Output Parser\":{\"ai_outputParser\":[[{\"node\":\"Is AI Related1\",\"type\":\"ai_outputParser\",\"index\":0}]]}}",
+  "settings": "{\"executionOrder\":\"v1\"}",
+  "staticData": "{\"node:Schedule Trigger\":{\"recurrenceRules\":[]}}",
+  "pinData": "{\"Start\":[{\"json\":{\"title\":\"Anthropic 胜诉引爆AI版权革命：训练数据\\\"合理使用\\\"获美国司法认可\",\"description\":\"<p>当地时间2025年6月23日，美国地区法官威廉•阿尔苏普（William Alsup）裁定，人工智能初创公司<strong>Anthropic对其人工智能进行版权书籍训练的行为合法，该行为受到“合理使用”原则的保护，该原则允许在特定条件下未经授权使用受版权保护的材料，并且无需向作者支付报酬。</strong></p>\\n  <p>美国法官首次在人工智能版权诉讼中支持科技公司而非创意人员，开创了在人工智能版权纠纷中法院支持人工智能公司的先例。这家估值615亿美元、由亚马逊和Alphabet支持的公司Anthropic，也是美国第一家赢得此类诉讼的人工智能公司。在此之前的汤森路透诉Ross案中，法官裁定AI初创公司Ross使用汤森路透旗下法律研究公司Westlaw的材料进行培训“不构成合理使用”——该案已进入上诉法院审理阶段。</p>\\n  <p>同一周里（6月25日），美国另一位地方法官文斯·查布里亚（Vince Chhabria）裁定，Meta在未经许可的情况下使用13位作者的书籍训练其人工智能工具，并未违反法律，因为原告没有提供足够的证据证明Meta对其书籍的使用是有害的。</p>\\n  <p>结合之前美国版权局长否认人工智能训练版权内容“合理使用”后旋即被辞的事件，可以说，美国人工智能版权正在经历一个历史性的转折。其结果可能对接下来OpenAI、Meta、微软、谷歌、Anthropic和英伟达相关的版权诉讼产生巨大影响，并可能重塑信息生态系统和整个人工智能行业，进而影响到互联网上的几乎每个人。</p>\\n  <p>这场裁决也伴随着巨大的争议。6月27日，数百名美国作家发出了一封公开信，呼吁图书出版商承诺限制使用人工智能工具，并言辞激烈地宣称，作家的作品被人工智能公司“窃取”了。</p>\\n  <h2><strong>一、为什么是“合理使用”</strong></h2>\\n  <p><strong>“合理使用”原则</strong>是美国版权法中的一个概念，指允许未经版权所有者许可使用受版权保护的素材。《版权法》第107条规定：“对受版权保护作品的合理使用……用于<strong>批评、评论、新闻报道、教学（包括课堂使用的多份副本）、奖学金或研究等目的</strong>，不构成侵犯版权”。</p>\\n  <p>然而，对人工智能大模型的训练，显然不符合这部最早制定于1790年、最近一次修订于2018年的《版权法》所列举的“合理使用”的传统情形。因此，这有赖于法官如何解释人工智能公司的行为，以及对“合理使用”的要素分析。</p>\\n  <p>阿尔苏普法官首先区分了Anthropic公司的两种不同的行为：购买大量书籍以及从某网站下载盗版书籍对大模型进行训练——“Anthropic购买的图书馆书籍和盗版之间的法律问题不同，因此该裁决将依次处理它们。”</p>\\n  <p>问题主要集中在前者，即对于Anthropic公司购买书籍、复制、训练大模型产品Claude，究竟是否经得起“合理使用”的分析。</p>\\n  <p><strong>1、训练大模型与人类阅读相似</strong></p>\\n  <p>首先，阿尔苏普法官认为<strong>人工智能大模型的训练，几乎等同于对“任何人阅读和写作一样”的训练</strong>，并且强调，Anthropic的大型语言模型Claude在训练过程中借鉴作品并非为了复制或取代它们，而是为了<strong>“另辟蹊径，创造出不同的东西”</strong>。书籍的作者不能理所当然地拒绝任何人使用他们的作品进行培训或学习，也就不应该拒绝其作品被用于训练大模型。</p>\\n  <p><strong>2、没有外部分享就属于合理使用</strong></p>\\n  <p>虽然Anthropic是一家商业机构，并能从这种复制书籍、训练大模型中得到商业利益，但是法官特别区分了<strong>这些书籍被使用的“内部性和外部性”，由于“它没有制作新的拷贝在外部分享或出售”，而只是用于内部大模型的训练，因此就属于“合理使用”</strong>。</p>\\n  <p>法官认为，购买的印刷版被Anthropic已经销毁，而数字替代品没有以其原本的内容向外重新分发，这就属于“合理使用”。</p>\\n  <p><strong>3、数百万本书对于大模型训练是“合理必要”的</strong></p>\\n  <p>原告作家们提出一个观点，认为Anthropic“复制整个作品”并使用数百万本书训练，这种量级对于“合理使用”来说，并非必要。</p>\\n  <p>但阿尔苏普法官认为，<strong>“合理必要”并不意味着“严格必要”</strong>。或许，使用数十万本书也可以训练出一个给定的大模型，但这不意味着Anthropic不可以使用更多的数百万本书来训练Claude，因此训练内容中包含了原告作者的作品，甚至“使用任何一部作品来实际训练LLM都是合理的”。</p>\\n  <p><strong>4、AI的输出并非作家出版作品的“竞争性替代”</strong></p>\\n  <p>阿尔苏普法官认为，<strong>训练特定大型语言模型使用大量书籍，本身并且不会减少市场对作者作品的需求，即便有所减少，也不符合《版权法》所关注的那种竞争性或创造性的替代。</strong></p>\\n  <p>他进一步解释，<strong>《版权法》旨在促进原创作品的创作，而不是保护作者完全免受竞争</strong>。即，如果某位作家出版大量自己作品，并被一批读者全部买去阅读、研究，并成为与其形成竞争的作家，那么原来的作家也无权对此加以阻止或控制。</p>\\n  <p>总的来说，法院判定未经许可使用受版权保护的作品是否构成合理使用，最主要的标准是审查该<strong>使用是否具有“变革性”</strong>，这意味着它并非是对原作品的替代，而是某种新事物。</p>\\n  <h2><strong>二、训练大模型不能合理化“盗版”</strong></h2>\\n  <p>然而，在购买图书之前，Anthropic曾下载了700多万本盗版图书，没有支付任何费用。虽然据称它已经决定不再使用这些盗版图书来训练人工智能，仍将这些盗版图书保存在其资料库种。Anthropic辩称，因为其中一些图书最终将被用于训练大模型，就可以将这一行为视为“合理使用”。</p>\\n  <p><strong>这家人工智能公司意图在于，无限制地拓宽“合理使用”的范围。</strong>Anthropic认为，因为这些书籍是“用于高度变革性的用途”，法律上就应当对其获得训练数据的任何途径进行正面评价。</p>\\n  <p>但阿尔苏普法官表示，<strong>盗版本来就是不可挽回的侵权行为</strong>，即使盗版书籍立即被丢弃。所以，无论盗版书籍是仅仅用于建设一个数字图书馆，还是训练大模型的语料库，<strong>从法律性质上都与购买书籍的行为完全不同</strong>。法官在这个问题上打破了Anthropic提出的“AI即合理”的假设。</p>\\n  <p><strong>Anthropic复制并存储的超过700万本盗版书籍，侵犯了作者的版权，不构成合理使用</strong>。法官已下令于12月开庭审理，以确定Anthropic应承担的侵权赔偿金额。根据美国的《版权法》，故意侵犯版权可能会导致每部作品被处以最高15万美元的法定赔偿。</p>\\n  <p>随着人工智能产业的扩张，美国法院正急于<strong>区分合法的变革性使用和超出创新范畴的纯粹抄袭</strong>。所以，尽管本案的裁决表明，从受版权保护的作品中学习可以被视为“合理使用”，但它也明确指出了一点：<strong>人工智能公司不能简单地从最容易获得的地方借用材料，因此必须谨慎地对待其抄袭的内容以及获取信息的方式</strong>。</p>\\n  <h2><strong>三、“合理使用”法院认定的巨大影响</strong></h2>\\n  <p>这一判决对作家、艺术家和出版商来说无疑是一个巨大的打击，他们正在对OpenAI、Meta、Midjourney、谷歌等公司提起与本案相似的数十起诉讼。</p>\\n  <p class=\\\"image-wrapper\\\"><img data-img-size-val=\\\"865,664\\\" src=\\\"https://img.36krcdn.com/hsossms/20250702/v2_d014ec18088e4852a5fdff29ed445d74@5655031_oswg111923oswg865oswg664_img_000?x-oss-process=image/format,jpg/interlace,1\\\" referrerpolicy=\\\"no-referrer\\\"></p>\\n  <p class=\\\"img-desc\\\">图：美国的人工智能版权诉讼：原告与被告（统计截至2025年5月，来自WIRED）</p>\\n  <p>这些创作者声称，人工智能公司使用他们的作品来训练利润丰厚且功能强大的人工智能模型，这种行为无异于<strong>“盗窃”</strong>；而人工智能公司经常依靠所谓的<strong>“合理使用”</strong>原则为自己辩护，认为构建人工智能工具应该被视为一种合法使用，而无需获得同意或向权利人支付报酬的情况。</p>\\n  <p>就像Anthropic在本案中的辩词所声称的，<strong>如果必须向权利人支付报酬，那么交易成本将超过其获得的预期收益。</strong>人工智能公司只有两个选择：停止与任何权利持有人打交道，或者完全停止开发AI技术。因此，人工智能公司甚至不惜以盗版的方式试探法律的底线。</p>\\n  <p><strong>虽然这项裁决并不能保证其他法官也会效仿阿尔苏普法官的做法，但它为法院站在科技公司一边、而非创意人士的立场奠定了基础。</strong>值得注意的是，阿尔苏普在合理使用问题上的经验远超一般联邦法官，他曾主持谷歌诉甲骨文案（Google v. Oracle）的初审。</p>\\n  <p>与此同时，美国版权局也在经历历史上最动荡的时刻。2025年5月，就在版权局发布了一份关于生成式人工智能训练和合理使用的报告几天后，美国版权局局长珀尔穆特突然被解雇。于是版权局“出于谨慎”立即暂停了版权登记证书的发放，影响了约2万份登记。5月29日美国版权局虽然恢复了工作，但现在发出的登记证书上，局长签名处却变成了空白，成为一份可被挑战的法律文件。版权局内部的现实是：实际上无人掌权。</p>\\n  <p>或许，接下来人工智能公司将赢得大部分诉讼，并获得美国政府的各种支持和版权局的认可。</p>\\n  <p class=\\\"editor-note\\\">本文来自微信公众号<a target=\\\"_blank\\\" rel=\\\"noopener noreferrer nofollow\\\" href=\\\"https://mp.weixin.qq.com/s/15uw-5u0iLzQxSvNN4y36A\\\">“Internet Law Review”</a>，作者：互联网法律评论，36氪经授权发布。</p>\\n \\n\",\"link\":\"https://www.36kr.com/p/3361194825685377\",\"guid\":{\"_\":\"https://www.36kr.com/p/3361194825685377\",\"isPermaLink\":\"false\"},\"pubDate\":\"Wed, 02 Jul 2025 06:24:50 GMT\"}}]}",
+  "versionId": "efcf6b0b-7350-486d-b00a-d7909f380d25",
+  "triggerCount": 1,
+  "meta": "{\"templateCredsSetupCompleted\":true}",
+  "parentFolderId": null,
+  "createdAt": "2025-06-28 08:31:27.126",
+  "updatedAt": "2025-07-03 05:29:48",
+  "isArchived": 0,
+  "versionCounter": 1,
+  "description": null,
+  "activeVersionId": null
+}
