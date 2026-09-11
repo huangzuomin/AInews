@@ -1,0 +1,106 @@
+# S1 分类闸（Classification Gate）—— "AI 内参是什么"的定义
+#
+# 这一层直接来自原始 n8n 工作流（`Process_Single_RSS_Article2` 的 `Is AI Related1` 节点），
+# 是**规范资产**而非新发明。原提示词里的判定标准（7 条 include/exclude）在此落成可执行规则。
+#
+# 为什么必须独立成一层：
+#   首跑实测暴露 —— 没有这一层，早报里会出现《国产动画电影〈八仙！〉票房破 19 亿》
+#   （来自 IT之家）和《Datasette 安全更新》（来自个人博客）。
+#   综合科技源（IT之家 / NYT / BBC）本身是合法信源，但**必须经过相关性判定**才能进内参。
+#
+# v1 为纯规则（确定、可重放、零成本）；v2 接 GLM-4.7-Flash 后模型只覆盖 `relevance`，
+# 本层的规则值保留为 fallback 与交叉校验基线 —— 与 score.py 同一套约定。
+
+version: 1
+
+# ───────── 相关性判定 ─────────
+relevance:
+  min_score: 0.30            # 低于此值判定为"与 AI 无关"，直接丢弃
+  soft_min: 0.18             # 介于 soft_min 与 min_score 之间 → 标记 borderline，由 LLM 闸复核（未接时按丢弃处理）
+
+  # 强信号：命中即显著加分（每个 0.34，独立去重后计入）
+  # ⚠️ 词表必须包含**产品名与工具名**，而不只是技术概念。
+  #    首跑实测教训：只列概念会让 "How a researcher uses Codex and ChatGPT…"
+  #    和 "Build voice experiences with GPT‑Live‑1" 被判为无关（双重原因：
+  #    ① 产品名不在表内；② 原文用的是非标准连字符 U+2011，`\b` 词边界失效）。
+  # ⚠️ 拉丁词边界必须用 `(?<![A-Za-z])…(?![A-Za-z])` 而**不能**用 `\b`。
+  #    Python 的 `\w` 对 str 模式是 Unicode 感知的，CJK 字符也算 word char，
+  #    于是 `\bAI\b` 在"全面AI化"、"物理AI"、"这款AI原生游戏"里**全部匹配失败**
+  #    —— 首跑实测：6 条明显含 "AI" 的新闻被判相关度 0.00。
+  #    这是 Python 特有行为，不是正则写错；记忆点是"中文紧邻拉丁时必须用环视"。
+  strong_terms:
+    - "人工智能"
+    - "(?<![A-Za-z])AI(?![A-Za-z])"
+    - "大模型|大语言模型"
+    - "生成式"
+    - "机器学习|深度学习|神经网络"
+    - "智能体|自主智能体"
+    - "具身智能|人形机器人"
+    - "多模态"
+    - "算力|AI芯片|推理芯片"
+    - "AGI|通用人工智能"
+    - "对齐|可控性|AI安全"
+    - "上下文窗口|上下文长度"
+    - "预训练|微调|蒸馏|强化学习|RLHF"
+    - "推理成本|推理速度|token成本"
+    - "提示词|prompt工程"
+    - "世界模型"
+    - "扩散模型|文生图|文生视频|语音模型|视觉模型"
+    - "思维链|chain of thought|上下文工程"
+    # 厂商 / 模型 / 工具（产品名与工具名是"这件事与 AI 有关"最直接的证据）
+    - "(?<![A-Za-z])(?:GPT|ChatGPT|Codex|Claude|Gemini|DeepSeek|Llama|Qwen|GLM|Mistral|Grok|Kimi|Phi|Falcon|Yi|MiniMax|Suno|Runway|Hailuo|Doubao)(?![A-Za-z])"
+    - "(?<![A-Za-z])(?:OpenAI|Anthropic|Hugging ?Face|Nvidia|Midjourney|Stability|Together|Databricks|Scale ?AI|Perplexity|Cursor|Replit|Cognition|Cohere|Inflection|Adept)(?![A-Za-z])"
+    - "(?<![A-Za-z])(?:Copilot|Sora|Stable ?Diffusion|AlphaFold|AlphaGenome|AlphaGo|Gradio|LangChain|LlamaIndex|Ollama|vLLM|TensorRT|ONNX|Whisper|DALL-?E|Veo|Gemma|Command ?R)(?![A-Za-z])"
+    - "(?<![A-Za-z])(?:transformer|embedding|RAG|MoE|SOTA|benchmark|GPU|TPU|token|inference|pretrain)(?:s|ing|ed)?(?![A-Za-z])"
+    - "(?:智谱|月之暗面|百川智能|阶跃星辰|零一万物|商汤|科大讯飞|文心|通义|混元|星火|豆包|元宝|英伟达|算力中心)"
+
+  # 弱信号：每个 0.11
+  weak_terms:
+    - "算法|模型|训练|数据集|开源模型|参数规模|推理|神经网络"
+    - "自动化|智能|机器人|自动驾驶|语音识别|图像识别"
+    - "科技巨头|初创公司|融资|估值"
+    - "(?<![A-Za-z])(?:ML|chatbot|agent|robot|automation|LLM|paper|model)(?:s)?(?![A-Za-z])"
+
+  # 硬排除（命中即判无关，无论强弱信号）—— 对应原提示词的 "排除明显是社会/娱乐/政治/八卦"
+  exclude_patterns:
+    - "票房|电影|电视剧|综艺|明星|恋情|婚礼|离婚|番位|追星|演唱会|游戏版号"
+    - "彩票|球赛|世界杯|奥运|球队|夺冠|赛程"
+    - "菜谱|旅游攻略|酒店|民宿|美食探店"
+    - "天气预报|台风路径|停水|停电通知|限行|交通管制"
+    - "股市开盘|涨停|跌停|彩票|基金净值|星座|运势"
+    - "招聘公告|招标公告|中标公示|人事任免|干部公示"
+    - "\\b(movie|box office|celebrity|sports|weather|horoscope|recipe)\\b"
+
+# ───────── 主题归类（闭集，14 项）─────────
+# 与原始提示词里的「官方主题列表」逐项对齐 —— 原提示词早已写明
+# "严禁创造列表之外的新主题"，但存量里仍长出 616 个碎片：
+# **规范写在提示词里、没有落在代码里，等于不存在**。这一层就是把它落成代码。
+topics:
+  - topic: 前沿模型与算法
+    patterns: ["模型架构|架构创新|参数|预训练|微调|对齐算法|benchmark|评测|SOTA|上下文|多模态|MoE|transformer|推理能力|能力突破"]
+  - topic: AI Agent与自主系统
+    patterns: ["智能体|agent|自主规划|工具调用|多智能体|AGI.*路径|computer use"]
+  - topic: 机器人与具身智能
+    patterns: ["机器人|具身|人形|自动驾驶|无人车|机械臂|四足"]
+  - topic: 算力与芯片
+    patterns: ["芯片|算力|GPU|TPU|英伟达|nvidia|台积电|算力集群|数据中心|推理成本|显存"]
+  - topic: 数据与开源生态
+    patterns: ["开源|数据标注|合成数据|数据集|权重开放|Apache|MIT 许可|社区"]
+  - topic: AIGC与内容科技
+    patterns: ["AIGC|文生图|文生视频|生成式.*内容|创作工具|图像生成|视频生成|配音|数字人"]
+  - topic: AI与软件工程
+    patterns: ["编程|代码|copilot|cursor|IDE|软件开发|测试|运维|devops"]
+  - topic: AI与科学发现
+    patterns: ["生物|医药|蛋白质|材料|气象|科学发现|科研|学术|论文|alphafold|药物"]
+  - topic: 企业级AI与数字化
+    patterns: ["企业|数字化转型|ToB|SaaS|PaaS|业务流|私有化部署|行业解决方案"]
+  - topic: 产业生态与商业版图
+    patterns: ["竞争|市场份额|生态|商业模式|巨头|战略|合作|收购|并购"]
+  - topic: 投融资与市场洞察
+    patterns: ["融资|投资|估值|IPO|上市|轮次|资本|财报|营收"]
+  - topic: AI伦理与治理
+    patterns: ["伦理|偏见|隐私|透明度|治理|监管|合规|法规|安全评估|风险"]
+  - topic: 社会影响与未来工作
+    patterns: ["就业|岗位|技能|教育|社会|失业|职业|影响.*工作"]
+  - topic: 安全与地缘政治
+    patterns: ["安全|地缘|出口管制|制裁|国家安全|AI安全|失控"]

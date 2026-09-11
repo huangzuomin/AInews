@@ -1,0 +1,110 @@
+# 模型分配（Stage → Model）
+#
+# 契约：**生成层唯一的事实源**。密钥不在这里 —— 密钥在仓库外
+#       `/mnt/SSD_Apps/apps/neican-run/llm.env`（600），本文件只描述"用谁、多少钱"。
+#
+# 三条成本设计规则（设计文档 §6.3）：
+#   1. 固定前缀：system + few-shot + 评分量表放 prompt 最前，逐字不变 → 命中缓存
+#   2. 批量请求：一次打分 20 条，而不是 20 次请求
+#   3. 不用模型做算术：加权公式在 scoring.yaml，模型只出子分
+#
+# 第一原则是**可移植性**：先让供应商选择不决定部署拓扑，再谈质量与价格。
+# 本机实测（2026-09-11）：bigmodel 200 / deepseek 401 / ark 401 / siliconflow 404 —— 全通。
+
+version: 1
+enabled: false               # 生成层总开关：false 时走"模板轨"（不接 LLM 也能出早报）
+
+stages:
+
+  # S1 分类闸：每条约 0.6s，日量最大（~230 条），必须用免费档
+  classify:
+    provider: zhipu
+    model: glm-4.7-flash
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    api_key_env: ZHIPU_API_KEY
+    prompt: "prompts/01-classify.md"
+    batch_size: 20                 # 一次 20 条共享同一份前缀
+    concurrency: 8                 # 免费档硬约束是 30，留余量
+    max_tokens: 1024
+    temperature: 0.0               # 分类要确定
+    price_per_mtok: { in: 0.0, out: 0.0 }
+    cache_hit_price_per_mtok: { in: 0.0, out: 0.0 }
+
+  # S2 打分：只出口子分与理由，加权在代码里
+  score:
+    provider: zhipu
+    model: glm-4.7-flash
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    api_key_env: ZHIPU_API_KEY
+    prompt: "prompts/02-score.md"
+    batch_size: 20
+    concurrency: 8
+    max_tokens: 2048
+    temperature: 0.2
+    price_per_mtok: { in: 0.0, out: 0.0 }
+    cache_hit_price_per_mtok: { in: 0.0, out: 0.0 }
+
+  # L2 深度稿：每天只写 2–3 篇，贵得起 → 用最强档
+  draft:
+    provider: deepseek
+    model: deepseek-v4-pro
+    base_url: "https://api.deepseek.com/v1"
+    api_key_env: DEEPSEEK_API_KEY
+    prompt: "prompts/03-draft.md"
+    batch_size: 1
+    concurrency: 2
+    max_tokens: 8192
+    temperature: 0.6
+    price_per_mtok: { in: 4.5, out: 13.5 }        # 闲时价（北京 00:30–08:30 / 其余低谷）
+    cache_hit_price_per_mtok: { in: 0.45, out: 13.5 }
+
+  # 早报/日报综述：1–2 次/天，成本可忽略 → 要最强的
+  digest:
+    provider: deepseek
+    model: deepseek-v4-pro
+    base_url: "https://api.deepseek.com/v1"
+    api_key_env: DEEPSEEK_API_KEY
+    prompt: "prompts/04-digest.md"
+    batch_size: 1
+    concurrency: 1
+    max_tokens: 4096
+    temperature: 0.5
+    price_per_mtok: { in: 4.5, out: 13.5 }
+    cache_hit_price_per_mtok: { in: 0.45, out: 13.5 }
+
+  # 审校：**必须与写作不同家** —— 不同模型的错误相关性低，这才是交叉验证的全部意义
+  review:
+    provider: aliyun
+    model: qwen3.8-flash
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    api_key_env: QWEN_API_KEY
+    prompt: "prompts/05-review.md"
+    batch_size: 1
+    concurrency: 2
+    max_tokens: 2048
+    temperature: 0.0
+    price_per_mtok: { in: 0.8, out: 2.7 }
+    cache_hit_price_per_mtok: { in: 0.08, out: 2.7 }
+
+  # 配图理解（只在需要读图时调用）
+  vision:
+    provider: deepseek
+    model: deepseek-v4-flash-vision-exp
+    base_url: "https://api.deepseek.com/v1"
+    api_key_env: DEEPSEEK_API_KEY
+    prompt: ""
+    batch_size: 1
+    concurrency: 2
+    max_tokens: 1024
+    temperature: 0.0
+    price_per_mtok: { in: 1.5, out: 4.5 }
+    cache_hit_price_per_mtok: { in: 0.15, out: 4.5 }
+
+# ───────── 熔断与成本闸（设计文档 §14）─────────
+circuit_breaker:
+  consecutive_failures: 3      # 连续 3 次 run 失败 → 自动停用 + 告警
+cost:
+  daily_limit_cny: 10.0        # 单日 LLM 花费上限，超出则停生成 + 告警
+  # 谷时窗口（北京时间）——早报 07:30 与日报 19:00 天然落在低谷时段
+  offpeak_windows:
+    - ["00:30", "08:30"]

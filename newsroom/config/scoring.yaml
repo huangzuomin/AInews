@@ -1,0 +1,123 @@
+# 评分与配额（Scoring & Quota）
+#
+# 契约：**判断的载体**。所有阈值与权重都在这里，代码里不写死任何数字。
+#       模型只出子分，加权求和由代码做 —— 这是设计文档 §6.3 的规则 3。
+#
+# 五维来自 SPEC-selection-and-style-2026-09-11.md；
+# `evidence`（证据可得性）是新增维，权重 0.20：
+#   原始设计没有"能不能核到事实"这一维，这正是 9,383 篇只能靠聚合摘要成文的结构性原因。
+#   有了它，"好看但核不动"的题会在选题阶段被淘汰，而不是在写作阶段变成编造。
+
+version: 1
+
+weights:
+  novelty: 0.20      # 新颖度：这件事有多新
+  impact: 0.25       # 影响面：有多大 / 涉及谁
+  clarity: 0.20      # 清晰度：标题是否可读、有信息量
+  depth: 0.15        # 深度：素材是否够展开
+  evidence: 0.20     # 证据可得性：能不能核到一手事实
+
+# ───────── 各维的规则参数（v1 为纯规则，可重放；v2 接 LLM 后模型只覆盖 value）─────────
+
+novelty:
+  lookback_days: 7            # 回看窗口：7 天内出现过相似标题则降分
+  first_seen_score: 1.0       # 首次出现
+  repeat_decay: 0.35          # 每多一次相似报道扣多少
+  min_score: 0.05
+  recency_hours_full: 6       # 6 小时内视为"很新"，满分
+  recency_hours_zero: 48      # 48 小时以上视为陈旧
+
+impact:
+  source_weight_share: 0.45   # impact 中来自"信源权重"的比重
+  entity_share: 0.40          # 来自"命中实体"的比重
+  signal_share: 0.15          # 来自"影响面关键词"的比重
+  signals:                    # 出现即加分的影响面信号（正则，大小写不敏感）
+    - "发布|推出|上线|开源|收购|合并|融资|上市|诉讼|禁令|监管|处罚|离职|裁员|事故|泄露|突破|纪录|基准|SOTA"
+    - "\\b(launch|release|open[- ]?source|acquire|merger|raise|IPO|lawsuit|ban|regulat|fine|resign|layoff|incident|leak|breakthrough|record|benchmark)\\b"
+  entity_tier_weight:
+    first_party: 1.0          # 厂商自身（OpenAI / DeepSeek …）
+    product: 0.8              # 模型 / 产品
+    person: 0.6               # 人物
+    other: 0.4
+
+clarity:
+  ideal_min: 8                # 标题理想长度下限（字符）
+  ideal_max: 48               # 上限；超出视为冗长
+  long_penalty: 0.3
+  clickbait_penalty: 0.4      # 命中标题党模式扣分
+  clickbait_patterns:
+    - "震惊|惊天|炸裂|必看|速看|太可怕|你绝对|不看后悔|惊呆|逆天|封神|yyds"
+    - "!{2,}|？{2,}|\\?{2,}"
+  # 自媒体调性扣分 —— 首跑实测：不加这一维，榜单会被口语化标题占据
+  # （"老黄替OpenAI宣布AGI，出题人当场打脸"、"……当Benchmark刷啊。。。"）。
+  # 注意：扣的是**标题风格**，不是内容价值 —— 同一条新闻用专业表述的版本会自然胜出。
+  tabloid_penalty: 0.5
+  tabloid_patterns:
+    - "打脸|开炮|开撕|互撕|大瓜|翻车|塌了|炸了|杀疯了|杀入|叫板|硬刚|怒怼|炮轰|下场"
+    - "吊打|碾压|血洗|爽文|逆袭|离谱|吓人|吓哭|破防|天价|内幕|惊天"
+    - "老黄|小扎|J神|雷总|红衣教主|钢铁侠|AI先生"      # 用昵称指代人物 → 非专业表述
+    - "啊[。！？…]{1,}|[。]{3,}|！{2,}|~{2,}"
+  number_bonus: 0.15          # 标题含具体数字（有信息量）
+  quote_bonus: 0.10           # 标题含引号（有具体表述）
+
+depth:
+  summary_len_floor: 40       # 摘要低于此长度 → 素材不足
+  summary_len_good: 200       # 达到此长度 → 满分
+  number_bonus: 0.15          # 摘要含数字
+  link_bonus: 0.10            # 条目带原文链接
+
+evidence:
+  tier_base:
+    first_party: 1.00         # 厂商/机构官方 = 可直接引用
+    media: 0.60               # 专业媒体 = 需交叉核
+    aggregator: 0.30          # 聚合/转载 = 需回溯原始来源
+  has_url_bonus: 0.10
+  corroboration_bonus: 0.20   # 同一 Event 有 ≥2 个独立信源 → 互相印证
+  corroboration_min_sources: 2
+
+# ───────── 排产配额 ─────────
+quota:
+  morning:
+    target: 10                # 早报目标条数
+    min: 8
+    max: 12
+  daily:
+    target: 5                 # 日报 = 5 个不同 Event（保证"5 条是 5 件事"）
+    min: 4
+    max: 6
+  insights:
+    t1: 3                     # 允许无人发布的深度稿
+    t2: 2                     # 需人工确认的深度稿（含数字/观点/争议/独家判断）
+
+# ───────── 分流阈值 ─────────
+thresholds:
+  publish_min_total: 0.45     # 总分低于此值不进任何频道
+  morning_min_total: 0.40     # 进早报的下限
+  daily_min_total: 0.55       # 进日报的下限（日报更严）
+  insight_min_total: 0.65     # 进洞察的下限（最严）
+  daily_require_distinct_events: true   # 日报 5 条必须是 5 个不同 Event
+
+# ───────── 归并（Event 聚合）参数 ─────────
+cluster:
+  title_similarity: 0.72      # difflib 比值阈值
+  title_jaccard: 0.55         # 词元 Jaccard 阈值（二者之一命中即归并）
+  url_exact_always_merge: true
+  window_hours: 72            # 只在 72 小时窗口内归并（防止把历史同名事件并进来）
+
+# ───────── 信源多样性（首跑实测后新增）─────────
+# 为什么必须有：首跑早报 10 条里 7 条来自同一个 feed（36氪），
+# 单一源垄断会让"日报 5 条 = 5 件事"退化成"一个栏目的摘要"，
+# 而多源印证正是 Event 模型要买到的东西。这是**编辑要求**，不是性能优化。
+diversity:
+  morning_max_per_source: 3     # 早报单源上限
+  daily_max_per_source: 2       # 日报单源上限
+  insight_max_per_source: 1     # 洞察单源上限（深度稿最忌讳同源堆叠）
+  min_distinct_sources: 4       # 早报至少覆盖几家（不足则在运行摘要里告警）
+
+# ───────── 停更判定（供看门狗与运行摘要共用）─────────
+freshness:
+  stale_hours: 14             # 早报 07:30 与日报 19:00 之间不应有 >14h 空档
+  channel_stale_hours:
+    morningnews: 30
+    newspaper: 30
+    insights: 24

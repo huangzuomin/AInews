@@ -1,0 +1,259 @@
+# 信源注册表（Source Registry）
+#
+# 契约：本文件是采集层的**唯一事实源**。所有条目都经过 2026-09-11 从 TrueNAS 本机实测，
+#       `status` 字段记录的是**实测结果**，不是猜测。改这里就等于改采集行为。
+#
+# 字段：
+#   id          稳定标识（用作 raw 落盘文件名，不可随意改）
+#   name        显示名
+#   kind        direct（直连 RSS/Atom） | rsshub（经本机 RSSHub 路由）
+#   url         kind=direct 时的完整地址
+#   route       kind=rsshub 时的路由（拼在 rsshub_base 之后）
+#   lang        zh | en
+#   tier        first_party（厂商/机构官方） | media（专业媒体） | aggregator（聚合/转载）
+#   weight      信源权重（进 impact 子分；一手源天然更高）
+#   status      ok（实测可用） | blocked（上游拒绝） | weak（可用但条目极少）
+#   note        实测记录（HTTP 码 / 条目数 / 备注），供审计
+#
+# 实测时间：2026-09-11 20:5x CST，出口 = TrueNAS 192.168.50.224
+
+rsshub_base: "http://127.0.0.1:1200"   # 本机 RSSHub（容器 ix-rsshub-rsshub-1，已运行 3 个月）
+user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+timeout_seconds: 30
+max_items_per_source: 40              # 单源单次最多取多少条（防单源淹没）
+
+sources:
+
+  # ─────────── 中文媒体（国内出口，无需翻墙，速度最快） ───────────
+  - id: kr36-ai
+    name: 36氪·AI
+    kind: rsshub
+    route: "36kr/information/AI"
+    lang: zh
+    tier: media
+    weight: 0.85
+    status: ok
+    note: "实测 200 / 544KB / 30 条 / 0.12s —— 本表最快的源"
+
+  - id: qbitai
+    name: 量子位
+    kind: direct
+    url: "https://www.qbitai.com/feed"
+    lang: zh
+    tier: media
+    weight: 0.90
+    status: ok
+    note: "实测 200 / 10 条 / 最新 09-11 08:59（RSSHub 路由 503，直连可用）"
+
+  - id: ithome
+    name: IT之家
+    kind: rsshub
+    route: "ithome/it"
+    lang: zh
+    tier: media
+    weight: 0.60
+    status: ok
+    note: "实测 200 / 9 条（综合科技，AI 相关需过滤）"
+
+  - id: infoq-ai
+    name: InfoQ·AI&LLM
+    kind: rsshub
+    route: "infoq/topic/AI%26LLM"
+    lang: zh
+    tier: media
+    weight: 0.85
+    status: ok
+    note: "实测 200 / 3 条 / 9s（上游慢，但内容质量高）"
+
+  # ─────────── 一手源（厂商/机构官方，权重最高） ───────────
+  - id: huggingface-blog
+    name: Hugging Face Blog
+    kind: direct
+    url: "https://huggingface.co/blog/feed.xml"
+    lang: en
+    tier: first_party
+    weight: 1.00
+    status: ok
+    note: "实测 200 / 861 条（全量 feed，需按时间窗截取）"
+
+  - id: deepmind-blog
+    name: Google DeepMind Blog
+    kind: direct
+    url: "https://deepmind.google/blog/rss.xml"
+    lang: en
+    tier: first_party
+    weight: 1.00
+    status: ok
+    note: "实测 200 / 1 条（更新稀疏但权威）"
+
+  - id: openai-news
+    name: OpenAI News
+    kind: rsshub
+    route: "openai/news"
+    lang: en
+    tier: first_party
+    weight: 1.00
+    status: ok
+    note: "实测 200 / 2 条（直连 openai.com/blog/rss.xml 为 307）"
+
+  - id: anthropic-news
+    name: Anthropic News
+    kind: rsshub
+    route: "anthropic/news"
+    lang: en
+    tier: first_party
+    weight: 1.00
+    status: ok
+    note: "实测 200 / 1 条"
+
+  - id: msft-research
+    name: Microsoft Research
+    kind: direct
+    url: "https://www.microsoft.com/en-us/research/feed/"
+    lang: en
+    tier: first_party
+    weight: 0.95
+    status: ok
+    note: "实测 200 / 10 条"
+
+  # ─────────── 英文媒体 ───────────
+  - id: techcrunch-ai
+    name: TechCrunch AI
+    kind: direct
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    lang: en
+    tier: media
+    weight: 0.85
+    status: ok
+    note: "实测 200 / 19 条 / 最新 09-10 21:51"
+
+  - id: arstechnica-ai
+    name: Ars Technica AI
+    kind: direct
+    url: "https://arstechnica.com/ai/feed/"
+    lang: en
+    tier: media
+    weight: 0.85
+    status: ok
+    note: "实测 200 / 20 条"
+
+  - id: technologyreview-ai
+    name: MIT Technology Review · AI
+    kind: direct
+    url: "https://www.technologyreview.com/topic/artificial-intelligence/feed"
+    lang: en
+    tier: media
+    weight: 0.90
+    status: ok
+    note: "实测 200 / 10 条（原写作提示词即模仿其资深记者 Karen Hao 风格）"
+
+  - id: nyt-technology
+    name: NYT Technology
+    kind: direct
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+    lang: en
+    tier: media
+    weight: 0.70
+    status: ok
+    note: "实测 200 / 28 条（综合科技，AI 相关需过滤）"
+
+  - id: bbc-technology
+    name: BBC Technology
+    kind: direct
+    url: "https://feeds.bbci.co.uk/news/technology/rss.xml"
+    lang: en
+    tier: media
+    weight: 0.65
+    status: ok
+    note: "实测 200 / 21 条（综合科技，AI 相关需过滤）"
+
+  - id: theverge-ai
+    name: The Verge · AI
+    kind: direct
+    url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+    lang: en
+    tier: media
+    weight: 0.80
+    status: ok
+    note: "实测 200 / 10 entries（Atom 格式）"
+
+  - id: guardian-ai
+    name: The Guardian · AI
+    kind: direct
+    url: "https://www.theguardian.com/technology/artificialintelligenceai/rss"
+    lang: en
+    tier: media
+    weight: 0.75
+    status: ok
+    note: "实测 200 / 20 条"
+
+  - id: simonwillison
+    name: Simon Willison's Weblog
+    kind: direct
+    url: "https://simonwillison.net/atom/everything/"
+    lang: en
+    tier: media
+    weight: 0.80
+    status: ok
+    note: "实测 200 / 30 entries（Atom；个人博客，但为 LLM 领域高信度一手观察）"
+
+  # ─────────── 实测不可用（保留记录，避免后人重复踩坑） ───────────
+  - id: venturebeat-ai
+    name: VentureBeat AI
+    kind: direct
+    url: "https://venturebeat.com/category/ai/feed/"
+    lang: en
+    tier: media
+    weight: 0.0
+    status: blocked
+    note: "实测 429 Too Many Requests（机房 IP 被限流），换浏览器 UA 无效"
+
+  - id: artintelligence-news
+    name: AI News
+    kind: direct
+    url: "https://www.artificialintelligence-news.com/feed/"
+    lang: en
+    tier: media
+    weight: 0.0
+    status: blocked
+    note: "实测 403 Forbidden，换浏览器 UA 无效"
+
+  - id: rsshub-public-aibase
+    name: AIBase（公共 rsshub.app）
+    kind: direct
+    url: "https://rsshub.app/aibase/news"
+    lang: zh
+    tier: aggregator
+    weight: 0.0
+    status: blocked
+    note: "实测 403 —— 公共 rsshub.app 已限制，必须走自建实例"
+
+  - id: jiqizhixin
+    name: 机器之心
+    kind: direct
+    url: "https://www.jiqizhixin.com/rss"
+    lang: zh
+    tier: media
+    weight: 0.90
+    status: blocked
+    note: "实测 302；RSSHub 路由 503。待查（该源价值高，值得单独攻）"
+
+  - id: github-trending
+    name: GitHub Trending (AI)
+    kind: rsshub
+    route: "github/trending/daily/any"
+    lang: en
+    tier: aggregator
+    weight: 0.50
+    status: blocked
+    note: "实测 503（RSSHub 路由上游失败）"
+
+  - id: solidot-ai
+    name: Solidot AI
+    kind: rsshub
+    route: "solidot/type/ai"
+    lang: zh
+    tier: aggregator
+    weight: 0.50
+    status: blocked
+    note: "实测 503（RSSHub 路由上游失败）"
