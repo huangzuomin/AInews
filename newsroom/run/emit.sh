@@ -82,6 +82,10 @@ COMMITTED=0
 PUSHED=0
 finish() {
   rc=$?
+  # 收尾横幅放在 trap 里，保证**任何**退出路径（含幂等跳过、--dry-run、失败）
+  # 都有配对的「开始 / 结束」。否则日志里只留一个开始行，读者无法判断是
+  # 还在跑、还是早就结束了 —— 这正是"沉默故障"的读法。
+  say "═══ emit.sh $KIND 结束 rc=$rc ═══"
   # 只对发布目标（GitHub origin/main）算差距；未 fetch 时记为 -1（= 未知），
   # 不要拿 nas-local 顶替 —— 那是传输中转，不代表"已发布"。
   if git -C "$REPO" rev-parse --verify --quiet refs/remotes/origin/main >/dev/null 2>&1; then
@@ -182,5 +186,3 @@ if [ -f "$RUN_HOME/git-credentials" ] && [ -s "$RUN_HOME/git-credentials" ]; the
 else
   say "未配置 push 凭据（$RUN_HOME/git-credentials 为空）→ 提交留在本地，等 token 到位后补推"
 fi
-
-say "═══ emit.sh $KIND 结束 ═══"
