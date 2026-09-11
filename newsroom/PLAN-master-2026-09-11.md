@@ -211,7 +211,71 @@
 | P1.4 | T3 | `.github/workflows/build-deploy.yml`（build → 校验 → deploy） | 一次内容提交 3 分钟内上线 |
 | P1.5 | T3 | 接入 G3-b 构建后抽检（JSON-LD 可解析） | 故意清空 schema partial → CI 失败 |
 | P1.6 | T6 | 幽灵站 IA 的**正确复建**排期（不提交 HTML，用真 taxonomy） | 见 P6.3 |
-| P1.7 | T6 | 实测 Cloudflare Pages 国内可达性 | 有数据 → 决定 D06 |
+| P1.7 | T6 | ~~实测 Cloudflare Pages 国内可达性~~ → **降级**：仅确认 origin 是否为 Vercel | 见 D06 更正（CDN 已是 CF，换 origin 不治国内） |
+| **P1.8** | T2 | **`public/` 出史**（`git filter-repo` 重写历史） | pack 2.96 GiB → 预估 <400 MB；`git push` 可行性恢复 |
+
+#### P1.8 说明：P1.1 只解决了索引，没解决历史
+
+实测：
+
+```
+$ git count-objects -vH
+in-pack: 560237
+size-pack: 2.96 GiB
+
+$ git rev-list --objects --all | grep -c ' public/'
+508654   ← 占全部历史对象的 91.1%
+```
+
+`public/` 已从**索引**移除（P1.1，70,505 → 18,066 条目），但它仍存在于**全部历史**里。
+后果是实际会挡住发布的：
+
+| 约束 | 阈值 | 当前 |
+|---|---|---|
+| GitHub 推荐仓库上限 | 1 GB | **2.96 GiB** ❌ |
+| HTTPS push 单次上限 | ~2 GB | **2.96 GiB** ❌ 很可能直接失败 |
+| CI `actions/checkout` | 越慢越贵 | 560k 对象，必然慢 |
+
+**结论：不做 P1.8，"把发布权交给 CI"这条路在第一步就会卡住。**
+
+**操作程序（需用户逐项确认，不可自动执行）**
+
+```bash
+# 0. 备份（必须最先，且验证备份可用）
+git clone --mirror D:/Work/neican-ai D:/_backup_neican_$(date +%Y%m%d).git
+git -C D:/_backup_neican_*.git count-objects -vH     # 确认 560237 对象
+
+# 1. 确认没有其他克隆（重写会使它们全部失效）
+#    已知相关目录：W:\hugo（本工作树）、D:\Work\AInews（5月浅克隆空壳）
+#    → W 盘树若仍需保留，重写后必须重新克隆，不能继续 push
+
+# 2. dry-run：只统计将要删除的对象，不写入
+git filter-repo --analyze
+
+# 3. 执行（同时清 public/ 与 public-test/）
+git filter-repo --path public/ --path public-test/ --invert-paths
+
+# 4. 校验
+git count-objects -vH          # 目标 <400 MB
+git log --oneline -5           # 提交信息应完整保留（SHA 会全部变化）
+git status --porcelain         # 应为空
+
+# 5. force push（**不可逆的外部动作**，需用户单独确认）
+git remote add origin git@github.com:huangzuomin/AInews.git
+git push --force --all && git push --force --tags
+```
+
+**三条前置提醒**
+
+1. **所有 commit SHA 都会变化**（`6e7f09c049` 等不再存在），任何指向旧 SHA 的
+   文档、Issue 引用、CI 徽章都会失效。`newsroom/` 里引用了 SHA 的文档需同步更新。
+2. **`W:\hugo` 现役树在重写后不能继续 push**，只能作为只读镜像或重新克隆。
+3. **force push 到公开库是外部且不可逆的动作**——即使有本地裸库备份，
+   GitHub 侧的历史、star/fork 关系与已传播的镜像无法收回。**必须单独确认。**
+
+**替代方案（若不做 P1.8）**：把仓库迁到新地址（新库只含重写后的历史），
+旧库设为 archived 只读。代价是 URL 变更；收益是不需要 force push。
+若目标是"不中断对外引用"，这条更稳。
 
 ### P2 — 无 LLM 骨架轨（预计 1–2 天）
 
