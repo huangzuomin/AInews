@@ -1,0 +1,23 @@
+# neican.ai 看门狗配置（模板）
+#
+# ⚠️ 真实配置放在 **仓库外**：/mnt/SSD_Apps/apps/neican-run/watchdog.conf
+#    原因：含密钥；且运行时文件在仓库内会把工作区弄脏，
+#    破坏「构建后 git status 恒为空」这个自动化前提。
+#
+# 复制到目标位置并填入真实值：
+#   install -m 600 /dev/stdin /mnt/SSD_Apps/apps/neican-run/watchdog.conf <<'EOF'
+#   DINGTALK_WEBHOOK=https://oapi.dingtalk.com/robot/send?access_token=xxx
+#   EOF
+
+# 钉钉群机器人 webhook（告警出口；复用旧系统的习惯，零新增依赖）
+# 留空 = 只记录不告警（阶段 2 上线初期的安全默认）
+DINGTALK_WEBHOOK=
+
+# 反向心跳 URL（healthchecks.io 等）。仅在**一切新鲜**时上报，缺席即告警。
+# 这是唯一的"第三方"信号——本机整个死掉时它仍然会响。
+# 注意：不要把它设成 GitHub 的 workflow_dispatch（那还是自报）。
+HEARTBEAT_URL=
+
+# 全局阈值覆盖（小时）。留空 = 用脚本内置的每频道阈值。
+# 验收测试用：设成 0 可立即触发停更判定。
+STALE_HOURS_OVERRIDE=

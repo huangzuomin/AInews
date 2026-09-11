@@ -55,3 +55,11 @@ _static_off/
 # Hugo 资源指纹缓存：每次构建都会改写（指纹抖动 + 删旧指纹）
 # 被追踪 => 每次构建都让工作区变脏，"干净工作区"这个自动化前提不成立
 resources/_gen/
+
+# ── 常驻运行层：运行态与密钥（默认放仓库外 /mnt/SSD_Apps/apps/neican-run）──
+# 此处是防线，不是主路径：若有人把 NEICAN_RUN_DIR 指到仓库内，
+# 每次告警都会写状态文件 → 弄脏工作区 → 破坏"构建后 git status 恒为空"。
+newsroom/run/*.conf
+newsroom/run/state/
+newsroom/run/logs/
+newsroom/run/__pycache__/
