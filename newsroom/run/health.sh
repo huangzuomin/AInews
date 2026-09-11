@@ -96,9 +96,13 @@ if d.get('committed') and not d.get('pushed'):
     a = d.get('commits_ahead_of_origin')
     behind = '未知（未 fetch origin/main）' if a in (-1, None) else '%s 个提交' % a
     alerts.append('ALERT 本期已提交未推送（origin 落后 %s）—— 发布链断了' % behind)
-print('%s %s | rc=%s committed=%s pushed=%s | ahead=%s|%s|%s' % (
-    d.get('kind'), d.get('day'), d.get('rc'), d.get('committed'), d.get('pushed'),
-    d.get('commits_ahead_of_origin'), age_s, '; '.join(alerts)))
+print('|'.join([
+    '%s %s rc=%s committed=%s pushed=%s ahead=%s' % (
+        d.get('kind'), d.get('day'), d.get('rc'), d.get('committed'),
+        d.get('pushed'), d.get('commits_ahead_of_origin')),
+    '产出于 %s' % age_s if age is not None else '产出时间未知',
+    '; '.join(alerts),
+]))
 " 2>/dev/null || echo "(读取失败)|?|")
   EMIT_LINE=$(printf '%s\n' "$EMIT_SUM" | cut -d'|' -f1)
   EMIT_AGE=$(printf '%s\n' "$EMIT_SUM" | cut -d'|' -f2)
@@ -118,7 +122,7 @@ fi
   echo "watchdog last : $WD_ISO"
   echo "watchdog stale: $WD_STALE"
   echo "emit last     : $EMIT_LINE"
-  echo "emit age      : $EMIT_AGE        # 生产线产出新鲜度（阈值 14h）"
+  echo "emit fresh    : $EMIT_AGE        # 生产线产出的新鲜度（阈值 14h）"
   echo "commits ahead : $AHEAD        # 相对 origin/main 已提交未推送；>0 = 发布链断了"
   echo ""
 } >> "$OUT"
@@ -151,16 +155,25 @@ if [ "$L" -gt 3000 ]; then
   tail -n 1000 "$OUT" > "$OUT.tmp" && mv "$OUT.tmp" "$OUT"
 fi
 
+# 告警要一次报全：逐个 exit 会让第二个问题永远看不见
+# （实测：工作区脏 + 已提交未推送同时成立时，后者被前者吃掉）
+ALERTS=""
+
 # 工作区脏 = 自动化前提被破坏，必须响亮（这是"沉默的故障"的典型）
 if [ "$DIRTY" != "0" ]; then
-  echo "ALERT: 工作区脏项 $DIRTY 个 —— 检查是否有进程在写仓库（多头写入）" >> "$OUT"
-  exit 1
+  ALERTS="${ALERTS}ALERT: 工作区脏项 $DIRTY 个 —— 检查是否有进程在写仓库（多头写入）
+"
 fi
 
 # 生产线自己没产出（或产出没发布）—— 与"站点停更"是两个不同的病，
 # 对外信号分不清，所以必须在对内信号里单独响亮。
 if [ -n "$EMIT_ALERT" ]; then
-  echo "$EMIT_ALERT" >> "$OUT"
+  ALERTS="${ALERTS}${EMIT_ALERT}
+"
+fi
+
+if [ -n "$ALERTS" ]; then
+  printf '%s' "$ALERTS" >> "$OUT"
   exit 1
 fi
 exit 0

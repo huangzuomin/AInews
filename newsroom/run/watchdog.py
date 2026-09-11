@@ -273,6 +273,16 @@ def build_alert(site_result, stale):
         ))
         if mark:
             lines[-1] = lines[-1][:-1] + mark
+
+    # 把"停的到底是不是生产线"直接点破：否则看到站点停更，第一反应会去查采集。
+    emit = next((r for r in site_result if r.get("key") == "emit"), None)
+    if emit and emit.get("committed") and not emit.get("pushed"):
+        lines += [
+            "",
+            "> **本地已产出但未推送**（`ahead=%s`）—— 站点停更的直接原因在"
+            "**发布链**（push 凭据 / CI 发布闸），不在生产线。" % emit.get("ahead"),
+        ]
+
     lines += [
         "",
         "**排查顺序**（先分清是产出问题还是发布问题）",

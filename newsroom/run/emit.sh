@@ -56,6 +56,17 @@ rotate() {
   fi
 }
 
+# 本次的产出是否已经在发布目标上（HEAD 是 origin/main 的祖先）。
+# 区分"已推送"与"仅本地提交"是这块的全部意义 —— 两者在运维上完全不同。
+is_pushed() {
+  if git -C "$REPO" rev-parse --verify --quiet refs/remotes/origin/main >/dev/null 2>&1 \
+     && git -C "$REPO" merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+
 # ── 产出结果落盘（机器可读）─────────────────────────────────────────
 # 为什么必须有这个文件：只要 push 凭据缺失、或 CI 的发布闸没开，
 # **线上日期就不会推进**，于是 watchdog 看到的永远是"停更"，
@@ -108,7 +119,17 @@ if [ "$DRY" -eq 0 ]; then
   sh "$REPO/newsroom/run/pipeline.sh" >> "$LOG" 2>&1 || say "WARN pipeline 非零退出，继续尝试用既有 plan"
 fi
 
-# ── 2. 编排
+# ── 2. 编排（幂等）
+# 同一期次被重复触发（补跑 / 重试 / 人工再跑一次）时，digest 会拒绝覆盖并返回非零。
+# 若不做区分，这个**正确的保护**会被记成"产出失败"，进而触发假告警 ——
+# 而假阳性比没有告警更糟（会训练出"可以忽略"的习惯）。
+if [ -f "$REPO/$TARGET_REL" ] && git -C "$REPO" cat-file -e "HEAD:$TARGET_REL" 2>/dev/null; then
+  COMMITTED=1
+  PUSHED=$(is_pushed)
+  say "本期已产出且已提交（$TARGET_REL）→ 本次为重复触发，跳过（幂等）"
+  exit 0
+fi
+
 if [ "$DRY" -eq 1 ]; then
   "$PY" -m src.digest --kind "$KIND" --dry-run 2>&1 | tee -a "$LOG"
   exit 0
