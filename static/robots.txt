@@ -1,4 +1,59 @@
+# ---- 默认策略：全部允许 ----
 User-agent: *
 Allow: /
 
+# ---- AI 检索与引用类爬虫：显式允许 ----
+# 决策 D1：全开。本站瓶颈是"被发现"而非"被抄"；
+# 以引用规范（见 /llms.txt）换署名，比用 robots 拒绝换保护更划算。
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google（Google-Extended 控制 Gemini / Vertex AI 的训练与 grounding）
+User-agent: Google-Extended
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# 字节（国内 AI 助手检索）
+User-agent: Bytespider
+Allow: /
+
+# ---- 索引与内容发现 ----
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://www.neican.ai/sitemap.xml
+# 站点说明与引用规范：https://www.neican.ai/llms.txt

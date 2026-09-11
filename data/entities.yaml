@@ -1,0 +1,189 @@
+# 实体注册表（Entity Registry）
+#
+# 用途：GEO 的长期复利所在 —— AI 引擎建立知识图谱靠的是"实体名一致 + 同一实体跨页共现"。
+#       现状是 16,237 个未归一化的标签（例如 `ai-agent与自主系统` 与
+#       `ai-agent与自主系统-ai-agents--autonomous-systems` 并存），无法形成实体。
+#
+# 契约：
+#   1. 文章 frontmatter 的 `entities: []` 必须取自本表的 canonical 值（闭集校验）
+#   2. `main_topics: []` 必须取自本表的 topic 闭集（见 topics.yaml 或本文档末尾）
+#   3. aliases 用于把历史碎片标签归并到 canonical
+#
+# 字段：
+#   canonical     规范名（写入 frontmatter 的值）
+#   aliases       同义写法（用于归并、检索与匹配）
+#   type          Organization | Product | SoftwareApplication | DefinedTerm | Person | Event
+#   official_url  一手源入口（用于来源白名单与 sameAs）
+#   same_as       外部知识库对齐（Wikidata / 维基 / GitHub）
+#   topic         归属主话题（闭集之一）
+
+# ============ 组织 / 公司 ============
+- canonical: DeepSeek
+  aliases: [deepseek, 深度求索, DeepSeek AI, DeepSeek-V4, 梁文锋]
+  type: Organization
+  official_url: https://www.deepseek.com/
+  same_as: [https://en.wikipedia.org/wiki/DeepSeek]
+  topic: 产业生态与商业版图
+
+- canonical: OpenAI
+  aliases: [openai, Open AI, GPT-6, ChatGPT, 奥特曼, Sam Altman]
+  type: Organization
+  official_url: https://openai.com/blog
+  same_as: [https://en.wikipedia.org/wiki/OpenAI]
+  topic: 产业生态与商业版图
+
+- canonical: Anthropic
+  aliases: [anthropic, Claude, ClaudeBot, Claude 4]
+  type: Organization
+  official_url: https://www.anthropic.com/news
+  same_as: [https://en.wikipedia.org/wiki/Anthropic]
+  topic: 产业生态与商业版图
+
+- canonical: Google DeepMind
+  aliases: [google, deepmind, Gemini, 谷歌, Alphabet]
+  type: Organization
+  official_url: https://deepmind.google/discover/blog/
+  same_as: [https://en.wikipedia.org/wiki/Google_DeepMind]
+  topic: 产业生态与商业版图
+
+- canonical: 阿里巴巴
+  aliases: [阿里, 阿里巴巴集团, 通义, 通义千问, Qwen, 阿里云]
+  type: Organization
+  official_url: https://qwen.ai/
+  same_as: [https://en.wikipedia.org/wiki/Alibaba_Group]
+  topic: 产业生态与商业版图
+
+- canonical: 字节跳动
+  aliases: [字节, ByteDance, 豆包, Doubao, 火山引擎, Seed]
+  type: Organization
+  official_url: https://www.volcengine.com/
+  same_as: [https://en.wikipedia.org/wiki/ByteDance]
+  topic: 产业生态与商业版图
+
+- canonical: 腾讯
+  aliases: [腾讯集团, Tencent, 混元, Hunyuan, 元宝]
+  type: Organization
+  official_url: https://hunyuan.tencent.com/
+  same_as: [https://en.wikipedia.org/wiki/Tencent]
+  topic: 产业生态与商业版图
+
+- canonical: 月之暗面
+  aliases: [Moonshot AI, Kimi, Kimi K3, 杨植麟]
+  type: Organization
+  official_url: https://www.moonshot.cn/
+  same_as: [https://en.wikipedia.org/wiki/Moonshot_AI]
+  topic: 产业生态与商业版图
+
+- canonical: 智谱
+  aliases: [智谱AI, Zhipu, GLM, ChatGLM, 智谱华章]
+  type: Organization
+  official_url: https://www.zhipuai.cn/
+  same_as: [https://en.wikipedia.org/wiki/Zhipu_AI]
+  topic: 产业生态与商业版图
+
+- canonical: MiniMax
+  aliases: [minimax, 稀宇科技, 海螺]
+  type: Organization
+  official_url: https://www.minimaxi.com/
+  same_as: [https://en.wikipedia.org/wiki/MiniMax_(company)]
+  topic: 产业生态与商业版图
+
+- canonical: 百度
+  aliases: [baidu, 文心一言, 文心, ERNIE, 萝卜快跑]
+  type: Organization
+  official_url: https://yiyan.baidu.com/
+  same_as: [https://en.wikipedia.org/wiki/Baidu]
+  topic: 产业生态与商业版图
+
+- canonical: NVIDIA
+  aliases: [nvidia, 英伟达, 黄仁勋, CUDA, H100, Blackwell]
+  type: Organization
+  official_url: https://nvidianews.nvidia.com/
+  same_as: [https://en.wikipedia.org/wiki/Nvidia]
+  topic: 算力与芯片
+
+- canonical: 微软
+  aliases: [microsoft, MSFT, Copilot, Azure]
+  type: Organization
+  official_url: https://blogs.microsoft.com/
+  same_as: [https://en.wikipedia.org/wiki/Microsoft]
+  topic: 产业生态与商业版图
+
+- canonical: Meta
+  aliases: [meta, Facebook, Llama, 扎克伯格]
+  type: Organization
+  official_url: https://ai.meta.com/blog/
+  same_as: [https://en.wikipedia.org/wiki/Meta_Platforms]
+  topic: 产业生态与商业版图
+
+# ============ 产品 / 模型 ============
+- canonical: GPT-6
+  aliases: [gpt6, GPT-6 Astra, Astra, GPT-5.6 Luna, GPT-5.6]
+  type: Product
+  official_url: https://openai.com/blog
+  topic: 前沿模型与算法
+
+- canonical: DeepSeek-V4
+  aliases: [DeepSeek V4, V4-Flash, V4.1-Flash, V4-Pro, deepseek-v4-flash]
+  type: Product
+  official_url: https://api-docs.deepseek.com/news/
+  topic: 前沿模型与算法
+
+- canonical: Claude
+  aliases: [claude, Claude 4, Claude Opus, Claude Sonnet]
+  type: Product
+  official_url: https://www.anthropic.com/news
+  topic: 前沿模型与算法
+
+# ============ 概念 / 术语 ============
+- canonical: KV 缓存
+  aliases: [KV cache, kvcache, KV缓存, 键值缓存, KV Cache]
+  type: DefinedTerm
+  same_as: [https://en.wikipedia.org/wiki/Key%E2%80%93value_database]
+  topic: 前沿模型与算法
+
+- canonical: MoE 架构
+  aliases: [MoE, Mixture of Experts, 混合专家, 混合专家模型]
+  type: DefinedTerm
+  same_as: [https://en.wikipedia.org/wiki/Mixture_of_experts]
+  topic: 前沿模型与算法
+
+- canonical: 长上下文
+  aliases: [long context, 1M 上下文, 长文本, long-context]
+  type: DefinedTerm
+  topic: 前沿模型与算法
+
+- canonical: 多模态
+  aliases: [multimodal, 原生多模态, 全模态, 视觉理解]
+  type: DefinedTerm
+  topic: 前沿模型与算法
+
+- canonical: AI Agent
+  aliases: [agent, AI Agent与自主系统, ai-agent与自主系统, ai-agent与自主系统-ai-agents--autonomous-systems, 智能体, Agentic AI, 自主系统]
+  type: DefinedTerm
+  topic: AI Agent与自主系统
+
+- canonical: 具身智能
+  aliases: [embodied AI, 人形机器人, 机器人, robotics]
+  type: DefinedTerm
+  topic: 机器人与具身智能
+
+- canonical: 推理成本
+  aliases: [inference cost, 推理价格, API 价格, token 价格, 价格战]
+  type: DefinedTerm
+  topic: 产业生态与商业版图
+
+- canonical: RAG
+  aliases: [rag, 检索增强生成, Retrieval-Augmented Generation]
+  type: DefinedTerm
+  topic: AI与软件工程
+
+- canonical: 模型对齐
+  aliases: [alignment, 对齐, RLHF, 安全对齐, 事故对齐评估]
+  type: DefinedTerm
+  topic: AI伦理与治理
+
+- canonical: AI 监管
+  aliases: [AI 治理, AI regulation, 人工智能法案, AI 法案]
+  type: DefinedTerm
+  topic: AI伦理与治理

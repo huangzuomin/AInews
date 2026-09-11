@@ -1,0 +1,124 @@
+{{/*
+  JSON-LD 结构化数据（@graph 形式，一次输出多实体互引）
+
+  替换对象：Hugo 内建 _internal/schema.html
+  —— 该模板在 0.147 仍然存在，但只输出过期于 2010 年代的 itemprop 微数据，
+     不输出任何 JSON-LD。它不报错、不警告，导致全站 JSON-LD 覆盖率为 0。
+     实测：调用 "_internal/nonexistent.html" → 构建失败；调用 "_internal/schema.html" → 静默。
+
+  设计原则：所有字段均从真实 frontmatter 派生。字段缺失则省略，
+  绝不臆造实体、作者或来源（不为 GEO 牺牲诚实）。
+*/}}
+{{- $base := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $orgID := printf "%s#organization" $base -}}
+{{- $webID := printf "%s#website" $base -}}
+
+{{- $logo := "/logo/logo.png" -}}
+{{- with site.Params.site_logo }}{{ $logo = . }}{{ end -}}
+{{- $logo = $logo | absURL -}}
+
+{{- $org := dict
+      "@type" "Organization"
+      "@id" $orgID
+      "name" site.Title
+      "url" site.BaseURL
+      "logo" (dict "@type" "ImageObject" "url" $logo) -}}
+
+{{- $web := dict
+      "@type" "WebSite"
+      "@id" $webID
+      "url" site.BaseURL
+      "name" site.Title
+      "inLanguage" "zh-CN"
+      "publisher" (dict "@id" $orgID) -}}
+
+{{- $nodes := slice $org $web -}}
+
+{{- if .IsPage -}}
+  {{- /* ---- 必填：标题 / 描述 / 时间 ---- */ -}}
+  {{- $headline := .Title | plainify -}}
+  {{- $headline = $headline | truncate 110 "" -}}
+
+  {{- $desc := "" -}}
+  {{- with .Params.summary }}{{ $desc = . }}{{ end -}}
+  {{- if not $desc }}{{ $desc = .Summary }}{{ end -}}
+  {{- $desc = $desc | plainify | truncate 200 "" -}}
+
+  {{- $published := .Date.Format "2006-01-02T15:04:05+08:00" -}}
+  {{- $modified := .Lastmod.Format "2006-01-02T15:04:05+08:00" -}}
+
+  {{- /* ---- 配图：解析逻辑集中在 seo/image.html（单一事实源）---- */ -}}
+  {{- $imgURL := partial "seo/image.html" . -}}
+
+  {{- /* ---- 作者：站级机构署名（E-E-A-T） ---- */ -}}
+  {{- $authorName := .Params.author | default site.Params.author -}}
+  {{- if reflect.IsSlice $authorName }}{{ $authorName = delimit $authorName ", " }}{{ end -}}
+
+  {{- $post := dict
+        "@type" "NewsArticle"
+        "@id" (printf "%s#article" .Permalink)
+        "headline" $headline
+        "description" $desc
+        "datePublished" $published
+        "dateModified" $modified
+        "inLanguage" "zh-CN"
+        "isAccessibleForFree" true
+        "mainEntityOfPage" (dict "@id" .Permalink)
+        "image" (slice $imgURL)
+        "publisher" (dict "@id" $orgID)
+        "isPartOf" (dict "@id" $webID)
+        "author" (dict "@type" "Organization" "name" $authorName "url" (printf "%s/about/" $base)) -}}
+
+  {{- /* ---- 可选：栏目（main_topics 首项）---- */ -}}
+  {{- $sectionName := "" -}}
+  {{- with .Params.main_topics }}{{ $sectionName = index . 0 }}{{ end -}}
+  {{- if and $sectionName (ne $sectionName "--") -}}
+    {{- $post = merge $post (dict "articleSection" $sectionName) -}}
+  {{- end -}}
+
+  {{- /* ---- 可选：关键词（tags）---- */ -}}
+  {{- with .Params.tags }}{{ $post = merge $post (dict "keywords" .) }}{{ end -}}
+
+  {{- /* ---- 可选：实体归属（entities，须来自 data/entities.yaml）---- */ -}}
+  {{- $about := slice -}}
+  {{- range .Params.entities -}}
+    {{- $about = $about | append (dict "@type" "Thing" "name" .) -}}
+  {{- end -}}
+  {{- with $about }}{{ $post = merge $post (dict "about" .) }}{{ end -}}
+
+  {{- /* ---- 可选：引用来源（sources → citation）—— GEO 的引用锚点 ---- */ -}}
+  {{- $cites := slice -}}
+  {{- range .Params.sources -}}
+    {{- $c := dict "@type" "CreativeWork" -}}
+    {{- with .title }}{{ $c = merge $c (dict "name" .) }}{{ end -}}
+    {{- with .url }}{{ $c = merge $c (dict "url" .) }}{{ end -}}
+    {{- with .publisher }}{{ $c = merge $c (dict "publisher" (dict "@type" "Organization" "name" .)) }}{{ end -}}
+    {{- with .date }}{{ $c = merge $c (dict "datePublished" .) }}{{ end -}}
+    {{- with .accessed }}{{ $c = merge $c (dict "dateAccessed" .) }}{{ end -}}
+    {{- $cites = $cites | append $c -}}
+  {{- end -}}
+  {{- with $cites }}{{ $post = merge $post (dict "citation" .) }}{{ end -}}
+
+  {{- $nodes = $nodes | append $post -}}
+
+  {{- /* ---- 面包屑 ---- */ -}}
+  {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "首页" "item" (printf "%s/" $base)) -}}
+  {{- $pos := 2 -}}
+  {{- $sys := .CurrentSection -}}
+  {{- if and $sys (not $sys.IsHome) -}}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" ($sys.Title | plainify) "item" $sys.Permalink) -}}
+    {{- $pos = add $pos 1 -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" $headline "item" .Permalink) -}}
+  {{- $nodes = $nodes | append (dict "@type" "BreadcrumbList" "@id" (printf "%s#breadcrumb" .Permalink) "itemListElement" $crumbs) -}}
+{{- end -}}
+
+{{- /*
+  注意 safeJS 不可省：
+  在 <script> 内，Go html/template 的上下文是 JavaScript，而 jsonify 返回的是
+  template.HTML（HTML 上下文类型）。类型不匹配时 Go 会把整段 JSON 再按 JS 字符串
+  编码一次 → 产物变成 "<script>\"{\\\"@context\\\"...}\"</script>"，
+  外层多一层引号与反斜杠，Google/JSON.parse 全部解析失败。
+  加 safeJS 后值为 template.JS，与 JS 上下文匹配，原样输出。
+*/ -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" $nodes) | jsonify | safeJS }}</script>

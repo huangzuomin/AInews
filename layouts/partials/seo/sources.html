@@ -1,0 +1,37 @@
+{{/*
+  引用信息索引（GEO 的引用锚点）
+
+  背景：全站每篇文章文末都声明"文末附有详细的[引用信息索引]，供您查证溯源"，
+        但 1,500 篇抽样中兑现 0 篇 —— 公开承诺违约，是 E-E-A-T 的直接反面。
+
+  契约（frontmatter，可选字段）：
+    sources:
+      - publisher: "DeepSeek"
+        title: "DeepSeek-V4.1-Flash Technical Report"
+        url: "https://api-docs.deepseek.com/news/v41-flash"
+        date: 2026-09-10
+        type: primary        # primary | secondary
+        accessed: 2026-09-10
+
+  原则：无 sources 时整块不渲染——不留空区块、不臆造来源。
+*/}}
+{{- with .Params.sources -}}
+<section id="sources" class="seo-sources nested-copy-line-height lh-copy f5 mt5 pt4 bt b--black-10">
+  <h2 class="f4 athelas mb3">来源</h2>
+  <ol class="pl4">
+    {{- range . }}
+    <li class="mb2">
+      {{- with .publisher }}<span class="b">{{ . }}</span>，{{ end -}}
+      {{- with .title }}《{{ . }}》{{ end -}}
+      {{- with .date }}{{ if not (eq . nil) }}，{{ . }}{{ end }}{{ end -}}
+      {{- with .type }}
+        {{- if eq . "primary" }} <span class="f6" style="color:#0F6E56;">[一手源]</span>
+        {{- else if eq . "secondary" }} <span class="f6" style="color:#888780;">[二手源]</span>{{ end -}}
+      {{- end -}}
+      {{- with .url }} <a href="{{ . }}" rel="noopener" target="_blank">原文</a>{{ end -}}
+      {{- with .accessed }} <span class="f6" style="color:#888780;">（访问于 {{ . }}）</span>{{ end -}}
+    </li>
+    {{- end }}
+  </ol>
+</section>
+{{- end -}}

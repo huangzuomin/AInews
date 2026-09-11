@@ -1,0 +1,28 @@
+{{/*
+  自写 sitemap —— 收敛薄页
+
+  现状：默认 sitemap 收录 26,961 条，其中 tags 16,345 条（60.6%），
+        而 16,237 个标签中 67.2% 只含 1 篇文章 → 爬虫预算被薄索引页吃掉。
+
+  规则：内容页（section 与 regular page）全收；taxonomy term 页仅当
+        文章数 >= 阈值时才收录。阈值写在 site.Params.sitemap_term_min（默认 5）。
+*/}}
+{{- $min := 5 -}}
+{{- with site.Params.sitemap_term_min }}{{ $min = . }}{{ end -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{- range site.Pages }}
+  {{- $include := true -}}
+  {{- if eq .Kind "term" -}}
+    {{- $include = ge (len .Pages) $min -}}
+  {{- end -}}
+  {{- if and $include .Permalink -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    {{- end }}
+  </url>
+  {{- end }}
+{{- end }}
+</urlset>

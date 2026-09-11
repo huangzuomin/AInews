@@ -1,0 +1,50 @@
+# 主话题闭集（Main Topics Closed Set）
+#
+# 契约：文章 frontmatter 的 `main_topics` 必须取自下列 12 个值。
+# 现状病害：全库有 616 个不同的 main_topics 值（11 个正常 + 605 个碎片 + `--`），
+#          其中 `--` 覆盖 9,308 篇文章（占 99%）—— 分类事实失效。
+# Phase 6 分批回填：`--` → 就近归入 12 项之一；605 个碎片按同义归并。
+
+canonical:
+  - 前沿模型与算法
+  - AI Agent与自主系统
+  - 算力与芯片
+  - 企业级AI与数字化
+  - 产业生态与商业版图
+  - 投融资与市场洞察
+  - AI伦理与治理
+  - 社会影响与未来工作
+  - 机器人与具身智能
+  - AIGC与内容科技
+  - AI与软件工程
+  - AI内参极速早报
+
+# 历史碎片 → 闭集的归并规则（Phase 6 使用；按顺序匹配，先命中先归）
+# 说明：原库中存在 605 个碎片值，形态包括大小写混写、连字符拼接、
+#       以及中英混排（如 `ai-agent与自主系统-ai-agents--autonomous-systems`）。
+#       完整映射表由 Phase 6 的治理脚本生成，此处只给出规则骨架。
+merge_rules:
+  - pattern: "未归类|^--$|^-$"
+    target: ""            # 留空表示"待人工归类"，不猜测
+  - pattern: "agent|智能体|自主系统"
+    target: AI Agent与自主系统
+  - pattern: "模型|算法|架构|上下文|多模态|moe"
+    target: 前沿模型与算法
+  - pattern: "芯片|算力|gpu|英伟达|nvidia|推理成本"
+    target: 算力与芯片
+  - pattern: "企业|数字化|垂直行业|toB|saas"
+    target: 企业级AI与数字化
+  - pattern: "投融资|市场|商业|竞争|价格战|财报"
+    target: 产业生态与商业版图
+  - pattern: "伦理|治理|监管|安全|对齐|合规"
+    target: AI伦理与治理
+  - pattern: "社会|就业|工作|教育|影响"
+    target: 社会影响与未来工作
+  - pattern: "机器人|具身|人形"
+    target: 机器人与具身智能
+  - pattern: "aigc|内容|创作|视频|图像|音乐"
+    target: AIGC与内容科技
+  - pattern: "软件工程|编程|代码|开发者|工具链"
+    target: AI与软件工程
+  - pattern: "早报|日报|速览"
+    target: AI内参极速早报

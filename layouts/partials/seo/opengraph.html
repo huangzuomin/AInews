@@ -1,0 +1,49 @@
+{{/*
+  Open Graph + Twitter Card
+
+  替换对象：_internal/opengraph.html + _internal/twitter_cards.html
+
+  为什么必须自写：内建 opengraph 模板只认 .Params.images（数组）或页面资源中
+  文件名匹配 feature / cover 的图片。本站 frontmatter 用的是 featured_image
+  （字符串指向 static 目录），两者不匹配 → 全站 og:image 恒为空。
+*/}}
+{{- $title := .Title | default site.Title | plainify -}}
+
+{{- $desc := "" -}}
+{{- with .Description }}{{ $desc = . }}{{ end -}}
+{{- if not $desc }}{{ with .Params.summary }}{{ $desc = . }}{{ end }}{{ end -}}
+{{- if not $desc }}{{ if .IsPage }}{{ $desc = .Summary }}{{ else }}{{ $desc = site.Params.description }}{{ end }}{{ end -}}
+{{- $desc = $desc | plainify | truncate 200 "" -}}
+
+{{- /* 配图解析集中在 seo/image.html（单一事实源，含"拒外链 + 路径编码"两条规则）*/ -}}
+{{- $imgURL := partial "seo/image.html" . -}}
+
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:locale" content="zh_CN">
+{{- if .IsPage }}
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05+08:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05+08:00" }}">
+{{- $sys := .CurrentSection }}
+{{- if and $sys (not $sys.IsHome) }}
+<meta property="article:section" content="{{ $sys.Title | plainify }}">
+{{- end }}
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}">
+{{- end }}
+{{- else }}
+<meta property="og:type" content="website">
+{{- end }}
+<meta property="og:image" content="{{ $imgURL }}">
+<meta property="og:image:alt" content="{{ $title }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $imgURL }}">
+<meta name="twitter:image:alt" content="{{ $title }}">

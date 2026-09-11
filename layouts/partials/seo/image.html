@@ -1,0 +1,47 @@
+{{/*
+  统一的配图解析（单一事实源）
+  被 seo/opengraph.html 与 seo/schema.html 共用。
+
+  调用：{{ $imgURL := partial "seo/image.html" . }}
+
+  解析链：featured_image → cover → 站级 og_default_image → 内置默认图
+
+  ── 两条硬规则 ──────────────────────────────────────────────
+
+  1. **只接受站内路径，外部 URL 一律丢弃并回退。**
+
+     理由有三：
+       ① 盗链第三方图片有版权风险；
+       ② 外链随时可能失效或防盗链（403）——og:image 指向不可达资源，比没有更糟；
+       ③ 实测（2026-09-11，3,000 篇抽样）有 300 篇的 featured_image 是
+          woshipm / baai / 36kr / zhihu / ifanr / zhidx 等外部 URL。
+
+     **修此 bug 前的行为**：外链不以 "/" 开头 → 被 `printf "/%s"` 加上前导斜杠
+     → 再 absURL → 产出 `https://www.neican.ai/https://image.woshipm.com/...`
+     这种双重前缀的坏 URL。既不可达，也不诚实。
+
+  2. **空格与括号必须编码。** 本站图片文件名形如 `default (1).png`
+     （static/images/ 下有 20 个）。未编码的空格会让部分爬虫与 CDN 取不到图。
+*/}}
+{{- $default := site.Params.og_default_image | default "/images/ai-report-default.png" -}}
+
+{{- $src := "" -}}
+{{- with .Params.featured_image }}{{ $src = . }}{{ end -}}
+{{- if not $src }}{{ with .Params.cover }}{{ $src = . }}{{ end }}{{ end -}}
+
+{{- /* 外部 URL → 丢弃，走默认图 */ -}}
+{{- if or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") }}{{ $src = "" }}{{ end -}}
+
+{{- if not $src }}{{ $src = $default }}{{ end -}}
+{{- if not (hasPrefix $src "/") }}{{ $src = printf "/%s" $src }}{{ end -}}
+
+{{- /* 注意：必须用 `replace INPUT OLD NEW` 的直接调用形式。
+       写成管道 `$x | replace " " "%20"` 会被解析为 `replace " " "%20" $x`，
+       即把 " " 当作 INPUT、$x 当作 NEW，返回值塌缩成 " "（实测踩过这个坑）。
+       另外实测 absURL 本身已完成 URL 编码（空格→%20、括号→%28%29），
+       下面的 replace 仅作冗余保险，防止 Hugo 版本差异导致编码缺失。 */ -}}
+{{- $url := $src | absURL -}}
+{{- $url = replace $url " " "%20" -}}
+{{- $url = replace $url "(" "%28" -}}
+{{- $url = replace $url ")" "%29" -}}
+{{- return $url -}}
