@@ -56,9 +56,11 @@ jobs:
         run: |
           set -euo pipefail
           for i in 1 2 3; do
-            if curl -fsS -m 30 "$SITE/index.xml" -o /tmp/feed.xml; then
+            if curl -fsS -m 30 "$SITE/index.xml" -o /tmp/feed.xml.tmp; then
+              mv /tmp/feed.xml.tmp /tmp/feed.xml
               break
             fi
+            rm -f /tmp/feed.xml.tmp
             echo "第 $i 次拉取失败，重试…"
             sleep 10
           done
@@ -69,14 +71,16 @@ jobs:
           fi
           echo "unreachable=false" >> "$GITHUB_OUTPUT"
           # 取第一个 pubDate（Hugo RSS 按时间倒序）
-          PUB=$(grep -oE '<pubDate>[^<]+</pubDate>' /tmp/feed.xml | head -1 \
-                | sed -e 's|<pubDate>||' -e 's|</pubDate>||')
+          PUB=$(awk 'match($0, /<pubDate>[^<]+<\/pubDate>/) && !found {
+            pub=substr($0, RSTART+9, RLENGTH-19); found=1
+          } END { print pub }' /tmp/feed.xml)
           echo "线上最新条目时间: $PUB"
           echo "pub=$PUB" >> "$GITHUB_OUTPUT"
-          echo "items=$(grep -c '<item>' /tmp/feed.xml || echo 0)" >> "$GITHUB_OUTPUT"
+          echo "items=$(grep -c '<item>' /tmp/feed.xml || true)" >> "$GITHUB_OUTPUT"
 
       - name: 计算停更时长
         id: age
+        if: steps.rss.outputs.unreachable != 'true'
         run: |
           set -euo pipefail
           TH="${STALE_INPUT:-}"
