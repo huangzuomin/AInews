@@ -56,9 +56,11 @@ jobs:
         run: |
           set -euo pipefail
           for i in 1 2 3; do
-            if curl -fsS -m 30 "$SITE/index.xml" -o /tmp/feed.xml; then
+            if curl -fsS -m 30 "$SITE/index.xml" -o /tmp/feed.xml.tmp; then
+              mv /tmp/feed.xml.tmp /tmp/feed.xml
               break
             fi
+            rm -f /tmp/feed.xml.tmp
             echo "第 $i 次拉取失败，重试…"
             sleep 10
           done
@@ -78,6 +80,7 @@ jobs:
 
       - name: 计算停更时长
         id: age
+        if: steps.rss.outputs.unreachable != 'true'
         run: |
           set -euo pipefail
           TH="${STALE_INPUT:-}"
